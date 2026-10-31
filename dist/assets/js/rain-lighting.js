@@ -95,69 +95,10 @@
     return c;
   })();
 
-  // 4. Volumetric Sea-Spray Mist Puff (Soft Billowing Cloud-like Wave Splash)
-  const seaMistSprite = (function() {
-    const c = document.createElement('canvas');
-    c.width = 256;
-    c.height = 256;
-    const sctx = c.getContext('2d');
-
-    // Multi-lobed cloud puff representing finely pulverized sea spray vapor
-    const lobes = [
-      { x: 128, y: 132, r: 76, a: 0.65 },
-      { x: 104, y: 116, r: 62, a: 0.52 },
-      { x: 154, y: 114, r: 60, a: 0.50 },
-      { x: 86,  y: 136, r: 52, a: 0.42 },
-      { x: 172, y: 134, r: 54, a: 0.44 },
-      { x: 128, y: 94,  r: 58, a: 0.55 },
-      { x: 110, y: 160, r: 50, a: 0.38 },
-      { x: 148, y: 158, r: 48, a: 0.36 }
-    ];
-
-    for (let lobe of lobes) {
-      const grad = sctx.createRadialGradient(lobe.x, lobe.y, 0, lobe.x, lobe.y, lobe.r);
-      // Soft oceanic sea-spray white with subtle aqua mist tones
-      grad.addColorStop(0, 'rgba(240, 248, 255, ' + lobe.a + ')');
-      grad.addColorStop(0.35, 'rgba(215, 238, 252, ' + (lobe.a * 0.72) + ')');
-      grad.addColorStop(0.70, 'rgba(180, 218, 240, ' + (lobe.a * 0.25) + ')');
-      grad.addColorStop(1, 'rgba(150, 195, 225, 0)');
-
-      sctx.fillStyle = grad;
-      sctx.beginPath();
-      sctx.arc(lobe.x, lobe.y, lobe.r, 0, Math.PI * 2);
-      sctx.fill();
-    }
-    return c;
-  })();
-
-  // 5. Elongated Spindrift Veil (Gale-blown Sea Smoke skittering over wave crests)
-  const spindriftVeilSprite = (function() {
-    const c = document.createElement('canvas');
-    c.width = 320;
-    c.height = 90;
-    const sctx = c.getContext('2d');
-
-    sctx.save();
-    sctx.scale(1.0, 0.28);
-    const grad = sctx.createRadialGradient(160, 45 / 0.28, 0, 160, 45 / 0.28, 140);
-    grad.addColorStop(0, 'rgba(235, 248, 255, 0.58)');
-    grad.addColorStop(0.4, 'rgba(205, 232, 250, 0.35)');
-    grad.addColorStop(0.75, 'rgba(170, 210, 238, 0.12)');
-    grad.addColorStop(1, 'rgba(140, 190, 225, 0)');
-
-    sctx.fillStyle = grad;
-    sctx.beginPath();
-    sctx.arc(160, 45 / 0.28, 140, 0, Math.PI * 2);
-    sctx.fill();
-    sctx.restore();
-    return c;
-  })();
-
   // Pools
   let cloudClusters = [];
   let scudWisps = [];
   let hazeBands = [];
-  let waveMistPuffs = [];
   let raindrops = [];
 
   // ==========================================================================
@@ -710,243 +651,7 @@
   }
 
   // ==========================================================================
-  // 8. VOLUMETRIC SEA-SPRAY WAVE MIST (Cloud-Like Billowing Splash & Spindrift)
-  // ==========================================================================
-  class WaveMistPuff {
-    constructor(x, y, vx, vy, baseSize, growthRate, maxAlpha, maxLife, type = 'cloud') {
-      this.x = x;
-      this.y = y;
-      this.vx = vx;
-      this.vy = vy;
-      this.size = baseSize;
-      this.growthRate = growthRate;
-      this.maxAlpha = maxAlpha;
-      this.maxLife = maxLife;
-      this.life = 0;
-      this.type = type; // 'cloud' (seaMistSprite) or 'veil' (spindriftVeilSprite)
-      this.rotation = Math.random() * Math.PI * 2;
-      this.rotSpeed = (Math.random() - 0.5) * 0.012;
-      this.aspect = 0.85 + Math.random() * 0.35; // natural organic asymmetry
-      this.dead = false;
-    }
-
-    update(wind) {
-      this.life++;
-      if (this.life >= this.maxLife) {
-        this.dead = true;
-        return;
-      }
-
-      // Physics: surge upward/outward then gently decelerate and ride storm gale
-      this.x += this.vx + wind.gustFactor * 0.75;
-      this.y += this.vy;
-
-      // Air resistance and atmospheric buoyancy
-      this.vx *= 0.985;
-      this.vy *= 0.982;
-      // Slight vertical gravity/falloff after initial upward surge
-      if (this.life > this.maxLife * 0.25) {
-        this.vy += 0.007; // gently settles or floats
-      }
-
-      // Billowing expansion
-      this.size += this.growthRate;
-      this.rotation += this.rotSpeed;
-    }
-
-    draw(flashBoost, beamAngle, beamLx, beamLy) {
-      if (this.dead) return;
-
-      const progress = this.life / this.maxLife;
-      // Smooth sine curve: rise smoothly, linger, then softly dissipate
-      const envelope = Math.sin(progress * Math.PI);
-      let alpha = this.maxAlpha * Math.pow(envelope, 0.78);
-
-      // Flash illumination during background lightning strikes
-      alpha = Math.min(alpha * (1 + flashBoost * 1.8), 0.32);
-
-      // Illumination catch if primary lighthouse beam sweeps across this spray puff
-      const dx = this.x - beamLx;
-      const dy = this.y - beamLy;
-      const angleToPuff = Math.atan2(dy, dx);
-      let angleDiff = Math.abs(beamAngle - angleToPuff);
-      if (angleDiff > Math.PI) angleDiff = Math.PI * 2 - angleDiff;
-
-      let beamCatch = 0;
-      if (angleDiff < 0.36) {
-        beamCatch = Math.cos((angleDiff / 0.36) * (Math.PI * 0.5));
-      }
-
-      ctx.save();
-      ctx.globalCompositeOperation = 'screen';
-      ctx.translate(this.x, this.y);
-      ctx.rotate(this.rotation);
-      ctx.scale(1.0, this.aspect);
-
-      const w = this.size;
-      const h = this.size;
-
-      // Base sea-spray mist
-      ctx.globalAlpha = alpha;
-      const sprite = this.type === 'veil' ? spindriftVeilSprite : seaMistSprite;
-      ctx.drawImage(sprite, -w * 0.5, -h * 0.5, w, h);
-
-      // Subtle warm lighthouse beam illumination catch on the mist
-      if (beamCatch > 0.05) {
-        ctx.globalAlpha = alpha * beamCatch * 0.60;
-        ctx.drawImage(sprite, -w * 0.5, -h * 0.5, w, h);
-      }
-
-      ctx.restore();
-    }
-  }
-
-  // Wave collision triggers & oceanic swell rhythm
-  let nextCliffCrashTime = Date.now() + 1000;
-  let nextSwellSpindriftTime = Date.now() + 2200;
-  let nextReefCrashTime = Date.now() + 3500;
-
-  function triggerCliffWaveCrash() {
-    // Primary lighthouse cliff base / rock face:
-    // nx: 0.305 - 0.355, ny: 0.525 - 0.575
-    const originX = width * (0.305 + Math.random() * 0.045);
-    const originY = height * (0.530 + Math.random() * 0.038);
-
-    // 5 to 7 billowing cloud-like puffs erupting in a dynamic cluster
-    const count = 5 + Math.floor(Math.random() * 3);
-    for (let i = 0; i < count; i++) {
-      const offsetX = (Math.random() - 0.3) * 36;
-      const offsetY = (Math.random() - 0.5) * 16;
-      const vx = Math.random() * 1.5 + 0.6; // carries rightward with gale
-      const vy = -(Math.random() * 1.6 + 0.7); // bursts upward along cliff face
-      const baseSize = 32 + Math.random() * 26; // initial puff size
-      const growthRate = 0.38 + Math.random() * 0.28; // expands to ~90-145px
-      const maxAlpha = 0.12 + Math.random() * 0.10; // soft and silky smooth
-      const maxLife = 130 + Math.floor(Math.random() * 60); // 2.2 - 3.2 seconds
-      waveMistPuffs.push(new WaveMistPuff(
-        originX + offsetX,
-        originY + offsetY,
-        vx,
-        vy,
-        baseSize,
-        growthRate,
-        maxAlpha,
-        maxLife,
-        'cloud'
-      ));
-    }
-
-    // Schedule next cliff crash with natural oceanic swell rhythm (3.2s to 5.4s)
-    nextCliffCrashTime = Date.now() + 3200 + Math.random() * 2200;
-  }
-
-  function triggerOceanSwellSpindrift() {
-    // Open ocean rolling swells in the midground
-    // nx: 0.48 - 0.76, ny: 0.57 - 0.66
-    const originX = width * (0.48 + Math.random() * 0.28);
-    const originY = height * (0.57 + Math.random() * 0.08);
-
-    // 2 to 4 trailing spindrift veils and mist puffs blown off the wave crest
-    const count = 2 + Math.floor(Math.random() * 3);
-    for (let i = 0; i < count; i++) {
-      const vx = Math.random() * 1.8 + 1.2; // fast downwind skitter
-      const vy = -(Math.random() * 0.35 + 0.15); // low rising sea smoke
-      const baseSize = 40 + Math.random() * 30;
-      const growthRate = 0.30 + Math.random() * 0.22;
-      const maxAlpha = 0.08 + Math.random() * 0.07;
-      const maxLife = 110 + Math.floor(Math.random() * 50);
-      const type = Math.random() < 0.6 ? 'veil' : 'cloud';
-      waveMistPuffs.push(new WaveMistPuff(
-        originX + i * 18,
-        originY + (Math.random() - 0.5) * 10,
-        vx,
-        vy,
-        baseSize,
-        growthRate,
-        maxAlpha,
-        maxLife,
-        type
-      ));
-    }
-
-    nextSwellSpindriftTime = Date.now() + 2400 + Math.random() * 2000;
-  }
-
-  function triggerReefBreaker() {
-    // Foreground / outer shelf reef (nx: 0.24 - 0.29, ny: 0.58 - 0.64)
-    const originX = width * (0.24 + Math.random() * 0.05);
-    const originY = height * (0.58 + Math.random() * 0.05);
-
-    const count = 3 + Math.floor(Math.random() * 2);
-    for (let i = 0; i < count; i++) {
-      const vx = Math.random() * 1.2 + 0.4;
-      const vy = -(Math.random() * 1.1 + 0.5);
-      const baseSize = 28 + Math.random() * 22;
-      const growthRate = 0.32 + Math.random() * 0.20;
-      const maxAlpha = 0.09 + Math.random() * 0.08;
-      const maxLife = 120 + Math.floor(Math.random() * 45);
-      waveMistPuffs.push(new WaveMistPuff(
-        originX + (Math.random() - 0.5) * 20,
-        originY + (Math.random() - 0.5) * 12,
-        vx,
-        vy,
-        baseSize,
-        growthRate,
-        maxAlpha,
-        maxLife,
-        'cloud'
-      ));
-    }
-
-    nextReefCrashTime = Date.now() + 4000 + Math.random() * 3000;
-  }
-
-  function updateAndDrawWaveMist(flashBoost, beamAngle, beamLx, beamLy) {
-    const now = Date.now();
-    const wind = getStormWind(simTime);
-
-    // Oceanic swell rhythm triggers
-    if (now >= nextCliffCrashTime) {
-      triggerCliffWaveCrash();
-    }
-    if (now >= nextSwellSpindriftTime) {
-      triggerOceanSwellSpindrift();
-    }
-    if (now >= nextReefCrashTime) {
-      triggerReefBreaker();
-    }
-
-    // Keep gentle ambient sea mist active (1-2 faint wisps along surf line)
-    if (waveMistPuffs.length < 3 && Math.random() < 0.04) {
-      const originX = width * (0.31 + Math.random() * 0.40);
-      const originY = height * (0.57 + Math.random() * 0.08);
-      waveMistPuffs.push(new WaveMistPuff(
-        originX,
-        originY,
-        0.8 + Math.random() * 0.8,
-        -(0.3 + Math.random() * 0.4),
-        25 + Math.random() * 20,
-        0.25,
-        0.06 + Math.random() * 0.05,
-        100 + Math.random() * 40,
-        'cloud'
-      ));
-    }
-
-    // Update & draw active puffs
-    for (let i = waveMistPuffs.length - 1; i >= 0; i--) {
-      const puff = waveMistPuffs[i];
-      puff.update(wind);
-      if (puff.dead) {
-        waveMistPuffs.splice(i, 1);
-      } else {
-        puff.draw(flashBoost, beamAngle, beamLx, beamLy);
-      }
-    }
-  }
-
-  // ==========================================================================
-  // 9. NATURAL STORM RAIN WITH DEPTH OF FIELD (DOF BLUR & FOCUS) & SILKY SMOOTHNESS
+  // 8. NATURAL STORM RAIN WITH DEPTH OF FIELD (DOF BLUR & FOCUS) & SILKY SMOOTHNESS
   // ==========================================================================
   class RealisticDOFRaindrop {
     constructor() {
@@ -1113,7 +818,7 @@
   }
 
   // ==========================================================================
-  // 10. INITIALIZE STORM SYSTEM
+  // 9. INITIALIZE STORM SYSTEM
   // ==========================================================================
   function initStormAtmosphere() {
     // A. 4 Major Volumetric Storm Cloud Clusters across the sky
@@ -1140,10 +845,7 @@
     hazeBands.push(new HorizonHaze(0, height * 0.46, 0.35, 0.055));
     hazeBands.push(new HorizonHaze(width * 0.55, height * 0.50, 0.42, 0.050));
 
-    // D. Volumetric Sea-Spray Wave Mist Puffs
-    waveMistPuffs = [];
-
-    // E. Soft Natural Realistic Rain Storm (~540 drops on desktop)
+    // D. Soft Natural Realistic Rain Storm (~540 drops on desktop)
     const count = Math.min(Math.floor((width * height) / 1450), 540);
     raindrops = [];
     for (let i = 0; i < count; i++) {
@@ -1161,7 +863,7 @@
   window.addEventListener('resize', resize);
 
   // ==========================================================================
-  // 11. MAIN ANIMATION & RENDERING LOOP
+  // 10. MAIN ANIMATION & RENDERING LOOP
   // ==========================================================================
   function render() {
     ctx.clearRect(0, 0, width, height);
@@ -1197,17 +899,14 @@
       haze.draw(ambientFlashIntensity);
     }
 
-    // 5. Volumetric Sea-Spray Wave Mist (Cloud-Like Billowing Splash & Spindrift)
-    updateAndDrawWaveMist(ambientFlashIntensity, beacon.angle, beacon.lx, beacon.ly);
-
-    // 6. Distant Village House Lamps & Secondary Lighthouse Ambience
+    // 5. Distant Village House Lamps & Secondary Lighthouse Ambience
     drawDistantVillageLamps(1 + ambientFlashIntensity * 0.8);
     distantSecondaryLighthouse.draw(1 + ambientFlashIntensity * 0.8);
 
-    // 7. Rotating Lighthouse Beacon with Feathered Soft Edges & Eye Bloom
+    // 6. Rotating Lighthouse Beacon with Feathered Soft Edges & Eye Bloom
     beacon.draw(1 + ambientFlashIntensity * 0.8);
 
-    // 8. Soft, Small & Smooth Heterogeneous DOF Rain
+    // 7. Soft, Small & Smooth Heterogeneous DOF Rain
     for (let drop of raindrops) {
       drop.update();
       drop.draw(ambientFlashIntensity);
