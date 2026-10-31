@@ -138,15 +138,23 @@ a {
   aspect-ratio: 21 / 9;
   min-height: 380px;
   max-height: 520px;
-  border-radius: 0;
+  border-radius: 16px;
   overflow: hidden;
-  border: none;
-  box-shadow: none;
-  background-color: transparent;
+  border: 1px solid rgba(56, 189, 248, 0.14);
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.50);
+  background-color: var(--bg-surface);
   margin-bottom: 36px;
-  /* Seamless integration: soft fade at bottom into the page background */
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+}
+
+/* Consistent soft atmospheric boundary vignette on all sides */
+.lighthouse-banner-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 16px;
+  box-shadow: inset 0 0 35px 12px rgba(5, 8, 20, 0.60);
+  z-index: 3;
 }
 
 .lighthouse-banner-frame picture {
@@ -160,8 +168,8 @@ a {
   height: 100%;
   object-fit: cover;
   display: block;
-  /* Natural realistic depth, sharpness, and elegant saturation */
-  filter: contrast(1.05) saturate(1.10) brightness(1.01);
+  /* Natural, non-coercive fine-art presentation: pure, velvety, and harmonious */
+  filter: none;
 }
 
 #rain-canvas {
