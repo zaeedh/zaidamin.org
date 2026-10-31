@@ -197,26 +197,26 @@
   class NaturalRaindrop {
     constructor() {
       const r = Math.random();
-      if (r < 0.50) {
+      if (r < 0.45) {
         this.tier = 0; // distant soft rain
         this.baseSpeed = Math.random() * 2.0 + 3.8;
-        this.baseLength = Math.random() * 4 + 9;
-        this.width = 0.45;
-        this.baseAlpha = Math.random() * 0.05 + 0.08;
+        this.baseLength = Math.random() * 4 + 11;
+        this.width = 0.55;
+        this.baseAlpha = Math.random() * 0.06 + 0.13;
         this.bias = (Math.random() - 0.5) * 0.08;
-      } else if (r < 0.85) {
+      } else if (r < 0.82) {
         this.tier = 1; // midground driving rain
         this.baseSpeed = Math.random() * 2.5 + 5.5;
-        this.baseLength = Math.random() * 5 + 13;
-        this.width = 0.60;
-        this.baseAlpha = Math.random() * 0.06 + 0.13;
+        this.baseLength = Math.random() * 5 + 15;
+        this.width = 0.70;
+        this.baseAlpha = Math.random() * 0.08 + 0.19;
         this.bias = (Math.random() - 0.5) * 0.06;
       } else {
         this.tier = 2; // foreground graceful streaks
         this.baseSpeed = Math.random() * 2.8 + 7.2;
-        this.baseLength = Math.random() * 6 + 16;
-        this.width = 0.75;
-        this.baseAlpha = Math.random() * 0.08 + 0.18;
+        this.baseLength = Math.random() * 6 + 19;
+        this.width = 0.85;
+        this.baseAlpha = Math.random() * 0.10 + 0.26;
         this.bias = (Math.random() - 0.5) * 0.04;
       }
 
@@ -261,7 +261,7 @@
         beamGlint = 1.0 + facingOcean * 1.4;
       }
 
-      const a = Math.min(this.alpha * flashBoost * beamGlint, 0.42);
+      const a = Math.min(this.alpha * flashBoost * beamGlint, 0.55);
 
       const endX = this.x + Math.sin(currentAngle) * this.baseLength;
       const endY = this.y + Math.cos(currentAngle) * this.baseLength;
@@ -271,12 +271,12 @@
       // Feathered linear gradient along streak (tail fades smoothly into air)
       const grad = ctx.createLinearGradient(this.x, this.y, endX, endY);
       if (beamGlint > 1.15) {
-        grad.addColorStop(0, `rgba(254, 243, 199, ${a * 0.25})`);
+        grad.addColorStop(0, `rgba(254, 243, 199, ${a * 0.35})`);
         grad.addColorStop(0.4, `rgba(254, 243, 199, ${a})`);
         grad.addColorStop(1, 'rgba(254, 243, 199, 0)');
       } else {
-        grad.addColorStop(0, `rgba(210, 230, 250, ${a * 0.25})`);
-        grad.addColorStop(0.4, `rgba(215, 235, 255, ${a})`);
+        grad.addColorStop(0, `rgba(210, 230, 250, ${a * 0.35})`);
+        grad.addColorStop(0.4, `rgba(220, 240, 255, ${a})`);
         grad.addColorStop(1, 'rgba(210, 230, 250, 0)');
       }
 
@@ -292,8 +292,8 @@
   }
 
   function initRain() {
-    // Natural, uncluttered density: 320 to 360 fluid raindrops
-    const count = Math.min(Math.floor((width * height) / 2200), 360);
+    // Elegant storm density: increased slightly for clearer presence, smoothly blended
+    const count = Math.min(Math.floor((width * height) / 1550), 520);
     raindrops = [];
     for (let i = 0; i < count; i++) {
       raindrops.push(new NaturalRaindrop());
