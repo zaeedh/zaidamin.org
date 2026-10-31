@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Curriculum Vitae | Dr. Zaid Amin, Ph.D.</title>
+  <title>Curriculum Vitae | Dr. Zaid Amin, Ph.D. | zaidamin.org</title>
   <meta name="description" content="Senior Lecturer and computational researcher specializing in the intersection of Human-Computer Interaction (HCI), Behavior & Social Computing, Digital Ethics, and AI Governance. Ph.D. graduate from Universiti Kebangsaan Malaysia (UKM). Former Head of Master in Informatics Engineering and Information Systems programs, actively advancing research in agentic AI alignment, attention-based cognitive interventions, and civic technology.">
   <meta name="author" content="Dr. Zaid Amin">
   <link rel="canonical" href="https://zaidamin.org/">
@@ -11,13 +11,12 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://zaidamin.org/">
-  <meta property="og:title" content="Curriculum Vitae | Dr. Zaid Amin, Ph.D.">
+  <meta property="og:title" content="Curriculum Vitae | Dr. Zaid Amin, Ph.D. | zaidamin.org">
   <meta property="og:description" content="Senior Lecturer and computational researcher specializing in the intersection of Human-Computer Interaction (HCI), Behavior & Social Computing, Digital Ethics, and AI Governance. Ph.D. graduate from Universiti Kebangsaan Malaysia (UKM). Former Head of Master in Informatics Engineering and Information Systems programs, actively advancing research in agentic AI alignment, attention-based cognitive interventions, and civic technology.">
 
   <!-- Google Scholar Indexing -->
   <meta name="citation_author" content="Amin, Zaid">
   <meta name="citation_author_institution" content="INTI International University">
-  
 
   <!-- JSON-LD -->
   <script type="application/ld+json">
@@ -63,280 +62,232 @@
   <!-- Typography & Styling -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="icon" href="favicon.ico">
 </head>
 <body>
-  <nav class="navbar" role="navigation" aria-label="Main Navigation">
-    <div class="container nav-container">
-      <a href="index.html" class="nav-brand">
-        <span class="nav-brand-title">Dr. Zaid Amin</span>
-        <span class="nav-brand-subtitle">Das Sein, das Sollen</span>
-      </a>
 
-      <ul class="nav-links">
-        <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="publications.html" class="nav-link">Publications (24+)</a></li>
-        <li><a href="research.html" class="nav-link">Research & Grants</a></li>
-        <li><a href="prospective-students.html" class="nav-link">Join Lab (Ph.D./Master)</a></li>
-        <li><a href="cv.html" class="nav-link active">CV</a></li>
-        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-      </ul>
+  <header class="subpage-nav">
+    <a href="index.html" class="back-home-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Home Cover
+    </a>
 
-      <div class="nav-actions">
-        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark/light theme">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    <div style="display: flex; gap: 18px; align-items: center;">
+      <a href="publications.html" style="font-size: 0.825rem; font-weight: 700; text-transform: uppercase; color: var(--text-secondary);">Publications</a>
+      <a href="research.html" style="font-size: 0.825rem; font-weight: 700; text-transform: uppercase; color: var(--text-secondary);">Research</a>
+      <a href="prospective-students.html" style="font-size: 0.825rem; font-weight: 700; text-transform: uppercase; color: var(--text-secondary);">Join Lab</a>
+      <a href="cv.html" style="font-size: 0.825rem; font-weight: 700; text-transform: uppercase; color: var(--brand-blue);">CV</a>
+
+      <button id="theme-toggle" class="theme-toggle-minimal" aria-label="Toggle theme">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="subpage-container" style="max-width: 900px;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; border-bottom: 2px solid var(--border-frame); padding-bottom: 24px;">
+      <div>
+        <h1 style="font-size: 2.6rem; font-weight: 900; margin-bottom: 4px;">Dr. Zaid Amin</h1>
+        <div style="font-size: 1.15rem; color: var(--brand-blue); font-weight: 700;">Curriculum Vitae</div>
+        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 4px;">
+          Senior Lecturer &bull; Faculty of Data Science and Information Technology, INTI International University<br>
+          Email: zaid.amin@newinti.edu.my &bull; Website: zaidamin.org &bull; ORCID: 0000-0001-5223-3058
+        </div>
+      </div>
+      <div>
+        <button onclick="window.print()" class="pub-btn" style="padding: 10px 20px; font-size: 0.85rem;">
+          Print / Save as PDF
         </button>
-        <button class="mobile-nav-toggle" aria-label="Open mobile menu">☰</button>
       </div>
     </div>
-  </nav>
-  <main>
 
-    <section class="section" style="padding-top: 48px;">
-      <div class="container" style="max-width: 900px;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; border-bottom: 2px solid var(--border-strong); padding-bottom: 24px;">
-          <div>
-            <h1 style="font-size: 2.4rem; margin-bottom: 6px;">Dr. Zaid Amin</h1>
-            <div style="font-size: 1.15rem; color: var(--brand-blue); font-weight: 600;">Curriculum Vitae</div>
-            <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 4px;">
-              Senior Lecturer &bull; Faculty of Data Science and Information Technology, INTI International University<br>
-              Email: zaid.amin@newinti.edu.my &bull; Website: zaidamin.org &bull; ORCID: 0000-0001-5223-3058
-            </div>
-          </div>
-          <div>
-            <button onclick="window.print()" class="btn btn-secondary">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-              Print / Save as PDF
-            </button>
-          </div>
-        </div>
-
-        <div style="margin-bottom: 32px;">
-          <h2 style="font-size: 1.35rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 6px; margin-bottom: 16px;">1. Education</h2>
+    <div style="margin-bottom: 32px;">
+      <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid var(--border-frame); padding-bottom: 6px; margin-bottom: 16px;">1. Education</h2>
     
-          <div style="margin-bottom: 12px;">
-            <div style="display: flex; justify-content: space-between;">
-              <strong>Doctor of Philosophy (Ph.D.) in Information Technology / Computer Science</strong>
-              <span style="color: var(--text-muted);">Malaysia</span>
-            </div>
-            <div style="color: var(--brand-navy); font-size: 0.95rem;">Universiti Kebangsaan Malaysia (UKM)</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Human-Computer Interaction (HCI), Attention-Based Design & Cognitive Interventions</div>
-          </div>
-        
-          <div style="margin-bottom: 12px;">
-            <div style="display: flex; justify-content: space-between;">
-              <strong>Master of Computer Science / Informatics Engineering (M.Kom.)</strong>
-              <span style="color: var(--text-muted);">Indonesia</span>
-            </div>
-            <div style="color: var(--brand-navy); font-size: 0.95rem;">Universitas Bina Darma</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Network Architecture, Information Systems & Distributed Computing</div>
-          </div>
-        
-          <div style="margin-bottom: 12px;">
-            <div style="display: flex; justify-content: space-between;">
-              <strong>Bachelor of Computer Science / Information Technology (S.Kom.)</strong>
-              <span style="color: var(--text-muted);">Indonesia</span>
-            </div>
-            <div style="color: var(--brand-navy); font-size: 0.95rem;">Palcomtech Institute of Technology and Business</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Information Systems & Computer Networks</div>
-          </div>
-        
+      <div style="margin-bottom: 14px;">
+        <div style="display: flex; justify-content: space-between;">
+          <strong>Doctor of Philosophy (Ph.D.) in Information Technology / Computer Science</strong>
+          <span style="color: var(--text-muted);">Malaysia</span>
         </div>
-
-        <div style="margin-bottom: 32px;">
-          <h2 style="font-size: 1.35rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 6px; margin-bottom: 16px;">2. Academic Appointments & Leadership</h2>
-    
-          <div style="margin-bottom: 14px;">
-            <div style="display: flex; justify-content: space-between;">
-              <strong>Senior Lecturer</strong>
-              <span style="color: var(--text-muted); font-size: 0.85rem;">Current</span>
-            </div>
-            <div style="color: var(--brand-navy);">INTI International University, Malaysia</div>
-            <div style="font-size: 0.85rem; color: var(--text-secondary);">Faculty of Data Science and Information Technology. Teaching postgraduate/undergraduate curricula, leading research in AI ethics, supervising dissertations.</div>
-          </div>
-        
-          <div style="margin-bottom: 14px;">
-            <div style="display: flex; justify-content: space-between;">
-              <strong>Senior Lecturer & Researcher</strong>
-              <span style="color: var(--text-muted); font-size: 0.85rem;">Previous</span>
-            </div>
-            <div style="color: var(--brand-navy);">Universitas Bina Darma</div>
-            <div style="font-size: 0.85rem; color: var(--text-secondary);">Led departmental research output, supervised master dissertations in software engineering and behavioral computing.</div>
-          </div>
-        
-          <div style="margin-bottom: 14px;">
-            <div style="display: flex; justify-content: space-between;">
-              <strong>Head of Master in Informatics Engineering Program</strong>
-              <span style="color: var(--text-muted); font-size: 0.85rem;">Previous</span>
-            </div>
-            <div style="color: var(--brand-navy);">Universitas Bina Darma</div>
-            <div style="font-size: 0.85rem; color: var(--text-secondary);">Directed academic accreditation (BAN-PT), curriculum development, graduate research symposiums, and faculty recruitment.</div>
-          </div>
-        
-          <div style="margin-bottom: 14px;">
-            <div style="display: flex; justify-content: space-between;">
-              <strong>Head of Information Systems Study Program</strong>
-              <span style="color: var(--text-muted); font-size: 0.85rem;">Previous</span>
-            </div>
-            <div style="color: var(--brand-navy);">Universitas Bina Darma</div>
-            <div style="font-size: 0.85rem; color: var(--text-secondary);">Supervised undergraduate curriculum modernization, industrial internships, and technological infrastructure.</div>
-          </div>
-        
-          <div style="margin-bottom: 14px;">
-            <div style="display: flex; justify-content: space-between;">
-              <strong>Head of Faculty of Informatics Engineering / Lecturer</strong>
-              <span style="color: var(--text-muted); font-size: 0.85rem;">Previous</span>
-            </div>
-            <div style="color: var(--brand-navy);">Palcomtech Institute of Technology and Business</div>
-            <div style="font-size: 0.85rem; color: var(--text-secondary);">Managed academic operations, computing laboratories, and technical curriculum standards.</div>
-          </div>
-        
-        </div>
-
-        <div style="margin-bottom: 32px;">
-          <h2 style="font-size: 1.35rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 6px; margin-bottom: 16px;">3. Complete Publication Record (24 Works)</h2>
-          <ol style="margin-left: 20px; font-size: 0.9rem; line-height: 1.7;">
-    
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2026). "Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance". <em>Smart Cities</em>. DOI: <a href="https://doi.org/10.3390/smartcities9100174" target="_blank">10.3390/smartcities9100174</a>
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2026). "SRIVIJAYAPEDIA: A DIGITAL PLATFORM FOR CULTURAL HERITAGE PRESERVATION OF THE SRIVIJAYA CIVILIZATION". <em>Journal of Information System and Technology Management</em>. DOI: <a href="https://doi.org/10.35631/JISTM.1142003" target="_blank">10.35631/JISTM.1142003</a>
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2026). "The Proxy Trap in Agentic AI: When Metrics Replace Judgment". <em>SSRN / Preprints</em>. DOI: <a href="https://doi.org/10.2139/ssrn.7670124" target="_blank">10.2139/ssrn.7670124</a>
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2026). "Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance". <em>SSRN / Preprints</em>. DOI: <a href="https://doi.org/10.20944/preprints202608.1136.v1" target="_blank">10.20944/preprints202608.1136.v1</a>
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2025). "Immersive Heritage: Exploring Srivijaya's Historical Legacy Through Virtual Reality in Digital Communication". <em>Jurnal Audiens</em>. DOI: <a href="https://doi.org/10.18196/jas.v6i2.617" target="_blank">10.18196/jas.v6i2.617</a>
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2025). "Celebrity of Instagram and Endorsements: Shaping and Constructing Social Identity". <em>Jurnal The Messenger</em>. DOI: <a href="https://doi.org/10.26623/themessenger.v17i1.11658" target="_blank">10.26623/themessenger.v17i1.11658</a>
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2025). "Peer-Review Statements". <em>Academic Publication</em>. DOI: <a href="https://doi.org/10.2991/978-2-38476-466-2_1" target="_blank">10.2991/978-2-38476-466-2_1</a>
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2024). "Tune-Attention Model: Designing Cybernetics Intervention for Information Sharing Behavior". <em>2024 4th International Conference on Electronic and Electrical Engineering and Intelligent System (ICE3IS)</em>. DOI: <a href="https://doi.org/10.1109/ice3is62977.2024.10775858" target="_blank">10.1109/ice3is62977.2024.10775858</a>
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2024). "Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World". <em>Contributions to Management Science</em>. DOI: <a href="https://doi.org/10.1007/978-3-031-48770-5_65" target="_blank">10.1007/978-3-031-48770-5_65</a>
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2021). "Attention-Based Design and Selective Exposure Amid COVID-19 Misinformation Sharing". <em>Lecture Notes in Computer Science</em>. DOI: <a href="https://doi.org/10.1007/978-3-030-78468-3_34" target="_blank">10.1007/978-3-030-78468-3_34</a>
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2021). "Attention-Based Design and User Decision on Information Sharing: An Ontological Approach Through Thematic Literature Review". <em>Unpublished</em>. DOI: <a href="https://doi.org/10.13140/RG.2.2.28372.83841" target="_blank">10.13140/RG.2.2.28372.83841</a>
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2021). "Attention-Based Design and User Decisions on Information Sharing: A Thematic Literature Review". <em>IEEE Access</em>. DOI: <a href="https://doi.org/10.1109/ACCESS.2021.3087740" target="_blank">10.1109/ACCESS.2021.3087740</a>
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2021). "Visual Selective Attention System to Intervene User Attention in Sharing COVID-19 Misinformation". <em>International Journal of Advanced Computer Science and Applications</em>. DOI: <a href="https://doi.org/10.14569/IJACSA.2021.0121005" target="_blank">10.14569/IJACSA.2021.0121005</a>
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2021). "Visual selective attention system to intervene user attention in sharing COVID-19 misinformation". <em>arXiv</em>.
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2020). "Attention and misinformation sharing on social media". <em>SSRN / Preprints</em>.
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2020). "Attention and misinformation sharing on social media". <em>arXiv</em>.
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2017). "PENGEMBANGAN APLIKASI SISTEM MANAJEMEN DOKUMEN ELEKTRONIK BERORIENTASI STANDAR BORANG AKREDITASI BAN PT". <em>PROSIDING SEMNASTEK 2017</em>.
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2017). "Aplikasi Sistem Manajemen Dokumen Elektronik Berorientasi Standar Borang BAN PT". <em>UST IT: Jurnal Sistem Informasi, Teknologi Informasi dan Komputer</em>.
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2017). "Aplikasi Web Sms Sebagai Reminder Digital Menggunakan GAMMU". <em>SNTIBD 2017</em>.
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2017). "Multi tier architecture model on a server cluster for application of big data". <em>Annual Research Seminar (ARS) - Computer Science and ICT 2017</em>.
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2015). "DESAIN DAN IMPLEMENTASI TUNNELING IPSEC BERBASIS UNIX DENGAN ESP (ENCAPSULATING SECURITY PAYLOAD) (Studi Kasus : PT. Sumeks Tivi Palembang & PT. Sumatera Ekspres)". <em>Jurnal Teknologi dan Informatika</em>.
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2015). "Routing protocols pada holistic network di era big data". <em>Annual Research Seminar (ARS) 2015</em>.
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2014). "SIMULASI DAN PERANCANGAN KEAMANAN AUTENTIKASI JARINGAN HIRARKI LINK AGGREGATION CONTROL PROTOCOL (LACP) BERBASIS ROUTER CISCO". <em>Konferensi Nasional Teknologi Informasi & Aplikasinya</em>.
-            </li>
-        
-            <li style="margin-bottom: 10px;">
-              <strong>Zaid Amin</strong> et al. (2012). "Analisis Vulnerabilitas Host Pada Keamanan Jaringan Komputer Di PT. Sumeks Tivi Palembang (PALTV) Menggunakan Router Berbasis Unix". <em>Jurnal Teknologi dan Informatika</em>.
-            </li>
-        
-          </ol>
-        </div>
+        <div style="color: var(--brand-navy); font-size: 0.95rem;">Universiti Kebangsaan Malaysia (UKM)</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted);">Human-Computer Interaction (HCI), Attention-Based Design & Cognitive Interventions</div>
       </div>
-    </section>
-    
-  </main>
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div style="font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin-bottom: 6px;">Dr. Zaid Amin, Ph.D.</div>
-          <div style="font-family: var(--font-serif); font-style: italic; color: var(--brand-blue); margin-bottom: 12px;">"Das Sein, das Sollen" &bull; Bridging Empirical Computing, Human-Centered AI, and Digital Ethics</div>
-          <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; max-width: 480px;">
-            Faculty of Data Science and Information Technology (FDSIT)<br>
-            <strong>INTI International University</strong>, Nilai, Negeri Sembilan, Malaysia.
-          </p>
+        
+      <div style="margin-bottom: 14px;">
+        <div style="display: flex; justify-content: space-between;">
+          <strong>Master of Computer Science / Informatics Engineering (M.Kom.)</strong>
+          <span style="color: var(--text-muted);">Indonesia</span>
         </div>
-        <div>
-          <h4 style="margin-bottom: 12px; font-size: 0.95rem;">Academic Navigation</h4>
-          <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
-            <li><a href="publications.html" style="color: var(--text-muted); font-size: 0.85rem;">Publications & BibTeX (24 Works)</a></li>
-            <li><a href="research.html" style="color: var(--text-muted); font-size: 0.85rem;">Research Pillars & Grants</a></li>
-            <li><a href="prospective-students.html" style="color: var(--text-muted); font-size: 0.85rem;">Postgraduate Lab (Open Positions)</a></li>
-            <li><a href="cv.html" style="color: var(--text-muted); font-size: 0.85rem;">Curriculum Vitae (PDF)</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 style="margin-bottom: 12px; font-size: 0.95rem;">Scholarly Identifiers</h4>
-          <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
-            <li><a href="https://orcid.org/0000-0001-5223-3058" target="_blank" rel="noopener" style="color: var(--text-muted); font-size: 0.85rem;">ORCID: 0000-0001-5223-3058</a></li>
-            <li><a href="https://scholar.google.com/citations?user=AUZIYQH0i7NW5_OAHWRFjwbm9jc5D8ZE4ig6J0WXXDvzO7thbSV1pshX55bzL7MpzfQJ0JyWhdfnGAsh5AFloZ2BnDcomtFhgqELhjxd8XflIXz9yOgOxQuF1dQJvyaDaloG5B-VL9kf8-iQOVWlpyykpD2ClLA=" target="_blank" rel="noopener" style="color: var(--text-muted); font-size: 0.85rem;">Google Scholar</a></li>
-            <li><a href="https://github.com/zaeedh" target="_blank" rel="noopener" style="color: var(--text-muted); font-size: 0.85rem;">GitHub (@zaeedh)</a></li>
-            <li><a href="https://www.linkedin.com/in/zaid-amin" target="_blank" rel="noopener" style="color: var(--text-muted); font-size: 0.85rem;">LinkedIn</a></li>
-          </ul>
-        </div>
+        <div style="color: var(--brand-navy); font-size: 0.95rem;">Universitas Bina Darma</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted);">Network Architecture, Information Systems & Distributed Computing</div>
       </div>
-      <div class="footer-bottom">
-        <div>&copy; 2026 Dr. Zaid Amin. Developed with Academic Rigor & Clean Web Standards.</div>
-        <div>Domain: <strong>zaidamin.org</strong></div>
+        
+      <div style="margin-bottom: 14px;">
+        <div style="display: flex; justify-content: space-between;">
+          <strong>Bachelor of Computer Science / Information Technology (S.Kom.)</strong>
+          <span style="color: var(--text-muted);">Indonesia</span>
+        </div>
+        <div style="color: var(--brand-navy); font-size: 0.95rem;">Palcomtech Institute of Technology and Business</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted);">Information Systems & Computer Networks</div>
       </div>
+        
     </div>
-  </footer>
+
+    <div style="margin-bottom: 32px;">
+      <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid var(--border-frame); padding-bottom: 6px; margin-bottom: 16px;">2. Academic Leadership History</h2>
+    
+      <div style="margin-bottom: 14px;">
+        <div style="display: flex; justify-content: space-between;">
+          <strong>Senior Lecturer</strong>
+          <span style="color: var(--text-muted); font-size: 0.85rem;">Current</span>
+        </div>
+        <div style="color: var(--brand-navy);">INTI International University, Malaysia</div>
+        <div style="font-size: 0.85rem; color: var(--text-secondary);">Faculty of Data Science and Information Technology. Teaching postgraduate/undergraduate curricula, leading research in AI ethics, supervising dissertations.</div>
+      </div>
+        
+      <div style="margin-bottom: 14px;">
+        <div style="display: flex; justify-content: space-between;">
+          <strong>Senior Lecturer & Researcher</strong>
+          <span style="color: var(--text-muted); font-size: 0.85rem;">Previous</span>
+        </div>
+        <div style="color: var(--brand-navy);">Universitas Bina Darma</div>
+        <div style="font-size: 0.85rem; color: var(--text-secondary);">Led departmental research output, supervised master dissertations in software engineering and behavioral computing.</div>
+      </div>
+        
+      <div style="margin-bottom: 14px;">
+        <div style="display: flex; justify-content: space-between;">
+          <strong>Head of Master in Informatics Engineering Program</strong>
+          <span style="color: var(--text-muted); font-size: 0.85rem;">Previous</span>
+        </div>
+        <div style="color: var(--brand-navy);">Universitas Bina Darma</div>
+        <div style="font-size: 0.85rem; color: var(--text-secondary);">Directed academic accreditation (BAN-PT), curriculum development, graduate research symposiums, and faculty recruitment.</div>
+      </div>
+        
+      <div style="margin-bottom: 14px;">
+        <div style="display: flex; justify-content: space-between;">
+          <strong>Head of Information Systems Study Program</strong>
+          <span style="color: var(--text-muted); font-size: 0.85rem;">Previous</span>
+        </div>
+        <div style="color: var(--brand-navy);">Universitas Bina Darma</div>
+        <div style="font-size: 0.85rem; color: var(--text-secondary);">Supervised undergraduate curriculum modernization, industrial internships, and technological infrastructure.</div>
+      </div>
+        
+      <div style="margin-bottom: 14px;">
+        <div style="display: flex; justify-content: space-between;">
+          <strong>Head of Faculty of Informatics Engineering / Lecturer</strong>
+          <span style="color: var(--text-muted); font-size: 0.85rem;">Previous</span>
+        </div>
+        <div style="color: var(--brand-navy);">Palcomtech Institute of Technology and Business</div>
+        <div style="font-size: 0.85rem; color: var(--text-secondary);">Managed academic operations, computing laboratories, and technical curriculum standards.</div>
+      </div>
+        
+    </div>
+
+    <div style="margin-bottom: 32px;">
+      <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid var(--border-frame); padding-bottom: 6px; margin-bottom: 16px;">3. Complete Publication Record (24 Works)</h2>
+      <ol style="margin-left: 20px; font-size: 0.9rem; line-height: 1.7;">
+    
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2026). "Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance". <em>Smart Cities</em>. DOI: <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" style="color:var(--brand-blue);">10.3390/smartcities9100174</a>
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2026). "SRIVIJAYAPEDIA: A DIGITAL PLATFORM FOR CULTURAL HERITAGE PRESERVATION OF THE SRIVIJAYA CIVILIZATION". <em>Journal of Information System and Technology Management</em>. DOI: <a href="https://doi.org/10.35631/JISTM.1142003" target="_blank" style="color:var(--brand-blue);">10.35631/JISTM.1142003</a>
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2026). "The Proxy Trap in Agentic AI: When Metrics Replace Judgment". <em>SSRN / Preprints</em>. DOI: <a href="https://doi.org/10.2139/ssrn.7670124" target="_blank" style="color:var(--brand-blue);">10.2139/ssrn.7670124</a>
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2026). "Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance". <em>SSRN / Preprints</em>. DOI: <a href="https://doi.org/10.20944/preprints202608.1136.v1" target="_blank" style="color:var(--brand-blue);">10.20944/preprints202608.1136.v1</a>
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2025). "Immersive Heritage: Exploring Srivijaya's Historical Legacy Through Virtual Reality in Digital Communication". <em>Jurnal Audiens</em>. DOI: <a href="https://doi.org/10.18196/jas.v6i2.617" target="_blank" style="color:var(--brand-blue);">10.18196/jas.v6i2.617</a>
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2025). "Celebrity of Instagram and Endorsements: Shaping and Constructing Social Identity". <em>Jurnal The Messenger</em>. DOI: <a href="https://doi.org/10.26623/themessenger.v17i1.11658" target="_blank" style="color:var(--brand-blue);">10.26623/themessenger.v17i1.11658</a>
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2025). "Peer-Review Statements". <em>Academic Publication</em>. DOI: <a href="https://doi.org/10.2991/978-2-38476-466-2_1" target="_blank" style="color:var(--brand-blue);">10.2991/978-2-38476-466-2_1</a>
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2024). "Tune-Attention Model: Designing Cybernetics Intervention for Information Sharing Behavior". <em>2024 4th International Conference on Electronic and Electrical Engineering and Intelligent System (ICE3IS)</em>. DOI: <a href="https://doi.org/10.1109/ice3is62977.2024.10775858" target="_blank" style="color:var(--brand-blue);">10.1109/ice3is62977.2024.10775858</a>
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2024). "Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World". <em>Contributions to Management Science</em>. DOI: <a href="https://doi.org/10.1007/978-3-031-48770-5_65" target="_blank" style="color:var(--brand-blue);">10.1007/978-3-031-48770-5_65</a>
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2021). "Attention-Based Design and Selective Exposure Amid COVID-19 Misinformation Sharing". <em>Lecture Notes in Computer Science</em>. DOI: <a href="https://doi.org/10.1007/978-3-030-78468-3_34" target="_blank" style="color:var(--brand-blue);">10.1007/978-3-030-78468-3_34</a>
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2021). "Attention-Based Design and User Decision on Information Sharing: An Ontological Approach Through Thematic Literature Review". <em>Unpublished</em>. DOI: <a href="https://doi.org/10.13140/RG.2.2.28372.83841" target="_blank" style="color:var(--brand-blue);">10.13140/RG.2.2.28372.83841</a>
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2021). "Attention-Based Design and User Decisions on Information Sharing: A Thematic Literature Review". <em>IEEE Access</em>. DOI: <a href="https://doi.org/10.1109/ACCESS.2021.3087740" target="_blank" style="color:var(--brand-blue);">10.1109/ACCESS.2021.3087740</a>
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2021). "Visual Selective Attention System to Intervene User Attention in Sharing COVID-19 Misinformation". <em>International Journal of Advanced Computer Science and Applications</em>. DOI: <a href="https://doi.org/10.14569/IJACSA.2021.0121005" target="_blank" style="color:var(--brand-blue);">10.14569/IJACSA.2021.0121005</a>
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2021). "Visual selective attention system to intervene user attention in sharing COVID-19 misinformation". <em>arXiv</em>.
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2020). "Attention and misinformation sharing on social media". <em>SSRN / Preprints</em>.
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2020). "Attention and misinformation sharing on social media". <em>arXiv</em>.
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2017). "PENGEMBANGAN APLIKASI SISTEM MANAJEMEN DOKUMEN ELEKTRONIK BERORIENTASI STANDAR BORANG AKREDITASI BAN PT". <em>PROSIDING SEMNASTEK 2017</em>.
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2017). "Aplikasi Sistem Manajemen Dokumen Elektronik Berorientasi Standar Borang BAN PT". <em>UST IT: Jurnal Sistem Informasi, Teknologi Informasi dan Komputer</em>.
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2017). "Aplikasi Web Sms Sebagai Reminder Digital Menggunakan GAMMU". <em>SNTIBD 2017</em>.
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2017). "Multi tier architecture model on a server cluster for application of big data". <em>Annual Research Seminar (ARS) - Computer Science and ICT 2017</em>.
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2015). "DESAIN DAN IMPLEMENTASI TUNNELING IPSEC BERBASIS UNIX DENGAN ESP (ENCAPSULATING SECURITY PAYLOAD) (Studi Kasus : PT. Sumeks Tivi Palembang & PT. Sumatera Ekspres)". <em>Jurnal Teknologi dan Informatika</em>.
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2015). "Routing protocols pada holistic network di era big data". <em>Annual Research Seminar (ARS) 2015</em>.
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2014). "SIMULASI DAN PERANCANGAN KEAMANAN AUTENTIKASI JARINGAN HIRARKI LINK AGGREGATION CONTROL PROTOCOL (LACP) BERBASIS ROUTER CISCO". <em>Konferensi Nasional Teknologi Informasi & Aplikasinya</em>.
+        </li>
+        
+        <li style="margin-bottom: 10px;">
+          <strong>Zaid Amin</strong> et al. (2012). "Analisis Vulnerabilitas Host Pada Keamanan Jaringan Komputer Di PT. Sumeks Tivi Palembang (PALTV) Menggunakan Router Berbasis Unix". <em>Jurnal Teknologi dan Informatika</em>.
+        </li>
+        
+      </ol>
+    </div>
+  </div>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
