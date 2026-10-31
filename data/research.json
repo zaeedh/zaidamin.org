@@ -1,0 +1,78 @@
+{
+  "vision": "Developing human-centered, ethically aligned computational frameworks that govern autonomous agentic AI, mitigate cognitive distractions in information ecosystems, and preserve cultural heritage through immersive technology.",
+  "pillars": [
+    {
+      "id": "pillar-ai-governance",
+      "icon": "shield-check",
+      "title": "AI Governance & Trustworthy Agentic Systems",
+      "short_desc": "Architecting governance mechanisms, multimodal orchestration agents, and safeguards against metric substitution ('The Proxy Trap') in autonomous AI.",
+      "full_desc": "As artificial intelligence transitions from assistive LLMs to autonomous agentic systems that make executive decisions, existing alignment benchmarks often fail due to metric gaming and reward hacking. Our research examines multimodal orchestration frameworks for civic compliance, urban sustainability, and organizational integrity, establishing verifiable guardrails where human judgment cannot be bypassed by automated proxies.",
+      "key_topics": [
+        "The Proxy Trap in Autonomous AI Decision-Making",
+        "Multimodal Orchestration for Civic Compliance & Smart Cities",
+        "Explainable & Auditable Agentic Workflows",
+        "Algorithmic Accountability & Policy Standards"
+      ],
+      "representative_publications": [
+        "Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance (Smart Cities, 2026)",
+        "The Proxy Trap in Agentic AI: When Metrics Replace Judgment (SSRN, 2026)"
+      ],
+      "grant_alignment": "Targeted under MOHE FRGS (Artificial Intelligence & Governance) and ASEAN-level Trustworthy AI research grants."
+    },
+    {
+      "id": "pillar-hci-attention",
+      "icon": "eye",
+      "title": "HCI, Attention-Based Design & Cognitive Interventions",
+      "short_desc": "Investigating how interface architectures shape user cognitive load, selective exposure, and information-sharing behavior amid digital misdirection.",
+      "full_desc": "Modern digital platforms are engineered for attention monetization, creating severe externalities including viral misinformation, cognitive fragmentation, and digital loneliness. Building upon the Tune-Attention Model and cybernetic intervention theory developed during doctoral research at UKM, this research develops humane interface interventions, visual selective attention cues, and friction-inducing mechanisms that empower intentional user agency.",
+      "key_topics": [
+        "Tune-Attention Model & Cybernetic Feedback Loops",
+        "Visual Selective Attention Systems for Combating Misinformation",
+        "Persuasive Technology & Humane Interface Engineering",
+        "Digital Loneliness & Well-being in Hyper-Connected Ecosystems"
+      ],
+      "representative_publications": [
+        "Tune-Attention Model: Designing Cybernetics Intervention for Information Sharing Behavior (IEEE ICE3IS, 2024)",
+        "Attention-Based Design and User Decisions on Information Sharing: A Thematic Literature Review (IEEE Access, 2021)",
+        "Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World (Springer, 2024)"
+      ],
+      "grant_alignment": "Aligned with National Digital Society Initiatives and International Human-Computer Interaction / Digital Wellbeing research funds."
+    },
+    {
+      "id": "pillar-behavioral-heritage",
+      "icon": "globe",
+      "title": "Behavior & Social Computing for Digital Heritage",
+      "short_desc": "Synthesizing computational social science with immersive technologies (VR/XR) to preserve civilizational knowledge and analyze societal behavior.",
+      "full_desc": "Culture and history form the cognitive anchor of human identity. This research pillar combines social computing with extended reality (XR) and crowdsourced digital archives (e.g., Srivijayapedia) to reconstruct historical maritime trade networks, sacred heritage artifacts, and ancient Southeast Asian civilizations for contemporary global preservation.",
+      "key_topics": [
+        "Srivijayapedia: Digital Platforms for Civilizational Heritage Preservation",
+        "Immersive Virtual Reality (VR) for Historical Digital Communication",
+        "Social Identity Construction & Influencer Dynamics in Social Networks",
+        "Community-Driven Digital Knowledge Repositories"
+      ],
+      "representative_publications": [
+        "SRIVIJAYAPEDIA: A Digital Platform for Cultural Heritage Preservation of the Srivijaya Civilization (JISTM, 2026)",
+        "Immersive Heritage: Exploring Srivijaya's Historical Legacy Through Virtual Reality (Jurnal Audiens, 2025)",
+        "Celebrity of Instagram and Endorsements: Shaping and Constructing Social Identity (Jurnal The Messenger, 2025)"
+      ],
+      "grant_alignment": "Cultural Informatics, Digital Humanities, and UNESCO/National Heritage digitisation grants."
+    }
+  ],
+  "active_grant_themes": [
+    {
+      "title": "Autonomous Agentic AI Governance in Higher Education & Urban Compliance",
+      "role": "Principal Investigator (Proposal Stage / Seed Funding)",
+      "period": "2026–2028",
+      "agency": "FRGS / Institutional Research Fund",
+      "objective": "Developing operational metrics to detect proxy corruption when deploying autonomous AI agents in academic evaluation and municipal civic workflows."
+    },
+    {
+      "title": "Cybernetic Attention Interventions to Mitigate Algorithmic Radicalization & Falsehoods",
+      "role": "Lead Researcher",
+      "period": "2025–2027",
+      "agency": "International Collaboration / FDSIT Strategic Research",
+      "objective": "Implementing real-time eye-tracking and micro-friction UI interventions to decelerate uncritical digital sharing."
+    }
+  ]
+}
+
