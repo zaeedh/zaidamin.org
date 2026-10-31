@@ -159,3 +159,61 @@ function initMobileMenu() {
   }
 }
 
+
+/* --------------------------------------------------------------------------
+   Wardiere Showcase: 3D Research Focus Carousel & Quick Package Filter
+   -------------------------------------------------------------------------- */
+let activeCarouselIndex = 1;
+
+function setCarouselCard(index) {
+  activeCarouselIndex = (index + 3) % 3;
+  updateCarouselView();
+}
+
+function rotateCarousel(dir) {
+  setCarouselCard(activeCarouselIndex + dir);
+}
+
+function updateCarouselView() {
+  const c0 = document.getElementById('carousel-card-0');
+  const c1 = document.getElementById('carousel-card-1');
+  const c2 = document.getElementById('carousel-card-2');
+  const dots = document.querySelectorAll('.carousel-dots .dot');
+
+  if (!c0 || !c1 || !c2) return;
+
+  const cards = [c0, c1, c2];
+
+  cards.forEach(c => {
+    c.className = 'carousel-preview-card';
+  });
+
+  const prevIdx = (activeCarouselIndex + 2) % 3;
+  const nextIdx = (activeCarouselIndex + 1) % 3;
+
+  cards[prevIdx].classList.add('card-prev');
+  cards[activeCarouselIndex].classList.add('card-active');
+  cards[nextIdx].classList.add('card-next');
+
+  dots.forEach((dot, idx) => {
+    if (idx === activeCarouselIndex) {
+      dot.classList.add('active');
+    } else {
+      dot.classList.remove('active');
+    }
+  });
+}
+
+function filterHomePackages(query) {
+  const items = document.querySelectorAll('#home-packages-list .package-item-card');
+  const q = (query || '').toLowerCase().trim();
+
+  items.forEach(item => {
+    const text = item.textContent.toLowerCase();
+    if (!q || text.includes(q)) {
+      item.style.display = 'grid';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
