@@ -78,7 +78,7 @@
       </p>
     </header>
 
-    <!-- 2. Clean, Unobstructed Lighthouse Storm Banner (Option 1 Storm) -->
+    <!-- 2. Clean, Unobstructed Lighthouse Storm Banner (Option 1 Storm - Active on Every Page) -->
     <section class="lighthouse-banner-frame">
       <picture>
         <source srcset="assets/images/lighthouse-banner.webp" type="image/webp">
@@ -87,40 +87,40 @@
       <canvas id="rain-canvas"></canvas>
     </section>
 
+    <!-- 3. Top Academic Navigation Bar (Brand + Menu + Photo Avatar + Actions) -->
+    <header class="ocean-top-bar">
+      <a href="index.html" class="ocean-brand">
+        <div class="ocean-logo-badge">ZA</div>
+        <div class="ocean-brand-text">
+          <span class="ocean-brand-name">Dr. Zaid Amin</span>
+          <span class="ocean-brand-title">Ph.D. &bull; Senior Lecturer</span>
+        </div>
+      </a>
+      
+      <nav class="ocean-nav-links">
+        <a href="index.html" class="ocean-nav-link active">HOME</a>
+        <a href="publications.html" class="ocean-nav-link ">PUBLICATIONS</a>
+        <a href="research.html" class="ocean-nav-link ">RESEARCH</a>
+        <a href="prospective-students.html" class="ocean-nav-link ">SUPERVISION</a>
+        <a href="cv.html" class="ocean-nav-link ">ABOUT &amp; CV</a>
+      </nav>
+      
+      <div class="ocean-profile-actions">
+        <a href="cv.html" class="ocean-avatar-link" title="Dr. Zaid Amin Profile">
+          <picture>
+            <source srcset="assets/images/dr-zaid.webp" type="image/webp">
+            <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="ocean-nav-avatar">
+          </picture>
+          <span class="avatar-status-dot"></span>
+        </a>
+        <a href="mailto:zaid.amin@newinti.edu.my" class="ocean-action-dots" title="Quick Contact">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+        </a>
+      </div>
+    </header>
+
     <!-- 3. GOLDEN RATIO MODERN ACADEMIC SHOWCASE (Wardiere Reference Layout) -->
     <section class="golden-ocean-showcase">
-      
-      <!-- Top Academic Navigation Bar (Brand + Menu + Photo Avatar + Actions) -->
-      <header class="ocean-top-bar">
-        <div class="ocean-brand">
-          <div class="ocean-logo-badge">ZA</div>
-          <div class="ocean-brand-text">
-            <span class="ocean-brand-name">Dr. Zaid Amin</span>
-            <span class="ocean-brand-title">Ph.D. &bull; Senior Lecturer</span>
-          </div>
-        </div>
-        
-        <nav class="ocean-nav-links">
-          <a href="index.html" class="ocean-nav-link active">HOME</a>
-          <a href="publications.html" class="ocean-nav-link">PUBLICATIONS</a>
-          <a href="research.html" class="ocean-nav-link">RESEARCH</a>
-          <a href="prospective-students.html" class="ocean-nav-link">SUPERVISION</a>
-          <a href="cv.html" class="ocean-nav-link">ABOUT &amp; CV</a>
-        </nav>
-        
-        <div class="ocean-profile-actions">
-          <a href="cv.html" class="ocean-avatar-link" title="Dr. Zaid Amin Profile">
-            <picture>
-              <source srcset="assets/images/dr-zaid.webp" type="image/webp">
-              <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="ocean-nav-avatar">
-            </picture>
-            <span class="avatar-status-dot"></span>
-          </a>
-          <a href="mailto:zaid.amin@newinti.edu.my" class="ocean-action-dots" title="Quick Contact">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
-          </a>
-        </div>
-      </header>
 
       <!-- Golden Ratio Split: Left Major Hero (~61.8%) & Right Minor Floating Panel (~38.2%) -->
       <div class="ocean-hero-grid">
@@ -148,7 +148,7 @@
             <a href="https://orcid.org/0000-0001-5223-3058" target="_blank" rel="noopener" class="meta-orcid">ORCID: 0000-0001-5223-3058</a>
           </div>
 
-          <!-- 3D Research Focus Carousel Showcase (Matching Reference 3-Card Carousel) -->
+          <!-- 3D Research Focus Carousel Showcase -->
           <div class="ocean-carousel-showcase" id="research-carousel">
             <div class="carousel-cards-track">
               
@@ -373,6 +373,7 @@
     </footer>
 
   </div>
+  <script src="assets/js/rain-lighting.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
