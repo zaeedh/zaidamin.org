@@ -460,40 +460,60 @@
   }
 
   // ==========================================================================
-  // 6. HEAVY DRIVING STORM RAIN (High-Speed Multi-Tier Gale Streaks)
+  // 6. REALISTIC SOFT RAIN WITH DEPTH OF FIELD (DOF BLUR & FOCUS) & HETEROGENEOUS SIZES
   // ==========================================================================
-  class HeavyStormRaindrop {
+  class RealisticDOFRaindrop {
     constructor() {
+      // Continuous optical depth layers:
+      // - Far layer (45%): Distant background, atmospheric blur, fine mist & soft drizzle
+      // - Focal layer (43%): Midground focal plane (in-focus), crisp and defined
+      // - Near layer (12%): Immediate foreground (out-of-focus bokeh blur), wide & translucent
       const r = Math.random();
-      if (r < 0.42) {
-        this.tier = 0; // distant dense mist sheets & drizzle
-        this.baseSpeed = Math.random() * 3.5 + 13.0;
-        this.baseLength = Math.random() * 6 + 15;
-        this.width = 0.55;
-        this.baseAlpha = Math.random() * 0.07 + 0.14;
-        this.bias = (Math.random() - 0.5) * 0.08;
-      } else if (r < 0.82) {
-        this.tier = 1; // midground driving gale downpour
-        this.baseSpeed = Math.random() * 4.5 + 18.0;
-        this.baseLength = Math.random() * 8 + 22;
-        this.width = 0.75;
-        this.baseAlpha = Math.random() * 0.09 + 0.22;
-        this.bias = (Math.random() - 0.5) * 0.06;
+
+      if (r < 0.45) {
+        // LAYER 1: Distant Background (Atmospheric Far Blur)
+        this.layer = 0;
+        this.baseLength = Math.random() * 8 + 6; // 6px to 14px (heterogeneous micro-streaks)
+        this.width = Math.random() * 0.20 + 0.40; // 0.40px to 0.60px (delicate)
+        this.baseSpeed = Math.random() * 2.8 + 6.8; // gentle distant pace
+        this.baseAlpha = Math.random() * 0.05 + 0.07; // soft atmospheric mist
+        this.blur = 0;
+      } else if (r < 0.88) {
+        // LAYER 2: Midground Focal Plane (Sharp & Crisp IN-FOCUS)
+        this.layer = 1;
+        const subSize = Math.random();
+        if (subSize < 0.35) {
+          this.baseLength = Math.random() * 6 + 12; // 12 - 18px fine drops
+          this.width = 0.55;
+          this.baseAlpha = Math.random() * 0.05 + 0.13;
+        } else if (subSize < 0.80) {
+          this.baseLength = Math.random() * 8 + 18; // 18 - 26px standard drops
+          this.width = 0.70;
+          this.baseAlpha = Math.random() * 0.06 + 0.17;
+        } else {
+          this.baseLength = Math.random() * 10 + 25; // 25 - 35px heavier driving drops
+          this.width = 0.85;
+          this.baseAlpha = Math.random() * 0.06 + 0.21;
+        }
+        this.baseSpeed = Math.random() * 3.5 + 11.5;
+        this.blur = 0;
       } else {
-        this.tier = 2; // foreground heavy storm streaks
-        this.baseSpeed = Math.random() * 5.5 + 24.0;
-        this.baseLength = Math.random() * 12 + 30;
-        this.width = 0.95;
-        this.baseAlpha = Math.random() * 0.12 + 0.30;
-        this.bias = (Math.random() - 0.5) * 0.04;
+        // LAYER 3: Immediate Camera Foreground (Out-of-Focus BOKEH Blur)
+        this.layer = 2;
+        this.baseLength = Math.random() * 25 + 38; // 38px to 63px (long motion blur)
+        this.width = Math.random() * 1.0 + 1.8; // 1.8px to 2.8px (wide defocused bokeh)
+        this.baseSpeed = Math.random() * 5.0 + 17.5; // fast near parallax
+        this.baseAlpha = Math.random() * 0.04 + 0.075; // soft translucent ghostly blur
+        this.blur = 3.5;
       }
 
+      this.bias = (Math.random() - 0.5) * 0.06;
       this.reset(true);
     }
 
     reset(initial = false) {
       this.x = Math.random() * (width + 500) - 250;
-      this.y = initial ? Math.random() * height : -45;
+      this.y = initial ? Math.random() * height : -50;
       this.speed = this.baseSpeed * (0.95 + Math.random() * 0.10);
       this.alpha = this.baseAlpha;
     }
@@ -509,7 +529,7 @@
       this.x += vx;
       this.y += vy;
 
-      if (this.y > height + 45 || this.x > width + 300) {
+      if (this.y > height + 55 || this.x > width + 300) {
         this.reset();
       }
     }
@@ -526,35 +546,81 @@
       let beamGlint = 1.0;
       const lx = beacon.lx;
       const ly = beacon.ly;
-      if (this.x > lx && Math.abs(this.y - ly) < 48) {
+      if (this.x > lx && Math.abs(this.y - ly) < 50) {
         const facingOcean = Math.max(0, Math.cos(beacon.angle));
-        beamGlint = 1.0 + facingOcean * 1.6;
+        beamGlint = 1.0 + facingOcean * 1.5;
       }
 
-      // Lightning glint boost
-      const a = Math.min(this.alpha * (1 + lightningBoost * 2.2) * beamGlint, 0.62);
+      // Lightning boost and beam boost (soft clamped ceiling)
+      const a = Math.min(this.alpha * (1 + lightningBoost * 1.8) * beamGlint, 0.48);
 
       const endX = this.x + Math.sin(angle) * currentLength;
       const endY = this.y + Math.cos(angle) * currentLength;
 
-      const grad = ctx.createLinearGradient(this.x, this.y, endX, endY);
-      if (beamGlint > 1.15) {
-        grad.addColorStop(0, `rgba(254, 243, 199, ${a * 0.35})`);
-        grad.addColorStop(0.4, `rgba(254, 243, 199, ${a})`);
-        grad.addColorStop(1, 'rgba(254, 243, 199, 0)');
+      // Depth of Field rendering:
+      if (this.layer === 2) {
+        // LAYER 3: Out-of-Focus Foreground Bokeh Blur
+        ctx.shadowColor = beamGlint > 1.15 ? 'rgba(254, 240, 138, 0.5)' : 'rgba(215, 235, 255, 0.45)';
+        ctx.shadowBlur = this.blur;
+
+        const grad = ctx.createLinearGradient(this.x, this.y, endX, endY);
+        if (beamGlint > 1.15) {
+          grad.addColorStop(0, 'rgba(254, 243, 199, 0)');
+          grad.addColorStop(0.3, `rgba(254, 243, 199, ${a * 0.7})`);
+          grad.addColorStop(0.7, `rgba(254, 243, 199, ${a * 0.5})`);
+          grad.addColorStop(1, 'rgba(254, 243, 199, 0)');
+        } else {
+          grad.addColorStop(0, 'rgba(210, 235, 255, 0)');
+          grad.addColorStop(0.3, `rgba(225, 242, 255, ${a * 0.7})`);
+          grad.addColorStop(0.7, `rgba(210, 235, 255, ${a * 0.5})`);
+          grad.addColorStop(1, 'rgba(200, 225, 250, 0)');
+        }
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = this.width;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(endX, endY);
+        ctx.stroke();
+
+      } else if (this.layer === 1) {
+        // LAYER 2: In-Focus Focal Plane (Crisp luminous head with feathered tail)
+        const grad = ctx.createLinearGradient(this.x, this.y, endX, endY);
+        if (beamGlint > 1.15) {
+          grad.addColorStop(0, `rgba(254, 243, 199, ${a * 0.3})`);
+          grad.addColorStop(0.35, `rgba(254, 243, 199, ${a})`);
+          grad.addColorStop(1, 'rgba(254, 243, 199, 0)');
+        } else {
+          grad.addColorStop(0, `rgba(215, 238, 255, ${a * 0.3})`);
+          grad.addColorStop(0.35, `rgba(230, 246, 255, ${a})`);
+          grad.addColorStop(1, 'rgba(210, 235, 255, 0)');
+        }
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = this.width;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(endX, endY);
+        ctx.stroke();
+
       } else {
-        grad.addColorStop(0, `rgba(210, 235, 255, ${a * 0.35})`);
-        grad.addColorStop(0.4, `rgba(228, 244, 255, ${a})`);
-        grad.addColorStop(1, 'rgba(210, 235, 255, 0)');
+        // LAYER 1: Distant Background (Atmospheric Far Blur, whisper soft)
+        const grad = ctx.createLinearGradient(this.x, this.y, endX, endY);
+        grad.addColorStop(0, 'rgba(200, 225, 250, 0)');
+        grad.addColorStop(0.35, `rgba(210, 232, 252, ${a})`);
+        grad.addColorStop(1, 'rgba(200, 225, 250, 0)');
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = this.width;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(endX, endY);
+        ctx.stroke();
       }
 
-      ctx.strokeStyle = grad;
-      ctx.lineWidth = this.width;
-      ctx.lineCap = 'round';
-      ctx.beginPath();
-      ctx.moveTo(this.x, this.y);
-      ctx.lineTo(endX, endY);
-      ctx.stroke();
       ctx.restore();
     }
   }
@@ -587,11 +653,11 @@
     hazeBands.push(new HorizonHaze(0, height * 0.46, 0.35, 0.055));
     hazeBands.push(new HorizonHaze(width * 0.55, height * 0.50, 0.42, 0.050));
 
-    // D. Heavy Driving Storm Rain (~720 drops on desktop)
-    const count = Math.min(Math.floor((width * height) / 1050), 750);
+    // D. Soft Heterogeneous DOF Rain (~680 drops on desktop)
+    const count = Math.min(Math.floor((width * height) / 1150), 680);
     raindrops = [];
     for (let i = 0; i < count; i++) {
-      raindrops.push(new HeavyStormRaindrop());
+      raindrops.push(new RealisticDOFRaindrop());
     }
   }
 
