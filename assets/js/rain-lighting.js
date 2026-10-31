@@ -197,27 +197,27 @@
   class NaturalRaindrop {
     constructor() {
       const r = Math.random();
-      if (r < 0.45) {
+      if (r < 0.50) {
         this.tier = 0; // distant soft rain
-        this.baseSpeed = Math.random() * 2.2 + 4.2;
-        this.baseLength = Math.random() * 5 + 10;
-        this.width = 0.65;
-        this.baseAlpha = Math.random() * 0.08 + 0.20;
-        this.bias = (Math.random() - 0.5) * 0.09;
-      } else if (r < 0.82) {
+        this.baseSpeed = Math.random() * 2.0 + 3.8;
+        this.baseLength = Math.random() * 4 + 9;
+        this.width = 0.45;
+        this.baseAlpha = Math.random() * 0.05 + 0.08;
+        this.bias = (Math.random() - 0.5) * 0.08;
+      } else if (r < 0.85) {
         this.tier = 1; // midground driving rain
-        this.baseSpeed = Math.random() * 2.8 + 6.2;
-        this.baseLength = Math.random() * 7 + 14;
-        this.width = 0.80;
-        this.baseAlpha = Math.random() * 0.10 + 0.28;
-        this.bias = (Math.random() - 0.5) * 0.07;
+        this.baseSpeed = Math.random() * 2.5 + 5.5;
+        this.baseLength = Math.random() * 5 + 13;
+        this.width = 0.60;
+        this.baseAlpha = Math.random() * 0.06 + 0.13;
+        this.bias = (Math.random() - 0.5) * 0.06;
       } else {
         this.tier = 2; // foreground graceful streaks
-        this.baseSpeed = Math.random() * 3.2 + 8.5;
-        this.baseLength = Math.random() * 9 + 18;
-        this.width = 1.0;
-        this.baseAlpha = Math.random() * 0.12 + 0.38;
-        this.bias = (Math.random() - 0.5) * 0.05;
+        this.baseSpeed = Math.random() * 2.8 + 7.2;
+        this.baseLength = Math.random() * 6 + 16;
+        this.width = 0.75;
+        this.baseAlpha = Math.random() * 0.08 + 0.18;
+        this.bias = (Math.random() - 0.5) * 0.04;
       }
 
       this.reset(true);
@@ -247,10 +247,10 @@
 
     draw(flashBoost) {
       const currentAngle = getStormWindAngle(this.x, this.y, simTime, this.bias);
-      // Slight aerodynamic curvature: tail curves with the local wind gradient
       const tailAngle = getStormWindAngle(this.x, this.y - this.baseLength * 0.5, simTime, this.bias);
 
       ctx.save();
+      ctx.globalCompositeOperation = 'screen'; // seamlessly blends into the painting pixels
 
       // Check if illuminated by rotating lighthouse beam
       let beamGlint = 1.0;
@@ -258,28 +258,33 @@
       const ly = beacon.ly;
       if (this.x > lx && Math.abs(this.y - ly) < 42) {
         const facingOcean = Math.max(0, Math.cos(beacon.angle));
-        beamGlint = 1.0 + facingOcean * 1.5;
+        beamGlint = 1.0 + facingOcean * 1.4;
       }
 
-      const a = Math.min(this.alpha * flashBoost * beamGlint, 0.75);
+      const a = Math.min(this.alpha * flashBoost * beamGlint, 0.42);
 
-      if (beamGlint > 1.2) {
-        ctx.strokeStyle = `rgba(254, 243, 199, ${a})`;
+      const endX = this.x + Math.sin(currentAngle) * this.baseLength;
+      const endY = this.y + Math.cos(currentAngle) * this.baseLength;
+      const midX = this.x + Math.sin((currentAngle + tailAngle) * 0.5) * (this.baseLength * 0.5);
+      const midY = this.y + Math.cos((currentAngle + tailAngle) * 0.5) * (this.baseLength * 0.5);
+
+      // Feathered linear gradient along streak (tail fades smoothly into air)
+      const grad = ctx.createLinearGradient(this.x, this.y, endX, endY);
+      if (beamGlint > 1.15) {
+        grad.addColorStop(0, `rgba(254, 243, 199, ${a * 0.25})`);
+        grad.addColorStop(0.4, `rgba(254, 243, 199, ${a})`);
+        grad.addColorStop(1, 'rgba(254, 243, 199, 0)');
       } else {
-        ctx.strokeStyle = `rgba(222, 238, 255, ${a})`;
+        grad.addColorStop(0, `rgba(210, 230, 250, ${a * 0.25})`);
+        grad.addColorStop(0.4, `rgba(215, 235, 255, ${a})`);
+        grad.addColorStop(1, 'rgba(210, 230, 250, 0)');
       }
 
+      ctx.strokeStyle = grad;
       ctx.lineWidth = this.width;
       ctx.lineCap = 'round';
       ctx.beginPath();
       ctx.moveTo(this.x, this.y);
-
-      // Natural curved rain streak
-      const midX = this.x + Math.sin((currentAngle + tailAngle) * 0.5) * (this.baseLength * 0.5);
-      const midY = this.y + Math.cos((currentAngle + tailAngle) * 0.5) * (this.baseLength * 0.5);
-      const endX = this.x + Math.sin(currentAngle) * this.baseLength;
-      const endY = this.y + Math.cos(currentAngle) * this.baseLength;
-
       ctx.quadraticCurveTo(midX, midY, endX, endY);
       ctx.stroke();
       ctx.restore();
