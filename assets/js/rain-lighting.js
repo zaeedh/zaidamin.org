@@ -226,13 +226,21 @@
   // 2. DISTANT VILLAGE HOUSE LAMPS & SECONDARY LIGHTHOUSE AMBIENCE
   // ==========================================================================
   const distantVillageLamps = [
-    { nx: 0.672, ny: 0.518, size: 0.9, baseA: 0.75, seed: 1.2 },
-    { nx: 0.694, ny: 0.522, size: 1.1, baseA: 0.85, seed: 3.7 },
-    { nx: 0.715, ny: 0.516, size: 0.8, baseA: 0.70, seed: 5.4 },
-    { nx: 0.732, ny: 0.524, size: 1.2, baseA: 0.90, seed: 7.1 },
-    { nx: 0.758, ny: 0.519, size: 1.0, baseA: 0.80, seed: 9.8 },
-    { nx: 0.776, ny: 0.526, size: 0.9, baseA: 0.75, seed: 12.3 },
-    { nx: 0.802, ny: 0.521, size: 1.1, baseA: 0.85, seed: 15.6 }
+    // A. Cliffside Hill Village Cottages (on the cliff left of the lighthouse)
+    { nx: 0.082, ny: 0.258, size: 1.0, baseA: 0.85, seed: 1.2 },
+    { nx: 0.104, ny: 0.278, size: 1.2, baseA: 0.90, seed: 3.4 },
+    { nx: 0.122, ny: 0.298, size: 0.9, baseA: 0.80, seed: 5.7 },
+    { nx: 0.144, ny: 0.312, size: 1.1, baseA: 0.85, seed: 8.1 },
+    { nx: 0.168, ny: 0.324, size: 0.9, baseA: 0.75, seed: 10.6 },
+    { nx: 0.185, ny: 0.334, size: 1.0, baseA: 0.80, seed: 13.2 },
+    // B. Distant Shoreline Cottages Across the Bay (Horizon right)
+    { nx: 0.672, ny: 0.518, size: 0.85, baseA: 0.75, seed: 2.5 },
+    { nx: 0.694, ny: 0.522, size: 1.05, baseA: 0.85, seed: 4.8 },
+    { nx: 0.715, ny: 0.516, size: 0.80, baseA: 0.70, seed: 6.9 },
+    { nx: 0.732, ny: 0.524, size: 1.15, baseA: 0.90, seed: 9.3 },
+    { nx: 0.758, ny: 0.519, size: 0.95, baseA: 0.80, seed: 11.7 },
+    { nx: 0.776, ny: 0.526, size: 0.85, baseA: 0.75, seed: 14.1 },
+    { nx: 0.802, ny: 0.521, size: 1.05, baseA: 0.85, seed: 16.5 }
   ];
 
   function drawDistantVillageLamps(boost) {
