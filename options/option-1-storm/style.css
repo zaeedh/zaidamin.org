@@ -1,0 +1,796 @@
+/* ==========================================================================
+   ACADEMIC GOLDEN RATIO ARCHITECTURE - DR. ZAID AMIN (zaidamin.org)
+   Epigraph • Unobstructed Lighthouse Storm Banner • Golden Ratio (1.618 : 1)
+   ========================================================================== */
+
+:root {
+  /* Color Palette - Royal Dark Academic Theme (Default) */
+  --bg-page: #050814;
+  --bg-surface: #0b1226;
+  --bg-subtle: #0f1932;
+  --bg-card: #0d162d;
+  --border-light: rgba(56, 189, 248, 0.16);
+  --border-strong: rgba(56, 189, 248, 0.35);
+  --border-accent: #38bdf8;
+
+  --text-title: #f8fafc;
+  --text-body: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  --brand-blue: #38bdf8;
+  --brand-blue-light: rgba(56, 189, 248, 0.12);
+  --brand-navy: #1e3a8a;
+  --brand-gold: #fbbf24;
+  --brand-gold-light: rgba(251, 191, 36, 0.15);
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --phi: 1.618;
+  --transition: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] {
+  --bg-page: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-subtle: #f8fafc;
+  --bg-card: #ffffff;
+  --border-light: #e2e8f0;
+  --border-strong: #0f172a;
+  --border-accent: #2563eb;
+
+  --text-title: #0a0f1d;
+  --text-body: #1e293b;
+  --text-muted: #64748b;
+
+  --brand-blue: #2563eb;
+  --brand-blue-light: #eff6ff;
+  --brand-navy: #0f2744;
+  --brand-gold: #d97706;
+  --brand-gold-light: #fef3c7;
+}
+
+[data-theme="dark"] {
+  --bg-page: #050814;
+  --bg-surface: #0b1226;
+  --bg-subtle: #0f1932;
+  --bg-card: #0d162d;
+  --border-light: rgba(56, 189, 248, 0.16);
+  --border-strong: rgba(56, 189, 248, 0.35);
+  --border-accent: #38bdf8;
+
+  --text-title: #f8fafc;
+  --text-body: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  --brand-blue: #38bdf8;
+  --brand-blue-light: rgba(56, 189, 248, 0.12);
+  --brand-navy: #1e3a8a;
+  --brand-gold: #fbbf24;
+  --brand-gold-light: rgba(251, 191, 36, 0.15);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--bg-page);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all var(--transition);
+}
+
+.site-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+@media (max-width: 768px) {
+  .site-wrapper {
+    padding: 20px 16px;
+  }
+}
+
+/* ==========================================================================
+   1. TOP EPIGRAPH (QUR'AN 31:27 & PHILOSOPHY)
+   ========================================================================== */
+.epigraph-header {
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.epigraph-title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--text-title);
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.epigraph-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  max-width: 980px;
+}
+
+/* ==========================================================================
+   2. CLEAN UNOBSTRUCTED LIGHTHOUSE STORM BANNER
+   ========================================================================== */
+.lighthouse-banner-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  min-height: 380px;
+  max-height: 520px;
+  border-radius: 0;
+  overflow: hidden;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: transparent;
+  margin-bottom: 36px;
+  /* Seamlessly integrated with background: soft feathered dissolution on all edges */
+  mask-image: radial-gradient(ellipse 98% 90% at 50% 50%, #000000 76%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 98% 90% at 50% 50%, #000000 76%, transparent 100%);
+}
+
+.lighthouse-banner-frame picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.lighthouse-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border: none !important;
+  outline: none !important;
+  filter: none;
+}
+
+#rain-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   3. HORIZONTAL MENU NAVIGATION BAR (DIRECTLY BELOW BANNER)
+   ========================================================================== */
+.golden-navbar {
+  display: flex;
+  width: 100%;
+  border: 1px solid var(--border-strong);
+  border-top: none;
+  background-color: var(--bg-surface);
+  border-radius: 0 0 10px 10px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.nav-tab-btn {
+  flex: 1;
+  text-align: center;
+  padding: 16px 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-title);
+  border-right: 1px solid var(--border-strong);
+  background-color: var(--bg-surface);
+  transition: all var(--transition);
+  text-transform: capitalize;
+}
+
+.nav-tab-btn:last-child {
+  border-right: none;
+}
+
+.nav-tab-btn:hover {
+  background-color: var(--brand-blue-light);
+  color: var(--brand-blue);
+}
+
+.nav-tab-btn.active {
+  background-color: var(--text-title);
+  color: var(--bg-page);
+}
+
+[data-theme="dark"] .nav-tab-btn.active {
+  background-color: var(--brand-blue);
+  color: #07090e;
+}
+
+@media (max-width: 768px) {
+  .golden-navbar {
+    flex-direction: column;
+    border-top: 1px solid var(--border-strong);
+    border-radius: 8px;
+  }
+  .nav-tab-btn {
+    border-right: none;
+    border-bottom: 1px solid var(--border-light);
+    padding: 12px;
+  }
+}
+
+/* ==========================================================================
+   4. GOLDEN RATIO STANDARD COMPOSITION (61.8% : 38.2%)
+   ========================================================================== */
+.golden-composition-grid {
+  display: grid;
+  grid-template-columns: 1.618fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .golden-composition-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* Major Column (61.8% Width) */
+.golden-major-col {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.scholar-hero-block {
+  background: linear-gradient(135deg, rgba(14, 23, 46, 0.95), rgba(9, 15, 30, 0.98));
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 15px 35px rgba(0, 5, 20, 0.45);
+}
+
+.scholar-hero-inner {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.royal-avatar-box {
+  flex-shrink: 0;
+}
+
+.royal-avatar-img {
+  width: 130px;
+  height: 130px;
+  border-radius: 20px;
+  object-fit: cover;
+  border: 2px solid rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.25), 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 640px) {
+  .scholar-hero-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.scholar-tagline-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background-color: rgba(56, 189, 248, 0.08);
+  color: var(--brand-blue);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.scholar-name-large {
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.royal-degree-gold {
+  color: var(--brand-gold);
+  font-weight: 800;
+}
+
+.scholar-subheading {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--brand-blue);
+  margin-bottom: 16px;
+}
+
+.royal-motto {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+  margin-bottom: 18px;
+  padding-left: 16px;
+  border-left: 3px solid var(--brand-gold);
+}
+
+.motto-gold {
+  color: var(--brand-gold);
+  font-weight: 700;
+  font-style: normal;
+}
+
+.scholar-mission-text {
+  font-size: 1.025rem;
+  color: var(--text-body);
+  line-height: 1.7;
+}
+
+/* 3 Core Pillars in Golden Section */
+.pillars-heading {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-title);
+  letter-spacing: -0.02em;
+  margin-bottom: 18px;
+}
+
+.pillar-item-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 18px;
+  transition: all var(--transition);
+}
+
+.pillar-item-card:hover {
+  border-color: var(--brand-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.08);
+}
+
+.pillar-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-title);
+  margin-bottom: 8px;
+}
+
+.pillar-desc {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.pillar-grant-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--brand-gold);
+  background-color: var(--brand-gold-light);
+  padding: 4px 10px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Flagship Works */
+.flagship-pub-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 14px;
+  transition: all var(--transition);
+}
+
+.flagship-pub-card:hover {
+  border-color: var(--brand-blue);
+}
+
+.flagship-badge {
+  font-size: 0.725rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--brand-blue);
+  margin-bottom: 4px;
+}
+
+.flagship-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-title);
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.flagship-venue {
+  font-size: 0.85rem;
+  font-style: italic;
+  font-family: var(--font-serif);
+  color: var(--text-muted);
+}
+
+/* Minor Column (38.2% Width) */
+.golden-minor-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: sticky;
+  top: 24px;
+}
+
+.action-buttons-card {
+  background: linear-gradient(135deg, rgba(14, 23, 46, 0.95), rgba(9, 15, 30, 0.98));
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 15px 35px rgba(0, 5, 20, 0.45);
+}
+
+.action-card-title {
+  font-size: 0.925rem;
+  font-weight: 800;
+  color: #94a3b8;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.action-card-title::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand-blue);
+  box-shadow: 0 0 10px var(--brand-blue);
+}
+
+.action-buttons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.golden-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  font-size: 0.925rem;
+  font-weight: 700;
+  border-radius: 12px;
+  transition: all var(--transition);
+  border: 1px solid transparent;
+}
+
+.golden-btn-primary {
+  background: #2563eb;
+  color: #ffffff;
+  border: 1px solid #3b82f6;
+  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.45);
+}
+
+.golden-btn-primary:hover {
+  background: #1d4ed8;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.65);
+}
+
+.golden-btn-outline {
+  background: rgba(14, 24, 48, 0.65);
+  color: #f1f5f9;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+.golden-btn-outline:hover {
+  border-color: #38bdf8;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.2);
+}
+
+.golden-btn-accent {
+  background: rgba(22, 26, 20, 0.7);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.55);
+  box-shadow: 0 0 16px rgba(251, 191, 36, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+.golden-btn-accent:hover {
+  background: #fbbf24;
+  color: #070a14;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 22px rgba(251, 191, 36, 0.45);
+}
+
+/* Scholarly Identifiers Icons */
+.golden-icons-cluster {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(56, 189, 248, 0.18);
+  padding-top: 20px;
+}
+
+.golden-icon-pill {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  background: rgba(14, 24, 48, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  transition: all var(--transition);
+}
+
+.golden-icon-pill:hover {
+  border-color: #38bdf8;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.2);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Metrics Card in Minor Column */
+.golden-metrics-card {
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.metrics-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-light);
+  padding: 10px 0;
+  font-size: 0.9rem;
+}
+
+.metrics-row:last-child {
+  border-bottom: none;
+}
+
+.metrics-val {
+  font-weight: 800;
+  color: var(--brand-blue);
+}
+
+/* Recruitment Callout Box */
+.golden-recruitment-box {
+  background: linear-gradient(135deg, var(--brand-navy) 0%, #1e3a8a 100%);
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.recruitment-callout-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.recruitment-callout-desc {
+  font-size: 0.875rem;
+  color: #e2e8f0;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+/* Subpage Navigation & Container */
+.subpage-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-light);
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+[data-theme="dark"] .subpage-nav {
+  background-color: rgba(7, 9, 14, 0.95);
+}
+
+.subpage-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.back-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--brand-blue);
+}
+
+/* Publications Engine in Subpage */
+.publications-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 28px;
+  padding: 16px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 240px;
+  padding: 10px 16px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  background: var(--bg-surface);
+  color: var(--text-title);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-btn {
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface);
+  color: var(--text-body);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.filter-btn.active {
+  background: var(--text-title);
+  color: var(--bg-page);
+  border-color: var(--text-title);
+}
+
+.pub-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+  transition: all var(--transition);
+}
+
+.pub-item:hover {
+  border-color: var(--brand-blue);
+  box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.06);
+}
+
+.pub-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 0.775rem;
+  font-weight: 700;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  background: var(--bg-subtle);
+  color: var(--text-body);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.pub-btn:hover {
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
+}
+
+.bibtex-box {
+  display: none;
+  margin-top: 14px;
+  padding: 14px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  position: relative;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.bibtex-box.show {
+  display: block;
+}
+
+.bibtex-copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 10px;
+  font-size: 0.725rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-title);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Site Footer */
+.golden-footer {
+  border-top: 1px solid var(--border-light);
+  padding: 40px 0 24px 0;
+  margin-top: 60px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.theme-toggle-btn {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--text-body);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
+}
