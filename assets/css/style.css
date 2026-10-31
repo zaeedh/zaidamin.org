@@ -138,11 +138,12 @@ a {
   aspect-ratio: 21 / 9;
   min-height: 380px;
   max-height: 520px;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
   border: 1px solid var(--border-light);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.25);
   background-color: #030712;
+  margin-bottom: 36px;
 }
 
 .lighthouse-bg-img {
