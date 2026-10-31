@@ -1,23 +1,13 @@
 /**
- * Cinematic Chaotic Ocean Tempest & Rotating Lighthouse Beacon Engine
+ * Cinematic Slow-Motion Atmospheric Rain & Rotating Lighthouse Beacon Engine
  * For Dr. Zaid Amin (zaidamin.org)
  * 
- * Features:
- * 1. Chaotic, High-Visibility Storm Rain:
- *    - 680+ luminous, sharply visible rain streaks (alpha 0.35 to 0.85).
- *    - True motion-blur physics: streak length scales with velocity (18px to 52px).
- *    - Turbulent wind gusts: severe storm slant (28 deg - 42 deg) with chaotic fluttering eddies.
- *    - Torrential squall sheets: wind gusts surge dynamically in breathing tempest waves.
- *    - Zero water splash/ripples: clean, seamless, continuous storm driving downpour.
- * 2. 3D Rotating Lighthouse Beacon & Eye-Splash Bloom:
- *    - Sweeps across the storm with a volumetric conical beam.
- *    - Rotates toward the viewer: blooms into a soft, radiant lens flare & warm eye-flash.
- *    - Rotates away: smoothly dissolves back into the ocean sweep.
- *    - Rain streaks passing through the beam glint brilliantly in golden-white.
- * 3. Driving Squall Mist Sheets:
- *    - Diagonal wind-driven mist bands sweeping across the sky and sea with the gale.
- * 4. Ambient Distant Thunder Lighting:
- *    - Soft sky flashes that illuminate the entire downpour in silver-blue.
+ * Aesthetic Philosophy:
+ * - Soft, dreamy slow-motion rainfall: raindrops float and drift gracefully like cinema slow-mo.
+ * - Perfectly blended: sheer, luminous opacities (0.18 - 0.38) that harmonize with the painting.
+ * - Gentle, elegant wind drift (~12 deg angle) without aggressive chaos or harsh gusts.
+ * - Hypnotic 3D rotating lighthouse beacon with warm, soft eye-splash bloom.
+ * - Silky smooth 60 FPS performance, clean, serene, prestigious.
  */
 
 (function() {
@@ -32,12 +22,10 @@
   // Rain Pool
   let raindrops = [];
 
-  // Wind & Chaos Dynamics
-  let baseWindAngle = 0.52; // ~30 deg steep storm slant
-  let currentWindAngle = 0.52;
-  let gustPower = 1.0;
+  // Gentle, Elegant Wind Angle (~12 degrees)
+  let windAngle = 0.20;
 
-  // Ambient Lightning
+  // Ambient Lighting
   let ambientFlashAlpha = 0;
   let targetFlash = 0;
   let lastFlashTime = Date.now();
@@ -52,13 +40,13 @@
   window.addEventListener('resize', resize);
 
   // ==========================================================================
-  // 1. ROTATING LIGHTHOUSE BEACON & EYE-SPLASH BLOOM ENGINE
+  // 1. MAJESTIC ROTATING LIGHTHOUSE BEACON & SOFT EYE-SPLASH BLOOM
   // ==========================================================================
   const beacon = {
     get lx() { return width * 0.318; },
     get ly() { return height * 0.262; },
-    angle: 0.2, // rotational phase
-    speed: 0.0135, // majestic revolution ~7.5 seconds per 360 deg
+    angle: 0.2,
+    speed: 0.0105, // slow, majestic ~9.5s per revolution
 
     update() {
       this.angle += this.speed;
@@ -76,41 +64,41 @@
 
       ctx.save();
 
-      // A. Steady Base Lantern Glow
-      const baseCoreGrad = ctx.createRadialGradient(lx, ly, 0, lx, ly, 18);
+      // A. Steady Warm Lantern Core Glow
+      const baseCoreGrad = ctx.createRadialGradient(lx, ly, 0, lx, ly, 16);
       baseCoreGrad.addColorStop(0, 'rgba(255, 255, 245, 0.95)');
-      baseCoreGrad.addColorStop(0.3, 'rgba(254, 240, 138, 0.7)');
-      baseCoreGrad.addColorStop(0.7, 'rgba(234, 179, 8, 0.3)');
+      baseCoreGrad.addColorStop(0.3, 'rgba(254, 240, 138, 0.65)');
+      baseCoreGrad.addColorStop(0.7, 'rgba(234, 179, 8, 0.25)');
       baseCoreGrad.addColorStop(1, 'rgba(234, 179, 8, 0)');
 
       ctx.globalCompositeOperation = 'screen';
       ctx.fillStyle = baseCoreGrad;
       ctx.beginPath();
-      ctx.arc(lx, ly, 18, 0, Math.PI * 2);
+      ctx.arc(lx, ly, 16, 0, Math.PI * 2);
       ctx.fill();
 
       // B. Volumetric Beam Sweeping Across the Ocean
       if (facingOcean > 0.02) {
-        const beamIntensity = Math.pow(facingOcean, 1.35) * flashBoost;
+        const beamIntensity = Math.pow(facingOcean, 1.3) * flashBoost;
         const beamLength = width * 0.75;
         
-        const beamPitch = 0.02 + Math.sin(this.angle * 2) * 0.015;
+        const beamPitch = 0.02 + Math.sin(this.angle * 2) * 0.012;
         const endY = ly + Math.sin(beamPitch) * beamLength;
-        const beamHalfWidth = 26 + facingOcean * 14;
+        const beamHalfWidth = 24 + facingOcean * 12;
 
         const p1x = lx;
-        const p1y = ly - 3;
+        const p1y = ly - 2.5;
         const p2x = lx;
-        const p2y = ly + 3;
+        const p2y = ly + 2.5;
         const p3x = lx + beamLength;
         const p3y = endY + beamHalfWidth;
         const p4x = lx + beamLength;
         const p4y = endY - beamHalfWidth;
 
         const beamGrad = ctx.createLinearGradient(lx, ly, lx + beamLength, endY);
-        beamGrad.addColorStop(0, `rgba(255, 250, 225, ${0.80 * beamIntensity})`);
-        beamGrad.addColorStop(0.15, `rgba(254, 240, 138, ${0.48 * beamIntensity})`);
-        beamGrad.addColorStop(0.55, `rgba(186, 230, 253, ${0.16 * beamIntensity})`);
+        beamGrad.addColorStop(0, `rgba(255, 250, 225, ${0.70 * beamIntensity})`);
+        beamGrad.addColorStop(0.18, `rgba(254, 240, 138, ${0.40 * beamIntensity})`);
+        beamGrad.addColorStop(0.60, `rgba(186, 230, 253, ${0.12 * beamIntensity})`);
         beamGrad.addColorStop(1, 'rgba(186, 230, 253, 0)');
 
         ctx.fillStyle = beamGrad;
@@ -124,42 +112,42 @@
 
         // Soft outer feathered aura
         const auraGrad = ctx.createLinearGradient(lx, ly, lx + beamLength * 0.7, endY);
-        auraGrad.addColorStop(0, `rgba(253, 224, 71, ${0.35 * beamIntensity})`);
-        auraGrad.addColorStop(0.6, `rgba(147, 197, 253, ${0.08 * beamIntensity})`);
+        auraGrad.addColorStop(0, `rgba(253, 224, 71, ${0.28 * beamIntensity})`);
+        auraGrad.addColorStop(0.6, `rgba(147, 197, 253, ${0.06 * beamIntensity})`);
         auraGrad.addColorStop(1, 'rgba(147, 197, 253, 0)');
 
         ctx.fillStyle = auraGrad;
         ctx.beginPath();
-        ctx.moveTo(p1x, p1y - 6);
-        ctx.lineTo(p4x, p4y - 14);
-        ctx.lineTo(p3x, p3y + 14);
-        ctx.lineTo(p2x, p2y + 6);
+        ctx.moveTo(p1x, p1y - 5);
+        ctx.lineTo(p4x, p4y - 12);
+        ctx.lineTo(p3x, p3y + 12);
+        ctx.lineTo(p2x, p2y + 5);
         ctx.closePath();
         ctx.fill();
       }
 
-      // C. "Splash into My Eyes" Lens Flare & Eye Bloom
+      // C. Soft "Splash into My Eyes" Lens Flare & Eye Bloom
       if (facingViewer > 0.05) {
         const eyeSplash = Math.pow(facingViewer, 3.2);
         const flareAlpha = Math.min(eyeSplash * flashBoost, 1.0);
 
         // Soft warm atmospheric wash over viewer
         const eyeWashGrad = ctx.createRadialGradient(lx, ly, 10, lx, ly, Math.max(width, height) * 0.75);
-        eyeWashGrad.addColorStop(0, `rgba(255, 250, 220, ${0.22 * flareAlpha})`);
-        eyeWashGrad.addColorStop(0.35, `rgba(253, 224, 71, ${0.09 * flareAlpha})`);
-        eyeWashGrad.addColorStop(0.7, `rgba(186, 230, 253, ${0.03 * flareAlpha})`);
+        eyeWashGrad.addColorStop(0, `rgba(255, 250, 220, ${0.18 * flareAlpha})`);
+        eyeWashGrad.addColorStop(0.35, `rgba(253, 224, 71, ${0.07 * flareAlpha})`);
+        eyeWashGrad.addColorStop(0.7, `rgba(186, 230, 253, ${0.02 * flareAlpha})`);
         eyeWashGrad.addColorStop(1, 'rgba(186, 230, 253, 0)');
 
         ctx.fillStyle = eyeWashGrad;
         ctx.fillRect(0, 0, width, height);
 
         // Radiant Lens Flare Corona
-        const flareRadius = 80 + eyeSplash * 70;
+        const flareRadius = 70 + eyeSplash * 60;
         const coronaGrad = ctx.createRadialGradient(lx, ly, 0, lx, ly, flareRadius);
-        coronaGrad.addColorStop(0, `rgba(255, 255, 255, ${0.95 * flareAlpha})`);
-        coronaGrad.addColorStop(0.2, `rgba(255, 245, 180, ${0.75 * flareAlpha})`);
-        coronaGrad.addColorStop(0.5, `rgba(251, 191, 36, ${0.35 * flareAlpha})`);
-        coronaGrad.addColorStop(0.8, `rgba(147, 197, 253, ${0.12 * flareAlpha})`);
+        coronaGrad.addColorStop(0, `rgba(255, 255, 255, ${0.92 * flareAlpha})`);
+        coronaGrad.addColorStop(0.2, `rgba(255, 245, 180, ${0.70 * flareAlpha})`);
+        coronaGrad.addColorStop(0.5, `rgba(251, 191, 36, ${0.30 * flareAlpha})`);
+        coronaGrad.addColorStop(0.8, `rgba(147, 197, 253, ${0.10 * flareAlpha})`);
         coronaGrad.addColorStop(1, 'rgba(147, 197, 253, 0)');
 
         ctx.fillStyle = coronaGrad;
@@ -168,13 +156,13 @@
         ctx.fill();
 
         // Anamorphic Horizontal Glare Streak
-        const streakLength = 120 + eyeSplash * 180;
-        const streakHeight = 2.5 + eyeSplash * 2.5;
+        const streakLength = 110 + eyeSplash * 150;
+        const streakHeight = 2.2 + eyeSplash * 2.0;
         const streakGrad = ctx.createLinearGradient(lx - streakLength, ly, lx + streakLength, ly);
         streakGrad.addColorStop(0, 'rgba(255, 255, 255, 0)');
-        streakGrad.addColorStop(0.35, `rgba(186, 230, 253, ${0.35 * flareAlpha})`);
-        streakGrad.addColorStop(0.5, `rgba(255, 255, 255, ${0.90 * flareAlpha})`);
-        streakGrad.addColorStop(0.65, `rgba(186, 230, 253, ${0.35 * flareAlpha})`);
+        streakGrad.addColorStop(0.35, `rgba(186, 230, 253, ${0.30 * flareAlpha})`);
+        streakGrad.addColorStop(0.5, `rgba(255, 255, 255, ${0.85 * flareAlpha})`);
+        streakGrad.addColorStop(0.65, `rgba(186, 230, 253, ${0.30 * flareAlpha})`);
         streakGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
 
         ctx.fillStyle = streakGrad;
@@ -182,10 +170,10 @@
         ctx.ellipse(lx, ly, streakLength, streakHeight, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Brilliant White Filament Hotspot
-        ctx.fillStyle = `rgba(255, 255, 255, ${0.98 * flareAlpha})`;
+        // Brilliant Filament Core
+        ctx.fillStyle = `rgba(255, 255, 255, ${0.95 * flareAlpha})`;
         ctx.beginPath();
-        ctx.arc(lx, ly, 5 + eyeSplash * 3, 0, Math.PI * 2);
+        ctx.arc(lx, ly, 4 + eyeSplash * 3, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -194,89 +182,83 @@
   };
 
   // ==========================================================================
-  // 2. CHAOTIC, VISIBLE, HIGH-SPEED STORM RAIN ENGINE
+  // 2. SLOW-MOTION, SOFT, BLENDED STORM RAIN ENGINE
   // ==========================================================================
-  class StormStreak {
+  class SlowMotionRaindrop {
     constructor() {
-      // 3 Atmospheric Depth Tiers:
-      // Tier 0: Background heavy squall veil (fast, dense, highly visible)
-      // Tier 1: Midground driving storm downpour (sharp, slanted needles)
-      // Tier 2: Foreground slashing storm streaks (high-speed, motion-blurred)
+      // 3 Gentle Depth Tiers:
+      // Tier 0: Soft background mist droplets (slow floating, sheer)
+      // Tier 1: Midground cinematic rain (slender, graceful, visible)
+      // Tier 2: Foreground slow-motion streaks (gentle drift, soft sheen)
       const r = Math.random();
       if (r < 0.45) {
         this.tier = 0;
-        this.speedBase = Math.random() * 6 + 18;
-        this.width = Math.random() * 0.3 + 0.75;
-        this.baseAlpha = Math.random() * 0.15 + 0.32;
-        this.lengthFactor = 1.0;
-        this.flutter = (Math.random() - 0.5) * 0.12; // individual wind turbulence
+        this.baseSpeed = Math.random() * 1.8 + 3.2; // slow motion: 3.2 - 5.0 px/frame
+        this.length = Math.random() * 4 + 10;      // 10px - 14px
+        this.width = 0.65;
+        this.baseAlpha = Math.random() * 0.08 + 0.18; // soft, beautifully visible
+        this.drift = (Math.random() - 0.5) * 0.03;
       } else if (r < 0.82) {
         this.tier = 1;
-        this.speedBase = Math.random() * 8 + 24;
-        this.width = Math.random() * 0.4 + 1.0;
-        this.baseAlpha = Math.random() * 0.18 + 0.48;
-        this.lengthFactor = 1.25;
-        this.flutter = (Math.random() - 0.5) * 0.10;
+        this.baseSpeed = Math.random() * 2.2 + 4.8; // 4.8 - 7.0 px/frame
+        this.length = Math.random() * 6 + 14;      // 14px - 20px
+        this.width = 0.80;
+        this.baseAlpha = Math.random() * 0.10 + 0.26; // 0.26 - 0.36
+        this.drift = (Math.random() - 0.5) * 0.025;
       } else {
         this.tier = 2;
-        this.speedBase = Math.random() * 10 + 32;
-        this.width = Math.random() * 0.5 + 1.35;
-        this.baseAlpha = Math.random() * 0.20 + 0.65;
-        this.lengthFactor = 1.5;
-        this.flutter = (Math.random() - 0.5) * 0.08;
+        this.baseSpeed = Math.random() * 2.5 + 6.5; // 6.5 - 9.0 px/frame
+        this.length = Math.random() * 8 + 18;      // 18px - 26px
+        this.width = 0.95;
+        this.baseAlpha = Math.random() * 0.12 + 0.35; // 0.35 - 0.47
+        this.drift = (Math.random() - 0.5) * 0.02;
       }
 
       this.reset(true);
     }
 
     reset(initial = false) {
-      // Spawn generously across left and top to account for steep sideways slant
-      this.x = Math.random() * (width + 600) - 300;
+      this.x = Math.random() * (width + 300) - 150;
       this.y = initial ? Math.random() * height : -30;
-      this.speed = this.speedBase * (0.92 + Math.random() * 0.16);
+      this.speed = this.baseSpeed * (0.94 + Math.random() * 0.12);
       this.alpha = this.baseAlpha;
     }
 
     update() {
-      // Individual turbulent angle = global gust angle + drop flutter
-      const dropAngle = currentWindAngle + this.flutter;
-      const vx = Math.sin(dropAngle) * this.speed * gustPower;
+      // Gentle, harmonic wind drift
+      const dropAngle = windAngle + this.drift;
+      const vx = Math.sin(dropAngle) * this.speed;
       const vy = Math.cos(dropAngle) * this.speed;
 
       this.x += vx;
       this.y += vy;
 
-      // Clean, seamless reset without splashes
-      if (this.y > height + 40 || this.x > width + 400) {
+      // Clean, seamless reset at boundaries (zero splash)
+      if (this.y > height + 30 || this.x > width + 200) {
         this.reset();
       }
     }
 
     draw(flashBoost) {
-      const dropAngle = currentWindAngle + this.flutter;
-      // Motion blur streak length directly proportional to velocity
-      const streakLength = this.speed * this.lengthFactor;
-
+      const dropAngle = windAngle + this.drift;
       ctx.save();
 
-      // Check if cutting through rotating lighthouse beam
-      let inBeam = false;
+      // Check if illuminated by rotating lighthouse beam
+      let beamGlint = 1.0;
       const lx = beacon.lx;
       const ly = beacon.ly;
-      if (this.x > lx && Math.abs(this.y - ly) < 48) {
+      if (this.x > lx && Math.abs(this.y - ly) < 42) {
         const facingOcean = Math.max(0, Math.cos(beacon.angle));
-        if (facingOcean > 0.1) {
-          inBeam = true;
-        }
+        beamGlint = 1.0 + facingOcean * 1.5;
       }
 
-      const a = Math.min(this.alpha * flashBoost * (inBeam ? 1.6 : 1.0), 0.95);
+      const a = Math.min(this.alpha * flashBoost * beamGlint, 0.70);
 
-      // Rain color: bright crystalline silver-white, glowing gold in lighthouse beam
-      if (inBeam) {
-        ctx.strokeStyle = `rgba(255, 248, 215, ${a})`;
+      // Ethereal silver rain, catching warm gold in lighthouse beam
+      if (beamGlint > 1.2) {
+        ctx.strokeStyle = `rgba(254, 243, 199, ${a})`;
       } else {
-        ctx.strokeStyle = `rgba(228, 242, 255, ${a})`;
+        ctx.strokeStyle = `rgba(220, 238, 255, ${a})`;
       }
 
       ctx.lineWidth = this.width;
@@ -284,78 +266,44 @@
       ctx.beginPath();
       ctx.moveTo(this.x, this.y);
       ctx.lineTo(
-        this.x + Math.sin(dropAngle) * streakLength,
-        this.y + Math.cos(dropAngle) * streakLength
+        this.x + Math.sin(dropAngle) * this.length,
+        this.y + Math.cos(dropAngle) * this.length
       );
       ctx.stroke();
       ctx.restore();
     }
   }
 
-  // ==========================================================================
-  // 3. TORRENTIAL SQUALL MIST SHEETS (Atmospheric Storm Gale Veils)
-  // ==========================================================================
-  function renderSquallMistBands(time, flashBoost) {
-    ctx.save();
-    ctx.globalCompositeOperation = 'screen';
-
-    // Fast-moving diagonal squall fog sheets that surge across with wind gusts
-    const surge1 = (Math.sin(time * 1.2) * 0.5 + 0.5);
-    const surge2 = (Math.cos(time * 0.8) * 0.5 + 0.5);
-
-    // Band 1: High-altitude driving squall haze
-    const grad1 = ctx.createLinearGradient(0, 0, width * 0.8, height * 0.6);
-    grad1.addColorStop(0, 'rgba(195, 225, 255, 0)');
-    grad1.addColorStop(0.35, `rgba(210, 235, 255, ${(0.05 + surge1 * 0.04) * flashBoost})`);
-    grad1.addColorStop(0.75, 'rgba(195, 225, 255, 0)');
-    ctx.fillStyle = grad1;
-    ctx.fillRect(0, 0, width, height * 0.7);
-
-    // Band 2: Ocean surface wind-swept spray mist
-    const grad2 = ctx.createLinearGradient(0, height * 0.50, width, height);
-    grad2.addColorStop(0, 'rgba(180, 220, 255, 0)');
-    grad2.addColorStop(0.45, `rgba(205, 235, 255, ${(0.045 + surge2 * 0.035) * flashBoost})`);
-    grad2.addColorStop(0.85, 'rgba(180, 220, 255, 0)');
-    ctx.fillStyle = grad2;
-    ctx.fillRect(0, height * 0.48, width, height * 0.52);
-
-    ctx.restore();
-  }
-
   function initRain() {
-    // Dense chaotic tempest: 680 sharply visible, driving storm streaks
-    const count = Math.min(Math.floor((width * height) / 1050), 720);
+    // Elegant, uncluttered density: 280-320 graceful slow-motion raindrops
+    const count = Math.min(Math.floor((width * height) / 2400), 320);
     raindrops = [];
     for (let i = 0; i < count; i++) {
-      raindrops.push(new StormStreak());
+      raindrops.push(new SlowMotionRaindrop());
     }
   }
 
   // ==========================================================================
-  // 4. MAIN STORM TIMING & RENDER LOOP
+  // 3. MAIN STORM TIMING & RENDER LOOP
   // ==========================================================================
-  function updateChaosDynamics() {
+  function updateAtmosphere() {
     const now = Date.now();
 
-    // Chaotic Storm Squall Wind:
-    // Base angle ~30 deg, fluctuating between 26 deg and 42 deg during gust surges
-    const gustWave1 = Math.sin(simTime * 0.75) * 0.10;
-    const gustWave2 = Math.cos(simTime * 1.6) * 0.04;
-    currentWindAngle = baseWindAngle + gustWave1 + gustWave2;
-    gustPower = 1.0 + Math.max(0, Math.sin(simTime * 0.75)) * 0.35; // surges up by 35% in gusts
+    // Gentle, slow breathing wind angle (~11 deg to 14 deg)
+    windAngle = 0.20 + Math.sin(simTime * 0.35) * 0.035;
 
-    // Ambient Distant Lightning
-    if (now - lastFlashTime > (Math.random() * 5000 + 6000)) {
+    // Soft Ambient Lightning (gentle distant cloud illumination)
+    if (now - lastFlashTime > (Math.random() * 5000 + 7000)) {
       lastFlashTime = now;
-      targetFlash = Math.random() * 0.22 + 0.09;
+      targetFlash = Math.random() * 0.16 + 0.07;
     }
   }
 
   function render() {
     ctx.clearRect(0, 0, width, height);
-    simTime += 0.022;
+    simTime += 0.020;
 
-    updateChaosDynamics();
+    updateAtmosphere();
     beacon.update();
 
     // Ambient Lightning calculation
@@ -363,21 +311,18 @@
     if (targetFlash > 0 && Math.abs(targetFlash - ambientFlashAlpha) < 0.01) {
       targetFlash = 0;
     }
-    const flashBoost = 1 + ambientFlashAlpha * 2.4;
+    const flashBoost = 1 + ambientFlashAlpha * 2.0;
 
-    // Distant ambient thunder sky illumination
+    // Distant ambient thunder sky flash
     if (ambientFlashAlpha > 0.005) {
-      ctx.fillStyle = `rgba(205, 222, 255, ${ambientFlashAlpha * 0.8})`;
+      ctx.fillStyle = `rgba(205, 222, 255, ${ambientFlashAlpha * 0.7})`;
       ctx.fillRect(0, 0, width, height);
     }
 
-    // 1. Torrential Squall Mist Bands
-    renderSquallMistBands(simTime, flashBoost);
-
-    // 2. Rotating Lighthouse Beacon & Eye-Splash Bloom
+    // 1. Rotating Lighthouse Beacon & Eye-Splash Bloom
     beacon.draw(flashBoost);
 
-    // 3. Dense, Chaotic, Highly-Visible Bad Storm Rain
+    // 2. Slow-Motion, Soft, Harmoniously Blended Rain
     for (let drop of raindrops) {
       drop.update();
       drop.draw(flashBoost);
