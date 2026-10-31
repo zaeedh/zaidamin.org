@@ -1,159 +1,298 @@
 /**
- * Realistic Ocean Wave Storm & Splash Engine
- * Lighthouse Storm Banner for Dr. Zaid Amin (zaidamin.org)
+ * Photorealistic Ocean Wave Storm, Lighthouse Splash & Atmospheric Rain Engine
+ * For Dr. Zaid Amin (zaidamin.org)
  * 
- * Features:
- * - Fluid Trochoidal Wave Swells & Foamy Breakers moving across the sea
- * - Dynamic Lighthouse Cliff Splashes (explosive breaker impact, spray droplets, mist)
- * - Foreground Reef Breakers & Churning Foamy Backwash
- * - Windblown Spindrift (sea spray whipping off crests)
- * - Realistic Slanted Storm Rain with dynamic ocean surface collision
- * - Ambient Lightning illumination that reflects realistically off churning water
- * - Silky smooth 60 FPS canvas performance
+ * Architecture:
+ * 1. WebGL Ocean Wave Simulation:
+ *    - GPU-accelerated displacement on the actual painting (assets/images/lighthouse-banner.jpg)
+ *    - Sky, clouds, and lighthouse tower remain 100% stationary, sharp, and undisturbed
+ *    - Ocean surface (y > 45%) undulates, rolls, surges, and breathes with real fluid mathematics
+ * 2. Canvas 2D Atmospheric Storm Particle System:
+ *    - Realistic crashing breaker spray and billowing mist puffs at the lighthouse base
+ *    - Fine windblown spindrift wisps whipping across wave crests
+ *    - Slanted storm rain with wind drift and water collision
+ *    - Soft ambient thunder flashes with realistic water surface reflection
  */
 
 (function() {
-  const canvas = document.getElementById('rain-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
+  // ==========================================================================
+  // PART 1: WEBGL FLUID OCEAN WAVE ENGINE (Displaces the Painting's Water)
+  // ==========================================================================
+  const oceanCanvas = document.getElementById('ocean-canvas');
+  let gl = null;
+  let oceanProgram = null;
+  let oceanTexture = null;
+  let isTextureLoaded = false;
+  let uTimeLoc, uResLoc, uLightningLoc;
+  let globalLightningAlpha = 0;
+
+  if (oceanCanvas) {
+    try {
+      gl = oceanCanvas.getContext('webgl', { alpha: true, antialias: true }) ||
+           oceanCanvas.getContext('experimental-webgl', { alpha: true });
+    } catch (e) {
+      gl = null;
+    }
+  }
+
+  const VERTEX_SHADER_SOURCE = `
+    attribute vec2 a_position;
+    varying vec2 v_uv;
+    void main() {
+      v_uv = (a_position + 1.0) * 0.5;
+      gl_Position = vec4(a_position, 0.0, 1.0);
+    }
+  `;
+
+  const FRAGMENT_SHADER_SOURCE = `
+    precision highp float;
+    uniform sampler2D u_texture;
+    uniform vec2 u_resolution;
+    uniform float u_time;
+    uniform float u_lightning;
+    varying vec2 v_uv;
+
+    void main() {
+      vec2 uv = v_uv;
+
+      // In WebGL texture space:
+      // v_uv.y = 1.0 is the top (sky), v_uv.y = 0.0 is the bottom (rocky shore).
+      // Ocean begins below the lighthouse cliff / horizon (v_uv.y < 0.55).
+      // Sky & lighthouse tower remain 100% stationary and sharp!
+      float waterMask = smoothstep(0.56, 0.47, v_uv.y);
+
+      if (waterMask > 0.001) {
+        // Multi-frequency harmonic wave displacement
+        // 1. Primary rolling ocean swell (drifting leftward into the wind)
+        float w1 = sin(v_uv.x * 22.0 - u_time * 2.2 + v_uv.y * 10.0) * 0.0055;
+
+        // 2. Secondary breaker wave (peaked crests with trochoidal sharpening)
+        float w2_raw = sin(v_uv.x * 38.0 - u_time * 3.4 - v_uv.y * 14.0);
+        float w2 = sign(w2_raw) * pow(abs(w2_raw), 1.5) * 0.004;
+
+        // 3. High-frequency ocean surface chop
+        float w3 = cos(v_uv.x * 58.0 + u_time * 1.9 + v_uv.y * 24.0) * 0.0025;
+
+        // 4. Cliff collision surge near lighthouse base (x ~ 0.318, y ~ 0.495 in texture space)
+        float distToCliff = length(vec2(v_uv.x - 0.318, v_uv.y - 0.495));
+        float cliffSurge = exp(-distToCliff * 9.0) * sin(u_time * 3.8) * 0.007;
+
+        // Combined organic displacement vector scaled by water depth
+        float depthFactor = smoothstep(0.56, 0.20, v_uv.y);
+        vec2 displacement = vec2(
+          (w2 * 1.3 - w1 * 0.6 + w3) * waterMask * depthFactor,
+          (w1 + w2 + w3 + cliffSurge) * waterMask * depthFactor
+        );
+
+        uv += displacement;
+      }
+
+      vec4 color = texture2D(u_texture, uv);
+
+      // Subtle dynamic froth / specular illumination along moving wave crests
+      if (waterMask > 0.01) {
+        float crest = pow(max(0.0, sin(uv.x * 24.0 - u_time * 2.6 + uv.y * 12.0)), 4.0);
+        vec3 foamGlint = vec3(0.92, 0.97, 1.0);
+        color.rgb += foamGlint * crest * 0.075 * waterMask;
+
+        // Ambient lightning reflection on turbulent wet water
+        if (u_lightning > 0.005) {
+          float wetSheen = pow(max(0.0, sin(uv.x * 30.0 - u_time * 2.0)), 2.5) * 0.4 + 0.6;
+          color.rgb += vec3(0.20, 0.28, 0.45) * u_lightning * wetSheen * waterMask;
+        }
+      }
+
+      // Atmospheric ambient lightning across entire banner
+      if (u_lightning > 0.005) {
+        color.rgb += vec3(0.10, 0.14, 0.20) * u_lightning;
+      }
+
+      gl_FragColor = color;
+    }
+  `;
+
+  function initWebGL() {
+    if (!gl) return;
+
+    function createShader(type, source) {
+      const shader = gl.createShader(type);
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        console.error('Shader compilation error:', gl.getShaderInfoLog(shader));
+        gl.deleteShader(shader);
+        return null;
+      }
+      return shader;
+    }
+
+    const vertexShader = createShader(gl.VERTEX_SHADER, VERTEX_SHADER_SOURCE);
+    const fragmentShader = createShader(gl.FRAGMENT_SHADER, FRAGMENT_SHADER_SOURCE);
+    if (!vertexShader || !fragmentShader) return;
+
+    oceanProgram = gl.createProgram();
+    gl.attachShader(oceanProgram, vertexShader);
+    gl.attachShader(oceanProgram, fragmentShader);
+    gl.linkProgram(oceanProgram);
+
+    if (!gl.getProgramParameter(oceanProgram, gl.LINK_STATUS)) {
+      console.error('Program link error:', gl.getProgramInfoLog(oceanProgram));
+      return;
+    }
+
+    gl.useProgram(oceanProgram);
+
+    // Quad geometry (2 triangles covering [-1, -1] to [1, 1])
+    const quadBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+      -1, -1,
+       1, -1,
+      -1,  1,
+      -1,  1,
+       1, -1,
+       1,  1
+    ]), gl.STATIC_DRAW);
+
+    const aPosLoc = gl.getAttribLocation(oceanProgram, 'a_position');
+    gl.enableVertexAttribArray(aPosLoc);
+    gl.vertexAttribPointer(aPosLoc, 2, gl.FLOAT, false, 0, 0);
+
+    uTimeLoc = gl.getUniformLocation(oceanProgram, 'u_time');
+    uResLoc = gl.getUniformLocation(oceanProgram, 'u_resolution');
+    uLightningLoc = gl.getUniformLocation(oceanProgram, 'u_lightning');
+
+    // Load Painting Texture
+    oceanTexture = gl.createTexture();
+    const image = new Image();
+    image.crossOrigin = 'anonymous';
+    image.onload = function() {
+      gl.bindTexture(gl.TEXTURE_2D, oceanTexture);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      isTextureLoaded = true;
+    };
+    image.src = 'assets/images/lighthouse-banner.jpg';
+  }
+
+  initWebGL();
+
+  // ==========================================================================
+  // PART 2: CANVAS 2D REALISTIC CRASHING SPLASHES, MIST & RAIN ENGINE
+  // ==========================================================================
+  const rainCanvas = document.getElementById('rain-canvas');
+  if (!rainCanvas) return;
+  const ctx = rainCanvas.getContext('2d');
 
   let width = 0;
   let height = 0;
-  let time = 0;
+  let simTime = 0;
 
-  // Pools
   let raindrops = [];
-  let ripples = [];
-  let splashParticles = [];
+  let splashDroplets = [];
   let mistClouds = [];
-  let spindriftParticles = [];
+  let spindriftWisps = [];
+  let ripples = [];
 
-  // Lighting
   let ambientFlashAlpha = 0;
   let targetFlash = 0;
   let lastFlashTime = Date.now();
-
-  // Lighthouse Splash Timer
   let nextLighthouseSplash = 0;
 
-  function resize() {
-    const parent = canvas.parentElement;
-    width = canvas.width = parent.clientWidth;
-    height = canvas.height = parent.clientHeight;
+  function resizeAll() {
+    const parent = rainCanvas.parentElement;
+    width = parent.clientWidth;
+    height = parent.clientHeight;
+
+    rainCanvas.width = width;
+    rainCanvas.height = height;
+
+    if (oceanCanvas) {
+      oceanCanvas.width = width;
+      oceanCanvas.height = height;
+      if (gl) {
+        gl.viewport(0, 0, width, height);
+      }
+    }
+
     initRain();
   }
 
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', resizeAll);
 
   // --------------------------------------------------------------------------
-  // 1. WAVE HEIGHT MATHEMATICAL MODELS
-  // --------------------------------------------------------------------------
-  // Distant swells (Horizon to mid ocean, y ~ 0.44H to 0.56H)
-  function getBackWaveY(x, t) {
-    const baseY = height * 0.49;
-    const s1 = Math.sin(x * 0.007 + t * 0.8) * 4.5;
-    const s2 = Math.cos(x * 0.013 - t * 0.6) * 3.0;
-    const s3 = Math.sin(x * 0.021 + t * 1.2) * 2.0;
-    return baseY + s1 + s2 + s3;
-  }
-
-  // Main Middle Breaker (The big rolling foamy wave in center, y ~ 0.58H to 0.72H)
-  function getMidWaveY(x, t) {
-    const baseY = height * 0.63;
-    // Trochoidal sharpening via sin^3 for steep peaked crests
-    const wave1 = Math.sin(x * 0.0055 - t * 1.1);
-    const sharp1 = Math.pow(Math.abs(wave1), 1.6) * Math.sign(wave1) * 11.0;
-    const wave2 = Math.sin(x * 0.012 + t * 0.75) * 5.0;
-    const wave3 = Math.cos(x * 0.022 - t * 1.4) * 3.5;
-    // Local swell near the lighthouse cliff (x ~ 0.3W)
-    const distFromCliff = Math.abs(x - width * 0.32);
-    const cliffSwell = Math.exp(-distFromCliff / (width * 0.14)) * Math.sin(t * 1.8) * 8.0;
-    return baseY + sharp1 + wave2 + wave3 - cliffSwell;
-  }
-
-  // Foreground Shore Surge (Turbulent rocky reef wash, y ~ 0.74H to 0.95H)
-  function getForeWaveY(x, t) {
-    const baseY = height * 0.81;
-    const s1 = Math.sin(x * 0.006 - t * 1.3) * 10.0;
-    const s2 = Math.cos(x * 0.014 + t * 0.9) * 6.0;
-    const s3 = Math.sin(x * 0.028 - t * 1.7) * 4.0;
-    return baseY + s1 + s2 + s3;
-  }
-
-  // Global ocean surface height for rain collision
-  function getSurfaceY(x, t) {
-    return Math.min(getForeWaveY(x, t), getMidWaveY(x, t) + 20);
-  }
-
-  // --------------------------------------------------------------------------
-  // 2. SPLASH & MIST PARTICLE CLASSES
+  // Splashing Droplets & Vapor Mist (No cartoon shapes—pure organic water)
   // --------------------------------------------------------------------------
   class SplashDrop {
-    constructor(x, y, vx, vy, size, alpha = 0.9) {
+    constructor(x, y, vx, vy, size, alpha = 0.85) {
       this.x = x;
       this.y = y;
       this.vx = vx;
       this.vy = vy;
       this.size = size;
       this.alpha = alpha;
-      this.decay = Math.random() * 0.018 + 0.012;
+      this.decay = Math.random() * 0.02 + 0.012;
       this.gravity = 0.22;
-      this.wind = 0.08;
+      this.wind = 0.07;
     }
 
     update() {
       this.x += this.vx;
       this.y += this.vy;
       this.vy += this.gravity;
-      this.vx += this.wind; // wind blows spray rightward
-      this.vx *= 0.985;     // air resistance
+      this.vx += this.wind; // storm wind blows spray rightward
+      this.vx *= 0.985;     // air drag
       this.alpha -= this.decay;
     }
 
     draw(boost) {
       if (this.alpha <= 0) return;
       ctx.save();
-      const a = Math.min(this.alpha * boost, 1);
-      ctx.fillStyle = `rgba(235, 245, 255, ${a})`;
+      const a = Math.min(this.alpha * boost, 0.95);
+      ctx.fillStyle = `rgba(240, 248, 255, ${a})`;
       ctx.beginPath();
-      // Slightly elongated droplet in motion direction
+      // Ellipse in direction of motion (natural water droplet teardrop)
+      const speed = Math.hypot(this.vx, this.vy);
       const angle = Math.atan2(this.vy, this.vx);
-      const len = Math.min(Math.hypot(this.vx, this.vy) * 0.6, 6);
-      ctx.ellipse(this.x, this.y, this.size + len * 0.5, this.size, angle, 0, Math.PI * 2);
+      ctx.ellipse(this.x, this.y, this.size + speed * 0.4, this.size * 0.85, angle, 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
     }
   }
 
-  class MistCloud {
-    constructor(x, y, radius, maxRadius, alpha = 0.35) {
+  class MistVapor {
+    constructor(x, y, radius, maxRadius, alpha = 0.32) {
       this.x = x;
       this.y = y;
       this.radius = radius;
       this.maxRadius = maxRadius;
       this.alpha = alpha;
-      this.growth = (maxRadius - radius) / (Math.random() * 25 + 30);
-      this.vx = Math.random() * 1.5 + 0.8; // drifts right with storm wind
-      this.vy = -(Math.random() * 0.8 + 0.4); // drifts slightly up
+      this.growth = (maxRadius - radius) / (Math.random() * 20 + 25);
+      this.vx = Math.random() * 1.8 + 0.9;  // drifts right with wind
+      this.vy = -(Math.random() * 0.7 + 0.3); // floats upward
     }
 
     update() {
       this.x += this.vx;
       this.y += this.vy;
       this.radius += this.growth;
-      this.alpha *= 0.955;
+      this.alpha *= 0.958;
     }
 
     draw(boost) {
       if (this.alpha <= 0.01) return;
       ctx.save();
-      const a = Math.min(this.alpha * boost, 0.6);
+      const a = Math.min(this.alpha * boost, 0.55);
       const grad = ctx.createRadialGradient(
         this.x, this.y, 0,
         this.x, this.y, Math.max(this.radius, 1)
       );
-      grad.addColorStop(0, `rgba(240, 248, 255, ${a})`);
-      grad.addColorStop(0.5, `rgba(215, 235, 250, ${a * 0.5})`);
+      grad.addColorStop(0, `rgba(245, 250, 255, ${a})`);
+      grad.addColorStop(0.45, `rgba(220, 238, 252, ${a * 0.45})`);
       grad.addColorStop(1, 'rgba(200, 230, 250, 0)');
 
       ctx.fillStyle = grad;
@@ -164,31 +303,31 @@
     }
   }
 
-  class Spindrift {
+  class SpindriftWisp {
     constructor(x, y) {
       this.x = x;
       this.y = y;
       this.vx = Math.random() * 5 + 4; // fast gale drift
-      this.vy = -(Math.random() * 1.2 + 0.2);
-      this.alpha = Math.random() * 0.45 + 0.25;
-      this.size = Math.random() * 1.4 + 0.8;
-      this.length = Math.random() * 8 + 6;
-      this.life = Math.random() * 30 + 20;
+      this.vy = -(Math.random() * 0.8 + 0.2);
+      this.alpha = Math.random() * 0.35 + 0.15;
+      this.length = Math.random() * 12 + 8;
+      this.width = Math.random() * 1.2 + 0.6;
+      this.life = Math.random() * 25 + 18;
     }
 
     update() {
       this.x += this.vx;
       this.y += this.vy;
-      this.alpha -= 0.016;
+      this.alpha -= 0.018;
       this.life--;
     }
 
     draw(boost) {
       if (this.alpha <= 0 || this.life <= 0) return;
       ctx.save();
-      const a = Math.min(this.alpha * boost, 0.8);
-      ctx.strokeStyle = `rgba(224, 242, 254, ${a})`;
-      ctx.lineWidth = this.size;
+      const a = Math.min(this.alpha * boost, 0.7);
+      ctx.strokeStyle = `rgba(230, 244, 255, ${a})`;
+      ctx.lineWidth = this.width;
       ctx.lineCap = 'round';
       ctx.beginPath();
       ctx.moveTo(this.x, this.y);
@@ -199,48 +338,47 @@
   }
 
   // --------------------------------------------------------------------------
-  // 3. EXPLOSIVE BREAKER & CLIFF SMASH SYSTEM
+  // Crashing Wave Trigger at Lighthouse Base
   // --------------------------------------------------------------------------
-  function triggerLighthouseSmash() {
-    // Lighthouse base rocks located at ~31.8% width, ~50% height
-    const impactX = width * 0.318 + (Math.random() * 20 - 10);
-    const impactY = height * 0.505 + (Math.random() * 12 - 6);
+  function triggerLighthouseBreakerCrash() {
+    // Exact cliff base in the painting: ~31.8% width, ~50.5% height
+    const impactX = width * 0.318 + (Math.random() * 18 - 9);
+    const impactY = height * 0.505 + (Math.random() * 10 - 5);
 
-    // 1. High Velocity Splash Droplet Eruption (50-70 droplets)
-    const count = Math.floor(Math.random() * 25 + 50);
+    // 1. Upward explosive water droplets (40-65 droplets)
+    const count = Math.floor(Math.random() * 25 + 45);
     for (let i = 0; i < count; i++) {
-      // Fan out upwards, biased downwind to the right
-      const angle = -(Math.PI * 0.25 + Math.random() * Math.PI * 0.55);
-      const speed = Math.random() * 9 + 4;
-      const vx = Math.cos(angle) * speed + (Math.random() * 2 + 1);
+      const angle = -(Math.PI * 0.22 + Math.random() * Math.PI * 0.58);
+      const speed = Math.random() * 8.5 + 3.5;
+      const vx = Math.cos(angle) * speed + (Math.random() * 2.0 + 0.8);
       const vy = Math.sin(angle) * speed;
-      const size = Math.random() * 2.2 + 1.2;
-      splashParticles.push(new SplashDrop(impactX, impactY, vx, vy, size, 0.95));
+      const size = Math.random() * 1.8 + 1.0;
+      splashDroplets.push(new SplashDrop(impactX, impactY, vx, vy, size, 0.9));
     }
 
-    // 2. Rising Sea Spray Mist Clouds (4-6 clouds)
-    for (let i = 0; i < 5; i++) {
-      const offsetX = impactX + (Math.random() * 24 - 12);
-      const offsetY = impactY + (Math.random() * 14 - 10);
-      const initR = Math.random() * 10 + 8;
-      const maxR = Math.random() * 28 + 35;
-      mistClouds.push(new MistCloud(offsetX, offsetY, initR, maxR, 0.42));
+    // 2. Billowing Sea Mist Clouds (4 clouds per impact)
+    for (let i = 0; i < 4; i++) {
+      const ox = impactX + (Math.random() * 20 - 10);
+      const oy = impactY + (Math.random() * 12 - 8);
+      const initR = Math.random() * 8 + 8;
+      const maxR = Math.random() * 26 + 32;
+      mistClouds.push(new MistVapor(ox, oy, initR, maxR, 0.38));
     }
   }
 
-  function triggerRockSplash(x, y, intensity = 1) {
-    const count = Math.floor(intensity * 12 + 6);
+  function triggerRockSplash(x, y) {
+    const count = Math.floor(Math.random() * 8 + 6);
     for (let i = 0; i < count; i++) {
-      const angle = -(Math.PI * 0.2 + Math.random() * Math.PI * 0.6);
-      const speed = Math.random() * 5 + 2.5;
-      const vx = Math.cos(angle) * speed + 0.8;
+      const angle = -(Math.PI * 0.25 + Math.random() * Math.PI * 0.5);
+      const speed = Math.random() * 4.5 + 2.0;
+      const vx = Math.cos(angle) * speed + 0.6;
       const vy = Math.sin(angle) * speed;
-      splashParticles.push(new SplashDrop(x, y, vx, vy, Math.random() * 1.6 + 0.8, 0.75));
+      splashDroplets.push(new SplashDrop(x, y, vx, vy, Math.random() * 1.3 + 0.8, 0.7));
     }
   }
 
   // --------------------------------------------------------------------------
-  // 4. RAINDROP & IMPACT RIPPLE ENGINE
+  // Raindrop System
   // --------------------------------------------------------------------------
   class Raindrop {
     constructor() {
@@ -250,31 +388,21 @@
     reset(initial = false) {
       this.x = Math.random() * (width + 250) - 100;
       this.y = initial ? Math.random() * height : -20;
-      this.speed = Math.random() * 9 + 13;
+      this.speed = Math.random() * 8 + 12;
       this.length = Math.random() * 16 + 14;
-      this.angle = 0.22; // subtle storm wind angle
-      this.alpha = Math.random() * 0.32 + 0.18;
-      this.width = Math.random() * 1.1 + 0.6;
+      this.angle = 0.22; // subtle wind slant to the right
+      this.alpha = Math.random() * 0.32 + 0.16;
+      this.width = Math.random() * 1.0 + 0.6;
     }
 
     update() {
       this.x += Math.sin(this.angle) * this.speed;
       this.y += Math.cos(this.angle) * this.speed;
 
-      // Check collision with dynamic moving ocean wave surface
-      const waterY = getSurfaceY(this.x, time);
-      if (this.y >= waterY) {
-        if (Math.random() < 0.25) {
-          ripples.push(new Ripple(this.x, waterY));
-        }
-        if (Math.random() < 0.08) {
-          // Micro splash droplet on wave impact
-          splashParticles.push(new SplashDrop(
-            this.x, waterY,
-            (Math.random() - 0.5) * 2 + 0.5,
-            -(Math.random() * 2.5 + 1.2),
-            0.9, 0.6
-          ));
+      // When reaching ocean zone (y > height * 0.52)
+      if (this.y > height * 0.52 + Math.random() * (height * 0.45)) {
+        if (Math.random() < 0.12) {
+          ripples.push(new Ripple(this.x, this.y));
         }
         this.reset();
       }
@@ -286,8 +414,8 @@
 
     draw(boost) {
       ctx.save();
-      const a = Math.min(this.alpha * boost, 0.9);
-      ctx.strokeStyle = `rgba(220, 238, 255, ${a})`;
+      const a = Math.min(this.alpha * boost, 0.85);
+      ctx.strokeStyle = `rgba(215, 235, 255, ${a})`;
       ctx.lineWidth = this.width;
       ctx.lineCap = 'round';
       ctx.beginPath();
@@ -306,20 +434,20 @@
       this.x = x;
       this.y = y;
       this.radius = 1;
-      this.maxRadius = Math.random() * 9 + 5;
-      this.alpha = 0.45;
-      this.growth = Math.random() * 0.45 + 0.35;
+      this.maxRadius = Math.random() * 7 + 4;
+      this.alpha = 0.4;
+      this.growth = Math.random() * 0.4 + 0.3;
     }
 
     update() {
       this.radius += this.growth;
-      this.alpha -= 0.024;
+      this.alpha -= 0.022;
     }
 
     draw(boost) {
       if (this.alpha <= 0) return;
       ctx.save();
-      const a = Math.min(this.alpha * boost, 0.8);
+      const a = Math.min(this.alpha * boost, 0.7);
       ctx.strokeStyle = `rgba(186, 230, 253, ${a})`;
       ctx.lineWidth = 1;
       ctx.beginPath();
@@ -330,7 +458,7 @@
   }
 
   function initRain() {
-    const count = Math.min(Math.floor((width * height) / 4800), 160);
+    const count = Math.min(Math.floor((width * height) / 4800), 150);
     raindrops = [];
     for (let i = 0; i < count; i++) {
       raindrops.push(new Raindrop());
@@ -338,206 +466,78 @@
   }
 
   // --------------------------------------------------------------------------
-  // 5. WAVE MESH RENDERING (SURGING SWELLS, BREAKER CRESTS & FOAM)
+  // Main Animation Loop
   // --------------------------------------------------------------------------
-
-  // Layer A: Distant Swells (Smooth undulation across the horizon)
-  function renderBackWave(boost) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(0, height);
-
-    const step = 20;
-    for (let x = 0; x <= width + step; x += step) {
-      const y = getBackWaveY(x, time);
-      ctx.lineTo(x, y);
-    }
-
-    ctx.lineTo(width, height);
-    ctx.closePath();
-
-    // Translucent dark teal ocean gradient
-    const grad = ctx.createLinearGradient(0, height * 0.46, 0, height * 0.65);
-    grad.addColorStop(0, 'rgba(12, 28, 44, 0.28)');
-    grad.addColorStop(1, 'rgba(6, 16, 28, 0.45)');
-    ctx.fillStyle = grad;
-    ctx.fill();
-
-    // Crest highlight line
-    ctx.beginPath();
-    for (let x = 0; x <= width + step; x += step) {
-      const y = getBackWaveY(x, time);
-      if (x === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    }
-    ctx.strokeStyle = `rgba(186, 230, 253, ${0.18 * boost})`;
-    ctx.lineWidth = 1.2;
-    ctx.stroke();
-    ctx.restore();
-  }
-
-  // Layer B: Midground Breaker Wave (The dominant crashing surge)
-  function renderMidBreaker(boost) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(0, height);
-
-    const step = 14;
-    for (let x = 0; x <= width + step; x += step) {
-      const y = getMidWaveY(x, time);
-      ctx.lineTo(x, y);
-    }
-
-    ctx.lineTo(width, height);
-    ctx.closePath();
-
-    // Deep stormy ocean body
-    const grad = ctx.createLinearGradient(0, height * 0.55, 0, height * 0.78);
-    grad.addColorStop(0, 'rgba(14, 38, 62, 0.38)');
-    grad.addColorStop(0.4, 'rgba(10, 26, 44, 0.50)');
-    grad.addColorStop(1, 'rgba(4, 12, 22, 0.62)');
-    ctx.fillStyle = grad;
-    ctx.fill();
-
-    // Luminous foaming crest line
-    ctx.beginPath();
-    for (let x = 0; x <= width + step; x += step) {
-      const y = getMidWaveY(x, time);
-      if (x === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    }
-    ctx.strokeStyle = `rgba(224, 242, 254, ${0.45 * boost})`;
-    ctx.lineWidth = 2.4;
-    ctx.stroke();
-
-    // Foam curls and frothing whitecaps along the crest
-    for (let x = 0; x <= width; x += 32) {
-      const y = getMidWaveY(x, time);
-      const curlOffset = Math.sin(x * 0.05 + time * 3) * 3;
-      const foamSize = Math.sin(x * 0.02 - time * 2) * 5 + 7;
-      
-      ctx.fillStyle = `rgba(240, 249, 255, ${0.35 * boost})`;
-      ctx.beginPath();
-      ctx.ellipse(x, y + curlOffset, foamSize * 1.8, foamSize * 0.55, 0.1, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Chance to whip spindrift off high wave crests
-      if (Math.random() < 0.06 && foamSize > 9) {
-        spindriftParticles.push(new Spindrift(x, y - 2));
-      }
-    }
-
-    ctx.restore();
-  }
-
-  // Layer C: Foreground Shore Surge & Churning Foamy Reef Wash
-  function renderForeSurge(boost) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(0, height);
-
-    const step = 16;
-    for (let x = 0; x <= width + step; x += step) {
-      const y = getForeWaveY(x, time);
-      ctx.lineTo(x, y);
-    }
-
-    ctx.lineTo(width, height);
-    ctx.closePath();
-
-    const grad = ctx.createLinearGradient(0, height * 0.72, 0, height);
-    grad.addColorStop(0, 'rgba(18, 54, 82, 0.32)');
-    grad.addColorStop(0.6, 'rgba(8, 22, 36, 0.52)');
-    grad.addColorStop(1, 'rgba(3, 8, 16, 0.70)');
-    ctx.fillStyle = grad;
-    ctx.fill();
-
-    // Frothy edge wash over rocks
-    ctx.beginPath();
-    for (let x = 0; x <= width + step; x += step) {
-      const y = getForeWaveY(x, time);
-      if (x === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    }
-    ctx.strokeStyle = `rgba(235, 248, 255, ${0.55 * boost})`;
-    ctx.lineWidth = 2.0;
-    ctx.stroke();
-
-    // Floating lace foam patches across foreground water
-    for (let x = 20; x < width; x += 45) {
-      const y = getForeWaveY(x, time) + 12 + Math.sin(x * 0.03 + time) * 8;
-      if (y < height) {
-        const patchW = Math.sin(x * 0.04 - time) * 8 + 16;
-        const patchH = Math.cos(x * 0.03 + time * 1.5) * 3 + 5;
-        ctx.fillStyle = `rgba(215, 238, 255, ${0.28 * boost})`;
-        ctx.beginPath();
-        ctx.ellipse(x, y, patchW, patchH, 0.05, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    ctx.restore();
-  }
-
-  // --------------------------------------------------------------------------
-  // 6. MAIN ANIMATION LOOP
-  // --------------------------------------------------------------------------
-  function checkLightingAndSplashes() {
+  function updateLightingAndEvents() {
     const now = Date.now();
 
-    // Ambient Lightning
+    // Soft Ambient Lightning
     if (now - lastFlashTime > (Math.random() * 5000 + 6000)) {
       lastFlashTime = now;
-      targetFlash = Math.random() * 0.22 + 0.08;
+      targetFlash = Math.random() * 0.20 + 0.08;
     }
 
-    // Periodic Lighthouse Cliff Breaker Collision (every 2.5 - 3.6 seconds)
+    // Periodic Lighthouse Cliff Breaker Collision (every 2.6 - 3.8 seconds)
     if (now > nextLighthouseSplash) {
-      triggerLighthouseSmash();
-      nextLighthouseSplash = now + (Math.random() * 1100 + 2500);
+      triggerLighthouseBreakerCrash();
+      nextLighthouseSplash = now + (Math.random() * 1200 + 2600);
     }
 
-    // Occasional foreground reef splash
-    if (Math.random() < 0.04) {
-      const rockX = width * (Math.random() * 0.8 + 0.1);
-      const rockY = getForeWaveY(rockX, time) + 4;
-      triggerRockSplash(rockX, rockY, Math.random() * 0.8 + 0.4);
+    // Occasional windblown spindrift across mid-ocean crest
+    if (Math.random() < 0.08) {
+      const sx = Math.random() * (width * 0.7) + (width * 0.2);
+      const sy = height * (Math.random() * 0.25 + 0.55);
+      spindriftWisps.push(new SpindriftWisp(sx, sy));
+    }
+
+    // Occasional minor rock splash in foreground
+    if (Math.random() < 0.03) {
+      const rx = Math.random() * width;
+      const ry = height * (Math.random() * 0.15 + 0.80);
+      triggerRockSplash(rx, ry);
     }
   }
 
   function render() {
-    ctx.clearRect(0, 0, width, height);
-    time += 0.022; // smooth wave phase increment
+    simTime += 0.024;
+    updateLightingAndEvents();
 
-    checkLightingAndSplashes();
-
-    // 1. Soft Ambient Lightning
+    // Compute Ambient Flash
     ambientFlashAlpha += (targetFlash - ambientFlashAlpha) * 0.08;
     if (targetFlash > 0 && Math.abs(targetFlash - ambientFlashAlpha) < 0.01) {
       targetFlash = 0;
     }
-    const flashBoost = 1 + ambientFlashAlpha * 2.8;
+    globalLightningAlpha = ambientFlashAlpha;
+    const flashBoost = 1 + ambientFlashAlpha * 2.5;
 
-    if (ambientFlashAlpha > 0.005) {
+    // 1. Render WebGL Fluid Ocean Waves
+    if (gl && oceanProgram && isTextureLoaded) {
+      gl.useProgram(oceanProgram);
+      gl.uniform1f(uTimeLoc, simTime);
+      gl.uniform2f(uResLoc, width, height);
+      gl.uniform1f(uLightningLoc, globalLightningAlpha);
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+    }
+
+    // 2. Render 2D Canvas Overlays (Rain, Splashes, Spindrift, Mist)
+    ctx.clearRect(0, 0, width, height);
+
+    // Ambient Lightning sky flash (if WebGL inactive)
+    if (!gl && ambientFlashAlpha > 0.005) {
       ctx.fillStyle = `rgba(192, 210, 245, ${ambientFlashAlpha})`;
       ctx.fillRect(0, 0, width, height);
     }
 
-    // 2. Render Moving Ocean Waves (Distant -> Mid Breaker -> Fore Surge)
-    renderBackWave(flashBoost);
-    renderMidBreaker(flashBoost);
-    renderForeSurge(flashBoost);
-
-    // 3. Render Spindrift Particles (Windblown sea spray)
-    for (let i = spindriftParticles.length - 1; i >= 0; i--) {
-      spindriftParticles[i].update();
-      spindriftParticles[i].draw(flashBoost);
-      if (spindriftParticles[i].alpha <= 0 || spindriftParticles[i].life <= 0) {
-        spindriftParticles.splice(i, 1);
+    // Draw Spindrift Wisps
+    for (let i = spindriftWisps.length - 1; i >= 0; i--) {
+      spindriftWisps[i].update();
+      spindriftWisps[i].draw(flashBoost);
+      if (spindriftWisps[i].alpha <= 0 || spindriftWisps[i].life <= 0) {
+        spindriftWisps.splice(i, 1);
       }
     }
 
-    // 4. Render Mist Clouds (Expanding sea spray vapor from impacts)
+    // Draw Mist Clouds
     for (let i = mistClouds.length - 1; i >= 0; i--) {
       mistClouds[i].update();
       mistClouds[i].draw(flashBoost);
@@ -546,16 +546,16 @@
       }
     }
 
-    // 5. Render Splash Droplets (Lighthouse & rock impact explosions)
-    for (let i = splashParticles.length - 1; i >= 0; i--) {
-      splashParticles[i].update();
-      splashParticles[i].draw(flashBoost);
-      if (splashParticles[i].alpha <= 0 || splashParticles[i].y > height + 20) {
-        splashParticles.splice(i, 1);
+    // Draw Splash Droplets
+    for (let i = splashDroplets.length - 1; i >= 0; i--) {
+      splashDroplets[i].update();
+      splashDroplets[i].draw(flashBoost);
+      if (splashDroplets[i].alpha <= 0 || splashDroplets[i].y > height + 20) {
+        splashDroplets.splice(i, 1);
       }
     }
 
-    // 6. Render Ripples on Water
+    // Draw Ripples
     for (let i = ripples.length - 1; i >= 0; i--) {
       ripples[i].update();
       ripples[i].draw(flashBoost);
@@ -564,7 +564,7 @@
       }
     }
 
-    // 7. Render Raindrops
+    // Draw Raindrops
     for (let drop of raindrops) {
       drop.update();
       drop.draw(flashBoost);
@@ -573,6 +573,6 @@
     requestAnimationFrame(render);
   }
 
-  resize();
+  resizeAll();
   requestAnimationFrame(render);
 })();
