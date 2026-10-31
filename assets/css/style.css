@@ -111,10 +111,15 @@ a {
 }
 
 /* ==========================================================================
-   1. EPIGRAPH & PHILOSOPHICAL MOTTO (SHARED STYLES)
+   1. TOP EPIGRAPH: DAS SEIN, DAS SOLLEN (KEPT AT THE VERY TOP)
    ========================================================================== */
+.epigraph-header {
+  margin-bottom: 28px;
+  text-align: left;
+}
+
 .epigraph-title {
-  font-size: 1.95rem;
+  font-size: 2.2rem;
   font-weight: 900;
   color: #ffffff;
   letter-spacing: -0.02em;
@@ -141,89 +146,45 @@ a {
 }
 
 /* ==========================================================================
-   2. SUB-SECTION BELOW OPTION 1 STORM (SIDE POSITION & QUOTATION STYLE)
+   2. SUB-SECTION BELOW OPTION 1 STORM: QUOTATION IN SIDE POSITION
    ========================================================================== */
 .ocean-quote-subsection {
-  margin-top: 4px;
-  margin-bottom: 32px;
+  margin-top: 6px;
+  margin-bottom: 28px;
   width: 100%;
 }
 
-.quote-subsection-container {
-  display: grid;
-  grid-template-columns: minmax(260px, 0.95fr) 1.55fr;
-  gap: 36px;
-  align-items: center;
-  background: rgba(4, 28, 48, 0.65);
+.quote-side-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.ocean-side-blockquote {
+  position: relative;
+  max-width: 740px;
+  width: 100%;
+  margin: 0;
+  padding: 18px 26px 18px 28px;
+  background: rgba(4, 28, 48, 0.72);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(34, 166, 200, 0.24);
-  border-radius: 20px;
-  padding: 24px 32px;
-  box-shadow: 0 10px 36px rgba(0, 10, 24, 0.45);
-  position: relative;
+  border: 1px solid rgba(34, 166, 200, 0.25);
+  border-left: 4px solid #22a6c8;
+  border-radius: 0 16px 16px 0;
+  box-shadow: 0 8px 30px rgba(0, 10, 24, 0.45), -4px 0 16px rgba(34, 166, 200, 0.22);
   overflow: hidden;
 }
 
-.quote-subsection-container::before {
+.ocean-side-blockquote::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(34, 166, 200, 0.7) 30%, rgba(56, 182, 208, 0.9) 50%, rgba(34, 166, 200, 0.7) 70%, transparent);
+  height: 1px;
+  background: linear-gradient(90deg, rgba(34, 166, 200, 0.8), rgba(56, 182, 208, 0.4), transparent);
   pointer-events: none;
-}
-
-.quote-motto-col {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.quote-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  color: #38b6d0;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-
-.quote-kicker .kicker-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #38b6d0;
-  box-shadow: 0 0 8px #38b6d0;
-}
-
-.quote-motto-sub {
-  font-size: 0.80rem;
-  color: #8da9be;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  margin-top: 22px;
-}
-
-/* Side Position Blockquote with Quotation Styling */
-.quote-side-col {
-  display: flex;
-  flex-direction: column;
-}
-
-.ocean-side-blockquote {
-  position: relative;
-  margin: 0;
-  padding: 18px 22px 18px 26px;
-  border-left: 3.5px solid #22a6c8;
-  background: rgba(2, 18, 32, 0.45);
-  border-radius: 0 14px 14px 0;
-  box-shadow: -4px 0 16px rgba(34, 166, 200, 0.22);
 }
 
 .quote-glyph-mark {
@@ -231,7 +192,7 @@ a {
   right: 14px;
   bottom: -10px;
   font-family: var(--font-serif);
-  font-size: 4.6rem;
+  font-size: 4.8rem;
   line-height: 1;
   color: rgba(34, 166, 200, 0.12);
   pointer-events: none;
@@ -257,7 +218,7 @@ a {
   font-style: normal;
   font-size: 0.82rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   color: #38b6d0;
   text-transform: uppercase;
   position: relative;
@@ -269,17 +230,14 @@ a {
   font-weight: 400;
 }
 
-@media (max-width: 900px) {
-  .quote-subsection-container {
-    grid-template-columns: 1fr;
-    gap: 22px;
-    padding: 20px 22px;
-  }
-  .quote-motto-col .epigraph-title {
-    font-size: 1.65rem;
-  }
+@media (max-width: 768px) {
   .ocean-side-blockquote {
-    padding: 14px 16px 14px 20px;
+    max-width: 100%;
+    border-radius: 0 12px 12px 0;
+    padding: 16px 18px 16px 20px;
+  }
+  .quotation-body {
+    font-size: 0.98rem;
   }
 }
 
