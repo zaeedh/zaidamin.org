@@ -21,13 +21,12 @@ function initThemeToggle() {
   const themeToggleBtn = document.getElementById('theme-toggle');
   if (!themeToggleBtn) return;
 
-  const currentTheme = localStorage.getItem('theme') || 
-    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const currentTheme = localStorage.getItem('theme') || 'dark';
 
   setTheme(currentTheme);
 
   themeToggleBtn.addEventListener('click', () => {
-    const activeTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const activeTheme = document.documentElement.getAttribute('data-theme') || 'dark';
     const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
   });
