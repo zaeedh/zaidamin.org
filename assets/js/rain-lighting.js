@@ -3,10 +3,11 @@
  * 1. Procedural Volumetric Storm Clouds: multi-lobed organic cloud puffs that billow, churn, and drift smoothly
  * 2. High-Altitude Scud & Atmospheric Air Currents: fast windblown storm vapor tearing across the sky
  * 3. Sea-Level Storm Haze: soft atmospheric rain mist at the ocean horizon
- * 4. Realistic Intra-Cloud Lightning Engine: multi-stroke flash illuminating the cloud bodies and rain glints
- * 5. Heavy Driving Storm Rain: high-velocity wind-field rainfall with dynamic gale squalls & gusts
- * 6. 3D Rotating Lighthouse Beacon: oceanic sweeping volumetric beam and soft eye-splash bloom
- * 7. Clean, pristine ocean: 100% natural, fused seamlessly over the real classical painting
+ * 4. Soft Distant Lightning Strikes at Behind: procedural branching lightning bolts deep in the sky
+ * 5. Distant Village Lamps & Secondary Lighthouse: warm cottage lights twinkling across the bay & rhythmic distant beacon
+ * 6. Soft Feathered Volumetric Lighthouse Beam: zero cut edges, silky Gaussian atmospheric diffusion & eye-splash bloom
+ * 7. Soft, Small & Smooth Rain with Depth of Field: delicate heterogeneous micro-streaks with 3 optical depth layers
+ * 8. Clean, borderless presentation: seamlessly integrated with the page layout
  */
 
 (function() {
@@ -101,60 +102,240 @@
   let raindrops = [];
 
   // ==========================================================================
-  // REALISTIC INTRA-CLOUD LIGHTNING SYSTEM
+  // 1. SOFT RANDOM DISTANT LIGHTNING STRIKES (Behind Clouds)
   // ==========================================================================
-  const stormLightning = {
-    state: 0, // 0: idle, 1: leader, 2: main stroke, 3: secondary stroke, 4: decay
-    intensity: 0,
-    nextTime: Date.now() + 5000,
-    stateTimer: 0,
+  let activeLightningStrike = null;
+  let nextLightningStrikeTime = Date.now() + 4000;
+  let ambientFlashIntensity = 0;
+
+  function createLightningBolt(x1, y1, x2, y2, displace, branchProb = 0.38) {
+    const branches = [];
+    function subdivide(p1, p2, disp, curDepth) {
+      if (disp < 3.5 || curDepth > 5) {
+        return [p1, p2];
+      }
+      const midX = (p1.x + p2.x) * 0.5 + (Math.random() - 0.5) * disp;
+      const midY = (p1.y + p2.y) * 0.5 + (Math.random() - 0.5) * (disp * 0.25);
+      const mid = { x: midX, y: midY };
+
+      if (curDepth < 3 && Math.random() < branchProb) {
+        const branchEnd = {
+          x: midX + (Math.random() - 0.3) * (disp * 2.8),
+          y: midY + (Math.random() * 0.6 + 0.4) * (disp * 2.2)
+        };
+        branches.push(subdivide(mid, branchEnd, disp * 0.5, curDepth + 1));
+      }
+
+      const left = subdivide(p1, mid, disp * 0.52, curDepth + 1);
+      const right = subdivide(mid, p2, disp * 0.52, curDepth + 1);
+      return left.slice(0, -1).concat(right);
+    }
+
+    const mainPath = subdivide({ x: x1, y: y1 }, { x: x2, y: y2 }, displace, 0);
+    return { mainPath, branches };
+  }
+
+  function triggerRandomLightningStrike() {
+    const startX = width * (Math.random() * 0.65 + 0.18);
+    const startY = height * (Math.random() * 0.08 + 0.01);
+    const endX = startX + (Math.random() - 0.5) * (width * 0.16);
+    const endY = height * (Math.random() * 0.14 + 0.42);
+    const displace = Math.min(width * 0.045, 46);
+
+    const bolt = createLightningBolt(startX, startY, endX, endY, displace);
+    activeLightningStrike = {
+      bolt: bolt,
+      frame: 0,
+      maxFrames: Math.floor(Math.random() * 5 + 9),
+      alpha: 0
+    };
+  }
+
+  function updateAndDrawLightningStrike() {
+    const now = Date.now();
+    if (!activeLightningStrike && now > nextLightningStrikeTime) {
+      triggerRandomLightningStrike();
+      nextLightningStrikeTime = now + (Math.random() * 9000 + 7000);
+    }
+
+    if (!activeLightningStrike) {
+      ambientFlashIntensity *= 0.88;
+      return;
+    }
+
+    activeLightningStrike.frame++;
+    const f = activeLightningStrike.frame;
+    const mf = activeLightningStrike.maxFrames;
+
+    let strikeAlpha = 0;
+    if (f <= 2) strikeAlpha = 0.28;
+    else if (f <= 5) strikeAlpha = 0.54;
+    else if (f <= 8) strikeAlpha = 0.32;
+    else strikeAlpha = Math.max(0, 0.32 * (1 - (f - 8) / (mf - 8)));
+
+    ambientFlashIntensity = strikeAlpha * 0.35;
+
+    if (f > mf || strikeAlpha <= 0.01) {
+      activeLightningStrike = null;
+      return;
+    }
+
+    ctx.save();
+    ctx.globalCompositeOperation = 'screen';
+    ctx.shadowColor = 'rgba(186, 230, 253, 0.65)';
+    ctx.shadowBlur = 8;
+
+    // Draw main soft bolt path
+    ctx.strokeStyle = `rgba(230, 244, 255, ${strikeAlpha * 0.72})`;
+    ctx.lineWidth = 1.0;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    const main = activeLightningStrike.bolt.mainPath;
+    for (let i = 0; i < main.length; i++) {
+      if (i === 0) ctx.moveTo(main[i].x, main[i].y);
+      else ctx.lineTo(main[i].x, main[i].y);
+    }
+    ctx.stroke();
+
+    // Secondary sub-branches (whisper thin & soft)
+    ctx.strokeStyle = `rgba(200, 230, 255, ${strikeAlpha * 0.40})`;
+    ctx.lineWidth = 0.60;
+    for (let b of activeLightningStrike.bolt.branches) {
+      ctx.beginPath();
+      for (let i = 0; i < b.length; i++) {
+        if (i === 0) ctx.moveTo(b[i].x, b[i].y);
+        else ctx.lineTo(b[i].x, b[i].y);
+      }
+      ctx.stroke();
+    }
+
+    // Soft atmospheric cloud illumination around strike origin
+    const origin = main[0];
+    const cloudGlow = ctx.createRadialGradient(origin.x, origin.y, 10, origin.x, origin.y, width * 0.22);
+    cloudGlow.addColorStop(0, `rgba(215, 235, 255, ${strikeAlpha * 0.22})`);
+    cloudGlow.addColorStop(0.5, `rgba(180, 215, 255, ${strikeAlpha * 0.08})`);
+    cloudGlow.addColorStop(1, 'rgba(180, 215, 255, 0)');
+    ctx.fillStyle = cloudGlow;
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.restore();
+  }
+
+  // ==========================================================================
+  // 2. DISTANT VILLAGE HOUSE LAMPS & SECONDARY LIGHTHOUSE AMBIENCE
+  // ==========================================================================
+  const distantVillageLamps = [
+    { nx: 0.672, ny: 0.518, size: 0.9, baseA: 0.75, seed: 1.2 },
+    { nx: 0.694, ny: 0.522, size: 1.1, baseA: 0.85, seed: 3.7 },
+    { nx: 0.715, ny: 0.516, size: 0.8, baseA: 0.70, seed: 5.4 },
+    { nx: 0.732, ny: 0.524, size: 1.2, baseA: 0.90, seed: 7.1 },
+    { nx: 0.758, ny: 0.519, size: 1.0, baseA: 0.80, seed: 9.8 },
+    { nx: 0.776, ny: 0.526, size: 0.9, baseA: 0.75, seed: 12.3 },
+    { nx: 0.802, ny: 0.521, size: 1.1, baseA: 0.85, seed: 15.6 }
+  ];
+
+  function drawDistantVillageLamps(boost) {
+    ctx.save();
+    ctx.globalCompositeOperation = 'screen';
+
+    for (let lamp of distantVillageLamps) {
+      const x = width * lamp.nx;
+      const y = height * lamp.ny;
+
+      // Realistic warm storm twinkle: distant cottage lights flickering through rain & sea haze
+      const twinkle = 0.70 + Math.sin(simTime * 2.8 + lamp.seed) * 0.20 + Math.cos(simTime * 5.5 + lamp.seed) * 0.10;
+      const a = Math.min(lamp.baseA * twinkle * boost, 1.0);
+
+      // Soft warm golden hearth halo
+      const haloGrad = ctx.createRadialGradient(x, y, 0, x, y, lamp.size * 4.5);
+      haloGrad.addColorStop(0, `rgba(254, 240, 138, ${a * 0.75})`);
+      haloGrad.addColorStop(0.4, `rgba(245, 158, 11, ${a * 0.35})`);
+      haloGrad.addColorStop(1, 'rgba(217, 119, 6, 0)');
+
+      ctx.fillStyle = haloGrad;
+      ctx.beginPath();
+      ctx.arc(x, y, lamp.size * 4.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Sharp warm lamp pinprick core
+      ctx.fillStyle = `rgba(255, 255, 245, ${a * 0.95})`;
+      ctx.beginPath();
+      ctx.arc(x, y, lamp.size * 0.85, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    ctx.restore();
+  }
+
+  // Distant secondary lighthouse far behind across the bay
+  const distantSecondaryLighthouse = {
+    nx: 0.865,
+    ny: 0.496,
+    angle: 1.5,
+    speed: 0.016, // distinct ~6s revolution
 
     update() {
-      const now = Date.now();
+      this.angle += this.speed;
+      if (this.angle > Math.PI * 2) this.angle -= Math.PI * 2;
+    },
 
-      if (this.state === 0) {
-        if (now > this.nextTime) {
-          this.state = 1; // trigger leader flash
-          this.stateTimer = 0;
-          this.intensity = Math.random() * 0.35 + 0.25;
-          this.nextTime = now + (Math.random() * 8000 + 7000);
-        }
-      } else if (this.state === 1) {
-        // Leader flash (quick preliminary flicker)
-        this.stateTimer++;
-        if (this.stateTimer > 2) {
-          this.state = 2; // main brilliant return stroke
-          this.stateTimer = 0;
-          this.intensity = Math.random() * 0.45 + 0.55; // 0.55 to 1.0
-        }
-      } else if (this.state === 2) {
-        // Main stroke
-        this.stateTimer++;
-        if (this.stateTimer > 3) {
-          this.state = 3; // second strike / re-strike
-          this.stateTimer = 0;
-          this.intensity = Math.random() * 0.30 + 0.40;
-        }
-      } else if (this.state === 3) {
-        // Re-strike
-        this.stateTimer++;
-        if (this.stateTimer > 3) {
-          this.state = 4; // exponential decay
-          this.stateTimer = 0;
-        }
-      } else if (this.state === 4) {
-        // Exponential decay
-        this.intensity *= 0.82;
-        if (this.intensity < 0.01) {
-          this.intensity = 0;
-          this.state = 0;
-        }
+    draw(boost) {
+      ctx.save();
+      ctx.globalCompositeOperation = 'screen';
+
+      const x = width * this.nx;
+      const y = height * this.ny;
+
+      const facingViewer = Math.max(0, Math.sin(this.angle));
+      const facingAcross = Math.max(0, Math.cos(this.angle));
+
+      // Periodic maritime pulse / flash when facing viewer
+      const pulse = Math.pow(facingViewer, 5.0);
+      const pulseAlpha = Math.min((0.25 + pulse * 0.75) * boost, 1.0);
+
+      // Faint sweeping miniature horizon beam
+      if (facingAcross > 0.1) {
+        const beamLen = width * 0.11;
+        const bAlpha = Math.pow(facingAcross, 1.5) * 0.16 * boost;
+        const grad = ctx.createLinearGradient(x, y, x - beamLen, y + 2);
+        grad.addColorStop(0, `rgba(254, 240, 138, ${bAlpha * 1.4})`);
+        grad.addColorStop(0.5, `rgba(254, 240, 138, ${bAlpha * 0.5})`);
+        grad.addColorStop(1, 'rgba(254, 240, 138, 0)');
+
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.moveTo(x, y - 0.8);
+        ctx.lineTo(x - beamLen, y - 4);
+        ctx.lineTo(x - beamLen, y + 6);
+        ctx.lineTo(x, y + 0.8);
+        ctx.closePath();
+        ctx.fill();
       }
+
+      // Distant beacon pinprick & soft aura
+      const halo = ctx.createRadialGradient(x, y, 0, x, y, 6.0);
+      halo.addColorStop(0, `rgba(255, 255, 240, ${pulseAlpha * 0.9})`);
+      halo.addColorStop(0.3, `rgba(253, 224, 71, ${pulseAlpha * 0.5})`);
+      halo.addColorStop(1, 'rgba(253, 224, 71, 0)');
+
+      ctx.fillStyle = halo;
+      ctx.beginPath();
+      ctx.arc(x, y, 6.0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Core point
+      ctx.fillStyle = `rgba(255, 255, 255, ${pulseAlpha})`;
+      ctx.beginPath();
+      ctx.arc(x, y, 1.1, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
     }
   };
 
   // ==========================================================================
-  // 1. ROTATING LIGHTHOUSE BEACON & EYE-SPLASH BLOOM ENGINE
+  // 3. PRIMARY ROTATING LIGHTHOUSE BEACON (Softer Feathered Cut Edges)
   // ==========================================================================
   const beacon = {
     get lx() { return width * 0.318; },
@@ -191,53 +372,59 @@
       ctx.arc(lx, ly, 16, 0, Math.PI * 2);
       ctx.fill();
 
-      // B. Volumetric Beam Sweeping Across the Ocean
+      // B. Volumetric Beam Sweeping Across the Ocean (Softer Feathered Gaussian Diffusion)
       if (facingOcean > 0.02) {
         const beamIntensity = Math.pow(facingOcean, 1.3) * flashBoost;
-        const beamLength = width * 0.75;
+        const beamLength = width * 0.74;
         
         const beamPitch = 0.02 + Math.sin(this.angle * 2) * 0.012;
         const endY = ly + Math.sin(beamPitch) * beamLength;
-        const beamHalfWidth = 24 + facingOcean * 12;
+        const baseHalfWidth = 26 + facingOcean * 14;
 
-        const p1x = lx;
-        const p1y = ly - 2.5;
-        const p2x = lx;
-        const p2y = ly + 2.5;
-        const p3x = lx + beamLength;
-        const p3y = endY + beamHalfWidth;
-        const p4x = lx + beamLength;
-        const p4y = endY - beamHalfWidth;
+        // Apply soft shadowBlur to completely feather and dissolve cut polygon edges
+        ctx.shadowColor = 'rgba(254, 240, 138, 0.50)';
+        ctx.shadowBlur = 18;
 
-        const beamGrad = ctx.createLinearGradient(lx, ly, lx + beamLength, endY);
-        beamGrad.addColorStop(0, `rgba(255, 250, 225, ${0.70 * beamIntensity})`);
-        beamGrad.addColorStop(0.18, `rgba(254, 240, 138, ${0.40 * beamIntensity})`);
-        beamGrad.addColorStop(0.60, `rgba(186, 230, 253, ${0.12 * beamIntensity})`);
-        beamGrad.addColorStop(1, 'rgba(186, 230, 253, 0)');
+        // Multi-pass feathered beam layers (Outer aura -> Mid body -> Core)
+        const beamLayers = [
+          { widthScale: 1.35, alphaScale: 0.15, lengthScale: 0.95 },
+          { widthScale: 0.95, alphaScale: 0.40, lengthScale: 0.88 },
+          { widthScale: 0.55, alphaScale: 0.75, lengthScale: 0.82 }
+        ];
 
-        ctx.fillStyle = beamGrad;
-        ctx.beginPath();
-        ctx.moveTo(p1x, p1y);
-        ctx.lineTo(p4x, p4y);
-        ctx.lineTo(p3x, p3y);
-        ctx.lineTo(p2x, p2y);
-        ctx.closePath();
-        ctx.fill();
+        for (let layer of beamLayers) {
+          const halfW = baseHalfWidth * layer.widthScale;
+          const curLen = beamLength * layer.lengthScale;
+          const curEndY = ly + Math.sin(beamPitch) * curLen;
 
-        // Soft outer feathered aura
-        const auraGrad = ctx.createLinearGradient(lx, ly, lx + beamLength * 0.7, endY);
-        auraGrad.addColorStop(0, `rgba(253, 224, 71, ${0.28 * beamIntensity})`);
-        auraGrad.addColorStop(0.6, `rgba(147, 197, 253, ${0.06 * beamIntensity})`);
-        auraGrad.addColorStop(1, 'rgba(147, 197, 253, 0)');
+          const p1x = lx;
+          const p1y = ly - 2.0;
+          const p2x = lx;
+          const p2y = ly + 2.0;
+          const p3x = lx + curLen;
+          const p3y = curEndY + halfW;
+          const p4x = lx + curLen;
+          const p4y = curEndY - halfW;
 
-        ctx.fillStyle = auraGrad;
-        ctx.beginPath();
-        ctx.moveTo(p1x, p1y - 5);
-        ctx.lineTo(p4x, p4y - 12);
-        ctx.lineTo(p3x, p3y + 12);
-        ctx.lineTo(p2x, p2y + 5);
-        ctx.closePath();
-        ctx.fill();
+          const beamGrad = ctx.createLinearGradient(lx, ly, lx + curLen, curEndY);
+          beamGrad.addColorStop(0, `rgba(255, 250, 225, ${0.65 * beamIntensity * layer.alphaScale})`);
+          beamGrad.addColorStop(0.18, `rgba(254, 240, 138, ${0.35 * beamIntensity * layer.alphaScale})`);
+          beamGrad.addColorStop(0.55, `rgba(186, 230, 253, ${0.10 * beamIntensity * layer.alphaScale})`);
+          beamGrad.addColorStop(0.85, 'rgba(186, 230, 253, 0)');
+          beamGrad.addColorStop(1, 'rgba(186, 230, 253, 0)');
+
+          ctx.fillStyle = beamGrad;
+          ctx.beginPath();
+          ctx.moveTo(p1x, p1y);
+          ctx.lineTo(p4x, p4y);
+          // Soft rounded tip instead of hard cut vertical line
+          ctx.quadraticCurveTo(lx + curLen + 15, curEndY, p3x, p3y);
+          ctx.lineTo(p2x, p2y);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        ctx.shadowBlur = 0; // reset
       }
 
       // C. Soft "Splash into My Eyes" Lens Flare & Eye Bloom
@@ -296,33 +483,32 @@
   };
 
   // ==========================================================================
-  // 2. DYNAMIC STORM WIND & GALE GUST SYSTEM
+  // 4. DYNAMIC STORM WIND & GALE GUST SYSTEM
   // ==========================================================================
   function getStormWind(t) {
-    // Dynamic gust factor: surges every 4 to 6 seconds
-    const gust = Math.max(0, Math.sin(t * 0.45) * 0.16) + Math.max(0, Math.cos(t * 0.95) * 0.09);
+    const gust = Math.max(0, Math.sin(t * 0.45) * 0.14) + Math.max(0, Math.cos(t * 0.95) * 0.08);
     return {
-      baseAngle: 0.36 + gust, // ~21 to 32 degrees slanting down-right
-      gustSpeedMultiplier: 1.0 + gust * 1.4,
+      baseAngle: 0.34 + gust,
+      gustSpeedMultiplier: 1.0 + gust * 1.25,
       gustFactor: gust
     };
   }
 
   function getLocalRainAngle(x, y, t, bias) {
     const wind = getStormWind(t);
-    const altitudeShear = (y / Math.max(height, 1)) * 0.10;
-    const wave = Math.sin(x * 0.003 - t * 0.7 + y * 0.002) * 0.05;
+    const altitudeShear = (y / Math.max(height, 1)) * 0.08;
+    const wave = Math.sin(x * 0.003 - t * 0.7 + y * 0.002) * 0.04;
     return wind.baseAngle + altitudeShear + wave + bias;
   }
 
   // ==========================================================================
-  // 3. LIVING PROCEDURAL STORM CLOUD MASSES (Organic Billowing Puffs)
+  // 5. LIVING PROCEDURAL STORM CLOUD MASSES (Organic Billowing Puffs)
   // ==========================================================================
   class CloudCluster {
     constructor(x, y, particleCount = 10) {
       this.x = x;
       this.y = y;
-      this.speed = Math.random() * 0.22 + 0.26; // stately storm drift
+      this.speed = Math.random() * 0.18 + 0.22;
       this.particles = [];
 
       for (let i = 0; i < particleCount; i++) {
@@ -341,7 +527,6 @@
 
     update() {
       this.x += this.speed;
-      // Wrap seamlessly
       if (this.x - 300 > width) {
         this.x = -350;
         this.y = height * (Math.random() * 0.32 + 0.04);
@@ -355,7 +540,6 @@
       for (let p of this.particles) {
         p.rotation += p.rotSpeed;
 
-        // Organic harmonic churn within the cloud mass
         const churnX = Math.sin(simTime * p.churnSpeed + p.seed) * 14;
         const churnY = Math.cos(simTime * (p.churnSpeed * 0.8) + p.seed) * 8;
         const scalePulse = 1.0 + Math.sin(simTime * 0.25 + p.seed) * 0.08;
@@ -366,8 +550,7 @@
         const w = 256 * s;
         const h = 256 * s;
 
-        // Cloud illumination from ambient lightning
-        const alpha = Math.min(p.baseAlpha * (1 + lightningBoost * 2.8), 0.28);
+        const alpha = Math.min(p.baseAlpha * (1 + lightningBoost * 2.5), 0.25);
 
         ctx.save();
         ctx.translate(px, py);
@@ -382,7 +565,7 @@
   }
 
   // ==========================================================================
-  // 4. HIGH-ALTITUDE SCUD & TORN STORM VAPOR (Atmospheric Air Motion)
+  // 6. HIGH-ALTITUDE SCUD & TORN STORM VAPOR (Atmospheric Air Motion)
   // ==========================================================================
   class ScudWisp {
     constructor() {
@@ -393,15 +576,15 @@
       this.x = initial ? Math.random() * (width + 400) - 200 : -350;
       this.y = height * (Math.random() * 0.44 + 0.06);
       this.scale = Math.random() * 0.55 + 0.75;
-      this.baseSpeed = Math.random() * 1.4 + 1.8; // swift gale speed
-      this.baseAlpha = Math.random() * 0.035 + 0.030;
+      this.baseSpeed = Math.random() * 1.2 + 1.5;
+      this.baseAlpha = Math.random() * 0.030 + 0.025;
       this.seed = Math.random() * 100;
     }
 
     update() {
       const wind = getStormWind(simTime);
       this.x += this.baseSpeed * wind.gustSpeedMultiplier;
-      this.y += Math.sin(simTime * 0.7 + this.seed) * 0.22;
+      this.y += Math.sin(simTime * 0.7 + this.seed) * 0.20;
 
       if (this.x - 300 > width) {
         this.reset();
@@ -413,8 +596,8 @@
       ctx.globalCompositeOperation = 'screen';
 
       const wind = getStormWind(simTime);
-      const angle = wind.baseAngle - 0.22; // aligned with storm air
-      const alpha = Math.min(this.baseAlpha * (1 + lightningBoost * 2.0), 0.18);
+      const angle = wind.baseAngle - 0.22;
+      const alpha = Math.min(this.baseAlpha * (1 + lightningBoost * 2.0), 0.16);
 
       const w = 340 * this.scale;
       const h = 120 * this.scale;
@@ -428,7 +611,7 @@
   }
 
   // ==========================================================================
-  // 5. SEA-LEVEL STORM HAZE (Drifting Atmospheric Spray Band at Horizon)
+  // 7. SEA-LEVEL STORM HAZE (Drifting Atmospheric Spray Band at Horizon)
   // ==========================================================================
   class HorizonHaze {
     constructor(x, y, speed, alpha) {
@@ -451,7 +634,7 @@
       ctx.globalCompositeOperation = 'screen';
 
       const pulse = Math.sin(simTime * 0.4 + this.seed) * 0.012;
-      const alpha = Math.min((this.baseAlpha + pulse) * (1 + lightningBoost * 1.5), 0.15);
+      const alpha = Math.min((this.baseAlpha + pulse) * (1 + lightningBoost * 1.4), 0.14);
 
       ctx.globalAlpha = alpha;
       ctx.drawImage(hazeSprite, this.x, this.y, 600, 140);
@@ -460,61 +643,61 @@
   }
 
   // ==========================================================================
-  // 6. REALISTIC SOFT RAIN WITH DEPTH OF FIELD (DOF BLUR & FOCUS) & HETEROGENEOUS SIZES
+  // 8. REFINED SOFT, SMALL & SMOOTH RAIN WITH DEPTH OF FIELD (DOF BLUR & FOCUS)
   // ==========================================================================
   class RealisticDOFRaindrop {
     constructor() {
-      // Continuous optical depth layers:
-      // - Far layer (45%): Distant background, atmospheric blur, fine mist & soft drizzle
-      // - Focal layer (43%): Midground focal plane (in-focus), crisp and defined
-      // - Near layer (12%): Immediate foreground (out-of-focus bokeh blur), wide & translucent
+      // 3 Optical Depth Layers:
+      // - Far layer (46%): Distant atmospheric blur, tiny micro-specks & soft mist
+      // - Focal layer (44%): Midground focal plane (in-focus), small, crisp, smooth
+      // - Near layer (10%): Immediate foreground (out-of-focus bokeh blur), soft & translucent
       const r = Math.random();
 
-      if (r < 0.45) {
+      if (r < 0.46) {
         // LAYER 1: Distant Background (Atmospheric Far Blur)
         this.layer = 0;
-        this.baseLength = Math.random() * 8 + 6; // 6px to 14px (heterogeneous micro-streaks)
-        this.width = Math.random() * 0.20 + 0.40; // 0.40px to 0.60px (delicate)
-        this.baseSpeed = Math.random() * 2.8 + 6.8; // gentle distant pace
-        this.baseAlpha = Math.random() * 0.05 + 0.07; // soft atmospheric mist
+        this.baseLength = Math.random() * 3.5 + 3.5; // 3.5px to 7.0px (tiny micro-streaks)
+        this.width = 0.32; // whisper thin, silky
+        this.baseSpeed = Math.random() * 2.2 + 5.5;
+        this.baseAlpha = Math.random() * 0.03 + 0.045; // soft atmospheric mist
         this.blur = 0;
-      } else if (r < 0.88) {
-        // LAYER 2: Midground Focal Plane (Sharp & Crisp IN-FOCUS)
+      } else if (r < 0.90) {
+        // LAYER 2: Midground Focal Plane (Sharp & Crisp IN-FOCUS, Small & Smooth)
         this.layer = 1;
         const subSize = Math.random();
-        if (subSize < 0.35) {
-          this.baseLength = Math.random() * 6 + 12; // 12 - 18px fine drops
-          this.width = 0.55;
-          this.baseAlpha = Math.random() * 0.05 + 0.13;
-        } else if (subSize < 0.80) {
-          this.baseLength = Math.random() * 8 + 18; // 18 - 26px standard drops
-          this.width = 0.70;
-          this.baseAlpha = Math.random() * 0.06 + 0.17;
+        if (subSize < 0.40) {
+          this.baseLength = Math.random() * 4.0 + 6.5; // 6.5 - 10.5px delicate drops
+          this.width = 0.40;
+          this.baseAlpha = Math.random() * 0.03 + 0.080;
+        } else if (subSize < 0.85) {
+          this.baseLength = Math.random() * 5.0 + 10.0; // 10.0 - 15.0px standard drops
+          this.width = 0.48;
+          this.baseAlpha = Math.random() * 0.04 + 0.105;
         } else {
-          this.baseLength = Math.random() * 10 + 25; // 25 - 35px heavier driving drops
-          this.width = 0.85;
-          this.baseAlpha = Math.random() * 0.06 + 0.21;
+          this.baseLength = Math.random() * 6.0 + 14.0; // 14.0 - 20.0px driving drops
+          this.width = 0.58;
+          this.baseAlpha = Math.random() * 0.04 + 0.130;
         }
-        this.baseSpeed = Math.random() * 3.5 + 11.5;
+        this.baseSpeed = Math.random() * 2.8 + 8.5;
         this.blur = 0;
       } else {
         // LAYER 3: Immediate Camera Foreground (Out-of-Focus BOKEH Blur)
         this.layer = 2;
-        this.baseLength = Math.random() * 25 + 38; // 38px to 63px (long motion blur)
-        this.width = Math.random() * 1.0 + 1.8; // 1.8px to 2.8px (wide defocused bokeh)
-        this.baseSpeed = Math.random() * 5.0 + 17.5; // fast near parallax
-        this.baseAlpha = Math.random() * 0.04 + 0.075; // soft translucent ghostly blur
-        this.blur = 3.5;
+        this.baseLength = Math.random() * 10 + 16; // 16px to 26px (smaller than before)
+        this.width = Math.random() * 0.4 + 1.15; // 1.15px to 1.55px (gentle soft defocus)
+        this.baseSpeed = Math.random() * 3.5 + 13.0;
+        this.baseAlpha = Math.random() * 0.025 + 0.045; // soft translucent ghostly blur
+        this.blur = 2.0;
       }
 
-      this.bias = (Math.random() - 0.5) * 0.06;
+      this.bias = (Math.random() - 0.5) * 0.05;
       this.reset(true);
     }
 
     reset(initial = false) {
       this.x = Math.random() * (width + 500) - 250;
-      this.y = initial ? Math.random() * height : -50;
-      this.speed = this.baseSpeed * (0.95 + Math.random() * 0.10);
+      this.y = initial ? Math.random() * height : -35;
+      this.speed = this.baseSpeed * (0.96 + Math.random() * 0.08);
       this.alpha = this.baseAlpha;
     }
 
@@ -529,7 +712,7 @@
       this.x += vx;
       this.y += vy;
 
-      if (this.y > height + 55 || this.x > width + 300) {
+      if (this.y > height + 40 || this.x > width + 300) {
         this.reset();
       }
     }
@@ -546,33 +729,30 @@
       let beamGlint = 1.0;
       const lx = beacon.lx;
       const ly = beacon.ly;
-      if (this.x > lx && Math.abs(this.y - ly) < 50) {
+      if (this.x > lx && Math.abs(this.y - ly) < 46) {
         const facingOcean = Math.max(0, Math.cos(beacon.angle));
-        beamGlint = 1.0 + facingOcean * 1.5;
+        beamGlint = 1.0 + facingOcean * 1.4;
       }
 
-      // Lightning boost and beam boost (soft clamped ceiling)
-      const a = Math.min(this.alpha * (1 + lightningBoost * 1.8) * beamGlint, 0.48);
+      // Soft ceiling
+      const a = Math.min(this.alpha * (1 + lightningBoost * 1.6) * beamGlint, 0.40);
 
       const endX = this.x + Math.sin(angle) * currentLength;
       const endY = this.y + Math.cos(angle) * currentLength;
 
-      // Depth of Field rendering:
       if (this.layer === 2) {
         // LAYER 3: Out-of-Focus Foreground Bokeh Blur
-        ctx.shadowColor = beamGlint > 1.15 ? 'rgba(254, 240, 138, 0.5)' : 'rgba(215, 235, 255, 0.45)';
+        ctx.shadowColor = beamGlint > 1.15 ? 'rgba(254, 240, 138, 0.4)' : 'rgba(215, 235, 255, 0.35)';
         ctx.shadowBlur = this.blur;
 
         const grad = ctx.createLinearGradient(this.x, this.y, endX, endY);
         if (beamGlint > 1.15) {
           grad.addColorStop(0, 'rgba(254, 243, 199, 0)');
-          grad.addColorStop(0.3, `rgba(254, 243, 199, ${a * 0.7})`);
-          grad.addColorStop(0.7, `rgba(254, 243, 199, ${a * 0.5})`);
+          grad.addColorStop(0.35, `rgba(254, 243, 199, ${a * 0.7})`);
           grad.addColorStop(1, 'rgba(254, 243, 199, 0)');
         } else {
           grad.addColorStop(0, 'rgba(210, 235, 255, 0)');
-          grad.addColorStop(0.3, `rgba(225, 242, 255, ${a * 0.7})`);
-          grad.addColorStop(0.7, `rgba(210, 235, 255, ${a * 0.5})`);
+          grad.addColorStop(0.35, `rgba(225, 242, 255, ${a * 0.7})`);
           grad.addColorStop(1, 'rgba(200, 225, 250, 0)');
         }
 
@@ -609,7 +789,7 @@
         // LAYER 1: Distant Background (Atmospheric Far Blur, whisper soft)
         const grad = ctx.createLinearGradient(this.x, this.y, endX, endY);
         grad.addColorStop(0, 'rgba(200, 225, 250, 0)');
-        grad.addColorStop(0.35, `rgba(210, 232, 252, ${a})`);
+        grad.addColorStop(0.4, `rgba(210, 232, 252, ${a})`);
         grad.addColorStop(1, 'rgba(200, 225, 250, 0)');
 
         ctx.strokeStyle = grad;
@@ -626,7 +806,7 @@
   }
 
   // ==========================================================================
-  // 7. INITIALIZE STORM SYSTEM
+  // 9. INITIALIZE STORM SYSTEM
   // ==========================================================================
   function initStormAtmosphere() {
     // A. 4 Major Volumetric Storm Cloud Clusters across the sky
@@ -653,8 +833,8 @@
     hazeBands.push(new HorizonHaze(0, height * 0.46, 0.35, 0.055));
     hazeBands.push(new HorizonHaze(width * 0.55, height * 0.50, 0.42, 0.050));
 
-    // D. Soft Heterogeneous DOF Rain (~680 drops on desktop)
-    const count = Math.min(Math.floor((width * height) / 1150), 680);
+    // D. Soft Heterogeneous Small & Smooth DOF Rain (~640 drops on desktop)
+    const count = Math.min(Math.floor((width * height) / 1200), 640);
     raindrops = [];
     for (let i = 0; i < count; i++) {
       raindrops.push(new RealisticDOFRaindrop());
@@ -671,48 +851,53 @@
   window.addEventListener('resize', resize);
 
   // ==========================================================================
-  // 8. MAIN ANIMATION & RENDERING LOOP
+  // 10. MAIN ANIMATION & RENDERING LOOP
   // ==========================================================================
   function render() {
     ctx.clearRect(0, 0, width, height);
     simTime += 0.020;
 
-    stormLightning.update();
     beacon.update();
+    distantSecondaryLighthouse.update();
 
-    const flash = stormLightning.intensity;
+    // 1. Soft Random Distant Lightning Strikes (Behind Clouds)
+    updateAndDrawLightningStrike();
 
-    // Distant ambient thunder sky flash
-    if (flash > 0.02) {
-      ctx.fillStyle = `rgba(215, 230, 255, ${flash * 0.22})`;
+    // Ambient flash glow across deep sky
+    if (ambientFlashIntensity > 0.01) {
+      ctx.fillStyle = `rgba(215, 230, 255, ${ambientFlashIntensity * 0.35})`;
       ctx.fillRect(0, 0, width, height);
     }
 
-    // 1. Procedural Living Volumetric Storm Clouds (Screen blend, billows & churns)
+    // 2. Procedural Living Volumetric Storm Clouds (Screen blend, billows & churns)
     for (let cluster of cloudClusters) {
       cluster.update();
-      cluster.draw(flash);
+      cluster.draw(ambientFlashIntensity);
     }
 
-    // 2. High-Altitude Scud & Atmospheric Gale Currents
+    // 3. High-Altitude Scud & Atmospheric Gale Currents
     for (let scud of scudWisps) {
       scud.update();
-      scud.draw(flash);
+      scud.draw(ambientFlashIntensity);
     }
 
-    // 3. Sea-Level Horizon Storm Spray Haze
+    // 4. Sea-Level Horizon Storm Spray Haze
     for (let haze of hazeBands) {
       haze.update();
-      haze.draw(flash);
+      haze.draw(ambientFlashIntensity);
     }
 
-    // 4. Rotating Lighthouse Beacon & Eye-Splash Bloom
-    beacon.draw(1 + flash * 0.8);
+    // 5. Distant Village House Lamps & Secondary Lighthouse Ambience
+    drawDistantVillageLamps(1 + ambientFlashIntensity * 0.8);
+    distantSecondaryLighthouse.draw(1 + ambientFlashIntensity * 0.8);
 
-    // 5. Heavy Driving Storm Rain (High-velocity, gust-reactive)
+    // 6. Rotating Lighthouse Beacon with Feathered Soft Edges & Eye Bloom
+    beacon.draw(1 + ambientFlashIntensity * 0.8);
+
+    // 7. Soft, Small & Smooth Heterogeneous DOF Rain
     for (let drop of raindrops) {
       drop.update();
-      drop.draw(flash);
+      drop.draw(ambientFlashIntensity);
     }
 
     requestAnimationFrame(render);
