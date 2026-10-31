@@ -1,0 +1,25 @@
+{
+  "name": "Option 1 storm",
+  "id": "option-1-storm",
+  "timestamp": "2026-11-01T07:14:00+08:00",
+  "title": "Atmospheric Lighthouse Storm - Clean & Borderless Standard",
+  "description": "Balanced realistic maritime storm featuring silky smooth DOF rain, atmospheric volumetric cloud churn, distant village lights, feathered lighthouse beam, and natural borderless background dissolution with unobstructed ocean waves.",
+  "specs": {
+    "rain_drops": "~540 heterogeneous streaks (3 optical depth layers: 44% far mist, 45% focal in-focus, 11% near bokeh)",
+    "rain_motion_blur": "5-stop optical feathered gradient (0% -> 25% -> 50% -> 75% -> 100%)",
+    "clouds": "4 procedural multi-lobed volumetric clusters + 8 low scud vapor wisps",
+    "lightning": "Procedural branching fractal strikes deep in background with ambient flash wash",
+    "lighting_beam": "Multi-pass Gaussian feathered beam (shadowBlur=18, zero hard cut edges)",
+    "distant_lights": "Twinkling cottage lamps mapped to cliff cottages and secondary rhythmic lighthouse beacon",
+    "framing": "Borderless with soft radial edge mask: radial-gradient(ellipse 98% 90% at 50% 50%, #000 76%, transparent 100%)",
+    "wave_rendering": "Pure, unobstructed fine-art painting (zero artificial splash/mist sprites)"
+  },
+  "archived_files": [
+    "rain-lighting.js",
+    "style.css",
+    "lighthouse-banner.jpg",
+    "lighthouse-banner.webp",
+    "index.html",
+    "build.py"
+  ]
+}
