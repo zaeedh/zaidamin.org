@@ -1,0 +1,97 @@
+{
+  "name": "Dr. Zaid Amin",
+  "degree": "Ph.D. in Computer Science / Information Technology",
+  "title": "Senior Lecturer in Data Science & Information Technology",
+  "affiliation": {
+    "faculty": "Faculty of Data Science and Information Technology (FDSIT)",
+    "institution": "INTI International University",
+    "location": "Nilai, Negeri Sembilan, Malaysia",
+    "website": "https://newinti.edu.my"
+  },
+  "tagline": "Bridging Empirical Computing, Human-Centered AI, and Digital Ethics",
+  "motto": "Das Sein, das Sollen (What is, what ought to be)",
+  "short_bio": "Senior Lecturer and computational researcher specializing in the intersection of Human-Computer Interaction (HCI), Behavior & Social Computing, Digital Ethics, and AI Governance. Ph.D. graduate from Universiti Kebangsaan Malaysia (UKM). Former Head of Master in Informatics Engineering and Information Systems programs, actively advancing research in agentic AI alignment, attention-based cognitive interventions, and civic technology.",
+  "research_keywords": [
+    "Human-Computer Interaction (HCI)",
+    "AI Governance & Digital Ethics",
+    "Behavior & Social Computing",
+    "Attention-Based Design & Cognitive Interventions",
+    "Agentic AI & Trustworthy Systems",
+    "Digital Heritage & XR"
+  ],
+  "social_links": {
+    "orcid": "https://orcid.org/0000-0001-5223-3058",
+    "scholar": "https://scholar.google.com/citations?user=AUZIYQH0i7NW5_OAHWRFjwbm9jc5D8ZE4ig6J0WXXDvzO7thbSV1pshX55bzL7MpzfQJ0JyWhdfnGAsh5AFloZ2BnDcomtFhgqELhjxd8XflIXz9yOgOxQuF1dQJvyaDaloG5B-VL9kf8-iQOVWlpyykpD2ClLA=",
+    "sciprofiles": "https://sciprofiles.com/profile/zaidamin",
+    "github": "https://github.com/zaeedh",
+    "linkedin": "https://www.linkedin.com/in/zaid-amin",
+    "researchgate": "https://www.researchgate.net/profile/Zaid-Amin",
+    "email": "zaid.amin@newinti.edu.my",
+    "personal_email": "zaeedh@gmail.com"
+  },
+  "metrics": {
+    "total_publications": "24+",
+    "top_tiers": "IEEE Access (Q1), MDPI Smart Cities, Springer LNCS",
+    "academic_experience": "10+ Years",
+    "orcid_id": "0000-0001-5223-3058"
+  },
+  "career_targets": [
+    "Associate Professorship Portfolio & International Research Leadership",
+    "Principal Investigator on National (FRGS, PRGS) and International AI Governance Grants",
+    "Postgraduate Supervision (Ph.D. & Master's candidates in HCI and AI Ethics)",
+    "Keynotes, Panel Moderation & International Research Advisory"
+  ],
+  "education": [
+    {
+      "degree": "Doctor of Philosophy (Ph.D.) in Information Technology / Computer Science",
+      "institution": "Universiti Kebangsaan Malaysia (UKM)",
+      "country": "Malaysia",
+      "focus": "Human-Computer Interaction (HCI), Attention-Based Design & Cognitive Interventions"
+    },
+    {
+      "degree": "Master of Computer Science / Informatics Engineering (M.Kom.)",
+      "institution": "Universitas Bina Darma",
+      "country": "Indonesia",
+      "focus": "Network Architecture, Information Systems & Distributed Computing"
+    },
+    {
+      "degree": "Bachelor of Computer Science / Information Technology (S.Kom.)",
+      "institution": "Palcomtech Institute of Technology and Business",
+      "country": "Indonesia",
+      "focus": "Information Systems & Computer Networks"
+    }
+  ],
+  "leadership_roles": [
+    {
+      "role": "Senior Lecturer",
+      "institution": "INTI International University, Malaysia",
+      "period": "Current",
+      "description": "Faculty of Data Science and Information Technology. Teaching postgraduate/undergraduate curricula, leading research in AI ethics, supervising dissertations."
+    },
+    {
+      "role": "Senior Lecturer & Researcher",
+      "institution": "Universitas Bina Darma",
+      "period": "Previous",
+      "description": "Led departmental research output, supervised master dissertations in software engineering and behavioral computing."
+    },
+    {
+      "role": "Head of Master in Informatics Engineering Program",
+      "institution": "Universitas Bina Darma",
+      "period": "Previous",
+      "description": "Directed academic accreditation (BAN-PT), curriculum development, graduate research symposiums, and faculty recruitment."
+    },
+    {
+      "role": "Head of Information Systems Study Program",
+      "institution": "Universitas Bina Darma",
+      "period": "Previous",
+      "description": "Supervised undergraduate curriculum modernization, industrial internships, and technological infrastructure."
+    },
+    {
+      "role": "Head of Faculty of Informatics Engineering / Lecturer",
+      "institution": "Palcomtech Institute of Technology and Business",
+      "period": "Previous",
+      "description": "Managed academic operations, computing laboratories, and technical curriculum standards."
+    }
+  ]
+}
+
