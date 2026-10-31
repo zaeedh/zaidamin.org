@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="royalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1936" />
+      <stop offset="50%" stop-color="#1e3a8a" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="glowRing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#60a5fa" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="400" height="400" fill="url(#royalGrad)" rx="200" />
+  
+  <!-- Outer Electric Halo -->
+  <circle cx="200" cy="200" r="190" fill="none" stroke="url(#glowRing)" stroke-width="4" filter="url(#glow)" opacity="0.85" />
+  <circle cx="200" cy="200" r="182" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="12 6" opacity="0.6" />
+
+  <!-- Academic Silhouette Representation -->
+  <g fill="#f8fafc" opacity="0.95">
+    <!-- Head / Face silhouette -->
+    <circle cx="200" cy="148" r="62" fill="#e2e8f0" />
+    <!-- Scholarly glasses hint -->
+    <rect x="162" y="140" width="30" height="18" rx="4" fill="none" stroke="#1e3a8a" stroke-width="3" />
+    <rect x="208" y="140" width="30" height="18" rx="4" fill="none" stroke="#1e3a8a" stroke-width="3" />
+    <line x1="192" y1="149" x2="208" y2="149" stroke="#1e3a8a" stroke-width="3" />
+    <!-- Shoulders / Blazer -->
+    <path d="M96 340 C108 260, 150 230, 200 230 C250 230, 292 260, 304 340 Z" fill="#cbd5e1" />
+    <path d="M165 240 L200 310 L235 240 Z" fill="#0f172a" />
+    <polygon points="194,260 206,260 202,320 198,320" fill="#2563eb" />
+  </g>
+
+  <!-- Monogram Badge at Bottom -->
+  <rect x="140" y="315" width="120" height="34" rx="17" fill="#0c1a38" stroke="#38bdf8" stroke-width="2" />
+  <text x="200" y="338" font-family="'Inter', sans-serif" font-size="14" font-weight="800" fill="#38bdf8" text-anchor="middle" letter-spacing="2">DR. ZAID</text>
+</svg>
