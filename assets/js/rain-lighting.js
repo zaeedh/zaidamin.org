@@ -651,51 +651,51 @@
   }
 
   // ==========================================================================
-  // 8. REFINED SOFT, SMALL & SMOOTH RAIN WITH DEPTH OF FIELD (DOF BLUR & FOCUS)
+  // 8. NATURAL STORM RAIN WITH DEPTH OF FIELD (DOF BLUR & FOCUS) & ORGANIC VISIBILITY
   // ==========================================================================
   class RealisticDOFRaindrop {
     constructor() {
       // 3 Optical Depth Layers:
-      // - Far layer (46%): Distant atmospheric blur, tiny micro-specks & soft mist
-      // - Focal layer (44%): Midground focal plane (in-focus), small, crisp, smooth
-      // - Near layer (10%): Immediate foreground (out-of-focus bokeh blur), soft & translucent
+      // - Far layer (42%): Distant atmospheric blur, fine mist & soft drizzle
+      // - Focal layer (46%): Midground focal plane (in-focus), visible, elegant, driving drops
+      // - Near layer (12%): Immediate foreground (out-of-focus bokeh blur), soft, wide & cinematic
       const r = Math.random();
 
-      if (r < 0.46) {
+      if (r < 0.42) {
         // LAYER 1: Distant Background (Atmospheric Far Blur)
         this.layer = 0;
-        this.baseLength = Math.random() * 3.5 + 3.5; // 3.5px to 7.0px (tiny micro-streaks)
-        this.width = 0.32; // whisper thin, silky
-        this.baseSpeed = Math.random() * 2.2 + 5.5;
-        this.baseAlpha = Math.random() * 0.03 + 0.045; // soft atmospheric mist
+        this.baseLength = Math.random() * 5.0 + 6.0; // 6px to 11px
+        this.width = 0.40;
+        this.baseSpeed = Math.random() * 2.5 + 6.5;
+        this.baseAlpha = Math.random() * 0.04 + 0.08; // 0.08 - 0.12 (soft atmospheric mist)
         this.blur = 0;
-      } else if (r < 0.90) {
-        // LAYER 2: Midground Focal Plane (Sharp & Crisp IN-FOCUS, Small & Smooth)
+      } else if (r < 0.88) {
+        // LAYER 2: Midground Focal Plane (Sharp & Crisp IN-FOCUS, Clearly Visible Storm Rain)
         this.layer = 1;
         const subSize = Math.random();
-        if (subSize < 0.40) {
-          this.baseLength = Math.random() * 4.0 + 6.5; // 6.5 - 10.5px delicate drops
-          this.width = 0.40;
-          this.baseAlpha = Math.random() * 0.03 + 0.080;
-        } else if (subSize < 0.85) {
-          this.baseLength = Math.random() * 5.0 + 10.0; // 10.0 - 15.0px standard drops
-          this.width = 0.48;
-          this.baseAlpha = Math.random() * 0.04 + 0.105;
+        if (subSize < 0.35) {
+          this.baseLength = Math.random() * 5.0 + 10.0; // 10 - 15px fine drops
+          this.width = 0.52;
+          this.baseAlpha = Math.random() * 0.04 + 0.14; // 0.14 - 0.18
+        } else if (subSize < 0.80) {
+          this.baseLength = Math.random() * 6.0 + 14.0; // 14 - 20px standard drops
+          this.width = 0.62;
+          this.baseAlpha = Math.random() * 0.05 + 0.17; // 0.17 - 0.22
         } else {
-          this.baseLength = Math.random() * 6.0 + 14.0; // 14.0 - 20.0px driving drops
-          this.width = 0.58;
-          this.baseAlpha = Math.random() * 0.04 + 0.130;
+          this.baseLength = Math.random() * 7.0 + 19.0; // 19 - 26px driving drops
+          this.width = 0.74;
+          this.baseAlpha = Math.random() * 0.05 + 0.21; // 0.21 - 0.26
         }
-        this.baseSpeed = Math.random() * 2.8 + 8.5;
+        this.baseSpeed = Math.random() * 3.5 + 10.5;
         this.blur = 0;
       } else {
         // LAYER 3: Immediate Camera Foreground (Out-of-Focus BOKEH Blur)
         this.layer = 2;
-        this.baseLength = Math.random() * 10 + 16; // 16px to 26px (smaller than before)
-        this.width = Math.random() * 0.4 + 1.15; // 1.15px to 1.55px (gentle soft defocus)
-        this.baseSpeed = Math.random() * 3.5 + 13.0;
-        this.baseAlpha = Math.random() * 0.025 + 0.045; // soft translucent ghostly blur
-        this.blur = 2.0;
+        this.baseLength = Math.random() * 16 + 26; // 26px to 42px (cinematic motion blur)
+        this.width = Math.random() * 0.5 + 1.6; // 1.6px to 2.1px (soft defocused bokeh)
+        this.baseSpeed = Math.random() * 4.5 + 16.0;
+        this.baseAlpha = Math.random() * 0.04 + 0.08; // 0.08 - 0.12 (soft translucent ghostly blur)
+        this.blur = 2.6;
       }
 
       this.bias = (Math.random() - 0.5) * 0.05;
@@ -704,7 +704,7 @@
 
     reset(initial = false) {
       this.x = Math.random() * (width + 500) - 250;
-      this.y = initial ? Math.random() * height : -35;
+      this.y = initial ? Math.random() * height : -45;
       this.speed = this.baseSpeed * (0.96 + Math.random() * 0.08);
       this.alpha = this.baseAlpha;
     }
@@ -720,7 +720,7 @@
       this.x += vx;
       this.y += vy;
 
-      if (this.y > height + 40 || this.x > width + 300) {
+      if (this.y > height + 45 || this.x > width + 300) {
         this.reset();
       }
     }
@@ -737,30 +737,30 @@
       let beamGlint = 1.0;
       const lx = beacon.lx;
       const ly = beacon.ly;
-      if (this.x > lx && Math.abs(this.y - ly) < 46) {
+      if (this.x > lx && Math.abs(this.y - ly) < 48) {
         const facingOcean = Math.max(0, Math.cos(beacon.angle));
-        beamGlint = 1.0 + facingOcean * 1.4;
+        beamGlint = 1.0 + facingOcean * 1.5;
       }
 
       // Soft ceiling
-      const a = Math.min(this.alpha * (1 + lightningBoost * 1.6) * beamGlint, 0.40);
+      const a = Math.min(this.alpha * (1 + lightningBoost * 1.7) * beamGlint, 0.52);
 
       const endX = this.x + Math.sin(angle) * currentLength;
       const endY = this.y + Math.cos(angle) * currentLength;
 
       if (this.layer === 2) {
         // LAYER 3: Out-of-Focus Foreground Bokeh Blur
-        ctx.shadowColor = beamGlint > 1.15 ? 'rgba(254, 240, 138, 0.4)' : 'rgba(215, 235, 255, 0.35)';
+        ctx.shadowColor = beamGlint > 1.15 ? 'rgba(254, 240, 138, 0.45)' : 'rgba(215, 235, 255, 0.40)';
         ctx.shadowBlur = this.blur;
 
         const grad = ctx.createLinearGradient(this.x, this.y, endX, endY);
         if (beamGlint > 1.15) {
           grad.addColorStop(0, 'rgba(254, 243, 199, 0)');
-          grad.addColorStop(0.35, `rgba(254, 243, 199, ${a * 0.7})`);
+          grad.addColorStop(0.35, `rgba(254, 243, 199, ${a * 0.75})`);
           grad.addColorStop(1, 'rgba(254, 243, 199, 0)');
         } else {
           grad.addColorStop(0, 'rgba(210, 235, 255, 0)');
-          grad.addColorStop(0.35, `rgba(225, 242, 255, ${a * 0.7})`);
+          grad.addColorStop(0.35, `rgba(225, 242, 255, ${a * 0.75})`);
           grad.addColorStop(1, 'rgba(200, 225, 250, 0)');
         }
 
@@ -776,11 +776,11 @@
         // LAYER 2: In-Focus Focal Plane (Crisp luminous head with feathered tail)
         const grad = ctx.createLinearGradient(this.x, this.y, endX, endY);
         if (beamGlint > 1.15) {
-          grad.addColorStop(0, `rgba(254, 243, 199, ${a * 0.3})`);
+          grad.addColorStop(0, `rgba(254, 243, 199, ${a * 0.35})`);
           grad.addColorStop(0.35, `rgba(254, 243, 199, ${a})`);
           grad.addColorStop(1, 'rgba(254, 243, 199, 0)');
         } else {
-          grad.addColorStop(0, `rgba(215, 238, 255, ${a * 0.3})`);
+          grad.addColorStop(0, `rgba(215, 238, 255, ${a * 0.35})`);
           grad.addColorStop(0.35, `rgba(230, 246, 255, ${a})`);
           grad.addColorStop(1, 'rgba(210, 235, 255, 0)');
         }
@@ -841,8 +841,8 @@
     hazeBands.push(new HorizonHaze(0, height * 0.46, 0.35, 0.055));
     hazeBands.push(new HorizonHaze(width * 0.55, height * 0.50, 0.42, 0.050));
 
-    // D. Soft Heterogeneous Small & Smooth DOF Rain (~640 drops on desktop)
-    const count = Math.min(Math.floor((width * height) / 1200), 640);
+    // D. Soft Heterogeneous Rain Storm (~760 drops on desktop)
+    const count = Math.min(Math.floor((width * height) / 1050), 780);
     raindrops = [];
     for (let i = 0; i < count; i++) {
       raindrops.push(new RealisticDOFRaindrop());
