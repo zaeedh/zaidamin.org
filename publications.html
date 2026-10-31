@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Publications (24+) | Dr. Zaid Amin | zaidamin.org</title>
-  <meta name="description" content="Senior Lecturer and computational researcher specializing in the intersection of Human-Computer Interaction (HCI), Behavior & Social Computing, Digital Ethics, and AI Governance. Ph.D. graduate from Universiti Kebangsaan Malaysia (UKM). Former Head of Master in Informatics Engineering and Information Systems programs, actively advancing research in agentic AI alignment, attention-based cognitive interventions, and civic technology.">
+  <meta name="description" content="Complete indexed research publications by Dr. Zaid Amin across Human-Computer Interaction, AI Governance, and Behavioral Computing.">
   <meta name="author" content="Dr. Zaid Amin">
   <link rel="canonical" href="https://zaidamin.org/">
 
@@ -12,7 +12,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://zaidamin.org/">
   <meta property="og:title" content="Publications (24+) | Dr. Zaid Amin | zaidamin.org">
-  <meta property="og:description" content="Senior Lecturer and computational researcher specializing in the intersection of Human-Computer Interaction (HCI), Behavior & Social Computing, Digital Ethics, and AI Governance. Ph.D. graduate from Universiti Kebangsaan Malaysia (UKM). Former Head of Master in Informatics Engineering and Information Systems programs, actively advancing research in agentic AI alignment, attention-based cognitive interventions, and civic technology.">
+  <meta property="og:description" content="Complete indexed research publications by Dr. Zaid Amin across Human-Computer Interaction, AI Governance, and Behavioral Computing.">
 
   <!-- Google Scholar Indexing -->
   <meta name="citation_author" content="Amin, Zaid">
@@ -68,65 +68,103 @@
 </head>
 <body>
 
-  <header class="subpage-nav">
-    <a href="index.html" class="back-home-link">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-      Home
-    </a>
-
-    <div style="display: flex; gap: 18px; align-items: center;">
-      <a href="publications.html" style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--brand-blue);">Publications</a>
-      <a href="research.html" style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--text-body);">Research</a>
-      <a href="prospective-students.html" style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--text-body);">Join Lab</a>
-      <a href="cv.html" style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--text-body);">CV</a>
-    </div>
-  </header>
-
-  <div class="subpage-container">
-    <div style="margin-bottom: 32px;">
-      <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brand-blue);">Scholarly Archive</span>
-      <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0;">Publications & Citations (24)</h1>
-      <p style="font-size: 1rem; color: var(--text-muted); max-width: 760px;">
-        Complete indexed works across Human-Computer Interaction, AI Governance, Behavioral Computing, and Information Systems. Search in real-time or filter by category.
-      </p>
-    </div>
-
-    <div class="publications-controls">
-      <input type="text" id="pub-search" class="search-input" placeholder="Search by paper title, venue, year, or keyword...">
-
-      <div class="filter-pills">
-        <button class="filter-btn active" data-filter="all">All (24)</button>
-        <button class="filter-btn" data-filter="journal">Journals</button>
-        <button class="filter-btn" data-filter="conference">Conferences</button>
-        <button class="filter-btn" data-filter="book chapter">Book Chapters</button>
-        <button class="filter-btn" data-filter="preprint">Preprints</button>
-      </div>
-    </div>
-
-    <div id="pub-count-indicator" style="margin-bottom: 16px; font-size: 0.85rem; color: var(--text-muted); font-weight: 700;">
-      Showing all 24 publications
-    </div>
-
-    <div class="publications-list">
+  <div class="site-wrapper">
     
-      <article class="pub-item" data-category="journal">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2026</span>
-          <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
+    <!-- 1. Top Epigraph -->
+    <header class="epigraph-header">
+      <h1 class="epigraph-title">Das Sein, Das Sollen.</h1>
+      <p class="epigraph-quote font-serif">
+        &ldquo;If all the trees on earth were pens and the ocean were ink, refilled by seven other oceans, the Words of Allah would not be exhausted. Surely Allah is Almighty, All-Wise.&rdquo; &mdash; Qur&rsquo;an 31:27
+      </p>
+    </header>
+
+    <!-- 2. Clean, Unobstructed Lighthouse Storm Banner (Option 1 Storm - Active on Every Page) -->
+    <section class="lighthouse-banner-frame">
+      <picture>
+        <source srcset="assets/images/lighthouse-banner.webp" type="image/webp">
+        <img src="assets/images/lighthouse-banner.jpg" class="lighthouse-bg-img" alt="Lighthouse Storm over Ocean" width="2048" height="790">
+      </picture>
+      <canvas id="rain-canvas"></canvas>
+    </section>
+
+    <!-- 3. Top Academic Navigation Bar (Brand + Menu + Photo Avatar + Actions) -->
+    <header class="ocean-top-bar">
+      <a href="index.html" class="ocean-brand">
+        <div class="ocean-logo-badge">ZA</div>
+        <div class="ocean-brand-text">
+          <span class="ocean-brand-name">Dr. Zaid Amin</span>
+          <span class="ocean-brand-title">Ph.D. &bull; Senior Lecturer</span>
         </div>
+      </a>
+      
+      <nav class="ocean-nav-links">
+        <a href="index.html" class="ocean-nav-link ">HOME</a>
+        <a href="publications.html" class="ocean-nav-link active">PUBLICATIONS</a>
+        <a href="research.html" class="ocean-nav-link ">RESEARCH</a>
+        <a href="prospective-students.html" class="ocean-nav-link ">SUPERVISION</a>
+        <a href="cv.html" class="ocean-nav-link ">ABOUT &amp; CV</a>
+      </nav>
+      
+      <div class="ocean-profile-actions">
+        <a href="cv.html" class="ocean-avatar-link" title="Dr. Zaid Amin Profile">
+          <picture>
+            <source srcset="assets/images/dr-zaid.webp" type="image/webp">
+            <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="ocean-nav-avatar">
+          </picture>
+          <span class="avatar-status-dot"></span>
+        </a>
+        <a href="mailto:zaid.amin@newinti.edu.my" class="ocean-action-dots" title="Quick Contact">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+        </a>
+      </div>
+    </header>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Smart Cities</div>
+    <!-- Subpage Content: Publications Engine -->
+    <div class="subpage-container">
+      <div style="margin-bottom: 32px;">
+        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brand-blue);">Scholarly Archive</span>
+        <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0; color: #ffffff;">Publications &amp; Citations (24)</h1>
+        <p style="font-size: 1rem; color: var(--text-muted); max-width: 760px;">
+          Complete indexed works across Human-Computer Interaction, AI Governance, Behavioral Computing, and Information Systems. Search in real-time or filter by category.
+        </p>
+      </div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="pub-btn">DOI: 10.3390/smartcities9100174 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2026trustworthy">Cite / BibTeX</button>
+      <div class="publications-controls">
+        <input type="text" id="pub-search" class="search-input" placeholder="Search by paper title, venue, year, or keyword...">
+
+        <div class="filter-pills">
+          <button class="filter-btn active" data-filter="all">All (24)</button>
+          <button class="filter-btn" data-filter="journal">Journals</button>
+          <button class="filter-btn" data-filter="conference">Conferences</button>
+          <button class="filter-btn" data-filter="book chapter">Book Chapters</button>
+          <button class="filter-btn" data-filter="preprint">Preprints</button>
         </div>
+      </div>
 
-        <div class="bibtex-box" id="bib-amin2026trustworthy">
-          <button class="bibtex-copy-btn" data-target="code-amin2026trustworthy">Copy BibTeX</button>
-          <code id="code-amin2026trustworthy">@article{amin2026trustworthy,
+      <div id="pub-count-indicator" style="margin-bottom: 16px; font-size: 0.85rem; color: var(--text-muted); font-weight: 700;">
+        Showing all 24 publications
+      </div>
+
+      <div class="publications-list">
+    
+        <article class="pub-item" data-category="journal">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2026</span>
+            <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
+          </div>
+
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Smart Cities</div>
+
+          <div style="display:flex; gap:10px; align-items:center;">
+            <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="pub-btn">DOI: 10.3390/smartcities9100174 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2026trustworthy">Cite / BibTeX</button>
+          </div>
+
+          <div class="bibtex-box" id="bib-amin2026trustworthy">
+            <button class="bibtex-copy-btn" data-target="code-amin2026trustworthy">Copy BibTeX</button>
+            <code id="code-amin2026trustworthy">@article{amin2026trustworthy,
   author    = {Zaid Amin and collaborators},
   title     = {{Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance}},
   year      = {2026},
@@ -134,27 +172,27 @@
   doi       = {10.3390/smartcities9100174},
   url       = {https://doi.org/10.3390/smartcities9100174}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="journal">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2026</span>
-          <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
-        </div>
+        <article class="pub-item" data-category="journal">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2026</span>
+            <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">SRIVIJAYAPEDIA: A DIGITAL PLATFORM FOR CULTURAL HERITAGE PRESERVATION OF THE SRIVIJAYA CIVILIZATION</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Journal of Information System and Technology Management</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">SRIVIJAYAPEDIA: A DIGITAL PLATFORM FOR CULTURAL HERITAGE PRESERVATION OF THE SRIVIJAYA CIVILIZATION</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Journal of Information System and Technology Management</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a href="https://doi.org/10.35631/JISTM.1142003" target="_blank" rel="noopener" class="pub-btn">DOI: 10.35631/JISTM.1142003 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2026srivijayapedia">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <a href="https://doi.org/10.35631/JISTM.1142003" target="_blank" rel="noopener" class="pub-btn">DOI: 10.35631/JISTM.1142003 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2026srivijayapedia">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2026srivijayapedia">
-          <button class="bibtex-copy-btn" data-target="code-amin2026srivijayapedia">Copy BibTeX</button>
-          <code id="code-amin2026srivijayapedia">@article{amin2026srivijayapedia,
+          <div class="bibtex-box" id="bib-amin2026srivijayapedia">
+            <button class="bibtex-copy-btn" data-target="code-amin2026srivijayapedia">Copy BibTeX</button>
+            <code id="code-amin2026srivijayapedia">@article{amin2026srivijayapedia,
   author    = {Zaid Amin and collaborators},
   title     = {{SRIVIJAYAPEDIA: A DIGITAL PLATFORM FOR CULTURAL HERITAGE PRESERVATION OF THE SRIVIJAYA CIVILIZATION}},
   year      = {2026},
@@ -162,27 +200,27 @@
   doi       = {10.35631/JISTM.1142003},
   url       = {https://doi.org/10.35631/JISTM.1142003}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="preprint">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Preprint &bull; 2026</span>
-          <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
-        </div>
+        <article class="pub-item" data-category="preprint">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Preprint &bull; 2026</span>
+            <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">The Proxy Trap in Agentic AI: When Metrics Replace Judgment</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">SSRN / Preprints</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">The Proxy Trap in Agentic AI: When Metrics Replace Judgment</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">SSRN / Preprints</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a href="https://doi.org/10.2139/ssrn.7670124" target="_blank" rel="noopener" class="pub-btn">DOI: 10.2139/ssrn.7670124 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2026the">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <a href="https://doi.org/10.2139/ssrn.7670124" target="_blank" rel="noopener" class="pub-btn">DOI: 10.2139/ssrn.7670124 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2026the">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2026the">
-          <button class="bibtex-copy-btn" data-target="code-amin2026the">Copy BibTeX</button>
-          <code id="code-amin2026the">@misc{amin2026the,
+          <div class="bibtex-box" id="bib-amin2026the">
+            <button class="bibtex-copy-btn" data-target="code-amin2026the">Copy BibTeX</button>
+            <code id="code-amin2026the">@misc{amin2026the,
   author    = {Zaid Amin and collaborators},
   title     = {{The Proxy Trap in Agentic AI: When Metrics Replace Judgment}},
   year      = {2026},
@@ -190,27 +228,27 @@
   doi       = {10.2139/ssrn.7670124},
   url       = {https://doi.org/10.2139/ssrn.7670124}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="preprint">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Preprint &bull; 2026</span>
-          <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
-        </div>
+        <article class="pub-item" data-category="preprint">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Preprint &bull; 2026</span>
+            <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">SSRN / Preprints</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">SSRN / Preprints</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a href="https://doi.org/10.20944/preprints202608.1136.v1" target="_blank" rel="noopener" class="pub-btn">DOI: 10.20944/preprints202608.1136.v1 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2026trustworthy">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <a href="https://doi.org/10.20944/preprints202608.1136.v1" target="_blank" rel="noopener" class="pub-btn">DOI: 10.20944/preprints202608.1136.v1 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2026trustworthy">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2026trustworthy">
-          <button class="bibtex-copy-btn" data-target="code-amin2026trustworthy">Copy BibTeX</button>
-          <code id="code-amin2026trustworthy">@misc{amin2026trustworthy,
+          <div class="bibtex-box" id="bib-amin2026trustworthy">
+            <button class="bibtex-copy-btn" data-target="code-amin2026trustworthy">Copy BibTeX</button>
+            <code id="code-amin2026trustworthy">@misc{amin2026trustworthy,
   author    = {Zaid Amin and collaborators},
   title     = {{Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance}},
   year      = {2026},
@@ -218,27 +256,27 @@
   doi       = {10.20944/preprints202608.1136.v1},
   url       = {https://doi.org/10.20944/preprints202608.1136.v1}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="journal">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2025</span>
-          <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
-        </div>
+        <article class="pub-item" data-category="journal">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2025</span>
+            <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Immersive Heritage: Exploring Srivijaya's Historical Legacy Through Virtual Reality in Digital Communication</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Jurnal Audiens</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Immersive Heritage: Exploring Srivijaya's Historical Legacy Through Virtual Reality in Digital Communication</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Jurnal Audiens</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a href="https://doi.org/10.18196/jas.v6i2.617" target="_blank" rel="noopener" class="pub-btn">DOI: 10.18196/jas.v6i2.617 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2025immersive">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <a href="https://doi.org/10.18196/jas.v6i2.617" target="_blank" rel="noopener" class="pub-btn">DOI: 10.18196/jas.v6i2.617 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2025immersive">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2025immersive">
-          <button class="bibtex-copy-btn" data-target="code-amin2025immersive">Copy BibTeX</button>
-          <code id="code-amin2025immersive">@article{amin2025immersive,
+          <div class="bibtex-box" id="bib-amin2025immersive">
+            <button class="bibtex-copy-btn" data-target="code-amin2025immersive">Copy BibTeX</button>
+            <code id="code-amin2025immersive">@article{amin2025immersive,
   author    = {Zaid Amin and collaborators},
   title     = {{Immersive Heritage: Exploring Srivijaya's Historical Legacy Through Virtual Reality in Digital Communication}},
   year      = {2025},
@@ -246,27 +284,27 @@
   doi       = {10.18196/jas.v6i2.617},
   url       = {https://doi.org/10.18196/jas.v6i2.617}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="journal">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2025</span>
-          <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
-        </div>
+        <article class="pub-item" data-category="journal">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2025</span>
+            <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Celebrity of Instagram and Endorsements: Shaping and Constructing Social Identity</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Jurnal The Messenger</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Celebrity of Instagram and Endorsements: Shaping and Constructing Social Identity</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Jurnal The Messenger</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a href="https://doi.org/10.26623/themessenger.v17i1.11658" target="_blank" rel="noopener" class="pub-btn">DOI: 10.26623/themessenger.v17i1.11658 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2025celebrity">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <a href="https://doi.org/10.26623/themessenger.v17i1.11658" target="_blank" rel="noopener" class="pub-btn">DOI: 10.26623/themessenger.v17i1.11658 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2025celebrity">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2025celebrity">
-          <button class="bibtex-copy-btn" data-target="code-amin2025celebrity">Copy BibTeX</button>
-          <code id="code-amin2025celebrity">@article{amin2025celebrity,
+          <div class="bibtex-box" id="bib-amin2025celebrity">
+            <button class="bibtex-copy-btn" data-target="code-amin2025celebrity">Copy BibTeX</button>
+            <code id="code-amin2025celebrity">@article{amin2025celebrity,
   author    = {Zaid Amin and collaborators},
   title     = {{Celebrity of Instagram and Endorsements: Shaping and Constructing Social Identity}},
   year      = {2025},
@@ -274,27 +312,27 @@
   doi       = {10.26623/themessenger.v17i1.11658},
   url       = {https://doi.org/10.26623/themessenger.v17i1.11658}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="book chapter">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Book Chapter &bull; 2025</span>
-          <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
-        </div>
+        <article class="pub-item" data-category="book chapter">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Book Chapter &bull; 2025</span>
+            <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Peer-Review Statements</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Academic Publication</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Peer-Review Statements</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Academic Publication</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a href="https://doi.org/10.2991/978-2-38476-466-2_1" target="_blank" rel="noopener" class="pub-btn">DOI: 10.2991/978-2-38476-466-2_1 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2025peerreview">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <a href="https://doi.org/10.2991/978-2-38476-466-2_1" target="_blank" rel="noopener" class="pub-btn">DOI: 10.2991/978-2-38476-466-2_1 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2025peerreview">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2025peerreview">
-          <button class="bibtex-copy-btn" data-target="code-amin2025peerreview">Copy BibTeX</button>
-          <code id="code-amin2025peerreview">@incollection{amin2025peerreview,
+          <div class="bibtex-box" id="bib-amin2025peerreview">
+            <button class="bibtex-copy-btn" data-target="code-amin2025peerreview">Copy BibTeX</button>
+            <code id="code-amin2025peerreview">@incollection{amin2025peerreview,
   author    = {Zaid Amin and collaborators},
   title     = {{Peer-Review Statements}},
   year      = {2025},
@@ -302,27 +340,27 @@
   doi       = {10.2991/978-2-38476-466-2_1},
   url       = {https://doi.org/10.2991/978-2-38476-466-2_1}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="conference">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Conference &bull; 2024</span>
-          <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
-        </div>
+        <article class="pub-item" data-category="conference">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Conference &bull; 2024</span>
+            <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Tune-Attention Model: Designing Cybernetics Intervention for Information Sharing Behavior</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">2024 4th International Conference on Electronic and Electrical Engineering and Intelligent System (ICE3IS)</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Tune-Attention Model: Designing Cybernetics Intervention for Information Sharing Behavior</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">2024 4th International Conference on Electronic and Electrical Engineering and Intelligent System (ICE3IS)</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a href="https://doi.org/10.1109/ice3is62977.2024.10775858" target="_blank" rel="noopener" class="pub-btn">DOI: 10.1109/ice3is62977.2024.10775858 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2024tuneattention">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <a href="https://doi.org/10.1109/ice3is62977.2024.10775858" target="_blank" rel="noopener" class="pub-btn">DOI: 10.1109/ice3is62977.2024.10775858 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2024tuneattention">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2024tuneattention">
-          <button class="bibtex-copy-btn" data-target="code-amin2024tuneattention">Copy BibTeX</button>
-          <code id="code-amin2024tuneattention">@inproceedings{amin2024tuneattention,
+          <div class="bibtex-box" id="bib-amin2024tuneattention">
+            <button class="bibtex-copy-btn" data-target="code-amin2024tuneattention">Copy BibTeX</button>
+            <code id="code-amin2024tuneattention">@inproceedings{amin2024tuneattention,
   author    = {Zaid Amin and collaborators},
   title     = {{Tune-Attention Model: Designing Cybernetics Intervention for Information Sharing Behavior}},
   year      = {2024},
@@ -330,27 +368,27 @@
   doi       = {10.1109/ice3is62977.2024.10775858},
   url       = {https://doi.org/10.1109/ice3is62977.2024.10775858}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="book chapter">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Book Chapter &bull; 2024</span>
-          <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
-        </div>
+        <article class="pub-item" data-category="book chapter">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Book Chapter &bull; 2024</span>
+            <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Contributions to Management Science</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Contributions to Management Science</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a href="https://doi.org/10.1007/978-3-031-48770-5_65" target="_blank" rel="noopener" class="pub-btn">DOI: 10.1007/978-3-031-48770-5_65 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2024digital">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <a href="https://doi.org/10.1007/978-3-031-48770-5_65" target="_blank" rel="noopener" class="pub-btn">DOI: 10.1007/978-3-031-48770-5_65 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2024digital">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2024digital">
-          <button class="bibtex-copy-btn" data-target="code-amin2024digital">Copy BibTeX</button>
-          <code id="code-amin2024digital">@incollection{amin2024digital,
+          <div class="bibtex-box" id="bib-amin2024digital">
+            <button class="bibtex-copy-btn" data-target="code-amin2024digital">Copy BibTeX</button>
+            <code id="code-amin2024digital">@incollection{amin2024digital,
   author    = {Zaid Amin and collaborators},
   title     = {{Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World}},
   year      = {2024},
@@ -358,27 +396,27 @@
   doi       = {10.1007/978-3-031-48770-5_65},
   url       = {https://doi.org/10.1007/978-3-031-48770-5_65}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="book chapter">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Book Chapter &bull; 2021</span>
-          
-        </div>
+        <article class="pub-item" data-category="book chapter">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Book Chapter &bull; 2021</span>
+            
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Attention-Based Design and Selective Exposure Amid COVID-19 Misinformation Sharing</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Lecture Notes in Computer Science</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Attention-Based Design and Selective Exposure Amid COVID-19 Misinformation Sharing</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Lecture Notes in Computer Science</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a href="https://doi.org/10.1007/978-3-030-78468-3_34" target="_blank" rel="noopener" class="pub-btn">DOI: 10.1007/978-3-030-78468-3_34 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2021attentionbased">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <a href="https://doi.org/10.1007/978-3-030-78468-3_34" target="_blank" rel="noopener" class="pub-btn">DOI: 10.1007/978-3-030-78468-3_34 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2021attentionbased">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2021attentionbased">
-          <button class="bibtex-copy-btn" data-target="code-amin2021attentionbased">Copy BibTeX</button>
-          <code id="code-amin2021attentionbased">@incollection{amin2021attentionbased,
+          <div class="bibtex-box" id="bib-amin2021attentionbased">
+            <button class="bibtex-copy-btn" data-target="code-amin2021attentionbased">Copy BibTeX</button>
+            <code id="code-amin2021attentionbased">@incollection{amin2021attentionbased,
   author    = {Zaid Amin and collaborators},
   title     = {{Attention-Based Design and Selective Exposure Amid COVID-19 Misinformation Sharing}},
   year      = {2021},
@@ -386,27 +424,27 @@
   doi       = {10.1007/978-3-030-78468-3_34},
   url       = {https://doi.org/10.1007/978-3-030-78468-3_34}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="journal">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2021</span>
-          
-        </div>
+        <article class="pub-item" data-category="journal">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2021</span>
+            
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Attention-Based Design and User Decision on Information Sharing: An Ontological Approach Through Thematic Literature Review</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Unpublished</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Attention-Based Design and User Decision on Information Sharing: An Ontological Approach Through Thematic Literature Review</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Unpublished</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a href="https://doi.org/10.13140/RG.2.2.28372.83841" target="_blank" rel="noopener" class="pub-btn">DOI: 10.13140/RG.2.2.28372.83841 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2021attentionbased">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <a href="https://doi.org/10.13140/RG.2.2.28372.83841" target="_blank" rel="noopener" class="pub-btn">DOI: 10.13140/RG.2.2.28372.83841 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2021attentionbased">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2021attentionbased">
-          <button class="bibtex-copy-btn" data-target="code-amin2021attentionbased">Copy BibTeX</button>
-          <code id="code-amin2021attentionbased">@article{amin2021attentionbased,
+          <div class="bibtex-box" id="bib-amin2021attentionbased">
+            <button class="bibtex-copy-btn" data-target="code-amin2021attentionbased">Copy BibTeX</button>
+            <code id="code-amin2021attentionbased">@article{amin2021attentionbased,
   author    = {Zaid Amin and collaborators},
   title     = {{Attention-Based Design and User Decision on Information Sharing: An Ontological Approach Through Thematic Literature Review}},
   year      = {2021},
@@ -414,27 +452,27 @@
   doi       = {10.13140/RG.2.2.28372.83841},
   url       = {https://doi.org/10.13140/RG.2.2.28372.83841}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="journal">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2021</span>
-          <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
-        </div>
+        <article class="pub-item" data-category="journal">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2021</span>
+            <span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Attention-Based Design and User Decisions on Information Sharing: A Thematic Literature Review</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">IEEE Access</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Attention-Based Design and User Decisions on Information Sharing: A Thematic Literature Review</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">IEEE Access</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a href="https://doi.org/10.1109/ACCESS.2021.3087740" target="_blank" rel="noopener" class="pub-btn">DOI: 10.1109/ACCESS.2021.3087740 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2021attentionbased">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <a href="https://doi.org/10.1109/ACCESS.2021.3087740" target="_blank" rel="noopener" class="pub-btn">DOI: 10.1109/ACCESS.2021.3087740 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2021attentionbased">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2021attentionbased">
-          <button class="bibtex-copy-btn" data-target="code-amin2021attentionbased">Copy BibTeX</button>
-          <code id="code-amin2021attentionbased">@article{amin2021attentionbased,
+          <div class="bibtex-box" id="bib-amin2021attentionbased">
+            <button class="bibtex-copy-btn" data-target="code-amin2021attentionbased">Copy BibTeX</button>
+            <code id="code-amin2021attentionbased">@article{amin2021attentionbased,
   author    = {Zaid Amin and collaborators},
   title     = {{Attention-Based Design and User Decisions on Information Sharing: A Thematic Literature Review}},
   year      = {2021},
@@ -442,27 +480,27 @@
   doi       = {10.1109/ACCESS.2021.3087740},
   url       = {https://doi.org/10.1109/ACCESS.2021.3087740}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="journal">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2021</span>
-          
-        </div>
+        <article class="pub-item" data-category="journal">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2021</span>
+            
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Visual Selective Attention System to Intervene User Attention in Sharing COVID-19 Misinformation</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">International Journal of Advanced Computer Science and Applications</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Visual Selective Attention System to Intervene User Attention in Sharing COVID-19 Misinformation</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">International Journal of Advanced Computer Science and Applications</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a href="https://doi.org/10.14569/IJACSA.2021.0121005" target="_blank" rel="noopener" class="pub-btn">DOI: 10.14569/IJACSA.2021.0121005 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2021visual">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <a href="https://doi.org/10.14569/IJACSA.2021.0121005" target="_blank" rel="noopener" class="pub-btn">DOI: 10.14569/IJACSA.2021.0121005 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2021visual">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2021visual">
-          <button class="bibtex-copy-btn" data-target="code-amin2021visual">Copy BibTeX</button>
-          <code id="code-amin2021visual">@article{amin2021visual,
+          <div class="bibtex-box" id="bib-amin2021visual">
+            <button class="bibtex-copy-btn" data-target="code-amin2021visual">Copy BibTeX</button>
+            <code id="code-amin2021visual">@article{amin2021visual,
   author    = {Zaid Amin and collaborators},
   title     = {{Visual Selective Attention System to Intervene User Attention in Sharing COVID-19 Misinformation}},
   year      = {2021},
@@ -470,27 +508,27 @@
   doi       = {10.14569/IJACSA.2021.0121005},
   url       = {https://doi.org/10.14569/IJACSA.2021.0121005}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="preprint">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Preprint &bull; 2021</span>
-          
-        </div>
+        <article class="pub-item" data-category="preprint">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Preprint &bull; 2021</span>
+            
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Visual selective attention system to intervene user attention in sharing COVID-19 misinformation</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">arXiv</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Visual selective attention system to intervene user attention in sharing COVID-19 misinformation</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">arXiv</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2021visual">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2021visual">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2021visual">
-          <button class="bibtex-copy-btn" data-target="code-amin2021visual">Copy BibTeX</button>
-          <code id="code-amin2021visual">@misc{amin2021visual,
+          <div class="bibtex-box" id="bib-amin2021visual">
+            <button class="bibtex-copy-btn" data-target="code-amin2021visual">Copy BibTeX</button>
+            <code id="code-amin2021visual">@misc{amin2021visual,
   author    = {Zaid Amin and collaborators},
   title     = {{Visual selective attention system to intervene user attention in sharing COVID-19 misinformation}},
   year      = {2021},
@@ -498,27 +536,27 @@
   doi       = {},
   url       = {http://www.scopus.com/inward/record.url?eid=2-s2.0-85118754709&partnerID=MN8TOARS}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="preprint">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Preprint &bull; 2020</span>
-          
-        </div>
+        <article class="pub-item" data-category="preprint">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Preprint &bull; 2020</span>
+            
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Attention and misinformation sharing on social media</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">SSRN / Preprints</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Attention and misinformation sharing on social media</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">SSRN / Preprints</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2020attention">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2020attention">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2020attention">
-          <button class="bibtex-copy-btn" data-target="code-amin2020attention">Copy BibTeX</button>
-          <code id="code-amin2020attention">@misc{amin2020attention,
+          <div class="bibtex-box" id="bib-amin2020attention">
+            <button class="bibtex-copy-btn" data-target="code-amin2020attention">Copy BibTeX</button>
+            <code id="code-amin2020attention">@misc{amin2020attention,
   author    = {Zaid Amin and collaborators},
   title     = {{Attention and misinformation sharing on social media}},
   year      = {2020},
@@ -526,27 +564,27 @@
   doi       = {},
   url       = {https://arxiv.org/pdf/2012.12593}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="preprint">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Preprint &bull; 2020</span>
-          
-        </div>
+        <article class="pub-item" data-category="preprint">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Preprint &bull; 2020</span>
+            
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Attention and misinformation sharing on social media</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">arXiv</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Attention and misinformation sharing on social media</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">arXiv</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2020attention">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2020attention">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2020attention">
-          <button class="bibtex-copy-btn" data-target="code-amin2020attention">Copy BibTeX</button>
-          <code id="code-amin2020attention">@misc{amin2020attention,
+          <div class="bibtex-box" id="bib-amin2020attention">
+            <button class="bibtex-copy-btn" data-target="code-amin2020attention">Copy BibTeX</button>
+            <code id="code-amin2020attention">@misc{amin2020attention,
   author    = {Zaid Amin and collaborators},
   title     = {{Attention and misinformation sharing on social media}},
   year      = {2020},
@@ -554,27 +592,27 @@
   doi       = {},
   url       = {http://www.scopus.com/inward/record.url?eid=2-s2.0-85100363873&partnerID=MN8TOARS}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="conference">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Conference &bull; 2017</span>
-          
-        </div>
+        <article class="pub-item" data-category="conference">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Conference &bull; 2017</span>
+            
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">PENGEMBANGAN APLIKASI SISTEM MANAJEMEN DOKUMEN ELEKTRONIK BERORIENTASI STANDAR BORANG AKREDITASI BAN PT</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">PROSIDING SEMNASTEK 2017</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">PENGEMBANGAN APLIKASI SISTEM MANAJEMEN DOKUMEN ELEKTRONIK BERORIENTASI STANDAR BORANG AKREDITASI BAN PT</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">PROSIDING SEMNASTEK 2017</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2017pengembangan">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2017pengembangan">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2017pengembangan">
-          <button class="bibtex-copy-btn" data-target="code-amin2017pengembangan">Copy BibTeX</button>
-          <code id="code-amin2017pengembangan">@inproceedings{amin2017pengembangan,
+          <div class="bibtex-box" id="bib-amin2017pengembangan">
+            <button class="bibtex-copy-btn" data-target="code-amin2017pengembangan">Copy BibTeX</button>
+            <code id="code-amin2017pengembangan">@inproceedings{amin2017pengembangan,
   author    = {Zaid Amin and collaborators},
   title     = {{PENGEMBANGAN APLIKASI SISTEM MANAJEMEN DOKUMEN ELEKTRONIK BERORIENTASI STANDAR BORANG AKREDITASI BAN PT}},
   year      = {2017},
@@ -582,27 +620,27 @@
   doi       = {},
   url       = {https://jurnal.umj.ac.id/index.php/semnastek/article/view/1935/1586}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="journal">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2017</span>
-          
-        </div>
+        <article class="pub-item" data-category="journal">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2017</span>
+            
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Aplikasi Sistem Manajemen Dokumen Elektronik Berorientasi Standar Borang BAN PT</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">UST IT: Jurnal Sistem Informasi, Teknologi Informasi dan Komputer</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Aplikasi Sistem Manajemen Dokumen Elektronik Berorientasi Standar Borang BAN PT</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">UST IT: Jurnal Sistem Informasi, Teknologi Informasi dan Komputer</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2017aplikasi">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2017aplikasi">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2017aplikasi">
-          <button class="bibtex-copy-btn" data-target="code-amin2017aplikasi">Copy BibTeX</button>
-          <code id="code-amin2017aplikasi">@article{amin2017aplikasi,
+          <div class="bibtex-box" id="bib-amin2017aplikasi">
+            <button class="bibtex-copy-btn" data-target="code-amin2017aplikasi">Copy BibTeX</button>
+            <code id="code-amin2017aplikasi">@article{amin2017aplikasi,
   author    = {Zaid Amin and collaborators},
   title     = {{Aplikasi Sistem Manajemen Dokumen Elektronik Berorientasi Standar Borang BAN PT}},
   year      = {2017},
@@ -610,27 +648,27 @@
   doi       = {},
   url       = {}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="conference">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Conference &bull; 2017</span>
-          
-        </div>
+        <article class="pub-item" data-category="conference">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Conference &bull; 2017</span>
+            
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Aplikasi Web Sms Sebagai Reminder Digital Menggunakan GAMMU</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">SNTIBD 2017</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Aplikasi Web Sms Sebagai Reminder Digital Menggunakan GAMMU</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">SNTIBD 2017</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2017aplikasi">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2017aplikasi">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2017aplikasi">
-          <button class="bibtex-copy-btn" data-target="code-amin2017aplikasi">Copy BibTeX</button>
-          <code id="code-amin2017aplikasi">@inproceedings{amin2017aplikasi,
+          <div class="bibtex-box" id="bib-amin2017aplikasi">
+            <button class="bibtex-copy-btn" data-target="code-amin2017aplikasi">Copy BibTeX</button>
+            <code id="code-amin2017aplikasi">@inproceedings{amin2017aplikasi,
   author    = {Zaid Amin and collaborators},
   title     = {{Aplikasi Web Sms Sebagai Reminder Digital Menggunakan GAMMU}},
   year      = {2017},
@@ -638,27 +676,27 @@
   doi       = {},
   url       = {http://ojs.palcomtech.com/index.php/SNTIBD/issue/view/17}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="conference">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Conference &bull; 2017</span>
-          
-        </div>
+        <article class="pub-item" data-category="conference">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Conference &bull; 2017</span>
+            
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Multi tier architecture model on a server cluster for application of big data</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Annual Research Seminar (ARS) - Computer Science and ICT 2017</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Multi tier architecture model on a server cluster for application of big data</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Annual Research Seminar (ARS) - Computer Science and ICT 2017</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2017multi">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2017multi">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2017multi">
-          <button class="bibtex-copy-btn" data-target="code-amin2017multi">Copy BibTeX</button>
-          <code id="code-amin2017multi">@inproceedings{amin2017multi,
+          <div class="bibtex-box" id="bib-amin2017multi">
+            <button class="bibtex-copy-btn" data-target="code-amin2017multi">Copy BibTeX</button>
+            <code id="code-amin2017multi">@inproceedings{amin2017multi,
   author    = {Zaid Amin and collaborators},
   title     = {{Multi tier architecture model on a server cluster for application of big data}},
   year      = {2017},
@@ -666,27 +704,27 @@
   doi       = {},
   url       = {http://www.seminar.ilkom.unsri.ac.id/index.php/ars/article/viewFile/1662/866}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="journal">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2015</span>
-          
-        </div>
+        <article class="pub-item" data-category="journal">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2015</span>
+            
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">DESAIN DAN IMPLEMENTASI TUNNELING IPSEC BERBASIS UNIX DENGAN ESP (ENCAPSULATING SECURITY PAYLOAD) (Studi Kasus : PT. Sumeks Tivi Palembang & PT. Sumatera Ekspres)</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Jurnal Teknologi dan Informatika</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">DESAIN DAN IMPLEMENTASI TUNNELING IPSEC BERBASIS UNIX DENGAN ESP (ENCAPSULATING SECURITY PAYLOAD) (Studi Kasus : PT. Sumeks Tivi Palembang & PT. Sumatera Ekspres)</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Jurnal Teknologi dan Informatika</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2015desain">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2015desain">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2015desain">
-          <button class="bibtex-copy-btn" data-target="code-amin2015desain">Copy BibTeX</button>
-          <code id="code-amin2015desain">@article{amin2015desain,
+          <div class="bibtex-box" id="bib-amin2015desain">
+            <button class="bibtex-copy-btn" data-target="code-amin2015desain">Copy BibTeX</button>
+            <code id="code-amin2015desain">@article{amin2015desain,
   author    = {Zaid Amin and collaborators},
   title     = {{DESAIN DAN IMPLEMENTASI TUNNELING IPSEC BERBASIS UNIX DENGAN ESP (ENCAPSULATING SECURITY PAYLOAD) (Studi Kasus : PT. Sumeks Tivi Palembang & PT. Sumatera Ekspres)}},
   year      = {2015},
@@ -694,27 +732,27 @@
   doi       = {},
   url       = {http://eprints.binadarma.ac.id/id/eprint/2511}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="conference">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Conference &bull; 2015</span>
-          
-        </div>
+        <article class="pub-item" data-category="conference">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Conference &bull; 2015</span>
+            
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Routing protocols pada holistic network di era big data</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Annual Research Seminar (ARS) 2015</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Routing protocols pada holistic network di era big data</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Annual Research Seminar (ARS) 2015</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2015routing">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2015routing">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2015routing">
-          <button class="bibtex-copy-btn" data-target="code-amin2015routing">Copy BibTeX</button>
-          <code id="code-amin2015routing">@inproceedings{amin2015routing,
+          <div class="bibtex-box" id="bib-amin2015routing">
+            <button class="bibtex-copy-btn" data-target="code-amin2015routing">Copy BibTeX</button>
+            <code id="code-amin2015routing">@inproceedings{amin2015routing,
   author    = {Zaid Amin and collaborators},
   title     = {{Routing protocols pada holistic network di era big data}},
   year      = {2015},
@@ -722,27 +760,27 @@
   doi       = {},
   url       = {http://www.seminar.ilkom.unsri.ac.id/index.php/ars/article/view/185}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="conference">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Conference &bull; 2014</span>
-          
-        </div>
+        <article class="pub-item" data-category="conference">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Conference &bull; 2014</span>
+            
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">SIMULASI DAN PERANCANGAN KEAMANAN AUTENTIKASI JARINGAN HIRARKI LINK AGGREGATION CONTROL PROTOCOL (LACP) BERBASIS ROUTER CISCO</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Konferensi Nasional Teknologi Informasi & Aplikasinya</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">SIMULASI DAN PERANCANGAN KEAMANAN AUTENTIKASI JARINGAN HIRARKI LINK AGGREGATION CONTROL PROTOCOL (LACP) BERBASIS ROUTER CISCO</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Konferensi Nasional Teknologi Informasi & Aplikasinya</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2014simulasi">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2014simulasi">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2014simulasi">
-          <button class="bibtex-copy-btn" data-target="code-amin2014simulasi">Copy BibTeX</button>
-          <code id="code-amin2014simulasi">@inproceedings{amin2014simulasi,
+          <div class="bibtex-box" id="bib-amin2014simulasi">
+            <button class="bibtex-copy-btn" data-target="code-amin2014simulasi">Copy BibTeX</button>
+            <code id="code-amin2014simulasi">@inproceedings{amin2014simulasi,
   author    = {Zaid Amin and collaborators},
   title     = {{SIMULASI DAN PERANCANGAN KEAMANAN AUTENTIKASI JARINGAN HIRARKI LINK AGGREGATION CONTROL PROTOCOL (LACP) BERBASIS ROUTER CISCO}},
   year      = {2014},
@@ -750,27 +788,27 @@
   doi       = {},
   url       = {http://www.seminar.ilkom.unsri.ac.id/index.php/kntia/article/view/730/403}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
-      <article class="pub-item" data-category="journal">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2012</span>
-          
-        </div>
+        <article class="pub-item" data-category="journal">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">Journal &bull; 2012</span>
+            
+          </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">Analisis Vulnerabilitas Host Pada Keamanan Jaringan Komputer Di PT. Sumeks Tivi Palembang (PALTV) Menggunakan Router Berbasis Unix</h3>
-        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-        <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Jurnal Teknologi dan Informatika</div>
+          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">Analisis Vulnerabilitas Host Pada Keamanan Jaringan Komputer Di PT. Sumeks Tivi Palembang (PALTV) Menggunakan Router Berbasis Unix</h3>
+          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">Jurnal Teknologi dan Informatika</div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          
-          <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2012analisis">Cite / BibTeX</button>
-        </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            
+            <button class="pub-btn btn-bibtex-toggle" data-target="bib-amin2012analisis">Cite / BibTeX</button>
+          </div>
 
-        <div class="bibtex-box" id="bib-amin2012analisis">
-          <button class="bibtex-copy-btn" data-target="code-amin2012analisis">Copy BibTeX</button>
-          <code id="code-amin2012analisis">@article{amin2012analisis,
+          <div class="bibtex-box" id="bib-amin2012analisis">
+            <button class="bibtex-copy-btn" data-target="code-amin2012analisis">Copy BibTeX</button>
+            <code id="code-amin2012analisis">@article{amin2012analisis,
   author    = {Zaid Amin and collaborators},
   title     = {{Analisis Vulnerabilitas Host Pada Keamanan Jaringan Komputer Di PT. Sumeks Tivi Palembang (PALTV) Menggunakan Router Berbasis Unix}},
   year      = {2012},
@@ -778,11 +816,26 @@
   doi       = {},
   url       = {http://eprints.binadarma.ac.id/id/eprint/2582}
 }</code>
-        </div>
-      </article>
+          </div>
+        </article>
         
+      </div>
     </div>
+    
+    <!-- Site Footer -->
+    <footer class="golden-footer">
+      <div class="footer-left">
+        &copy; 2026 Dr. Zaid Amin &bull; Faculty of Data Science and Information Technology, INTI International University.
+      </div>
+      <div class="footer-right">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.8 3.8v6.7L12 24l7.2-4v-6.7l4.8-3.8L12 0zm0 3.7l7.1 5.8-7.1 5.8-7.1-5.8 7.1-5.8z"/></svg>
+        </button>
+      </div>
+    </footer>
+
   </div>
+  <script src="assets/js/rain-lighting.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
