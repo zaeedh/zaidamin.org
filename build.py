@@ -1,6 +1,6 @@
 """
-Academic Editorial Static Site Generator - zaidamin.org
-Poster & Magazine Cover Design System for Dr. Zaid Amin, Ph.D.
+Academic Royal Blue Storm Static Site Generator - zaidamin.org
+Atmospheric Animated Storm Canvas • Centered Portrait • Simple Portfolio & Links
 Author: Antigravity AI & Dr. Zaid Amin
 """
 
@@ -27,7 +27,9 @@ def render_svg_icon(name):
         "email": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>',
         "arrow-up-right": '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>',
         "arrow-left": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
-        "search": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+        "shield": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>',
+        "eye": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>',
+        "globe": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line></svg>',
         "external": '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>'
     }
     return icons.get(name, "")
@@ -102,16 +104,16 @@ def get_subpage_nav(active_page=""):
   <header class="subpage-nav">
     <a href="index.html" class="back-home-link">
       {render_svg_icon('arrow-left')}
-      Home Cover
+      Home Storm
     </a>
 
-    <div style="display: flex; gap: 18px; align-items: center;">
-      <a href="publications.html" style="font-size: 0.825rem; font-weight: 700; text-transform: uppercase; color: {'var(--brand-blue)' if active_page == 'publications' else 'var(--text-secondary)'};">Publications</a>
-      <a href="research.html" style="font-size: 0.825rem; font-weight: 700; text-transform: uppercase; color: {'var(--brand-blue)' if active_page == 'research' else 'var(--text-secondary)'};">Research</a>
-      <a href="prospective-students.html" style="font-size: 0.825rem; font-weight: 700; text-transform: uppercase; color: {'var(--brand-blue)' if active_page == 'lab' else 'var(--text-secondary)'};">Join Lab</a>
-      <a href="cv.html" style="font-size: 0.825rem; font-weight: 700; text-transform: uppercase; color: {'var(--brand-blue)' if active_page == 'cv' else 'var(--text-secondary)'};">CV</a>
+    <div style="display: flex; gap: 16px; align-items: center;">
+      <a href="publications.html" style="font-size: 0.825rem; font-weight: 700; text-transform: uppercase; color: {'var(--electric-cyan)' if active_page == 'publications' else 'var(--text-sub)'};">Publications</a>
+      <a href="research.html" style="font-size: 0.825rem; font-weight: 700; text-transform: uppercase; color: {'var(--electric-cyan)' if active_page == 'research' else 'var(--text-sub)'};">Research</a>
+      <a href="prospective-students.html" style="font-size: 0.825rem; font-weight: 700; text-transform: uppercase; color: {'var(--electric-cyan)' if active_page == 'lab' else 'var(--text-sub)'};">Join Lab</a>
+      <a href="cv.html" style="font-size: 0.825rem; font-weight: 700; text-transform: uppercase; color: {'var(--electric-cyan)' if active_page == 'cv' else 'var(--text-sub)'};">CV</a>
 
-      <button id="theme-toggle" class="theme-toggle-minimal" aria-label="Toggle theme">
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
       </button>
     </div>
@@ -119,110 +121,220 @@ def get_subpage_nav(active_page=""):
 """
 
 # ==============================================================================
-# 1. THE EDITORIAL POSTER LANDING PAGE (index.html)
+# 1. THE ROYAL BLUE STORM BANNER HOMEPAGE (index.html)
 # ==============================================================================
-def generate_poster_home():
+def generate_storm_home():
     profile = load_json("profile.json")
     publications = load_json("publications.json")
+    research = load_json("research.json")
+    supervision = load_json("supervision.json")
 
-    html = get_html_head("Dr. Zaid Amin | Academic Portfolio | zaidamin.org")
+    html = get_html_head("Dr. Zaid Amin | Academic & Computational Researcher | zaidamin.org")
 
+    # Big Animated Storm Banner at the Top
     html += f"""
-  <div class="poster-wrapper">
-    <div class="poster-canvas">
-      
-      <!-- Top Metadata Bar -->
-      <header class="poster-top-bar">
-        <div class="top-bar-left">
-          <span>JUNE 2026 &bull; EST. 2012</span>
-          <span class="top-bar-highlight">DATA SCIENCE &bull; HUMAN-CENTERED AI</span>
+  <header class="storm-hero-wrapper">
+    <canvas id="storm-canvas"></canvas>
+
+    <div class="storm-hero-content">
+      <!-- Eyebrow Tag -->
+      <div class="storm-eyebrow">
+        <span>INTI INTERNATIONAL UNIVERSITY</span> &bull;
+        <span>SENIOR LECTURER</span> &bull;
+        <span>UKM PH.D.</span>
+      </div>
+
+      <!-- Photo Hub in the Middle -->
+      <div class="photo-hub-container">
+        <div class="photo-halo-ring">
+          <img src="assets/images/photo.jpg" onerror="this.onerror=null; this.src='assets/images/avatar.svg';" class="hero-portrait-img" alt="{profile['name']}">
         </div>
-        <div class="top-bar-right">
-          <span class="top-bar-highlight">{profile['name']}, PH.D.</span>
-          <span>INTI INTERNATIONAL UNIVERSITY</span>
-        </div>
-      </header>
+        <div class="photo-status-badge">Accepting Ph.D. Scholars</div>
+      </div>
 
-      <!-- Center Showcase: The Massive Editorial Typography -->
-      <main class="poster-center">
-        <div class="poster-eyebrow">DAS SEIN, DAS SOLLEN</div>
+      <!-- Title & Credentials -->
+      <h1 class="storm-title">{profile['name']}<span style="color:var(--accent-amber); font-size:2.4rem;">, Ph.D.</span></h1>
+      <div class="storm-creds">Human-Computer Interaction &bull; AI Governance &bull; Behavioral Computing</div>
 
-        <h1 class="poster-giant-title" title="Academic Portfolio of Dr. Zaid Amin">
-          <span>PORT</span>
-          <span>FOLIO</span>
-        </h1>
+      <p class="storm-motto">
+        &ldquo;<strong>Das Sein, das Sollen</strong> &mdash; Bridging empirical computational intelligence with human ethical purpose.&rdquo;
+      </p>
 
-        <div class="poster-subtitle">
-          Senior Lecturer &bull; Human-Computer Interaction &bull; AI Governance &bull; Behavioral Computing
-        </div>
+      <!-- Key Buttons Cluster -->
+      <div class="storm-buttons-cluster">
+        <a href="publications.html" class="btn-royal-solid">
+          Publications ({len(publications)})
+          {render_svg_icon('arrow-up-right')}
+        </a>
 
-        <p class="poster-quote">
-          &ldquo;Bridging the gap between what computational systems are, and what human society ought to become.&rdquo;
-        </p>
+        <a href="research.html" class="btn-royal-glass">
+          Research Pillars & Grants
+          {render_svg_icon('arrow-up-right')}
+        </a>
 
-        <!-- Key Buttons Cluster -->
-        <div class="poster-buttons-cluster">
-          <a href="publications.html" class="poster-btn btn-solid-dark">
-            Publications ({len(publications)})
-            {render_svg_icon('arrow-up-right')}
-          </a>
+        <a href="prospective-students.html" class="btn-royal-accent">
+          Join Research Lab (Ph.D./Master)
+          {render_svg_icon('arrow-up-right')}
+        </a>
 
-          <a href="research.html" class="poster-btn btn-outline-clean">
-            Research Pillars
-            {render_svg_icon('arrow-up-right')}
-          </a>
+        <a href="cv.html" class="btn-royal-glass">
+          Curriculum Vitae (PDF)
+          {render_svg_icon('arrow-up-right')}
+        </a>
+      </div>
 
-          <a href="prospective-students.html" class="poster-btn btn-accent-pill">
-            Join Research Lab
-            {render_svg_icon('arrow-up-right')}
-          </a>
-
-          <a href="cv.html" class="poster-btn btn-outline-clean">
-            Curriculum Vitae
-            {render_svg_icon('arrow-up-right')}
-          </a>
-        </div>
-
-        <!-- Key Icons Row -->
-        <div class="poster-icons-row">
-          <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="poster-icon-link" title="Google Scholar">
-            {render_svg_icon('scholar')}
-          </a>
-          <a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="poster-icon-link" title="ORCID ({profile['metrics']['orcid_id']})">
-            {render_svg_icon('orcid')}
-          </a>
-          <a href="{profile['social_links']['github']}" target="_blank" rel="noopener" class="poster-icon-link" title="GitHub (@zaeedh)">
-            {render_svg_icon('github')}
-          </a>
-          <a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" class="poster-icon-link" title="LinkedIn">
-            {render_svg_icon('linkedin')}
-          </a>
-          <a href="mailto:{profile['social_links']['email']}" class="poster-icon-link" title="Email Dr. Amin">
-            {render_svg_icon('email')}
-          </a>
-        </div>
-      </main>
-
-      <!-- Bottom Metadata & Controls -->
-      <footer class="poster-bottom-bar">
-        <div class="bottom-bar-left">
-          Faculty of Data Science and Information Technology (FDSIT), INTI International University, Malaysia.
-        </div>
-
-        <div class="bottom-bar-center" title="More details in dedicated sections">
-          &bull;&bull;&bull;
-        </div>
-
-        <div class="bottom-bar-right">
-          <button id="theme-toggle" class="theme-toggle-minimal" aria-label="Toggle theme">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-          </button>
-        </div>
-      </footer>
-
+      <!-- Scholarly Orbit Icons -->
+      <div class="storm-icons-row">
+        <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="storm-icon-pill" title="Google Scholar">
+          {render_svg_icon('scholar')}
+        </a>
+        <a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="storm-icon-pill" title="ORCID ({profile['metrics']['orcid_id']})">
+          {render_svg_icon('orcid')}
+        </a>
+        <a href="{profile['social_links']['github']}" target="_blank" rel="noopener" class="storm-icon-pill" title="GitHub (@zaeedh)">
+          {render_svg_icon('github')}
+        </a>
+        <a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" class="storm-icon-pill" title="LinkedIn">
+          {render_svg_icon('linkedin')}
+        </a>
+        <a href="mailto:{profile['social_links']['email']}" class="storm-icon-pill" title="Email Dr. Amin">
+          {render_svg_icon('email')}
+        </a>
+      </div>
     </div>
-  </div>
+  </header>
 
+  <!-- Simple Portfolio Showcase Directly Below Banner -->
+  <main class="portfolio-showcase">
+    <div class="showcase-header">
+      <div class="showcase-tag">Academic Dossier & Agenda</div>
+      <h2 class="showcase-title">Research Vision & Leadership</h2>
+      <p style="color:var(--text-muted); font-size:1.05rem; max-width:680px; margin:8px auto 0 auto;">
+        {research['vision']}
+      </p>
+    </div>
+
+    <!-- 3 Core Research Pillars Cards -->
+    <div class="royal-cards-grid">
+      <div class="royal-card">
+        <div class="royal-card-icon">
+          {render_svg_icon('shield')}
+        </div>
+        <h3 class="royal-card-title">AI Governance & The Proxy Trap</h3>
+        <p class="royal-card-desc">
+          Mitigating metric substitution and proxy reward hacking when autonomous multi-agent AI systems make civic and organizational decisions.
+        </p>
+        <a href="research.html" class="royal-card-link">Explore Pillar {render_svg_icon('arrow-up-right')}</a>
+      </div>
+
+      <div class="royal-card">
+        <div class="royal-card-icon">
+          {render_svg_icon('eye')}
+        </div>
+        <h3 class="royal-card-title">HCI & Cognitive Attention</h3>
+        <p class="royal-card-desc">
+          Building upon the doctoral <strong>Tune-Attention Model</strong> at UKM to develop humane interface micro-frictions against viral distraction and misinformation.
+        </p>
+        <a href="research.html" class="royal-card-link">Explore Pillar {render_svg_icon('arrow-up-right')}</a>
+      </div>
+
+      <div class="royal-card">
+        <div class="royal-card-icon">
+          {render_svg_icon('globe')}
+        </div>
+        <h3 class="royal-card-title">Digital Heritage Preservation</h3>
+        <p class="royal-card-desc">
+          Synthesizing social computing and immersive VR through <strong>Srivijayapedia</strong> to preserve ancient maritime civilizational archives.
+        </p>
+        <a href="research.html" class="royal-card-link">Explore Pillar {render_svg_icon('arrow-up-right')}</a>
+      </div>
+    </div>
+
+    <!-- Royal Metrics Strip -->
+    <div class="royal-metrics-strip">
+      <div>
+        <div class="metric-num">24+</div>
+        <div class="metric-lbl">Indexed Publications</div>
+      </div>
+      <div>
+        <div class="metric-num">Q1</div>
+        <div class="metric-lbl">IEEE Access & MDPI</div>
+      </div>
+      <div>
+        <div class="metric-num">10+</div>
+        <div class="metric-lbl">Years Leadership</div>
+      </div>
+      <div>
+        <div class="metric-num">Ph.D.</div>
+        <div class="metric-lbl">Universiti Kebangsaan Malaysia</div>
+      </div>
+    </div>
+
+    <!-- Featured Flagship Publications (Top 3) -->
+    <div class="featured-pubs-wrap">
+      <div class="featured-header-row">
+        <div>
+          <span style="font-size:0.75rem; font-weight:800; color:var(--electric-cyan); text-transform:uppercase; letter-spacing:0.1em;">Flagship Works</span>
+          <h3 style="font-size:1.6rem; font-weight:800; margin-top:4px;">Selected Recent Scholarship</h3>
+        </div>
+        <a href="publications.html" class="btn-royal-glass" style="font-size:0.8rem; padding:8px 18px;">
+          View All 24 Publications
+          {render_svg_icon('arrow-up-right')}
+        </a>
+      </div>
+
+      <div class="featured-pub-row">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--accent-amber); text-transform:uppercase; margin-bottom:4px;">★ Journal Article &bull; 2026 &bull; MDPI Smart Cities</div>
+        <div style="font-size:1.15rem; font-weight:800; color:var(--text-main); margin-bottom:4px;">Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance</div>
+        <div style="font-size:0.85rem; color:var(--text-muted); font-style:italic;">Smart Cities (MDPI) &bull; DOI: 10.3390/smartcities9100174</div>
+      </div>
+
+      <div class="featured-pub-row">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--accent-amber); text-transform:uppercase; margin-bottom:4px;">★ SSRN Preprint &bull; 2026</div>
+        <div style="font-size:1.15rem; font-weight:800; color:var(--text-main); margin-bottom:4px;">The Proxy Trap in Agentic AI: When Metrics Replace Judgment</div>
+        <div style="font-size:0.85rem; color:var(--text-muted); font-style:italic;">Social Science Research Network &bull; DOI: 10.2139/ssrn.7670124</div>
+      </div>
+
+      <div class="featured-pub-row">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--accent-amber); text-transform:uppercase; margin-bottom:4px;">★ Q1 Publication &bull; 2021 &bull; IEEE Access</div>
+        <div style="font-size:1.15rem; font-weight:800; color:var(--text-main); margin-bottom:4px;">Attention-Based Design and User Decisions on Information Sharing: A Thematic Literature Review</div>
+        <div style="font-size:0.85rem; color:var(--text-muted); font-style:italic;">IEEE Access &bull; DOI: 10.1109/ACCESS.2021.3087740</div>
+      </div>
+    </div>
+
+    <!-- Postgraduate Lab Direct Callout -->
+    <div style="background:linear-gradient(135deg, var(--royal-navy) 0%, var(--royal-card) 100%); border:1px solid var(--royal-border); border-radius:20px; padding:36px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;">
+      <div>
+        <div style="font-size:0.75rem; font-weight:800; color:var(--accent-amber); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px;">Postgraduate Supervision</div>
+        <h3 style="font-size:1.6rem; font-weight:800; color:#ffffff; margin-bottom:8px;">Join My Research Group (Ph.D. & Master's)</h3>
+        <p style="font-size:0.95rem; color:var(--text-sub); max-width:620px;">
+          Actively recruiting self-motivated scholars in AI Governance, The Proxy Trap, and Attention Cybernetics at INTI International University.
+        </p>
+      </div>
+      <a href="prospective-students.html" class="btn-royal-accent">
+        View Open Topics & Apply
+        {render_svg_icon('arrow-up-right')}
+      </a>
+    </div>
+  </main>
+
+  <!-- Royal Footer -->
+  <footer class="royal-footer">
+    <div style="margin-bottom:12px; font-weight:700; color:var(--text-main);">
+      Dr. Zaid Amin, Ph.D. &bull; Faculty of Data Science and Information Technology, INTI International University
+    </div>
+    <div style="margin-bottom:16px; color:var(--text-muted);">
+      Email: <a href="mailto:{profile['social_links']['email']}" style="color:var(--electric-cyan); text-decoration:underline;">zaid.amin@newinti.edu.my</a> &bull; Domain: <strong>zaidamin.org</strong>
+    </div>
+    <div style="display:flex; justify-content:center; align-items:center; gap:16px;">
+      <span>&copy; 2026 Dr. Zaid Amin</span>
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+    </div>
+  </footer>
+
+  <script src="assets/js/storm.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
@@ -241,9 +353,9 @@ def generate_publications_page():
     html += f"""
   <div class="subpage-container">
     <div style="margin-bottom: 32px;">
-      <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brand-accent);">Scholarly Index</span>
+      <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--electric-cyan);">Scholarly Index</span>
       <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0;">Publications & Citations ({len(publications)})</h1>
-      <p style="font-size: 1rem; color: var(--text-muted); max-width: 760px;">
+      <p style="font-size: 1rem; color: var(--text-sub); max-width: 760px;">
         Complete indexed works across Human-Computer Interaction, AI Governance, Behavioral Computing, and Information Systems. Search in real-time or filter by category.
       </p>
     </div>
@@ -272,12 +384,12 @@ def generate_publications_page():
         html += f"""
       <article class="pub-item" data-category="{pub['category'].lower()}">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">{pub['category']} &bull; {pub['year']}</span>
-          {f'<span style="font-size:0.75rem; color:var(--brand-accent); font-weight:800;">★ Featured</span>' if pub.get('featured') else ''}
+          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--electric-cyan);">{pub['category']} &bull; {pub['year']}</span>
+          {f'<span style="font-size:0.75rem; color:var(--accent-amber); font-weight:800;">★ Featured</span>' if pub.get('featured') else ''}
         </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">{pub['title']}</h3>
-        <div style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:var(--text-main);">{pub['title']}</h3>
+        <div style="font-size:0.9rem; color:var(--text-sub); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
         <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">{pub['venue']}</div>
 
         <div style="display:flex; gap:10px; align-items:center;">
@@ -313,9 +425,9 @@ def generate_research_page():
     html += f"""
   <div class="subpage-container">
     <div style="margin-bottom: 40px;">
-      <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brand-accent);">Scholarly Agenda</span>
+      <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--electric-cyan);">Scholarly Agenda</span>
       <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0;">Research Pillars & Grants</h1>
-      <p style="font-size: 1.05rem; color: var(--text-muted); max-width: 820px; line-height: 1.6;">
+      <p style="font-size: 1.05rem; color: var(--text-sub); max-width: 820px; line-height: 1.6;">
         {research['vision']}
       </p>
     </div>
@@ -323,20 +435,20 @@ def generate_research_page():
     <div style="display: flex; flex-direction: column; gap: 32px;">
     """
     for pillar in research["pillars"]:
-        topics = " ".join([f'<span style="font-size:0.775rem; font-weight:600; padding:4px 10px; background:var(--bg-subtle); border:1px solid var(--border-frame); border-radius:4px; margin-right:6px; margin-bottom:6px; display:inline-block;">{t}</span>' for t in pillar["key_topics"]])
+        topics = " ".join([f'<span style="font-size:0.775rem; font-weight:600; padding:4px 10px; background:var(--royal-surface); border:1px solid var(--royal-border); border-radius:4px; margin-right:6px; margin-bottom:6px; display:inline-block; color:var(--text-sub);">{t}</span>' for t in pillar["key_topics"]])
         html += f"""
-      <div style="background:var(--bg-surface); border:1px solid var(--border-frame); border-radius:16px; padding:36px; box-shadow:0 8px 24px -10px rgba(0,0,0,0.04);">
-        <h2 style="font-size: 1.7rem; font-weight: 800; margin-bottom: 12px;">{pillar['title']}</h2>
-        <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 20px;">
+      <div style="background:var(--royal-card); border:1px solid var(--royal-border); border-radius:18px; padding:36px; box-shadow:0 8px 24px -10px rgba(0,0,0,0.4);">
+        <h2 style="font-size: 1.7rem; font-weight: 800; margin-bottom: 12px; color:var(--text-main);">{pillar['title']}</h2>
+        <p style="font-size: 1rem; color: var(--text-sub); line-height: 1.7; margin-bottom: 20px;">
           {pillar['full_desc']}
         </p>
 
         <div style="margin-bottom: 20px;">
-          <div style="font-size: 0.85rem; font-weight: 800; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em;">Key Technical Frontiers:</div>
+          <div style="font-size: 0.85rem; font-weight: 800; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; color:var(--text-main);">Key Technical Frontiers:</div>
           {topics}
         </div>
 
-        <div style="background: var(--brand-accent-light); color: var(--brand-accent); padding: 12px 18px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; border-left: 4px solid var(--brand-accent);">
+        <div style="background: var(--accent-amber-light); color: var(--accent-amber); padding: 12px 18px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; border-left: 4px solid var(--accent-amber);">
           Grant Alignment: {pillar['grant_alignment']}
         </div>
       </div>
@@ -362,9 +474,9 @@ def generate_supervision_page():
     html += f"""
   <div class="subpage-container">
     <div style="margin-bottom: 36px;">
-      <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brand-emerald);">Academic Mentorship</span>
+      <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--electric-cyan);">Academic Mentorship</span>
       <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0;">{supervision['heading']}</h1>
-      <p style="font-size: 1.05rem; color: var(--text-secondary); line-height: 1.7; max-width: 820px;">
+      <p style="font-size: 1.05rem; color: var(--text-sub); line-height: 1.7; max-width: 820px;">
         {supervision['statement']}
       </p>
     </div>
@@ -374,12 +486,12 @@ def generate_supervision_page():
       <div style="display: flex; flex-direction: column; gap: 20px;">
     """
     for t in supervision["open_topics"]:
-        pills = " ".join([f'<span style="background:var(--brand-blue-light); color:var(--brand-blue); padding:3px 10px; border-radius:4px; font-size:0.75rem; font-weight:700;">{d}</span>' for d in t["degree_levels"]])
+        pills = " ".join([f'<span style="background:rgba(56,189,248,0.15); color:var(--electric-cyan); padding:3px 10px; border-radius:4px; font-size:0.75rem; font-weight:700;">{d}</span>' for d in t["degree_levels"]])
         html += f"""
-        <div style="background:var(--bg-surface); border:1px solid var(--border-frame); border-radius:14px; padding:28px;">
+        <div style="background:var(--royal-card); border:1px solid var(--royal-border); border-radius:14px; padding:28px;">
           <div style="margin-bottom: 8px;">{pills}</div>
-          <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 8px;">{t['title']}</h3>
-          <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">{t['description']}</p>
+          <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 8px; color:var(--text-main);">{t['title']}</h3>
+          <p style="font-size: 0.95rem; color: var(--text-sub); line-height: 1.6; margin-bottom: 12px;">{t['description']}</p>
           <div style="font-size: 0.825rem; color: var(--text-muted);"><strong>Prerequisites:</strong> {t['skills_required']}</div>
         </div>
         """
@@ -387,12 +499,12 @@ def generate_supervision_page():
       </div>
     </div>
 
-    <div style="background: var(--bg-surface); border: 2px solid var(--brand-navy); border-radius: 16px; padding: 32px;">
-      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 16px;">How to Submit an Inquiry for Supervision</h2>
-      <ol style="margin-left: 20px; font-size: 0.95rem; line-height: 1.8; color: var(--text-secondary);">
+    <div style="background: var(--royal-card); border: 2px solid var(--electric-blue); border-radius: 16px; padding: 32px;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; color:var(--text-main);">How to Submit an Inquiry for Supervision</h2>
+      <ol style="margin-left: 20px; font-size: 0.95rem; line-height: 1.8; color: var(--text-sub);">
         <li>Review my recent publications on Attention-Based Design (IEEE Access) or Agentic AI Governance (Smart Cities 2026).</li>
         <li>Prepare your Academic CV, transcripts, and a 1-page Research Proposal outlining your core problem.</li>
-        <li>Email your materials to <a href="mailto:zaid.amin@newinti.edu.my" style="font-weight:700; color:var(--brand-blue); text-decoration:underline;">zaid.amin@newinti.edu.my</a> with the subject: <code>[Prospective Postgraduate] - [Your Name] - [Ph.D./Master]</code>.</li>
+        <li>Email your materials to <a href="mailto:zaid.amin@newinti.edu.my" style="font-weight:700; color:var(--electric-cyan); text-decoration:underline;">zaid.amin@newinti.edu.my</a> with the subject: <code>[Prospective Postgraduate] - [Your Name] - [Ph.D./Master]</code>.</li>
       </ol>
     </div>
   </div>
@@ -414,11 +526,11 @@ def generate_cv_page():
 
     html += f"""
   <div class="subpage-container" style="max-width: 900px;">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; border-bottom: 2px solid var(--border-frame); padding-bottom: 24px;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; border-bottom: 2px solid var(--royal-border); padding-bottom: 24px;">
       <div>
-        <h1 style="font-size: 2.6rem; font-weight: 900; margin-bottom: 4px;">Dr. Zaid Amin</h1>
-        <div style="font-size: 1.15rem; color: var(--brand-blue); font-weight: 700;">Curriculum Vitae</div>
-        <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 4px;">
+        <h1 style="font-size: 2.6rem; font-weight: 900; margin-bottom: 4px; color:var(--text-main);">Dr. Zaid Amin</h1>
+        <div style="font-size: 1.15rem; color: var(--electric-cyan); font-weight: 700;">Curriculum Vitae</div>
+        <div style="font-size: 0.9rem; color: var(--text-sub); margin-top: 4px;">
           Senior Lecturer &bull; Faculty of Data Science and Information Technology, INTI International University<br>
           Email: zaid.amin@newinti.edu.my &bull; Website: zaidamin.org &bull; ORCID: 0000-0001-5223-3058
         </div>
@@ -431,16 +543,16 @@ def generate_cv_page():
     </div>
 
     <div style="margin-bottom: 32px;">
-      <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid var(--border-frame); padding-bottom: 6px; margin-bottom: 16px;">1. Education</h2>
+      <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid var(--royal-border); padding-bottom: 6px; margin-bottom: 16px; color:var(--text-main);">1. Education</h2>
     """
     for edu in profile["education"]:
         html += f"""
       <div style="margin-bottom: 14px;">
         <div style="display: flex; justify-content: space-between;">
-          <strong>{edu['degree']}</strong>
+          <strong style="color:var(--text-main);">{edu['degree']}</strong>
           <span style="color: var(--text-muted);">{edu['country']}</span>
         </div>
-        <div style="color: var(--brand-navy); font-size: 0.95rem;">{edu['institution']}</div>
+        <div style="color: var(--electric-cyan); font-size: 0.95rem;">{edu['institution']}</div>
         <div style="font-size: 0.85rem; color: var(--text-muted);">{edu['focus']}</div>
       </div>
         """
@@ -449,17 +561,17 @@ def generate_cv_page():
     </div>
 
     <div style="margin-bottom: 32px;">
-      <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid var(--border-frame); padding-bottom: 6px; margin-bottom: 16px;">2. Academic Leadership History</h2>
+      <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid var(--royal-border); padding-bottom: 6px; margin-bottom: 16px; color:var(--text-main);">2. Academic Leadership History</h2>
     """
     for role in profile["leadership_roles"]:
         html += f"""
       <div style="margin-bottom: 14px;">
         <div style="display: flex; justify-content: space-between;">
-          <strong>{role['role']}</strong>
+          <strong style="color:var(--text-main);">{role['role']}</strong>
           <span style="color: var(--text-muted); font-size: 0.85rem;">{role['period']}</span>
         </div>
-        <div style="color: var(--brand-navy);">{role['institution']}</div>
-        <div style="font-size: 0.85rem; color: var(--text-secondary);">{role['description']}</div>
+        <div style="color: var(--electric-cyan);">{role['institution']}</div>
+        <div style="font-size: 0.85rem; color: var(--text-sub);">{role['description']}</div>
       </div>
         """
 
@@ -467,14 +579,14 @@ def generate_cv_page():
     </div>
 
     <div style="margin-bottom: 32px;">
-      <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid var(--border-frame); padding-bottom: 6px; margin-bottom: 16px;">3. Complete Publication Record ({len(publications)} Works)</h2>
-      <ol style="margin-left: 20px; font-size: 0.9rem; line-height: 1.7;">
+      <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid var(--royal-border); padding-bottom: 6px; margin-bottom: 16px; color:var(--text-main);">3. Complete Publication Record ({len(publications)} Works)</h2>
+      <ol style="margin-left: 20px; font-size: 0.9rem; line-height: 1.7; color:var(--text-sub);">
     """
     for pub in publications:
-        doi_str = f' DOI: <a href="{pub["url"]}" target="_blank" style="color:var(--brand-blue);">{pub["doi"]}</a>' if pub.get("doi") else ""
+        doi_str = f' DOI: <a href="{pub["url"]}" target="_blank" style="color:var(--electric-cyan);">{pub["doi"]}</a>' if pub.get("doi") else ""
         html += f"""
         <li style="margin-bottom: 10px;">
-          <strong>Zaid Amin</strong> et al. ({pub['year']}). "{pub['title']}". <em>{pub['venue']}</em>.{doi_str}
+          <strong style="color:var(--text-main);">Zaid Amin</strong> et al. ({pub['year']}). "{pub['title']}". <em>{pub['venue']}</em>.{doi_str}
         </li>
         """
 
@@ -492,11 +604,11 @@ def generate_cv_page():
 # MAIN COMPILER BUILD
 # ==============================================================================
 def build_all():
-    print("Compiling Editorial Poster Academic Site for zaidamin.org...")
+    print("Compiling Royal Blue Storm Academic Site for zaidamin.org...")
     DIST_DIR.mkdir(parents=True, exist_ok=True)
 
     pages = {
-        "index.html": generate_poster_home(),
+        "index.html": generate_storm_home(),
         "publications.html": generate_publications_page(),
         "research.html": generate_research_page(),
         "prospective-students.html": generate_supervision_page(),
@@ -506,7 +618,7 @@ def build_all():
     for filename, content in pages.items():
         with open(DIST_DIR / filename, "w", encoding="utf-8") as f:
             f.write(content)
-        # Keep at workspace root for immediate browser preview
+        # Keep at workspace root for immediate preview
         with open(BASE_DIR / filename, "w", encoding="utf-8") as f:
             f.write(content)
         print(f"  Compiled: {filename} ({len(content)} chars)")
@@ -523,7 +635,7 @@ def build_all():
         if src.exists():
             shutil.copy(src, DIST_DIR / Path(extra).name)
 
-    print("Editorial build complete!")
+    print("Royal Storm build complete!")
 
 if __name__ == "__main__":
     build_all()
