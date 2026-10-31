@@ -1,11 +1,12 @@
 /**
- * Cinematic Realistic Storm Atmosphere for zaidamin.org:
- * 1. Rolling Storm Clouds: soft, layered atmospheric cloud masses drifting smoothly across the background sky
- * 2. Moving Atmospheric Air Currents & Scud Wisps: fast-drifting storm vapor torn by maritime gales
- * 3. Atmospheric Squall Curtains: sweeping sheets of downpour billowing across the atmosphere
- * 4. Heavy Wind-Field Rain: dense, organic multi-tier rainfall with feathered linear gradients
- * 5. 3D Rotating Lighthouse Beacon: oceanic sweeping beam and soft eye-splash lens bloom
- * 6. Completely clean ocean: no artificial splash waves; pure natural storm blended over the original painting
+ * Cinematic Realistic Living Storm Atmosphere for zaidamin.org:
+ * 1. Procedural Volumetric Storm Clouds: multi-lobed organic cloud puffs that billow, churn, and drift smoothly
+ * 2. High-Altitude Scud & Atmospheric Air Currents: fast windblown storm vapor tearing across the sky
+ * 3. Sea-Level Storm Haze: soft atmospheric rain mist at the ocean horizon
+ * 4. Realistic Intra-Cloud Lightning Engine: multi-stroke flash illuminating the cloud bodies and rain glints
+ * 5. Heavy Driving Storm Rain: high-velocity wind-field rainfall with dynamic gale squalls & gusts
+ * 6. 3D Rotating Lighthouse Beacon: oceanic sweeping volumetric beam and soft eye-splash bloom
+ * 7. Clean, pristine ocean: 100% natural, fused seamlessly over the real classical painting
  */
 
 (function() {
@@ -17,25 +18,140 @@
   let height = 0;
   let simTime = 0;
 
+  // ==========================================================================
+  // PROCEDURAL PRE-RENDERED SPRITES (Organic, Seamless, GPU-Accelerated)
+  // ==========================================================================
+  // 1. Organic Cumulus Storm Cloud Puff
+  const cloudSprite = (function() {
+    const c = document.createElement('canvas');
+    c.width = 256;
+    c.height = 256;
+    const sctx = c.getContext('2d');
+
+    const lobes = [
+      { x: 128, y: 128, r: 85, a: 0.65 },
+      { x: 96,  y: 118, r: 70, a: 0.50 },
+      { x: 160, y: 118, r: 70, a: 0.50 },
+      { x: 110, y: 148, r: 60, a: 0.45 },
+      { x: 148, y: 148, r: 60, a: 0.45 },
+      { x: 74,  y: 132, r: 48, a: 0.35 },
+      { x: 182, y: 132, r: 48, a: 0.35 },
+      { x: 128, y: 92,  r: 58, a: 0.55 }
+    ];
+
+    for (let lobe of lobes) {
+      const grad = sctx.createRadialGradient(lobe.x, lobe.y, 0, lobe.x, lobe.y, lobe.r);
+      grad.addColorStop(0, `rgba(205, 225, 250, ${lobe.a})`);
+      grad.addColorStop(0.4, `rgba(165, 195, 230, ${lobe.a * 0.6})`);
+      grad.addColorStop(0.75, `rgba(125, 155, 195, ${lobe.a * 0.2})`);
+      grad.addColorStop(1, 'rgba(95, 125, 165, 0)');
+
+      sctx.fillStyle = grad;
+      sctx.beginPath();
+      sctx.arc(lobe.x, lobe.y, lobe.r, 0, Math.PI * 2);
+      sctx.fill();
+    }
+    return c;
+  })();
+
+  // 2. Wispy Gale Scud (Torn Low-Altitude Storm Vapor)
+  const scudSprite = (function() {
+    const c = document.createElement('canvas');
+    c.width = 340;
+    c.height = 120;
+    const sctx = c.getContext('2d');
+
+    sctx.save();
+    sctx.scale(1.0, 0.35);
+    const grad = sctx.createRadialGradient(170, 60 / 0.35, 0, 170, 60 / 0.35, 150);
+    grad.addColorStop(0, 'rgba(215, 235, 255, 0.60)');
+    grad.addColorStop(0.35, 'rgba(175, 205, 240, 0.35)');
+    grad.addColorStop(0.70, 'rgba(130, 165, 205, 0.10)');
+    grad.addColorStop(1, 'rgba(95, 130, 175, 0)');
+
+    sctx.fillStyle = grad;
+    sctx.beginPath();
+    sctx.arc(170, 60 / 0.35, 150, 0, Math.PI * 2);
+    sctx.fill();
+    sctx.restore();
+    return c;
+  })();
+
+  // 3. Horizon Storm Rain Haze Band
+  const hazeSprite = (function() {
+    const c = document.createElement('canvas');
+    c.width = 600;
+    c.height = 140;
+    const sctx = c.getContext('2d');
+
+    const grad = sctx.createLinearGradient(0, 0, 0, 140);
+    grad.addColorStop(0, 'rgba(170, 200, 235, 0)');
+    grad.addColorStop(0.5, 'rgba(195, 220, 248, 0.32)');
+    grad.addColorStop(1, 'rgba(170, 200, 235, 0)');
+
+    sctx.fillStyle = grad;
+    sctx.fillRect(0, 0, 600, 140);
+    return c;
+  })();
+
   // Pools
+  let cloudClusters = [];
+  let scudWisps = [];
+  let hazeBands = [];
   let raindrops = [];
-  let cloudBanks = [];
-  let airWisps = [];
-  let squallCurtains = [];
 
-  // Ambient Lightning
-  let ambientFlashAlpha = 0;
-  let targetFlash = 0;
-  let lastFlashTime = Date.now();
+  // ==========================================================================
+  // REALISTIC INTRA-CLOUD LIGHTNING SYSTEM
+  // ==========================================================================
+  const stormLightning = {
+    state: 0, // 0: idle, 1: leader, 2: main stroke, 3: secondary stroke, 4: decay
+    intensity: 0,
+    nextTime: Date.now() + 5000,
+    stateTimer: 0,
 
-  function resize() {
-    const parent = canvas.parentElement;
-    width = canvas.width = parent.clientWidth;
-    height = canvas.height = parent.clientHeight;
-    initStormAtmosphere();
-  }
+    update() {
+      const now = Date.now();
 
-  window.addEventListener('resize', resize);
+      if (this.state === 0) {
+        if (now > this.nextTime) {
+          this.state = 1; // trigger leader flash
+          this.stateTimer = 0;
+          this.intensity = Math.random() * 0.35 + 0.25;
+          this.nextTime = now + (Math.random() * 8000 + 7000);
+        }
+      } else if (this.state === 1) {
+        // Leader flash (quick preliminary flicker)
+        this.stateTimer++;
+        if (this.stateTimer > 2) {
+          this.state = 2; // main brilliant return stroke
+          this.stateTimer = 0;
+          this.intensity = Math.random() * 0.45 + 0.55; // 0.55 to 1.0
+        }
+      } else if (this.state === 2) {
+        // Main stroke
+        this.stateTimer++;
+        if (this.stateTimer > 3) {
+          this.state = 3; // second strike / re-strike
+          this.stateTimer = 0;
+          this.intensity = Math.random() * 0.30 + 0.40;
+        }
+      } else if (this.state === 3) {
+        // Re-strike
+        this.stateTimer++;
+        if (this.stateTimer > 3) {
+          this.state = 4; // exponential decay
+          this.stateTimer = 0;
+        }
+      } else if (this.state === 4) {
+        // Exponential decay
+        this.intensity *= 0.82;
+        if (this.intensity < 0.01) {
+          this.intensity = 0;
+          this.state = 0;
+        }
+      }
+    }
+  };
 
   // ==========================================================================
   // 1. ROTATING LIGHTHOUSE BEACON & EYE-SPLASH BLOOM ENGINE
@@ -180,194 +296,195 @@
   };
 
   // ==========================================================================
-  // 2. DYNAMIC STORM WIND FIELD & GUST CALCULATOR
+  // 2. DYNAMIC STORM WIND & GALE GUST SYSTEM
   // ==========================================================================
-  function getStormWindAngle(x, y, t, individualBias) {
-    const base = 0.31; // ~18 degrees standard storm tilt
-    const gust = Math.sin(t * 0.55 + x * 0.002) * 0.08 + Math.cos(t * 1.1) * 0.03;
-    const altitudeShear = (y / Math.max(height, 1)) * 0.12;
-    const wave = Math.sin(x * 0.003 - t * 0.8 + y * 0.002) * 0.06;
-    return base + gust + altitudeShear + wave + individualBias;
+  function getStormWind(t) {
+    // Dynamic gust factor: surges every 4 to 6 seconds
+    const gust = Math.max(0, Math.sin(t * 0.45) * 0.16) + Math.max(0, Math.cos(t * 0.95) * 0.09);
+    return {
+      baseAngle: 0.36 + gust, // ~21 to 32 degrees slanting down-right
+      gustSpeedMultiplier: 1.0 + gust * 1.4,
+      gustFactor: gust
+    };
+  }
+
+  function getLocalRainAngle(x, y, t, bias) {
+    const wind = getStormWind(t);
+    const altitudeShear = (y / Math.max(height, 1)) * 0.10;
+    const wave = Math.sin(x * 0.003 - t * 0.7 + y * 0.002) * 0.05;
+    return wind.baseAngle + altitudeShear + wave + bias;
   }
 
   // ==========================================================================
-  // 3. ROLLING STORM CLOUDS IN BACKGROUND (Soft, Realistic Atmospheric Drift)
+  // 3. LIVING PROCEDURAL STORM CLOUD MASSES (Organic Billowing Puffs)
   // ==========================================================================
-  class StormCloudBank {
-    constructor(x, y, rx, ry, speed, baseAlpha) {
+  class CloudCluster {
+    constructor(x, y, particleCount = 10) {
       this.x = x;
       this.y = y;
-      this.rx = rx;
-      this.ry = ry;
-      this.speed = speed;
-      this.baseAlpha = baseAlpha;
-      this.seed = Math.random() * 100;
+      this.speed = Math.random() * 0.22 + 0.26; // stately storm drift
+      this.particles = [];
+
+      for (let i = 0; i < particleCount; i++) {
+        this.particles.push({
+          ox: (Math.random() - 0.5) * 260,
+          oy: (Math.random() - 0.5) * 85,
+          scale: Math.random() * 0.65 + 0.85,
+          rotation: Math.random() * Math.PI * 2,
+          rotSpeed: (Math.random() - 0.5) * 0.0018,
+          churnSpeed: Math.random() * 0.3 + 0.2,
+          seed: Math.random() * 100,
+          baseAlpha: Math.random() * 0.035 + 0.045
+        });
+      }
     }
 
     update() {
       this.x += this.speed;
-      this.currentY = this.y + Math.sin(simTime * 0.35 + this.seed) * 5;
-      if (this.x - this.rx > width + 100) {
-        this.x = -this.rx - 80;
-        this.y = height * (Math.random() * 0.38 + 0.05);
+      // Wrap seamlessly
+      if (this.x - 300 > width) {
+        this.x = -350;
+        this.y = height * (Math.random() * 0.32 + 0.04);
       }
     }
 
-    draw(flashBoost) {
+    draw(lightningBoost) {
       ctx.save();
       ctx.globalCompositeOperation = 'screen';
 
-      const pulse = Math.sin(simTime * 0.28 + this.seed) * 0.015;
-      const alpha = Math.min((this.baseAlpha + pulse) * flashBoost, 0.20);
+      for (let p of this.particles) {
+        p.rotation += p.rotSpeed;
 
-      ctx.translate(this.x, this.currentY);
-      ctx.scale(this.rx / Math.max(this.ry, 1), 1.0);
+        // Organic harmonic churn within the cloud mass
+        const churnX = Math.sin(simTime * p.churnSpeed + p.seed) * 14;
+        const churnY = Math.cos(simTime * (p.churnSpeed * 0.8) + p.seed) * 8;
+        const scalePulse = 1.0 + Math.sin(simTime * 0.25 + p.seed) * 0.08;
 
-      const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, this.ry);
-      grad.addColorStop(0, `rgba(175, 205, 235, ${alpha * 0.95})`);
-      grad.addColorStop(0.35, `rgba(140, 175, 215, ${alpha * 0.65})`);
-      grad.addColorStop(0.70, `rgba(105, 140, 185, ${alpha * 0.25})`);
-      grad.addColorStop(1, 'rgba(80, 110, 150, 0)');
+        const px = this.x + p.ox + churnX;
+        const py = this.y + p.oy + churnY;
+        const s = p.scale * scalePulse;
+        const w = 256 * s;
+        const h = 256 * s;
 
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(0, 0, this.ry, 0, Math.PI * 2);
-      ctx.fill();
+        // Cloud illumination from ambient lightning
+        const alpha = Math.min(p.baseAlpha * (1 + lightningBoost * 2.8), 0.28);
+
+        ctx.save();
+        ctx.translate(px, py);
+        ctx.rotate(p.rotation);
+        ctx.globalAlpha = alpha;
+        ctx.drawImage(cloudSprite, -w * 0.5, -h * 0.5, w, h);
+        ctx.restore();
+      }
 
       ctx.restore();
     }
   }
 
   // ==========================================================================
-  // 4. ATMOSPHERIC STORM AIR CURRENTS & SCUD WISPS (Torn Vapor in Gale)
+  // 4. HIGH-ALTITUDE SCUD & TORN STORM VAPOR (Atmospheric Air Motion)
   // ==========================================================================
-  class StormAirWisp {
+  class ScudWisp {
     constructor() {
       this.reset(true);
     }
 
     reset(initial = false) {
-      this.x = initial ? Math.random() * (width + 300) - 150 : -250;
-      this.y = height * (Math.random() * 0.46 + 0.06);
-      this.length = Math.random() * 140 + 90;
-      this.height = Math.random() * 16 + 10;
-      this.speed = Math.random() * 1.1 + 1.4; // swift drifting gale motion
-      this.baseAlpha = Math.random() * 0.045 + 0.035; // sheer vapor
-      this.seed = Math.random() * 50;
+      this.x = initial ? Math.random() * (width + 400) - 200 : -350;
+      this.y = height * (Math.random() * 0.44 + 0.06);
+      this.scale = Math.random() * 0.55 + 0.75;
+      this.baseSpeed = Math.random() * 1.4 + 1.8; // swift gale speed
+      this.baseAlpha = Math.random() * 0.035 + 0.030;
+      this.seed = Math.random() * 100;
     }
 
     update() {
-      this.x += this.speed;
-      this.y += Math.sin(simTime * 0.75 + this.seed) * 0.3;
-      if (this.x - this.length > width + 80) {
+      const wind = getStormWind(simTime);
+      this.x += this.baseSpeed * wind.gustSpeedMultiplier;
+      this.y += Math.sin(simTime * 0.7 + this.seed) * 0.22;
+
+      if (this.x - 300 > width) {
         this.reset();
       }
     }
 
-    draw(flashBoost) {
+    draw(lightningBoost) {
       ctx.save();
       ctx.globalCompositeOperation = 'screen';
 
-      const angle = getStormWindAngle(this.x, this.y, simTime, 0) - 0.20;
-      const alpha = Math.min(this.baseAlpha * flashBoost, 0.15);
+      const wind = getStormWind(simTime);
+      const angle = wind.baseAngle - 0.22; // aligned with storm air
+      const alpha = Math.min(this.baseAlpha * (1 + lightningBoost * 2.0), 0.18);
+
+      const w = 340 * this.scale;
+      const h = 120 * this.scale;
 
       ctx.translate(this.x, this.y);
       ctx.rotate(angle);
-
-      const grad = ctx.createLinearGradient(-this.length * 0.5, 0, this.length * 0.5, 0);
-      grad.addColorStop(0, 'rgba(195, 225, 255, 0)');
-      grad.addColorStop(0.25, `rgba(205, 230, 255, ${alpha * 0.65})`);
-      grad.addColorStop(0.5, `rgba(225, 242, 255, ${alpha})`);
-      grad.addColorStop(0.75, `rgba(205, 230, 255, ${alpha * 0.65})`);
-      grad.addColorStop(1, 'rgba(195, 225, 255, 0)');
-
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.ellipse(0, 0, this.length * 0.5, this.height * 0.5, 0, 0, Math.PI * 2);
-      ctx.fill();
-
+      ctx.globalAlpha = alpha;
+      ctx.drawImage(scudSprite, -w * 0.5, -h * 0.5, w, h);
       ctx.restore();
     }
   }
 
   // ==========================================================================
-  // 5. ATMOSPHERIC SQUALL CURTAINS (Blowing Sheets of Heavy Rain)
+  // 5. SEA-LEVEL STORM HAZE (Drifting Atmospheric Spray Band at Horizon)
   // ==========================================================================
-  class SquallCurtain {
-    constructor(index) {
-      this.index = index;
-      this.reset(true);
-    }
-
-    reset(initial = false) {
-      this.x = initial ? Math.random() * (width + 500) - 250 : -width * 0.40;
-      this.widthSpan = width * (Math.random() * 0.18 + 0.30);
-      this.speed = Math.random() * 0.8 + 1.5;
-      this.baseAlpha = Math.random() * 0.038 + 0.032;
+  class HorizonHaze {
+    constructor(x, y, speed, alpha) {
+      this.x = x;
+      this.y = y;
+      this.speed = speed;
+      this.baseAlpha = alpha;
       this.seed = Math.random() * 100;
     }
 
     update() {
       this.x += this.speed;
-      if (this.x > width + 300) {
-        this.reset();
+      if (this.x - 400 > width) {
+        this.x = -600;
       }
     }
 
-    draw(flashBoost) {
+    draw(lightningBoost) {
       ctx.save();
       ctx.globalCompositeOperation = 'screen';
 
-      const gust = Math.sin(simTime * 0.55 + this.seed) * 0.012;
-      const alpha = Math.min((this.baseAlpha + gust) * flashBoost, 0.13);
+      const pulse = Math.sin(simTime * 0.4 + this.seed) * 0.012;
+      const alpha = Math.min((this.baseAlpha + pulse) * (1 + lightningBoost * 1.5), 0.15);
 
-      const slant = height * 0.34;
-      const grad = ctx.createLinearGradient(this.x, 0, this.x + this.widthSpan, 0);
-      grad.addColorStop(0, 'rgba(195, 225, 255, 0)');
-      grad.addColorStop(0.35, `rgba(210, 235, 255, ${alpha * 0.7})`);
-      grad.addColorStop(0.5, `rgba(225, 245, 255, ${alpha})`);
-      grad.addColorStop(0.65, `rgba(210, 235, 255, ${alpha * 0.7})`);
-      grad.addColorStop(1, 'rgba(195, 225, 255, 0)');
-
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.moveTo(this.x, 0);
-      ctx.lineTo(this.x + this.widthSpan, 0);
-      ctx.lineTo(this.x + this.widthSpan + slant, height);
-      ctx.lineTo(this.x + slant, height);
-      ctx.closePath();
-      ctx.fill();
-
+      ctx.globalAlpha = alpha;
+      ctx.drawImage(hazeSprite, this.x, this.y, 600, 140);
       ctx.restore();
     }
   }
 
   // ==========================================================================
-  // 6. HEAVY WIND-FIELD RAINDROP SIMULATION (Multi-tier Downpour)
+  // 6. HEAVY DRIVING STORM RAIN (High-Speed Multi-Tier Gale Streaks)
   // ==========================================================================
-  class HeavyRaindrop {
+  class HeavyStormRaindrop {
     constructor() {
       const r = Math.random();
-      if (r < 0.44) {
-        this.tier = 0; // distant dense mist-rain & gale drizzle
-        this.baseSpeed = Math.random() * 2.4 + 5.0;
-        this.baseLength = Math.random() * 5 + 12;
-        this.width = 0.50;
+      if (r < 0.42) {
+        this.tier = 0; // distant dense mist sheets & drizzle
+        this.baseSpeed = Math.random() * 3.5 + 13.0;
+        this.baseLength = Math.random() * 6 + 15;
+        this.width = 0.55;
         this.baseAlpha = Math.random() * 0.07 + 0.14;
         this.bias = (Math.random() - 0.5) * 0.08;
       } else if (r < 0.82) {
         this.tier = 1; // midground driving gale downpour
-        this.baseSpeed = Math.random() * 3.0 + 7.5;
-        this.baseLength = Math.random() * 6 + 17;
-        this.width = 0.72;
-        this.baseAlpha = Math.random() * 0.09 + 0.21;
+        this.baseSpeed = Math.random() * 4.5 + 18.0;
+        this.baseLength = Math.random() * 8 + 22;
+        this.width = 0.75;
+        this.baseAlpha = Math.random() * 0.09 + 0.22;
         this.bias = (Math.random() - 0.5) * 0.06;
       } else {
         this.tier = 2; // foreground heavy storm streaks
-        this.baseSpeed = Math.random() * 3.5 + 10.5;
-        this.baseLength = Math.random() * 8 + 23;
+        this.baseSpeed = Math.random() * 5.5 + 24.0;
+        this.baseLength = Math.random() * 12 + 30;
         this.width = 0.95;
-        this.baseAlpha = Math.random() * 0.12 + 0.28;
+        this.baseAlpha = Math.random() * 0.12 + 0.30;
         this.bias = (Math.random() - 0.5) * 0.04;
       }
 
@@ -375,28 +492,32 @@
     }
 
     reset(initial = false) {
-      this.x = Math.random() * (width + 450) - 225;
-      this.y = initial ? Math.random() * height : -35;
-      this.speed = this.baseSpeed * (0.94 + Math.random() * 0.12);
+      this.x = Math.random() * (width + 500) - 250;
+      this.y = initial ? Math.random() * height : -45;
+      this.speed = this.baseSpeed * (0.95 + Math.random() * 0.10);
       this.alpha = this.baseAlpha;
     }
 
     update() {
-      const currentAngle = getStormWindAngle(this.x, this.y, simTime, this.bias);
-      const vx = Math.sin(currentAngle) * this.speed;
-      const vy = Math.cos(currentAngle) * this.speed;
+      const wind = getStormWind(simTime);
+      const angle = getLocalRainAngle(this.x, this.y, simTime, this.bias);
+      const totalSpeed = this.speed * wind.gustSpeedMultiplier;
+
+      const vx = Math.sin(angle) * totalSpeed;
+      const vy = Math.cos(angle) * totalSpeed;
 
       this.x += vx;
       this.y += vy;
 
-      if (this.y > height + 35 || this.x > width + 260) {
+      if (this.y > height + 45 || this.x > width + 300) {
         this.reset();
       }
     }
 
-    draw(flashBoost) {
-      const currentAngle = getStormWindAngle(this.x, this.y, simTime, this.bias);
-      const tailAngle = getStormWindAngle(this.x, this.y - this.baseLength * 0.5, simTime, this.bias);
+    draw(lightningBoost) {
+      const angle = getLocalRainAngle(this.x, this.y, simTime, this.bias);
+      const wind = getStormWind(simTime);
+      const currentLength = this.baseLength * wind.gustSpeedMultiplier;
 
       ctx.save();
       ctx.globalCompositeOperation = 'screen';
@@ -405,17 +526,16 @@
       let beamGlint = 1.0;
       const lx = beacon.lx;
       const ly = beacon.ly;
-      if (this.x > lx && Math.abs(this.y - ly) < 46) {
+      if (this.x > lx && Math.abs(this.y - ly) < 48) {
         const facingOcean = Math.max(0, Math.cos(beacon.angle));
-        beamGlint = 1.0 + facingOcean * 1.5;
+        beamGlint = 1.0 + facingOcean * 1.6;
       }
 
-      const a = Math.min(this.alpha * flashBoost * beamGlint, 0.58);
+      // Lightning glint boost
+      const a = Math.min(this.alpha * (1 + lightningBoost * 2.2) * beamGlint, 0.62);
 
-      const endX = this.x + Math.sin(currentAngle) * this.baseLength;
-      const endY = this.y + Math.cos(currentAngle) * this.baseLength;
-      const midX = this.x + Math.sin((currentAngle + tailAngle) * 0.5) * (this.baseLength * 0.5);
-      const midY = this.y + Math.cos((currentAngle + tailAngle) * 0.5) * (this.baseLength * 0.5);
+      const endX = this.x + Math.sin(angle) * currentLength;
+      const endY = this.y + Math.cos(angle) * currentLength;
 
       const grad = ctx.createLinearGradient(this.x, this.y, endX, endY);
       if (beamGlint > 1.15) {
@@ -423,9 +543,9 @@
         grad.addColorStop(0.4, `rgba(254, 243, 199, ${a})`);
         grad.addColorStop(1, 'rgba(254, 243, 199, 0)');
       } else {
-        grad.addColorStop(0, `rgba(210, 232, 252, ${a * 0.35})`);
-        grad.addColorStop(0.4, `rgba(225, 242, 255, ${a})`);
-        grad.addColorStop(1, 'rgba(210, 232, 252, 0)');
+        grad.addColorStop(0, `rgba(210, 235, 255, ${a * 0.35})`);
+        grad.addColorStop(0.4, `rgba(228, 244, 255, ${a})`);
+        grad.addColorStop(1, 'rgba(210, 235, 255, 0)');
       }
 
       ctx.strokeStyle = grad;
@@ -433,108 +553,100 @@
       ctx.lineCap = 'round';
       ctx.beginPath();
       ctx.moveTo(this.x, this.y);
-      ctx.quadraticCurveTo(midX, midY, endX, endY);
+      ctx.lineTo(endX, endY);
       ctx.stroke();
       ctx.restore();
     }
   }
 
   // ==========================================================================
-  // 7. INITIALIZE STORM ATMOSPHERE
+  // 7. INITIALIZE STORM SYSTEM
   // ==========================================================================
   function initStormAtmosphere() {
-    // A. Rolling Storm Clouds
-    cloudBanks = [];
-    const cloudCount = 5;
-    for (let i = 0; i < cloudCount; i++) {
-      const cx = (width / cloudCount) * i + Math.random() * 80;
-      const cy = height * (Math.random() * 0.35 + 0.05);
-      const rx = width * (Math.random() * 0.15 + 0.24);
-      const ry = height * (Math.random() * 0.10 + 0.16);
-      const speed = Math.random() * 0.22 + 0.22;
-      const alpha = Math.random() * 0.035 + 0.055;
-      cloudBanks.push(new StormCloudBank(cx, cy, rx, ry, speed, alpha));
+    // A. 4 Major Volumetric Storm Cloud Clusters across the sky
+    cloudClusters = [];
+    const clusterPositions = [
+      { x: width * 0.15, y: height * 0.18, count: 11 },
+      { x: width * 0.42, y: height * 0.14, count: 12 },
+      { x: width * 0.72, y: height * 0.20, count: 11 },
+      { x: width * 0.96, y: height * 0.15, count: 10 }
+    ];
+    for (let c of clusterPositions) {
+      cloudClusters.push(new CloudCluster(c.x, c.y, c.count));
     }
 
-    // B. Low Atmospheric Storm Air Wisps
-    airWisps = [];
-    const wispCount = 10;
-    for (let i = 0; i < wispCount; i++) {
-      airWisps.push(new StormAirWisp());
+    // B. Low Scud Wisps (Torn Gale Vapor)
+    scudWisps = [];
+    const scudCount = 8;
+    for (let i = 0; i < scudCount; i++) {
+      scudWisps.push(new ScudWisp());
     }
 
-    // C. Squall Curtains (Heavy rain sheets)
-    squallCurtains = [];
-    const squallCount = 3;
-    for (let i = 0; i < squallCount; i++) {
-      squallCurtains.push(new SquallCurtain(i));
-    }
+    // C. Sea-Level Horizon Storm Spray Haze
+    hazeBands = [];
+    hazeBands.push(new HorizonHaze(0, height * 0.46, 0.35, 0.055));
+    hazeBands.push(new HorizonHaze(width * 0.55, height * 0.50, 0.42, 0.050));
 
-    // D. Heavy Raindrop Simulation (~750 drops on desktop)
-    const rainCount = Math.min(Math.floor((width * height) / 1050), 780);
+    // D. Heavy Driving Storm Rain (~720 drops on desktop)
+    const count = Math.min(Math.floor((width * height) / 1050), 750);
     raindrops = [];
-    for (let i = 0; i < rainCount; i++) {
-      raindrops.push(new HeavyRaindrop());
+    for (let i = 0; i < count; i++) {
+      raindrops.push(new HeavyStormRaindrop());
     }
   }
+
+  function resize() {
+    const parent = canvas.parentElement;
+    width = canvas.width = parent.clientWidth;
+    height = canvas.height = parent.clientHeight;
+    initStormAtmosphere();
+  }
+
+  window.addEventListener('resize', resize);
 
   // ==========================================================================
   // 8. MAIN ANIMATION & RENDERING LOOP
   // ==========================================================================
-  function updateStormLighting() {
-    const now = Date.now();
-    // Gentle distant thunder illumination across storm clouds
-    if (now - lastFlashTime > (Math.random() * 5000 + 7000)) {
-      lastFlashTime = now;
-      targetFlash = Math.random() * 0.16 + 0.07;
-    }
-  }
-
   function render() {
     ctx.clearRect(0, 0, width, height);
     simTime += 0.020;
 
-    updateStormLighting();
+    stormLightning.update();
     beacon.update();
 
-    // Ambient Lightning calculation
-    ambientFlashAlpha += (targetFlash - ambientFlashAlpha) * 0.08;
-    if (targetFlash > 0 && Math.abs(targetFlash - ambientFlashAlpha) < 0.01) {
-      targetFlash = 0;
-    }
-    const flashBoost = 1 + ambientFlashAlpha * 2.0;
+    const flash = stormLightning.intensity;
 
     // Distant ambient thunder sky flash
-    if (ambientFlashAlpha > 0.005) {
-      ctx.fillStyle = `rgba(205, 222, 255, ${ambientFlashAlpha * 0.65})`;
+    if (flash > 0.02) {
+      ctx.fillStyle = `rgba(215, 230, 255, ${flash * 0.22})`;
       ctx.fillRect(0, 0, width, height);
     }
 
-    // 1. Rolling Storm Clouds in Background
-    for (let cloud of cloudBanks) {
-      cloud.update();
-      cloud.draw(flashBoost);
+    // 1. Procedural Living Volumetric Storm Clouds (Screen blend, billows & churns)
+    for (let cluster of cloudClusters) {
+      cluster.update();
+      cluster.draw(flash);
     }
 
-    // 2. Moving Atmospheric Air Currents & Scud Wisps
-    for (let wisp of airWisps) {
-      wisp.update();
-      wisp.draw(flashBoost);
+    // 2. High-Altitude Scud & Atmospheric Gale Currents
+    for (let scud of scudWisps) {
+      scud.update();
+      scud.draw(flash);
     }
 
-    // 3. Atmospheric Squall Curtains (Blowing heavy downpour sheets)
-    for (let squall of squallCurtains) {
-      squall.update();
-      squall.draw(flashBoost);
+    // 3. Sea-Level Horizon Storm Spray Haze
+    for (let haze of hazeBands) {
+      haze.update();
+      haze.draw(flash);
     }
 
     // 4. Rotating Lighthouse Beacon & Eye-Splash Bloom
-    beacon.draw(flashBoost);
+    beacon.draw(1 + flash * 0.8);
 
-    // 5. Heavy Wind-Field Raindrops (Multi-tier downpour)
+    // 5. Heavy Driving Storm Rain (High-velocity, gust-reactive)
     for (let drop of raindrops) {
       drop.update();
-      drop.draw(flashBoost);
+      drop.draw(flash);
     }
 
     requestAnimationFrame(render);
