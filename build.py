@@ -1,7 +1,12 @@
 """
 Academic Static Site Generator - zaidamin.org
-Compiler for Dr. Zaid Amin's Personal Academic Portal
-Author: Antigravity AI & Dr. Zaid Amin
+Compiler for Dr. Zaid Amin's Premium Academic Portal
+Generates:
+- index.html (Compact, hook-catchy, premium executive showroom)
+- publications.html (Complete 24-paper interactive catalog with search & BibTeX)
+- research.html (In-depth research pillars & grant dossier)
+- prospective-students.html (Postgraduate recruitment & supervision guide)
+- cv.html (Print-ready academic Curriculum Vitae)
 """
 
 import json
@@ -24,17 +29,19 @@ def render_svg_icon(name):
         "orcid": '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.306v7.444h2.297c2.359 0 3.8-1.381 3.8-3.722 0-2.203-1.406-3.722-3.8-3.722h-2.297z"/></svg>',
         "github": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>',
         "linkedin": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>',
-        "email": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>',
-        "pdf": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>',
-        "shield-check": '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>',
-        "eye": '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>',
-        "globe": '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>',
+        "arrow-right": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>',
+        "pdf": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>',
+        "shield": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>',
+        "eye": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>',
+        "globe": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line></svg>',
+        "award": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>',
+        "book": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>',
         "search": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
         "external": '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>'
     }
     return icons.get(name, "")
 
-def get_base_header(title="Dr. Zaid Amin | Academic & Computational Researcher", description="", extra_meta=""):
+def get_base_header(active_nav="home", title="Dr. Zaid Amin | Academic & Computational Researcher", description="", extra_meta=""):
     profile = load_json("profile.json")
     if not description:
         description = profile["short_bio"]
@@ -52,8 +59,7 @@ def get_base_header(title="Dr. Zaid Amin | Academic & Computational Researcher",
         },
         "alumniOf": [
             {"@type": "CollegeOrUniversity", "name": "Universiti Kebangsaan Malaysia (UKM)"},
-            {"@type": "CollegeOrUniversity", "name": "Universitas Bina Darma"},
-            {"@type": "CollegeOrUniversity", "name": "Palcomtech Institute of Technology and Business"}
+            {"@type": "CollegeOrUniversity", "name": "Universitas Bina Darma"}
         ],
         "knowsAbout": profile["research_keywords"],
         "sameAs": [
@@ -65,6 +71,9 @@ def get_base_header(title="Dr. Zaid Amin | Academic & Computational Researcher",
         ]
     }
 
+    def nav_class(name):
+        return "nav-link active" if active_nav == name else "nav-link"
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,24 +84,18 @@ def get_base_header(title="Dr. Zaid Amin | Academic & Computational Researcher",
   <meta name="author" content="Dr. Zaid Amin">
   <link rel="canonical" href="https://zaidamin.org/">
 
-  <!-- Open Graph / Social Media -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://zaidamin.org/">
   <meta property="og:title" content="{title}">
   <meta property="og:description" content="{description}">
-  <meta property="og:image" content="https://zaidamin.org/assets/images/zaid-amin-preview.png">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{title}">
-  <meta name="twitter:description" content="{description}">
-
-  <!-- Google Scholar Indexing Meta Tags -->
+  <!-- Google Scholar Indexing -->
   <meta name="citation_author" content="Amin, Zaid">
   <meta name="citation_author_institution" content="INTI International University">
   {extra_meta}
 
-  <!-- JSON-LD Structured Data -->
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {json.dumps(schema_json, indent=2)}
   </script>
@@ -102,6 +105,7 @@ def get_base_header(title="Dr. Zaid Amin | Academic & Computational Researcher",
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="favicon.ico">
 </head>
 <body>
   <nav class="navbar" role="navigation" aria-label="Main Navigation">
@@ -112,13 +116,11 @@ def get_base_header(title="Dr. Zaid Amin | Academic & Computational Researcher",
       </a>
 
       <ul class="nav-links">
-        <li><a href="index.html#about" class="nav-link">About</a></li>
-        <li><a href="index.html#research" class="nav-link">Research & Grants</a></li>
-        <li><a href="index.html#publications" class="nav-link">Publications</a></li>
-        <li><a href="index.html#recruitment" class="nav-link">Postgraduate Lab</a></li>
-        <li><a href="index.html#teaching" class="nav-link">Teaching & Service</a></li>
-        <li><a href="index.html#essays" class="nav-link">Essays</a></li>
-        <li><a href="cv.html" class="nav-link">CV</a></li>
+        <li><a href="index.html" class="{nav_class('home')}">Home</a></li>
+        <li><a href="publications.html" class="{nav_class('publications')}">Publications (24+)</a></li>
+        <li><a href="research.html" class="{nav_class('research')}">Research & Grants</a></li>
+        <li><a href="prospective-students.html" class="{nav_class('lab')}">Join Lab (Ph.D./Master)</a></li>
+        <li><a href="cv.html" class="{nav_class('cv')}">CV</a></li>
         <li><a href="index.html#contact" class="nav-link">Contact</a></li>
       </ul>
 
@@ -141,8 +143,8 @@ def get_base_footer():
     <div class="container">
       <div class="footer-grid">
         <div>
-          <div class="footer-brand-title">Dr. Zaid Amin, Ph.D.</div>
-          <div class="footer-motto">"Das Sein, das Sollen" &mdash; {profile['tagline']}</div>
+          <div style="font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin-bottom: 6px;">Dr. Zaid Amin, Ph.D.</div>
+          <div style="font-family: var(--font-serif); font-style: italic; color: var(--brand-blue); margin-bottom: 12px;">"Das Sein, das Sollen" &bull; {profile['tagline']}</div>
           <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; max-width: 480px;">
             {profile['affiliation']['faculty']}<br>
             <strong>{profile['affiliation']['institution']}</strong>, {profile['affiliation']['location']}.
@@ -150,28 +152,26 @@ def get_base_footer():
         </div>
         <div>
           <h4 style="margin-bottom: 12px; font-size: 0.95rem;">Academic Navigation</h4>
-          <ul class="footer-links-list">
-            <li><a href="index.html#research" class="footer-link">Research Pillars & Grants</a></li>
-            <li><a href="index.html#publications" class="footer-link">Publications & BibTeX</a></li>
-            <li><a href="index.html#recruitment" class="footer-link">Join My Lab (Ph.D./Master)</a></li>
-            <li><a href="index.html#teaching" class="footer-link">Teaching & Leadership</a></li>
-            <li><a href="cv.html" class="footer-link">Curriculum Vitae (PDF)</a></li>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+            <li><a href="publications.html" style="color: var(--text-muted); font-size: 0.85rem;">Publications & BibTeX (24 Works)</a></li>
+            <li><a href="research.html" style="color: var(--text-muted); font-size: 0.85rem;">Research Pillars & Grants</a></li>
+            <li><a href="prospective-students.html" style="color: var(--text-muted); font-size: 0.85rem;">Postgraduate Lab (Open Positions)</a></li>
+            <li><a href="cv.html" style="color: var(--text-muted); font-size: 0.85rem;">Curriculum Vitae (PDF)</a></li>
           </ul>
         </div>
         <div>
-          <h4 style="margin-bottom: 12px; font-size: 0.95rem;">Profiles & Identifiers</h4>
-          <ul class="footer-links-list">
-            <li><a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="footer-link">ORCID: {profile['metrics']['orcid_id']}</a></li>
-            <li><a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="footer-link">Google Scholar Profile</a></li>
-            <li><a href="{profile['social_links']['sciprofiles']}" target="_blank" rel="noopener" class="footer-link">SciProfiles</a></li>
-            <li><a href="{profile['social_links']['github']}" target="_blank" rel="noopener" class="footer-link">GitHub (@zaeedh)</a></li>
-            <li><a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" class="footer-link">LinkedIn</a></li>
+          <h4 style="margin-bottom: 12px; font-size: 0.95rem;">Scholarly Identifiers</h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+            <li><a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" style="color: var(--text-muted); font-size: 0.85rem;">ORCID: {profile['metrics']['orcid_id']}</a></li>
+            <li><a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" style="color: var(--text-muted); font-size: 0.85rem;">Google Scholar</a></li>
+            <li><a href="{profile['social_links']['github']}" target="_blank" rel="noopener" style="color: var(--text-muted); font-size: 0.85rem;">GitHub (@zaeedh)</a></li>
+            <li><a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" style="color: var(--text-muted); font-size: 0.85rem;">LinkedIn</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <div>&copy; 2026 Dr. Zaid Amin. Built with Academic Rigor & Clean Web Architecture.</div>
-        <div>Hosted on <strong>zaidamin.org</strong></div>
+        <div>&copy; 2026 Dr. Zaid Amin. Developed with Academic Rigor & Clean Web Standards.</div>
+        <div>Domain: <strong>zaidamin.org</strong></div>
       </div>
     </div>
   </footer>
@@ -180,194 +180,299 @@ def get_base_footer():
 </html>
 """
 
-def generate_index_html():
+# ==============================================================================
+# 1. COMPACT, HOOK-CATCHY PREMIUM LANDING PAGE (index.html)
+# ==============================================================================
+def generate_compact_home():
     profile = load_json("profile.json")
-    research = load_json("research.json")
     publications = load_json("publications.json")
+    research = load_json("research.json")
     supervision = load_json("supervision.json")
-    teaching = load_json("teaching.json")
-    talks = load_json("talks.json")
     essays = load_json("essays.json")
 
-    # Generate Scholar Meta tags for the top papers
-    scholar_meta = ""
-    for pub in publications[:5]:
-        scholar_meta += f'\n  <meta name="citation_title" content="{pub["title"]}">'
-        if pub.get("doi"):
-            scholar_meta += f'\n  <meta name="citation_doi" content="{pub["doi"]}">'
-        if pub.get("year"):
-            scholar_meta += f'\n  <meta name="citation_publication_date" content="{pub["year"]}">'
+    html = get_base_header("home", "Dr. Zaid Amin | Academic & Computational Researcher | zaidamin.org")
 
-    html = get_base_header("Dr. Zaid Amin | Academic & Computational Researcher | zaidamin.org", extra_meta=scholar_meta)
-
-    # 1. Hero Section
+    # Hero Hook
     html += f"""
-    <section class="hero-section" id="about">
-      <div class="container hero-grid">
+    <section class="hero-compact">
+      <div class="container hero-compact-header">
+        <div class="hero-pill-hook">
+          <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background-color:var(--brand-emerald);"></span>
+          Senior Lecturer in Data Science &bull; INTI International University &bull; Ph.D. UKM
+        </div>
+
+        <h1 class="hero-main-title">{profile['name']}<span style="color:var(--brand-accent); font-size:2rem;">, Ph.D.</span></h1>
+        <div class="hero-creds">Human-Computer Interaction &bull; AI Governance &bull; Behavioral Computing</div>
+
+        <p class="hero-tagline-quote font-serif">
+          &ldquo;<strong>Das Sein, das Sollen</strong> &mdash; Bridging the gap between what computational systems <em>are</em>, and what human society <em>ought</em> to become.&rdquo;
+        </p>
+
+        <p class="hero-mission-statement">
+          Senior Lecturer and computational researcher investigating the frontiers of <strong>Agentic AI Governance</strong>, <strong>Attention-Based Interface Interventions</strong>, and <strong>Digital Ethics</strong>. Former Head of Master in Informatics Engineering, actively architecting verified guardrails to ensure artificial intelligence serves human dignity rather than exploitation.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="publications.html" class="btn btn-primary">
+            Explore Publications (24+)
+            {render_svg_icon('arrow-right')}
+          </a>
+          <a href="prospective-students.html" class="btn btn-accent">
+            Join My Research Group
+          </a>
+          <a href="cv.html" class="btn btn-secondary">
+            {render_svg_icon('pdf')}
+            View CV
+          </a>
+        </div>
+
+        <div class="academic-badges-center">
+          <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="badge-link">
+            {render_svg_icon('scholar')} Google Scholar
+          </a>
+          <a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="badge-link">
+            {render_svg_icon('orcid')} ORCID ({profile['metrics']['orcid_id']})
+          </a>
+          <a href="{profile['social_links']['github']}" target="_blank" rel="noopener" class="badge-link">
+            {render_svg_icon('github')} GitHub
+          </a>
+          <a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" class="badge-link">
+            {render_svg_icon('linkedin')} LinkedIn
+          </a>
+        </div>
+      </div>
+    </section>
+    """
+
+    # Bento Grid Showroom
+    html += f"""
+    <section class="bento-section">
+      <div class="container">
+        <div style="text-align: center; max-width: 680px; margin: 0 auto 36px auto;">
+          <span style="font-size: 0.75rem; font-weight: 700; color: var(--brand-blue); text-transform: uppercase; letter-spacing: 0.1em;">Executive Dossier</span>
+          <h2 style="font-size: 2.1rem; line-height: 1.25; margin-top: 6px;">Research Vision & Academic Leadership</h2>
+        </div>
+
+        <div class="bento-grid">
+          <!-- Card 1: Agentic AI (Span 2) -->
+          <div class="bento-card bento-card-span-2">
+            <div class="bento-icon-box">
+              {render_svg_icon('shield')}
+            </div>
+            <h3 class="bento-card-title">AI Governance & The Proxy Trap in Agentic Systems</h3>
+            <p class="bento-card-desc">
+              When autonomous agentic AI models optimize surrogate metrics, they inevitably divert from underlying human purpose. Our framework investigates multi-agent orchestration for civic compliance, urban sustainability, and structural safeguards where human judgment cannot be automated away.
+            </p>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 14px;">
+              <span style="font-size: 0.8rem; color: var(--brand-accent); font-weight: 700;">★ High-Impact 2026 Focus</span>
+              <a href="research.html" class="bento-link">Explore Research Pillars {render_svg_icon('arrow-right')}</a>
+            </div>
+          </div>
+
+          <!-- Card 2: HCI & Attention -->
+          <div class="bento-card">
+            <div class="bento-icon-box" style="background-color: var(--brand-emerald-light); color: var(--brand-emerald);">
+              {render_svg_icon('eye')}
+            </div>
+            <h3 class="bento-card-title">HCI & Cognitive Interventions</h3>
+            <p class="bento-card-desc">
+              Building upon the <strong>Tune-Attention Model</strong> developed during doctoral work at UKM, developing humane interface interventions to counteract misinformation, viral distraction, and digital loneliness.
+            </p>
+            <a href="research.html" class="bento-link">Learn More {render_svg_icon('arrow-right')}</a>
+          </div>
+
+          <!-- Card 3: Digital Heritage -->
+          <div class="bento-card">
+            <div class="bento-icon-box" style="background-color: var(--brand-accent-light); color: var(--brand-accent);">
+              {render_svg_icon('globe')}
+            </div>
+            <h3 class="bento-card-title">Digital Heritage Preservation</h3>
+            <p class="bento-card-desc">
+              Synthesizing social computing and immersive VR through <strong>Srivijayapedia</strong> to digitally preserve ancient maritime civilizations and cultural memory for future generations.
+            </p>
+            <a href="research.html" class="bento-link">View Projects {render_svg_icon('arrow-right')}</a>
+          </div>
+
+          <!-- Card 4: Academic Track Record (Span 2) -->
+          <div class="bento-card bento-card-span-2">
+            <div class="bento-icon-box">
+              {render_svg_icon('award')}
+            </div>
+            <h3 class="bento-card-title">Academic Leadership & Track Record</h3>
+            <p class="bento-card-desc">
+              Senior Lecturer at INTI International University, former Head of Master in Informatics Engineering and Head of Information Systems. Supervised graduate dissertations, led BAN-PT university accreditations, and actively reviewing for top journals.
+            </p>
+            <div class="bento-metrics-mini">
+              <div>
+                <div class="bento-metric-num">24+</div>
+                <div class="bento-metric-lbl">Indexed Publications</div>
+              </div>
+              <div>
+                <div class="bento-metric-num">Q1</div>
+                <div class="bento-metric-lbl">IEEE Access & MDPI</div>
+              </div>
+              <div>
+                <div class="bento-metric-num">10+</div>
+                <div class="bento-metric-lbl">Years Academic Leadership</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    """
+
+    # Featured Crown-Jewel Publications (Top 3)
+    html += f"""
+    <section class="featured-pubs-section">
+      <div class="container">
+        <div class="section-head-compact">
+          <div class="section-head-compact-left">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--brand-blue); text-transform: uppercase; letter-spacing: 0.1em;">Selected Scholarship</span>
+            <h2 style="font-size: 2.1rem; line-height: 1.25; margin-top: 4px;">Featured Publications</h2>
+            <p style="font-size: 0.95rem; color: var(--text-muted);">Highlighted recent and foundational contributions from our 24 peer-reviewed works.</p>
+          </div>
+          <div>
+            <a href="publications.html" class="btn btn-secondary">
+              View All 24 Publications & BibTeX
+              {render_svg_icon('arrow-right')}
+            </a>
+          </div>
+        </div>
+
         <div>
-          <div class="hero-badge-pill">
-            <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background-color:var(--brand-blue);"></span>
-            {profile['affiliation']['institution']} &bull; Senior Lecturer
-          </div>
-          <h1 class="hero-title">{profile['name']}<span style="color:var(--brand-accent); font-size:1.8rem;">, Ph.D.</span></h1>
-          <div class="hero-subtitle font-serif">{profile['tagline']}</div>
-          
-          <div class="hero-affiliation">
-            <div><strong>{profile['title']}</strong></div>
-            <div>{profile['affiliation']['faculty']} &bull; {profile['affiliation']['institution']}, Malaysia</div>
-            <div style="font-size:0.875rem; color:var(--text-muted); margin-top:2px;">Ph.D., Universiti Kebangsaan Malaysia (UKM)</div>
-          </div>
+          <!-- Featured 1 -->
+          <article class="featured-pub-card">
+            <div class="featured-tag-badge">★ Journal Article &bull; 2026 &bull; MDPI Smart Cities</div>
+            <h3 class="featured-pub-title">Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance</h3>
+            <div class="featured-pub-authors"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+            <div class="featured-pub-venue">Smart Cities (MDPI) &bull; DOI: 10.3390/smartcities9100174</div>
+            <div class="featured-pub-actions">
+              <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="pub-btn">DOI Article {render_svg_icon('external')}</a>
+              <a href="publications.html" class="pub-btn">Cite / BibTeX</a>
+            </div>
+          </article>
 
-          <p class="hero-bio">
-            {profile['short_bio']}
-          </p>
+          <!-- Featured 2 -->
+          <article class="featured-pub-card">
+            <div class="featured-tag-badge">★ SSRN / Working Paper &bull; 2026</div>
+            <h3 class="featured-pub-title">The Proxy Trap in Agentic AI: When Metrics Replace Judgment</h3>
+            <div class="featured-pub-authors"><strong>Dr. Zaid Amin</strong></div>
+            <div class="featured-pub-venue">Social Science Research Network (SSRN) &bull; DOI: 10.2139/ssrn.7670124</div>
+            <div class="featured-pub-actions">
+              <a href="https://doi.org/10.2139/ssrn.7670124" target="_blank" rel="noopener" class="pub-btn">DOI Article {render_svg_icon('external')}</a>
+              <a href="publications.html" class="pub-btn">Cite / BibTeX</a>
+            </div>
+          </article>
 
-          <div class="hero-actions">
-            <a href="index.html#recruitment" class="btn btn-primary">Join My Research Group</a>
-            <a href="index.html#publications" class="btn btn-secondary">Explore Publications ({len(publications)})</a>
-            <a href="cv.html" class="btn btn-secondary">
-              {render_svg_icon('pdf')}
-              Download CV
-            </a>
-          </div>
-
-          <div class="academic-badges">
-            <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="badge-link">
-              {render_svg_icon('scholar')}
-              Google Scholar
-            </a>
-            <a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="badge-link">
-              {render_svg_icon('orcid')}
-              ORCID ({profile['metrics']['orcid_id']})
-            </a>
-            <a href="{profile['social_links']['sciprofiles']}" target="_blank" rel="noopener" class="badge-link">
-              {render_svg_icon('external')}
-              SciProfiles
-            </a>
-            <a href="{profile['social_links']['github']}" target="_blank" rel="noopener" class="badge-link">
-              {render_svg_icon('github')}
-              GitHub
-            </a>
-            <a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" class="badge-link">
-              {render_svg_icon('linkedin')}
-              LinkedIn
-            </a>
-          </div>
-        </div>
-
-        <div class="hero-card">
-          <div class="avatar-wrapper">
-            ZA
-          </div>
-          <h3 class="card-name">{profile['name']}</h3>
-          <div class="card-title">Senior Lecturer & Researcher</div>
-          <div class="card-status-pill">
-            <span class="card-status-dot"></span>
-            Accepting Ph.D. & Master's Students
-          </div>
-
-          <ul class="card-details-list">
-            <li class="card-details-item">
-              <span class="card-details-label">Affiliation</span>
-              <span>INTI Intl. University</span>
-            </li>
-            <li class="card-details-item">
-              <span class="card-details-label">Doctorate</span>
-              <span>UKM (Malaysia)</span>
-            </li>
-            <li class="card-details-item">
-              <span class="card-details-label">Focus Area</span>
-              <span>HCI & AI Governance</span>
-            </li>
-            <li class="card-details-item">
-              <span class="card-details-label">Location</span>
-              <span>Nilai, Malaysia</span>
-            </li>
-          </ul>
+          <!-- Featured 3 -->
+          <article class="featured-pub-card">
+            <div class="featured-tag-badge">★ Q1 Flagship &bull; 2021 &bull; IEEE Access</div>
+            <h3 class="featured-pub-title">Attention-Based Design and User Decisions on Information Sharing: A Thematic Literature Review</h3>
+            <div class="featured-pub-authors"><strong>Dr. Zaid Amin</strong> et al.</div>
+            <div class="featured-pub-venue">IEEE Access &bull; DOI: 10.1109/ACCESS.2021.3087740</div>
+            <div class="featured-pub-actions">
+              <a href="https://doi.org/10.1109/ACCESS.2021.3087740" target="_blank" rel="noopener" class="pub-btn">DOI Article {render_svg_icon('external')}</a>
+              <a href="publications.html" class="pub-btn">Cite / BibTeX</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
     """
 
-    # 2. Metrics Strip
+    # Postgraduate Lab Hook Banner
     html += f"""
-    <div class="metrics-strip">
-      <div class="container metrics-grid">
-        <div class="metric-card">
-          <div class="metric-value">{len(publications)}+</div>
-          <div class="metric-label">Publications</div>
-          <div class="metric-sub">Journals, Conferences & Chapters</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value">Q1</div>
-          <div class="metric-label">High-Impact Venues</div>
-          <div class="metric-sub">IEEE Access, MDPI Smart Cities</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value">10+</div>
-          <div class="metric-label">Academic Experience</div>
-          <div class="metric-sub">Senior Lecturer & Program Head</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value">4</div>
-          <div class="metric-label">Target Grant Themes</div>
-          <div class="metric-sub">FRGS, AI Ethics, Civic Tech</div>
-        </div>
-      </div>
-    </div>
-    """
-
-    # 3. Research Pillars & Grants Section (Crucial for Associate Professorship & Funding)
-    html += f"""
-    <section class="section" id="research">
+    <section class="section" style="padding: 48px 0;">
       <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Scholarly Vision & Grants</span>
-          <h2 class="section-title">Research Pillars & Grant Themes</h2>
-          <p class="section-desc">{research['vision']}</p>
-        </div>
-
-        <div class="pillars-grid">
-    """
-    for pillar in research["pillars"]:
-        topics_html = "".join([f'<li class="topic-chip">{t}</li>' for t in pillar["key_topics"]])
-        html += f"""
-          <div class="pillar-card">
-            <div class="pillar-icon-box">
-              {render_svg_icon(pillar['icon'])}
-            </div>
-            <h3 class="pillar-title">{pillar['title']}</h3>
-            <p class="pillar-desc">{pillar['full_desc']}</p>
-            <ul class="pillar-topics-list">
-              {topics_html}
-            </ul>
-            <div class="grant-alignment-badge">
-              <strong>Grant Alignment:</strong> {pillar['grant_alignment']}
-            </div>
+        <div class="lab-banner-compact">
+          <div>
+            <span style="font-size: 0.75rem; font-weight: 700; color: #fbbf24; text-transform: uppercase; letter-spacing: 0.08em; display: inline-block; margin-bottom: 8px;">Graduate Opportunities</span>
+            <h2 class="lab-banner-title">Accepting Ph.D. & Master's by Research Scholars</h2>
+            <p class="lab-banner-desc">
+              Join Dr. Zaid Amin's research initiative at INTI International University. Open supervision topics in Agentic AI Alignment, The Proxy Trap, and Attention-Based Interface Interventions.
+            </p>
           </div>
-        """
-    html += """
+          <div>
+            <a href="prospective-students.html" class="btn btn-accent" style="white-space: nowrap;">
+              Explore Open Topics & Apply
+              {render_svg_icon('arrow-right')}
+            </a>
+          </div>
         </div>
       </div>
     </section>
     """
 
-    # 4. Publications Section (All 24 real works with search, filter tabs, BibTeX copy)
+    # Thought Leadership ("Das Sein, das Sollen")
     html += f"""
-    <section class="section section-subtle" id="publications">
+    <section class="section section-subtle">
+      <div class="container" style="max-width: 860px; text-align: center;">
+        <span style="font-size: 0.75rem; font-weight: 700; color: var(--brand-blue); text-transform: uppercase; letter-spacing: 0.1em;">Public Intellectual Writing</span>
+        <h2 style="font-size: 2rem; margin: 6px 0 12px 0;">Das Sein, das Sollen</h2>
+        <p style="font-size: 1.05rem; color: var(--text-secondary); font-family: var(--font-serif); font-style: italic; margin-bottom: 24px; line-height: 1.6;">
+          &ldquo;Every millisecond of digital engagement today has been monetized. Designing systems that honor human stillness requires reimagining friction not as an engineering defect, but as a sacred cognitive sanctuary.&rdquo;
+        </p>
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 24px;">
+          From Hume's is-ought problem to autonomous LLM alignment: why descriptive machine learning training data ('Das Sein') cannot automatically manufacture moral discernment ('Das Sollen').
+        </p>
+        <a href="index.html#contact" class="btn btn-secondary">Inquire for Speaking & Keynotes</a>
+      </div>
+    </section>
+    """
+
+    # Contact Section
+    html += f"""
+    <section class="section" id="contact">
+      <div class="container" style="max-width: 760px; text-align: center;">
+        <span style="font-size: 0.75rem; font-weight: 700; color: var(--brand-blue); text-transform: uppercase; letter-spacing: 0.1em;">Direct Inquiries</span>
+        <h2 style="font-size: 2rem; margin: 6px 0 12px 0;">Connect & Collaborate</h2>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 28px;">
+          For research partnerships, keynote invitations, grant applications, or postgraduate inquiries:
+        </p>
+
+        <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 28px;">
+          <a href="mailto:{profile['social_links']['email']}" class="btn btn-primary">
+            zaid.amin@newinti.edu.my
+          </a>
+          <a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" class="btn btn-secondary">
+            LinkedIn Profile
+          </a>
+        </div>
+
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          Faculty of Data Science and Information Technology (FDSIT)<br>
+          INTI International University, Nilai, Negeri Sembilan, Malaysia.
+        </div>
+      </div>
+    </section>
+    """
+
+    html += get_base_footer()
+    return html
+
+# ==============================================================================
+# 2. FULL DEDICATED PUBLICATIONS CATALOG (publications.html)
+# ==============================================================================
+def generate_publications_page():
+    publications = load_json("publications.json")
+
+    html = get_base_header("publications", f"Publications ({len(publications)}) | Dr. Zaid Amin")
+    html += f"""
+    <section class="section" style="padding-top: 48px;">
       <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Peer-Reviewed Scholarship</span>
-          <h2 class="section-title">Publications & Citations ({len(publications)})</h2>
-          <p class="section-desc">
-            Complete indexed record across Human-Computer Interaction, AI Governance, Behavioral Computing, and Information Systems. Filter by venue type or search topics in real-time.
+        <div style="margin-bottom: 32px;">
+          <span style="font-size: 0.75rem; font-weight: 700; color: var(--brand-blue); text-transform: uppercase; letter-spacing: 0.1em;">Scholarly Archive</span>
+          <h1 style="font-size: 2.5rem; margin-top: 4px;">Complete Publication Catalog ({len(publications)})</h1>
+          <p style="font-size: 1rem; color: var(--text-muted); max-width: 780px;">
+            Full indexed record across Human-Computer Interaction, AI Governance, Behavioral Computing, and Information Systems. Search in real-time or filter by venue category.
           </p>
         </div>
 
         <div class="publications-controls">
           <div class="search-input-box">
             <span class="search-icon">{render_svg_icon('search')}</span>
-            <input type="text" id="pub-search" class="search-input" placeholder="Search publications by title, venue, year, or keyword...">
+            <input type="text" id="pub-search" class="search-input" placeholder="Search by paper title, venue, year, or keyword...">
           </div>
 
           <div class="filter-pills">
@@ -379,33 +484,29 @@ def generate_index_html():
           </div>
         </div>
 
-        <div id="pub-count-indicator" style="margin-bottom: 16px; font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">
+        <div id="pub-count-indicator" style="margin-bottom: 16px; font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">
           Showing all {len(publications)} publications
         </div>
 
         <div class="publications-list">
     """
-
     for pub in publications:
         type_class = f"type-{pub['category'].lower().replace(' ', '')}"
         doi_link = f'<a href="{pub["url"]}" target="_blank" rel="noopener" class="pub-btn">DOI: {pub["doi"]} {render_svg_icon("external")}</a>' if pub.get("doi") else ""
-        url_link = f'<a href="{pub["url"]}" target="_blank" rel="noopener" class="pub-btn">Link {render_svg_icon("external")}</a>' if (pub.get("url") and not pub.get("doi")) else ""
 
         html += f"""
           <article class="pub-item" data-category="{pub['category'].lower()}">
-            <div class="pub-meta-top">
-              <span class="pub-type-badge {type_class}">{pub['category']}</span>
-              <span class="pub-year">{pub['year']}</span>
-              {f'<span style="font-size:0.75rem; color:var(--brand-accent); font-weight:700;">★ Featured Paper</span>' if pub.get('featured') else ''}
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <span style="font-size:0.75rem; font-weight:700; color:var(--brand-blue); text-transform:uppercase;">{pub['category']} &bull; {pub['year']}</span>
+              {f'<span style="font-size:0.75rem; color:var(--brand-accent); font-weight:700;">★ Featured</span>' if pub.get('featured') else ''}
             </div>
 
-            <h3 class="pub-title">{pub['title']}</h3>
-            <div class="pub-authors"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-            <div class="pub-venue">{pub['venue']}</div>
+            <h3 style="font-size:1.2rem; margin-bottom:6px; line-height:1.35;">{pub['title']}</h3>
+            <div style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+            <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">{pub['venue']}</div>
 
-            <div class="pub-actions">
+            <div style="display:flex; gap:10px; align-items:center;">
               {doi_link}
-              {url_link}
               <button class="pub-btn btn-bibtex-toggle" data-target="bib-{pub['id']}">Cite / BibTeX</button>
             </div>
 
@@ -421,179 +522,122 @@ def generate_index_html():
       </div>
     </section>
     """
+    html += get_base_footer()
+    return html
 
-    # 5. Prospective Students & Lab Recruitment Section (Target #3 for Dr. Zaid)
+# ==============================================================================
+# 3. RESEARCH PILLARS & GRANTS DOSSIER (research.html)
+# ==============================================================================
+def generate_research_page():
+    research = load_json("research.json")
+
+    html = get_base_header("research", "Research Pillars & Grants | Dr. Zaid Amin")
     html += f"""
-    <section class="section" id="recruitment">
+    <section class="section" style="padding-top: 48px;">
       <div class="container">
-        <div class="recruitment-card">
-          <div class="recruitment-tag">Academic Mentorship & Opportunities</div>
-          <h2 class="recruitment-title">{supervision['heading']}</h2>
-          <p class="recruitment-text">{supervision['statement']}</p>
-
-          <h3 style="color:#ffffff; font-size:1.25rem; margin-bottom:20px;">Open Supervised Research Directions</h3>
-          <div class="recruitment-topics-grid">
-    """
-    for t in supervision["open_topics"]:
-        degrees_pills = " ".join([f'<span style="background:rgba(255,255,255,0.15); padding:2px 8px; border-radius:4px; font-size:0.75rem;">{d}</span>' for d in t["degree_levels"]])
-        html += f"""
-            <div class="recruitment-topic-box">
-              <div style="margin-bottom:6px;">{degrees_pills}</div>
-              <div class="topic-box-title">{t['title']}</div>
-              <p class="topic-box-desc">{t['description']}</p>
-              <div style="font-size:0.75rem; color:#94a3b8; margin-top:8px;"><strong>Skills:</strong> {t['skills_required']}</div>
-            </div>
-        """
-    html += f"""
-          </div>
-
-          <div style="background-color:rgba(0,0,0,0.25); border-radius:var(--radius-md); padding:24px; border:1px solid rgba(255,255,255,0.1);">
-            <h4 style="color:#fbbf24; font-size:1.05rem; margin-bottom:12px;">How to Inquire for Supervision:</h4>
-            <ol style="margin-left:20px; font-size:0.9rem; line-height:1.7; color:#e2e8f0;">
-              <li>Verify that your background in Computer Science / IT / Data Science meets postgraduate entry requirements.</li>
-              <li>Read my recent papers on Attention-Based Design (IEEE Access 2021) or Agentic Governance (Smart Cities 2026).</li>
-              <li>Email your CV and a 1-page Research Proposal to <a href="mailto:zaid.amin@newinti.edu.my" style="color:#60a5fa; text-decoration:underline;">zaid.amin@newinti.edu.my</a> with the subject <code>[Prospective Postgraduate] - [Your Name]</code>.</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </section>
-    """
-
-    # 6. Teaching, Academic Leadership & Talks
-    html += f"""
-    <section class="section" id="teaching">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Pedagogy & Professional Standing</span>
-          <h2 class="section-title">Teaching, Leadership & Service</h2>
-          <p class="section-desc">{teaching['philosophy']}</p>
-        </div>
-
-        <div class="two-col-grid">
-          <div>
-            <h3 style="margin-bottom: 24px; font-size: 1.35rem;">Academic Leadership History</h3>
-            <div class="timeline-list">
-    """
-    for role in profile["leadership_roles"]:
-        html += f"""
-              <div class="timeline-item">
-                <div class="timeline-date">{role['period']}</div>
-                <div class="timeline-title">{role['role']}</div>
-                <div class="timeline-org">{role['institution']}</div>
-                <div class="timeline-desc">{role['description']}</div>
-              </div>
-        """
-    html += f"""
-            </div>
-          </div>
-
-          <div>
-            <h3 style="margin-bottom: 24px; font-size: 1.35rem;">Keynotes, Talks & Peer Review</h3>
-            <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px;">
-    """
-    for talk in talks["talks"]:
-        html += f"""
-              <div style="background-color: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 0.75rem; font-weight: 700; color: var(--brand-blue); text-transform: uppercase;">{talk['type']} &bull; {talk['year']}</span>
-                  <span style="font-size: 0.775rem; color: var(--text-muted);">{talk['location']}</span>
-                </div>
-                <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; color: var(--text-primary);">{talk['title']}</div>
-                <div style="font-size: 0.85rem; color: var(--text-secondary); font-style: italic;">{talk['event']}</div>
-              </div>
-        """
-
-    html += f"""
-            </div>
-
-            <div style="background-color: var(--bg-subtle); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 20px;">
-              <h4 style="font-size: 0.95rem; margin-bottom: 10px;">Peer Reviewer for Prestigious Venues</h4>
-              <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
-                IEEE Access &bull; International Journal of Human-Computer Interaction (Taylor & Francis) &bull; MDPI Smart Cities &bull; Springer LNCS &bull; IJACSA &bull; ICE3IS Program Committee.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    """
-
-    # 7. Essays & Reflections ("Das sein, das sollen")
-    html += f"""
-    <section class="section section-subtle" id="essays">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Public Scholarship</span>
-          <h2 class="section-title">Essays & Intellectual Dispatches ("Das Sein, das Sollen")</h2>
-          <p class="section-desc">
-            Bridging empirical computing with normative philosophy, examining what technology is versus what human society ought to become.
+        <div style="margin-bottom: 40px;">
+          <span style="font-size: 0.75rem; font-weight: 700; color: var(--brand-blue); text-transform: uppercase; letter-spacing: 0.1em;">Scholarly Mission</span>
+          <h1 style="font-size: 2.5rem; margin-top: 4px;">Research Pillars & Grant Themes</h1>
+          <p style="font-size: 1.05rem; color: var(--text-muted); max-width: 820px; line-height: 1.6;">
+            {research['vision']}
           </p>
         </div>
 
-        <div class="essays-grid">
+        <div style="display: flex; flex-direction: column; gap: 32px;">
     """
-    for e in essays:
-        tags_html = " ".join([f'<span class="topic-chip">{t}</span>' for t in e["tags"]])
+    for pillar in research["pillars"]:
+        topics_html = " ".join([f'<span class="topic-chip" style="font-size:0.8rem; padding:4px 10px; background:var(--bg-subtle); border-radius:4px; margin-right:6px; margin-bottom:6px; display:inline-block;">{t}</span>' for t in pillar["key_topics"]])
         html += f"""
-          <article class="essay-card">
-            <div class="essay-date">{e['date']} &bull; {e['reading_time']}</div>
-            <h3 class="essay-title">{e['title']}</h3>
-            <p class="essay-summary">{e['summary']}</p>
-            <div class="essay-footer">
-              <div style="display:flex; gap:4px;">{tags_html}</div>
-              <a href="index.html#essays" style="font-weight:600; font-size:0.8rem;">Read Essay &rarr;</a>
+          <div style="background-color: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 36px; box-shadow: var(--shadow-sm);">
+            <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
+              <div class="bento-icon-box" style="margin-bottom:0;">
+                {render_svg_icon(pillar['icon'])}
+              </div>
+              <h2 style="font-size: 1.6rem; margin:0;">{pillar['title']}</h2>
             </div>
-          </article>
+
+            <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 20px;">
+              {pillar['full_desc']}
+            </p>
+
+            <div style="margin-bottom: 20px;">
+              <div style="font-size:0.85rem; font-weight:700; margin-bottom:8px; color:var(--text-primary);">Key Theoretical & Technical Areas:</div>
+              {topics_html}
+            </div>
+
+            <div style="background-color: var(--brand-accent-light); color: var(--brand-accent); padding: 12px 18px; border-radius: var(--radius-sm); font-size: 0.85rem; font-weight: 600; border-left: 4px solid var(--brand-accent);">
+              <strong>Grant Alignment:</strong> {pillar['grant_alignment']}
+            </div>
+          </div>
         """
     html += """
         </div>
       </div>
     </section>
     """
+    html += get_base_footer()
+    return html
 
-    # 8. Contact Section
+# ==============================================================================
+# 4. POSTGRADUATE LAB & SUPERVISION (prospective-students.html)
+# ==============================================================================
+def generate_supervision_page():
+    supervision = load_json("supervision.json")
+
+    html = get_base_header("lab", "Postgraduate Lab & Supervision | Dr. Zaid Amin")
     html += f"""
-    <section class="section" id="contact">
-      <div class="container" style="max-width: 800px; text-align: center;">
-        <span class="section-tag">Connect & Collaborate</span>
-        <h2 class="section-title">Academic & Research Inquiries</h2>
-        <p class="section-desc" style="margin: 0 auto 36px auto;">
-          For research collaborations, keynote invitations, grant partnerships, or postgraduate supervision at INTI International University, please reach out directly.
-        </p>
-
-        <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 32px;">
-          <a href="mailto:{profile['social_links']['email']}" class="btn btn-primary" style="font-size: 1rem; padding: 14px 28px;">
-            {render_svg_icon('email')}
-            zaid.amin@newinti.edu.my
-          </a>
-          <a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" class="btn btn-secondary" style="font-size: 1rem; padding: 14px 28px;">
-            {render_svg_icon('linkedin')}
-            Connect on LinkedIn
-          </a>
+    <section class="section" style="padding-top: 48px;">
+      <div class="container" style="max-width: 920px;">
+        <div style="margin-bottom: 32px;">
+          <span style="font-size: 0.75rem; font-weight: 700; color: var(--brand-emerald); text-transform: uppercase; letter-spacing: 0.1em;">Academic Mentorship</span>
+          <h1 style="font-size: 2.5rem; margin-top: 4px;">{supervision['heading']}</h1>
+          <p style="font-size: 1.05rem; color: var(--text-secondary); line-height: 1.7; margin-top: 12px;">
+            {supervision['statement']}
+          </p>
         </div>
 
-        <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
-          <strong>Office Address:</strong><br>
-          Faculty of Data Science and Information Technology (FDSIT)<br>
-          INTI International University, Persiaran Perdana BBN, Putra Nilai, 71800 Nilai, Negeri Sembilan, Malaysia.
+        <div style="margin-bottom: 40px;">
+          <h2 style="font-size: 1.5rem; margin-bottom: 20px;">Open Supervised Research Directions</h2>
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+    """
+    for t in supervision["open_topics"]:
+        pills = " ".join([f'<span style="background:var(--brand-blue-light); color:var(--brand-blue); padding:3px 10px; border-radius:4px; font-size:0.75rem; font-weight:600;">{d}</span>' for d in t["degree_levels"]])
+        html += f"""
+            <div style="background-color: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 24px;">
+              <div style="margin-bottom: 8px;">{pills}</div>
+              <h3 style="font-size: 1.25rem; margin-bottom: 8px;">{t['title']}</h3>
+              <p style="font-size: 0.925rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">{t['description']}</p>
+              <div style="font-size: 0.8rem; color: var(--text-muted);"><strong>Prerequisites:</strong> {t['skills_required']}</div>
+            </div>
+        """
+    html += f"""
+          </div>
+        </div>
+
+        <div style="background-color: var(--bg-surface); border: 2px solid var(--brand-blue); border-radius: var(--radius-lg); padding: 32px;">
+          <h2 style="font-size: 1.4rem; color: var(--brand-navy); margin-bottom: 16px;">How to Submit an Inquiry</h2>
+          <ol style="margin-left: 20px; font-size: 0.95rem; line-height: 1.8; color: var(--text-secondary);">
+            <li>Review my recent papers on Attention-Based Design (IEEE Access) or Agentic AI Governance (Smart Cities 2026).</li>
+            <li>Prepare your Academic CV, transcripts, and a 1-page Research Proposal outlining the research questions you wish to pursue.</li>
+            <li>Email your dossier to <a href="mailto:zaid.amin@newinti.edu.my" style="font-weight:700; color:var(--brand-blue);">zaid.amin@newinti.edu.my</a> with the subject line <code>[Prospective Postgraduate] - [Your Full Name] - [Ph.D./Master]</code>.</li>
+          </ol>
         </div>
       </div>
     </section>
     """
-
     html += get_base_footer()
     return html
 
-def generate_cv_html():
+# ==============================================================================
+# 5. CURRICULUM VITAE (cv.html)
+# ==============================================================================
+def generate_cv_page():
     profile = load_json("profile.json")
     publications = load_json("publications.json")
-    teaching = load_json("teaching.json")
-    talks = load_json("talks.json")
 
-    html = get_base_header("Curriculum Vitae | Dr. Zaid Amin, Ph.D. | zaidamin.org")
+    html = get_base_header("cv", "Curriculum Vitae | Dr. Zaid Amin, Ph.D.")
     html += f"""
-    <section class="section">
+    <section class="section" style="padding-top: 48px;">
       <div class="container" style="max-width: 900px;">
         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; border-bottom: 2px solid var(--border-strong); padding-bottom: 24px;">
           <div>
@@ -660,17 +704,8 @@ def generate_cv_html():
             </li>
         """
 
-    html += f"""
+    html += """
           </ol>
-        </div>
-
-        <div style="margin-bottom: 32px;">
-          <h2 style="font-size: 1.35rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 6px; margin-bottom: 16px;">4. Academic Service & Peer Review</h2>
-          <ul style="margin-left: 20px; font-size: 0.9rem; line-height: 1.7;">
-            <li><strong>Peer Reviewer:</strong> IEEE Access, International Journal of Human-Computer Interaction, MDPI Smart Cities, IJACSA, Springer LNCS.</li>
-            <li><strong>Conference Committee:</strong> ICE3IS (Track Chair), Annual Research Seminar (ARS).</li>
-            <li><strong>Professional Memberships:</strong> IEEE, ACM SIGCHI, Malaysian Software Engineering Interest Group (MySEIG).</li>
-          </ul>
         </div>
       </div>
     </section>
@@ -678,49 +713,42 @@ def generate_cv_html():
     html += get_base_footer()
     return html
 
+# ==============================================================================
+# MAIN COMPILER BUILD
+# ==============================================================================
 def build_all():
-    print("Starting Academic Static Site Build for zaidamin.org...")
+    print("Compiling Premium Academic Static Site for zaidamin.org...")
     DIST_DIR.mkdir(parents=True, exist_ok=True)
 
-    # 1. Compile pages
-    index_content = generate_index_html()
-    cv_content = generate_cv_html()
+    pages = {
+        "index.html": generate_compact_home(),
+        "publications.html": generate_publications_page(),
+        "research.html": generate_research_page(),
+        "prospective-students.html": generate_supervision_page(),
+        "cv.html": generate_cv_page()
+    }
 
-    with open(DIST_DIR / "index.html", "w", encoding="utf-8") as f:
-        f.write(index_content)
+    for filename, content in pages.items():
+        with open(DIST_DIR / filename, "w", encoding="utf-8") as f:
+            f.write(content)
+        # Also copy to workspace root for direct preview
+        with open(BASE_DIR / filename, "w", encoding="utf-8") as f:
+            f.write(content)
+        print(f"  Compiled: {filename} ({len(content)} chars)")
 
-    with open(DIST_DIR / "cv.html", "w", encoding="utf-8") as f:
-        f.write(cv_content)
-
-    # Also keep index.html and cv.html at workspace root for immediate browser previewing
-    with open(BASE_DIR / "index.html", "w", encoding="utf-8") as f:
-        f.write(index_content)
-
-    with open(BASE_DIR / "cv.html", "w", encoding="utf-8") as f:
-        f.write(cv_content)
-
-    # 2. Copy assets
+    # Copy assets
     dist_assets = DIST_DIR / "assets"
     if dist_assets.exists():
         shutil.rmtree(dist_assets)
     shutil.copytree(ASSETS_DIR, dist_assets)
 
-    # 3. Copy CNAME
-    cname_src = BASE_DIR / "CNAME"
-    if cname_src.exists():
-        shutil.copy(cname_src, DIST_DIR / "CNAME")
+    # Copy CNAME, favicon, and BibTeX
+    for extra in ["CNAME", "favicon.ico", "data/publications.bib"]:
+        src = BASE_DIR / extra
+        if src.exists():
+            shutil.copy(src, DIST_DIR / Path(extra).name)
 
-    # 4. Copy BibTeX
-    bib_src = DATA_DIR / "publications.bib"
-    if bib_src.exists():
-        shutil.copy(bib_src, DIST_DIR / "publications.bib")
-        shutil.copy(bib_src, BASE_DIR / "publications.bib")
-
-    print("Build completed successfully!")
-    print(f"- Production distribution: {DIST_DIR}")
-    print(f"- Main index page: {DIST_DIR / 'index.html'}")
-    print(f"- Curriculum Vitae page: {DIST_DIR / 'cv.html'}")
+    print("Build complete! All pages successfully generated in dist/ and workspace root.")
 
 if __name__ == "__main__":
     build_all()
-
