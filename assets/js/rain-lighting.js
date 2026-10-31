@@ -1,22 +1,23 @@
 /**
- * Heavy Ocean Storm Rain & Rotating Lighthouse Beacon Engine
+ * Cinematic Chaotic Ocean Tempest & Rotating Lighthouse Beacon Engine
  * For Dr. Zaid Amin (zaidamin.org)
  * 
  * Features:
- * 1. Severe Ocean Storm Rain:
- *    - 720+ needle-fine, whisper-thin, ultra-smooth raindrops.
- *    - Steep squall slant (driven by heavy gale-force storm winds at ~26 deg).
- *    - Small, compact raindrop needles (4px-10px) with high velocity (16-28 px/frame).
- *    - Zero splash on collision (clean, seamless, continuous storm downpour).
- *    - 3 depth tiers (distant squall mist veil, midground driving sheets, foreground fast needles).
- *    - Dynamic wind gusting: rain angle and speed surge in organic storm waves.
+ * 1. Chaotic, High-Visibility Storm Rain:
+ *    - 680+ luminous, sharply visible rain streaks (alpha 0.35 to 0.85).
+ *    - True motion-blur physics: streak length scales with velocity (18px to 52px).
+ *    - Turbulent wind gusts: severe storm slant (28 deg - 42 deg) with chaotic fluttering eddies.
+ *    - Torrential squall sheets: wind gusts surge dynamically in breathing tempest waves.
+ *    - Zero water splash/ripples: clean, seamless, continuous storm driving downpour.
  * 2. 3D Rotating Lighthouse Beacon & Eye-Splash Bloom:
- *    - Sweeps across the stormy ocean with a volumetric conical beam.
- *    - Rotates toward the viewer: blooms into a soft, dazzling lens flare & warm eye-flash.
+ *    - Sweeps across the storm with a volumetric conical beam.
+ *    - Rotates toward the viewer: blooms into a soft, radiant lens flare & warm eye-flash.
  *    - Rotates away: smoothly dissolves back into the ocean sweep.
- *    - Raindrops catch golden-white glints when cutting through the rotating beam.
- * 3. Soft Distant Thunder Flashes:
- *    - Gentle, natural ambient lightning illuminating the tempest.
+ *    - Rain streaks passing through the beam glint brilliantly in golden-white.
+ * 3. Driving Squall Mist Sheets:
+ *    - Diagonal wind-driven mist bands sweeping across the sky and sea with the gale.
+ * 4. Ambient Distant Thunder Lighting:
+ *    - Soft sky flashes that illuminate the entire downpour in silver-blue.
  */
 
 (function() {
@@ -31,9 +32,10 @@
   // Rain Pool
   let raindrops = [];
 
-  // Storm Dynamics (Severe Squall Gale)
-  let currentWindAngle = 0.42; // ~24 deg slant
-  let windGustFactor = 1.0;
+  // Wind & Chaos Dynamics
+  let baseWindAngle = 0.52; // ~30 deg steep storm slant
+  let currentWindAngle = 0.52;
+  let gustPower = 1.0;
 
   // Ambient Lightning
   let ambientFlashAlpha = 0;
@@ -94,7 +96,7 @@
         
         const beamPitch = 0.02 + Math.sin(this.angle * 2) * 0.015;
         const endY = ly + Math.sin(beamPitch) * beamLength;
-        const beamHalfWidth = 24 + facingOcean * 12;
+        const beamHalfWidth = 26 + facingOcean * 14;
 
         const p1x = lx;
         const p1y = ly - 3;
@@ -106,9 +108,9 @@
         const p4y = endY - beamHalfWidth;
 
         const beamGrad = ctx.createLinearGradient(lx, ly, lx + beamLength, endY);
-        beamGrad.addColorStop(0, `rgba(255, 250, 225, ${0.75 * beamIntensity})`);
-        beamGrad.addColorStop(0.15, `rgba(254, 240, 138, ${0.45 * beamIntensity})`);
-        beamGrad.addColorStop(0.55, `rgba(186, 230, 253, ${0.15 * beamIntensity})`);
+        beamGrad.addColorStop(0, `rgba(255, 250, 225, ${0.80 * beamIntensity})`);
+        beamGrad.addColorStop(0.15, `rgba(254, 240, 138, ${0.48 * beamIntensity})`);
+        beamGrad.addColorStop(0.55, `rgba(186, 230, 253, ${0.16 * beamIntensity})`);
         beamGrad.addColorStop(1, 'rgba(186, 230, 253, 0)');
 
         ctx.fillStyle = beamGrad;
@@ -192,79 +194,89 @@
   };
 
   // ==========================================================================
-  // 2. SEVERE STORM RAIN ENGINE (Smaller, Smooth, Needle-Fine, Heavy Gale)
+  // 2. CHAOTIC, VISIBLE, HIGH-SPEED STORM RAIN ENGINE
   // ==========================================================================
-  class RainNeedle {
+  class StormStreak {
     constructor() {
-      // 3 Depth Tiers:
-      // 0 = Distant squall mist needles (faint, ultra small, dense haze)
-      // 1 = Midground driving storm downpour (steady gale needles)
-      // 2 = Foreground fast storm streaks (fast, motion-blurred)
+      // 3 Atmospheric Depth Tiers:
+      // Tier 0: Background heavy squall veil (fast, dense, highly visible)
+      // Tier 1: Midground driving storm downpour (sharp, slanted needles)
+      // Tier 2: Foreground slashing storm streaks (high-speed, motion-blurred)
       const r = Math.random();
-      if (r < 0.50) {
+      if (r < 0.45) {
         this.tier = 0;
-        this.baseSpeed = Math.random() * 5 + 13;
-        this.baseLength = Math.random() * 3 + 4; // very small: 4px to 7px
-        this.width = 0.30; // whisper thin needle
-        this.baseAlpha = Math.random() * 0.05 + 0.06;
-      } else if (r < 0.85) {
+        this.speedBase = Math.random() * 6 + 18;
+        this.width = Math.random() * 0.3 + 0.75;
+        this.baseAlpha = Math.random() * 0.15 + 0.32;
+        this.lengthFactor = 1.0;
+        this.flutter = (Math.random() - 0.5) * 0.12; // individual wind turbulence
+      } else if (r < 0.82) {
         this.tier = 1;
-        this.baseSpeed = Math.random() * 6 + 18;
-        this.baseLength = Math.random() * 4 + 6; // 6px to 10px
-        this.width = 0.40;
-        this.baseAlpha = Math.random() * 0.06 + 0.10;
+        this.speedBase = Math.random() * 8 + 24;
+        this.width = Math.random() * 0.4 + 1.0;
+        this.baseAlpha = Math.random() * 0.18 + 0.48;
+        this.lengthFactor = 1.25;
+        this.flutter = (Math.random() - 0.5) * 0.10;
       } else {
         this.tier = 2;
-        this.baseSpeed = Math.random() * 7 + 23;
-        this.baseLength = Math.random() * 4 + 9; // 9px to 13px
-        this.width = 0.50;
-        this.baseAlpha = Math.random() * 0.08 + 0.14;
+        this.speedBase = Math.random() * 10 + 32;
+        this.width = Math.random() * 0.5 + 1.35;
+        this.baseAlpha = Math.random() * 0.20 + 0.65;
+        this.lengthFactor = 1.5;
+        this.flutter = (Math.random() - 0.5) * 0.08;
       }
 
       this.reset(true);
     }
 
     reset(initial = false) {
-      // Spawn across wider area to account for steep wind angle
-      this.x = Math.random() * (width + 500) - 250;
-      this.y = initial ? Math.random() * height : -20;
-      this.speed = this.baseSpeed * (0.95 + Math.random() * 0.15);
-      this.length = this.baseLength;
+      // Spawn generously across left and top to account for steep sideways slant
+      this.x = Math.random() * (width + 600) - 300;
+      this.y = initial ? Math.random() * height : -30;
+      this.speed = this.speedBase * (0.92 + Math.random() * 0.16);
       this.alpha = this.baseAlpha;
     }
 
     update() {
-      // Driven hard by current storm squall angle and gusting wind
-      const vx = Math.sin(currentWindAngle) * this.speed * windGustFactor;
-      const vy = Math.cos(currentWindAngle) * this.speed;
+      // Individual turbulent angle = global gust angle + drop flutter
+      const dropAngle = currentWindAngle + this.flutter;
+      const vx = Math.sin(dropAngle) * this.speed * gustPower;
+      const vy = Math.cos(dropAngle) * this.speed;
 
       this.x += vx;
       this.y += vy;
 
-      // NO SPLASH ON WATER - Clean, continuous storm downpour passing through
-      if (this.y > height + 25 || this.x > width + 300) {
+      // Clean, seamless reset without splashes
+      if (this.y > height + 40 || this.x > width + 400) {
         this.reset();
       }
     }
 
     draw(flashBoost) {
+      const dropAngle = currentWindAngle + this.flutter;
+      // Motion blur streak length directly proportional to velocity
+      const streakLength = this.speed * this.lengthFactor;
+
       ctx.save();
 
-      // Check if illuminated by rotating lighthouse beam
-      let beamGlint = 1.0;
+      // Check if cutting through rotating lighthouse beam
+      let inBeam = false;
       const lx = beacon.lx;
       const ly = beacon.ly;
-      if (this.x > lx && Math.abs(this.y - ly) < 40) {
+      if (this.x > lx && Math.abs(this.y - ly) < 48) {
         const facingOcean = Math.max(0, Math.cos(beacon.angle));
-        beamGlint = 1.0 + facingOcean * 1.6;
+        if (facingOcean > 0.1) {
+          inBeam = true;
+        }
       }
 
-      const a = Math.min(this.alpha * flashBoost * beamGlint, 0.65);
+      const a = Math.min(this.alpha * flashBoost * (inBeam ? 1.6 : 1.0), 0.95);
 
-      if (beamGlint > 1.15) {
-        ctx.strokeStyle = `rgba(254, 243, 199, ${a})`;
+      // Rain color: bright crystalline silver-white, glowing gold in lighthouse beam
+      if (inBeam) {
+        ctx.strokeStyle = `rgba(255, 248, 215, ${a})`;
       } else {
-        ctx.strokeStyle = `rgba(215, 235, 255, ${a})`;
+        ctx.strokeStyle = `rgba(228, 242, 255, ${a})`;
       }
 
       ctx.lineWidth = this.width;
@@ -272,55 +284,70 @@
       ctx.beginPath();
       ctx.moveTo(this.x, this.y);
       ctx.lineTo(
-        this.x + Math.sin(currentWindAngle) * this.length,
-        this.y + Math.cos(currentWindAngle) * this.length
+        this.x + Math.sin(dropAngle) * streakLength,
+        this.y + Math.cos(dropAngle) * streakLength
       );
       ctx.stroke();
       ctx.restore();
     }
   }
 
-  // Soft atmospheric drifting squall haze (giving the feeling of a raging storm)
-  function renderStormSquallHaze(time, flashBoost) {
+  // ==========================================================================
+  // 3. TORRENTIAL SQUALL MIST SHEETS (Atmospheric Storm Gale Veils)
+  // ==========================================================================
+  function renderSquallMistBands(time, flashBoost) {
     ctx.save();
     ctx.globalCompositeOperation = 'screen';
 
-    // Horizontal wind-driven squall mist sheet
-    const hazePulse = (Math.sin(time * 0.8) * 0.5 + 0.5) * 0.04;
-    const hazeGrad = ctx.createLinearGradient(0, 0, width, height * 0.7);
-    hazeGrad.addColorStop(0, 'rgba(180, 210, 240, 0)');
-    hazeGrad.addColorStop(0.3, `rgba(195, 220, 245, ${(0.035 + hazePulse) * flashBoost})`);
-    hazeGrad.addColorStop(0.7, `rgba(180, 210, 240, ${(0.025 + hazePulse * 0.6) * flashBoost})`);
-    hazeGrad.addColorStop(1, 'rgba(180, 210, 240, 0)');
+    // Fast-moving diagonal squall fog sheets that surge across with wind gusts
+    const surge1 = (Math.sin(time * 1.2) * 0.5 + 0.5);
+    const surge2 = (Math.cos(time * 0.8) * 0.5 + 0.5);
 
-    ctx.fillStyle = hazeGrad;
-    ctx.fillRect(0, 0, width, height);
+    // Band 1: High-altitude driving squall haze
+    const grad1 = ctx.createLinearGradient(0, 0, width * 0.8, height * 0.6);
+    grad1.addColorStop(0, 'rgba(195, 225, 255, 0)');
+    grad1.addColorStop(0.35, `rgba(210, 235, 255, ${(0.05 + surge1 * 0.04) * flashBoost})`);
+    grad1.addColorStop(0.75, 'rgba(195, 225, 255, 0)');
+    ctx.fillStyle = grad1;
+    ctx.fillRect(0, 0, width, height * 0.7);
+
+    // Band 2: Ocean surface wind-swept spray mist
+    const grad2 = ctx.createLinearGradient(0, height * 0.50, width, height);
+    grad2.addColorStop(0, 'rgba(180, 220, 255, 0)');
+    grad2.addColorStop(0.45, `rgba(205, 235, 255, ${(0.045 + surge2 * 0.035) * flashBoost})`);
+    grad2.addColorStop(0.85, 'rgba(180, 220, 255, 0)');
+    ctx.fillStyle = grad2;
+    ctx.fillRect(0, height * 0.48, width, height * 0.52);
+
     ctx.restore();
   }
 
   function initRain() {
-    // Dense storm downpour: 650 to 750 small needle raindrops
-    const count = Math.min(Math.floor((width * height) / 1000), 720);
+    // Dense chaotic tempest: 680 sharply visible, driving storm streaks
+    const count = Math.min(Math.floor((width * height) / 1050), 720);
     raindrops = [];
     for (let i = 0; i < count; i++) {
-      raindrops.push(new RainNeedle());
+      raindrops.push(new StormStreak());
     }
   }
 
   // ==========================================================================
-  // 3. MAIN STORM TIMING & RENDER LOOP
+  // 4. MAIN STORM TIMING & RENDER LOOP
   // ==========================================================================
-  function updateStormDynamics() {
+  function updateChaosDynamics() {
     const now = Date.now();
 
-    // Severe squall wind gusting: steep storm slant (~25 deg) with breathing surges
-    currentWindAngle = 0.42 + Math.sin(simTime * 0.6) * 0.08 + Math.cos(simTime * 1.3) * 0.03;
-    windGustFactor = 1.0 + Math.sin(simTime * 0.6) * 0.28;
+    // Chaotic Storm Squall Wind:
+    // Base angle ~30 deg, fluctuating between 26 deg and 42 deg during gust surges
+    const gustWave1 = Math.sin(simTime * 0.75) * 0.10;
+    const gustWave2 = Math.cos(simTime * 1.6) * 0.04;
+    currentWindAngle = baseWindAngle + gustWave1 + gustWave2;
+    gustPower = 1.0 + Math.max(0, Math.sin(simTime * 0.75)) * 0.35; // surges up by 35% in gusts
 
-    // Soft Ambient Lightning
+    // Ambient Distant Lightning
     if (now - lastFlashTime > (Math.random() * 5000 + 6000)) {
       lastFlashTime = now;
-      targetFlash = Math.random() * 0.18 + 0.07;
+      targetFlash = Math.random() * 0.22 + 0.09;
     }
   }
 
@@ -328,7 +355,7 @@
     ctx.clearRect(0, 0, width, height);
     simTime += 0.022;
 
-    updateStormDynamics();
+    updateChaosDynamics();
     beacon.update();
 
     // Ambient Lightning calculation
@@ -336,21 +363,21 @@
     if (targetFlash > 0 && Math.abs(targetFlash - ambientFlashAlpha) < 0.01) {
       targetFlash = 0;
     }
-    const flashBoost = 1 + ambientFlashAlpha * 2.2;
+    const flashBoost = 1 + ambientFlashAlpha * 2.4;
 
-    // Distant ambient thunder sky flash
+    // Distant ambient thunder sky illumination
     if (ambientFlashAlpha > 0.005) {
-      ctx.fillStyle = `rgba(195, 210, 245, ${ambientFlashAlpha * 0.75})`;
+      ctx.fillStyle = `rgba(205, 222, 255, ${ambientFlashAlpha * 0.8})`;
       ctx.fillRect(0, 0, width, height);
     }
 
-    // 1. Drifting Atmospheric Storm Squall Haze
-    renderStormSquallHaze(simTime, flashBoost);
+    // 1. Torrential Squall Mist Bands
+    renderSquallMistBands(simTime, flashBoost);
 
     // 2. Rotating Lighthouse Beacon & Eye-Splash Bloom
     beacon.draw(flashBoost);
 
-    // 3. Dense, Needle-Fine, Wind-Swept Bad Storm Rain (Zero Splashes)
+    // 3. Dense, Chaotic, Highly-Visible Bad Storm Rain
     for (let drop of raindrops) {
       drop.update();
       drop.draw(flashBoost);
