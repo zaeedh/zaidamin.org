@@ -149,13 +149,19 @@ a {
   -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
 }
 
+.lighthouse-banner-frame picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .lighthouse-bg-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  /* Rich, realistic color saturation and crisp clarity */
-  filter: saturate(1.28) contrast(1.08) brightness(1.02);
+  /* Natural realistic depth, sharpness, and elegant saturation */
+  filter: contrast(1.05) saturate(1.10) brightness(1.01);
 }
 
 #rain-canvas {
