@@ -1,6 +1,6 @@
 """
-Academic Lighthouse Storm Banner Static Site Generator - zaidamin.org
-Cinematic Lighthouse Storm • Animated Soft Rain & Beacon Beam • Premium Glass Center Card
+Academic Golden Ratio Static Site Generator - zaidamin.org
+Epigraph (Qur'an 31:27) • Clean Lighthouse Storm Banner • Golden Ratio (1.618 : 1) Composition
 Author: Antigravity AI & Dr. Zaid Amin
 """
 
@@ -25,11 +25,8 @@ def render_svg_icon(name):
         "github": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>',
         "linkedin": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>',
         "email": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>',
-        "arrow-up-right": '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>',
+        "arrow-right": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>',
         "arrow-left": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
-        "shield": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>',
-        "eye": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>',
-        "globe": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line></svg>',
         "external": '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>'
     }
     return icons.get(name, "")
@@ -65,7 +62,7 @@ def get_html_head(title="Dr. Zaid Amin | Academic & Computational Researcher | z
     }
 
     return f"""<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -104,195 +101,334 @@ def get_subpage_nav(active_page=""):
   <header class="subpage-nav">
     <a href="index.html" class="back-home-link">
       {render_svg_icon('arrow-left')}
-      Home Banner
+      Home
     </a>
 
     <div style="display: flex; gap: 18px; align-items: center;">
-      <a href="publications.html" style="font-size: 0.825rem; font-weight: 700; text-transform: uppercase; color: {'var(--electric-cyan)' if active_page == 'publications' else 'var(--text-sub)'};">Publications</a>
-      <a href="research.html" style="font-size: 0.825rem; font-weight: 700; text-transform: uppercase; color: {'var(--electric-cyan)' if active_page == 'research' else 'var(--text-sub)'};">Research</a>
-      <a href="prospective-students.html" style="font-size: 0.825rem; font-weight: 700; text-transform: uppercase; color: {'var(--electric-cyan)' if active_page == 'lab' else 'var(--text-sub)'};">Join Lab</a>
-      <a href="cv.html" style="font-size: 0.825rem; font-weight: 700; text-transform: uppercase; color: {'var(--electric-cyan)' if active_page == 'cv' else 'var(--text-sub)'};">CV</a>
+      <a href="publications.html" style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: {'var(--brand-blue)' if active_page == 'publications' else 'var(--text-body)'};">Publications</a>
+      <a href="research.html" style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: {'var(--brand-blue)' if active_page == 'research' else 'var(--text-body)'};">Research</a>
+      <a href="prospective-students.html" style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: {'var(--brand-blue)' if active_page == 'lab' else 'var(--text-body)'};">Join Lab</a>
+      <a href="cv.html" style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: {'var(--brand-blue)' if active_page == 'cv' else 'var(--text-body)'};">CV</a>
     </div>
   </header>
 """
 
 # ==============================================================================
-# 1. THE BIG LIGHTHOUSE STORM BANNER HOMEPAGE (index.html)
+# 1. GOLDEN RATIO STANDARD COMPOSITION HOMEPAGE (index.html)
 # ==============================================================================
-def generate_lighthouse_home():
+def generate_golden_ratio_home():
     profile = load_json("profile.json")
     publications = load_json("publications.json")
     research = load_json("research.json")
+    supervision = load_json("supervision.json")
 
-    html = get_html_head("Dr. Zaid Amin | Academic & Computational Researcher | zaidamin.org")
+    html = get_html_head("Dr. Zaid Amin | Das Sein, Das Sollen | zaidamin.org")
 
-    # Big Banner at the top and middle with soft lighting, rain and beacon beam
     html += f"""
-  <header class="lighthouse-banner-wrapper">
-    <!-- Beacon Lamp and Sweeping Volumetric Beam Layer -->
-    <div class="beacon-beam-layer">
-      <div class="beacon-lamp"></div>
-      <div class="beacon-beam"></div>
-    </div>
-
-    <!-- Soft Animated Rain & Distant Lighting Canvas -->
-    <canvas id="rain-canvas"></canvas>
-
-    <!-- Clean, Premium Glass Center Card in the Middle -->
-    <div class="banner-center-card">
-      <div class="banner-pill">
-        <span>INTI INTERNATIONAL UNIVERSITY</span> &bull;
-        <span>SENIOR LECTURER</span> &bull;
-        <span>UKM PH.D.</span>
-      </div>
-
-      <h1 class="banner-name">{profile['name']}<span style="color:var(--beacon-gold); font-size:2rem;">, Ph.D.</span></h1>
-      <div class="banner-subtitle">Human-Computer Interaction &bull; AI Governance &bull; Behavioral Computing</div>
-
-      <p class="banner-hook">
-        &ldquo;<strong>Das Sein, das Sollen</strong> &mdash; The guiding beacon of human reason and digital ethics amidst the turbulent storm of algorithmic complexity.&rdquo;
+  <div class="site-wrapper">
+    
+    <!-- 1. Top Epigraph -->
+    <header class="epigraph-header">
+      <h1 class="epigraph-title">Das Sein, Das Sollen.</h1>
+      <p class="epigraph-quote font-serif">
+        &ldquo;If all the trees on earth were pens and the ocean were ink, refilled by seven other oceans, the Words of Allah would not be exhausted. Surely Allah is Almighty, All-Wise.&rdquo; &mdash; Qur&rsquo;an 31:27
       </p>
+    </header>
 
-      <!-- Key Action Buttons Cluster -->
-      <div class="banner-buttons-cluster">
-        <a href="publications.html" class="banner-btn-primary">
-          Publications ({len(publications)})
-          {render_svg_icon('arrow-up-right')}
-        </a>
+    <!-- 2. Clean, Unobstructed Lighthouse Storm Banner (Option 1 Storm) -->
+    <section class="lighthouse-banner-frame">
+      <picture>
+        <source srcset="assets/images/lighthouse-banner.webp" type="image/webp">
+        <img src="assets/images/lighthouse-banner.jpg" class="lighthouse-bg-img" alt="Lighthouse Storm over Ocean" width="2048" height="790">
+      </picture>
+      <canvas id="rain-canvas"></canvas>
+    </section>
 
-        <a href="research.html" class="banner-btn-glass">
-          Research Pillars & Grants
-          {render_svg_icon('arrow-up-right')}
-        </a>
+    <!-- 3. GOLDEN RATIO MODERN ACADEMIC SHOWCASE (Wardiere Reference Layout) -->
+    <section class="golden-ocean-showcase">
+      
+      <!-- Top Academic Navigation Bar (Brand + Menu + Photo Avatar + Actions) -->
+      <header class="ocean-top-bar">
+        <div class="ocean-brand">
+          <div class="ocean-logo-badge">ZA</div>
+          <div class="ocean-brand-text">
+            <span class="ocean-brand-name">Dr. Zaid Amin</span>
+            <span class="ocean-brand-title">Ph.D. &bull; Senior Lecturer</span>
+          </div>
+        </div>
+        
+        <nav class="ocean-nav-links">
+          <a href="index.html" class="ocean-nav-link active">HOME</a>
+          <a href="publications.html" class="ocean-nav-link">PUBLICATIONS</a>
+          <a href="research.html" class="ocean-nav-link">RESEARCH</a>
+          <a href="prospective-students.html" class="ocean-nav-link">SUPERVISION</a>
+          <a href="cv.html" class="ocean-nav-link">ABOUT &amp; CV</a>
+        </nav>
+        
+        <div class="ocean-profile-actions">
+          <a href="cv.html" class="ocean-avatar-link" title="Dr. Zaid Amin Profile">
+            <picture>
+              <source srcset="assets/images/dr-zaid.webp" type="image/webp">
+              <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="ocean-nav-avatar">
+            </picture>
+            <span class="avatar-status-dot"></span>
+          </a>
+          <a href="mailto:zaid.amin@newinti.edu.my" class="ocean-action-dots" title="Quick Contact">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+          </a>
+        </div>
+      </header>
 
-        <a href="prospective-students.html" class="banner-btn-accent">
-          Join Research Lab (Ph.D./Master)
-          {render_svg_icon('arrow-up-right')}
-        </a>
+      <!-- Golden Ratio Split: Left Major Hero (~61.8%) & Right Minor Floating Panel (~38.2%) -->
+      <div class="ocean-hero-grid">
+        
+        <!-- LEFT: Major Column (Headline + Bio + 3D Focus Carousel Showcase) -->
+        <div class="ocean-major-hero">
+          <div class="ocean-tagline-badge">
+            <span class="pulse-dot"></span>
+            INTI INTERNATIONAL UNIVERSITY &bull; FDSIT &bull; PH.D. UKM
+          </div>
 
-        <a href="cv.html" class="banner-btn-glass">
-          Curriculum Vitae (PDF)
-          {render_svg_icon('arrow-up-right')}
-        </a>
+          <h2 class="ocean-headline">
+            ADVANCING TRUSTWORTHY AI, COGNITIVE COMPUTING &amp; ETHICAL GOVERNANCE
+          </h2>
+
+          <p class="ocean-mission-text">
+            Bridging human-centered computing, behavioral analytics, and agentic AI alignment. Former Head of Informatics Master&rsquo;s Program, driving empirical research in civic compliance, attention-based systems, and digital cultural preservation.
+          </p>
+
+          <div class="ocean-metadata-row">
+            <span class="meta-date">Term 2026</span>
+            <span class="meta-divider">&bull;</span>
+            <span class="meta-loc">Nilai, Malaysia</span>
+            <span class="meta-divider">&bull;</span>
+            <a href="https://orcid.org/0000-0001-5223-3058" target="_blank" rel="noopener" class="meta-orcid">ORCID: 0000-0001-5223-3058</a>
+          </div>
+
+          <!-- 3D Research Focus Carousel Showcase (Matching Reference 3-Card Carousel) -->
+          <div class="ocean-carousel-showcase" id="research-carousel">
+            <div class="carousel-cards-track">
+              
+              <!-- Card 0: Left Preview -->
+              <div class="carousel-preview-card card-prev" id="carousel-card-0" onclick="setCarouselCard(0)">
+                <div class="carousel-card-inner card-gradient-1">
+                  <div class="carousel-card-icon">🏛️</div>
+                  <div class="carousel-card-title">Digital Heritage &amp; XR</div>
+                  <div class="carousel-card-sub">Srivijayapedia VR</div>
+                </div>
+              </div>
+
+              <!-- Card 1: Center Active Focal Card -->
+              <div class="carousel-preview-card card-active" id="carousel-card-1">
+                <div class="carousel-card-inner card-gradient-2">
+                  <div class="carousel-badge-live">FLAGSHIP FOCUS</div>
+                  <div class="carousel-card-icon">🤖</div>
+                  <div class="carousel-card-title">Trustworthy AI &amp; Governance</div>
+                  <div class="carousel-card-desc">Multi-agent orchestration for sustainable smart cities, civic compliance &amp; algorithmic auditing.</div>
+                  <a href="research.html" class="carousel-explore-link">Explore Theme &rarr;</a>
+                </div>
+                <!-- Arrow Controls -->
+                <button class="carousel-arrow arrow-left" onclick="rotateCarousel(-1)" aria-label="Previous Theme">&#8249;</button>
+                <button class="carousel-arrow arrow-right" onclick="rotateCarousel(1)" aria-label="Next Theme">&#8250;</button>
+              </div>
+
+              <!-- Card 2: Right Preview -->
+              <div class="carousel-preview-card card-next" id="carousel-card-2" onclick="setCarouselCard(2)">
+                <div class="carousel-card-inner card-gradient-3">
+                  <div class="carousel-card-icon">🧠</div>
+                  <div class="carousel-card-title">HCI &amp; Attention Systems</div>
+                  <div class="carousel-card-sub">Cognitive Decisions</div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Dot Indicators -->
+            <div class="carousel-dots">
+              <span class="dot" onclick="setCarouselCard(0)"></span>
+              <span class="dot active" onclick="setCarouselCard(1)"></span>
+              <span class="dot" onclick="setCarouselCard(2)"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Minor Column (Floating Modern White/Glass Academic Card Panel) -->
+        <div class="ocean-minor-panel">
+          <div class="floating-packages-card">
+            
+            <!-- Search & Filter Bar (Matching reference explore header) -->
+            <div class="card-search-header">
+              <div class="search-input-box">
+                <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="home-quick-filter" placeholder="Explore publications, grants, themes..." oninput="filterHomePackages(this.value)">
+              </div>
+              <button class="filter-settings-btn" title="Filter Categories" onclick="location.href='publications.html'">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+              </button>
+            </div>
+
+            <div class="card-panel-heading-row">
+              <h3 class="card-panel-title">Academic Packages &amp; Works</h3>
+              <span class="card-panel-subtitle">Selected High-Impact Contributions</span>
+            </div>
+
+            <!-- 3 Rich Package Cards (Bromo, Lampung, Lombok style) -->
+            <div class="packages-list" id="home-packages-list">
+              
+              <!-- Package 1: Smart Cities AI -->
+              <div class="package-item-card">
+                <div class="package-thumb-box thumb-ai">
+                  <span class="bookmark-icon">★</span>
+                  <div class="thumb-label">MDPI</div>
+                </div>
+                <div class="package-info-col">
+                  <h4 class="package-item-title">Trustworthy AI for Sustainable Cities</h4>
+                  <ul class="package-bullets">
+                    <li>Multimodal Orchestration Agent Framework</li>
+                    <li>MDPI Smart Cities Journal (Scopus Indexed)</li>
+                    <li>Civic Compliance &amp; Ethical Systems</li>
+                  </ul>
+                </div>
+                <div class="package-action-col">
+                  <div class="package-price-metric">
+                    <span class="metric-big">Q1</span>
+                    <span class="metric-sub">Scopus</span>
+                  </div>
+                  <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="package-book-btn">Read Paper</a>
+                </div>
+              </div>
+
+              <!-- Package 2: The Proxy Trap in Agentic AI -->
+              <div class="package-item-card">
+                <div class="package-thumb-box thumb-ethics">
+                  <span class="bookmark-icon">★</span>
+                  <div class="thumb-label">SSRN</div>
+                </div>
+                <div class="package-info-col">
+                  <h4 class="package-item-title">The Proxy Trap in Agentic AI</h4>
+                  <ul class="package-bullets">
+                    <li>When Metrics Replace Human Judgment</li>
+                    <li>High-Impact AI Governance Preprint</li>
+                    <li>Behavioral Decision Theory</li>
+                  </ul>
+                </div>
+                <div class="package-action-col">
+                  <div class="package-price-metric">
+                    <span class="metric-big">2026</span>
+                    <span class="metric-sub">Preprint</span>
+                  </div>
+                  <a href="https://doi.org/10.2139/ssrn.7670124" target="_blank" rel="noopener" class="package-book-btn">Explore</a>
+                </div>
+              </div>
+
+              <!-- Package 3: Attention-Based Design (IEEE Access) -->
+              <div class="package-item-card">
+                <div class="package-thumb-box thumb-heritage">
+                  <span class="bookmark-icon">★</span>
+                  <div class="thumb-label">IEEE</div>
+                </div>
+                <div class="package-info-col">
+                  <h4 class="package-item-title">Attention-Based Design &amp; Decisions</h4>
+                  <ul class="package-bullets">
+                    <li>Information Sharing in Cognitive Computing</li>
+                    <li>IEEE Access Flagship Review</li>
+                    <li>Ph.D. UKM Foundation Research</li>
+                  </ul>
+                </div>
+                <div class="package-action-col">
+                  <div class="package-price-metric">
+                    <span class="metric-big">IEEE</span>
+                    <span class="metric-sub">Q1 Ranked</span>
+                  </div>
+                  <a href="https://doi.org/10.1109/ACCESS.2021.3087740" target="_blank" rel="noopener" class="package-book-btn">View Paper</a>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Floating Yellow Expand / Scroll-Down Button (Matching reference circular chevron) -->
+            <a href="#full-academic-content" class="floating-expand-btn" title="Explore Detailed Research Agenda">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </a>
+
+          </div>
+        </div>
+
       </div>
 
-      <!-- Clean Scholarly Icons Row -->
-      <div class="banner-icons-row">
-        <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="banner-icon-pill" title="Google Scholar">
+    </section>
+
+    <!-- 4. DETAILED ACADEMIC FOUNDATIONS & RESEARCH AGENDA -->
+    <section id="full-academic-content" class="golden-academic-details">
+      
+      <div class="details-section-header">
+        <h3 class="details-heading">Comprehensive Research Agenda &amp; Academic Leadership</h3>
+        <p class="details-sub">Investigating the intersections of empirical software engineering, cognitive computing, and algorithmic integrity.</p>
+      </div>
+
+      <div class="details-grid-3col">
+"""
+    # Add research pillars
+    for pillar in research["pillars"]:
+        html += f"""
+        <div class="pillar-item-card">
+          <div class="pillar-badge">RESEARCH PILLAR</div>
+          <h4 class="pillar-title">{pillar['title']}</h4>
+          <p class="pillar-desc">{pillar['full_desc']}</p>
+          <span class="pillar-grant-tag">Grant Target: {pillar['grant_alignment']}</span>
+        </div>
+        """
+
+    html += f"""
+      </div>
+
+      <!-- Action & Portal Connect Strip -->
+      <div class="academic-connect-strip">
+        <div class="strip-left">
+          <h4 class="strip-title">Join the Research Lab &bull; Prospective Postgraduate Candidates</h4>
+          <p class="strip-desc">Actively recruiting Ph.D. and Master&rsquo;s researchers in Human-Computer Interaction, AI Alignment, and Digital Heritage.</p>
+        </div>
+        <div class="strip-right">
+          <a href="prospective-students.html" class="golden-btn golden-btn-primary">Supervision Information {render_svg_icon('arrow-right')}</a>
+          <a href="cv.html" class="golden-btn golden-btn-outline">Curriculum Vitae {render_svg_icon('arrow-right')}</a>
+        </div>
+      </div>
+
+      <!-- Scholarly Network Cluster -->
+      <div class="scholarly-network-bar">
+        <span class="network-label">Scholarly Profiles &amp; Direct Identifiers:</span>
+        <div class="network-links">
+          <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="network-pill">{render_svg_icon('scholar')} Google Scholar</a>
+          <a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="network-pill">{render_svg_icon('orcid')} ORCID</a>
+          <a href="{profile['social_links']['github']}" target="_blank" rel="noopener" class="network-pill">{render_svg_icon('github')} GitHub</a>
+          <a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" class="network-pill">{render_svg_icon('linkedin')} LinkedIn</a>
+          <a href="mailto:{profile['social_links']['email']}" class="network-pill">{render_svg_icon('email')} Institutional Email</a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Site Footer -->
+    <footer class="golden-footer">
+      <div class="footer-left">
+        &copy; 2026 Dr. Zaid Amin &bull; Faculty of Data Science and Information Technology, INTI International University.
+      </div>
+      <div class="footer-right">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
           {render_svg_icon('scholar')}
-        </a>
-        <a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="banner-icon-pill" title="ORCID ({profile['metrics']['orcid_id']})">
-          {render_svg_icon('orcid')}
-        </a>
-        <a href="{profile['social_links']['github']}" target="_blank" rel="noopener" class="banner-icon-pill" title="GitHub (@zaeedh)">
-          {render_svg_icon('github')}
-        </a>
-        <a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" class="banner-icon-pill" title="LinkedIn">
-          {render_svg_icon('linkedin')}
-        </a>
-        <a href="mailto:{profile['social_links']['email']}" class="banner-icon-pill" title="Email Dr. Amin">
-          {render_svg_icon('email')}
-        </a>
+        </button>
       </div>
-    </div>
-  </header>
+    </footer>
 
-  <!-- Clean Academic Showroom (Directly Below Banner) -->
-  <main class="showcase-container">
-    <div style="text-align: center; margin-bottom: 48px;">
-      <span style="font-size: 0.8rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--electric-cyan);">Academic Dossier</span>
-      <h2 style="font-size: 2.2rem; font-weight: 800; margin-top: 6px;">Research Pillars & Agenda</h2>
-      <p style="color:var(--text-muted); font-size:1.05rem; max-width:680px; margin:8px auto 0 auto;">
-        {research['vision']}
-      </p>
-    </div>
-
-    <!-- 3 Core Pillars -->
-    <div class="showcase-cards-grid">
-      <div class="showcase-card">
-        <div style="color: var(--electric-cyan); margin-bottom: 16px;">
-          {render_svg_icon('shield')}
-        </div>
-        <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 12px; color: #ffffff;">AI Governance & The Proxy Trap</h3>
-        <p style="font-size: 0.925rem; color: var(--text-sub); line-height: 1.6; margin-bottom: 16px; flex-grow: 1;">
-          Mitigating metric substitution and proxy reward hacking when autonomous multi-agent AI systems make civic and organizational decisions.
-        </p>
-        <a href="research.html" style="font-size: 0.85rem; font-weight: 700; color: var(--electric-cyan); display: inline-flex; align-items: center; gap: 6px;">
-          Explore Pillar {render_svg_icon('arrow-up-right')}
-        </a>
-      </div>
-
-      <div class="showcase-card">
-        <div style="color: var(--electric-cyan); margin-bottom: 16px;">
-          {render_svg_icon('eye')}
-        </div>
-        <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 12px; color: #ffffff;">HCI & Cognitive Attention</h3>
-        <p style="font-size: 0.925rem; color: var(--text-sub); line-height: 1.6; margin-bottom: 16px; flex-grow: 1;">
-          Building upon the doctoral <strong>Tune-Attention Model</strong> at UKM to develop humane interface micro-frictions against viral distraction.
-        </p>
-        <a href="research.html" style="font-size: 0.85rem; font-weight: 700; color: var(--electric-cyan); display: inline-flex; align-items: center; gap: 6px;">
-          Explore Pillar {render_svg_icon('arrow-up-right')}
-        </a>
-      </div>
-
-      <div class="showcase-card">
-        <div style="color: var(--electric-cyan); margin-bottom: 16px;">
-          {render_svg_icon('globe')}
-        </div>
-        <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 12px; color: #ffffff;">Digital Heritage Preservation</h3>
-        <p style="font-size: 0.925rem; color: var(--text-sub); line-height: 1.6; margin-bottom: 16px; flex-grow: 1;">
-          Synthesizing social computing and immersive VR through <strong>Srivijayapedia</strong> to preserve ancient maritime civilizational archives.
-        </p>
-        <a href="research.html" style="font-size: 0.85rem; font-weight: 700; color: var(--electric-cyan); display: inline-flex; align-items: center; gap: 6px;">
-          Explore Pillar {render_svg_icon('arrow-up-right')}
-        </a>
-      </div>
-    </div>
-
-    <!-- Metrics Strip -->
-    <div class="showcase-metrics-strip">
-      <div>
-        <div class="metric-num">24+</div>
-        <div class="metric-lbl">Indexed Publications</div>
-      </div>
-      <div>
-        <div class="metric-num">Q1</div>
-        <div class="metric-lbl">IEEE Access & MDPI</div>
-      </div>
-      <div>
-        <div class="metric-num">10+</div>
-        <div class="metric-lbl">Years Leadership</div>
-      </div>
-      <div>
-        <div class="metric-num">Ph.D.</div>
-        <div class="metric-lbl">Universiti Kebangsaan Malaysia</div>
-      </div>
-    </div>
-  </main>
-
-  <!-- Clean Footer -->
-  <footer class="banner-footer">
-    <div style="margin-bottom:10px; font-weight:700; color:#ffffff;">
-      Dr. Zaid Amin, Ph.D. &bull; Faculty of Data Science and Information Technology, INTI International University
-    </div>
-    <div style="color:var(--text-muted); font-size:0.825rem;">
-      Email: <a href="mailto:{profile['social_links']['email']}" style="color:var(--electric-cyan); text-decoration:underline;">zaid.amin@newinti.edu.my</a> &bull; Domain: <strong>zaidamin.org</strong>
-    </div>
-    <div style="margin-top:16px; font-size:0.8rem; color:var(--text-muted);">
-      &copy; 2026 Dr. Zaid Amin &bull; All Rights Reserved
-    </div>
-  </footer>
-
-  <script src="assets/js/rain-lighting.js"></script>
+  </div>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
 """
     return html
 
-# ==============================================================================
-# 2. PUBLICATIONS ARCHIVE (publications.html)
-# ==============================================================================
+
+
 def generate_publications_page():
     publications = load_json("publications.json")
 
@@ -302,9 +438,9 @@ def generate_publications_page():
     html += f"""
   <div class="subpage-container">
     <div style="margin-bottom: 32px;">
-      <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--electric-cyan);">Scholarly Index</span>
-      <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0; color:#ffffff;">Publications & Citations ({len(publications)})</h1>
-      <p style="font-size: 1rem; color: var(--text-sub); max-width: 760px;">
+      <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brand-blue);">Scholarly Archive</span>
+      <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0;">Publications & Citations ({len(publications)})</h1>
+      <p style="font-size: 1rem; color: var(--text-muted); max-width: 760px;">
         Complete indexed works across Human-Computer Interaction, AI Governance, Behavioral Computing, and Information Systems. Search in real-time or filter by category.
       </p>
     </div>
@@ -333,12 +469,12 @@ def generate_publications_page():
         html += f"""
       <article class="pub-item" data-category="{pub['category'].lower()}">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--electric-cyan);">{pub['category']} &bull; {pub['year']}</span>
-          {f'<span style="font-size:0.75rem; color:var(--beacon-gold); font-weight:800;">★ Featured</span>' if pub.get('featured') else ''}
+          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">{pub['category']} &bull; {pub['year']}</span>
+          {f'<span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>' if pub.get('featured') else ''}
         </div>
 
-        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">{pub['title']}</h3>
-        <div style="font-size:0.9rem; color:var(--text-sub); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
+        <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35;">{pub['title']}</h3>
+        <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
         <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">{pub['venue']}</div>
 
         <div style="display:flex; gap:10px; align-items:center;">
@@ -374,9 +510,9 @@ def generate_research_page():
     html += f"""
   <div class="subpage-container">
     <div style="margin-bottom: 40px;">
-      <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--electric-cyan);">Scholarly Agenda</span>
-      <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0; color:#ffffff;">Research Pillars & Grants</h1>
-      <p style="font-size: 1.05rem; color: var(--text-sub); max-width: 820px; line-height: 1.6;">
+      <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brand-blue);">Scholarly Agenda</span>
+      <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0;">Research Pillars & Grants</h1>
+      <p style="font-size: 1.05rem; color: var(--text-muted); max-width: 820px; line-height: 1.6;">
         {research['vision']}
       </p>
     </div>
@@ -384,20 +520,20 @@ def generate_research_page():
     <div style="display: flex; flex-direction: column; gap: 32px;">
     """
     for pillar in research["pillars"]:
-        topics = " ".join([f'<span style="font-size:0.775rem; font-weight:600; padding:4px 10px; background:#040917; border:1px solid var(--night-border); border-radius:4px; margin-right:6px; margin-bottom:6px; display:inline-block; color:var(--text-sub);">{t}</span>' for t in pillar["key_topics"]])
+        topics = " ".join([f'<span style="font-size:0.775rem; font-weight:600; padding:4px 10px; background:var(--bg-subtle); border:1px solid var(--border-light); border-radius:4px; margin-right:6px; margin-bottom:6px; display:inline-block;">{t}</span>' for t in pillar["key_topics"]])
         html += f"""
-      <div style="background:#081226; border:1px solid var(--night-border); border-radius:18px; padding:36px; box-shadow:0 8px 24px -10px rgba(0,0,0,0.4);">
-        <h2 style="font-size: 1.7rem; font-weight: 800; margin-bottom: 12px; color:#ffffff;">{pillar['title']}</h2>
-        <p style="font-size: 1rem; color: var(--text-sub); line-height: 1.7; margin-bottom: 20px;">
+      <div style="background:var(--bg-card); border:1px solid var(--border-light); border-radius:16px; padding:36px; box-shadow:0 8px 24px -10px rgba(0,0,0,0.04);">
+        <h2 style="font-size: 1.7rem; font-weight: 800; margin-bottom: 12px;">{pillar['title']}</h2>
+        <p style="font-size: 1rem; color: var(--text-body); line-height: 1.7; margin-bottom: 20px;">
           {pillar['full_desc']}
         </p>
 
         <div style="margin-bottom: 20px;">
-          <div style="font-size: 0.85rem; font-weight: 800; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; color:#ffffff;">Key Technical Frontiers:</div>
+          <div style="font-size: 0.85rem; font-weight: 800; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em;">Key Technical Frontiers:</div>
           {topics}
         </div>
 
-        <div style="background: rgba(253, 224, 71, 0.12); color: var(--beacon-gold); padding: 12px 18px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; border-left: 4px solid var(--beacon-gold);">
+        <div style="background: var(--brand-gold-light); color: var(--brand-gold); padding: 12px 18px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; border-left: 4px solid var(--brand-gold);">
           Grant Alignment: {pillar['grant_alignment']}
         </div>
       </div>
@@ -423,24 +559,24 @@ def generate_supervision_page():
     html += f"""
   <div class="subpage-container">
     <div style="margin-bottom: 36px;">
-      <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--electric-cyan);">Academic Mentorship</span>
-      <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0; color:#ffffff;">{supervision['heading']}</h1>
-      <p style="font-size: 1.05rem; color: var(--text-sub); line-height: 1.7; max-width: 820px;">
+      <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brand-blue);">Academic Mentorship</span>
+      <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0;">{supervision['heading']}</h1>
+      <p style="font-size: 1.05rem; color: var(--text-body); line-height: 1.7; max-width: 820px;">
         {supervision['statement']}
       </p>
     </div>
 
     <div style="margin-bottom: 40px;">
-      <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 20px; color:#ffffff;">Open Supervised Research Directions</h2>
+      <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 20px;">Open Supervised Research Directions</h2>
       <div style="display: flex; flex-direction: column; gap: 20px;">
     """
     for t in supervision["open_topics"]:
-        pills = " ".join([f'<span style="background:rgba(56,189,248,0.15); color:var(--electric-cyan); padding:3px 10px; border-radius:4px; font-size:0.75rem; font-weight:700;">{d}</span>' for d in t["degree_levels"]])
+        pills = " ".join([f'<span style="background:var(--brand-blue-light); color:var(--brand-blue); padding:3px 10px; border-radius:4px; font-size:0.75rem; font-weight:700;">{d}</span>' for d in t["degree_levels"]])
         html += f"""
-        <div style="background:#081226; border:1px solid var(--night-border); border-radius:14px; padding:28px;">
+        <div style="background:var(--bg-card); border:1px solid var(--border-light); border-radius:14px; padding:28px;">
           <div style="margin-bottom: 8px;">{pills}</div>
-          <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 8px; color:#ffffff;">{t['title']}</h3>
-          <p style="font-size: 0.95rem; color: var(--text-sub); line-height: 1.6; margin-bottom: 12px;">{t['description']}</p>
+          <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 8px;">{t['title']}</h3>
+          <p style="font-size: 0.95rem; color: var(--text-body); line-height: 1.6; margin-bottom: 12px;">{t['description']}</p>
           <div style="font-size: 0.825rem; color: var(--text-muted);"><strong>Prerequisites:</strong> {t['skills_required']}</div>
         </div>
         """
@@ -448,12 +584,12 @@ def generate_supervision_page():
       </div>
     </div>
 
-    <div style="background: #081226; border: 2px solid var(--electric-blue); border-radius: 16px; padding: 32px;">
-      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; color:#ffffff;">How to Submit an Inquiry for Supervision</h2>
-      <ol style="margin-left: 20px; font-size: 0.95rem; line-height: 1.8; color: var(--text-sub);">
+    <div style="background: var(--bg-card); border: 2px solid var(--brand-blue); border-radius: 16px; padding: 32px;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 16px;">How to Submit an Inquiry for Supervision</h2>
+      <ol style="margin-left: 20px; font-size: 0.95rem; line-height: 1.8; color: var(--text-body);">
         <li>Review my recent publications on Attention-Based Design (IEEE Access) or Agentic AI Governance (Smart Cities 2026).</li>
         <li>Prepare your Academic CV, transcripts, and a 1-page Research Proposal outlining your core problem.</li>
-        <li>Email your materials to <a href="mailto:zaid.amin@newinti.edu.my" style="font-weight:700; color:var(--electric-cyan); text-decoration:underline;">zaid.amin@newinti.edu.my</a> with the subject: <code>[Prospective Postgraduate] - [Your Name] - [Ph.D./Master]</code>.</li>
+        <li>Email your materials to <a href="mailto:zaid.amin@newinti.edu.my" style="font-weight:700; color:var(--brand-blue); text-decoration:underline;">zaid.amin@newinti.edu.my</a> with the subject: <code>[Prospective Postgraduate] - [Your Name] - [Ph.D./Master]</code>.</li>
       </ol>
     </div>
   </div>
@@ -475,11 +611,11 @@ def generate_cv_page():
 
     html += f"""
   <div class="subpage-container" style="max-width: 900px;">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; border-bottom: 2px solid var(--night-border); padding-bottom: 24px;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; border-bottom: 2px solid var(--border-light); padding-bottom: 24px;">
       <div>
-        <h1 style="font-size: 2.6rem; font-weight: 900; margin-bottom: 4px; color:#ffffff;">Dr. Zaid Amin</h1>
-        <div style="font-size: 1.15rem; color: var(--electric-cyan); font-weight: 700;">Curriculum Vitae</div>
-        <div style="font-size: 0.9rem; color: var(--text-sub); margin-top: 4px;">
+        <h1 style="font-size: 2.6rem; font-weight: 900; margin-bottom: 4px;">Dr. Zaid Amin</h1>
+        <div style="font-size: 1.15rem; color: var(--brand-blue); font-weight: 700;">Curriculum Vitae</div>
+        <div style="font-size: 0.9rem; color: var(--text-body); margin-top: 4px;">
           Senior Lecturer &bull; Faculty of Data Science and Information Technology, INTI International University<br>
           Email: zaid.amin@newinti.edu.my &bull; Website: zaidamin.org &bull; ORCID: 0000-0001-5223-3058
         </div>
@@ -492,16 +628,16 @@ def generate_cv_page():
     </div>
 
     <div style="margin-bottom: 32px;">
-      <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid var(--night-border); padding-bottom: 6px; margin-bottom: 16px; color:#ffffff;">1. Education</h2>
+      <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid var(--border-light); padding-bottom: 6px; margin-bottom: 16px;">1. Education</h2>
     """
     for edu in profile["education"]:
         html += f"""
       <div style="margin-bottom: 14px;">
         <div style="display: flex; justify-content: space-between;">
-          <strong style="color:#ffffff;">{edu['degree']}</strong>
+          <strong>{edu['degree']}</strong>
           <span style="color: var(--text-muted);">{edu['country']}</span>
         </div>
-        <div style="color: var(--electric-cyan); font-size: 0.95rem;">{edu['institution']}</div>
+        <div style="color: var(--brand-navy); font-size: 0.95rem;">{edu['institution']}</div>
         <div style="font-size: 0.85rem; color: var(--text-muted);">{edu['focus']}</div>
       </div>
         """
@@ -510,17 +646,17 @@ def generate_cv_page():
     </div>
 
     <div style="margin-bottom: 32px;">
-      <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid var(--night-border); padding-bottom: 6px; margin-bottom: 16px; color:#ffffff;">2. Academic Leadership History</h2>
+      <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid var(--border-light); padding-bottom: 6px; margin-bottom: 16px;">2. Academic Leadership History</h2>
     """
     for role in profile["leadership_roles"]:
         html += f"""
       <div style="margin-bottom: 14px;">
         <div style="display: flex; justify-content: space-between;">
-          <strong style="color:#ffffff;">{role['role']}</strong>
+          <strong>{role['role']}</strong>
           <span style="color: var(--text-muted); font-size: 0.85rem;">{role['period']}</span>
         </div>
-        <div style="color: var(--electric-cyan);">{role['institution']}</div>
-        <div style="font-size: 0.85rem; color: var(--text-sub);">{role['description']}</div>
+        <div style="color: var(--brand-navy);">{role['institution']}</div>
+        <div style="font-size: 0.85rem; color: var(--text-body);">{role['description']}</div>
       </div>
         """
 
@@ -528,14 +664,14 @@ def generate_cv_page():
     </div>
 
     <div style="margin-bottom: 32px;">
-      <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid var(--night-border); padding-bottom: 6px; margin-bottom: 16px; color:#ffffff;">3. Complete Publication Record ({len(publications)} Works)</h2>
-      <ol style="margin-left: 20px; font-size: 0.9rem; line-height: 1.7; color:var(--text-sub);">
+      <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid var(--border-light); padding-bottom: 6px; margin-bottom: 16px;">3. Complete Publication Record ({len(publications)} Works)</h2>
+      <ol style="margin-left: 20px; font-size: 0.9rem; line-height: 1.7;">
     """
     for pub in publications:
-        doi_str = f' DOI: <a href="{pub["url"]}" target="_blank" style="color:var(--electric-cyan);">{pub["doi"]}</a>' if pub.get("doi") else ""
+        doi_str = f' DOI: <a href="{pub["url"]}" target="_blank" style="color:var(--brand-blue);">{pub["doi"]}</a>' if pub.get("doi") else ""
         html += f"""
         <li style="margin-bottom: 10px;">
-          <strong style="color:#ffffff;">Zaid Amin</strong> et al. ({pub['year']}). "{pub['title']}". <em>{pub['venue']}</em>.{doi_str}
+          <strong>Zaid Amin</strong> et al. ({pub['year']}). "{pub['title']}". <em>{pub['venue']}</em>.{doi_str}
         </li>
         """
 
@@ -553,11 +689,11 @@ def generate_cv_page():
 # MAIN COMPILER BUILD
 # ==============================================================================
 def build_all():
-    print("Compiling Lighthouse Storm Banner Academic Site for zaidamin.org...")
+    print("Compiling Golden Ratio Standard Academic Site for zaidamin.org...")
     DIST_DIR.mkdir(parents=True, exist_ok=True)
 
     pages = {
-        "index.html": generate_lighthouse_home(),
+        "index.html": generate_golden_ratio_home(),
         "publications.html": generate_publications_page(),
         "research.html": generate_research_page(),
         "prospective-students.html": generate_supervision_page(),
@@ -584,7 +720,7 @@ def build_all():
         if src.exists():
             shutil.copy(src, DIST_DIR / Path(extra).name)
 
-    print("Lighthouse Storm build complete!")
+    print("Golden Ratio build complete!")
 
 if __name__ == "__main__":
     build_all()
