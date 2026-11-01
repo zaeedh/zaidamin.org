@@ -4167,3 +4167,95 @@ a {
   margin: 0;
   line-height: 1.4;
 }
+
+/* ==========================================================================
+   SPOTLIGHT CAROUSEL (BLOGGER ARTICLES DECK)
+   ========================================================================== */
+.spotlight-slide {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  animation: spotlightFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.spotlight-slide.active {
+  display: flex;
+}
+
+@keyframes spotlightFadeIn {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.spotlight-arrows-cluster {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(3, 18, 32, 0.80);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(34, 166, 200, 0.32);
+  border-radius: 999px;
+  padding: 2px 7px;
+  gap: 5px;
+  box-shadow: 0 2px 8px rgba(0, 10, 24, 0.35);
+}
+
+.spotlight-arrow-btn {
+  background: transparent;
+  border: none;
+  color: #c4dbe8;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.spotlight-arrow-btn:hover {
+  background: rgba(34, 166, 200, 0.25);
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.spotlight-counter {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: #bae6fd;
+  font-weight: 700;
+  user-select: none;
+  padding: 0 2px;
+}
+
+.spotlight-dots-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  margin-bottom: 14px;
+}
+
+.spotlight-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(186, 230, 253, 0.25);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border: none;
+  padding: 0;
+}
+
+.spotlight-dot:hover {
+  background: rgba(212, 175, 55, 0.65);
+}
+
+.spotlight-dot.active {
+  width: 22px;
+  background: linear-gradient(90deg, #d4af37, #fce09b);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.50);
+}
