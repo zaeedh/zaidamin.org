@@ -105,13 +105,28 @@ def get_page_header(active_page="home"):
     return f"""
   <div class="site-wrapper">
     
-    <!-- 1. Top Epigraph: Das Sein, Das Sollen & Top-Right Star of David -->
+    <!-- 1. Top Epigraph: Das Sein, Das Sollen & Top-Right Star of David with Side Links -->
     <header class="epigraph-header">
       <div class="epigraph-top-flex">
         <h1 class="epigraph-title">Das Sein, Das Sollen.</h1>
-        <div class="epigraph-top-actions">
-          <button class="david-star-btn top-star-btn" aria-label="Scholarly Profiles & Identifiers" title="Scholarly Profiles & Direct Identifiers" aria-expanded="false">
-            {star_svg}
+        
+        <div class="top-scholarly-cluster">
+          <!-- Side-Expanding Scholarly Profiles Links (Activated by Star Button) -->
+          <div class="top-scholarly-links" id="top-scholarly-links" aria-hidden="true">
+            <span class="top-scholarly-label">Scholarly Profiles:</span>
+            <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="top-link-pill" title="Google Scholar">{render_svg_icon('scholar')} <span>Scholar</span></a>
+            <a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="top-link-pill" title="ORCID">{render_svg_icon('orcid')} <span>ORCID</span></a>
+            <a href="{profile['social_links']['github']}" target="_blank" rel="noopener" class="top-link-pill" title="GitHub">{render_svg_icon('github')} <span>GitHub</span></a>
+            <a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" class="top-link-pill" title="LinkedIn">{render_svg_icon('linkedin')} <span>LinkedIn</span></a>
+            <a href="mailto:{profile['social_links']['email']}" class="top-link-pill" title="Institutional Email">{render_svg_icon('email')} <span>Email</span></a>
+          </div>
+
+          <!-- Pure Rotating Star of David Button (No circle boundary!) -->
+          <button class="david-star-pure-btn" id="star-toggle-btn" aria-label="Toggle Scholarly Profiles" title="Scholarly Profiles & Direct Identifiers" aria-expanded="false">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" class="david-star-svg">
+              <polygon points="12,2 20.66,17 3.34,17" />
+              <polygon points="12,22 3.34,7 20.66,7" />
+            </svg>
           </button>
         </div>
       </div>
@@ -166,31 +181,11 @@ def get_page_header(active_page="home"):
           </picture>
           <span class="avatar-status-dot"></span>
         </a>
-        <button class="david-star-btn menu-star-btn" aria-label="Scholarly Profiles & Identifiers" title="Scholarly Profiles & Direct Identifiers" aria-expanded="false">
-          {star_svg}
-        </button>
+        <a href="mailto:zaid.amin@newinti.edu.my" class="ocean-action-dots" title="Quick Contact">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+        </a>
       </div>
     </header>
-
-    <!-- Scholarly Profiles Slide-Out Drawer (Animated by Star of David Button) -->
-    <div class="scholarly-header-drawer" id="scholarly-header-drawer" aria-hidden="true">
-      <div class="scholarly-drawer-inner">
-        <div class="drawer-header-label">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.8" stroke-linejoin="round" class="inline-star">
-            <polygon points="12,2 20.66,17 3.34,17" />
-            <polygon points="12,22 3.34,7 20.66,7" />
-          </svg>
-          <span class="drawer-title">Scholarly Profiles &amp; Direct Identifiers:</span>
-        </div>
-        <div class="drawer-network-links">
-          <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="drawer-pill">{render_svg_icon('scholar')} <span>Google Scholar</span></a>
-          <a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="drawer-pill">{render_svg_icon('orcid')} <span>ORCID</span></a>
-          <a href="{profile['social_links']['github']}" target="_blank" rel="noopener" class="drawer-pill">{render_svg_icon('github')} <span>GitHub</span></a>
-          <a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" class="drawer-pill">{render_svg_icon('linkedin')} <span>LinkedIn</span></a>
-          <a href="mailto:{profile['social_links']['email']}" class="drawer-pill">{render_svg_icon('email')} <span>Institutional Email</span></a>
-        </div>
-      </div>
-    </div>
 """
 
 def get_page_footer():
