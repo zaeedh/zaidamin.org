@@ -405,15 +405,14 @@ def generate_golden_ratio_home():
         <!-- Header with Dr. Zaid Amin Profile Summary & Title -->
         <div class="ref-portals-header">
           <div class="ref-profile-info-col">
-            <div class="ref-header-kicker font-cinzel">Academic Portals</div>
-            <h3 class="ref-profile-name font-cinzel">Dr. Zaid Amin, Ph.D.</h3>
+            <h3 class="ref-profile-name font-cinzel">Zaid Amin, Ph.D.</h3>
             <div class="ref-profile-role">Senior Lecturer in Data Science &amp; IT &bull; INTI University</div>
             <div class="ref-profile-fields">Trustworthy AI &bull; Human-Centered Computing &bull; Civic Cybernetics</div>
           </div>
           <div class="ref-photo-ring">
             <picture>
               <source srcset="assets/images/dr-zaid.webp" type="image/webp">
-              <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="ref-photo-img" width="100" height="100">
+              <img src="assets/images/dr-zaid.png" alt="Zaid Amin, Ph.D." class="ref-photo-img" width="124" height="124">
             </picture>
             <span class="ref-live-status" title="Active Senior Lecturer &amp; Researcher"></span>
           </div>
@@ -427,7 +426,7 @@ def generate_golden_ratio_home():
             <div class="ref-item-thumb-box">
               <picture>
                 <source srcset="assets/images/thumb-research.webp" type="image/webp">
-                <img src="assets/images/thumb-research.jpg" alt="Research &amp; Publications" class="ref-item-thumb" width="88" height="64" loading="lazy">
+                <img src="assets/images/thumb-research.jpg" alt="Research &amp; Publications" class="ref-item-thumb" width="82" height="60" loading="lazy">
               </picture>
             </div>
             <div class="ref-item-info">
@@ -449,7 +448,7 @@ def generate_golden_ratio_home():
             <div class="ref-item-thumb-box">
               <picture>
                 <source srcset="assets/images/thumb-projects.webp" type="image/webp">
-                <img src="assets/images/thumb-projects.jpg" alt="Projects &amp; Innovations" class="ref-item-thumb" width="88" height="64" loading="lazy">
+                <img src="assets/images/thumb-projects.jpg" alt="Projects &amp; Innovations" class="ref-item-thumb" width="82" height="60" loading="lazy">
               </picture>
             </div>
             <div class="ref-item-info">
@@ -466,16 +465,60 @@ def generate_golden_ratio_home():
             </div>
           </div>
 
-          <!-- Item 3: Media, Talks & Academic CV -->
+          <!-- Item 3: Attention Interventions & Cybernetics (IEEE Access) -->
+          <div class="ref-item-card">
+            <div class="ref-item-thumb-box">
+              <picture>
+                <source srcset="assets/images/thumb-attention.webp" type="image/webp">
+                <img src="assets/images/thumb-attention.jpg" alt="Attention-Based Cybernetics" class="ref-item-thumb" width="82" height="60" loading="lazy">
+              </picture>
+            </div>
+            <div class="ref-item-info">
+              <h4 class="ref-item-title font-cinzel">Attention-Based Decision Systems</h4>
+              <ul class="ref-item-bullets">
+                <li>IEEE Access (2021) &bull; Q1 Scopus Indexed</li>
+                <li>Visual Attention System for Digital Environments</li>
+                <li>Empirical Intervention &amp; Cognitive Feedback Loops</li>
+              </ul>
+            </div>
+            <div class="ref-item-meta-action">
+              <span class="ref-item-tag font-cinzel">IEEE Access</span>
+              <a href="https://doi.org/10.1109/ACCESS.2021.3087740" target="_blank" rel="noopener" class="ref-item-btn">Read</a>
+            </div>
+          </div>
+
+          <!-- Item 4: Civic AI & Municipal Governance (SSRN / Oxford) -->
+          <div class="ref-item-card">
+            <div class="ref-item-thumb-box">
+              <picture>
+                <source srcset="assets/images/thumb-governance.webp" type="image/webp">
+                <img src="assets/images/thumb-governance.jpg" alt="AI Governance &amp; Civic Compliance" class="ref-item-thumb" width="82" height="60" loading="lazy">
+              </picture>
+            </div>
+            <div class="ref-item-info">
+              <h4 class="ref-item-title font-cinzel">The Proxy Trap in Agentic AI</h4>
+              <ul class="ref-item-bullets">
+                <li>AI Governance Series &bull; SSRN Preprint 2026</li>
+                <li>When Metrics Replace Judgment in Autonomous Nodes</li>
+                <li>Preserving Civic Human Oversight in Admin Protocols</li>
+              </ul>
+            </div>
+            <div class="ref-item-meta-action">
+              <span class="ref-item-tag font-cinzel">Governance</span>
+              <a href="https://doi.org/10.2139/ssrn.7670124" target="_blank" rel="noopener" class="ref-item-btn">Examine</a>
+            </div>
+          </div>
+
+          <!-- Item 5: About, Talks & CV -->
           <div class="ref-item-card">
             <div class="ref-item-thumb-box">
               <picture>
                 <source srcset="assets/images/dr-zaid.webp" type="image/webp">
-                <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="ref-item-thumb" width="88" height="64" loading="lazy">
+                <img src="assets/images/dr-zaid.png" alt="Zaid Amin, Ph.D." class="ref-item-thumb" width="82" height="60" loading="lazy">
               </picture>
             </div>
             <div class="ref-item-info">
-              <h4 class="ref-item-title font-cinzel">About, Talks &amp; CV</h4>
+              <h4 class="ref-item-title font-cinzel">About, Talks &amp; Academic CV</h4>
               <ul class="ref-item-bullets">
                 <li>Ph.D. in Computer Science (UKM)</li>
                 <li>Keynote Speaker, Media Interviews &amp; Panels</li>
@@ -489,7 +532,6 @@ def generate_golden_ratio_home():
           </div>
 
         </div>
-
       </aside>
 
     </section>
