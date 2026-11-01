@@ -188,13 +188,14 @@ a {
 
 /* ==========================================================================
    STORM BANNER QUR'AN QUOTATION OVERLAY
-   Pure Typographic Overlay: Borderless & Background-Free, Blended into Ocean
+   Pure Typographic Overlay: Soft Ethereal Drift & Fade In/Out
+   Left-to-Right Subtle Motion with Cinematic Dissolve & Increased Font Size
    ========================================================================== */
 .storm-quote-overlay {
   position: absolute;
   bottom: clamp(52px, 14%, 66px);
   right: clamp(26px, 4%, 38px);
-  max-width: 530px;
+  max-width: 620px;
   box-sizing: border-box;
   padding: 0;
   background: transparent !important;
@@ -207,22 +208,50 @@ a {
   text-align: right;
   z-index: 10;
   pointer-events: auto;
+  animation: quoteDriftFade 15s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+  will-change: transform, opacity, filter;
 }
 
 .storm-quote-overlay:hover {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+  animation-play-state: paused;
+}
+
+@keyframes quoteDriftFade {
+  0% {
+    opacity: 0;
+    transform: translateX(-28px);
+    filter: blur(2px);
+  }
+  16% {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+  68% {
+    opacity: 1;
+    transform: translateX(8px);
+    filter: blur(0);
+  }
+  86% {
+    opacity: 0;
+    transform: translateX(34px);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-28px);
+    filter: blur(2px);
+  }
 }
 
 .storm-quote-text {
   font-family: var(--font-premium-serif), Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  font-size: 0.90rem;
-  color: #e6f2fa; /* Ethereal sea-pearl luminescence */
-  line-height: 1.48;
-  margin: 0 0 5px 0;
+  font-size: 1.05rem; /* Increased for elevated legibility and cinematic prestige */
+  color: #eaf4fb; /* Ethereal sea-pearl luminescence */
+  line-height: 1.54;
+  margin: 0 0 7px 0;
   letter-spacing: 0.015em;
   text-shadow: 0 2px 10px rgba(0, 10, 24, 0.98), 0 0 24px rgba(0, 6, 16, 0.92);
   text-align: right;
@@ -232,24 +261,24 @@ a {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 10px;
   font-style: normal;
   text-align: right;
 }
 
 .storm-cite-line {
-  width: 32px;
+  width: 36px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.65));
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.70));
   display: inline-block;
 }
 
 .storm-cite-label {
   font-family: var(--font-cinzel), serif;
-  font-size: 0.72rem;
+  font-size: 0.78rem; /* Proportionally scaled */
   font-weight: 700;
   letter-spacing: 0.16em;
-  color: #d4af37; /* Premium Imperial Gold */
+  color: #d4af37;
   background: linear-gradient(135deg, #fce09b 0%, #d4af37 50%, #b88d28 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -263,12 +292,11 @@ a {
   .storm-quote-overlay {
     bottom: clamp(38px, 11%, 50px);
     right: 20px;
-    max-width: 460px;
-    padding: 0;
+    max-width: 500px;
   }
   .storm-quote-text {
-    font-size: 0.84rem;
-    line-height: 1.42;
+    font-size: 0.94rem;
+    line-height: 1.46;
   }
 }
 
@@ -278,14 +306,13 @@ a {
     right: 14px;
     left: 14px;
     max-width: none;
-    padding: 0;
   }
   .storm-quote-text {
-    font-size: 0.78rem;
-    line-height: 1.38;
+    font-size: 0.86rem;
+    line-height: 1.40;
   }
   .storm-cite-label {
-    font-size: 0.68rem;
+    font-size: 0.72rem;
   }
 }
 
