@@ -157,7 +157,6 @@ def get_page_header(active_page="home"):
 
         <!-- 4. Main Menu (Matching User Wireframe) -->
     <section class="main-menu-section">
-      <div class="main-menu-kicker font-cinzel">MAIN MENU</div>
       <nav class="main-menu-nav" aria-label="Main Navigation">
         <a href="index.html" class="main-menu-link {'active' if active_page == 'home' else ''}">Home</a>
         <a href="publications.html" class="main-menu-link {'active' if active_page == 'publications' else ''}">Research &amp; Publication</a>
