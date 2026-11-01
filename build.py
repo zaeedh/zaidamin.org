@@ -444,7 +444,7 @@ def get_spotlight_card_html():
 
 def get_portals_tray_carousel_html():
     slides_data = [
-        # Slide 0: Core Portals & CV Highlights
+        # Slide 0: Core Portals & Top Academic Highlights (4 items)
         [
             {
                 "thumb_webp": "assets/images/dr-zaid.webp",
@@ -453,7 +453,7 @@ def get_portals_tray_carousel_html():
                 "bullets": [
                     "Ph.D. in Computer Science (UKM)",
                     "Keynote Speaker, Media Interviews &amp; Panels",
-                    "Awards, Academic Honors &amp; Leadership Track"
+                    "Academic Honors &amp; Leadership Track"
                 ],
                 "tag": "UKM Ph.D.",
                 "btn_text": "View CV",
@@ -487,9 +487,23 @@ def get_portals_tray_carousel_html():
                 "btn_text": "Explore",
                 "btn_url": "publications.html",
                 "is_external": False
+            },
+            {
+                "thumb_webp": "assets/images/thumb-attention.webp",
+                "thumb_jpg": "assets/images/thumb-attention.jpg",
+                "title": "Attention-Based Decision Systems",
+                "bullets": [
+                    "IEEE Access (2021) &bull; Q1 Scopus Indexed",
+                    "Visual Attention System for Digital Environments",
+                    "Empirical Intervention &amp; Cognitive Feedback Loops"
+                ],
+                "tag": "IEEE Access",
+                "btn_text": "Read",
+                "btn_url": "https://doi.org/10.1109/ACCESS.2021.3087740",
+                "is_external": True
             }
         ],
-        # Slide 1: Blogger: AI, Pedagogy & Cognition
+        # Slide 1: Blogger: AI, Pedagogy, Cognition & Cybernetics (4 items)
         [
             {
                 "thumb_webp": "",
@@ -532,10 +546,7 @@ def get_portals_tray_carousel_html():
                 "btn_text": "Read",
                 "btn_url": "https://www.zaidamin.org/2020/07/mengenal-tipe-tipe-bias-dalam.html",
                 "is_external": True
-            }
-        ],
-        # Slide 2: Cybernetics & Media Vigilance
-        [
+            },
             {
                 "thumb_webp": "",
                 "thumb_jpg": "assets/images/blogger/post_4.jpg",
@@ -549,7 +560,10 @@ def get_portals_tray_carousel_html():
                 "btn_text": "Read",
                 "btn_url": "https://www.zaidamin.org/2019/08/cyberspace-dan-perubahan-perilaku.html",
                 "is_external": True
-            },
+            }
+        ],
+        # Slide 2: Epistemic Vigilance, Governance & Doctoral Path (4 items)
+        [
             {
                 "thumb_webp": "",
                 "thumb_jpg": "assets/images/blogger/post_5.jpg",
@@ -564,23 +578,6 @@ def get_portals_tray_carousel_html():
                 "btn_url": "https://www.zaidamin.org/2019/06/tackling-disinformation-fake-news-and.html",
                 "is_external": True
             },
-            {
-                "thumb_webp": "assets/images/thumb-attention.webp",
-                "thumb_jpg": "assets/images/thumb-attention.jpg",
-                "title": "Attention-Based Decision Systems",
-                "bullets": [
-                    "IEEE Access (2021) &bull; Q1 Scopus Indexed",
-                    "Visual Attention System for Digital Environments",
-                    "Empirical Intervention &amp; Cognitive Feedback Loops"
-                ],
-                "tag": "IEEE Access",
-                "btn_text": "Read",
-                "btn_url": "https://doi.org/10.1109/ACCESS.2021.3087740",
-                "is_external": True
-            }
-        ],
-        # Slide 3: AI Governance & Scholarly Journey
-        [
             {
                 "thumb_webp": "assets/images/thumb-governance.webp",
                 "thumb_jpg": "assets/images/thumb-governance.jpg",
@@ -623,6 +620,65 @@ def get_portals_tray_carousel_html():
                 "btn_url": "https://www.zaidamin.org/2019/06/dimuliakan-melalui-makan-dan-minum.html",
                 "is_external": True
             }
+        ],
+        # Slide 3: Startups, Cultural Heritage & Digital Society (4 items)
+        [
+            {
+                "thumb_webp": "",
+                "thumb_jpg": "assets/images/blogger/post_8.jpg",
+                "title": "E-Commerce &amp; Startup Ecosystem",
+                "bullets": [
+                    "Digital economy trends &amp; startup ecosystem",
+                    "Empowering student innovation in commerce tech",
+                    "Technology-driven enterprise development"
+                ],
+                "tag": "Industry",
+                "btn_text": "Read",
+                "btn_url": "https://www.zaidamin.org/2015/09/talk-show-e-commerce-entrepreneurship.html",
+                "is_external": True
+            },
+            {
+                "thumb_webp": "assets/images/thumb-research.webp",
+                "thumb_jpg": "assets/images/thumb-research.jpg",
+                "title": "Srivijayapedia Heritage Platform",
+                "bullets": [
+                    "JISTM (2026) &bull; Cultural Heritage Preservation",
+                    "Srivijaya Civilization Semantic Digital Archive",
+                    "Human-Centered Cultural Informatics Mapping"
+                ],
+                "tag": "JISTM 2026",
+                "btn_text": "Read",
+                "btn_url": "https://doi.org/10.35631/JISTM.1141001",
+                "is_external": True
+            },
+            {
+                "thumb_webp": "assets/images/thumb-attention.webp",
+                "thumb_jpg": "assets/images/thumb-attention.jpg",
+                "title": "Digital Loneliness &amp; Screen Epoch",
+                "bullets": [
+                    "Contributions to Management Science (Springer 2024)",
+                    "Cognitive Distraction in Social Media Ecosystems",
+                    "Algorithmic Attention Capture &amp; Behavioral Health"
+                ],
+                "tag": "Springer",
+                "btn_text": "Read",
+                "btn_url": "https://doi.org/10.1007/978-3-031-52280-2_14",
+                "is_external": True
+            },
+            {
+                "thumb_webp": "assets/images/spotlight-smart-cities.webp",
+                "thumb_jpg": "assets/images/spotlight-smart-cities.jpg",
+                "title": "Municipal Autonomous Auditing",
+                "bullets": [
+                    "MDPI Smart Cities (2026) &bull; Multi-Agent Governance",
+                    "Real-Time Cybernetic Civic Feedback Loops",
+                    "Mitigating Metric Divergence in Urban Systems"
+                ],
+                "tag": "Smart Cities",
+                "btn_text": "Inspect",
+                "btn_url": "https://doi.org/10.3390/smartcities9100174",
+                "is_external": True
+            }
         ]
     ]
 
@@ -635,10 +691,10 @@ def get_portals_tray_carousel_html():
             if card.get("thumb_webp"):
                 img_html = f'''<picture>
                   <source srcset="{card['thumb_webp']}" type="image/webp">
-                  <img src="{card['thumb_jpg']}" alt="{card['title']}" class="ref-item-thumb" width="82" height="60" loading="lazy">
+                  <img src="{card['thumb_jpg']}" alt="{card['title']}" class="ref-item-thumb" width="78" height="56" loading="lazy">
                 </picture>'''
             else:
-                img_html = f'''<img src="{card['thumb_jpg']}" alt="{card['title']}" class="ref-item-thumb" width="82" height="60" loading="lazy">'''
+                img_html = f'''<img src="{card['thumb_jpg']}" alt="{card['title']}" class="ref-item-thumb" width="78" height="56" loading="lazy">'''
 
             bullets_html = "".join([f"<li>{b}</li>" for b in card["bullets"]])
             ext_attr = ' target="_blank" rel="noopener"' if card.get("is_external") else ""
@@ -668,28 +724,28 @@ def get_portals_tray_carousel_html():
     dots_html = ""
     for d_idx in range(total_slides):
         active_cls = " active" if d_idx == 0 else ""
-        dots_html += f'<button class="spotlight-dot{active_cls}" data-slide-target="{d_idx}" aria-label="Page {d_idx+1}" type="button"></button>'
+        dots_html += f'<button class="spotlight-dot{active_cls}" data-slide-target="{d_idx}" aria-label="Slide {d_idx+1}" type="button"></button>'
 
     return f'''
-        <!-- Inset Tray containing 3 Stacked Horizontal Cards with Carousel Navigation -->
-        <div class="ref-inset-tray" id="portals-carousel" aria-roledescription="carousel" aria-label="Academic Portals and Articles">
+        <!-- Inset Tray containing 4 Stacked Horizontal Cards with Vertical Sliding Ticker -->
+        <div class="ref-inset-tray" id="portals-carousel" aria-roledescription="marquee" aria-label="Academic Portals and Articles">
           <!-- Tray Carousel Top Controls Bar -->
           <div class="tray-carousel-header">
             <div class="tray-header-left font-cinzel">
               <span class="pulse-dot"></span> Portals &amp; Articles
             </div>
             <div class="spotlight-arrows-cluster tray-arrows-cluster">
-              <button class="spotlight-arrow-btn tray-arrow-prev" aria-label="Previous Page" type="button">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              <button class="spotlight-arrow-btn tray-arrow-prev" aria-label="Previous Slide (Up)" title="Previous (Up)" type="button">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
               </button>
               <span class="spotlight-counter tray-counter font-mono"><span class="tray-curr">01</span> / <span class="tray-total">{str(total_slides).zfill(2)}</span></span>
-              <button class="spotlight-arrow-btn tray-arrow-next" aria-label="Next Page" type="button">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <button class="spotlight-arrow-btn tray-arrow-next" aria-label="Next Slide (Down)" title="Next (Down)" type="button">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </button>
             </div>
           </div>
 
-          <!-- Tray Carousel Slides Container -->
+          <!-- Tray Carousel Vertical Slides Container -->
           <div class="tray-slides-wrap">
             {slides_html}
           </div>
