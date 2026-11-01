@@ -348,7 +348,6 @@ def get_visitor_stats_html():
             <span class="stats-live-label font-cinzel">Live Readership Telemetry</span>
           </div>
           <h3 class="stats-heading font-cinzel">Visitor Statistics &amp; Global Scholarly Reach</h3>
-          <p class="stats-subtitle font-garamond">Continuous telemetry across 84+ nations, university networks &amp; academic repositories</p>
         </div>
         <div class="stats-meta-cluster font-cinzel">
           <span class="stats-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> 84 Nations</span>
