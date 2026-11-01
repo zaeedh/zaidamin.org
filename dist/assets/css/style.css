@@ -145,20 +145,30 @@ a {
   aspect-ratio: 21 / 9;
   min-height: 360px;
   max-height: 480px;
-  border-radius: 0;
+  border-radius: 12px;
   overflow: hidden;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-  background-color: transparent;
-  margin-bottom: 14px;
+  border: 1px solid rgba(140, 180, 205, 0.16);
+  box-shadow: 0 8px 30px rgba(0, 8, 20, 0.40);
+  background-color: var(--bg-surface);
+  margin-bottom: 8px;
+  transition: border-color var(--transition);
 }
 
-/* Mask applied only to storm media and canvas so overlay menu remains 100% crisp */
-.lighthouse-banner-frame picture,
-.lighthouse-banner-frame #rain-canvas {
-  mask-image: linear-gradient(to bottom, #000000 0%, #000000 88%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, #000000 0%, #000000 88%, transparent 100%);
+.lighthouse-banner-frame:hover {
+  border-color: rgba(34, 166, 200, 0.28);
+}
+
+/* Ambient top highlight line consistent with second-gaze and card nuances */
+.lighthouse-banner-frame::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(140, 180, 205, 0.32) 50%, transparent);
+  pointer-events: none;
+  z-index: 5;
 }
 
 .lighthouse-banner-frame picture {
@@ -1792,7 +1802,7 @@ a {
   box-shadow: none !important;
   color: #d4af37; /* Premium Imperial Gold */
   cursor: pointer;
-  padding: 4px;
+  padding: 3px;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
   flex-shrink: 0;
   user-select: none;
@@ -1800,12 +1810,14 @@ a {
 
 .david-star-pure-btn:hover,
 .david-star-pure-btn.is-active {
-  transform: scale(1.18);
-  filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.85));
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.85));
 }
 
 .david-star-svg {
   display: block;
+  width: 19px;
+  height: 19px;
   transform-origin: 50% 50%;
   animation: starRotateBreathe 20s linear infinite;
   transition: transform 0.3s ease;
