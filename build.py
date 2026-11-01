@@ -228,6 +228,84 @@ def generate_golden_ratio_home():
     html += get_page_header("home")
 
     html += f"""
+    <!-- 6. LIST OF JOURNAL: ANIMATE FADE IN FADE OUT MOVE FROM TOP TO DOWN -->
+    <section class="journal-ticker-section">
+      <div class="journal-ticker-container">
+        
+        <div class="ticker-label-col font-cinzel">
+          <span class="ticker-star-glyph">✦</span>
+          <span class="ticker-label-text">INDEXED JOURNALS</span>
+        </div>
+
+        <div class="ticker-viewport-col" id="journal-ticker-viewport" onmouseenter="pauseJournalTicker()" onmouseleave="resumeJournalTicker()">
+          
+          <!-- Slide 0: MDPI Smart Cities -->
+          <div class="ticker-slide-item active" data-slide="0">
+            <span class="ticker-tag tag-q1 font-cinzel">Q1 SCOPUS</span>
+            <span class="ticker-venue-name font-cinzel">Smart Cities (MDPI) &bull; 2026</span>
+            <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="ticker-title-link">
+              Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance &nearr;
+            </a>
+          </div>
+
+          <!-- Slide 1: IEEE Access -->
+          <div class="ticker-slide-item" data-slide="1">
+            <span class="ticker-tag tag-q1 font-cinzel">Q1 SCOPUS</span>
+            <span class="ticker-venue-name font-cinzel">IEEE Access &bull; 2021</span>
+            <a href="https://doi.org/10.1109/ACCESS.2021.3087740" target="_blank" rel="noopener" class="ticker-title-link">
+              Attention-Based Design and User Decisions on Information Sharing: Cybernetics Intervention &nearr;
+            </a>
+          </div>
+
+          <!-- Slide 2: IJACSA -->
+          <div class="ticker-slide-item" data-slide="2">
+            <span class="ticker-tag tag-scopus font-cinzel">SCOPUS INDEXED</span>
+            <span class="ticker-venue-name font-cinzel">IJACSA &bull; 2021</span>
+            <a href="https://doi.org/10.14569/IJACSA.2021.0121092" target="_blank" rel="noopener" class="ticker-title-link">
+              Visual Selective Attention System to Intervene User Attention in Digital Environments &nearr;
+            </a>
+          </div>
+
+          <!-- Slide 3: JISTM -->
+          <div class="ticker-slide-item" data-slide="3">
+            <span class="ticker-tag tag-peer font-cinzel">PEER-REVIEWED</span>
+            <span class="ticker-venue-name font-cinzel">JISTM &bull; 2026</span>
+            <a href="https://doi.org/10.35631/JISTM.1141001" target="_blank" rel="noopener" class="ticker-title-link">
+              Srivijayapedia: A Digital Platform for Cultural Heritage Preservation of the Srivijaya Civilization &nearr;
+            </a>
+          </div>
+
+          <!-- Slide 4: Springer Contributions to Management Science -->
+          <div class="ticker-slide-item" data-slide="4">
+            <span class="ticker-tag tag-scopus font-cinzel">SPRINGER</span>
+            <span class="ticker-venue-name font-cinzel">Contributions to Management Science &bull; 2024</span>
+            <a href="https://doi.org/10.1007/978-3-031-52280-2_14" target="_blank" rel="noopener" class="ticker-title-link">
+              Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World &nearr;
+            </a>
+          </div>
+
+          <!-- Slide 5: SSRN AI Governance Series -->
+          <div class="ticker-slide-item" data-slide="5">
+            <span class="ticker-tag tag-preprint font-cinzel">GOVERNANCE PREPRINT</span>
+            <span class="ticker-venue-name font-cinzel">SSRN Series &bull; 2026</span>
+            <a href="https://doi.org/10.2139/ssrn.7670124" target="_blank" rel="noopener" class="ticker-title-link">
+              The Proxy Trap in Agentic AI: When Metrics Replace Judgment in Autonomous Systems &nearr;
+            </a>
+          </div>
+
+        </div>
+
+        <div class="ticker-controls-col">
+          <span class="ticker-slide-counter font-cinzel" id="ticker-counter">1 / 6</span>
+          <div class="ticker-arrows-box">
+            <button class="ticker-arrow-btn" onclick="rotateJournalTicker(-1)" title="Previous Journal (Top)" aria-label="Previous Journal">&uarr;</button>
+            <button class="ticker-arrow-btn" onclick="rotateJournalTicker(1)" title="Next Journal (Down)" aria-label="Next Journal">&darr;</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- 5. FEATURED SPOTLIGHT & ACADEMIC PORTALS (REFERENCE SPLIT CARD LAYOUT) -->
     <section class="golden-split-section ref-split-layout">
       
@@ -422,84 +500,6 @@ def generate_golden_ratio_home():
 
       </aside>
 
-    </section>
-
-    <!-- 6. LIST OF JOURNAL: ANIMATE FADE IN FADE OUT MOVE FROM TOP TO DOWN -->
-    <section class="journal-ticker-section">
-      <div class="journal-ticker-container">
-        
-        <div class="ticker-label-col font-cinzel">
-          <span class="ticker-star-glyph">✦</span>
-          <span class="ticker-label-text">INDEXED JOURNALS</span>
-        </div>
-
-        <div class="ticker-viewport-col" id="journal-ticker-viewport" onmouseenter="pauseJournalTicker()" onmouseleave="resumeJournalTicker()">
-          
-          <!-- Slide 0: MDPI Smart Cities -->
-          <div class="ticker-slide-item active" data-slide="0">
-            <span class="ticker-tag tag-q1 font-cinzel">Q1 SCOPUS</span>
-            <span class="ticker-venue-name font-cinzel">Smart Cities (MDPI) &bull; 2026</span>
-            <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="ticker-title-link">
-              Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance &nearr;
-            </a>
-          </div>
-
-          <!-- Slide 1: IEEE Access -->
-          <div class="ticker-slide-item" data-slide="1">
-            <span class="ticker-tag tag-q1 font-cinzel">Q1 SCOPUS</span>
-            <span class="ticker-venue-name font-cinzel">IEEE Access &bull; 2021</span>
-            <a href="https://doi.org/10.1109/ACCESS.2021.3087740" target="_blank" rel="noopener" class="ticker-title-link">
-              Attention-Based Design and User Decisions on Information Sharing: Cybernetics Intervention &nearr;
-            </a>
-          </div>
-
-          <!-- Slide 2: IJACSA -->
-          <div class="ticker-slide-item" data-slide="2">
-            <span class="ticker-tag tag-scopus font-cinzel">SCOPUS INDEXED</span>
-            <span class="ticker-venue-name font-cinzel">IJACSA &bull; 2021</span>
-            <a href="https://doi.org/10.14569/IJACSA.2021.0121092" target="_blank" rel="noopener" class="ticker-title-link">
-              Visual Selective Attention System to Intervene User Attention in Digital Environments &nearr;
-            </a>
-          </div>
-
-          <!-- Slide 3: JISTM -->
-          <div class="ticker-slide-item" data-slide="3">
-            <span class="ticker-tag tag-peer font-cinzel">PEER-REVIEWED</span>
-            <span class="ticker-venue-name font-cinzel">JISTM &bull; 2026</span>
-            <a href="https://doi.org/10.35631/JISTM.1141001" target="_blank" rel="noopener" class="ticker-title-link">
-              Srivijayapedia: A Digital Platform for Cultural Heritage Preservation of the Srivijaya Civilization &nearr;
-            </a>
-          </div>
-
-          <!-- Slide 4: Springer Contributions to Management Science -->
-          <div class="ticker-slide-item" data-slide="4">
-            <span class="ticker-tag tag-scopus font-cinzel">SPRINGER</span>
-            <span class="ticker-venue-name font-cinzel">Contributions to Management Science &bull; 2024</span>
-            <a href="https://doi.org/10.1007/978-3-031-52280-2_14" target="_blank" rel="noopener" class="ticker-title-link">
-              Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World &nearr;
-            </a>
-          </div>
-
-          <!-- Slide 5: SSRN AI Governance Series -->
-          <div class="ticker-slide-item" data-slide="5">
-            <span class="ticker-tag tag-preprint font-cinzel">GOVERNANCE PREPRINT</span>
-            <span class="ticker-venue-name font-cinzel">SSRN Series &bull; 2026</span>
-            <a href="https://doi.org/10.2139/ssrn.7670124" target="_blank" rel="noopener" class="ticker-title-link">
-              The Proxy Trap in Agentic AI: When Metrics Replace Judgment in Autonomous Systems &nearr;
-            </a>
-          </div>
-
-        </div>
-
-        <div class="ticker-controls-col">
-          <span class="ticker-slide-counter font-cinzel" id="ticker-counter">1 / 6</span>
-          <div class="ticker-arrows-box">
-            <button class="ticker-arrow-btn" onclick="rotateJournalTicker(-1)" title="Previous Journal (Top)" aria-label="Previous Journal">&uarr;</button>
-            <button class="ticker-arrow-btn" onclick="rotateJournalTicker(1)" title="Next Journal (Down)" aria-label="Next Journal">&darr;</button>
-          </div>
-        </div>
-
-      </div>
     </section>
 
     <!-- 7. FOOTER DIVIDER LINE (Matching Wireframe) -->
