@@ -2250,6 +2250,26 @@ a {
   transform: translateY(-1px);
 }
 
+
+/* Refined Scopus Kicker: Golden ratio typographic hierarchy */
+.ref-scopus-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #d4af37;
+  opacity: 0.90;
+  margin-bottom: 8px; /* Fibonacci 8px vertical rhythm */
+  line-height: 1;
+}
+
+.ref-scopus-kicker .kicker-gem {
+  font-size: 0.58rem;
+  color: #fce09b;
+}
+
 .ref-spotlight-body {
   padding: 26px 30px 28px 30px;
   display: flex;
