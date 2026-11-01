@@ -778,3 +778,63 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// ==============================================================================
+// SPOTLIGHT & BLOGGER ARTICLES CAROUSEL CONTROLLER
+// ==============================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const carousel = document.getElementById('spotlight-carousel');
+  if (!carousel) return;
+  
+  const slides = carousel.querySelectorAll('.spotlight-slide');
+  if (!slides.length) return;
+  
+  let currentIndex = 0;
+  const total = slides.length;
+  
+  function goToSlide(idx) {
+    if (idx < 0) idx = total - 1;
+    if (idx >= total) idx = 0;
+    currentIndex = idx;
+    
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === currentIndex);
+      const dots = slide.querySelectorAll('.spotlight-dot');
+      dots.forEach((dot, dIdx) => {
+        dot.classList.toggle('active', dIdx === currentIndex);
+      });
+    });
+  }
+  
+  carousel.addEventListener('click', (e) => {
+    const prevBtn = e.target.closest('.spotlight-arrow-prev');
+    const nextBtn = e.target.closest('.spotlight-arrow-next');
+    const dotBtn = e.target.closest('.spotlight-dot');
+    
+    if (prevBtn) {
+      e.preventDefault();
+      goToSlide(currentIndex - 1);
+    } else if (nextBtn) {
+      e.preventDefault();
+      goToSlide(currentIndex + 1);
+    } else if (dotBtn) {
+      e.preventDefault();
+      const target = parseInt(dotBtn.getAttribute('data-slide-target'), 10);
+      if (!isNaN(target)) goToSlide(target);
+    }
+  });
+  
+  // Touch swipe support
+  let touchStartX = 0;
+  carousel.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  
+  carousel.addEventListener('touchend', (e) => {
+    const diff = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(diff) > 45) {
+      if (diff > 0) goToSlide(currentIndex - 1);
+      else goToSlide(currentIndex + 1);
+    }
+  }, { passive: true });
+});
