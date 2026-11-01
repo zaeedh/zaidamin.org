@@ -115,7 +115,7 @@ def get_page_header(active_page="home"):
             <a href="index.html" class="main-menu-link {'active' if active_page == 'home' else ''}">Home</a>
             <a href="publications.html" class="main-menu-link {'active' if active_page == 'publications' else ''}">Research &amp; Publication</a>
             <a href="cv.html#talks" class="main-menu-link {'active' if active_page == 'talks' else ''}">Recent Media &amp; Talks</a>
-            <a href="research.html" class="main-menu-link {'active' if active_page == 'research' else ''}">Project</a>
+            <a href="research.html" class="main-menu-link {'active' if active_page == 'research' else ''}">Activity &amp; Project</a>
             <a href="cv.html#achievements" class="main-menu-link {'active' if active_page == 'achievements' else ''}">Achievement</a>
             <a href="cv.html" class="main-menu-link {'active' if active_page == 'cv' else ''}">About &amp; CV</a>
           </nav>''' if active_page != 'home' else ''}
@@ -344,7 +344,6 @@ def get_visitor_stats_html():
 
 
         <div class="stats-meta-cluster font-cinzel">
-          <span class="stats-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> 84 Nations</span>
           <span class="stats-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2008 &ndash; 2026 Archive</span>
         </div>
       </div>
@@ -359,8 +358,11 @@ def get_visitor_stats_html():
 def get_page_footer(show_visitor_stats=False):
     stats_html = get_visitor_stats_html() if show_visitor_stats else ""
     return f"""
-    <!-- Visitor Statistics Section (Directly Above Copyright) -->
+    <!-- Visitor Statistics Section (Exclusive to Homepage) -->
     {stats_html}
+
+    <!-- Footer Divider Line (Above Footer Section) -->
+    <hr class="golden-footer-divider">
 
     <!-- Site Footer -->
     <footer class="golden-footer">
@@ -539,7 +541,9 @@ def generate_golden_ratio_home():
           <a href="cv.html#talks" class="ref-menu-tab" title="Recent Media &amp; Invited Talks">
             <span class="tab-txt-full">Media &amp; Talks</span><span class="tab-txt-compact">Media</span>
           </a>
-          <a href="research.html" class="ref-menu-tab" title="Funded Projects &amp; Themes">Project</a>
+          <a href="research.html" class="ref-menu-tab" title="Activities &amp; Funded Projects">
+            <span class="tab-txt-full">Activity &amp; Project</span><span class="tab-txt-compact">Activity</span>
+          </a>
           <a href="cv.html#achievements" class="ref-menu-tab" title="Awards &amp; Milestones">Achievement</a>
           <a href="cv.html" class="ref-menu-tab" title="About &amp; Curriculum Vitae">About &amp; CV</a>
         </nav>
@@ -681,8 +685,6 @@ def generate_golden_ratio_home():
 
     </section>
 
-    <!-- 7. FOOTER DIVIDER LINE (Matching Wireframe) -->
-    <hr class="golden-footer-divider">
     """
     html += get_page_footer(show_visitor_stats=True)
     return html
