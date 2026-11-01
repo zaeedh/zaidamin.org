@@ -392,126 +392,313 @@ def get_page_footer(show_visitor_stats=False):
 # ==============================================================================
 # 1. GOLDEN RATIO STANDARD COMPOSITION HOMEPAGE (index.html)
 # ==============================================================================
-def get_spotlight_carousel_html():
-    try:
-        blogger_posts = load_json("blogger_posts.json")
-    except Exception:
-        blogger_posts = []
+def get_spotlight_card_html():
+    return '''
+      <!-- LEFT CARD: Chosen Featured Spotlight Article (Clean Editorial Display) -->
+      <article class="ref-spotlight-card" aria-label="Featured Spotlight Publication">
+        <div class="ref-spotlight-visual-wrap">
+          <picture>
+            <source srcset="assets/images/spotlight-smart-cities.webp" type="image/webp">
+            <img src="assets/images/spotlight-smart-cities.jpg" alt="Trustworthy AI for Sustainable Cities" class="ref-spotlight-visual-img" loading="lazy">
+          </picture>
+          <div class="ref-visual-overlay"></div>
+          
+          <div class="ref-spotlight-top-bar">
+            <span class="ref-kicker-pill font-cinzel"><span class="pulse-dot"></span> SPOTLIGHT ARTICLE</span>
+            <div class="ref-top-right-group">
+              <span class="ref-badge-scopus font-cinzel">Q1 SCOPUS INDEXED</span>
+              <span class="ref-bookmark-icon" title="Featured Spotlight Publication" aria-label="Featured Publication Bookmark">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
 
-    spotlight_items = [
-        {
-            "kicker": "SPOTLIGHT ARTICLE",
-            "badge": "Q1 SCOPUS INDEXED",
-            "image": "assets/images/spotlight-smart-cities.jpg",
-            "webp_image": "assets/images/spotlight-smart-cities.webp",
-            "title": "Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance",
-            "venue": "Smart Cities (MDPI)",
-            "year": "2026 Volume 9",
-            "author": "Lead Author: Zaid Amin, Ph.D.",
-            "access": "Open Access",
-            "desc": "Addresses critical systemic vulnerabilities in urban autonomous deployments where metric-driven proxies diverge from authentic civic welfare. Introduces an audited multimodal orchestration agent architecture enforcing real-time cybernetic feedback loops, cognitive transparency, and verifiable alignment for municipal governance.",
-            "url": "https://doi.org/10.3390/smartcities9100174"
-        }
+        <div class="ref-spotlight-body">
+          <h2 class="ref-spotlight-title">Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance</h2>
+
+          <div class="ref-spotlight-meta">
+            <span class="spotlight-venue font-cinzel">Smart Cities (MDPI)</span>
+            <span class="spotlight-divider">&bull;</span>
+            <span class="spotlight-year">2026 Volume 9</span>
+            <span class="spotlight-divider">&bull;</span>
+            <span class="spotlight-author">Lead Author: Zaid Amin, Ph.D.</span>
+            <span class="spotlight-divider">&bull;</span>
+            <span class="spotlight-open-access">Open Access</span>
+          </div>
+
+          <p class="ref-spotlight-desc">Addresses critical systemic vulnerabilities in urban autonomous deployments where metric-driven proxies diverge from authentic civic welfare. Introduces an audited multimodal orchestration agent architecture enforcing real-time cybernetic feedback loops, cognitive transparency, and verifiable alignment for municipal governance.</p>
+
+          <div class="ref-spotlight-actions">
+            <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="spotlight-btn btn-gold font-cinzel">
+              Read Full Article &rarr;
+            </a>
+            <a href="https://www.zaidamin.org/" target="_blank" rel="noopener" class="spotlight-btn btn-more">
+              All Articles (80) &rarr;
+            </a>
+          </div>
+        </div>
+      </article>'''
+
+def get_portals_tray_carousel_html():
+    slides_data = [
+        # Slide 0: Core Portals & CV Highlights
+        [
+            {
+                "thumb_webp": "assets/images/dr-zaid.webp",
+                "thumb_jpg": "assets/images/dr-zaid.png",
+                "title": "About, Talks &amp; Academic CV",
+                "bullets": [
+                    "Ph.D. in Computer Science (UKM)",
+                    "Keynote Speaker, Media Interviews &amp; Panels",
+                    "Awards, Academic Honors &amp; Leadership Track"
+                ],
+                "tag": "UKM Ph.D.",
+                "btn_text": "View CV",
+                "btn_url": "cv.html",
+                "is_external": False
+            },
+            {
+                "thumb_webp": "assets/images/thumb-projects.webp",
+                "thumb_jpg": "assets/images/thumb-projects.jpg",
+                "title": "Projects &amp; Innovations",
+                "bullets": [
+                    "FRGS Grant: Civic Compliance Framework",
+                    "Multimodal Orchestration Agent Architecture",
+                    "Municipal Autonomous Auditing Prototypes"
+                ],
+                "tag": "FRGS / AI",
+                "btn_text": "Inspect",
+                "btn_url": "research.html",
+                "is_external": False
+            },
+            {
+                "thumb_webp": "assets/images/thumb-research.webp",
+                "thumb_jpg": "assets/images/thumb-research.jpg",
+                "title": "Research &amp; Publications",
+                "bullets": [
+                    "24 Peer-Reviewed Articles (MDPI, IEEE, Scopus Q1)",
+                    "Trustworthy AI &amp; Civic Autonomous Systems",
+                    "Full Open-Access Preprints &amp; BibTeX Citations"
+                ],
+                "tag": "24 Works",
+                "btn_text": "Explore",
+                "btn_url": "publications.html",
+                "is_external": False
+            }
+        ],
+        # Slide 1: Blogger: AI, Pedagogy & Cognition
+        [
+            {
+                "thumb_webp": "",
+                "thumb_jpg": "assets/images/blogger/post_1.png",
+                "title": "HARMONY: Human-Trusted AI Framework",
+                "bullets": [
+                    "Multi-agent normative alignment framework",
+                    "Grounded ethical orchestration &amp; cybernetics",
+                    "Civic trust modeling in urban autonomous systems"
+                ],
+                "tag": "AI / 2026",
+                "btn_text": "Read",
+                "btn_url": "https://www.zaidamin.org/2026/02/harmony-human-trusted-ai-and-resilient.html",
+                "is_external": True
+            },
+            {
+                "thumb_webp": "",
+                "thumb_jpg": "assets/images/blogger/post_2.jpg",
+                "title": "Kehidupan Pendidik Teladan Rasulullah",
+                "bullets": [
+                    "Pedagogical philosophy &amp; exemplary mentorship",
+                    "Nurturing ethical intellect and civic empathy",
+                    "Scholarly reflections on holistic education"
+                ],
+                "tag": "Pedagogy",
+                "btn_text": "Read",
+                "btn_url": "https://www.zaidamin.org/2021/05/kehidupan-pendidik-yang-diteladankan.html",
+                "is_external": True
+            },
+            {
+                "thumb_webp": "",
+                "thumb_jpg": "assets/images/blogger/post_3.jpg",
+                "title": "Mengenal Tipe-Tipe Bias Kognitif",
+                "bullets": [
+                    "Cognitive heuristics &amp; systemic decision errors",
+                    "Algorithmic and human bias systemic parallels",
+                    "De-biasing methodologies for critical judgment"
+                ],
+                "tag": "Cognition",
+                "btn_text": "Read",
+                "btn_url": "https://www.zaidamin.org/2020/07/mengenal-tipe-tipe-bias-dalam.html",
+                "is_external": True
+            }
+        ],
+        # Slide 2: Cybernetics & Media Vigilance
+        [
+            {
+                "thumb_webp": "",
+                "thumb_jpg": "assets/images/blogger/post_4.jpg",
+                "title": "Cyberspace &amp; Perubahan Perilaku",
+                "bullets": [
+                    "Digital sociology &amp; psychological transformations",
+                    "Hyper-connected environments &amp; attention economy",
+                    "Human-computer behavioral paradigm shifts"
+                ],
+                "tag": "Cybernetics",
+                "btn_text": "Read",
+                "btn_url": "https://www.zaidamin.org/2019/08/cyberspace-dan-perubahan-perilaku.html",
+                "is_external": True
+            },
+            {
+                "thumb_webp": "",
+                "thumb_jpg": "assets/images/blogger/post_5.jpg",
+                "title": "Tackling Disinformation: Fake News",
+                "bullets": [
+                    "Cognitive resistance against online disinformation",
+                    "Epistemic vigilance in algorithm-curated media",
+                    "Information literacy &amp; truth verification models"
+                ],
+                "tag": "Media AI",
+                "btn_text": "Read",
+                "btn_url": "https://www.zaidamin.org/2019/06/tackling-disinformation-fake-news-and.html",
+                "is_external": True
+            },
+            {
+                "thumb_webp": "assets/images/thumb-attention.webp",
+                "thumb_jpg": "assets/images/thumb-attention.jpg",
+                "title": "Attention-Based Decision Systems",
+                "bullets": [
+                    "IEEE Access (2021) &bull; Q1 Scopus Indexed",
+                    "Visual Attention System for Digital Environments",
+                    "Empirical Intervention &amp; Cognitive Feedback Loops"
+                ],
+                "tag": "IEEE Access",
+                "btn_text": "Read",
+                "btn_url": "https://doi.org/10.1109/ACCESS.2021.3087740",
+                "is_external": True
+            }
+        ],
+        # Slide 3: AI Governance & Scholarly Journey
+        [
+            {
+                "thumb_webp": "assets/images/thumb-governance.webp",
+                "thumb_jpg": "assets/images/thumb-governance.jpg",
+                "title": "The Proxy Trap in Agentic AI",
+                "bullets": [
+                    "AI Governance Series &bull; SSRN Preprint 2026",
+                    "When Metrics Replace Judgment in Autonomous Nodes",
+                    "Preserving Civic Human Oversight in Admin Protocols"
+                ],
+                "tag": "Governance",
+                "btn_text": "Examine",
+                "btn_url": "https://doi.org/10.2139/ssrn.7670124",
+                "is_external": True
+            },
+            {
+                "thumb_webp": "",
+                "thumb_jpg": "assets/images/blogger/post_7.jpg",
+                "title": "Hal yang Tidak Kuketahui Sebelum UKM",
+                "bullets": [
+                    "Doctoral milestones &amp; postgraduate research life",
+                    "Research rigor, perseverance &amp; publication path",
+                    "Academic mentorship &amp; community building"
+                ],
+                "tag": "Academic",
+                "btn_text": "Read",
+                "btn_url": "https://www.zaidamin.org/2018/09/hal-hal-yang-tidak-kuketahui-sebelum.html",
+                "is_external": True
+            },
+            {
+                "thumb_webp": "",
+                "thumb_jpg": "assets/images/blogger/post_6.jpg",
+                "title": "Dimuliakan Melalui Makan &amp; Minum",
+                "bullets": [
+                    "Philosophical reflections on gratitude and mindfulness",
+                    "Everyday rituals as avenues for dignified living",
+                    "Moral cultivation in contemporary society"
+                ],
+                "tag": "Philosophy",
+                "btn_text": "Read",
+                "btn_url": "https://www.zaidamin.org/2019/06/dimuliakan-melalui-makan-dan-minum.html",
+                "is_external": True
+            }
+        ]
     ]
 
-    for p in blogger_posts[:5]:
-        img = p.get('local_image') or p.get('image') or 'assets/images/spotlight-smart-cities.jpg'
-        tag_str = p['tags'][0] if p.get('tags') and len(p['tags']) > 0 else "Scholarly Essay"
-        spotlight_items.append({
-            "kicker": "BLOGGER SPOTLIGHT",
-            "badge": "BLOG ARCHIVE",
-            "image": img,
-            "webp_image": "",
-            "title": p['title'],
-            "venue": "das Sein, das Sollen",
-            "year": p['published'],
-            "author": "Zaid Amin, Ph.D.",
-            "access": tag_str,
-            "desc": p['excerpt'],
-            "url": p['url']
-        })
-
-    total_slides = len(spotlight_items)
     slides_html = ""
-    dots_html = ""
+    total_slides = len(slides_data)
+    for s_idx, cards in enumerate(slides_data):
+        active_cls = " active" if s_idx == 0 else ""
+        cards_html = ""
+        for card in cards:
+            if card.get("thumb_webp"):
+                img_html = f'''<picture>
+                  <source srcset="{card['thumb_webp']}" type="image/webp">
+                  <img src="{card['thumb_jpg']}" alt="{card['title']}" class="ref-item-thumb" width="82" height="60" loading="lazy">
+                </picture>'''
+            else:
+                img_html = f'''<img src="{card['thumb_jpg']}" alt="{card['title']}" class="ref-item-thumb" width="82" height="60" loading="lazy">'''
 
-    for i in range(total_slides):
-        active_cls = " active" if i == 0 else ""
-        dots_html += f'<button class="spotlight-dot{active_cls}" data-slide-target="{i}" aria-label="Slide {i+1}" type="button"></button>'
+            bullets_html = "".join([f"<li>{b}</li>" for b in card["bullets"]])
+            ext_attr = ' target="_blank" rel="noopener"' if card.get("is_external") else ""
 
-    for i, item in enumerate(spotlight_items):
-        active_cls = " active" if i == 0 else ""
-        if item.get('webp_image'):
-            img_html = f'''<picture>
-                <source srcset="{item['webp_image']}" type="image/webp">
-                <img src="{item['image']}" alt="{item['title']}" class="ref-spotlight-visual-img" loading="lazy">
-              </picture>'''
-        else:
-            img_html = f'''<img src="{item['image']}" alt="{item['title']}" class="ref-spotlight-visual-img" loading="lazy">'''
+            cards_html += f'''
+            <div class="ref-item-card">
+              <div class="ref-item-thumb-box">
+                {img_html}
+              </div>
+              <div class="ref-item-info">
+                <h4 class="ref-item-title font-cinzel">{card['title']}</h4>
+                <ul class="ref-item-bullets">
+                  {bullets_html}
+                </ul>
+              </div>
+              <div class="ref-item-meta-action">
+                <span class="ref-item-tag font-cinzel">{card['tag']}</span>
+                <a href="{card['btn_url']}"{ext_attr} class="ref-item-btn">{card['btn_text']}</a>
+              </div>
+            </div>'''
 
         slides_html += f'''
-        <div class="spotlight-slide{active_cls}" data-slide-index="{i}">
-          <div class="ref-spotlight-visual-wrap">
-            {img_html}
-            <div class="ref-visual-overlay"></div>
-            
-            <div class="ref-spotlight-top-bar">
-              <span class="ref-kicker-pill font-cinzel"><span class="pulse-dot"></span> {item['kicker']}</span>
-              <div class="ref-top-right-group">
-                <span class="ref-badge-scopus font-cinzel">{item['badge']}</span>
-                <div class="spotlight-arrows-cluster">
-                  <button class="spotlight-arrow-btn spotlight-arrow-prev" aria-label="Previous Article" type="button">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                  </button>
-                  <span class="spotlight-counter font-mono"><span class="spotlight-curr">{str(i+1).zfill(2)}</span> / <span class="spotlight-total">{str(total_slides).zfill(2)}</span></span>
-                  <button class="spotlight-arrow-btn spotlight-arrow-next" aria-label="Next Article" type="button">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                  </button>
-                </div>
-                <span class="ref-bookmark-icon" title="Featured Spotlight Publication" aria-label="Featured Publication Bookmark">
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-                  </svg>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="ref-spotlight-body">
-            <h2 class="ref-spotlight-title">{item['title']}</h2>
-
-            <div class="ref-spotlight-meta">
-              <span class="spotlight-venue font-cinzel">{item['venue']}</span>
-              <span class="spotlight-divider">&bull;</span>
-              <span class="spotlight-year">{item['year']}</span>
-              <span class="spotlight-divider">&bull;</span>
-              <span class="spotlight-author">{item['author']}</span>
-              <span class="spotlight-divider">&bull;</span>
-              <span class="spotlight-open-access">{item['access']}</span>
-            </div>
-
-            <p class="ref-spotlight-desc">{item['desc']}</p>
-
-            <div class="spotlight-dots-bar">
-              {dots_html}
-            </div>
-
-            <div class="ref-spotlight-actions">
-              <a href="{item['url']}" target="_blank" rel="noopener" class="spotlight-btn btn-gold font-cinzel">
-                Read Full Article &rarr;
-              </a>
-              <a href="https://www.zaidamin.org/" target="_blank" rel="noopener" class="spotlight-btn btn-more">
-                All Articles (80) &rarr;
-              </a>
-            </div>
-          </div>
+        <div class="tray-slide{active_cls}" data-slide-index="{s_idx}">
+          {cards_html}
         </div>'''
 
+    dots_html = ""
+    for d_idx in range(total_slides):
+        active_cls = " active" if d_idx == 0 else ""
+        dots_html += f'<button class="spotlight-dot{active_cls}" data-slide-target="{d_idx}" aria-label="Page {d_idx+1}" type="button"></button>'
+
     return f'''
-      <!-- LEFT CARD: Interactive Blogger & Spotlight Articles Carousel -->
-      <article class="ref-spotlight-card" id="spotlight-carousel" aria-roledescription="carousel" aria-label="Spotlight &amp; Blogger Articles">
-        {slides_html}
-      </article>'''
+        <!-- Inset Tray containing 3 Stacked Horizontal Cards with Carousel Navigation -->
+        <div class="ref-inset-tray" id="portals-carousel" aria-roledescription="carousel" aria-label="Academic Portals and Articles">
+          <!-- Tray Carousel Top Controls Bar -->
+          <div class="tray-carousel-header">
+            <div class="tray-header-left font-cinzel">
+              <span class="pulse-dot"></span> Portals &amp; Articles
+            </div>
+            <div class="spotlight-arrows-cluster tray-arrows-cluster">
+              <button class="spotlight-arrow-btn tray-arrow-prev" aria-label="Previous Page" type="button">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </button>
+              <span class="spotlight-counter tray-counter font-mono"><span class="tray-curr">01</span> / <span class="tray-total">{str(total_slides).zfill(2)}</span></span>
+              <button class="spotlight-arrow-btn tray-arrow-next" aria-label="Next Page" type="button">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Tray Carousel Slides Container -->
+          <div class="tray-slides-wrap">
+            {slides_html}
+          </div>
+
+          <!-- Tray Indicator Dots -->
+          <div class="tray-dots-bar">
+            {dots_html}
+          </div>
+        </div>'''
 
 def generate_golden_ratio_home():
     profile = load_json("profile.json")
@@ -602,7 +789,7 @@ def generate_golden_ratio_home():
     <!-- 5. FEATURED SPOTLIGHT & ACADEMIC PORTALS (REFERENCE SPLIT CARD LAYOUT) -->
     <section class="golden-split-section ref-split-layout">
       
-{get_spotlight_carousel_html()}
+{get_spotlight_card_html()}
 
       <!-- RIGHT CARD: Academic Portals & Highlights (Matching Reference Inset Tray + Stacked Cards) -->
       <aside class="ref-portals-card">
@@ -647,121 +834,7 @@ def generate_golden_ratio_home():
           </div>
         </div>
 
-        <!-- Inset Tray containing 3 Stacked Horizontal Cards -->
-        <div class="ref-inset-tray">
-          
-          <!-- Item 1: Research & Publications -->
-          <div class="ref-item-card">
-            <div class="ref-item-thumb-box">
-              <picture>
-                <source srcset="assets/images/thumb-research.webp" type="image/webp">
-                <img src="assets/images/thumb-research.jpg" alt="Research &amp; Publications" class="ref-item-thumb" width="82" height="60" loading="lazy">
-              </picture>
-            </div>
-            <div class="ref-item-info">
-              <h4 class="ref-item-title font-cinzel">Research &amp; Publications</h4>
-              <ul class="ref-item-bullets">
-                <li>24 Peer-Reviewed Articles (MDPI, IEEE, Scopus Q1)</li>
-                <li>Trustworthy AI &amp; Civic Autonomous Systems</li>
-                <li>Full Open-Access Preprints &amp; BibTeX Citations</li>
-              </ul>
-            </div>
-            <div class="ref-item-meta-action">
-              <span class="ref-item-tag font-cinzel">24 Works</span>
-              <a href="publications.html" class="ref-item-btn">Explore</a>
-            </div>
-          </div>
-
-          <!-- Item 2: Projects & Innovations -->
-          <div class="ref-item-card">
-            <div class="ref-item-thumb-box">
-              <picture>
-                <source srcset="assets/images/thumb-projects.webp" type="image/webp">
-                <img src="assets/images/thumb-projects.jpg" alt="Projects &amp; Innovations" class="ref-item-thumb" width="82" height="60" loading="lazy">
-              </picture>
-            </div>
-            <div class="ref-item-info">
-              <h4 class="ref-item-title font-cinzel">Projects &amp; Innovations</h4>
-              <ul class="ref-item-bullets">
-                <li>FRGS Grant: Civic Compliance Framework</li>
-                <li>Multimodal Orchestration Agent Architecture</li>
-                <li>Municipal Autonomous Auditing Prototypes</li>
-              </ul>
-            </div>
-            <div class="ref-item-meta-action">
-              <span class="ref-item-tag font-cinzel">FRGS / AI</span>
-              <a href="research.html" class="ref-item-btn">Inspect</a>
-            </div>
-          </div>
-
-          <!-- Item 3: Attention Interventions & Cybernetics (IEEE Access) -->
-          <div class="ref-item-card">
-            <div class="ref-item-thumb-box">
-              <picture>
-                <source srcset="assets/images/thumb-attention.webp" type="image/webp">
-                <img src="assets/images/thumb-attention.jpg" alt="Attention-Based Cybernetics" class="ref-item-thumb" width="82" height="60" loading="lazy">
-              </picture>
-            </div>
-            <div class="ref-item-info">
-              <h4 class="ref-item-title font-cinzel">Attention-Based Decision Systems</h4>
-              <ul class="ref-item-bullets">
-                <li>IEEE Access (2021) &bull; Q1 Scopus Indexed</li>
-                <li>Visual Attention System for Digital Environments</li>
-                <li>Empirical Intervention &amp; Cognitive Feedback Loops</li>
-              </ul>
-            </div>
-            <div class="ref-item-meta-action">
-              <span class="ref-item-tag font-cinzel">IEEE Access</span>
-              <a href="https://doi.org/10.1109/ACCESS.2021.3087740" target="_blank" rel="noopener" class="ref-item-btn">Read</a>
-            </div>
-          </div>
-
-          <!-- Item 4: Civic AI & Municipal Governance (SSRN / Oxford) -->
-          <div class="ref-item-card">
-            <div class="ref-item-thumb-box">
-              <picture>
-                <source srcset="assets/images/thumb-governance.webp" type="image/webp">
-                <img src="assets/images/thumb-governance.jpg" alt="AI Governance &amp; Civic Compliance" class="ref-item-thumb" width="82" height="60" loading="lazy">
-              </picture>
-            </div>
-            <div class="ref-item-info">
-              <h4 class="ref-item-title font-cinzel">The Proxy Trap in Agentic AI</h4>
-              <ul class="ref-item-bullets">
-                <li>AI Governance Series &bull; SSRN Preprint 2026</li>
-                <li>When Metrics Replace Judgment in Autonomous Nodes</li>
-                <li>Preserving Civic Human Oversight in Admin Protocols</li>
-              </ul>
-            </div>
-            <div class="ref-item-meta-action">
-              <span class="ref-item-tag font-cinzel">Governance</span>
-              <a href="https://doi.org/10.2139/ssrn.7670124" target="_blank" rel="noopener" class="ref-item-btn">Examine</a>
-            </div>
-          </div>
-
-          <!-- Item 5: About, Talks & CV -->
-          <div class="ref-item-card">
-            <div class="ref-item-thumb-box">
-              <picture>
-                <source srcset="assets/images/dr-zaid.webp" type="image/webp">
-                <img src="assets/images/dr-zaid.png" alt="Zaid Amin, Ph.D." class="ref-item-thumb" width="82" height="60" loading="lazy">
-              </picture>
-            </div>
-            <div class="ref-item-info">
-              <h4 class="ref-item-title font-cinzel">About, Talks &amp; Academic CV</h4>
-              <ul class="ref-item-bullets">
-                <li>Ph.D. in Computer Science (UKM)</li>
-                <li>Keynote Speaker, Media Interviews &amp; Panels</li>
-                <li>Awards, Academic Honors &amp; Leadership Track</li>
-              </ul>
-            </div>
-            <div class="ref-item-meta-action">
-              <span class="ref-item-tag font-cinzel">UKM Ph.D.</span>
-              <a href="cv.html" class="ref-item-btn">View CV</a>
-            </div>
-          </div>
-
-        </div>
-      </aside>
+        {get_portals_tray_carousel_html()}</aside>
 
     </section>
 
