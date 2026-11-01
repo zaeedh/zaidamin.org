@@ -301,6 +301,41 @@ a {
 }
 
 @media (max-width: 640px) {
+  .ref-portals-card {
+    padding: 16px 14px 18px 14px;
+  }
+  .ref-portals-header {
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+  .ref-profile-info-col {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+  .ref-profile-name {
+    font-size: 1.45rem;
+    letter-spacing: 0.02em;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .ref-profile-role {
+    font-size: 0.72rem;
+    line-height: 1.35;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  .ref-profile-fields {
+    font-size: 0.68rem;
+    line-height: 1.35;
+    text-align: center;
+  }
+  .ref-photo-ring {
+    width: 96px;
+    height: 96px;
+  }
   .storm-quote-overlay {
     bottom: 24px;
     right: 14px;
@@ -2559,25 +2594,23 @@ a {
 }
 
 .ref-profile-role {
-  font-size: 0.80rem;
+  font-size: 0.77rem;
   font-weight: 600;
   color: #d2e4f0;
   line-height: 1.35;
-  margin-bottom: 3px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;text-align: right;
+  margin-bottom: 4px;
+  white-space: normal;
+  width: 100%;
+  text-align: right;
 }
 
 .ref-profile-fields {
   font-size: 0.72rem;
   color: #8da4b5;
-  line-height: 1.3;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;text-align: right;
+  line-height: 1.32;
+  white-space: normal;
+  width: 100%;
+  text-align: right;
 }
 
 .ref-photo-ring {
@@ -2850,10 +2883,10 @@ a {
   border: 1px solid transparent;
 }
   .ref-menu-tab .tab-txt-full {
-    display: inline;
+    display: none;
   }
   .ref-menu-tab .tab-txt-compact {
-    display: none;
+    display: inline;
   }
 }
 
