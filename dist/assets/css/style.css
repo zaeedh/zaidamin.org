@@ -187,11 +187,11 @@ a {
 }
 
 /* ==========================================================================
-   3. SUB-SECTION BELOW STORM: FULL-FIT ELEGANT SECOND-GAZE QUOTATION
+   EPIGRAPH QUOTATION: DIRECTLY BELOW DAS SEIN, DAS SOLLEN & ABOVE STORM
    ========================================================================== */
 .ocean-quote-subsection {
-  margin-top: 0;
-  margin-bottom: 14px;
+  margin-top: 4px;
+  margin-bottom: 12px;
   width: 100%;
 }
 
@@ -3079,7 +3079,7 @@ a {
   align-items: center;
   justify-content: center;
   padding: 0;
-  margin: 2px 0 6px 0;
+  margin: 2px 0 20px 0;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
