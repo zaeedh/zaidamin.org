@@ -1837,28 +1837,37 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 4px 10px 4px 14px;
-  background: rgba(4, 28, 48, 0.85);
+  padding: 0 0;
+  background: rgba(4, 28, 48, 0.90);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(212, 175, 55, 0.28);
+  border: 1px solid transparent;
   border-radius: 999px;
-  box-shadow: 0 4px 20px rgba(0, 10, 24, 0.45), 0 0 16px rgba(212, 175, 55, 0.10);
+  box-shadow: none;
   max-width: 0;
   opacity: 0;
-  transform: translateX(20px) scale(0.96);
+  visibility: hidden;
+  transform: translateX(18px) scale(0.96);
   transform-origin: right center;
   overflow: hidden;
   white-space: nowrap;
   pointer-events: none;
-  transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+  transition: max-width 0.42s cubic-bezier(0.16, 1, 0.3, 1),
               opacity 0.28s ease,
-              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+              transform 0.36s cubic-bezier(0.16, 1, 0.3, 1),
+              padding 0.36s ease,
+              border-color 0.28s ease,
+              box-shadow 0.28s ease,
+              visibility 0.42s;
 }
 
 .top-scholarly-links.is-open {
-  max-width: 650px;
+  max-width: 1050px;
   opacity: 1;
+  visibility: visible;
+  padding: 5px 12px 5px 16px;
+  border-color: rgba(212, 175, 55, 0.32);
+  box-shadow: 0 6px 24px rgba(0, 10, 24, 0.55), 0 0 16px rgba(212, 175, 55, 0.12);
   transform: translateX(0) scale(1);
   pointer-events: auto;
 }
