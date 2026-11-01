@@ -112,7 +112,12 @@ def get_page_header(active_page="home"):
         
         <div class="epigraph-right-cluster">
           {f'''<nav class="top-epigraph-menu" id="top-main-nav" aria-label="Main Navigation">
-            <a href="index.html" class="main-menu-link {'active' if active_page == 'home' else ''}">Home</a>
+            <a href="index.html" class="main-menu-link {'active' if active_page == 'home' else ''}" title="Home" aria-label="Home">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;" aria-hidden="true">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </a>
             <a href="publications.html" class="main-menu-link {'active' if active_page == 'publications' else ''}">Research &amp; Publication</a>
             <a href="cv.html#talks" class="main-menu-link {'active' if active_page == 'talks' else ''}">Recent Media &amp; Talks</a>
             <a href="research.html" class="main-menu-link {'active' if active_page == 'research' else ''}">Activity &amp; Project</a>
@@ -533,7 +538,12 @@ def generate_golden_ratio_home():
       <aside class="ref-portals-card">
         <!-- 1. Top Main Menu Navigation Grid (Placed Above Dr. Zaid Profile, 3x2 Golden Ratio Layout) -->
         <nav class="ref-top-menu-bar" aria-label="Main Navigation">
-          <a href="index.html" class="ref-menu-tab active" title="Home Landing">Home</a>
+          <a href="index.html" class="ref-menu-tab tab-home active" title="Home" aria-label="Home">
+            <svg class="tab-icon-home" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </a>
           <a href="publications.html" class="ref-menu-tab" title="Research &amp; Publications">
             <span class="tab-txt-full">Research &amp; Pubs</span><span class="tab-txt-compact">Research</span>
           </a>
