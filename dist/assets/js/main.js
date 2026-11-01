@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScholarlyDrawer();
   initJournalTicker();
   initPortalsTrayCarousel();
+  initAdvancedActivitySearch();
   initPublicationsFilter();
   initBibtexButtons();
   initMobileMenu();
@@ -512,6 +513,44 @@ function initPortalsTrayCarousel() {
     if (currEl) currEl.textContent = String(portalsTickerIndex + 1).padStart(2, '0');
   }
 
+  // Global controller for Advanced Search Engine & Slide Auto-Jump
+  window.getCurrentTraySlide = function() { return portalsTickerIndex; };
+  window.pausePortalsTicker = function(durationMs) {
+    isPortalsTickerPaused = true;
+    if (durationMs) {
+      setTimeout(() => { isPortalsTickerPaused = false; }, durationMs);
+    }
+  };
+
+  window.resumePortalsTicker = function() {
+    isPortalsTickerPaused = false;
+  };
+
+  window.goToTraySlide = function(targetIdx) {
+    if (typeof targetIdx === 'number' && targetIdx >= 0 && targetIdx < slides.length) {
+      goToSlide(targetIdx);
+    }
+  };
+
+  window.highlightTrayCard = function(slideIdx, keyword) {
+    if (typeof slideIdx === 'number') {
+      goToSlide(slideIdx);
+    }
+    setTimeout(() => {
+      const activeSlide = slides[portalsTickerIndex];
+      if (!activeSlide) return;
+      const cards = activeSlide.querySelectorAll('.ref-item-card');
+      cards.forEach(card => {
+        if (!keyword || card.textContent.toLowerCase().includes(keyword.toLowerCase())) {
+          card.classList.remove('card-highlight-pulse');
+          void card.offsetWidth; // force reflow
+          card.classList.add('card-highlight-pulse');
+          setTimeout(() => card.classList.remove('card-highlight-pulse'), 2200);
+        }
+      });
+    }, 140);
+  };
+
   // Automatic vertical sliding every 4.8 seconds (matching Indexed Journals)
   clearInterval(portalsTickerInterval);
   portalsTickerInterval = setInterval(() => {
@@ -609,3 +648,230 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+
+/* ==========================================================================
+   ADVANCED ACTIVITY & TOPIC SEARCH ENGINE (REAL-TIME REACTIVE)
+   Indexed across Portals, Articles, Research Pillars, Grants, & Publications
+   ========================================================================== */
+const ACTIVITIES_SEARCH_DATA = [{"id": "spotlight-article", "type": "spotlight", "category": "✦ SPOTLIGHT ARTICLE", "title": "Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance", "sub": "Smart Cities (MDPI) • Vol. 9 (2026) • Open Access • Lead Author: Zaid Amin, Ph.D.", "keywords": "trustworthy ai sustainable cities multimodal orchestration agent civic compliance mdpi scopus q1 proxy trap governance", "url": "https://doi.org/10.3390/smartcities9100174", "action": "Read Article ↗", "isExternal": true}, {"slideIndex": 0, "category": "✦ PORTAL / SLIDE 01", "title": "About, Talks & Academic CV", "sub": "Ph.D. in Computer Science (UKM) • Keynotes, Media & Honors", "keywords": "cv curriculum vitae ukm doctoral ph.d. biography education experience talks keynotes", "url": "cv.html", "action": "View CV ↗", "isExternal": false}, {"slideIndex": 0, "category": "✦ GRANT & AI / SLIDE 01", "title": "Projects & Innovations", "sub": "FRGS Grant: Civic Compliance Framework • Multimodal Orchestration Architecture", "keywords": "frgs grant mohe projects innovations civic compliance multimodal orchestration agent municipal auditing", "url": "research.html", "action": "Inspect ↗", "isExternal": false}, {"slideIndex": 0, "category": "✦ PORTAL / SLIDE 01", "title": "Research & Publications Portal", "sub": "24 Peer-Reviewed Articles • MDPI, IEEE, Scopus Q1 • Open Access Preprints", "keywords": "research publications papers 24 articles scopus q1 ieee mdpi bibtex citations", "url": "publications.html", "action": "Explore ↗", "isExternal": false}, {"slideIndex": 0, "category": "✦ Q1 SCOPUS / SLIDE 01", "title": "Attention-Based Decision Systems", "sub": "IEEE Access (2021) • Q1 Scopus Indexed • Visual Selective Attention & Feedback Loops", "keywords": "attention-based decision systems ieee access 2021 scopus q1 cognitive feedback loops tune-attention user decisions", "url": "https://doi.org/10.1109/ACCESS.2021.3087740", "action": "Read ↗", "isExternal": true}, {"slideIndex": 1, "category": "✦ AI FRAMEWORK / SLIDE 02", "title": "HARMONY: Human-Trusted AI Framework", "sub": "Multi-agent normative alignment • Grounded ethical orchestration & cybernetics", "keywords": "harmony human-trusted ai multi-agent normative alignment cybernetics civic trust autonomous systems", "url": "https://www.zaidamin.org/2026/02/harmony-human-trusted-ai-and-resilient.html", "action": "Read ↗", "isExternal": true}, {"slideIndex": 1, "category": "✦ PEDAGOGY / SLIDE 02", "title": "Kehidupan Pendidik Teladan Rasulullah", "sub": "Pedagogical philosophy & exemplary mentorship • Nurturing ethical intellect", "keywords": "pendidik teladan rasulullah pedagogy education mentorship ethics holistic learning teacher", "url": "https://www.zaidamin.org/2021/05/kehidupan-pendidik-yang-diteladankan.html", "action": "Read ↗", "isExternal": true}, {"slideIndex": 1, "category": "✦ COGNITION / SLIDE 02", "title": "Mengenal Tipe-Tipe Bias Kognitif", "sub": "Cognitive heuristics & systemic decision errors • Algorithmic vs human bias", "keywords": "bias kognitif cognitive bias heuristics decision errors de-biasing judgment psychology", "url": "https://www.zaidamin.org/2020/07/mengenal-tipe-tipe-bias-dalam.html", "action": "Read ↗", "isExternal": true}, {"slideIndex": 1, "category": "✦ CYBERNETICS / SLIDE 02", "title": "Cyberspace & Perubahan Perilaku", "sub": "Digital sociology & psychological transformations • Attention economy", "keywords": "cyberspace perubahan perilaku digital behavior psychology attention economy human-computer interaction", "url": "https://www.zaidamin.org/2019/08/cyberspace-dan-perubahan-perilaku.html", "action": "Read ↗", "isExternal": true}, {"slideIndex": 2, "category": "✦ MEDIA AI / SLIDE 03", "title": "Tackling Disinformation: Fake News", "sub": "Cognitive resistance against disinformation • Epistemic vigilance in media", "keywords": "tackling disinformation fake news epistemic vigilance misinformation truth verification information literacy", "url": "https://www.zaidamin.org/2019/06/tackling-disinformation-fake-news-and.html", "action": "Read ↗", "isExternal": true}, {"slideIndex": 2, "category": "✦ GOVERNANCE / SLIDE 03", "title": "The Proxy Trap in Agentic AI", "sub": "AI Governance Series • SSRN Preprint 2026 • Metric gaming vs human oversight", "keywords": "proxy trap agentic ai governance ssrn 2026 metric replacement autonomous nodes civic human oversight", "url": "https://doi.org/10.2139/ssrn.7670124", "action": "Examine ↗", "isExternal": true}, {"slideIndex": 2, "category": "✦ ACADEMIC / SLIDE 03", "title": "Hal yang Tidak Kuketahui Sebelum UKM", "sub": "Doctoral milestones & postgraduate research life • Academic rigor & community", "keywords": "ukm universiti kebangsaan malaysia doctoral phd postgraduate research milestones dissertation", "url": "https://www.zaidamin.org/2018/09/hal-hal-yang-tidak-kuketahui-sebelum.html", "action": "Read ↗", "isExternal": true}, {"slideIndex": 2, "category": "✦ PHILOSOPHY / SLIDE 03", "title": "Dimuliakan Melalui Makan & Minum", "sub": "Philosophical reflections on gratitude, mindfulness & moral cultivation", "keywords": "dimuliakan makan minum philosophy ethics gratitude mindfulness moral dignity spiritual", "url": "https://www.zaidamin.org/2019/06/dimuliakan-melalui-makan-dan-minum.html", "action": "Read ↗", "isExternal": true}, {"slideIndex": 3, "category": "✦ INDUSTRY / SLIDE 04", "title": "E-Commerce & Startup Ecosystem", "sub": "Digital economy trends, entrepreneurship & student innovation in tech", "keywords": "e-commerce startup ecosystem entrepreneurship industry business technology enterprise", "url": "https://www.zaidamin.org/2015/09/talk-show-e-commerce-entrepreneurship.html", "action": "Read ↗", "isExternal": true}, {"slideIndex": 3, "category": "✦ HERITAGE / SLIDE 04", "title": "Srivijayapedia Heritage Platform", "sub": "JISTM (2026) • Srivijaya Maritime Digital Archive • Cultural Informatics", "keywords": "srivijayapedia heritage srivijaya digital archive jistm 2026 history civilization cultural informatics", "url": "https://doi.org/10.35631/JISTM.1141001", "action": "Read ↗", "isExternal": true}, {"slideIndex": 3, "category": "✦ SPRINGER / SLIDE 04", "title": "Digital Loneliness & Screen Epoch", "sub": "Contributions to Management Science (Springer 2024) • Attention capture & health", "keywords": "digital loneliness screen epoch springer 2024 social media distraction attention capture behavioral health", "url": "https://doi.org/10.1007/978-3-031-52280-2_14", "action": "Read ↗", "isExternal": true}, {"slideIndex": 3, "category": "✦ SMART CITIES / SLIDE 04", "title": "Municipal Autonomous Auditing", "sub": "MDPI Smart Cities (2026) • Cybernetic Civic Loops • Metric Divergence Mitigation", "keywords": "municipal autonomous auditing smart cities mdpi 2026 cybernetic feedback civic compliance urban governance", "url": "https://doi.org/10.3390/smartcities9100174", "action": "Inspect ↗", "isExternal": true}, {"id": "pillar-ai-governance", "type": "research-pillar", "category": "✦ RESEARCH PILLAR & GRANT", "title": "AI Governance & Trustworthy Agentic Systems", "sub": "Architecting governance mechanisms, multimodal orchestration agents, and safeguards against metric substitution ('The Proxy Trap') in autonomous AI. • Alignment: Targeted under MOHE FRGS (Artificial Intelligence & Governance) and ASEAN-level Trustworthy AI research grants.", "keywords": "AI Governance & Trustworthy Agentic Systems The Proxy Trap in Autonomous AI Decision-Making Multimodal Orchestration for Civic Compliance & Smart Cities Explainable & Auditable Agentic Workflows Algorithmic Accountability & Policy Standards Architecting governance mechanisms, multimodal orchestration agents, and safeguards against metric substitution ('The Proxy Trap') in autonomous AI. grant frgs mohe", "url": "research.html#pillar-ai-governance", "action": "View Pillar ↗", "isExternal": false}, {"id": "pillar-hci-attention", "type": "research-pillar", "category": "✦ RESEARCH PILLAR & GRANT", "title": "HCI, Attention-Based Design & Cognitive Interventions", "sub": "Investigating how interface architectures shape user cognitive load, selective exposure, and information-sharing behavior amid digital misdirection. • Alignment: Aligned with National Digital Society Initiatives and International Human-Computer Interaction / Digital Wellbeing research funds.", "keywords": "HCI, Attention-Based Design & Cognitive Interventions Tune-Attention Model & Cybernetic Feedback Loops Visual Selective Attention Systems for Combating Misinformation Persuasive Technology & Humane Interface Engineering Digital Loneliness & Well-being in Hyper-Connected Ecosystems Investigating how interface architectures shape user cognitive load, selective exposure, and information-sharing behavior amid digital misdirection. grant frgs mohe", "url": "research.html#pillar-hci-attention", "action": "View Pillar ↗", "isExternal": false}, {"id": "pillar-behavioral-heritage", "type": "research-pillar", "category": "✦ RESEARCH PILLAR & GRANT", "title": "Behavior & Social Computing for Digital Heritage", "sub": "Synthesizing computational social science with immersive technologies (VR/XR) to preserve civilizational knowledge and analyze societal behavior. • Alignment: Cultural Informatics, Digital Humanities, and UNESCO/National Heritage digitisation grants.", "keywords": "Behavior & Social Computing for Digital Heritage Srivijayapedia: Digital Platforms for Civilizational Heritage Preservation Immersive Virtual Reality (VR) for Historical Digital Communication Social Identity Construction & Influencer Dynamics in Social Networks Community-Driven Digital Knowledge Repositories Synthesizing computational social science with immersive technologies (VR/XR) to preserve civilizational knowledge and analyze societal behavior. grant frgs mohe", "url": "research.html#pillar-behavioral-heritage", "action": "View Pillar ↗", "isExternal": false}, {"id": "amin2026trustworthy", "type": "publication", "category": "✦ JOURNAL (2026)", "title": "Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance", "sub": "Smart Cities (2026) • Dr. Zaid Amin et al.", "keywords": "Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance Smart Cities 2026 JOURNAL Research addressing trustworthy ai for sustainable cities: a multimodal orchestration agent-based framework for civic compliance through empirical computational methodologies, behavioral analytics, and human-centered design frameworks. 10.3390/smartcities9100174 scopus q1", "url": "https://doi.org/10.3390/smartcities9100174", "action": "Read Paper ↗", "isExternal": true}, {"id": "amin2026srivijayapedia", "type": "publication", "category": "✦ JOURNAL (2026)", "title": "SRIVIJAYAPEDIA: A DIGITAL PLATFORM FOR CULTURAL HERITAGE PRESERVATION OF THE SRIVIJAYA CIVILIZATION", "sub": "Journal of Information System and Technology Management (2026) • Dr. Zaid Amin et al.", "keywords": "SRIVIJAYAPEDIA: A DIGITAL PLATFORM FOR CULTURAL HERITAGE PRESERVATION OF THE SRIVIJAYA CIVILIZATION Journal of Information System and Technology Management 2026 JOURNAL Research addressing srivijayapedia: a digital platform for cultural heritage preservation of the srivijaya civilization through empirical computational methodologies, behavioral analytics, and human-centered design frameworks. 10.35631/JISTM.1142003 scopus q1", "url": "https://doi.org/10.35631/JISTM.1142003", "action": "Read Paper ↗", "isExternal": true}, {"id": "amin2026the", "type": "publication", "category": "✦ PREPRINT (2026)", "title": "The Proxy Trap in Agentic AI: When Metrics Replace Judgment", "sub": "SSRN / Preprints (2026) • Dr. Zaid Amin et al.", "keywords": "The Proxy Trap in Agentic AI: When Metrics Replace Judgment SSRN / Preprints 2026 PREPRINT Research addressing the proxy trap in agentic ai: when metrics replace judgment through empirical computational methodologies, behavioral analytics, and human-centered design frameworks. 10.2139/ssrn.7670124 scopus q1", "url": "https://doi.org/10.2139/ssrn.7670124", "action": "Read Paper ↗", "isExternal": true}, {"id": "amin2026trustworthy", "type": "publication", "category": "✦ PREPRINT (2026)", "title": "Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance", "sub": "SSRN / Preprints (2026) • Dr. Zaid Amin et al.", "keywords": "Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance SSRN / Preprints 2026 PREPRINT Research addressing trustworthy ai for sustainable cities: a multimodal orchestration agent-based framework for civic compliance through empirical computational methodologies, behavioral analytics, and human-centered design frameworks. 10.20944/preprints202608.1136.v1 scopus q1", "url": "https://doi.org/10.20944/preprints202608.1136.v1", "action": "Read Paper ↗", "isExternal": true}, {"id": "amin2025immersive", "type": "publication", "category": "✦ JOURNAL (2025)", "title": "Immersive Heritage: Exploring Srivijaya's Historical Legacy Through Virtual Reality in Digital Communication", "sub": "Jurnal Audiens (2025) • Dr. Zaid Amin et al.", "keywords": "Immersive Heritage: Exploring Srivijaya's Historical Legacy Through Virtual Reality in Digital Communication Jurnal Audiens 2025 JOURNAL Research addressing immersive heritage: exploring srivijaya's historical legacy through virtual reality in digital communication through empirical computational methodologies, behavioral analytics, and human-centered design frameworks. 10.18196/jas.v6i2.617 scopus q1", "url": "https://doi.org/10.18196/jas.v6i2.617", "action": "Read Paper ↗", "isExternal": true}, {"id": "amin2025celebrity", "type": "publication", "category": "✦ JOURNAL (2025)", "title": "Celebrity of Instagram and Endorsements: Shaping and Constructing Social Identity", "sub": "Jurnal The Messenger (2025) • Dr. Zaid Amin et al.", "keywords": "Celebrity of Instagram and Endorsements: Shaping and Constructing Social Identity Jurnal The Messenger 2025 JOURNAL Research addressing celebrity of instagram and endorsements: shaping and constructing social identity through empirical computational methodologies, behavioral analytics, and human-centered design frameworks. 10.26623/themessenger.v17i1.11658 scopus q1", "url": "https://doi.org/10.26623/themessenger.v17i1.11658", "action": "Read Paper ↗", "isExternal": true}, {"id": "amin2025peerreview", "type": "publication", "category": "✦ BOOK CHAPTER (2025)", "title": "Peer-Review Statements", "sub": "Academic Publication (2025) • Dr. Zaid Amin et al.", "keywords": "Peer-Review Statements Academic Publication 2025 BOOK CHAPTER Research addressing peer-review statements through empirical computational methodologies, behavioral analytics, and human-centered design frameworks. 10.2991/978-2-38476-466-2_1 scopus q1", "url": "https://doi.org/10.2991/978-2-38476-466-2_1", "action": "Read Paper ↗", "isExternal": true}, {"id": "amin2024tuneattention", "type": "publication", "category": "✦ CONFERENCE (2024)", "title": "Tune-Attention Model: Designing Cybernetics Intervention for Information Sharing Behavior", "sub": "2024 4th International Conference on Electronic and Electrical Engineering and Intelligent System (ICE3IS) (2024) • Dr. Zaid Amin et al.", "keywords": "Tune-Attention Model: Designing Cybernetics Intervention for Information Sharing Behavior 2024 4th International Conference on Electronic and Electrical Engineering and Intelligent System (ICE3IS) 2024 CONFERENCE Research addressing tune-attention model: designing cybernetics intervention for information sharing behavior through empirical computational methodologies, behavioral analytics, and human-centered design frameworks. 10.1109/ice3is62977.2024.10775858 scopus q1", "url": "https://doi.org/10.1109/ice3is62977.2024.10775858", "action": "Read Paper ↗", "isExternal": true}, {"id": "amin2024digital", "type": "publication", "category": "✦ BOOK CHAPTER (2024)", "title": "Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World", "sub": "Contributions to Management Science (2024) • Dr. Zaid Amin et al.", "keywords": "Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World Contributions to Management Science 2024 BOOK CHAPTER Research addressing digital loneliness in social media: the epoch of our connected and distraction world through empirical computational methodologies, behavioral analytics, and human-centered design frameworks. 10.1007/978-3-031-48770-5_65 scopus q1", "url": "https://doi.org/10.1007/978-3-031-48770-5_65", "action": "Read Paper ↗", "isExternal": true}, {"id": "amin2021attentionbased", "type": "publication", "category": "✦ BOOK CHAPTER (2021)", "title": "Attention-Based Design and Selective Exposure Amid COVID-19 Misinformation Sharing", "sub": "Lecture Notes in Computer Science (2021) • Dr. Zaid Amin et al.", "keywords": "Attention-Based Design and Selective Exposure Amid COVID-19 Misinformation Sharing Lecture Notes in Computer Science 2021 BOOK CHAPTER Research addressing attention-based design and selective exposure amid covid-19 misinformation sharing through empirical computational methodologies, behavioral analytics, and human-centered design frameworks. 10.1007/978-3-030-78468-3_34 scopus q1", "url": "https://doi.org/10.1007/978-3-030-78468-3_34", "action": "Read Paper ↗", "isExternal": true}, {"id": "amin2021attentionbased", "type": "publication", "category": "✦ JOURNAL (2021)", "title": "Attention-Based Design and User Decision on Information Sharing: An Ontological Approach Through Thematic Literature Review", "sub": "Unpublished (2021) • Dr. Zaid Amin et al.", "keywords": "Attention-Based Design and User Decision on Information Sharing: An Ontological Approach Through Thematic Literature Review Unpublished 2021 JOURNAL Research addressing attention-based design and user decision on information sharing: an ontological approach through thematic literature review through empirical computational methodologies, behavioral analytics, and human-centered design frameworks. 10.13140/RG.2.2.28372.83841 scopus q1", "url": "https://doi.org/10.13140/RG.2.2.28372.83841", "action": "Read Paper ↗", "isExternal": true}, {"id": "amin2021attentionbased", "type": "publication", "category": "✦ JOURNAL (2021)", "title": "Attention-Based Design and User Decisions on Information Sharing: A Thematic Literature Review", "sub": "IEEE Access (2021) • Dr. Zaid Amin et al.", "keywords": "Attention-Based Design and User Decisions on Information Sharing: A Thematic Literature Review IEEE Access 2021 JOURNAL Research addressing attention-based design and user decisions on information sharing: a thematic literature review through empirical computational methodologies, behavioral analytics, and human-centered design frameworks. 10.1109/ACCESS.2021.3087740 scopus q1", "url": "https://doi.org/10.1109/ACCESS.2021.3087740", "action": "Read Paper ↗", "isExternal": true}, {"id": "amin2021visual", "type": "publication", "category": "✦ JOURNAL (2021)", "title": "Visual Selective Attention System to Intervene User Attention in Sharing COVID-19 Misinformation", "sub": "International Journal of Advanced Computer Science and Applications (2021) • Dr. Zaid Amin et al.", "keywords": "Visual Selective Attention System to Intervene User Attention in Sharing COVID-19 Misinformation International Journal of Advanced Computer Science and Applications 2021 JOURNAL Research addressing visual selective attention system to intervene user attention in sharing covid-19 misinformation through empirical computational methodologies, behavioral analytics, and human-centered design frameworks. 10.14569/IJACSA.2021.0121005 scopus q1", "url": "https://doi.org/10.14569/IJACSA.2021.0121005", "action": "Read Paper ↗", "isExternal": true}, {"id": "amin2021visual", "type": "publication", "category": "✦ PREPRINT (2021)", "title": "Visual selective attention system to intervene user attention in sharing COVID-19 misinformation", "sub": "arXiv (2021) • Dr. Zaid Amin et al.", "keywords": "Visual selective attention system to intervene user attention in sharing COVID-19 misinformation arXiv 2021 PREPRINT Research addressing visual selective attention system to intervene user attention in sharing covid-19 misinformation through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.  scopus q1", "url": "publications.html#amin2021visual", "action": "Explore ↗", "isExternal": false}, {"id": "amin2020attention", "type": "publication", "category": "✦ PREPRINT (2020)", "title": "Attention and misinformation sharing on social media", "sub": "SSRN / Preprints (2020) • Dr. Zaid Amin et al.", "keywords": "Attention and misinformation sharing on social media SSRN / Preprints 2020 PREPRINT Research addressing attention and misinformation sharing on social media through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.  scopus q1", "url": "publications.html#amin2020attention", "action": "Explore ↗", "isExternal": false}, {"id": "amin2020attention", "type": "publication", "category": "✦ PREPRINT (2020)", "title": "Attention and misinformation sharing on social media", "sub": "arXiv (2020) • Dr. Zaid Amin et al.", "keywords": "Attention and misinformation sharing on social media arXiv 2020 PREPRINT Research addressing attention and misinformation sharing on social media through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.  scopus q1", "url": "publications.html#amin2020attention", "action": "Explore ↗", "isExternal": false}, {"id": "amin2017pengembangan", "type": "publication", "category": "✦ CONFERENCE (2017)", "title": "PENGEMBANGAN APLIKASI SISTEM MANAJEMEN DOKUMEN ELEKTRONIK BERORIENTASI STANDAR BORANG AKREDITASI BAN PT", "sub": "PROSIDING SEMNASTEK 2017 (2017) • Dr. Zaid Amin et al.", "keywords": "PENGEMBANGAN APLIKASI SISTEM MANAJEMEN DOKUMEN ELEKTRONIK BERORIENTASI STANDAR BORANG AKREDITASI BAN PT PROSIDING SEMNASTEK 2017 2017 CONFERENCE Research addressing pengembangan aplikasi sistem manajemen dokumen elektronik berorientasi standar borang akreditasi ban pt through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.  scopus q1", "url": "publications.html#amin2017pengembangan", "action": "Explore ↗", "isExternal": false}, {"id": "amin2017aplikasi", "type": "publication", "category": "✦ JOURNAL (2017)", "title": "Aplikasi Sistem Manajemen Dokumen Elektronik Berorientasi Standar Borang BAN PT", "sub": "UST IT: Jurnal Sistem Informasi, Teknologi Informasi dan Komputer (2017) • Dr. Zaid Amin et al.", "keywords": "Aplikasi Sistem Manajemen Dokumen Elektronik Berorientasi Standar Borang BAN PT UST IT: Jurnal Sistem Informasi, Teknologi Informasi dan Komputer 2017 JOURNAL Research addressing aplikasi sistem manajemen dokumen elektronik berorientasi standar borang ban pt through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.  scopus q1", "url": "publications.html#amin2017aplikasi", "action": "Explore ↗", "isExternal": false}, {"id": "amin2017aplikasi", "type": "publication", "category": "✦ CONFERENCE (2017)", "title": "Aplikasi Web Sms Sebagai Reminder Digital Menggunakan GAMMU", "sub": "SNTIBD 2017 (2017) • Dr. Zaid Amin et al.", "keywords": "Aplikasi Web Sms Sebagai Reminder Digital Menggunakan GAMMU SNTIBD 2017 2017 CONFERENCE Research addressing aplikasi web sms sebagai reminder digital menggunakan gammu through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.  scopus q1", "url": "publications.html#amin2017aplikasi", "action": "Explore ↗", "isExternal": false}, {"id": "amin2017multi", "type": "publication", "category": "✦ CONFERENCE (2017)", "title": "Multi tier architecture model on a server cluster for application of big data", "sub": "Annual Research Seminar (ARS) - Computer Science and ICT 2017 (2017) • Dr. Zaid Amin et al.", "keywords": "Multi tier architecture model on a server cluster for application of big data Annual Research Seminar (ARS) - Computer Science and ICT 2017 2017 CONFERENCE Research addressing multi tier architecture model on a server cluster for application of big data through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.  scopus q1", "url": "publications.html#amin2017multi", "action": "Explore ↗", "isExternal": false}, {"id": "amin2015desain", "type": "publication", "category": "✦ JOURNAL (2015)", "title": "DESAIN DAN IMPLEMENTASI TUNNELING IPSEC BERBASIS UNIX DENGAN ESP (ENCAPSULATING SECURITY PAYLOAD) (Studi Kasus : PT. Sumeks Tivi Palembang & PT. Sumatera Ekspres)", "sub": "Jurnal Teknologi dan Informatika (2015) • Dr. Zaid Amin et al.", "keywords": "DESAIN DAN IMPLEMENTASI TUNNELING IPSEC BERBASIS UNIX DENGAN ESP (ENCAPSULATING SECURITY PAYLOAD) (Studi Kasus : PT. Sumeks Tivi Palembang & PT. Sumatera Ekspres) Jurnal Teknologi dan Informatika 2015 JOURNAL Research addressing desain dan implementasi tunneling ipsec berbasis unix dengan esp (encapsulating security payload) (studi kasus : pt. sumeks tivi palembang & pt. sumatera ekspres) through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.  scopus q1", "url": "publications.html#amin2015desain", "action": "Explore ↗", "isExternal": false}, {"id": "amin2015routing", "type": "publication", "category": "✦ CONFERENCE (2015)", "title": "Routing protocols pada holistic network di era big data", "sub": "Annual Research Seminar (ARS) 2015 (2015) • Dr. Zaid Amin et al.", "keywords": "Routing protocols pada holistic network di era big data Annual Research Seminar (ARS) 2015 2015 CONFERENCE Research addressing routing protocols pada holistic network di era big data through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.  scopus q1", "url": "publications.html#amin2015routing", "action": "Explore ↗", "isExternal": false}, {"id": "amin2014simulasi", "type": "publication", "category": "✦ CONFERENCE (2014)", "title": "SIMULASI DAN PERANCANGAN KEAMANAN AUTENTIKASI JARINGAN HIRARKI LINK AGGREGATION CONTROL PROTOCOL (LACP) BERBASIS ROUTER CISCO", "sub": "Konferensi Nasional Teknologi Informasi & Aplikasinya (2014) • Dr. Zaid Amin et al.", "keywords": "SIMULASI DAN PERANCANGAN KEAMANAN AUTENTIKASI JARINGAN HIRARKI LINK AGGREGATION CONTROL PROTOCOL (LACP) BERBASIS ROUTER CISCO Konferensi Nasional Teknologi Informasi & Aplikasinya 2014 CONFERENCE Research addressing simulasi dan perancangan keamanan autentikasi jaringan hirarki link aggregation control protocol (lacp) berbasis router cisco through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.  scopus q1", "url": "publications.html#amin2014simulasi", "action": "Explore ↗", "isExternal": false}, {"id": "amin2012analisis", "type": "publication", "category": "✦ JOURNAL (2012)", "title": "Analisis Vulnerabilitas Host Pada Keamanan Jaringan Komputer Di PT. Sumeks Tivi Palembang (PALTV) Menggunakan Router Berbasis Unix", "sub": "Jurnal Teknologi dan Informatika (2012) • Dr. Zaid Amin et al.", "keywords": "Analisis Vulnerabilitas Host Pada Keamanan Jaringan Komputer Di PT. Sumeks Tivi Palembang (PALTV) Menggunakan Router Berbasis Unix Jurnal Teknologi dan Informatika 2012 JOURNAL Research addressing analisis vulnerabilitas host pada keamanan jaringan komputer di pt. sumeks tivi palembang (paltv) menggunakan router berbasis unix through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.  scopus q1", "url": "publications.html#amin2012analisis", "action": "Explore ↗", "isExternal": false}, {"id": "talk-2026-44", "type": "talk", "category": "✦ KEYNOTE SPEAKER (2026)", "title": "The Proxy Trap in Agentic AI: Why Metric Optimization Fails Human Values", "sub": "International Symposium on Trustworthy AI and Autonomous Systems • Kuala Lumpur, Malaysia (Hybrid)", "keywords": "The Proxy Trap in Agentic AI: Why Metric Optimization Fails Human Values International Symposium on Trustworthy AI and Autonomous Systems Kuala Lumpur, Malaysia (Hybrid) Keynote Speaker keynote speaker plenary talk", "url": "cv.html#talks", "action": "View Talk ↗", "isExternal": false}, {"id": "talk-2025-45", "type": "talk", "category": "✦ INVITED PLENARY SPEAKER (2025)", "title": "Humane Interface Design: Rewiring User Attention in an Age of Viral Algorithmic Distraction", "sub": "ASEAN HCI & Digital Society Colloquium • Jakarta / Online", "keywords": "Humane Interface Design: Rewiring User Attention in an Age of Viral Algorithmic Distraction ASEAN HCI & Digital Society Colloquium Jakarta / Online Invited Plenary Speaker keynote speaker plenary talk", "url": "cv.html#talks", "action": "View Talk ↗", "isExternal": false}, {"id": "talk-2024-46", "type": "talk", "category": "✦ CONFERENCE PAPER PRESENTATION & TRACK SESSION CHAIR (2024)", "title": "Tune-Attention Model: Designing Cybernetic Interventions for Responsible Information Sharing", "sub": "4th International Conference on Electronic and Electrical Engineering and Intelligent System (ICE3IS) • Yogyakarta, Indonesia", "keywords": "Tune-Attention Model: Designing Cybernetic Interventions for Responsible Information Sharing 4th International Conference on Electronic and Electrical Engineering and Intelligent System (ICE3IS) Yogyakarta, Indonesia Conference Paper Presentation & Track Session Chair keynote speaker plenary talk", "url": "cv.html#talks", "action": "View Talk ↗", "isExternal": false}, {"id": "talk-2023-47", "type": "talk", "category": "✦ PANELIST & PRESENTER (2023)", "title": "Digital Heritage Digitization: Reconstructing the Srivijaya Maritime Legacy", "sub": "Regional Forum on Cultural Informatics & Immersive VR • Palembang, Indonesia", "keywords": "Digital Heritage Digitization: Reconstructing the Srivijaya Maritime Legacy Regional Forum on Cultural Informatics & Immersive VR Palembang, Indonesia Panelist & Presenter keynote speaker plenary talk", "url": "cv.html#talks", "action": "View Talk ↗", "isExternal": false}];
+
+function initAdvancedActivitySearch() {
+  const wrap = document.getElementById('activity-search-wrap');
+  const input = document.getElementById('activity-search-input');
+  const clearBtn = document.getElementById('activity-search-clear');
+  const panel = document.getElementById('activity-search-results');
+  const listEl = document.getElementById('search-results-list');
+  const countEl = document.getElementById('search-results-count');
+
+  if (!wrap || !input || !panel || !listEl) return;
+
+  let activeResultIndex = -1;
+  let currentMatches = [];
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>"']/g, m => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[m]));
+  }
+
+  function highlightQuery(text, query) {
+    if (!query || !text) return escapeHtml(text);
+    const escapedText = escapeHtml(text);
+    const cleanQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${cleanQuery})`, 'gi');
+    return escapedText.replace(regex, '<mark class="search-match">$1</mark>');
+  }
+
+  function renderResults(query, matches) {
+    currentMatches = matches;
+    activeResultIndex = -1;
+
+    if (!query) {
+      panel.style.display = 'none';
+      if (clearBtn) clearBtn.style.display = 'none';
+      return;
+    }
+
+    if (clearBtn) clearBtn.style.display = 'inline-flex';
+    panel.style.display = 'block';
+
+    if (matches.length === 0) {
+      if (countEl) countEl.textContent = '0 ACTIVITIES FOUND';
+      listEl.innerHTML = `
+        <div class="search-empty-state">
+          <div class="search-empty-icon">&#10022;</div>
+          <div class="search-empty-title font-cinzel">No Matching Activities Found</div>
+          <div class="search-empty-desc">Try terms like <em>"AI"</em>, <em>"FRGS"</em>, <em>"Governance"</em>, <em>"Smart Cities"</em>, or <em>"UKM"</em>.</div>
+        </div>
+      `;
+      return;
+    }
+
+    if (countEl) {
+      countEl.textContent = `${matches.length} ACTIVIT${matches.length === 1 ? 'Y' : 'IES'} FOUND`;
+    }
+
+    listEl.innerHTML = matches.slice(0, 8).map((item, idx) => `
+      <a href="${item.url}" class="search-result-item" data-index="${idx}" ${item.isExternal ? 'target="_blank" rel="noopener"' : ''} data-slide="${item.slideIndex !== undefined ? item.slideIndex : ''}" data-title="${encodeURIComponent(item.title)}">
+        <div class="result-item-main">
+          <div class="result-item-tag font-cinzel">${escapeHtml(item.category)}</div>
+          <div class="result-item-title">${highlightQuery(item.title, query)}</div>
+          <div class="result-item-sub">${escapeHtml(item.sub)}</div>
+        </div>
+        <div class="result-item-action font-cinzel">${escapeHtml(item.action)}</div>
+      </a>
+    `).join('');
+
+    // Attach click listeners to result items
+    listEl.querySelectorAll('.search-result-item').forEach(itemEl => {
+      itemEl.addEventListener('click', (e) => {
+        const slideAttr = itemEl.getAttribute('data-slide');
+        const titleAttr = decodeURIComponent(itemEl.getAttribute('data-title') || '');
+        const isActionPillClick = Boolean(e.target.closest('.result-item-action'));
+        
+        if (slideAttr !== '' && slideAttr !== null) {
+          const slideIdx = parseInt(slideAttr, 10);
+          if (!isNaN(slideIdx) && typeof window.highlightTrayCard === 'function') {
+            window.highlightTrayCard(slideIdx, titleAttr);
+          }
+          // If clicking the row body (not the direct external action pill), stay on page and focus tray card
+          if (!isActionPillClick) {
+            e.preventDefault();
+            panel.style.display = 'none';
+            input.value = '';
+            if (clearBtn) clearBtn.style.display = 'none';
+            return;
+          }
+        }
+
+        // External or other page link
+        setTimeout(() => {
+          panel.style.display = 'none';
+        }, 200);
+      });
+    });
+  }
+
+  function search(query) {
+    const q = query.trim().toLowerCase();
+    if (!q) {
+      renderResults('', []);
+      return;
+    }
+
+    const terms = q.split(/\s+/).filter(Boolean);
+
+    const matches = ACTIVITIES_SEARCH_DATA.filter(item => {
+      const text = `${item.title} ${item.category} ${item.sub} ${item.keywords}`.toLowerCase();
+      return terms.every(term => text.includes(term));
+    }).sort((a, b) => {
+      const aTitle = a.title.toLowerCase();
+      const bTitle = b.title.toLowerCase();
+      const aStarts = aTitle.startsWith(q);
+      const bStarts = bTitle.startsWith(q);
+      if (aStarts && !bStarts) return -1;
+      if (!aStarts && bStarts) return 1;
+
+      // Prefer tray slides on home page
+      if (a.slideIndex !== undefined && b.slideIndex === undefined) return -1;
+      if (a.slideIndex === undefined && b.slideIndex !== undefined) return 1;
+
+      return 0;
+    });
+
+    renderResults(q, matches);
+  }
+
+  // Input event
+  input.addEventListener('focus', () => {
+    if (typeof window.pausePortalsTicker === 'function') {
+      window.pausePortalsTicker();
+    }
+  });
+
+  input.addEventListener('input', (e) => {
+    if (typeof window.pausePortalsTicker === 'function') {
+      window.pausePortalsTicker();
+    }
+    search(e.target.value);
+  });
+
+  // Keyboard navigation inside input
+  input.addEventListener('keydown', (e) => {
+    const items = listEl.querySelectorAll('.search-result-item');
+    if (!items.length || panel.style.display === 'none') {
+      if (e.key === 'Escape') {
+        panel.style.display = 'none';
+        input.blur();
+      }
+      return;
+    }
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      activeResultIndex = (activeResultIndex + 1) % items.length;
+      updateActiveItem(items);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      activeResultIndex = (activeResultIndex - 1 + items.length) % items.length;
+      updateActiveItem(items);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      const target = activeResultIndex >= 0 ? items[activeResultIndex] : items[0];
+      if (target) {
+        target.click();
+      }
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      panel.style.display = 'none';
+      input.blur();
+    }
+  });
+
+  function updateActiveItem(items) {
+    items.forEach((item, idx) => {
+      if (idx === activeResultIndex) {
+        item.classList.add('is-selected');
+        item.scrollIntoView({ block: 'nearest' });
+      } else {
+        item.classList.remove('is-selected');
+      }
+    });
+  }
+
+  // Clear button click
+  if (clearBtn) {
+    clearBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      input.value = '';
+      search('');
+      input.focus();
+    });
+  }
+
+  // Dismiss dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!wrap.contains(e.target)) {
+      panel.style.display = 'none';
+    }
+  });
+
+  // Global hotkeys: '/' or 'Ctrl+K' / 'Cmd+K' to focus search
+  document.addEventListener('keydown', (e) => {
+    const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+    if (activeTag === 'input' || activeTag === 'textarea' || document.activeElement.isContentEditable) {
+      return;
+    }
+
+    if (e.key === '/' || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k')) {
+      e.preventDefault();
+      input.focus();
+      input.select();
+      if (input.value.trim()) {
+        search(input.value);
+      }
+    }
+  });
+}
