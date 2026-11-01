@@ -2651,9 +2651,9 @@ a {
   grid-template-columns: 82px 1fr auto;
   align-items: center;
   gap: 12px;
-  height: 88px;
-  min-height: 88px;
-  max-height: 88px;
+  height:  120px;
+  min-height:  120px;
+  max-height:  120px;
   flex-shrink: 0;
   box-sizing: border-box;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -2735,7 +2735,7 @@ a {
 }
 
 .ref-item-bullets li::before {
-  content: "•";
+  content: "\2022";
   position: absolute;
   left: 0;
   color: rgba(212, 175, 55, 0.75);
@@ -4258,4 +4258,80 @@ a {
   width: 22px;
   background: linear-gradient(90deg, #d4af37, #fce09b);
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.50);
+}
+
+
+/* ==========================================================================
+   TRAY CAROUSEL CONTROLS & SLIDES (PAGINATED 3-CARD SLIDES DECK)
+   ========================================================================== */
+.tray-carousel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 2px 8px 2px;
+  border-bottom: 1px solid rgba(140, 180, 205, 0.12);
+  margin-bottom: 6px;
+  flex-shrink: 0;
+}
+
+.tray-header-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #d4af37;
+  text-transform: uppercase;
+}
+
+.tray-arrows-cluster {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(3, 18, 32, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(34, 166, 200, 0.35);
+  border-radius: 999px;
+  padding: 2px 7px;
+  gap: 5px;
+  box-shadow: 0 2px 8px rgba(0, 10, 24, 0.40);
+}
+
+.tray-slides-wrap {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tray-slide {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  height: 100%;
+  width: 100%;
+  animation: traySlideFadeIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.tray-slide.active {
+  display: flex;
+}
+
+@keyframes traySlideFadeIn {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.tray-dots-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 0 2px 0;
+  margin-top: auto;
+  flex-shrink: 0;
 }
