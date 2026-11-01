@@ -114,21 +114,19 @@ def get_page_header(active_page="home"):
       <canvas id="rain-canvas"></canvas>
     </section>
 
-    <!-- 3. Sub-Section Below Storm: Golden Ratio Composition (61.8% Verse : 38.2% Citation) -->
+    <!-- 3. Sub-Section Below Storm: Centered Warm Golden Ratio Quotation (Qur'an 31:27) -->
     <section class="ocean-quote-subsection">
-      <div class="quote-golden-ribbon">
-        <div class="quote-golden-major">
-          <blockquote class="premium-verse-text">
+      <div class="quote-golden-center">
+        <blockquote class="ocean-golden-blockquote">
+          <p class="golden-quotation-text font-serif">
             &ldquo;If all the trees on earth were pens and the ocean were ink, refilled by seven other oceans, the Words of Allah would not be exhausted. Surely Allah is Almighty, All-Wise.&rdquo;
-          </blockquote>
-        </div>
-        <div class="quote-golden-divider" aria-hidden="true"></div>
-        <div class="quote-golden-minor">
-          <cite class="quote-golden-citation">
-            <span class="cite-surah">Qur&rsquo;an 31:27</span>
-            <span class="cite-meta">Surah Luqman &bull; Divine Knowledge</span>
+          </p>
+          <cite class="golden-quotation-cite">
+            <span class="golden-cite-line"></span>
+            <span class="golden-cite-label font-cinzel">Qur&rsquo;an 31:27</span>
+            <span class="golden-cite-line"></span>
           </cite>
-        </div>
+        </blockquote>
       </div>
     </section>
 
