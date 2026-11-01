@@ -3590,30 +3590,45 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(16, 185, 129, 0.10);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  padding: 4px 12px;
+  background: rgba(3, 18, 32, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(34, 166, 200, 0.28);
+  padding: 5px 13px;
   border-radius: 999px;
   width: fit-content;
   margin-bottom: 0;
   position: relative;
+  box-shadow: 0 2px 8px rgba(0, 10, 24, 0.35);
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.24s ease,
+              border-color 0.24s ease,
+              box-shadow 0.24s ease;
+}
+
+.stats-live-badge:hover {
+  background: rgba(34, 166, 200, 0.22);
+  border-color: #d4af37;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 10, 24, 0.50), 0 0 10px rgba(212, 175, 55, 0.25);
 }
 
 .stats-pulse-dot {
   width: 7px;
   height: 7px;
-  background: #10b981;
+  background: #38b6d0;
   border-radius: 50%;
-  box-shadow: 0 0 8px #10b981;
+  box-shadow: 0 0 8px #38b6d0;
 }
 
 .stats-pulse-ring {
   position: absolute;
-  left: 10px;
+  left: 13px;
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  border: 1.5px solid #10b981;
+  border: 1.5px solid #38b6d0;
+  transform-origin: center center;
   animation: statsPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
@@ -3623,11 +3638,17 @@ a {
 }
 
 .stats-live-label {
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #34d399;
-  font-weight: 700;
+  color: #c4dbe8;
+  font-weight: 600;
+  transition: color 0.24s ease;
+}
+
+.stats-live-badge:hover .stats-live-label {
+  color: #ffffff;
 }
 
 .stats-heading {
