@@ -108,7 +108,10 @@ def get_page_header(active_page="home"):
     <!-- 1. Top Epigraph: Das Sein, Das Sollen & Top-Right Star of David with Side Links -->
     <header class="epigraph-header">
       <div class="epigraph-top-flex">
-        <h1 class="epigraph-title">Das Sein, Das Sollen.</h1>
+        <div class="epigraph-title-group">
+          <h1 class="epigraph-title">Das Sein, Das Sollen.</h1>
+          <div class="epigraph-golden-line" aria-hidden="true"></div>
+        </div>
         
         <div class="epigraph-right-cluster">
           {f'''<nav class="top-epigraph-menu" id="top-main-nav" aria-label="Main Navigation">
