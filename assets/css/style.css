@@ -145,20 +145,20 @@ a {
   aspect-ratio: 21 / 9;
   min-height: 360px;
   max-height: 480px;
-  border-radius: 0;
+  border-radius: 16px;
   overflow: hidden;
   border: none !important;
   outline: none !important;
-  box-shadow: none !important;
-  background-color: transparent;
+  box-shadow: 0 8px 30px rgba(0, 10, 24, 0.40);
+  background-color: #020c15;
   margin-bottom: 10px;
+  isolation: isolate;
+  transform: translateZ(0);
 }
 
-/* Mask applied only to storm media and canvas so overlay menu remains 100% crisp */
 .lighthouse-banner-frame picture,
 .lighthouse-banner-frame #rain-canvas {
-  mask-image: linear-gradient(to bottom, #000000 0%, #000000 88%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, #000000 0%, #000000 88%, transparent 100%);
+  border-radius: 16px;
 }
 
 .lighthouse-banner-frame picture {
