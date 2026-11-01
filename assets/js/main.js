@@ -9,6 +9,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
+  initScholarlyDrawer();
   initPublicationsFilter();
   initBibtexButtons();
   initMobileMenu();
@@ -214,6 +215,80 @@ function filterHomePackages(query) {
       item.style.display = 'grid';
     } else {
       item.style.display = 'none';
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Scholarly Profiles Drawer (Star of David Button Interaction)
+   -------------------------------------------------------------------------- */
+function initScholarlyDrawer() {
+  const triggers = document.querySelectorAll('.david-star-btn');
+  const drawer = document.getElementById('scholarly-header-drawer');
+  if (!drawer || triggers.length === 0) return;
+
+  let closeTimeout = null;
+  let isPinned = false;
+
+  function openDrawer() {
+    clearTimeout(closeTimeout);
+    drawer.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
+    triggers.forEach(t => {
+      t.classList.add('is-active');
+      t.setAttribute('aria-expanded', 'true');
+    });
+  }
+
+  function closeDrawer(force = false) {
+    if (isPinned && !force) return;
+    clearTimeout(closeTimeout);
+    closeTimeout = setTimeout(() => {
+      drawer.classList.remove('is-open');
+      drawer.setAttribute('aria-hidden', 'true');
+      triggers.forEach(t => {
+        t.classList.remove('is-active');
+        t.setAttribute('aria-expanded', 'false');
+      });
+      if (force) isPinned = false;
+    }, 280);
+  }
+
+  triggers.forEach(btn => {
+    // Hover events
+    btn.addEventListener('mouseenter', openDrawer);
+    btn.addEventListener('mouseleave', () => closeDrawer(false));
+
+    // Click toggle
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      if (drawer.classList.contains('is-open') && isPinned) {
+        closeDrawer(true);
+      } else {
+        isPinned = true;
+        openDrawer();
+      }
+    });
+  });
+
+  // Keep open when hovering inside drawer
+  drawer.addEventListener('mouseenter', () => {
+    clearTimeout(closeTimeout);
+  });
+  drawer.addEventListener('mouseleave', () => closeDrawer(false));
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!drawer.contains(e.target)) {
+      closeDrawer(true);
+    }
+  });
+
+  // Close on ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeDrawer(true);
     }
   });
 }
