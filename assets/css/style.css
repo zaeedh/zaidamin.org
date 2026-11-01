@@ -2452,7 +2452,8 @@ a {
 .ref-profile-info-col {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
+  text-align: right;
   min-width: 0;
   flex: 1;
 }
@@ -2485,7 +2486,7 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
-  text-shadow: 0 2px 10px rgba(0, 10, 24, 0.40);
+  text-shadow: 0 2px 10px rgba(0, 10, 24, 0.40);text-align: right;
 }
 
 .ref-profile-role {
@@ -2497,7 +2498,7 @@ a {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 100%;
+  width: 100%;text-align: right;
 }
 
 .ref-profile-fields {
@@ -2507,7 +2508,7 @@ a {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 100%;
+  width: 100%;text-align: right;
 }
 
 .ref-photo-ring {
