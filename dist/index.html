@@ -159,126 +159,198 @@
       </div>
     </section>
 
-    <!-- 5. GOLDEN RATIO SPLIT SECTION: SPOTLIGHT ARTICLE (~61.8%) & PROFILE CARD (~38.2%) -->
-    <section class="golden-split-section">
+    <!-- 5. FEATURED SPOTLIGHT & ACADEMIC PORTALS (REFERENCE SPLIT CARD LAYOUT) -->
+    <section class="golden-split-section ref-split-layout">
       
-      <!-- LEFT: Major Spotlight Article (61.8% Golden Ratio Proportion) -->
-      <article class="spotlight-article-card">
-        <div class="spotlight-header-row">
-          <span class="spotlight-kicker font-cinzel"><span class="pulse-dot"></span> SPOTLIGHT ARTICLE</span>
-          <span class="spotlight-badge-q1 font-cinzel">Q1 SCOPUS INDEXED</span>
-        </div>
-
-        <h2 class="spotlight-article-title">
-          Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance
-        </h2>
-
-        <div class="spotlight-meta-line">
-          <span class="spotlight-venue font-cinzel">Smart Cities (MDPI)</span>
-          <span class="spotlight-divider">&bull;</span>
-          <span class="spotlight-year">2026 Volume 9</span>
-          <span class="spotlight-divider">&bull;</span>
-          <span class="spotlight-author">Lead Author: Dr. Zaid Amin, Ph.D.</span>
-          <span class="spotlight-divider">&bull;</span>
-          <span class="spotlight-open-access">Open Access</span>
-        </div>
-
-        <p class="spotlight-summary">
-          Addresses critical systemic vulnerabilities in urban autonomous deployments where metric-driven proxies diverge from authentic civic welfare. Introduces an audited multimodal orchestration agent architecture enforcing real-time cybernetic feedback loops, cognitive transparency, and verifiable alignment for municipal governance.
-        </p>
-
-        <div class="spotlight-highlights-grid">
-          <div class="spotlight-highlight-item">
-            <span class="highlight-num font-cinzel">01</span>
-            <div class="highlight-body">
-              <strong>Multi-Agent Governance:</strong> Formal auditing protocols mitigating reward hacking and metric substitution across decentralized municipal nodes.
-            </div>
-          </div>
-          <div class="spotlight-highlight-item">
-            <span class="highlight-num font-cinzel">02</span>
-            <div class="highlight-body">
-              <strong>Civic Behavioral Cybernetics:</strong> Preserving human ethical discretion and attention-driven oversight within automated administrative decisions.
+      <!-- LEFT CARD: Featured Spotlight Article (Hero Visual Header + Bookmark + Abstract + Actions) -->
+      <article class="ref-spotlight-card">
+        <div class="ref-spotlight-visual-wrap">
+          <picture>
+            <source srcset="assets/images/spotlight-smart-cities.webp" type="image/webp">
+            <img src="assets/images/spotlight-smart-cities.jpg" alt="Trustworthy AI for Sustainable Cities" class="ref-spotlight-visual-img" loading="lazy">
+          </picture>
+          <div class="ref-visual-overlay"></div>
+          
+          <!-- Top Floating Badges & Bookmark Ribbon Icon -->
+          <div class="ref-spotlight-top-bar">
+            <span class="ref-kicker-pill font-cinzel"><span class="pulse-dot"></span> SPOTLIGHT ARTICLE</span>
+            <div class="ref-top-right-group">
+              <span class="ref-badge-scopus font-cinzel">Q1 SCOPUS INDEXED</span>
+              <span class="ref-bookmark-icon" title="Featured Spotlight Publication" aria-label="Featured Publication Bookmark">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                </svg>
+              </span>
             </div>
           </div>
         </div>
 
-        <div class="spotlight-actions-bar">
-          <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="spotlight-btn btn-gold font-cinzel">
-            Read Paper (DOI) &nearr;
-          </a>
-          <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="spotlight-btn btn-outline">
-            PDF Preprint
-          </a>
-          <button onclick="copyBibtex('amin2026trustworthy')" class="spotlight-btn btn-ghost" title="Copy BibTeX Citation">
-            Copy BibTeX
-          </button>
-          <a href="publications.html" class="spotlight-btn btn-more">
-            Explore All 24 Publications &rarr;
-          </a>
+        <div class="ref-spotlight-body">
+          <h2 class="ref-spotlight-title">
+            Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance
+          </h2>
+
+          <div class="ref-spotlight-meta">
+            <span class="spotlight-venue font-cinzel">Smart Cities (MDPI)</span>
+            <span class="spotlight-divider">&bull;</span>
+            <span class="spotlight-year">2026 Volume 9</span>
+            <span class="spotlight-divider">&bull;</span>
+            <span class="spotlight-author">Lead Author: Dr. Zaid Amin, Ph.D.</span>
+            <span class="spotlight-divider">&bull;</span>
+            <span class="spotlight-open-access">Open Access</span>
+          </div>
+
+          <p class="ref-spotlight-desc">
+            Addresses critical systemic vulnerabilities in urban autonomous deployments where metric-driven proxies diverge from authentic civic welfare. Introduces an audited multimodal orchestration agent architecture enforcing real-time cybernetic feedback loops, cognitive transparency, and verifiable alignment for municipal governance.
+          </p>
+
+          <div class="ref-highlights-capsules">
+            <div class="ref-highlight-capsule">
+              <span class="ref-hl-num font-cinzel">01</span>
+              <div class="ref-hl-text">
+                <strong>Multi-Agent Governance:</strong> Formal auditing protocols mitigating reward hacking across municipal nodes.
+              </div>
+            </div>
+            <div class="ref-highlight-capsule">
+              <span class="ref-hl-num font-cinzel">02</span>
+              <div class="ref-hl-text">
+                <strong>Civic Cybernetics:</strong> Preserving human ethical discretion and oversight within automated decisions.
+              </div>
+            </div>
+          </div>
+
+          <div class="ref-spotlight-actions">
+            <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="spotlight-btn btn-gold font-cinzel">
+              Read Paper (DOI) &nearr;
+            </a>
+            <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="spotlight-btn btn-outline">
+              PDF Preprint
+            </a>
+            <button onclick="copyBibtex('amin2026trustworthy')" class="spotlight-btn btn-ghost" title="Copy BibTeX Citation">
+              Copy BibTeX
+            </button>
+            <a href="publications.html" class="spotlight-btn btn-more">
+              Explore All 24 Publications &rarr;
+            </a>
+          </div>
         </div>
       </article>
 
-      <!-- RIGHT: Profile Card with Circular Photo, Bio & 4 Stacked Rectangular Buttons (~38.2%) -->
-      <aside class="profile-feature-card">
-        <div class="profile-feature-content">
-          
-          <!-- Circular Photo -->
-          <div class="profile-photo-col">
-            <div class="profile-photo-ring">
+      <!-- RIGHT CARD: Academic Portals & Highlights (Matching Reference Inset Tray + Stacked Cards) -->
+      <aside class="ref-portals-card">
+        
+        <!-- Header with Dr. Zaid Amin Profile Summary & Title -->
+        <div class="ref-portals-header">
+          <div class="ref-profile-summary">
+            <div class="ref-photo-ring">
               <picture>
                 <source srcset="assets/images/dr-zaid.webp" type="image/webp">
-                <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="profile-circular-avatar" width="110" height="110">
+                <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="ref-photo-img" width="50" height="50">
               </picture>
-              <span class="profile-live-status" title="Active Senior Lecturer &amp; Researcher"></span>
+              <span class="ref-live-status" title="Active Senior Lecturer &amp; Researcher"></span>
+            </div>
+            <div class="ref-profile-text">
+              <h3 class="ref-profile-name font-cinzel">Dr. Zaid Amin, Ph.D.</h3>
+              <div class="ref-profile-role">Senior Lecturer in Data Science &amp; IT &bull; INTI University</div>
+              <div class="ref-profile-fields">Trustworthy AI &bull; Human-Centered Computing &bull; Civic Cybernetics</div>
+            </div>
+          </div>
+          <div class="ref-header-kicker font-cinzel">Academic Portals</div>
+        </div>
+
+        <!-- Inset Tray containing 3 Stacked Horizontal Cards -->
+        <div class="ref-inset-tray">
+          
+          <!-- Item 1: Research & Publications -->
+          <div class="ref-item-card">
+            <div class="ref-item-thumb-box">
+              <picture>
+                <source srcset="assets/images/thumb-research.webp" type="image/webp">
+                <img src="assets/images/thumb-research.jpg" alt="Research &amp; Publications" class="ref-item-thumb" width="88" height="64" loading="lazy">
+              </picture>
+            </div>
+            <div class="ref-item-info">
+              <h4 class="ref-item-title font-cinzel">Research &amp; Publications</h4>
+              <ul class="ref-item-bullets">
+                <li>24 Peer-Reviewed Articles (MDPI, IEEE, Scopus Q1)</li>
+                <li>Trustworthy AI &amp; Civic Autonomous Systems</li>
+                <li>Full Open-Access Preprints &amp; BibTeX Citations</li>
+              </ul>
+            </div>
+            <div class="ref-item-meta-action">
+              <span class="ref-item-tag font-cinzel">24 Works</span>
+              <a href="publications.html" class="ref-item-btn">Explore</a>
             </div>
           </div>
 
-          <!-- Middle Bio Details -->
-          <div class="profile-info-col">
-            <h3 class="profile-person-name">Dr. Zaid Amin</h3>
-            <div class="profile-person-title">Senior Lecturer in Data Science &amp; IT</div>
-            <div class="profile-person-dept">Faculty of Data Science &amp; IT (FDSIT)<br>INTI International University, Malaysia</div>
-            <div class="profile-person-degree font-cinzel">Ph.D. Computer Science &bull; UKM</div>
-            <p class="profile-person-bio">
-              Trustworthy AI &bull; Human-Centered Computing &bull; Civic Cybernetics
-            </p>
+          <!-- Item 2: Projects & Innovations -->
+          <div class="ref-item-card">
+            <div class="ref-item-thumb-box">
+              <picture>
+                <source srcset="assets/images/thumb-projects.webp" type="image/webp">
+                <img src="assets/images/thumb-projects.jpg" alt="Projects &amp; Innovations" class="ref-item-thumb" width="88" height="64" loading="lazy">
+              </picture>
+            </div>
+            <div class="ref-item-info">
+              <h4 class="ref-item-title font-cinzel">Projects &amp; Innovations</h4>
+              <ul class="ref-item-bullets">
+                <li>FRGS Grant: Civic Compliance Framework</li>
+                <li>Multimodal Orchestration Agent Architecture</li>
+                <li>Municipal Autonomous Auditing Prototypes</li>
+              </ul>
+            </div>
+            <div class="ref-item-meta-action">
+              <span class="ref-item-tag font-cinzel">FRGS / AI</span>
+              <a href="research.html" class="ref-item-btn">Inspect</a>
+            </div>
           </div>
 
-          <!-- Main Menu Stack: 6 Elegant & Premium Navigation Buttons (Fitted into Side Section) -->
-          <nav class="profile-actions-stack" aria-label="Main Navigation">
-            <a href="index.html" class="profile-rect-btn active" title="Home Landing">
-              <span class="rect-btn-icon">🏛</span>
-              <span class="rect-btn-text">Home</span>
-              <span class="rect-btn-chevron">&rsaquo;</span>
-            </a>
-            <a href="publications.html" class="profile-rect-btn" title="Research &amp; Publications">
-              <span class="rect-btn-icon">📚</span>
-              <span class="rect-btn-text">Research &amp; Pubs</span>
-              <span class="rect-btn-chevron">&rsaquo;</span>
-            </a>
-            <a href="cv.html#talks" class="profile-rect-btn" title="Recent Media &amp; Invited Talks">
-              <span class="rect-btn-icon">🎙</span>
-              <span class="rect-btn-text">Media &amp; Talks</span>
-              <span class="rect-btn-chevron">&rsaquo;</span>
-            </a>
-            <a href="research.html" class="profile-rect-btn" title="Funded Projects &amp; Themes">
-              <span class="rect-btn-icon">💡</span>
-              <span class="rect-btn-text">Project</span>
-              <span class="rect-btn-chevron">&rsaquo;</span>
-            </a>
-            <a href="cv.html#achievements" class="profile-rect-btn" title="Awards &amp; Milestones">
-              <span class="rect-btn-icon">🏆</span>
-              <span class="rect-btn-text">Achievement</span>
-              <span class="rect-btn-chevron">&rsaquo;</span>
-            </a>
-            <a href="cv.html" class="profile-rect-btn" title="About &amp; Curriculum Vitae">
-              <span class="rect-btn-icon">📜</span>
-              <span class="rect-btn-text">About &amp; CV</span>
-              <span class="rect-btn-chevron">&rsaquo;</span>
-            </a>
-          </nav>
+          <!-- Item 3: Media, Talks & Academic CV -->
+          <div class="ref-item-card">
+            <div class="ref-item-thumb-box">
+              <picture>
+                <source srcset="assets/images/dr-zaid.webp" type="image/webp">
+                <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="ref-item-thumb" width="88" height="64" loading="lazy">
+              </picture>
+            </div>
+            <div class="ref-item-info">
+              <h4 class="ref-item-title font-cinzel">About, Talks &amp; CV</h4>
+              <ul class="ref-item-bullets">
+                <li>Ph.D. in Computer Science (UKM)</li>
+                <li>Keynote Speaker, Media Interviews &amp; Panels</li>
+                <li>Awards, Academic Honors &amp; Leadership Track</li>
+              </ul>
+            </div>
+            <div class="ref-item-meta-action">
+              <span class="ref-item-tag font-cinzel">UKM Ph.D.</span>
+              <a href="cv.html" class="ref-item-btn">View CV</a>
+            </div>
+          </div>
 
         </div>
+
+        <!-- 6 Direct Navigation Action Pills (Preserving All Previous Functionalities) -->
+        <nav class="ref-quick-nav-strip" aria-label="Quick Academic Directory">
+          <a href="index.html" class="ref-quick-pill active" title="Home Landing">
+            <span class="pill-icon">🏛</span> Home
+          </a>
+          <a href="publications.html" class="ref-quick-pill" title="Research &amp; Publications">
+            <span class="pill-icon">📚</span> Research &amp; Pubs
+          </a>
+          <a href="cv.html#talks" class="ref-quick-pill" title="Recent Media &amp; Invited Talks">
+            <span class="pill-icon">🎙</span> Media &amp; Talks
+          </a>
+          <a href="research.html" class="ref-quick-pill" title="Funded Projects &amp; Themes">
+            <span class="pill-icon">💡</span> Project
+          </a>
+          <a href="cv.html#achievements" class="ref-quick-pill" title="Awards &amp; Milestones">
+            <span class="pill-icon">🏆</span> Achievement
+          </a>
+          <a href="cv.html" class="ref-quick-pill" title="About &amp; Curriculum Vitae">
+            <span class="pill-icon">📜</span> About &amp; CV
+          </a>
+        </nav>
+
       </aside>
 
     </section>
