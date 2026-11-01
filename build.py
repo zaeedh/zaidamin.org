@@ -116,8 +116,7 @@ def get_page_header(active_page="home"):
             <a href="publications.html" class="main-menu-link {'active' if active_page == 'publications' else ''}">Research &amp; Publication</a>
             <a href="cv.html#talks" class="main-menu-link {'active' if active_page == 'talks' else ''}">Recent Media &amp; Talks</a>
             <a href="research.html" class="main-menu-link {'active' if active_page == 'research' else ''}">Activity &amp; Project</a>
-            <a href="cv.html#achievements" class="main-menu-link {'active' if active_page == 'achievements' else ''}">Achievement</a>
-            <a href="cv.html" class="main-menu-link {'active' if active_page == 'cv' else ''}">About &amp; CV</a>
+            <a href="cv.html" class="main-menu-link {'active' if active_page in ['cv', 'achievements'] else ''}">Achievement &amp; CV</a>
           </nav>''' if active_page != 'home' else ''}
 
           <!-- Top-Right Star of David Button & Side-Expanding Scholarly Profiles -->
@@ -544,8 +543,9 @@ def generate_golden_ratio_home():
           <a href="research.html" class="ref-menu-tab" title="Activities &amp; Funded Projects">
             <span class="tab-txt-full">Activity &amp; Project</span><span class="tab-txt-compact">Activity</span>
           </a>
-          <a href="cv.html#achievements" class="ref-menu-tab" title="Awards &amp; Milestones">Achievement</a>
-          <a href="cv.html" class="ref-menu-tab" title="About &amp; Curriculum Vitae">About &amp; CV</a>
+          <a href="cv.html" class="ref-menu-tab" title="Achievements, Honors &amp; Curriculum Vitae">
+            <span class="tab-txt-full">Achievement &amp; CV</span><span class="tab-txt-compact">CV</span>
+          </a>
         </nav>
 
         <div class="ref-menu-divider"></div>
