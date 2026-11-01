@@ -152,15 +152,36 @@ def get_page_header(active_page="home"):
       <canvas id="rain-canvas"></canvas>
     </section>
 
-    <!-- Featured Content Player Audio (Atmospheric Soundtrack - Borderless Full-Fit Second-Gaze) -->
-    <div class="royal-vanish-container">
+    <!-- Featured Content Player Audio (Atmospheric Soundtrack - Soft Transparent Second-Gaze) -->
+    <div class="royal-vanish-container" id="royal-audio-container">
       <div class="royal-aura-popup">
         <div class="royal-title">Test Driving Toothless</div>
         <div class="royal-subtitle">John Powell</div>
         <div class="royal-crown-tip"></div>
       </div>
 
-      <audio controls="controls" preload="none">
+      <div class="royal-custom-player">
+        <button class="royal-play-btn" id="royal-play-btn" aria-label="Play/Pause soundtrack" type="button">
+          <svg class="play-icon" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          <svg class="pause-icon" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+        </button>
+
+        <span class="royal-time-display" id="royal-time-display">0:00 / 3:03</span>
+
+        <div class="royal-progress-wrap" id="royal-progress-wrap" role="slider" aria-label="Seek time" tabindex="0">
+          <div class="royal-progress-bar" id="royal-progress-bar">
+            <div class="royal-progress-fill" id="royal-progress-fill"></div>
+            <div class="royal-progress-thumb" id="royal-progress-thumb"></div>
+          </div>
+        </div>
+
+        <button class="royal-mute-btn" id="royal-mute-btn" aria-label="Mute/Unmute" type="button">
+          <svg class="volume-high" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+          <svg class="volume-muted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+        </button>
+      </div>
+
+      <audio id="soundtrack-audio" preload="none">
         <source src="https://zaeedh.github.io/blog-zaidamin/Test%20Driving%20Toothless%20(from%20How%20to%20Train%20Your%20Dragon).mp3" type="audio/mpeg"/>
         Your browser does not support the audio element.
       </audio>
