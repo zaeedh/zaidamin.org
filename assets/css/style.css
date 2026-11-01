@@ -332,14 +332,14 @@ a {
 
 @media (max-width: 640px) {
   .ref-portals-card {
-    padding: 16px 14px 18px 14px;
+    padding: 12px 18px 12px 18px;
   }
   .ref-portals-header {
     flex-direction: column-reverse;
     align-items: center;
     text-align: center;
     gap: 12px;
-    margin-bottom: 18px;
+    margin-bottom: 7px;
   }
   .ref-profile-info-col {
     align-items: center;
@@ -2175,11 +2175,6 @@ a {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.ref-spotlight-card:hover {
-  border-color: rgba(34, 166, 200, 0.35);
-  box-shadow: 0 14px 40px rgba(0, 15, 30, 0.50);
-}
-
 .ref-spotlight-visual-wrap {
   position: relative;
   width: 100%;
@@ -2588,7 +2583,7 @@ a {
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(140, 180, 205, 0.18);
   border-radius: 18px;
-  padding: 18px 22px 20px 22px;
+  padding: 12px 18px 12px 18px;
   box-shadow: 0 10px 32px rgba(0, 10, 24, 0.38);
   display: flex;
   flex-direction: column;
@@ -2616,7 +2611,7 @@ a {
   border-radius: 999px;
   padding: 4px;
   gap: 4px;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   box-shadow: 0 4px 14px rgba(0, 10, 24, 0.35);
 }
 
@@ -2689,7 +2684,7 @@ a {
   width: 100%;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.35) 50%, transparent);
-  margin-bottom: 14px;
+  margin-bottom: 6px;
 }
 
 /* ==========================================================================
@@ -2700,7 +2695,7 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  margin-bottom: 18px;
+  margin-bottom: 7px;
   padding: 2px 2px 0 2px;
 }
 
@@ -2808,14 +2803,14 @@ a {
   background: rgba(2, 14, 25, 0.65);
   border: 1px solid rgba(140, 180, 205, 0.14);
   border-radius: 14px;
-  padding: 13px 12px 14px 12px;
+  padding: 15px 13px 12px 13px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 10px;
-  height: 456px;
-  min-height: 456px;
-  max-height: 456px;
+  height: 504px;
+  min-height: 504px;
+  max-height: 504px;
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
@@ -2828,14 +2823,14 @@ a {
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(140, 180, 205, 0.12);
   border-radius: 10px;
-  padding: 8px 12px;
+  padding: 0 13px;
   display: grid;
   grid-template-columns: 70px 1fr 60px;
   align-items: center;
   gap: 12px;
-  height: 89px;
-  min-height: 89px;
-  max-height: 89px;
+  height: 104px;
+  min-height: 104px;
+  max-height: 104px;
   flex-shrink: 0;
   box-sizing: border-box;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
@@ -2848,9 +2843,9 @@ a {
 
 .ref-item-card:hover {
   transform: translateX(3px);
-  border-color: rgba(212, 175, 55, 0.50);
+  border-color: rgba(212, 175, 55, 0.55);
   background: rgba(6, 28, 50, 0.96);
-  box-shadow: 0 4px 18px rgba(0, 12, 28, 0.50), 0 0 14px rgba(212, 175, 55, 0.18);
+  box-shadow: 0 4px 18px rgba(0, 12, 28, 0.50), 0 0 14px rgba(212, 175, 55, 0.20);
   z-index: 5;
 }
 
@@ -2917,15 +2912,16 @@ a {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 2.5px;
+  gap: 2px;
 }
 
 .ref-item-bullets li {
-  font-size: 0.65rem;
+  font-size: 0.61rem;
   color: #8da9bc;
-  line-height: 1.24;
+  line-height: 1.18;
   position: relative;
   padding-left: 9px;
+  margin-bottom: 0px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3010,7 +3006,7 @@ a {
   border-radius: 999px;
   padding: 4px;
   gap: 4px;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   box-shadow: 0 4px 14px rgba(0, 10, 24, 0.35);
 }
   .ref-top-menu-bar::-webkit-scrollbar {
@@ -4493,7 +4489,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 11px;
+  gap: 9px;
   height: 100%;
   width: 100%;
   opacity: 0;
@@ -4543,7 +4539,7 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  margin-bottom: 22px;
+  margin-bottom: 7px;
   padding: 4px 0;
 }
 
@@ -4635,7 +4631,7 @@ a {
 .ref-search-bar-wrap {
   position: relative;
   width: 100%;
-  margin-bottom: 11px; /* Fibonacci rhythm */
+  margin-bottom: 7px; /* Fibonacci rhythm */
   z-index: 20;
 }
 
@@ -4920,7 +4916,7 @@ a {
 /* Mobile Golden Ratio Proportions for Portals & Search */
 @media (max-width: 640px) {
   .ref-search-bar-wrap {
-    margin-bottom: 9px;
+    margin-bottom: 7px;
   }
   .ref-search-input-box {
     height: 34px;
