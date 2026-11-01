@@ -878,8 +878,8 @@ def generate_golden_ratio_home():
         <div class="ref-portals-header">
           <div class="ref-profile-info-col">
             <h3 class="ref-profile-name font-cinzel">Zaid Amin, Ph.D.</h3>
-            <div class="ref-profile-role">Senior Lecturer in Data Science &amp; IT &bull; INTI University</div>
-            <div class="ref-profile-fields">Trustworthy AI &bull; Human-Centered Computing &bull; Civic Cybernetics</div>
+            <div class="ref-profile-role">Senior Lecturer at Faculty of Data Science and Information Technology (FDSIT), INTI International University, Malaysia.</div>
+            <div class="ref-profile-fields">Digital Ethics, Behavior and Social Computing, Human-Computer Interaction (HCI)</div>
           </div>
           <div class="ref-photo-ring">
             <picture>
