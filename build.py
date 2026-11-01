@@ -174,11 +174,7 @@ def get_page_footer():
       <div class="footer-left">
         &copy; 2026 Dr. Zaid Amin &bull; Faculty of Data Science and Information Technology, INTI International University.
       </div>
-      <div class="footer-right">
-        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.8 3.8v6.7L12 24l7.2-4v-6.7l4.8-3.8L12 0zm0 3.7l7.1 5.8-7.1 5.8-7.1-5.8 7.1-5.8z"/></svg>
-        </button>
-      </div>
+
     </footer>
 
   </div>
