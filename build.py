@@ -110,25 +110,38 @@ def get_page_header(active_page="home"):
       <div class="epigraph-top-flex">
         <h1 class="epigraph-title">Das Sein, Das Sollen.</h1>
         
-        <div class="top-scholarly-cluster">
-          <!-- Side-Expanding Scholarly Profiles Links (Activated by Star Button) -->
-          <div class="top-scholarly-links" id="top-scholarly-links" aria-hidden="true">
-            <span class="top-scholarly-label">Scholarly Profiles &amp; Direct Identifiers:</span>
-            <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="top-link-pill" title="Google Scholar">{render_svg_icon('scholar')} <span>Google Scholar</span></a>
-            <a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="top-link-pill" title="ORCID">{render_svg_icon('orcid')} <span>ORCID</span></a>
-            <a href="{profile['social_links']['github']}" target="_blank" rel="noopener" class="top-link-pill" title="GitHub">{render_svg_icon('github')} <span>GitHub</span></a>
-            <a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" class="top-link-pill" title="LinkedIn">{render_svg_icon('linkedin')} <span>LinkedIn</span></a>
-            <a href="mailto:{profile['social_links']['email']}" class="top-link-pill" title="Institutional Email">{render_svg_icon('email')} <span>Institutional Email</span></a>
-          </div>
+        <div class="epigraph-right-cluster">
+          <!-- Main Menu: Positioned on top row (Justify Right, Borderless, Hides on Star Hover/Click) -->
+          <nav class="top-epigraph-menu" id="top-main-nav" aria-label="Main Navigation">
+            <a href="index.html" class="main-menu-link {'active' if active_page == 'home' else ''}">Home</a>
+            <a href="publications.html" class="main-menu-link {'active' if active_page == 'publications' else ''}">Research &amp; Publication</a>
+            <a href="cv.html#talks" class="main-menu-link {'active' if active_page == 'talks' else ''}">Recent Media &amp; Talks</a>
+            <a href="research.html" class="main-menu-link {'active' if active_page == 'research' else ''}">Project</a>
+            <a href="cv.html#achievements" class="main-menu-link {'active' if active_page == 'achievements' else ''}">Achievement</a>
+            <a href="cv.html" class="main-menu-link {'active' if active_page == 'cv' else ''}">About &amp; CV</a>
+          </nav>
 
-          <!-- Pure Rotating Star of David Button (No circle boundary!) -->
-          <button class="david-star-pure-btn" id="star-toggle-btn" aria-label="Toggle Scholarly Profiles" title="Scholarly Profiles & Direct Identifiers" aria-expanded="false">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" class="david-star-svg">
-              <polygon points="12,2 20.66,17 3.34,17" />
-              <polygon points="12,22 3.34,7 20.66,7" />
-            </svg>
-          </button>
+          <!-- Top-Right Star of David Button & Side-Expanding Scholarly Profiles -->
+          <div class="top-scholarly-cluster">
+            <div class="top-scholarly-links" id="top-scholarly-links" aria-hidden="true">
+              <span class="top-scholarly-label">Scholarly Profiles &amp; Direct Identifiers:</span>
+              <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="top-link-pill" title="Google Scholar">{render_svg_icon('scholar')} <span>Google Scholar</span></a>
+              <a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="top-link-pill" title="ORCID">{render_svg_icon('orcid')} <span>ORCID</span></a>
+              <a href="{profile['social_links']['github']}" target="_blank" rel="noopener" class="top-link-pill" title="GitHub">{render_svg_icon('github')} <span>GitHub</span></a>
+              <a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" class="top-link-pill" title="LinkedIn">{render_svg_icon('linkedin')} <span>LinkedIn</span></a>
+              <a href="mailto:{profile['social_links']['email']}" class="top-link-pill" title="Institutional Email">{render_svg_icon('email')} <span>Institutional Email</span></a>
+            </div>
+
+            <!-- Pure Rotating Star of David Button (No circle boundary!) -->
+            <button class="david-star-pure-btn" id="star-toggle-btn" aria-label="Toggle Scholarly Profiles" title="Scholarly Profiles & Direct Identifiers" aria-expanded="false">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" class="david-star-svg">
+                <polygon points="12,2 20.66,17 3.34,17" />
+                <polygon points="12,22 3.34,7 20.66,7" />
+              </svg>
+            </button>
+          </div>
         </div>
+
       </div>
     </header>
 
@@ -139,16 +152,6 @@ def get_page_header(active_page="home"):
         <img src="assets/images/lighthouse-banner.jpg" class="lighthouse-bg-img" alt="Lighthouse Storm over Ocean" width="2048" height="790">
       </picture>
       <canvas id="rain-canvas"></canvas>
-
-      <!-- Main Menu: Floating in front of Option 1 Storm at bottom-right (matching user wireframe) -->
-      <nav class="storm-overlay-menu" aria-label="Main Navigation">
-        <a href="index.html" class="main-menu-link {'active' if active_page == 'home' else ''}">Home</a>
-        <a href="publications.html" class="main-menu-link {'active' if active_page == 'publications' else ''}">Research &amp; Publication</a>
-        <a href="cv.html#talks" class="main-menu-link {'active' if active_page == 'talks' else ''}">Recent Media &amp; Talks</a>
-        <a href="research.html" class="main-menu-link {'active' if active_page == 'research' else ''}">Project</a>
-        <a href="cv.html#achievements" class="main-menu-link {'active' if active_page == 'achievements' else ''}">Achievement</a>
-        <a href="cv.html" class="main-menu-link {'active' if active_page == 'cv' else ''}">About &amp; CV</a>
-      </nav>
     </section>
 
     <!-- 3. Sub-Section Below Storm: Full Fit Second-Gaze Quotation (Qur'an 31:27) -->
