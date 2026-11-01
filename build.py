@@ -432,7 +432,7 @@ def get_page_footer(show_visitor_stats=False):
     <!-- Site Footer -->
     <footer class="golden-footer">
       <div class="footer-left">
-        &copy; 2008 - 2026 Dr. Zaid Amin. All rights reserved.
+        Copyright &copy; 2008 - 2026 Dr. Zaid Amin. All Rights Reserved.
       </div>
     </footer>
 
