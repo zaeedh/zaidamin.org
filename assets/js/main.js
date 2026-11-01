@@ -220,75 +220,68 @@ function filterHomePackages(query) {
 }
 
 /* --------------------------------------------------------------------------
-   Scholarly Profiles Drawer (Star of David Button Interaction)
+   Scholarly Profiles Side Expansion (Star of David Button Interaction)
    -------------------------------------------------------------------------- */
 function initScholarlyDrawer() {
-  const triggers = document.querySelectorAll('.david-star-btn');
-  const drawer = document.getElementById('scholarly-header-drawer');
-  if (!drawer || triggers.length === 0) return;
+  const trigger = document.getElementById('star-toggle-btn');
+  const linksContainer = document.getElementById('top-scholarly-links');
+  if (!trigger || !linksContainer) return;
 
   let closeTimeout = null;
   let isPinned = false;
 
-  function openDrawer() {
+  function openLinks() {
     clearTimeout(closeTimeout);
-    drawer.classList.add('is-open');
-    drawer.setAttribute('aria-hidden', 'false');
-    triggers.forEach(t => {
-      t.classList.add('is-active');
-      t.setAttribute('aria-expanded', 'true');
-    });
+    linksContainer.classList.add('is-open');
+    linksContainer.setAttribute('aria-hidden', 'false');
+    trigger.classList.add('is-active');
+    trigger.setAttribute('aria-expanded', 'true');
   }
 
-  function closeDrawer(force = false) {
+  function closeLinks(force = false) {
     if (isPinned && !force) return;
     clearTimeout(closeTimeout);
     closeTimeout = setTimeout(() => {
-      drawer.classList.remove('is-open');
-      drawer.setAttribute('aria-hidden', 'true');
-      triggers.forEach(t => {
-        t.classList.remove('is-active');
-        t.setAttribute('aria-expanded', 'false');
-      });
+      linksContainer.classList.remove('is-open');
+      linksContainer.setAttribute('aria-hidden', 'true');
+      trigger.classList.remove('is-active');
+      trigger.setAttribute('aria-expanded', 'false');
       if (force) isPinned = false;
     }, 280);
   }
 
-  triggers.forEach(btn => {
-    // Hover events
-    btn.addEventListener('mouseenter', openDrawer);
-    btn.addEventListener('mouseleave', () => closeDrawer(false));
-
-    // Click toggle
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      e.preventDefault();
-      if (drawer.classList.contains('is-open') && isPinned) {
-        closeDrawer(true);
-      } else {
-        isPinned = true;
-        openDrawer();
-      }
-    });
+  // Click toggle (Pins or unpins)
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (linksContainer.classList.contains('is-open') && isPinned) {
+      closeLinks(true);
+    } else {
+      isPinned = true;
+      openLinks();
+    }
   });
 
-  // Keep open when hovering inside drawer
-  drawer.addEventListener('mouseenter', () => {
+  // Hover support
+  trigger.addEventListener('mouseenter', openLinks);
+  trigger.addEventListener('mouseleave', () => closeLinks(false));
+
+  linksContainer.addEventListener('mouseenter', () => {
     clearTimeout(closeTimeout);
   });
-  drawer.addEventListener('mouseleave', () => closeDrawer(false));
+  linksContainer.addEventListener('mouseleave', () => closeLinks(false));
 
   // Close on outside click
   document.addEventListener('click', (e) => {
-    if (!drawer.contains(e.target)) {
-      closeDrawer(true);
+    if (!linksContainer.contains(e.target) && !trigger.contains(e.target)) {
+      closeLinks(true);
     }
   });
 
   // Close on ESC
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      closeDrawer(true);
+      closeLinks(true);
     }
   });
 }
