@@ -1949,8 +1949,8 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 4px !important;
-  margin: -8px -4px;
+  padding: 4px 0 !important;
+  margin: 0 !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -1972,8 +1972,8 @@ a {
   max-width: 850px;
   opacity: 1;
   overflow: visible;
-  padding: 8px 4px !important;
-  margin: -8px -4px;
+  padding: 4px 0 !important;
+  margin: 0 !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
