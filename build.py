@@ -98,7 +98,7 @@ def get_html_head(title="Dr. Zaid Amin | Academic & Computational Researcher | z
 
 def get_page_header(active_page="home"):
     profile = load_json("profile.json")
-    star_svg = '''<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" class="david-star-svg">
+    star_svg = '''<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" class="david-star-svg">
       <polygon points="12,2 20.66,17 3.34,17" />
       <polygon points="12,22 3.34,7 20.66,7" />
     </svg>'''
@@ -132,7 +132,7 @@ def get_page_header(active_page="home"):
 
             <!-- Pure Rotating Star of David Button (No circle boundary!) -->
             <button class="david-star-pure-btn" id="star-toggle-btn" aria-label="Toggle Scholarly Profiles" title="Scholarly Profiles & Direct Identifiers" aria-expanded="false">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" class="david-star-svg">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" class="david-star-svg">
                 <polygon points="12,2 20.66,17 3.34,17" />
                 <polygon points="12,22 3.34,7 20.66,7" />
               </svg>
