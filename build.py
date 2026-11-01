@@ -90,7 +90,7 @@ def get_html_head(title="Dr. Zaid Amin | Academic & Computational Researcher | z
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=3.1">
+  <link rel="stylesheet" href="assets/css/style.css?v=3.2">
   <link rel="icon" href="favicon.ico">
 </head>
 <body>
@@ -427,7 +427,7 @@ def get_spotlight_card_html():
               <span class="spotlight-venue font-cinzel">Smart Cities (MDPI)</span>
               <span class="spotlight-divider">&bull;</span>
               <span class="spotlight-year">Vol. 9 (2026)</span>
-              <span class="spotlight-oa-pill font-cinzel">&#10003; Open Access</span>
+              <span class="spotlight-oa-pill font-cinzel"><span class="oa-check">&#10003;</span> Open Access</span>
             </div>
             <div class="meta-row-author">
               <span class="author-pre">Lead Author:</span> <strong class="author-name">Zaid Amin, Ph.D.</strong>
