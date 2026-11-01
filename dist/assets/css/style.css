@@ -2460,7 +2460,7 @@ a {
 
 .ref-profile-name {
   font-family: var(--font-cinzel), serif;
-  font-size: 1.20rem;
+  font-size: 1.32rem;
   font-weight: 700;
   color: #ffffff;
   margin: 0 0 3px 0;
@@ -2496,10 +2496,9 @@ a {
 
 .ref-photo-ring {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 124px; height: 124px;
   border-radius: 50%;
-  padding: 3.5px;
+  padding: 4px;
   background: linear-gradient(135deg, #fce09b 0%, #d4af37 50%, #0d5c80 100%);
   box-shadow: 0 0 24px rgba(212, 175, 55, 0.42), 0 4px 16px rgba(0, 10, 24, 0.50);
   flex-shrink: 0;
@@ -2552,15 +2551,15 @@ a {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(34, 166, 200, 0.22);
-  border-radius: 11px;
-  padding: 12px 14px;
+  border-radius: 10px;
+  padding: 8px 12px;
   display: grid;
-  grid-template-columns: 92px 1fr auto;
+  grid-template-columns: 82px 1fr auto;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   flex: 1;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 8px rgba(0, 10, 24, 0.30);
+  box-shadow: 0 2px 7px rgba(0, 10, 24, 0.30);
 }
 
 .ref-item-card:hover {
@@ -2571,9 +2570,9 @@ a {
 }
 
 .ref-item-thumb-box {
-  width: 92px;
-  height: 68px;
-  border-radius: 8px;
+  width: 82px;
+  height: 60px;
+  border-radius: 7px;
   overflow: hidden;
   flex-shrink: 0;
   border: 1px solid rgba(140, 180, 205, 0.20);
@@ -2598,10 +2597,10 @@ a {
 
 .ref-item-title {
   font-family: var(--font-cinzel), serif;
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   font-weight: 700;
   color: #ffffff;
-  margin: 0 0 4px 0;
+  margin: 0 0 2px 0;
   letter-spacing: 0.02em;
   white-space: nowrap;
   overflow: hidden;
@@ -2618,9 +2617,9 @@ a {
 }
 
 .ref-item-bullets li {
-  font-size: 0.70rem;
+  font-size: 0.68rem;
   color: #9bbcd0;
-  line-height: 1.32;
+  line-height: 1.28;
   position: relative;
   padding-left: 10px;
   white-space: nowrap;
