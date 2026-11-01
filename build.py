@@ -90,7 +90,7 @@ def get_html_head(title="Dr. Zaid Amin | Academic & Computational Researcher | z
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=3.3">
+  <link rel="stylesheet" href="assets/css/style.css?v=3.4">
   <link rel="icon" href="favicon.ico">
 </head>
 <body>
@@ -1100,112 +1100,475 @@ def generate_supervision_page():
 # 5. CURRICULUM VITAE (cv.html)
 # ==============================================================================
 def generate_cv_page():
-    profile = load_json("profile.json")
+    cv = load_json("cv_data.json")
+    exec_prof = cv["executive_profile"]
     publications = load_json("publications.json")
-    talks_data = load_json("talks.json")
 
-    html = get_html_head("Curriculum Vitae | Dr. Zaid Amin, Ph.D. | zaidamin.org", "Curriculum Vitae of Dr. Zaid Amin, Senior Lecturer at INTI International University, Ph.D. from UKM.")
+    html = get_html_head(
+        "Achievement & Curriculum Vitae | Dr. Zaid Amin, Ph.D. | zaidamin.org",
+        "Official Curriculum Vitae and Achievements of Dr. Zaid Amin, Senior Lecturer & QS Deputy Director at INTI International University, Ph.D. from UKM (Tesis Cemerlang & GOT)."
+    )
     html += get_page_header("cv")
 
     html += f"""
-    <!-- Subpage Content: Curriculum Vitae -->
-    <div class="subpage-container" style="max-width: 960px;">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; border-bottom: 1px solid rgba(34, 166, 200, 0.25); padding-bottom: 24px; flex-wrap: wrap; gap: 16px;">
-        <div>
-          <h1 style="font-size: 2.6rem; font-weight: 900; margin-bottom: 4px; color: #ffffff;">Dr. Zaid Amin</h1>
-          <div style="font-size: 1.15rem; color: var(--brand-blue); font-weight: 700;">Curriculum Vitae</div>
-          <div style="font-size: 0.9rem; color: var(--text-body); margin-top: 6px; line-height: 1.6;">
-            Senior Lecturer &bull; Faculty of Data Science and Information Technology, INTI International University<br>
-            Email: <a href="mailto:zaid.amin@newinti.edu.my" style="color:var(--brand-blue);">zaid.amin@newinti.edu.my</a> &bull; Website: zaidamin.org &bull; ORCID: 0000-0001-5223-3058
-          </div>
-        </div>
-        <div>
-          <button onclick="window.print()" class="pub-btn" style="padding: 10px 20px; font-size: 0.85rem; background: var(--brand-blue); color: #021220; font-weight: 800; border: none; box-shadow: 0 4px 15px rgba(34, 166, 200, 0.40);">
-            Print / Save as PDF
-          </button>
-        </div>
-      </div>
+    <!-- Subpage Content: Achievement & Curriculum Vitae (July 2026 Official Resume) -->
+    <div class="cv-page-container">
+      
+      <!-- Executive Hero Profile Card -->
+      <section class="cv-hero-card">
+        <div class="cv-hero-top">
+          <div style="flex: 1 1 540px;">
+            <div class="cv-section-tag" style="margin-bottom: 6px;">CURRICULUM VITAE &bull; ACADEMIC PORTFOLIO</div>
+            <h1 class="cv-hero-name">{exec_prof['name']}</h1>
+            <div style="font-size: 1.12rem; font-weight: 700; color: var(--brand-blue); margin-bottom: 6px;">
+              {exec_prof['role_title']}
+            </div>
+            <div class="cv-hero-affiliation">
+              {exec_prof['institution']}
+            </div>
 
-      <div style="margin-bottom: 32px;">
-        <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid rgba(34, 166, 200, 0.25); padding-bottom: 6px; margin-bottom: 16px; color: #ffffff;">1. Education</h2>
-    """
-    for edu in profile["education"]:
-        html += f"""
-        <div style="margin-bottom: 16px; background: rgba(4, 28, 48, 0.50); border: 1px solid rgba(34, 166, 200, 0.15); border-radius: 12px; padding: 16px;">
-          <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-            <strong style="color: #ffffff; font-size: 1.05rem;">{edu['degree']}</strong>
-            <span style="color: var(--brand-blue); font-weight: 700;">{edu['country']}</span>
+            <div class="cv-hero-badges">
+              <span class="cv-badge-gold" title="UKM Distinctions">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                {exec_prof['distinction']}
+              </span>
+              <span class="cv-badge-cyan" title="Global Cisco Grant">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zm0 8.5L4.5 7 12 3.5 19.5 7 12 10.5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                Global Cisco Scholar (Top 40 Worldwide)
+              </span>
+              <span class="cv-badge-emerald" title="Q1 Peer Reviewer">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Active Q1 Journal Reviewer
+              </span>
+            </div>
           </div>
-          <div style="color: var(--text-body); font-size: 0.95rem; margin-top: 4px;">{edu['institution']}</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">{edu['focus']}</div>
+
+          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
+            <button onclick="window.print()" class="cv-action-pill cv-action-pill-primary" title="Print or save verified PDF copy">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+              Print / Save as PDF
+            </button>
+            <span style="font-size: 0.76rem; color: var(--text-muted); font-family: monospace;">July 2026 Academic Edition</span>
+          </div>
+        </div>
+
+        <div class="cv-hero-summary">
+          {exec_prof['summary']}
+        </div>
+
+        <div class="cv-hero-actions">
+          <a href="{exec_prof['researcher_ids']['orcid']['url']}" target="_blank" rel="noopener" class="cv-action-pill" title="ORCID Verified Record">
+            {render_svg_icon('orcid')} <span>ORCID: {exec_prof['researcher_ids']['orcid']['id']}</span>
+          </a>
+          <a href="{exec_prof['researcher_ids']['scopus']['url']}" target="_blank" rel="noopener" class="cv-action-pill" title="Scopus Author Profile">
+            {render_svg_icon('external')} <span>Scopus ID: {exec_prof['researcher_ids']['scopus']['id']}</span>
+          </a>
+          <a href="{exec_prof['researcher_ids']['wos']['url']}" target="_blank" rel="noopener" class="cv-action-pill" title="Web of Science Profile">
+            {render_svg_icon('external')} <span>WoS ResearcherID: {exec_prof['researcher_ids']['wos']['id']}</span>
+          </a>
+          <a href="{exec_prof['researcher_ids']['scholar']['url']}" target="_blank" rel="noopener" class="cv-action-pill" title="Google Scholar Profile">
+            {render_svg_icon('scholar')} <span>Google Scholar</span>
+          </a>
+          <a href="mailto:{exec_prof['contact']['email']}" class="cv-action-pill" title="Institutional Email">
+            {render_svg_icon('email')} <span>{exec_prof['contact']['email']}</span>
+          </a>
+          <a href="{exec_prof['official_docs']['teaching_permit']['url']}" target="_blank" rel="noopener" class="cv-action-pill" title="Higher Education Teaching Permit">
+            {render_svg_icon('external')} <span>Teaching Permit</span>
+          </a>
+          <a href="{exec_prof['official_docs']['mqa_cv']['url']}" target="_blank" rel="noopener" class="cv-action-pill" title="MQA CV Accreditation Document">
+            {render_svg_icon('external')} <span>MQA Official CV</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Golden Ratio Quick-Jump Navigation Bar (TOC) -->
+      <nav class="cv-jump-bar" aria-label="CV Sections Navigation">
+        <a href="#honors" class="cv-jump-link">Honors &amp; Grants</a>
+        <a href="#leadership" class="cv-jump-link">Leadership</a>
+        <a href="#experience" class="cv-jump-link">Appointments</a>
+        <a href="#education" class="cv-jump-link">Education</a>
+        <a href="#talks" class="cv-jump-link">Media &amp; Talks</a>
+        <a href="#peer-review" class="cv-jump-link">Peer Review</a>
+        <a href="#certifications" class="cv-jump-link">Certifications</a>
+        <a href="#research-monograph" class="cv-jump-link">Book &amp; Research</a>
+        <a href="#teaching" class="cv-jump-link">Teaching &amp; Supervision</a>
+        <a href="#references" class="cv-jump-link">References</a>
+      </nav>
+
+      <!-- SECTION 1: PRESTIGIOUS HONORS, AWARDS & RESEARCH GRANTS -->
+      <section id="honors" class="cv-section">
+        <div id="achievements"></div>
+        <div class="cv-section-tag">01 / HONORS &amp; DISTINCTIONS</div>
+        <div class="cv-section-title-wrap">
+          <h2 class="cv-section-title">Prestigious Honors, Awards &amp; Research Grants</h2>
+          <span class="cv-section-count">{len(cv['achievements_and_grants'])} Distinctions</span>
+        </div>
+    """
+
+    for item in cv['achievements_and_grants']:
+        highlight_cls = "is-highlight" if item.get('highlight') else ""
+        html += f"""
+        <div class="cv-card {highlight_cls}">
+          <div class="cv-card-top">
+            <div class="cv-card-heading">
+              <h3 class="cv-card-title">{item['title']}</h3>
+              <div class="cv-card-sub">{item['organization']}</div>
+            </div>
+            <div class="cv-card-badges">
+              <span class="cv-year-pill">{item['year']}</span>
+              <span class="cv-type-pill">{item['badge']}</span>
+            </div>
+          </div>
+          <div class="cv-card-body">
+            {item['details']}
+          </div>
         </div>
         """
 
     html += f"""
-      </div>
+      </section>
 
-      <div style="margin-bottom: 32px;">
-        <div id="achievements"><h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid rgba(34, 166, 200, 0.25); padding-bottom: 6px; margin-bottom: 16px; color: #ffffff;">2. Academic Leadership History &amp; Key Milestones</h2>
+      <!-- SECTION 2: ACADEMIC LEADERSHIP & GOVERNANCE -->
+      <section id="leadership" class="cv-section">
+        <div class="cv-section-tag">02 / ACADEMIC GOVERNANCE</div>
+        <div class="cv-section-title-wrap">
+          <h2 class="cv-section-title">Academic Leadership &amp; University Administration</h2>
+          <span class="cv-section-count">{len(cv['academic_leadership'])} Positions</span>
+        </div>
     """
-    for role in profile["leadership_roles"]:
+
+    for item in cv['academic_leadership']:
         html += f"""
-        <div style="margin-bottom: 16px; background: rgba(4, 28, 48, 0.50); border: 1px solid rgba(34, 166, 200, 0.15); border-radius: 12px; padding: 16px;">
-          <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-            <strong style="color: #ffffff; font-size: 1.05rem;">{role['role']}</strong>
-            <span style="color: var(--brand-gold); font-weight: 700;">{role['period']}</span>
+        <div class="cv-card is-highlight">
+          <div class="cv-card-top">
+            <div class="cv-card-heading">
+              <h3 class="cv-card-title">{item['role']}</h3>
+              <div class="cv-card-sub">{item['institution']}</div>
+            </div>
+            <div class="cv-card-badges">
+              <span class="cv-year-pill">{item['period']}</span>
+              <span class="cv-type-pill">{item['scope']}</span>
+            </div>
           </div>
-          <div style="color: var(--text-body); font-size: 0.95rem; margin-top: 4px;">{role['institution']}</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">{role['description']}</div>
+          <div class="cv-card-body">
+            {item['responsibilities']}
+          </div>
         </div>
         """
 
     html += f"""
-      </div>
-      </div>
+      </section>
 
-      <!-- Keynotes, Media & Talks Section (Matching Navigation) -->
-      <div id="talks" style="margin-bottom: 32px;">
-        <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid rgba(34, 166, 200, 0.25); padding-bottom: 6px; margin-bottom: 16px; color: #ffffff;">3. Keynotes, Media &amp; Invited Talks</h2>
+      <!-- SECTION 3: WORK EXPERIENCE & ACADEMIC APPOINTMENTS -->
+      <section id="experience" class="cv-section">
+        <div class="cv-section-tag">03 / CAREER APPOINTMENTS</div>
+        <div class="cv-section-title-wrap">
+          <h2 class="cv-section-title">Professional Work Experience &amp; Academic Appointments</h2>
+          <span class="cv-section-count">{len(cv['work_experience'])} Appointments</span>
+        </div>
     """
-    for talk in talks_data.get("talks", []):
-        venue_str = f" &bull; {talk['venue']}" if talk.get("venue") else ""
+
+    for item in cv['work_experience']:
         html += f"""
-        <div style="margin-bottom: 16px; background: rgba(4, 28, 48, 0.50); border: 1px solid rgba(34, 166, 200, 0.15); border-radius: 12px; padding: 16px;">
-          <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-            <strong style="color: #ffffff; font-size: 1.05rem;">{talk['title']}</strong>
-            <span style="color: var(--brand-gold); font-weight: 700;">{talk['year']}</span>
+        <div class="cv-card">
+          <div class="cv-card-top">
+            <div class="cv-card-heading">
+              <h3 class="cv-card-title">{item['role']}</h3>
+              <div class="cv-card-sub">{item['institution']}</div>
+            </div>
+            <div class="cv-card-badges">
+              <span class="cv-year-pill">{item['period']}</span>
+            </div>
           </div>
-          <div style="color: var(--brand-blue); font-size: 0.95rem; margin-top: 4px;">{talk.get('topic', 'Invited Speaker')}{venue_str}</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">{talk.get('details', '')}</div>
+          <div class="cv-card-body">
+            {item['description']}
+          </div>
         </div>
         """
 
     html += f"""
-      </div>
+      </section>
 
-      <div style="margin-bottom: 32px;">
-        <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid rgba(34, 166, 200, 0.25); padding-bottom: 6px; margin-bottom: 16px; color: #ffffff;">4. Complete Publication Record ({len(publications)} Works)</h2>
-        <ol style="margin-left: 20px; font-size: 0.9rem; line-height: 1.8; color: var(--text-body);">
+      <!-- SECTION 4: EDUCATION & FORMAL QUALIFICATIONS -->
+      <section id="education" class="cv-section">
+        <div class="cv-section-tag">04 / ACADEMIC CREDENTIALS</div>
+        <div class="cv-section-title-wrap">
+          <h2 class="cv-section-title">Education &amp; Formal Qualifications</h2>
+          <span class="cv-section-count">{len(cv['education'])} Degrees</span>
+        </div>
     """
-    for pub in publications:
-        doi_str = f' DOI: <a href="{pub["url"]}" target="_blank" rel="noopener" style="color:var(--brand-blue); text-decoration:underline;">{pub["doi"]}</a>' if pub.get("doi") else ""
+
+    for item in cv['education']:
         html += f"""
-          <li style="margin-bottom: 12px;">
-            <strong style="color:#ffffff;">Zaid Amin</strong> et al. ({pub['year']}). "{pub['title']}". <em>{pub['venue']}</em>.{doi_str}
-          </li>
+        <div class="cv-card">
+          <div class="cv-card-top">
+            <div class="cv-card-heading">
+              <h3 class="cv-card-title">{item['degree']}</h3>
+              <div class="cv-card-sub">{item['institution']} &bull; {item['country']}</div>
+            </div>
+            <div class="cv-card-badges">
+              <span class="cv-year-pill">{item['period']}</span>
+              <span class="cv-type-pill">{item['distinction']}</span>
+            </div>
+          </div>
+          <div class="cv-card-body">
+            <strong>Core Focus:</strong> {item['focus']}
+          </div>
+        </div>
+        """
+
+    html += f"""
+      </section>
+
+      <!-- SECTION 5: KEYNOTES, INVITED TALKS & MEDIA -->
+      <section id="talks" class="cv-section">
+        <div class="cv-section-tag">05 / PUBLIC ENGAGEMENT</div>
+        <div class="cv-section-title-wrap">
+          <h2 class="cv-section-title">Keynotes, Media &amp; Invited Talks</h2>
+          <span class="cv-section-count">{len(cv['invited_talks_and_media'])} Keynotes</span>
+        </div>
+    """
+
+    for item in cv['invited_talks_and_media']:
+        url_link = f'<a href="{item["url"]}" target="_blank" rel="noopener" class="cv-type-pill" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">{render_svg_icon("external")} Verification Link</a>' if item.get('url') else ''
+        html += f"""
+        <div class="cv-card is-highlight">
+          <div class="cv-card-top">
+            <div class="cv-card-heading">
+              <h3 class="cv-card-title">{item['event']}</h3>
+              <div class="cv-card-sub">{item['venue']}</div>
+            </div>
+            <div class="cv-card-badges">
+              <span class="cv-year-pill">{item['year']}</span>
+              <span class="cv-type-pill">{item['role']}</span>
+              {url_link}
+            </div>
+          </div>
+          <div class="cv-card-body">
+            {item['details']}
+          </div>
+        </div>
+        """
+
+    html += f"""
+      </section>
+
+      <!-- SECTION 6: PEER REVIEW & EDITORIAL CONTRIBUTIONS -->
+      <section id="peer-review" class="cv-section">
+        <div class="cv-section-tag">06 / SCHOLARLY RIGOR</div>
+        <div class="cv-section-title-wrap">
+          <h2 class="cv-section-title">Peer Review &amp; Editorial Board Contributions</h2>
+          <a href="{cv['peer_review_and_editorial']['comprehensive_link']}" target="_blank" rel="noopener" class="cv-section-count" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+            {render_svg_icon('external')} Publons / WoS Record
+          </a>
+        </div>
+        <p style="font-size: 0.92rem; color: var(--text-body); margin-bottom: 18px; line-height: 1.6;">
+          {cv['peer_review_and_editorial']['summary']}
+        </p>
+
+        <h3 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 14px;">Verified High-Impact Q1 Journals</h3>
+        <div class="cv-grid-2col" style="margin-bottom: 24px;">
+    """
+
+    for jnl in cv['peer_review_and_editorial']['verified_journals']:
+        html += f"""
+          <div class="cv-mini-card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <strong style="color: #ffffff; font-size: 0.98rem;">{jnl['name']}</strong>
+              <span class="cv-type-pill">{jnl['tier']}</span>
+            </div>
+            <div style="font-size: 0.85rem; color: var(--brand-blue); margin-top: 4px;">{jnl['publisher']}</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 0.78rem; color: var(--text-muted);">
+              <span>ISSN: {jnl['issn']}</span>
+              <a href="{jnl['url']}" target="_blank" rel="noopener" style="color: var(--brand-gold); text-decoration: underline; font-weight: 700;">Verified Record &rarr;</a>
+            </div>
+          </div>
+        """
+
+    html += f"""
+        </div>
+
+        <h3 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 14px;">International Conference Technical Committees</h3>
+        <div class="cv-grid-2col">
+    """
+
+    for conf in cv['peer_review_and_editorial']['conference_committees']:
+        html += f"""
+          <div class="cv-mini-card">
+            <div style="font-weight: 800; color: #ffffff; font-size: 0.94rem;">{conf['name']}</div>
+            <div style="font-size: 0.82rem; color: var(--brand-gold); margin-top: 4px; font-weight: 700;">Role: {conf['role']}</div>
+          </div>
+        """
+
+    html += f"""
+        </div>
+      </section>
+
+      <!-- SECTION 7: PROFESSIONAL CERTIFICATIONS & SPECIALIZED TRAINING -->
+      <section id="certifications" class="cv-section">
+        <div class="cv-section-tag">07 / TECHNICAL MASTERY</div>
+        <div class="cv-section-title-wrap">
+          <h2 class="cv-section-title">Professional Certifications &amp; Specialized Training</h2>
+          <span class="cv-section-count">{len(cv['professional_certifications'])} Credentials</span>
+        </div>
+        <div class="cv-grid-2col">
+    """
+
+    for cert in cv['professional_certifications']:
+        html += f"""
+          <div class="cv-mini-card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;">
+              <strong style="color: #ffffff; font-size: 0.98rem; line-height: 1.35;">{cert['name']}</strong>
+              <span class="cv-year-pill">{cert['period']}</span>
+            </div>
+            <div style="font-size: 0.85rem; color: var(--brand-blue); margin-top: 4px; font-weight: 600;">{cert['issuer']}</div>
+            <div style="font-size: 0.82rem; color: var(--text-body); margin-top: 8px; line-height: 1.55;">{cert['details']}</div>
+          </div>
+        """
+
+    html += f"""
+        </div>
+      </section>
+
+      <!-- SECTION 8: CORE RESEARCH, BOOKS & SCHOLARLY MONOGRAPHS -->
+      <section id="research-monograph" class="cv-section">
+        <div class="cv-section-tag">08 / SCHOLARLY AUTHORSHIP</div>
+        <div class="cv-section-title-wrap">
+          <h2 class="cv-section-title">Core Research Domains, Book &amp; Scholarly Output</h2>
+          <a href="publications.html" class="cv-section-count" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+            View All {len(publications)} Works &rarr;
+          </a>
+        </div>
+
+        <!-- Book Card -->
+        <div class="cv-card is-highlight" style="margin-bottom: 24px;">
+          <div class="cv-card-top">
+            <div class="cv-card-heading">
+              <span class="cv-type-pill" style="margin-bottom: 6px; display: inline-block;">Scholarly Monograph (Book)</span>
+              <h3 class="cv-card-title">{cv['core_research_and_books']['book']['title']}</h3>
+              <div class="cv-card-sub">{cv['core_research_and_books']['book']['publisher']} &bull; {cv['core_research_and_books']['book']['year']}</div>
+            </div>
+            <div class="cv-card-badges">
+              <span class="cv-badge-gold">UKM Press Author</span>
+            </div>
+          </div>
+          <div class="cv-card-body">
+            {cv['core_research_and_books']['book']['description']}
+          </div>
+        </div>
+
+        <h3 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 14px;">Specialized Research Domains</h3>
+        <div class="cv-grid-2col" style="margin-bottom: 24px;">
+    """
+
+    for dom in cv['core_research_and_books']['key_domains']:
+        html += f"""
+          <div class="cv-mini-card">
+            <strong style="color: #ffffff; font-size: 0.98rem;">{dom['domain']}</strong>
+            <div style="font-size: 0.84rem; color: var(--text-body); margin-top: 6px; line-height: 1.55;">{dom['desc']}</div>
+          </div>
+        """
+
+    html += f"""
+        </div>
+
+        <div style="background: rgba(3, 18, 32, 0.75); border: 1px solid rgba(34, 166, 200, 0.25); border-radius: 14px; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <div style="font-weight: 800; color: #ffffff; font-size: 1.05rem;">Complete 24-Work Peer-Reviewed Repository</div>
+            <div style="font-size: 0.85rem; color: var(--text-body); margin-top: 2px;">Comprehensive catalog of Q1 IEEE Access, Springer LNCS, Scopus-indexed conference papers, and preprints.</div>
+          </div>
+          <a href="publications.html" class="pub-btn" style="text-decoration:none; padding: 9px 18px; font-size: 0.82rem; font-weight: 800; background: var(--brand-blue); color: #021220; border-radius: 999px;">
+            Explore Publications &rarr;
+          </a>
+        </div>
+      </section>
+
+      <!-- SECTION 9: TEACHING, SUPERVISION & HIGHER EDUCATION PERMITS -->
+      <section id="teaching" class="cv-section">
+        <div class="cv-section-tag">09 / ACADEMIC PEDAGOGY</div>
+        <div class="cv-section-title-wrap">
+          <h2 class="cv-section-title">Teaching, Supervision &amp; Accreditation Credentials</h2>
+          <a href="{exec_prof['official_docs']['teaching_portfolio']['url']}" target="_blank" rel="noopener" class="cv-section-count" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+            {render_svg_icon('external')} Full Portfolio Record
+          </a>
+        </div>
+        <div class="cv-grid-3col">
+          <div class="cv-mini-card">
+            <div class="cv-ref-role" style="color: var(--brand-gold);">Official Government Permit</div>
+            <div class="cv-ref-name" style="font-size: 0.95rem; margin-top: 4px;">Higher Education Teaching Permit</div>
+            <div style="font-size: 0.82rem; color: var(--text-body); margin-top: 6px; line-height: 1.5;">Authorized for Doctoral, Master, and Bachelor Degree Programs.</div>
+            <div style="margin-top: 10px;">
+              <a href="{exec_prof['official_docs']['teaching_permit']['url']}" target="_blank" rel="noopener" style="font-size: 0.78rem; color: var(--brand-blue); text-decoration: underline; font-weight: 700;">Verified Document &rarr;</a>
+            </div>
+          </div>
+          <div class="cv-mini-card">
+            <div class="cv-ref-role" style="color: #38b6d0;">Institutional Accreditation</div>
+            <div class="cv-ref-name" style="font-size: 0.95rem; margin-top: 4px;">MQA Official Higher Education CV</div>
+            <div style="font-size: 0.82rem; color: var(--text-body); margin-top: 6px; line-height: 1.5;">Malaysian Qualifications Agency standard format for higher education accreditation.</div>
+            <div style="margin-top: 10px;">
+              <a href="{exec_prof['official_docs']['mqa_cv']['url']}" target="_blank" rel="noopener" style="font-size: 0.78rem; color: var(--brand-blue); text-decoration: underline; font-weight: 700;">Verified Document &rarr;</a>
+            </div>
+          </div>
+          <div class="cv-mini-card">
+            <div class="cv-ref-role" style="color: #6ee7b7;">Supervisory Roles</div>
+            <div class="cv-ref-name" style="font-size: 0.95rem; margin-top: 4px;">Postgraduate Dissertation Supervision</div>
+            <div style="font-size: 0.82rem; color: var(--text-body); margin-top: 6px; line-height: 1.5;">Appointed Master and Ph.D. dissertation supervisor at INTI International University and UKM.</div>
+            <div style="margin-top: 10px;">
+              <a href="prospective-students.html" style="font-size: 0.78rem; color: var(--brand-blue); text-decoration: underline; font-weight: 700;">Supervision Lab &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 10: ACADEMIC REFERENCES & PERSONAL INTERESTS -->
+      <section id="references" class="cv-section">
+        <div class="cv-section-tag">10 / TESTIMONIALS &amp; PROFILE</div>
+        <div class="cv-section-title-wrap">
+          <h2 class="cv-section-title">Academic References &amp; Personal Interests</h2>
+          <span class="cv-section-count">4 Referees</span>
+        </div>
+
+        <div class="cv-grid-referees" style="margin-bottom: 28px;">
+    """
+
+    for ref in cv['academic_references']:
+        html += f"""
+          <div class="cv-mini-card">
+            <div class="cv-ref-name">{ref['name']}</div>
+            <div class="cv-ref-role">{ref['role']}</div>
+            <div class="cv-ref-inst">{ref['institution']}</div>
+            <div class="cv-ref-contact">
+              <div>Phone: <a href="tel:{ref['phone']}" style="color: var(--brand-blue);">{ref['phone']}</a></div>
+              <div>Email: <a href="mailto:{ref['email']}" style="color: var(--brand-blue);">{ref['email']}</a></div>
+            </div>
+          </div>
+        """
+
+    html += f"""
+        </div>
+
+        <div class="cv-mini-card" style="padding: 20px 24px;">
+          <div class="cv-section-tag" style="margin-bottom: 8px;">PERSONAL INTERESTS &amp; EXPLORATION</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+    """
+
+    for interest in cv['personal_interests']:
+        html += f"""
+            <span class="cv-badge-cyan" style="font-size: 0.82rem; padding: 5px 14px;">{interest}</span>
         """
 
     html += """
-        </ol>
-      </div>
+          </div>
+        </div>
+
+      </section>
+
     </div>
     """
+
     html += get_page_footer()
     return html
 
-# ==============================================================================
-# MAIN COMPILER BUILD
-# ==============================================================================
 def build_all():
     print("Compiling Golden Ratio Standard Academic Site for zaidamin.org...")
     DIST_DIR.mkdir(parents=True, exist_ok=True)
