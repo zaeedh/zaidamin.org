@@ -226,6 +226,7 @@ function filterHomePackages(query) {
 function initScholarlyDrawer() {
   const trigger = document.getElementById('star-toggle-btn');
   const linksContainer = document.getElementById('top-scholarly-links');
+  const mainNav = document.getElementById('top-main-nav');
   if (!trigger || !linksContainer) return;
 
   let closeTimeout = null;
@@ -233,6 +234,7 @@ function initScholarlyDrawer() {
 
   function openLinks() {
     clearTimeout(closeTimeout);
+    if (mainNav) mainNav.classList.add('nav-hidden');
     linksContainer.classList.add('is-open');
     linksContainer.setAttribute('aria-hidden', 'false');
     trigger.classList.add('is-active');
@@ -247,6 +249,7 @@ function initScholarlyDrawer() {
       linksContainer.setAttribute('aria-hidden', 'true');
       trigger.classList.remove('is-active');
       trigger.setAttribute('aria-expanded', 'false');
+      if (mainNav) mainNav.classList.remove('nav-hidden');
       if (force) isPinned = false;
     }, 280);
   }
