@@ -1837,41 +1837,37 @@ a {
 }
 
 /* Side-Expanding Links Container (Expands to the left of the star) */
+/* Side-Expanding Links Container (Borderless, Pure Floating Pills) */
 .top-scholarly-links {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 0 0;
-  background: rgba(4, 28, 48, 0.90);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid transparent;
-  border-radius: 999px;
-  box-shadow: none;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
   max-width: 0;
   opacity: 0;
   visibility: hidden;
-  transform: translateX(18px) scale(0.96);
+  transform: translateX(16px) scale(0.96);
   transform-origin: right center;
   overflow: hidden;
   white-space: nowrap;
   pointer-events: none;
-  transition: max-width 0.42s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.28s ease,
-              transform 0.36s cubic-bezier(0.16, 1, 0.3, 1),
-              padding 0.36s ease,
-              border-color 0.28s ease,
-              box-shadow 0.28s ease,
-              visibility 0.42s;
+  transition: max-width 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.26s ease,
+              transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.38s;
 }
 
 .top-scholarly-links.is-open {
-  max-width: 1050px;
+  max-width: 850px;
   opacity: 1;
   visibility: visible;
-  padding: 5px 12px 5px 16px;
-  border-color: rgba(212, 175, 55, 0.32);
-  box-shadow: 0 6px 24px rgba(0, 10, 24, 0.55), 0 0 16px rgba(212, 175, 55, 0.12);
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
   transform: translateX(0) scale(1);
   pointer-events: auto;
 }
@@ -1888,25 +1884,28 @@ a {
 .top-link-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 11px;
-  background: rgba(2, 18, 32, 0.65);
-  border: 1px solid rgba(34, 166, 200, 0.25);
+  gap: 7px;
+  padding: 5px 12px;
+  background: rgba(3, 18, 32, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(34, 166, 200, 0.28);
   border-radius: 999px;
   font-family: var(--font-sans);
   font-size: 0.76rem;
   font-weight: 600;
-  color: #c8e0ec;
+  color: #c4dbe8;
   text-decoration: none;
   transition: all var(--transition);
+  box-shadow: 0 2px 8px rgba(0, 10, 24, 0.35);
 }
 
 .top-link-pill:hover {
   background: rgba(34, 166, 200, 0.22);
-  border-color: rgba(212, 175, 55, 0.60);
+  border-color: #d4af37;
   color: #ffffff;
-  transform: translateY(-1px);
-  box-shadow: 0 3px 12px rgba(0, 10, 24, 0.40), 0 0 10px rgba(212, 175, 55, 0.22);
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 14px rgba(0, 10, 24, 0.45), 0 0 12px rgba(212, 175, 55, 0.30);
 }
 
 .top-link-pill svg {
