@@ -445,6 +445,38 @@ def get_spotlight_card_html():
         </div>
       </article>'''
 
+def get_activity_search_bar_html():
+    return '''
+        <!-- Advanced Activity & Topic Search Bar (Golden Ratio Proportions) -->
+        <div class="ref-search-bar-wrap" id="activity-search-wrap">
+          <div class="ref-search-input-box">
+            <span class="ref-search-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </span>
+            <input type="text" id="activity-search-input" class="ref-search-input font-cinzel" placeholder="Search activities, articles, grants &amp; topics..." autocomplete="off" spellcheck="false" aria-label="Search activities, articles, grants and topics">
+            <button type="button" id="activity-search-clear" class="ref-search-clear" title="Clear search" aria-label="Clear search" style="display: none;">
+              &times;
+            </button>
+            <span class="ref-search-shortcut" title="Press / or Ctrl+K to search">
+              <kbd>/</kbd>
+            </span>
+          </div>
+
+          <!-- Live Advanced Search Dropdown Results Panel -->
+          <div class="ref-search-results-panel" id="activity-search-results" style="display: none;">
+            <div class="search-results-header font-cinzel">
+              <span id="search-results-count">0 ACTIVITIES FOUND</span>
+              <span class="search-results-esc">ESC TO CLOSE</span>
+            </div>
+            <div class="search-results-list" id="search-results-list">
+              <!-- Dynamically populated by main.js -->
+            </div>
+          </div>
+        </div>'''
+
 def get_portals_tray_carousel_html():
     slides_data = [
         # Slide 0: Core Portals & Top Academic Highlights (4 items)
@@ -884,6 +916,7 @@ def generate_golden_ratio_home():
           </div>
         </div>
 
+        {get_activity_search_bar_html()}
         {get_portals_tray_carousel_html()}</aside>
 
     </section>
