@@ -316,11 +316,6 @@ def get_visitor_stats_html():
         {"code": "DE", "name": "Germany", "pct": 5.1, "count": "2.5K", "color": "#a78bfa"},
         {"code": "OTHER", "name": "78+ Other Nations", "pct": 9.4, "count": "4.5K", "color": "#94a3b8"}
     ]
-    
-    bar_segments_html = ""
-    for c in countries:
-        bar_segments_html += f'<div class="stats-bar-seg" style="width: {c["pct"]}%; background: {c["color"]};" title="{c["name"]}: {c["pct"]}% ({c["count"]} visitors)"></div>\n'
-
     country_capsules_html = ""
     for c in countries:
         flag = get_flag_svg(c["code"])
@@ -418,20 +413,6 @@ def get_visitor_stats_html():
         <div class="stats-meta-cluster font-cinzel">
           <span class="stats-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> 84 Nations</span>
           <span class="stats-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2008 &ndash; 2026 Archive</span>
-        </div>
-      </div>
-
-      <!-- 2. Graphic Proportional Distribution Spectrum Bar -->
-      <div class="stats-graphic-wrapper">
-        <div class="stats-graphic-header">
-          <span class="stats-graphic-caption font-cinzel">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-            Origin of Country Distribution Graphic
-          </span>
-          <span class="stats-graphic-total font-mono">100% Verified Telemetry &bull; Cumulative Share</span>
-        </div>
-        <div class="stats-spectrum-bar" role="progressbar" aria-label="Visitor origin percentage distribution">
-          {bar_segments_html}
         </div>
       </div>
 
