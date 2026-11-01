@@ -420,13 +420,15 @@ def get_spotlight_card_html():
           <h2 class="ref-spotlight-title">Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance</h2>
 
           <div class="ref-spotlight-meta">
-            <span class="spotlight-venue font-cinzel">Smart Cities (MDPI)</span>
-            <span class="spotlight-divider">&bull;</span>
-            <span class="spotlight-year">2026 Volume 9</span>
-            <span class="spotlight-divider">&bull;</span>
-            <span class="spotlight-author">Lead Author: Zaid Amin, Ph.D.</span>
-            <span class="spotlight-divider">&bull;</span>
-            <span class="spotlight-open-access">Open Access</span>
+            <div class="meta-row-pub">
+              <span class="spotlight-venue font-cinzel">Smart Cities (MDPI)</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-year">Vol. 9 (2026)</span>
+              <span class="spotlight-oa-pill font-cinzel">&#10003; Open Access</span>
+            </div>
+            <div class="meta-row-author">
+              <span class="author-pre">Lead Author:</span> <strong class="author-name">Zaid Amin, Ph.D.</strong>
+            </div>
           </div>
 
           <p class="ref-spotlight-desc">Addresses critical systemic vulnerabilities in urban autonomous deployments where metric-driven proxies diverge from authentic civic welfare. Introduces an audited multimodal orchestration agent architecture enforcing real-time cybernetic feedback loops, cognitive transparency, and verifiable alignment for municipal governance.</p>
@@ -434,6 +436,10 @@ def get_spotlight_card_html():
           <div class="ref-spotlight-actions">
             <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="spotlight-btn btn-gold font-cinzel">
               Read Full Article &rarr;
+            </a>
+            <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="spotlight-doi-pill font-cinzel" title="Direct Digital Object Identifier (DOI)">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              DOI: 10.3390/sc9100174 &nearr;
             </a>
           </div>
         </div>
