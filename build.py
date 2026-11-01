@@ -152,6 +152,20 @@ def get_page_header(active_page="home"):
       <canvas id="rain-canvas"></canvas>
     </section>
 
+    <!-- Featured Content Player Audio (Atmospheric Soundtrack) -->
+    <div class="royal-vanish-container" onclick='const p=this.querySelector(".royal-aura-popup"); if(p) p.style.display="none";' onmouseenter='const p=this.querySelector(".royal-aura-popup"); if(p) p.style.display="block";'>
+      <div class="royal-aura-popup">
+        <div class="royal-title">Test Driving Toothless</div>
+        <div class="royal-subtitle">John Powell</div>
+        <div class="royal-crown-tip"></div>
+      </div>
+
+      <audio controls="controls" preload="none">
+        <source src="https://zaeedh.github.io/blog-zaidamin/Test%20Driving%20Toothless%20(from%20How%20to%20Train%20Your%20Dragon).mp3" type="audio/mpeg"/>
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
     <!-- 3. Sub-Section Below Storm: Full Fit Second-Gaze Quotation (Qur'an 31:27) -->
     <section class="ocean-quote-subsection">
       <div class="ocean-quote-full-frame">
