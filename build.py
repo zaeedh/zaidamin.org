@@ -392,6 +392,127 @@ def get_page_footer(show_visitor_stats=False):
 # ==============================================================================
 # 1. GOLDEN RATIO STANDARD COMPOSITION HOMEPAGE (index.html)
 # ==============================================================================
+def get_spotlight_carousel_html():
+    try:
+        blogger_posts = load_json("blogger_posts.json")
+    except Exception:
+        blogger_posts = []
+
+    spotlight_items = [
+        {
+            "kicker": "SPOTLIGHT ARTICLE",
+            "badge": "Q1 SCOPUS INDEXED",
+            "image": "assets/images/spotlight-smart-cities.jpg",
+            "webp_image": "assets/images/spotlight-smart-cities.webp",
+            "title": "Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance",
+            "venue": "Smart Cities (MDPI)",
+            "year": "2026 Volume 9",
+            "author": "Lead Author: Zaid Amin, Ph.D.",
+            "access": "Open Access",
+            "desc": "Addresses critical systemic vulnerabilities in urban autonomous deployments where metric-driven proxies diverge from authentic civic welfare. Introduces an audited multimodal orchestration agent architecture enforcing real-time cybernetic feedback loops, cognitive transparency, and verifiable alignment for municipal governance.",
+            "url": "https://doi.org/10.3390/smartcities9100174"
+        }
+    ]
+
+    for p in blogger_posts[:5]:
+        img = p.get('local_image') or p.get('image') or 'assets/images/spotlight-smart-cities.jpg'
+        tag_str = p['tags'][0] if p.get('tags') and len(p['tags']) > 0 else "Scholarly Essay"
+        spotlight_items.append({
+            "kicker": "BLOGGER SPOTLIGHT",
+            "badge": "BLOG ARCHIVE",
+            "image": img,
+            "webp_image": "",
+            "title": p['title'],
+            "venue": "das Sein, das Sollen",
+            "year": p['published'],
+            "author": "Zaid Amin, Ph.D.",
+            "access": tag_str,
+            "desc": p['excerpt'],
+            "url": p['url']
+        })
+
+    total_slides = len(spotlight_items)
+    slides_html = ""
+    dots_html = ""
+
+    for i in range(total_slides):
+        active_cls = " active" if i == 0 else ""
+        dots_html += f'<button class="spotlight-dot{active_cls}" data-slide-target="{i}" aria-label="Slide {i+1}" type="button"></button>'
+
+    for i, item in enumerate(spotlight_items):
+        active_cls = " active" if i == 0 else ""
+        if item.get('webp_image'):
+            img_html = f'''<picture>
+                <source srcset="{item['webp_image']}" type="image/webp">
+                <img src="{item['image']}" alt="{item['title']}" class="ref-spotlight-visual-img" loading="lazy">
+              </picture>'''
+        else:
+            img_html = f'''<img src="{item['image']}" alt="{item['title']}" class="ref-spotlight-visual-img" loading="lazy">'''
+
+        slides_html += f'''
+        <div class="spotlight-slide{active_cls}" data-slide-index="{i}">
+          <div class="ref-spotlight-visual-wrap">
+            {img_html}
+            <div class="ref-visual-overlay"></div>
+            
+            <div class="ref-spotlight-top-bar">
+              <span class="ref-kicker-pill font-cinzel"><span class="pulse-dot"></span> {item['kicker']}</span>
+              <div class="ref-top-right-group">
+                <span class="ref-badge-scopus font-cinzel">{item['badge']}</span>
+                <div class="spotlight-arrows-cluster">
+                  <button class="spotlight-arrow-btn spotlight-arrow-prev" aria-label="Previous Article" type="button">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  </button>
+                  <span class="spotlight-counter font-mono"><span class="spotlight-curr">{str(i+1).zfill(2)}</span> / <span class="spotlight-total">{str(total_slides).zfill(2)}</span></span>
+                  <button class="spotlight-arrow-btn spotlight-arrow-next" aria-label="Next Article" type="button">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                </div>
+                <span class="ref-bookmark-icon" title="Featured Spotlight Publication" aria-label="Featured Publication Bookmark">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ref-spotlight-body">
+            <h2 class="ref-spotlight-title">{item['title']}</h2>
+
+            <div class="ref-spotlight-meta">
+              <span class="spotlight-venue font-cinzel">{item['venue']}</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-year">{item['year']}</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-author">{item['author']}</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-open-access">{item['access']}</span>
+            </div>
+
+            <p class="ref-spotlight-desc">{item['desc']}</p>
+
+            <div class="spotlight-dots-bar">
+              {dots_html}
+            </div>
+
+            <div class="ref-spotlight-actions">
+              <a href="{item['url']}" target="_blank" rel="noopener" class="spotlight-btn btn-gold font-cinzel">
+                Read Full Article &rarr;
+              </a>
+              <a href="https://www.zaidamin.org/" target="_blank" rel="noopener" class="spotlight-btn btn-more">
+                All Articles (80) &rarr;
+              </a>
+            </div>
+          </div>
+        </div>'''
+
+    return f'''
+      <!-- LEFT CARD: Interactive Blogger & Spotlight Articles Carousel -->
+      <article class="ref-spotlight-card" id="spotlight-carousel" aria-roledescription="carousel" aria-label="Spotlight &amp; Blogger Articles">
+        {slides_html}
+      </article>'''
+
 def generate_golden_ratio_home():
     profile = load_json("profile.json")
     publications = load_json("publications.json")
@@ -481,58 +602,7 @@ def generate_golden_ratio_home():
     <!-- 5. FEATURED SPOTLIGHT & ACADEMIC PORTALS (REFERENCE SPLIT CARD LAYOUT) -->
     <section class="golden-split-section ref-split-layout">
       
-      <!-- LEFT CARD: Featured Spotlight Article (Hero Visual Header + Bookmark + Abstract + Actions) -->
-      <article class="ref-spotlight-card">
-        <div class="ref-spotlight-visual-wrap">
-          <picture>
-            <source srcset="assets/images/spotlight-smart-cities.webp" type="image/webp">
-            <img src="assets/images/spotlight-smart-cities.jpg" alt="Trustworthy AI for Sustainable Cities" class="ref-spotlight-visual-img" loading="lazy">
-          </picture>
-          <div class="ref-visual-overlay"></div>
-          
-          <!-- Top Floating Badges & Bookmark Ribbon Icon -->
-          <div class="ref-spotlight-top-bar">
-            <span class="ref-kicker-pill font-cinzel"><span class="pulse-dot"></span> SPOTLIGHT ARTICLE</span>
-            <div class="ref-top-right-group">
-              <span class="ref-badge-scopus font-cinzel">Q1 SCOPUS INDEXED</span>
-              <span class="ref-bookmark-icon" title="Featured Spotlight Publication" aria-label="Featured Publication Bookmark">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-                </svg>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="ref-spotlight-body">
-          <h2 class="ref-spotlight-title">
-            Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance
-          </h2>
-
-          <div class="ref-spotlight-meta">
-            <span class="spotlight-venue font-cinzel">Smart Cities (MDPI)</span>
-            <span class="spotlight-divider">&bull;</span>
-            <span class="spotlight-year">2026 Volume 9</span>
-            <span class="spotlight-divider">&bull;</span>
-            <span class="spotlight-author">Lead Author: Zaid Amin, Ph.D.</span>
-            <span class="spotlight-divider">&bull;</span>
-            <span class="spotlight-open-access">Open Access</span>
-          </div>
-
-          <p class="ref-spotlight-desc">
-            Addresses critical systemic vulnerabilities in urban autonomous deployments where metric-driven proxies diverge from authentic civic welfare. Introduces an audited multimodal orchestration agent architecture enforcing real-time cybernetic feedback loops, cognitive transparency, and verifiable alignment for municipal governance.
-          </p>
-
-          <div class="ref-spotlight-actions">
-            <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="spotlight-btn btn-gold font-cinzel">
-              Read More &rarr;
-            </a>
-            <a href="publications.html" class="spotlight-btn btn-more">
-              Explore All Articles &rarr;
-            </a>
-          </div>
-        </div>
-      </article>
+{get_spotlight_carousel_html()}
 
       <!-- RIGHT CARD: Academic Portals & Highlights (Matching Reference Inset Tray + Stacked Cards) -->
       <aside class="ref-portals-card">
