@@ -747,3 +747,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+
+// ==============================================================================
+// FLOATING SCROLL TO TOP CONTROLLER (HIGH-PERFORMANCE PASSIVE LISTENER)
+// ==============================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const scrollBtn = document.getElementById('scroll-to-top');
+  if (scrollBtn) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (window.scrollY > 300) {
+            scrollBtn.classList.add('visible');
+          } else {
+            scrollBtn.classList.remove('visible');
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    scrollBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+});
