@@ -146,98 +146,117 @@ a {
 }
 
 /* ==========================================================================
-   2. SUB-SECTION BELOW OPTION 1 STORM: QUOTATION IN SIDE POSITION
+   2. SUB-SECTION BELOW OPTION 1 STORM: GOLDEN RATIO CENTERED QUOTATION
    ========================================================================== */
 .ocean-quote-subsection {
-  margin-top: 6px;
-  margin-bottom: 28px;
+  margin-top: 8px;
+  margin-bottom: 32px;
   width: 100%;
 }
 
-.quote-side-container {
+.quote-golden-center {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
-.ocean-side-blockquote {
+.ocean-golden-blockquote {
   position: relative;
-  max-width: 740px;
+  /* Golden Ratio width relative to 1200px container: 1200 / 1.618 ≈ 741.6px */
+  max-width: 742px;
   width: 100%;
-  margin: 0;
-  padding: 18px 26px 18px 28px;
-  background: rgba(4, 28, 48, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(34, 166, 200, 0.25);
-  border-left: 4px solid #22a6c8;
-  border-radius: 0 16px 16px 0;
-  box-shadow: 0 8px 30px rgba(0, 10, 24, 0.45), -4px 0 16px rgba(34, 166, 200, 0.22);
+  margin: 0 auto;
+  /* Golden Ratio padding: 26px vertical, 26 * 1.618 ≈ 42px horizontal */
+  padding: 26px 42px;
+  background: rgba(4, 28, 48, 0.70);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(34, 166, 200, 0.28);
+  border-radius: 18px;
+  box-shadow: 0 10px 36px rgba(0, 10, 24, 0.45), 0 0 24px rgba(34, 166, 200, 0.10);
+  text-align: center;
   overflow: hidden;
+  transition: border-color var(--transition), box-shadow var(--transition);
 }
 
-.ocean-side-blockquote::before {
+.ocean-golden-blockquote:hover {
+  border-color: rgba(56, 182, 208, 0.45);
+  box-shadow: 0 12px 40px rgba(0, 10, 24, 0.55), 0 0 32px rgba(34, 166, 200, 0.18);
+}
+
+.ocean-golden-blockquote::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
+  left: 20%;
+  right: 20%;
   height: 1px;
-  background: linear-gradient(90deg, rgba(34, 166, 200, 0.8), rgba(56, 182, 208, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(56, 182, 208, 0.85), transparent);
   pointer-events: none;
 }
 
-.quote-glyph-mark {
+.quote-watermark-glyph {
   position: absolute;
-  right: 14px;
-  bottom: -10px;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: var(--font-serif);
-  font-size: 4.8rem;
+  font-size: 4rem;
   line-height: 1;
-  color: rgba(34, 166, 200, 0.12);
+  color: rgba(34, 166, 200, 0.08);
   pointer-events: none;
   user-select: none;
 }
 
-.quotation-body {
+.golden-quotation-text {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   color: #cde4f0;
-  line-height: 1.68;
-  margin: 0 0 10px 0;
+  line-height: 1.75;
+  margin: 0 0 14px 0;
   position: relative;
   z-index: 1;
+  letter-spacing: 0.01em;
 }
 
-.quotation-attribution {
+.golden-quotation-cite {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  gap: 12px;
   font-family: var(--font-sans);
   font-style: normal;
-  font-size: 0.82rem;
+  font-size: 0.80rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   color: #38b6d0;
   text-transform: uppercase;
   position: relative;
   z-index: 1;
 }
 
-.quotation-attribution .cite-dash {
-  color: #22a6c8;
-  font-weight: 400;
+.golden-cite-line {
+  width: 24px;
+  height: 1px;
+  background: rgba(34, 166, 200, 0.45);
+  display: inline-block;
+}
+
+.golden-cite-label {
+  display: inline-block;
 }
 
 @media (max-width: 768px) {
-  .ocean-side-blockquote {
+  .ocean-golden-blockquote {
     max-width: 100%;
-    border-radius: 0 12px 12px 0;
-    padding: 16px 18px 16px 20px;
+    padding: 20px 22px;
+    border-radius: 14px;
   }
-  .quotation-body {
+  .golden-quotation-text {
     font-size: 0.98rem;
+    line-height: 1.65;
   }
 }
 
