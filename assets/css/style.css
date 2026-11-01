@@ -137,6 +137,36 @@ a {
 }
 
 /* ==========================================================================
+   EPIGRAPH GOLDEN BEAM / ACCENT LINE (GOLDEN RATIO PROPORTIONS)
+   Sleek, Luminous & Clean Aesthetic Beneath 'Das Sein, Das Sollen.'
+   ========================================================================== */
+.epigraph-title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+}
+
+.epigraph-golden-line {
+  width: 240px; /* Golden Ratio section of epigraph heading */
+  max-width: 85%;
+  height: 2px;
+  margin-top: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(212, 175, 55, 0.15) 0%,
+    rgba(212, 175, 55, 0.85) 18%,
+    #fce09b 48%,
+    rgba(212, 175, 55, 0.75) 75%,
+    rgba(212, 175, 55, 0) 100%
+  );
+  border-radius: 999px;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.55), 0 0 20px rgba(212, 175, 55, 0.20);
+  pointer-events: none;
+}
+
+
+/* ==========================================================================
    2. CLEAN UNOBSTRUCTED LIGHTHOUSE STORM BANNER
    ========================================================================== */
 .lighthouse-banner-frame {
@@ -4922,4 +4952,14 @@ a {
     padding: 3px 9px;
     font-size: 0.63rem;
   }
+}
+
+@media (max-width: 640px) {
+
+  .epigraph-golden-line {
+    width: 180px;
+    height: 1.8px;
+    margin-top: 5px;
+  }
+
 }
