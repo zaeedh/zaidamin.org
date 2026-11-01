@@ -3534,7 +3534,7 @@ a {
   background: linear-gradient(145deg, rgba(12, 24, 42, 0.78) 0%, rgba(8, 17, 30, 0.88) 100%);
   border: 1px solid rgba(186, 230, 253, 0.12);
   border-radius: 14px;
-  padding: 24px 34px;
+  padding: 20px 28px;
   margin: 28px 0 21px 0;
   box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.50), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(14px);
@@ -3557,16 +3557,10 @@ a {
 .stats-header-row {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 21px;
-  margin-bottom: 21px;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
   flex-wrap: wrap;
-}
-
-.stats-title-block {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
 }
 
 .stats-live-badge {
@@ -3575,10 +3569,10 @@ a {
   gap: 8px;
   background: rgba(16, 185, 129, 0.10);
   border: 1px solid rgba(16, 185, 129, 0.25);
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: 999px;
   width: fit-content;
-  margin-bottom: 2px;
+  margin-bottom: 0;
   position: relative;
 }
 
