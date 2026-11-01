@@ -152,9 +152,9 @@ def get_page_header(active_page="home"):
       <canvas id="rain-canvas"></canvas>
     </section>
 
-    <!-- Featured Content Player Audio (Atmospheric Soundtrack) -->
-    <div class="royal-vanish-container" onclick='const p=this.querySelector(".royal-aura-popup"); if(p) p.style.display="none";' onmouseenter='const p=this.querySelector(".royal-aura-popup"); if(p) p.style.display="block";'>
-      <div class="royal-aura-popup">
+    <!-- Featured Content Player Audio (Atmospheric Soundtrack - Second-Gaze Design) -->
+    <div class="royal-vanish-container" onmouseenter='const p=this.querySelector(".royal-aura-popup"); if(p) p.style.display="block";' onmouseleave='const p=this.querySelector(".royal-aura-popup"); if(p) p.style.display="none";' onclick='const p=this.querySelector(".royal-aura-popup"); if(p) p.style.display="none";'>
+      <div class="royal-aura-popup" style="display: none;">
         <div class="royal-title">Test Driving Toothless</div>
         <div class="royal-subtitle">John Powell</div>
         <div class="royal-crown-tip"></div>
