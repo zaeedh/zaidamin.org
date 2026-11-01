@@ -12,12 +12,12 @@
   "motto": "Das Sein, das Sollen (What is, what ought to be)",
   "short_bio": "Senior Lecturer and computational researcher specializing in the intersection of Human-Computer Interaction (HCI), Behavior & Social Computing, Digital Ethics, and AI Governance. Ph.D. graduate from Universiti Kebangsaan Malaysia (UKM). Former Head of Master in Informatics Engineering and Information Systems programs, actively advancing research in agentic AI alignment, attention-based cognitive interventions, and civic technology.",
   "research_keywords": [
+    "Digital Ethics",
+    "Behavior and Social Computing",
     "Human-Computer Interaction (HCI)",
-    "AI Governance & Digital Ethics",
-    "Behavior & Social Computing",
+    "AI Governance & Trustworthy Systems",
     "Attention-Based Design & Cognitive Interventions",
-    "Agentic AI & Trustworthy Systems",
-    "Digital Heritage & XR"
+    "Civic Technology & Agentic AI"
   ],
   "social_links": {
     "orcid": "https://orcid.org/0000-0001-5223-3058",
@@ -94,4 +94,3 @@
     }
   ]
 }
-
