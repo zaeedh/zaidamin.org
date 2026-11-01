@@ -309,32 +309,38 @@ a {
     align-items: center;
     text-align: center;
     gap: 12px;
+    margin-bottom: 18px;
   }
   .ref-profile-info-col {
     align-items: center;
     text-align: center;
     width: 100%;
+    gap: 6px;
   }
   .ref-profile-name {
-    font-size: 1.45rem;
-    letter-spacing: 0.02em;
+    font-size: 1.42rem;
+    letter-spacing: 0.03em;
     text-align: center;
-    margin-bottom: 4px;
+    margin: 0;
   }
   .ref-profile-role {
     font-size: 0.72rem;
-    line-height: 1.35;
+    line-height: 1.45;
     text-align: center;
-    margin-bottom: 5px;
+    margin: 0;
+  }
+  .ref-profile-inst {
+    font-size: 0.70rem;
   }
   .ref-profile-fields {
     font-size: 0.68rem;
-    line-height: 1.35;
+    line-height: 1.40;
     text-align: center;
+    margin: 0;
   }
   .ref-photo-ring {
-    width: 96px;
-    height: 96px;
+    width: 92px;
+    height: 92px;
   }
   .storm-quote-overlay {
     bottom: 24px;
@@ -4381,4 +4387,98 @@ a {
   padding: 6px 0 2px 0;
   margin-top: auto;
   flex-shrink: 0;
+}
+
+
+/* ==========================================================================
+   DR. ZAID AMIN PROFILE HEADER (GOLDEN RATIO PROPORTIONS & BREATHING SPACE)
+   ========================================================================== */
+.ref-portals-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 22px;
+  padding: 4px 0;
+}
+
+.ref-profile-info-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  min-width: 0;
+  flex: 1;
+  justify-content: center;
+  gap: 7px;
+}
+
+.ref-profile-name {
+  font-family: var(--font-cinzel), serif;
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: #f8fafc;
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: 0.045em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: right;
+  text-shadow: 0 2px 10px rgba(0, 10, 24, 0.40);
+}
+
+.ref-profile-role {
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: #cad9e8;
+  line-height: 1.52;
+  letter-spacing: 0.015em;
+  margin: 0;
+  white-space: normal;
+  width: 100%;
+  text-align: right;
+}
+
+.ref-profile-inst {
+  color: #9cb3c6;
+  font-weight: 400;
+  font-size: 0.74rem;
+}
+
+.ref-profile-fields {
+  font-size: 0.70rem;
+  font-weight: 400;
+  color: #8da4b8;
+  line-height: 1.45;
+  letter-spacing: 0.025em;
+  margin: 0;
+  white-space: normal;
+  width: 100%;
+  text-align: right;
+}
+
+.ref-gold-dot {
+  color: #d4af37;
+  opacity: 0.75;
+  margin: 0 3px;
+  display: inline-block;
+}
+
+.ref-photo-ring {
+  position: relative;
+  width: 114px;
+  height: 114px;
+  border-radius: 50%;
+  padding: 1.5px;
+  background: linear-gradient(135deg, rgba(254, 243, 199, 0.85) 0%, rgba(212, 175, 55, 0.50) 45%, rgba(140, 180, 205, 0.30) 80%, rgba(212, 175, 55, 0.45) 100%);
+  box-shadow: 0 4px 18px -2px rgba(0, 10, 24, 0.60), 0 0 14px rgba(212, 175, 55, 0.18);
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, padding 0.3s ease;
+}
+
+.ref-photo-ring:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 22px -2px rgba(0, 10, 24, 0.70), 0 0 16px rgba(212, 175, 55, 0.28);
 }
