@@ -3539,7 +3539,7 @@ a {
   box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.50), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(14px);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .golden-visitor-stats::before {
@@ -3908,4 +3908,154 @@ a {
     width: 100%;
     justify-content: space-between;
   }
+}
+
+
+/* Interactive Tooltip Trigger on Title */
+.stats-title-interactive {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.stats-heading-flex {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.stats-title-interactive:hover .stats-heading {
+  color: #fce09b;
+  transition: color 0.2s ease;
+}
+
+.stats-info-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.10);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  padding: 2px 7px;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+}
+
+.stats-title-interactive:hover .stats-info-pill {
+  background: rgba(56, 189, 248, 0.22);
+  border-color: #38bdf8;
+  color: #f8fafc;
+}
+
+/* Floating Tooltip Pop-up Caption */
+.stats-tooltip-popup {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  width: 530px;
+  max-width: 92vw;
+  background: linear-gradient(145deg, rgba(10, 22, 38, 0.98) 0%, rgba(6, 14, 26, 0.98) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.85), 0 0 24px rgba(212, 175, 55, 0.18);
+  backdrop-filter: blur(20px);
+  z-index: 150;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stats-tooltip-arrow {
+  position: absolute;
+  top: -6px;
+  left: 40px;
+  width: 10px;
+  height: 10px;
+  background: rgba(10, 22, 38, 0.98);
+  border-left: 1px solid rgba(212, 175, 55, 0.35);
+  border-top: 1px solid rgba(212, 175, 55, 0.35);
+  transform: rotate(45deg);
+}
+
+/* Reveal tooltip on hover, focus, or when class .is-active is added */
+.stats-title-interactive:hover .stats-tooltip-popup,
+.stats-title-interactive:focus-within .stats-tooltip-popup,
+.stats-tooltip-popup.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.stats-tooltip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(186, 230, 253, 0.08);
+}
+
+.stats-tooltip-lead {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.stats-tooltip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
+.stats-tooltip-title {
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.stats-tooltip-badge {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.stats-tooltip-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.stats-tooltip-kpi-card {
+  background: rgba(14, 28, 48, 0.65);
+  border: 1px solid rgba(186, 230, 253, 0.08);
+  border-radius: 8px;
+  padding: 9px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.stats-tooltip-caption {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  font-style: italic;
+  border-top: 1px solid rgba(186, 230, 253, 0.08);
+  padding-top: 8px;
+  margin: 0;
+  line-height: 1.4;
 }
