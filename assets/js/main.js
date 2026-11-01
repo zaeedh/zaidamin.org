@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCustomSoundtrackPlayer();
   initScholarlyDrawer();
   initJournalTicker();
+  initPortalMenuTicker();
   initPublicationsFilter();
   initBibtexButtons();
   initMobileMenu();
@@ -427,4 +428,300 @@ function initCustomSoundtrackPlayer() {
       if (volMuted) volMuted.style.display = audio.muted ? 'block' : 'none';
     });
   }
+}
+
+
+/* --------------------------------------------------------------------------
+   Dynamic Top-to-Down Portal Menu Ticker (Changing Randomly like Indexed Journals)
+   Supports:
+   - Mode 'waterfall': Cards glide down top-to-down in unison as a new item enters
+   - Mode 'slot_flip': Individual card slots flip top-to-down mirroring .ticker-slide-item
+   Pauses automatically on user hover so links are easily clickable.
+   -------------------------------------------------------------------------- */
+const PORTAL_ANIM_MODE = 'waterfall'; // Options: 'waterfall' | 'slot_flip'
+let portalTickerInterval = null;
+let isPortalTickerPaused = false;
+
+const PORTAL_CATALOG = [
+  {
+    tag: "24 Works",
+    tagClass: "font-cinzel",
+    thumbWebp: "assets/images/thumb-research.webp",
+    thumbJpg: "assets/images/thumb-research.jpg",
+    title: "Research & Publications",
+    bullets: [
+      "24 Peer-Reviewed Articles (MDPI, IEEE, Scopus Q1)",
+      "Trustworthy AI & Civic Autonomous Systems",
+      "Full Open-Access Preprints & BibTeX Citations"
+    ],
+    btnText: "Explore",
+    btnHref: "publications.html",
+    target: "_self"
+  },
+  {
+    tag: "FRGS / AI",
+    tagClass: "font-cinzel",
+    thumbWebp: "assets/images/thumb-projects.webp",
+    thumbJpg: "assets/images/thumb-projects.jpg",
+    title: "Projects & Innovations",
+    bullets: [
+      "FRGS Grant: Civic Compliance Framework",
+      "Multimodal Orchestration Agent Architecture",
+      "Municipal Autonomous Auditing Prototypes"
+    ],
+    btnText: "Inspect",
+    btnHref: "research.html",
+    target: "_self"
+  },
+  {
+    tag: "IEEE Access",
+    tagClass: "font-cinzel",
+    thumbWebp: "assets/images/thumb-attention.webp",
+    thumbJpg: "assets/images/thumb-attention.jpg",
+    title: "Attention-Based Decision Systems",
+    bullets: [
+      "IEEE Access (2021) • Q1 Scopus Indexed",
+      "Visual Attention System for Digital Environments",
+      "Empirical Intervention & Cognitive Feedback Loops"
+    ],
+    btnText: "Read",
+    btnHref: "https://doi.org/10.1109/ACCESS.2021.3087740",
+    target: "_blank"
+  },
+  {
+    tag: "Governance",
+    tagClass: "font-cinzel",
+    thumbWebp: "assets/images/thumb-governance.webp",
+    thumbJpg: "assets/images/thumb-governance.jpg",
+    title: "The Proxy Trap in Agentic AI",
+    bullets: [
+      "AI Governance Series • SSRN Preprint 2026",
+      "When Metrics Replace Judgment in Autonomous Nodes",
+      "Preserving Civic Human Oversight in Admin Protocols"
+    ],
+    btnText: "Examine",
+    btnHref: "https://doi.org/10.2139/ssrn.7670124",
+    target: "_blank"
+  },
+  {
+    tag: "UKM Ph.D.",
+    tagClass: "font-cinzel",
+    thumbWebp: "assets/images/dr-zaid.webp",
+    thumbJpg: "assets/images/dr-zaid.png",
+    title: "About, Talks & Academic CV",
+    bullets: [
+      "Ph.D. in Computer Science (UKM)",
+      "Keynote Speaker, Media Interviews & Panels",
+      "Awards, Academic Honors & Leadership Track"
+    ],
+    btnText: "View CV",
+    btnHref: "cv.html",
+    target: "_self"
+  },
+  {
+    tag: "JISTM 2026",
+    tagClass: "font-cinzel",
+    thumbWebp: "assets/images/thumb-research.webp",
+    thumbJpg: "assets/images/thumb-research.jpg",
+    title: "Srivijayapedia Heritage Platform",
+    bullets: [
+      "Preservation of Srivijaya Maritime Civilization",
+      "Semantic Digital Archive & Spatial Mapping",
+      "Human-Centered Cultural Heritage Informatics"
+    ],
+    btnText: "Read",
+    btnHref: "https://doi.org/10.35631/JISTM.1141001",
+    target: "_blank"
+  },
+  {
+    tag: "Springer",
+    tagClass: "font-cinzel",
+    thumbWebp: "assets/images/thumb-attention.webp",
+    thumbJpg: "assets/images/thumb-attention.jpg",
+    title: "Digital Loneliness & Screen Epoch",
+    bullets: [
+      "Contributions to Management Science (Springer 2024)",
+      "Cognitive Distraction in Social Media Ecosystems",
+      "Algorithmic Attention Capture & Behavioral Health"
+    ],
+    btnText: "Read",
+    btnHref: "https://doi.org/10.1007/978-3-031-52280-2_14",
+    target: "_blank"
+  },
+  {
+    tag: "Smart Cities",
+    tagClass: "font-cinzel",
+    thumbWebp: "assets/images/spotlight-smart-cities.webp",
+    thumbJpg: "assets/images/spotlight-smart-cities.jpg",
+    title: "Municipal Autonomous Auditing",
+    bullets: [
+      "MDPI Smart Cities (2026) • Volume 9 Lead Author",
+      "Multi-Agent Governance & Civic Feedback Loops",
+      "Mitigating Reward Hacking in Autonomous Urbanism"
+    ],
+    btnText: "Inspect",
+    btnHref: "https://doi.org/10.3390/smartcities9100174",
+    target: "_blank"
+  }
+];
+
+function initPortalMenuTicker() {
+  const tray = document.querySelector('.ref-inset-tray');
+  if (!tray) return;
+
+  // Pause rotation on hover
+  tray.addEventListener('mouseenter', () => { isPortalTickerPaused = true; });
+  tray.addEventListener('mouseleave', () => { isPortalTickerPaused = false; });
+
+  // Rotate every 4.5 seconds
+  clearInterval(portalTickerInterval);
+  portalTickerInterval = setInterval(() => {
+    if (!isPortalTickerPaused) {
+      if (PORTAL_ANIM_MODE === 'waterfall') {
+        rotatePortalWaterfallDown();
+      } else {
+        rotatePortalSlotFlip();
+      }
+    }
+  }, 4500);
+}
+
+function rotatePortalWaterfallDown() {
+  const tray = document.querySelector('.ref-inset-tray');
+  if (!tray) return;
+  const cards = tray.querySelectorAll('.ref-item-card');
+  if (cards.length === 0) return;
+
+  // Pick an item from PORTAL_CATALOG that is not currently displayed in the tray
+  const visibleTitles = Array.from(cards).map(c => {
+    const t = c.querySelector('.ref-item-title');
+    return t ? t.textContent.trim().toLowerCase() : '';
+  });
+
+  const available = PORTAL_CATALOG.filter(item => !visibleTitles.includes(item.title.toLowerCase()));
+  const pool = available.length > 0 ? available : PORTAL_CATALOG;
+  const nextItem = pool[Math.floor(Math.random() * pool.length)];
+
+  // Measure card height for seamless margin-top animation
+  const cardHeight = cards[0].offsetHeight || 74;
+
+  // Create incoming card element
+  const newCard = document.createElement('div');
+  newCard.className = 'ref-item-card ref-card-incoming';
+  newCard.style.marginTop = `-${cardHeight + 8}px`;
+  newCard.style.opacity = '0';
+  newCard.style.transform = 'translateY(-16px)';
+  newCard.style.transition = 'margin-top 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.50s ease, transform 0.60s cubic-bezier(0.16, 1, 0.3, 1)';
+
+  newCard.innerHTML = `
+    <div class="ref-item-thumb-box">
+      <picture>
+        <source srcset="${nextItem.thumbWebp}" type="image/webp">
+        <img src="${nextItem.thumbJpg}" alt="${nextItem.title}" class="ref-item-thumb" width="82" height="60" loading="lazy">
+      </picture>
+    </div>
+    <div class="ref-item-info">
+      <h4 class="ref-item-title ${nextItem.tagClass}">${nextItem.title}</h4>
+      <ul class="ref-item-bullets">
+        ${nextItem.bullets.map(b => `<li>${b}</li>`).join('')}
+      </ul>
+    </div>
+    <div class="ref-item-meta-action">
+      <span class="ref-item-tag ${nextItem.tagClass}">${nextItem.tag}</span>
+      <a href="${nextItem.btnHref}" ${nextItem.target === '_blank' ? 'target="_blank" rel="noopener"' : ''} class="ref-item-btn">${nextItem.btnText}</a>
+    </div>
+  `;
+
+  // Prepend new card
+  tray.insertBefore(newCard, cards[0]);
+
+  // Fade out bottom card
+  const lastCard = cards[cards.length - 1];
+  lastCard.style.transition = 'opacity 0.45s ease, transform 0.55s ease';
+  lastCard.style.opacity = '0';
+  lastCard.style.transform = 'translateY(16px)';
+
+  // Animate new card down
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      newCard.style.marginTop = '0px';
+      newCard.style.opacity = '1';
+      newCard.style.transform = 'translateY(0)';
+    });
+  });
+
+  // Cleanup after animation completes
+  setTimeout(() => {
+    if (lastCard && lastCard.parentNode) {
+      lastCard.parentNode.removeChild(lastCard);
+    }
+    newCard.style.marginTop = '';
+    newCard.style.opacity = '';
+    newCard.style.transform = '';
+    newCard.style.transition = '';
+    newCard.classList.remove('ref-card-incoming');
+  }, 680);
+}
+
+function rotatePortalSlotFlip() {
+  const tray = document.querySelector('.ref-inset-tray');
+  if (!tray) return;
+  const cards = tray.querySelectorAll('.ref-item-card');
+  if (cards.length === 0) return;
+
+  // Pick a random slot to update
+  const slotIdx = Math.floor(Math.random() * cards.length);
+  const targetCard = cards[slotIdx];
+
+  const visibleTitles = Array.from(cards).map(c => {
+    const t = c.querySelector('.ref-item-title');
+    return t ? t.textContent.trim().toLowerCase() : '';
+  });
+
+  const available = PORTAL_CATALOG.filter(item => !visibleTitles.includes(item.title.toLowerCase()));
+  const pool = available.length > 0 ? available : PORTAL_CATALOG;
+  const nextItem = pool[Math.floor(Math.random() * pool.length)];
+
+  // Animate slot out downwards
+  targetCard.style.transition = 'transform 0.40s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease';
+  targetCard.style.transform = 'translateY(18px)';
+  targetCard.style.opacity = '0';
+
+  setTimeout(() => {
+    targetCard.innerHTML = `
+      <div class="ref-item-thumb-box">
+        <picture>
+          <source srcset="${nextItem.thumbWebp}" type="image/webp">
+          <img src="${nextItem.thumbJpg}" alt="${nextItem.title}" class="ref-item-thumb" width="82" height="60" loading="lazy">
+        </picture>
+      </div>
+      <div class="ref-item-info">
+        <h4 class="ref-item-title ${nextItem.tagClass}">${nextItem.title}</h4>
+        <ul class="ref-item-bullets">
+          ${nextItem.bullets.map(b => `<li>${b}</li>`).join('')}
+        </ul>
+      </div>
+      <div class="ref-item-meta-action">
+        <span class="ref-item-tag ${nextItem.tagClass}">${nextItem.tag}</span>
+        <a href="${nextItem.btnHref}" ${nextItem.target === '_blank' ? 'target="_blank" rel="noopener"' : ''} class="ref-item-btn">${nextItem.btnText}</a>
+      </div>
+    `;
+
+    // Slide in from top
+    targetCard.style.transform = 'translateY(-18px)';
+    targetCard.style.opacity = '0';
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        targetCard.style.transform = 'translateY(0)';
+        targetCard.style.opacity = '1';
+      });
+    });
+
+    setTimeout(() => {
+      targetCard.style.transition = '';
+      targetCard.style.transform = '';
+      targetCard.style.opacity = '';
+    }, 450);
+  }, 400);
 }
