@@ -205,7 +205,7 @@ def get_page_footer():
     <!-- Site Footer -->
     <footer class="golden-footer">
       <div class="footer-left">
-        &copy; 2026 Dr. Zaid Amin &bull; Faculty of Data Science and Information Technology, INTI International University.
+        &copy; 2008 - 2026 Dr. Zaid Amin. All rights reserved.
       </div>
 
     </footer>
