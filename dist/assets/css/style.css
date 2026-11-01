@@ -2704,3 +2704,128 @@ a {
     padding: 4px 6px;
   }
 }
+
+/* ==========================================================================
+   TOP ROW EPIGRAPH CLUSTER & MAIN MENU (BORDERLESS, RIGHT-JUSTIFIED)
+   ========================================================================== */
+.epigraph-top-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  gap: 16px;
+}
+
+.epigraph-right-cluster {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  position: relative;
+  flex: 1;
+}
+
+.top-epigraph-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px 18px;
+  flex-wrap: nowrap;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0;
+  margin: 0;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.28s;
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+/* Hidden immediately when Star of David is hovered or clicked to avoid clash */
+.top-epigraph-menu.nav-hidden,
+.top-scholarly-links.is-open ~ .top-epigraph-menu,
+.epigraph-right-cluster:has(.top-scholarly-links.is-open) .top-epigraph-menu {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateX(-16px) !important;
+}
+
+.top-epigraph-menu .main-menu-link {
+  position: relative;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #9cb4c4;
+  padding: 4px 2px;
+  text-decoration: none;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  white-space: nowrap;
+  letter-spacing: 0.015em;
+  transition: color 0.25s ease, transform 0.25s ease, text-shadow 0.25s ease;
+  display: inline-block;
+}
+
+.top-epigraph-menu .main-menu-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #fce09b 0%, #d4af37 50%, #b88d28 100%);
+  border-radius: 999px;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.70), 0 0 16px rgba(34, 166, 200, 0.35);
+  transform: translateX(-50%);
+  transition: width 0.30s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.top-epigraph-menu .main-menu-link:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.50);
+}
+
+.top-epigraph-menu .main-menu-link:hover::after {
+  width: 100%;
+  opacity: 1;
+}
+
+.top-epigraph-menu .main-menu-link.active {
+  color: #fce09b;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.60);
+}
+
+.top-epigraph-menu .main-menu-link.active::after {
+  width: 100%;
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .epigraph-top-flex {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .epigraph-right-cluster {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .top-epigraph-menu {
+    flex-wrap: wrap;
+    gap: 4px 12px;
+  }
+  .top-epigraph-menu .main-menu-link {
+    font-size: 0.76rem;
+  }
+}
