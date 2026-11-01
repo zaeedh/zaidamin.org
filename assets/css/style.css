@@ -230,12 +230,12 @@ a {
 
 .golden-quotation-text {
   font-family: var(--font-premium-serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 0.94rem;
-  color: #9bb4c4; /* Sweet, ethereal sea-mist pearl: elegant second-gaze read */
-  line-height: 1.48;
-  margin: 0 0 5px 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.06rem;
+  color: #a4bece; /* Sweet, ethereal sea-mist pearl: elegant second-gaze read */
+  line-height: 1.54;
+  margin: 0 0 6px 0;
   letter-spacing: 0.015em;
   text-shadow: none;
 }
@@ -276,8 +276,8 @@ a {
     border-radius: 8px;
   }
   .golden-quotation-text {
-    font-size: 0.88rem;
-    line-height: 1.44;
+    font-size: 0.96rem;
+    line-height: 1.50;
   }
 }
 
