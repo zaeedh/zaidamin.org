@@ -430,7 +430,6 @@ function initCustomSoundtrackPlayer() {
   }
 }
 
-
 /* --------------------------------------------------------------------------
    Inset Tray Portals & Blogger Articles Carousel Controller
    Paginates 4 slides of 3 cards each with counter, arrows & indicator dots
@@ -496,7 +495,21 @@ function initPortalsTrayCarousel() {
       else goToSlide(currentIndex + 1);
     }
   }, { passive: true });
-});
+}
+
+
+// ==============================================================================
+// VISITOR METRICS POPUP TOUCH / CLICK TOGGLE
+// ==============================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const statsTrigger = document.querySelector('.stats-title-interactive');
+  if (statsTrigger) {
+    statsTrigger.addEventListener('click', (e) => {
+      if (!e.target.closest('.stats-tooltip-popup')) {
+        const popup = statsTrigger.querySelector('.stats-tooltip-popup');
+        if (popup) popup.classList.toggle('is-active');
+      }
+    });
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.stats-title-interactive')) {
         const popup = statsTrigger.querySelector('.stats-tooltip-popup');
@@ -535,41 +548,4 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-});
-
-
-    });
-  }
-  
-  carousel.addEventListener('click', (e) => {
-    const prevBtn = e.target.closest('.spotlight-arrow-prev');
-    const nextBtn = e.target.closest('.spotlight-arrow-next');
-    const dotBtn = e.target.closest('.spotlight-dot');
-    
-    if (prevBtn) {
-      e.preventDefault();
-      goToSlide(currentIndex - 1);
-    } else if (nextBtn) {
-      e.preventDefault();
-      goToSlide(currentIndex + 1);
-    } else if (dotBtn) {
-      e.preventDefault();
-      const target = parseInt(dotBtn.getAttribute('data-slide-target'), 10);
-      if (!isNaN(target)) goToSlide(target);
-    }
-  });
-  
-  // Touch swipe support
-  let touchStartX = 0;
-  carousel.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-  
-  carousel.addEventListener('touchend', (e) => {
-    const diff = e.changedTouches[0].screenX - touchStartX;
-    if (Math.abs(diff) > 45) {
-      if (diff > 0) goToSlide(currentIndex - 1);
-      else goToSlide(currentIndex + 1);
-    }
-  }, { passive: true });
 });
