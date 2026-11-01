@@ -2373,17 +2373,32 @@ a {
 .spotlight-oa-pill {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.10em;
-  padding: 2px 7px;
-  border-radius: 4px;
-  background: rgba(46, 204, 113, 0.12);
-  border: 1px solid rgba(46, 204, 113, 0.35);
-  color: #2ecc71;
+  letter-spacing: 0.08em;
+  padding: 2.5px 10px;
+  border-radius: 999px;
+  background: rgba(3, 18, 32, 0.75);
+  border: 1px solid rgba(34, 166, 200, 0.32);
+  color: #c4dbe8;
   text-transform: uppercase;
-  margin-left: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+  box-shadow: 0 2px 6px rgba(0, 10, 24, 0.30);
+  transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.spotlight-oa-pill .oa-check {
+  color: #38b6d0;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.spotlight-oa-pill:hover {
+  background: rgba(34, 166, 200, 0.16);
+  border-color: rgba(212, 175, 55, 0.45);
+  color: #ffffff;
 }
 
 .ref-spotlight-desc {
