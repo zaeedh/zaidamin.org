@@ -708,14 +708,16 @@ def get_portals_tray_carousel_html():
                 {img_html}
               </div>
               <div class="ref-item-info">
+                <div class="ref-card-kicker-row">
+                  <span class="ref-kicker-tag font-cinzel">&#10022; {card['tag']}</span>
+                </div>
                 <h4 class="ref-item-title font-cinzel">{card['title']}</h4>
                 <ul class="ref-item-bullets">
                   {bullets_html}
                 </ul>
               </div>
               <div class="ref-item-meta-action">
-                <span class="ref-item-tag font-cinzel">{card['tag']}</span>
-                <a href="{card['btn_url']}"{ext_attr} class="ref-item-btn">{card['btn_text']}</a>
+                <a href="{card['btn_url']}"{ext_attr} class="ref-item-btn font-cinzel">{card['btn_text']}</a>
               </div>
             </div>'''
 
