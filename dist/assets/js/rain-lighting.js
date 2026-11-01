@@ -367,12 +367,13 @@
 
       ctx.save();
 
-      // A. Steady Warm Lantern Core Glow
-      const baseCoreGrad = ctx.createRadialGradient(lx, ly, 0, lx, ly, 16);
-      baseCoreGrad.addColorStop(0, 'rgba(255, 255, 245, 0.95)');
-      baseCoreGrad.addColorStop(0.3, 'rgba(254, 240, 138, 0.65)');
-      baseCoreGrad.addColorStop(0.7, 'rgba(234, 179, 8, 0.25)');
-      baseCoreGrad.addColorStop(1, 'rgba(234, 179, 8, 0)');
+      // A. Steady Radiant Golden Lantern Core Glow
+      const baseCoreGrad = ctx.createRadialGradient(lx, ly, 0, lx, ly, 20);
+      baseCoreGrad.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+      baseCoreGrad.addColorStop(0.25, 'rgba(255, 230, 130, 0.95)');
+      baseCoreGrad.addColorStop(0.55, 'rgba(245, 180, 25, 0.70)');
+      baseCoreGrad.addColorStop(0.82, 'rgba(217, 119, 6, 0.30)');
+      baseCoreGrad.addColorStop(1, 'rgba(217, 119, 6, 0)');
 
       ctx.globalCompositeOperation = 'screen';
       ctx.fillStyle = baseCoreGrad;
@@ -390,8 +391,8 @@
         const baseHalfWidth = 26 + facingOcean * 14;
 
         // Apply soft shadowBlur to completely feather and dissolve cut polygon edges
-        ctx.shadowColor = 'rgba(254, 240, 138, 0.50)';
-        ctx.shadowBlur = 18;
+        ctx.shadowColor = 'rgba(245, 185, 30, 0.75)';
+        ctx.shadowBlur = 24;
 
         // Multi-pass feathered beam layers (Outer aura -> Mid body -> Core)
         const beamLayers = [
@@ -415,11 +416,12 @@
           const p4y = curEndY - halfW;
 
           const beamGrad = ctx.createLinearGradient(lx, ly, lx + curLen, curEndY);
-          beamGrad.addColorStop(0, `rgba(255, 250, 225, ${0.65 * beamIntensity * layer.alphaScale})`);
-          beamGrad.addColorStop(0.18, `rgba(254, 240, 138, ${0.35 * beamIntensity * layer.alphaScale})`);
-          beamGrad.addColorStop(0.55, `rgba(186, 230, 253, ${0.10 * beamIntensity * layer.alphaScale})`);
-          beamGrad.addColorStop(0.85, 'rgba(186, 230, 253, 0)');
-          beamGrad.addColorStop(1, 'rgba(186, 230, 253, 0)');
+          beamGrad.addColorStop(0, `rgba(255, 255, 245, ${0.95 * beamIntensity * layer.alphaScale})`);
+          beamGrad.addColorStop(0.12, `rgba(255, 230, 120, ${0.75 * beamIntensity * layer.alphaScale})`);
+          beamGrad.addColorStop(0.38, `rgba(245, 185, 30, ${0.50 * beamIntensity * layer.alphaScale})`);
+          beamGrad.addColorStop(0.68, `rgba(217, 130, 10, ${0.22 * beamIntensity * layer.alphaScale})`);
+          beamGrad.addColorStop(0.92, 'rgba(180, 105, 5, 0)');
+          beamGrad.addColorStop(1, 'rgba(180, 105, 5, 0)');
 
           ctx.fillStyle = beamGrad;
           ctx.beginPath();
@@ -453,11 +455,11 @@
         // Radiant Lens Flare Corona
         const flareRadius = 70 + eyeSplash * 60;
         const coronaGrad = ctx.createRadialGradient(lx, ly, 0, lx, ly, flareRadius);
-        coronaGrad.addColorStop(0, `rgba(255, 255, 255, ${0.92 * flareAlpha})`);
-        coronaGrad.addColorStop(0.2, `rgba(255, 245, 180, ${0.70 * flareAlpha})`);
-        coronaGrad.addColorStop(0.5, `rgba(251, 191, 36, ${0.30 * flareAlpha})`);
-        coronaGrad.addColorStop(0.8, `rgba(147, 197, 253, ${0.10 * flareAlpha})`);
-        coronaGrad.addColorStop(1, 'rgba(147, 197, 253, 0)');
+        coronaGrad.addColorStop(0, `rgba(255, 255, 255, ${0.98 * flareAlpha})`);
+        coronaGrad.addColorStop(0.18, `rgba(255, 238, 140, ${0.85 * flareAlpha})`);
+        coronaGrad.addColorStop(0.45, `rgba(245, 180, 25, ${0.55 * flareAlpha})`);
+        coronaGrad.addColorStop(0.75, `rgba(217, 119, 6, ${0.20 * flareAlpha})`);
+        coronaGrad.addColorStop(1, 'rgba(217, 119, 6, 0)');
 
         ctx.fillStyle = coronaGrad;
         ctx.beginPath();
