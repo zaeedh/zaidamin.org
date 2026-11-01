@@ -107,12 +107,12 @@ a {
 .site-wrapper {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 18px 24px 32px 24px;
+  padding: 18px 24px 14px 24px;
 }
 
 @media (max-width: 768px) {
   .site-wrapper {
-    padding: 20px 16px;
+    padding: 20px 16px 14px 16px;
   }
 }
 
@@ -915,7 +915,7 @@ a {
 /* Site Footer */
 .golden-footer {
   border-top: none;
-  padding: 0 0 20px 0;
+  padding: 0 0 6px 0;
   margin-top: 0;
   font-size: 0.78rem;
   color: var(--text-muted);
@@ -3046,7 +3046,7 @@ a {
   border: none;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(140, 180, 205, 0.28) 25%, rgba(212, 175, 55, 0.40) 50%, rgba(140, 180, 205, 0.28) 75%, transparent);
-  margin: 14px 0 12px 0;
+  margin: 12px 0 8px 0;
 }
 
 /* Responsive adjustments */
@@ -3557,8 +3557,8 @@ a {
   background: linear-gradient(145deg, rgba(12, 24, 42, 0.78) 0%, rgba(8, 17, 30, 0.88) 100%);
   border: 1px solid rgba(186, 230, 253, 0.12);
   border-radius: 14px;
-  padding: 20px 28px;
-  margin: 28px 0 21px 0;
+  padding: 18px 26px;
+  margin: 24px 0 12px 0;
   box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.50), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(14px);
   position: relative;
