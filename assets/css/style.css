@@ -2456,6 +2456,29 @@ a {
 
 
 
+.ref-menu-tab.tab-home {
+  flex: 0 0 44px;
+  min-width: 44px;
+  padding: 7px 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ref-menu-tab .tab-icon-home {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  stroke-width: 2.1;
+  fill: none;
+  transition: all 0.22s ease;
+}
+
+.ref-menu-tab.active .tab-icon-home {
+  fill: rgba(252, 224, 155, 0.25);
+  stroke-width: 2.3;
+}
+
 .ref-menu-tab .tab-txt-compact {
   display: none;
 }
