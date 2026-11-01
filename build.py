@@ -734,15 +734,6 @@ def get_portals_tray_carousel_html():
             <div class="tray-header-left font-cinzel">
               <span class="pulse-dot"></span> Portals &amp; Articles
             </div>
-            <div class="spotlight-arrows-cluster tray-arrows-cluster">
-              <button class="spotlight-arrow-btn tray-arrow-prev" aria-label="Previous Slide (Up)" title="Previous (Up)" type="button">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-              </button>
-              <span class="spotlight-counter tray-counter font-mono"><span class="tray-curr">01</span> / <span class="tray-total">{str(total_slides).zfill(2)}</span></span>
-              <button class="spotlight-arrow-btn tray-arrow-next" aria-label="Next Slide (Down)" title="Next (Down)" type="button">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-            </div>
           </div>
 
           <!-- Tray Carousel Vertical Slides Container -->
