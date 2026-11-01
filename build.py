@@ -123,7 +123,6 @@ def get_page_header(active_page="home"):
           <!-- Top-Right Star of David Button & Side-Expanding Scholarly Profiles -->
           <div class="top-scholarly-cluster">
             <div class="top-scholarly-links" id="top-scholarly-links" aria-hidden="true">
-              <span class="top-scholarly-label">Scholarly Profiles &amp; Direct Identifiers:</span>
               <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="top-link-pill" title="Google Scholar">{render_svg_icon('scholar')} <span>Google Scholar</span></a>
               <a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="top-link-pill" title="ORCID">{render_svg_icon('orcid')} <span>ORCID</span></a>
               <a href="{profile['social_links']['github']}" target="_blank" rel="noopener" class="top-link-pill" title="GitHub">{render_svg_icon('github')} <span>GitHub</span></a>
