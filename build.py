@@ -343,7 +343,7 @@ def get_visitor_stats_html():
         <div class="stats-live-badge">
           <span class="stats-pulse-ring"></span>
           <span class="stats-pulse-dot"></span>
-          <span class="stats-live-label font-cinzel">Live Readership Telemetry</span>
+          <span class="stats-live-label">Live Readership Telemetry</span>
         </div>
 
 
