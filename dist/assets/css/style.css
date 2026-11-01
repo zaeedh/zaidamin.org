@@ -2346,39 +2346,102 @@ a {
 }
 
 /* 4 STACKED RECTANGULAR ACTION BUTTONS ON RIGHT EDGE */
+/* ==========================================================================
+   SIDE SECTION MAIN MENU BUTTONS (PREMIUM & ELEGANT LUXURY DASHBOARD)
+   ========================================================================== */
 .profile-actions-stack {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 6px;
+  width: 156px;
   flex-shrink: 0;
 }
 
 .profile-rect-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 11px;
-  background: rgba(2, 16, 28, 0.75);
-  border: 1px solid rgba(34, 166, 200, 0.28);
-  border-radius: 6px;
-  font-size: 0.72rem;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 7px 11px;
+  background: rgba(3, 18, 32, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(34, 166, 200, 0.25);
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
   font-weight: 600;
   color: #c4dbe8;
   text-decoration: none;
-  transition: all 0.22s ease;
-  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 10, 24, 0.35);
 }
 
+.profile-rect-btn .rect-btn-icon {
+  font-size: 0.82rem;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.profile-rect-btn .rect-btn-text {
+  flex: 1;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.profile-rect-btn .rect-btn-chevron {
+  font-size: 0.88rem;
+  color: rgba(140, 180, 205, 0.40);
+  transition: all 0.25s ease;
+  line-height: 1;
+  margin-left: auto;
+}
+
+/* Hover: Elegant Gold Border, Micro-Translation, Soft Amber/Cyan Glow */
 .profile-rect-btn:hover {
   border-color: #d4af37;
   color: #ffffff;
-  background: rgba(34, 166, 200, 0.20);
-  transform: translateX(-2px);
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+  background: rgba(34, 166, 200, 0.22);
+  transform: translateX(-3px);
+  box-shadow: 0 4px 16px rgba(0, 10, 24, 0.55), 0 0 14px rgba(212, 175, 55, 0.32);
 }
 
-.rect-btn-icon {
-  font-size: 0.85rem;
+.profile-rect-btn:hover .rect-btn-icon {
+  transform: scale(1.15);
+}
+
+.profile-rect-btn:hover .rect-btn-chevron {
+  color: #fce09b;
+  transform: translateX(2px);
+}
+
+/* Active State: Royal Imperial Gold Glow */
+.profile-rect-btn.active {
+  border-color: #d4af37;
+  color: #fce09b;
+  font-weight: 700;
+  background: rgba(212, 175, 55, 0.16);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.28), inset 0 0 8px rgba(212, 175, 55, 0.10);
+}
+
+.profile-rect-btn.active .rect-btn-chevron {
+  color: #d4af37;
+}
+
+/* Ambient line glow on active */
+.profile-rect-btn.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 2.5px;
+  background: linear-gradient(180deg, #fce09b, #d4af37);
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 6px #d4af37;
 }
 
 /* ==========================================================================
