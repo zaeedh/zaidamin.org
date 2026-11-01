@@ -416,8 +416,8 @@ def get_visitor_stats_html():
     </section>
 """
 
-def get_page_footer():
-    stats_html = get_visitor_stats_html()
+def get_page_footer(show_visitor_stats=False):
+    stats_html = get_visitor_stats_html() if show_visitor_stats else ""
     return f"""
     <!-- Visitor Statistics Section (Directly Above Copyright) -->
     {stats_html}
@@ -737,7 +737,7 @@ def generate_golden_ratio_home():
     <!-- 7. FOOTER DIVIDER LINE (Matching Wireframe) -->
     <hr class="golden-footer-divider">
     """
-    html += get_page_footer()
+    html += get_page_footer(show_visitor_stats=True)
     return html
 
 def generate_publications_page():
