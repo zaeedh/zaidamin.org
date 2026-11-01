@@ -10,6 +10,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
   initScholarlyDrawer();
+  initJournalTicker();
   initPublicationsFilter();
   initBibtexButtons();
   initMobileMenu();
@@ -284,4 +285,63 @@ function initScholarlyDrawer() {
       closeLinks(true);
     }
   });
+}
+
+
+/* --------------------------------------------------------------------------
+   Journal Publication Ticker (Animate fade in/out move from top to down)
+   -------------------------------------------------------------------------- */
+let journalTickerIndex = 0;
+let journalTickerInterval = null;
+let isJournalTickerPaused = false;
+
+function initJournalTicker() {
+  const slides = document.querySelectorAll('.ticker-slide-item');
+  if (!slides || slides.length === 0) return;
+
+  // Set initial state
+  slides.forEach((slide, idx) => {
+    slide.classList.remove('active', 'slide-out-down');
+    if (idx === 0) slide.classList.add('active');
+  });
+
+  const counter = document.getElementById('ticker-counter');
+  if (counter) counter.textContent = `1 / ${slides.length}`;
+
+  // Start smooth auto-advance every 4.8s
+  clearInterval(journalTickerInterval);
+  journalTickerInterval = setInterval(() => {
+    if (!isJournalTickerPaused) {
+      rotateJournalTicker(1);
+    }
+  }, 4800);
+}
+
+function rotateJournalTicker(dir) {
+  const slides = document.querySelectorAll('.ticker-slide-item');
+  if (!slides || slides.length === 0) return;
+
+  const prevIdx = journalTickerIndex;
+  journalTickerIndex = (journalTickerIndex + dir + slides.length) % slides.length;
+
+  // Animate: current slide slides out downwards (0 -> +20px, fade out)
+  slides[prevIdx].classList.remove('active');
+  slides[prevIdx].classList.add('slide-out-down');
+
+  // Next slide enters from top (-20px -> 0, fade in)
+  slides[journalTickerIndex].classList.remove('slide-out-down');
+  slides[journalTickerIndex].classList.add('active');
+
+  const counter = document.getElementById('ticker-counter');
+  if (counter) {
+    counter.textContent = `${journalTickerIndex + 1} / ${slides.length}`;
+  }
+}
+
+function pauseJournalTicker() {
+  isJournalTickerPaused = true;
+}
+
+function resumeJournalTicker() {
+  isJournalTickerPaused = false;
 }
