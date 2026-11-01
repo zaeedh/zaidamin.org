@@ -2612,13 +2612,13 @@ a {
    ========================================================================== */
 .storm-overlay-menu {
   position: absolute;
-  bottom: 22px;
+  top: 20px;
   right: 28px;
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 8px 24px;
+  gap: 8px 26px;
   flex-wrap: wrap;
   background: transparent !important;
   border: none !important;
@@ -2692,7 +2692,8 @@ a {
 
 @media (max-width: 768px) {
   .storm-overlay-menu {
-    bottom: 12px;
+    top: 12px;
+    bottom: auto;
     right: 14px;
     left: 14px;
     justify-content: center;
