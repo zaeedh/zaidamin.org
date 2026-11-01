@@ -111,15 +111,14 @@ def get_page_header(active_page="home"):
         <h1 class="epigraph-title">Das Sein, Das Sollen.</h1>
         
         <div class="epigraph-right-cluster">
-          <!-- Main Menu: Positioned on top row (Justify Right, Borderless, Hides on Star Hover/Click) -->
-          <nav class="top-epigraph-menu" id="top-main-nav" aria-label="Main Navigation">
+          {f'''<nav class="top-epigraph-menu" id="top-main-nav" aria-label="Main Navigation">
             <a href="index.html" class="main-menu-link {'active' if active_page == 'home' else ''}">Home</a>
             <a href="publications.html" class="main-menu-link {'active' if active_page == 'publications' else ''}">Research &amp; Publication</a>
             <a href="cv.html#talks" class="main-menu-link {'active' if active_page == 'talks' else ''}">Recent Media &amp; Talks</a>
             <a href="research.html" class="main-menu-link {'active' if active_page == 'research' else ''}">Project</a>
             <a href="cv.html#achievements" class="main-menu-link {'active' if active_page == 'achievements' else ''}">Achievement</a>
             <a href="cv.html" class="main-menu-link {'active' if active_page == 'cv' else ''}">About &amp; CV</a>
-          </nav>
+          </nav>''' if active_page != 'home' else ''}
 
           <!-- Top-Right Star of David Button & Side-Expanding Scholarly Profiles -->
           <div class="top-scholarly-cluster">
@@ -286,25 +285,39 @@ def generate_golden_ratio_home():
             </p>
           </div>
 
-          <!-- Right Stack: 4 Rectangular Action Buttons (Matching Wireframe [ ] [ ] [ ] [ ]) -->
-          <div class="profile-actions-stack">
-            <a href="cv.html" class="profile-rect-btn" title="View Full Curriculum Vitae">
-              <span class="rect-btn-icon">📄</span>
-              <span class="rect-btn-text">Full CV</span>
+          <!-- Main Menu Stack: 6 Elegant & Premium Navigation Buttons (Fitted into Side Section) -->
+          <nav class="profile-actions-stack" aria-label="Main Navigation">
+            <a href="index.html" class="profile-rect-btn active" title="Home Landing">
+              <span class="rect-btn-icon">🏛</span>
+              <span class="rect-btn-text">Home</span>
+              <span class="rect-btn-chevron">&rsaquo;</span>
             </a>
-            <a href="mailto:{profile['social_links']['email']}" class="profile-rect-btn" title="Institutional Email Contact">
-              <span class="rect-btn-icon">✉</span>
-              <span class="rect-btn-text">Email</span>
+            <a href="publications.html" class="profile-rect-btn" title="Research &amp; Publications">
+              <span class="rect-btn-icon">📚</span>
+              <span class="rect-btn-text">Research &amp; Pubs</span>
+              <span class="rect-btn-chevron">&rsaquo;</span>
             </a>
-            <a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="profile-rect-btn" title="ORCID Profile">
-              <span class="rect-btn-icon">🆔</span>
-              <span class="rect-btn-text">ORCID</span>
+            <a href="cv.html#talks" class="profile-rect-btn" title="Recent Media &amp; Invited Talks">
+              <span class="rect-btn-icon">🎙</span>
+              <span class="rect-btn-text">Media &amp; Talks</span>
+              <span class="rect-btn-chevron">&rsaquo;</span>
             </a>
-            <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="profile-rect-btn" title="Google Scholar Profile">
-              <span class="rect-btn-icon">🎓</span>
-              <span class="rect-btn-text">Scholar</span>
+            <a href="research.html" class="profile-rect-btn" title="Funded Projects &amp; Themes">
+              <span class="rect-btn-icon">💡</span>
+              <span class="rect-btn-text">Project</span>
+              <span class="rect-btn-chevron">&rsaquo;</span>
             </a>
-          </div>
+            <a href="cv.html#achievements" class="profile-rect-btn" title="Awards &amp; Milestones">
+              <span class="rect-btn-icon">🏆</span>
+              <span class="rect-btn-text">Achievement</span>
+              <span class="rect-btn-chevron">&rsaquo;</span>
+            </a>
+            <a href="cv.html" class="profile-rect-btn" title="About &amp; Curriculum Vitae">
+              <span class="rect-btn-icon">📜</span>
+              <span class="rect-btn-text">About &amp; CV</span>
+              <span class="rect-btn-chevron">&rsaquo;</span>
+            </a>
+          </nav>
 
         </div>
       </aside>
