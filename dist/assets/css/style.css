@@ -192,9 +192,9 @@ a {
    ========================================================================== */
 .storm-quote-overlay {
   position: absolute;
-  bottom: 22px;
-  right: 28px;
-  max-width: 560px;
+  bottom: clamp(52px, 14%, 66px);
+  right: clamp(26px, 4%, 38px);
+  max-width: 530px;
   box-sizing: border-box;
   padding: 0;
   background: transparent !important;
@@ -261,9 +261,9 @@ a {
 
 @media (max-width: 900px) {
   .storm-quote-overlay {
-    bottom: 16px;
-    right: 18px;
-    max-width: 480px;
+    bottom: clamp(38px, 11%, 50px);
+    right: 20px;
+    max-width: 460px;
     padding: 0;
   }
   .storm-quote-text {
@@ -274,9 +274,9 @@ a {
 
 @media (max-width: 640px) {
   .storm-quote-overlay {
-    bottom: 12px;
-    right: 12px;
-    left: 12px;
+    bottom: 24px;
+    right: 14px;
+    left: 14px;
     max-width: none;
     padding: 0;
   }
