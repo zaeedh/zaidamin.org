@@ -28,6 +28,8 @@
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-serif: 'Newsreader', Georgia, serif;
+  --font-premium-serif: 'Cormorant Garamond', 'Newsreader', Georgia, serif;
+  --font-cinzel: 'Cinzel', Georgia, serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   --phi: 1.618;
@@ -146,117 +148,125 @@ a {
 }
 
 /* ==========================================================================
-   2. SUB-SECTION BELOW OPTION 1 STORM: GOLDEN RATIO CENTERED QUOTATION
+   2. SUB-SECTION BELOW OPTION 1 STORM: FULL FIT PREMIUM CORMORANT GARAMOND
    ========================================================================== */
 .ocean-quote-subsection {
-  margin-top: 8px;
-  margin-bottom: 32px;
+  margin-top: 6px;
+  margin-bottom: 30px;
   width: 100%;
 }
 
-.quote-golden-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.ocean-golden-blockquote {
+.ocean-quote-full-frame {
   position: relative;
-  /* Golden Ratio width relative to 1200px container: 1200 / 1.618 ≈ 741.6px */
-  max-width: 742px;
   width: 100%;
-  margin: 0 auto;
-  /* Golden Ratio padding: 26px vertical, 26 * 1.618 ≈ 42px horizontal */
-  padding: 26px 42px;
-  background: rgba(4, 28, 48, 0.70);
+  box-sizing: border-box;
+  padding: 30px 48px;
+  background: rgba(4, 28, 48, 0.72);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(34, 166, 200, 0.28);
   border-radius: 18px;
-  box-shadow: 0 10px 36px rgba(0, 10, 24, 0.45), 0 0 24px rgba(34, 166, 200, 0.10);
+  box-shadow: 0 12px 38px rgba(0, 10, 24, 0.45), 0 0 24px rgba(34, 166, 200, 0.08);
   text-align: center;
   overflow: hidden;
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
-.ocean-golden-blockquote:hover {
+.ocean-quote-full-frame:hover {
   border-color: rgba(56, 182, 208, 0.45);
-  box-shadow: 0 12px 40px rgba(0, 10, 24, 0.55), 0 0 32px rgba(34, 166, 200, 0.18);
+  box-shadow: 0 14px 44px rgba(0, 10, 24, 0.55), 0 0 32px rgba(34, 166, 200, 0.16);
 }
 
-.ocean-golden-blockquote::before {
+/* Ambient jewel highlights across top and bottom edges */
+.ocean-quote-full-frame::before {
   content: "";
   position: absolute;
   top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(56, 182, 208, 0.85) 50%, transparent);
+  pointer-events: none;
+}
+
+.ocean-quote-full-frame::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
   left: 20%;
   right: 20%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(56, 182, 208, 0.85), transparent);
+  background: linear-gradient(90deg, transparent, rgba(34, 166, 200, 0.4) 50%, transparent);
   pointer-events: none;
 }
 
 .quote-watermark-glyph {
   position: absolute;
-  top: -8px;
+  top: -10px;
   left: 50%;
   transform: translateX(-50%);
-  font-family: var(--font-serif);
-  font-size: 4rem;
+  font-family: var(--font-premium-serif);
+  font-size: 5.5rem;
   line-height: 1;
-  color: rgba(34, 166, 200, 0.08);
+  color: rgba(34, 166, 200, 0.06);
   pointer-events: none;
   user-select: none;
 }
 
-.golden-quotation-text {
-  font-family: var(--font-serif);
+.premium-quotation-body {
+  font-family: var(--font-premium-serif);
   font-style: italic;
-  font-size: 1.08rem;
-  color: #cde4f0;
-  line-height: 1.75;
-  margin: 0 0 14px 0;
+  font-weight: 500;
+  font-size: 1.34rem;
+  color: #e2f2fb;
+  line-height: 1.72;
+  margin: 0 auto 16px auto;
+  max-width: 1040px;
   position: relative;
   z-index: 1;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.018em;
+  text-shadow: 0 2px 18px rgba(34, 166, 200, 0.22);
 }
 
-.golden-quotation-cite {
+.premium-quotation-cite {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  font-family: var(--font-sans);
-  font-style: normal;
-  font-size: 0.80rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: #38b6d0;
-  text-transform: uppercase;
+  gap: 16px;
   position: relative;
   z-index: 1;
 }
 
-.golden-cite-line {
-  width: 24px;
-  height: 1px;
-  background: rgba(34, 166, 200, 0.45);
-  display: inline-block;
+.premium-quotation-cite .cite-text {
+  font-family: var(--font-cinzel), serif;
+  font-style: normal;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.20em;
+  color: #38b6d0;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(56, 182, 208, 0.35);
 }
 
-.golden-cite-label {
+.cite-accent-line {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(34, 166, 200, 0.65), transparent);
   display: inline-block;
 }
 
 @media (max-width: 768px) {
-  .ocean-golden-blockquote {
-    max-width: 100%;
-    padding: 20px 22px;
+  .ocean-quote-full-frame {
+    padding: 22px 20px;
     border-radius: 14px;
   }
-  .golden-quotation-text {
-    font-size: 0.98rem;
-    line-height: 1.65;
+  .premium-quotation-body {
+    font-size: 1.15rem;
+    line-height: 1.62;
+    margin-bottom: 12px;
+  }
+  .cite-accent-line {
+    width: 28px;
   }
 }
 
