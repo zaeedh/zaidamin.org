@@ -187,67 +187,65 @@ a {
 }
 
 /* ==========================================================================
-   EPIGRAPH QUOTATION: DIRECTLY BELOW DAS SEIN, DAS SOLLEN & ABOVE STORM
-   Left-aligned literary epigraph without borders, seamlessly integrated.
+   STORM BANNER QUR'AN QUOTATION OVERLAY
+   Blended, Soft, Elegant & Premium Overlay on the Lower Ocean
    ========================================================================== */
-.ocean-quote-subsection {
-  margin-top: 4px;
-  margin-bottom: 12px;
-  width: 100%;
-}
-
-.ocean-quote-full-frame {
-  position: relative;
-  width: 100%;
+.storm-quote-overlay {
+  position: absolute;
+  bottom: 22px;
+  right: 28px;
+  max-width: 560px;
   box-sizing: border-box;
-  padding: 0;
-  background: transparent !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border: none !important;
-  outline: none !important;
-  border-radius: 0;
-  box-shadow: none !important;
-  text-align: left;
-  overflow: visible;
-  transition: opacity var(--transition);
+  padding: 12px 20px 10px 20px;
+  background: rgba(2, 14, 26, 0.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(140, 180, 205, 0.16);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 10, 24, 0.60), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  z-index: 10;
+  pointer-events: auto;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.ocean-quote-full-frame:hover {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+.storm-quote-overlay:hover {
+  background: rgba(2, 14, 26, 0.75);
+  border-color: rgba(212, 175, 55, 0.35);
+  box-shadow: 0 10px 36px rgba(0, 10, 24, 0.70);
 }
 
-.ocean-quote-full-frame::before {
-  display: none !important;
-}
-
-.golden-quotation-text {
-  font-family: var(--font-premium-serif);
+.storm-quote-text {
+  font-family: var(--font-premium-serif), Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  font-size: 0.94rem;
-  color: #9bb4c4; /* Sweet, ethereal sea-mist pearl: elegant second-gaze read */
-  line-height: 1.5;
-  margin: 0 0 4px 0;
+  font-size: 0.90rem;
+  color: #e6f2fa; /* Ethereal sea-pearl luminescence */
+  line-height: 1.48;
+  margin: 0 0 5px 0;
   letter-spacing: 0.015em;
-  text-shadow: none;
+  text-shadow: 0 2px 10px rgba(0, 10, 24, 0.95);
   text-align: left;
 }
 
-.golden-quotation-cite {
-  display: inline-flex;
+.storm-quote-cite {
+  display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
   gap: 8px;
   font-style: normal;
-  text-align: left;
+  text-align: right;
 }
 
-.golden-cite-label {
+.storm-cite-line {
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.60));
+  display: inline-block;
+}
+
+.storm-cite-label {
   font-family: var(--font-cinzel), serif;
-  font-size: 0.73rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   color: #d4af37; /* Premium Imperial Gold */
@@ -256,24 +254,37 @@ a {
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
   line-height: 1.2;
-  filter: drop-shadow(0 1px 6px rgba(212, 175, 55, 0.32));
+  filter: drop-shadow(0 1px 6px rgba(212, 175, 55, 0.40));
   display: inline-block;
 }
 
-.golden-cite-line {
-  width: 32px;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(212, 175, 55, 0.60), transparent);
-  display: inline-block;
-}
-
-@media (max-width: 768px) {
-  .ocean-quote-full-frame {
-    padding: 0;
+@media (max-width: 900px) {
+  .storm-quote-overlay {
+    bottom: 16px;
+    right: 18px;
+    max-width: 480px;
+    padding: 10px 16px;
   }
-  .golden-quotation-text {
-    font-size: 0.88rem;
-    line-height: 1.44;
+  .storm-quote-text {
+    font-size: 0.84rem;
+    line-height: 1.42;
+  }
+}
+
+@media (max-width: 640px) {
+  .storm-quote-overlay {
+    bottom: 12px;
+    right: 12px;
+    left: 12px;
+    max-width: none;
+    padding: 8px 12px;
+  }
+  .storm-quote-text {
+    font-size: 0.78rem;
+    line-height: 1.38;
+  }
+  .storm-cite-label {
+    font-size: 0.68rem;
   }
 }
 
