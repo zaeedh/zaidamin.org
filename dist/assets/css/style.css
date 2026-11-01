@@ -174,7 +174,7 @@ a {
   display: block;
   border: none !important;
   outline: none !important;
-  filter: none;
+  filter: saturate(1.38) contrast(1.08) brightness(1.02);
 }
 
 #rain-canvas {
