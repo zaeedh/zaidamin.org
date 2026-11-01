@@ -238,55 +238,347 @@
     <!-- 5. FEATURED SPOTLIGHT & ACADEMIC PORTALS (REFERENCE SPLIT CARD LAYOUT) -->
     <section class="golden-split-section ref-split-layout">
       
-      <!-- LEFT CARD: Featured Spotlight Article (Hero Visual Header + Bookmark + Abstract + Actions) -->
-      <article class="ref-spotlight-card">
-        <div class="ref-spotlight-visual-wrap">
-          <picture>
-            <source srcset="assets/images/spotlight-smart-cities.webp" type="image/webp">
-            <img src="assets/images/spotlight-smart-cities.jpg" alt="Trustworthy AI for Sustainable Cities" class="ref-spotlight-visual-img" loading="lazy">
-          </picture>
-          <div class="ref-visual-overlay"></div>
-          
-          <!-- Top Floating Badges & Bookmark Ribbon Icon -->
-          <div class="ref-spotlight-top-bar">
-            <span class="ref-kicker-pill font-cinzel"><span class="pulse-dot"></span> SPOTLIGHT ARTICLE</span>
-            <div class="ref-top-right-group">
-              <span class="ref-badge-scopus font-cinzel">Q1 SCOPUS INDEXED</span>
-              <span class="ref-bookmark-icon" title="Featured Spotlight Publication" aria-label="Featured Publication Bookmark">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-                </svg>
-              </span>
+
+      <!-- LEFT CARD: Interactive Blogger & Spotlight Articles Carousel -->
+      <article class="ref-spotlight-card" id="spotlight-carousel" aria-roledescription="carousel" aria-label="Spotlight &amp; Blogger Articles">
+        
+        <div class="spotlight-slide active" data-slide-index="0">
+          <div class="ref-spotlight-visual-wrap">
+            <picture>
+                <source srcset="assets/images/spotlight-smart-cities.webp" type="image/webp">
+                <img src="assets/images/spotlight-smart-cities.jpg" alt="Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance" class="ref-spotlight-visual-img" loading="lazy">
+              </picture>
+            <div class="ref-visual-overlay"></div>
+            
+            <div class="ref-spotlight-top-bar">
+              <span class="ref-kicker-pill font-cinzel"><span class="pulse-dot"></span> SPOTLIGHT ARTICLE</span>
+              <div class="ref-top-right-group">
+                <span class="ref-badge-scopus font-cinzel">Q1 SCOPUS INDEXED</span>
+                <div class="spotlight-arrows-cluster">
+                  <button class="spotlight-arrow-btn spotlight-arrow-prev" aria-label="Previous Article" type="button">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  </button>
+                  <span class="spotlight-counter font-mono"><span class="spotlight-curr">01</span> / <span class="spotlight-total">06</span></span>
+                  <button class="spotlight-arrow-btn spotlight-arrow-next" aria-label="Next Article" type="button">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                </div>
+                <span class="ref-bookmark-icon" title="Featured Spotlight Publication" aria-label="Featured Publication Bookmark">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ref-spotlight-body">
+            <h2 class="ref-spotlight-title">Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance</h2>
+
+            <div class="ref-spotlight-meta">
+              <span class="spotlight-venue font-cinzel">Smart Cities (MDPI)</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-year">2026 Volume 9</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-author">Lead Author: Zaid Amin, Ph.D.</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-open-access">Open Access</span>
+            </div>
+
+            <p class="ref-spotlight-desc">Addresses critical systemic vulnerabilities in urban autonomous deployments where metric-driven proxies diverge from authentic civic welfare. Introduces an audited multimodal orchestration agent architecture enforcing real-time cybernetic feedback loops, cognitive transparency, and verifiable alignment for municipal governance.</p>
+
+            <div class="spotlight-dots-bar">
+              <button class="spotlight-dot active" data-slide-target="0" aria-label="Slide 1" type="button"></button><button class="spotlight-dot" data-slide-target="1" aria-label="Slide 2" type="button"></button><button class="spotlight-dot" data-slide-target="2" aria-label="Slide 3" type="button"></button><button class="spotlight-dot" data-slide-target="3" aria-label="Slide 4" type="button"></button><button class="spotlight-dot" data-slide-target="4" aria-label="Slide 5" type="button"></button><button class="spotlight-dot" data-slide-target="5" aria-label="Slide 6" type="button"></button>
+            </div>
+
+            <div class="ref-spotlight-actions">
+              <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="spotlight-btn btn-gold font-cinzel">
+                Read Full Article &rarr;
+              </a>
+              <a href="https://www.zaidamin.org/" target="_blank" rel="noopener" class="spotlight-btn btn-more">
+                All Articles (80) &rarr;
+              </a>
             </div>
           </div>
         </div>
-
-        <div class="ref-spotlight-body">
-          <h2 class="ref-spotlight-title">
-            Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance
-          </h2>
-
-          <div class="ref-spotlight-meta">
-            <span class="spotlight-venue font-cinzel">Smart Cities (MDPI)</span>
-            <span class="spotlight-divider">&bull;</span>
-            <span class="spotlight-year">2026 Volume 9</span>
-            <span class="spotlight-divider">&bull;</span>
-            <span class="spotlight-author">Lead Author: Zaid Amin, Ph.D.</span>
-            <span class="spotlight-divider">&bull;</span>
-            <span class="spotlight-open-access">Open Access</span>
+        <div class="spotlight-slide" data-slide-index="1">
+          <div class="ref-spotlight-visual-wrap">
+            <img src="assets/images/blogger/post_1.png" alt="HARMONY: Human-Trusted AI and Resilient Multimodal Orchestration Framework for Enhancing Normative Trust in Society" class="ref-spotlight-visual-img" loading="lazy">
+            <div class="ref-visual-overlay"></div>
+            
+            <div class="ref-spotlight-top-bar">
+              <span class="ref-kicker-pill font-cinzel"><span class="pulse-dot"></span> BLOGGER SPOTLIGHT</span>
+              <div class="ref-top-right-group">
+                <span class="ref-badge-scopus font-cinzel">BLOG ARCHIVE</span>
+                <div class="spotlight-arrows-cluster">
+                  <button class="spotlight-arrow-btn spotlight-arrow-prev" aria-label="Previous Article" type="button">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  </button>
+                  <span class="spotlight-counter font-mono"><span class="spotlight-curr">02</span> / <span class="spotlight-total">06</span></span>
+                  <button class="spotlight-arrow-btn spotlight-arrow-next" aria-label="Next Article" type="button">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                </div>
+                <span class="ref-bookmark-icon" title="Featured Spotlight Publication" aria-label="Featured Publication Bookmark">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
           </div>
 
-          <p class="ref-spotlight-desc">
-            Addresses critical systemic vulnerabilities in urban autonomous deployments where metric-driven proxies diverge from authentic civic welfare. Introduces an audited multimodal orchestration agent architecture enforcing real-time cybernetic feedback loops, cognitive transparency, and verifiable alignment for municipal governance.
-          </p>
+          <div class="ref-spotlight-body">
+            <h2 class="ref-spotlight-title">HARMONY: Human-Trusted AI and Resilient Multimodal Orchestration Framework for Enhancing Normative Trust in Society</h2>
 
-          <div class="ref-spotlight-actions">
-            <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="spotlight-btn btn-gold font-cinzel">
-              Read More &rarr;
-            </a>
-            <a href="publications.html" class="spotlight-btn btn-more">
-              Explore All Articles &rarr;
-            </a>
+            <div class="ref-spotlight-meta">
+              <span class="spotlight-venue font-cinzel">das Sein, das Sollen</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-year">2026-02-02</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-author">Zaid Amin, Ph.D.</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-open-access">Scholarly Essay</span>
+            </div>
+
+            <p class="ref-spotlight-desc">Sustainable urban resource stewardship requires AI systems that are both technically robust and socially aligned. Traditional interventions for public cleanliness, such as static signage, frequently fail due to "banner blindness" and a lack of situational context. This concept...</p>
+
+            <div class="spotlight-dots-bar">
+              <button class="spotlight-dot active" data-slide-target="0" aria-label="Slide 1" type="button"></button><button class="spotlight-dot" data-slide-target="1" aria-label="Slide 2" type="button"></button><button class="spotlight-dot" data-slide-target="2" aria-label="Slide 3" type="button"></button><button class="spotlight-dot" data-slide-target="3" aria-label="Slide 4" type="button"></button><button class="spotlight-dot" data-slide-target="4" aria-label="Slide 5" type="button"></button><button class="spotlight-dot" data-slide-target="5" aria-label="Slide 6" type="button"></button>
+            </div>
+
+            <div class="ref-spotlight-actions">
+              <a href="https://www.zaidamin.org/2026/02/harmony-human-trusted-ai-and-resilient.html" target="_blank" rel="noopener" class="spotlight-btn btn-gold font-cinzel">
+                Read Full Article &rarr;
+              </a>
+              <a href="https://www.zaidamin.org/" target="_blank" rel="noopener" class="spotlight-btn btn-more">
+                All Articles (80) &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="spotlight-slide" data-slide-index="2">
+          <div class="ref-spotlight-visual-wrap">
+            <img src="assets/images/blogger/post_2.jpg" alt="Kehidupan Pendidik saat Pandemi COVID-19 (Part I)" class="ref-spotlight-visual-img" loading="lazy">
+            <div class="ref-visual-overlay"></div>
+            
+            <div class="ref-spotlight-top-bar">
+              <span class="ref-kicker-pill font-cinzel"><span class="pulse-dot"></span> BLOGGER SPOTLIGHT</span>
+              <div class="ref-top-right-group">
+                <span class="ref-badge-scopus font-cinzel">BLOG ARCHIVE</span>
+                <div class="spotlight-arrows-cluster">
+                  <button class="spotlight-arrow-btn spotlight-arrow-prev" aria-label="Previous Article" type="button">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  </button>
+                  <span class="spotlight-counter font-mono"><span class="spotlight-curr">03</span> / <span class="spotlight-total">06</span></span>
+                  <button class="spotlight-arrow-btn spotlight-arrow-next" aria-label="Next Article" type="button">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                </div>
+                <span class="ref-bookmark-icon" title="Featured Spotlight Publication" aria-label="Featured Publication Bookmark">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ref-spotlight-body">
+            <h2 class="ref-spotlight-title">Kehidupan Pendidik saat Pandemi COVID-19 (Part I)</h2>
+
+            <div class="ref-spotlight-meta">
+              <span class="spotlight-venue font-cinzel">das Sein, das Sollen</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-year">2021-01-21</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-author">Zaid Amin, Ph.D.</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-open-access">Scholarly Essay</span>
+            </div>
+
+            <p class="ref-spotlight-desc">Tulisan ini saya kembangkan dan terjemahkan dari Author - Jay Liebowitz yang berasal dari Harrisburg University of Science and Technology . Beliau menguraikan dan menggambarkan bagaimana ideal nya seorang tenaga pendidik yang profesional (dalam level Professor) mampu beradaptasi...</p>
+
+            <div class="spotlight-dots-bar">
+              <button class="spotlight-dot active" data-slide-target="0" aria-label="Slide 1" type="button"></button><button class="spotlight-dot" data-slide-target="1" aria-label="Slide 2" type="button"></button><button class="spotlight-dot" data-slide-target="2" aria-label="Slide 3" type="button"></button><button class="spotlight-dot" data-slide-target="3" aria-label="Slide 4" type="button"></button><button class="spotlight-dot" data-slide-target="4" aria-label="Slide 5" type="button"></button><button class="spotlight-dot" data-slide-target="5" aria-label="Slide 6" type="button"></button>
+            </div>
+
+            <div class="ref-spotlight-actions">
+              <a href="https://www.zaidamin.org/2021/01/kehidupan-pendidik-saat-pandemi-covid.html" target="_blank" rel="noopener" class="spotlight-btn btn-gold font-cinzel">
+                Read Full Article &rarr;
+              </a>
+              <a href="https://www.zaidamin.org/" target="_blank" rel="noopener" class="spotlight-btn btn-more">
+                All Articles (80) &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="spotlight-slide" data-slide-index="3">
+          <div class="ref-spotlight-visual-wrap">
+            <img src="assets/images/blogger/post_3.jpg" alt="Tipe-tipe "bias" dalam penelitian ilmiah" class="ref-spotlight-visual-img" loading="lazy">
+            <div class="ref-visual-overlay"></div>
+            
+            <div class="ref-spotlight-top-bar">
+              <span class="ref-kicker-pill font-cinzel"><span class="pulse-dot"></span> BLOGGER SPOTLIGHT</span>
+              <div class="ref-top-right-group">
+                <span class="ref-badge-scopus font-cinzel">BLOG ARCHIVE</span>
+                <div class="spotlight-arrows-cluster">
+                  <button class="spotlight-arrow-btn spotlight-arrow-prev" aria-label="Previous Article" type="button">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  </button>
+                  <span class="spotlight-counter font-mono"><span class="spotlight-curr">04</span> / <span class="spotlight-total">06</span></span>
+                  <button class="spotlight-arrow-btn spotlight-arrow-next" aria-label="Next Article" type="button">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                </div>
+                <span class="ref-bookmark-icon" title="Featured Spotlight Publication" aria-label="Featured Publication Bookmark">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ref-spotlight-body">
+            <h2 class="ref-spotlight-title">Tipe-tipe "bias" dalam penelitian ilmiah</h2>
+
+            <div class="ref-spotlight-meta">
+              <span class="spotlight-venue font-cinzel">das Sein, das Sollen</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-year">2020-12-25</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-author">Zaid Amin, Ph.D.</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-open-access">Research</span>
+            </div>
+
+            <p class="ref-spotlight-desc">Dalam konteks menjalankan tahapan penelitian riset yang objektif dan konsisten , sebagai peneliti (akademisi) yang profesional sudah seharusnya kita memahami beberapa tipe "bias" (penyimpangan) yang seringkali terjadi. Pertanyaan mendasar timbul, mengenai mengapa kita harus...</p>
+
+            <div class="spotlight-dots-bar">
+              <button class="spotlight-dot active" data-slide-target="0" aria-label="Slide 1" type="button"></button><button class="spotlight-dot" data-slide-target="1" aria-label="Slide 2" type="button"></button><button class="spotlight-dot" data-slide-target="2" aria-label="Slide 3" type="button"></button><button class="spotlight-dot" data-slide-target="3" aria-label="Slide 4" type="button"></button><button class="spotlight-dot" data-slide-target="4" aria-label="Slide 5" type="button"></button><button class="spotlight-dot" data-slide-target="5" aria-label="Slide 6" type="button"></button>
+            </div>
+
+            <div class="ref-spotlight-actions">
+              <a href="https://www.zaidamin.org/2020/12/tipe-tipe-bias-di-dalam-penelitian.html" target="_blank" rel="noopener" class="spotlight-btn btn-gold font-cinzel">
+                Read Full Article &rarr;
+              </a>
+              <a href="https://www.zaidamin.org/" target="_blank" rel="noopener" class="spotlight-btn btn-more">
+                All Articles (80) &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="spotlight-slide" data-slide-index="4">
+          <div class="ref-spotlight-visual-wrap">
+            <img src="assets/images/blogger/post_4.jpg" alt="Cyberspace" class="ref-spotlight-visual-img" loading="lazy">
+            <div class="ref-visual-overlay"></div>
+            
+            <div class="ref-spotlight-top-bar">
+              <span class="ref-kicker-pill font-cinzel"><span class="pulse-dot"></span> BLOGGER SPOTLIGHT</span>
+              <div class="ref-top-right-group">
+                <span class="ref-badge-scopus font-cinzel">BLOG ARCHIVE</span>
+                <div class="spotlight-arrows-cluster">
+                  <button class="spotlight-arrow-btn spotlight-arrow-prev" aria-label="Previous Article" type="button">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  </button>
+                  <span class="spotlight-counter font-mono"><span class="spotlight-curr">05</span> / <span class="spotlight-total">06</span></span>
+                  <button class="spotlight-arrow-btn spotlight-arrow-next" aria-label="Next Article" type="button">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                </div>
+                <span class="ref-bookmark-icon" title="Featured Spotlight Publication" aria-label="Featured Publication Bookmark">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ref-spotlight-body">
+            <h2 class="ref-spotlight-title">Cyberspace</h2>
+
+            <div class="ref-spotlight-meta">
+              <span class="spotlight-venue font-cinzel">das Sein, das Sollen</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-year">2019-02-14</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-author">Zaid Amin, Ph.D.</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-open-access">Human-computer interaction</span>
+            </div>
+
+            <p class="ref-spotlight-desc">Cyberspace is widespread, interconnected digital technology . The term entered the popular culture from science fiction and the arts but is now used by technology strategists, security professionals, government, military and industry leaders and entrepreneurs to describe the...</p>
+
+            <div class="spotlight-dots-bar">
+              <button class="spotlight-dot active" data-slide-target="0" aria-label="Slide 1" type="button"></button><button class="spotlight-dot" data-slide-target="1" aria-label="Slide 2" type="button"></button><button class="spotlight-dot" data-slide-target="2" aria-label="Slide 3" type="button"></button><button class="spotlight-dot" data-slide-target="3" aria-label="Slide 4" type="button"></button><button class="spotlight-dot" data-slide-target="4" aria-label="Slide 5" type="button"></button><button class="spotlight-dot" data-slide-target="5" aria-label="Slide 6" type="button"></button>
+            </div>
+
+            <div class="ref-spotlight-actions">
+              <a href="https://www.zaidamin.org/2019/02/cyberspace.html" target="_blank" rel="noopener" class="spotlight-btn btn-gold font-cinzel">
+                Read Full Article &rarr;
+              </a>
+              <a href="https://www.zaidamin.org/" target="_blank" rel="noopener" class="spotlight-btn btn-more">
+                All Articles (80) &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="spotlight-slide" data-slide-index="5">
+          <div class="ref-spotlight-visual-wrap">
+            <img src="assets/images/blogger/post_5.jpg" alt="How can academics contribute to tackling disinformation?" class="ref-spotlight-visual-img" loading="lazy">
+            <div class="ref-visual-overlay"></div>
+            
+            <div class="ref-spotlight-top-bar">
+              <span class="ref-kicker-pill font-cinzel"><span class="pulse-dot"></span> BLOGGER SPOTLIGHT</span>
+              <div class="ref-top-right-group">
+                <span class="ref-badge-scopus font-cinzel">BLOG ARCHIVE</span>
+                <div class="spotlight-arrows-cluster">
+                  <button class="spotlight-arrow-btn spotlight-arrow-prev" aria-label="Previous Article" type="button">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  </button>
+                  <span class="spotlight-counter font-mono"><span class="spotlight-curr">06</span> / <span class="spotlight-total">06</span></span>
+                  <button class="spotlight-arrow-btn spotlight-arrow-next" aria-label="Next Article" type="button">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                </div>
+                <span class="ref-bookmark-icon" title="Featured Spotlight Publication" aria-label="Featured Publication Bookmark">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ref-spotlight-body">
+            <h2 class="ref-spotlight-title">How can academics contribute to tackling disinformation?</h2>
+
+            <div class="ref-spotlight-meta">
+              <span class="spotlight-venue font-cinzel">das Sein, das Sollen</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-year">2019-02-11</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-author">Zaid Amin, Ph.D.</span>
+              <span class="spotlight-divider">&bull;</span>
+              <span class="spotlight-open-access">Human-computer interaction</span>
+            </div>
+
+            <p class="ref-spotlight-desc">BY NIAMH KIRK ON 31ST JANUARY 2019 ARTICLES This week the European Commission hosted a day-long conference on Countering Online Disinformation which featured the Director of the FuJo Institute, Dr Jane Suiter. The panel discussed how academic research can contribute to a better...</p>
+
+            <div class="spotlight-dots-bar">
+              <button class="spotlight-dot active" data-slide-target="0" aria-label="Slide 1" type="button"></button><button class="spotlight-dot" data-slide-target="1" aria-label="Slide 2" type="button"></button><button class="spotlight-dot" data-slide-target="2" aria-label="Slide 3" type="button"></button><button class="spotlight-dot" data-slide-target="3" aria-label="Slide 4" type="button"></button><button class="spotlight-dot" data-slide-target="4" aria-label="Slide 5" type="button"></button><button class="spotlight-dot" data-slide-target="5" aria-label="Slide 6" type="button"></button>
+            </div>
+
+            <div class="ref-spotlight-actions">
+              <a href="https://www.zaidamin.org/2019/02/how-can-academics-contribute-to.html" target="_blank" rel="noopener" class="spotlight-btn btn-gold font-cinzel">
+                Read Full Article &rarr;
+              </a>
+              <a href="https://www.zaidamin.org/" target="_blank" rel="noopener" class="spotlight-btn btn-more">
+                All Articles (80) &rarr;
+              </a>
+            </div>
           </div>
         </div>
       </article>
