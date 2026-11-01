@@ -155,37 +155,18 @@ def get_page_header(active_page="home"):
       </div>
     </section>
 
-    <!-- 3. Top Academic Navigation Bar (Brand + Menu + Photo Avatar + Actions) -->
-    <header class="ocean-top-bar">
-      <a href="index.html" class="ocean-brand">
-        <div class="ocean-logo-badge">ZA</div>
-        <div class="ocean-brand-text">
-          <span class="ocean-brand-name">Dr. Zaid Amin</span>
-          <span class="ocean-brand-title">Ph.D. &bull; Senior Lecturer</span>
-        </div>
-      </a>
-      
-      <nav class="ocean-nav-links">
-        <a href="index.html" class="ocean-nav-link {'active' if active_page == 'home' else ''}">HOME</a>
-        <a href="publications.html" class="ocean-nav-link {'active' if active_page == 'publications' else ''}">PUBLICATIONS</a>
-        <a href="research.html" class="ocean-nav-link {'active' if active_page == 'research' else ''}">RESEARCH</a>
-        <a href="prospective-students.html" class="ocean-nav-link {'active' if active_page == 'supervision' else ''}">SUPERVISION</a>
-        <a href="cv.html" class="ocean-nav-link {'active' if active_page == 'cv' else ''}">ABOUT &amp; CV</a>
+        <!-- 4. Main Menu (Matching User Wireframe) -->
+    <section class="main-menu-section">
+      <div class="main-menu-kicker font-cinzel">MAIN MENU</div>
+      <nav class="main-menu-nav" aria-label="Main Navigation">
+        <a href="index.html" class="main-menu-link {'active' if active_page == 'home' else ''}">Home</a>
+        <a href="publications.html" class="main-menu-link {'active' if active_page == 'publications' else ''}">Research &amp; Publication</a>
+        <a href="cv.html#talks" class="main-menu-link {'active' if active_page == 'talks' else ''}">Recent Media &amp; Talks</a>
+        <a href="research.html" class="main-menu-link {'active' if active_page == 'research' else ''}">Project</a>
+        <a href="cv.html#achievements" class="main-menu-link {'active' if active_page == 'achievements' else ''}">Achievement</a>
+        <a href="cv.html" class="main-menu-link {'active' if active_page == 'cv' else ''}">About &amp; CV</a>
       </nav>
-      
-      <div class="ocean-profile-actions">
-        <a href="cv.html" class="ocean-avatar-link" title="Dr. Zaid Amin Profile">
-          <picture>
-            <source srcset="assets/images/dr-zaid.webp" type="image/webp">
-            <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="ocean-nav-avatar">
-          </picture>
-          <span class="avatar-status-dot"></span>
-        </a>
-        <a href="mailto:zaid.amin@newinti.edu.my" class="ocean-action-dots" title="Quick Contact">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
-        </a>
-      </div>
-    </header>
+    </section>
 """
 
 def get_page_footer():
@@ -215,251 +196,205 @@ def get_page_footer():
 def generate_golden_ratio_home():
     profile = load_json("profile.json")
     publications = load_json("publications.json")
-    research = load_json("research.json")
-    supervision = load_json("supervision.json")
 
     html = get_html_head("Dr. Zaid Amin | Das Sein, Das Sollen | zaidamin.org")
     html += get_page_header("home")
 
     html += f"""
-    <!-- 3. GOLDEN RATIO MODERN ACADEMIC SHOWCASE (Wardiere Reference Layout) -->
-    <section class="golden-ocean-showcase">
-
-      <!-- Golden Ratio Split: Left Major Hero (~61.8%) & Right Minor Floating Panel (~38.2%) -->
-      <div class="ocean-hero-grid">
-        
-        <!-- LEFT: Major Column (Headline + Bio + 3D Focus Carousel Showcase) -->
-        <div class="ocean-major-hero">
-          <div class="ocean-tagline-badge">
-            <span class="pulse-dot"></span>
-            INTI INTERNATIONAL UNIVERSITY &bull; FDSIT &bull; PH.D. UKM
-          </div>
-
-          <h2 class="ocean-headline">
-            ADVANCING TRUSTWORTHY AI, COGNITIVE COMPUTING &amp; ETHICAL GOVERNANCE
-          </h2>
-
-          <p class="ocean-mission-text">
-            Bridging human-centered computing, behavioral analytics, and agentic AI alignment. Former Head of Informatics Master&rsquo;s Program, driving empirical research in civic compliance, attention-based systems, and digital cultural preservation.
-          </p>
-
-          <div class="ocean-metadata-row">
-            <span class="meta-date">Term 2026</span>
-            <span class="meta-divider">&bull;</span>
-            <span class="meta-loc">Nilai, Malaysia</span>
-            <span class="meta-divider">&bull;</span>
-            <a href="https://orcid.org/0000-0001-5223-3058" target="_blank" rel="noopener" class="meta-orcid">ORCID: 0000-0001-5223-3058</a>
-          </div>
-
-          <!-- 3D Research Focus Carousel Showcase -->
-          <div class="ocean-carousel-showcase" id="research-carousel">
-            <div class="carousel-cards-track">
-              
-              <!-- Card 0: Left Preview -->
-              <div class="carousel-preview-card card-prev" id="carousel-card-0" onclick="setCarouselCard(0)">
-                <div class="carousel-card-inner card-gradient-1">
-                  <div class="carousel-card-icon">🏛️</div>
-                  <div class="carousel-card-title">Digital Heritage &amp; XR</div>
-                  <div class="carousel-card-sub">Srivijayapedia VR</div>
-                </div>
-              </div>
-
-              <!-- Card 1: Center Active Focal Card -->
-              <div class="carousel-preview-card card-active" id="carousel-card-1">
-                <div class="carousel-card-inner card-gradient-2">
-                  <div class="carousel-badge-live">FLAGSHIP FOCUS</div>
-                  <div class="carousel-card-icon">🤖</div>
-                  <div class="carousel-card-title">Trustworthy AI &amp; Governance</div>
-                  <div class="carousel-card-desc">Multi-agent orchestration for sustainable smart cities, civic compliance &amp; algorithmic auditing.</div>
-                  <a href="research.html" class="carousel-explore-link">Explore Theme &rarr;</a>
-                </div>
-                <!-- Arrow Controls -->
-                <button class="carousel-arrow arrow-left" onclick="rotateCarousel(-1)" aria-label="Previous Theme">&#8249;</button>
-                <button class="carousel-arrow arrow-right" onclick="rotateCarousel(1)" aria-label="Next Theme">&#8250;</button>
-              </div>
-
-              <!-- Card 2: Right Preview -->
-              <div class="carousel-preview-card card-next" id="carousel-card-2" onclick="setCarouselCard(2)">
-                <div class="carousel-card-inner card-gradient-3">
-                  <div class="carousel-card-icon">🧠</div>
-                  <div class="carousel-card-title">HCI &amp; Attention Systems</div>
-                  <div class="carousel-card-sub">Cognitive Decisions</div>
-                </div>
-              </div>
-
-            </div>
-
-            <!-- Dot Indicators -->
-            <div class="carousel-dots">
-              <span class="dot" onclick="setCarouselCard(0)"></span>
-              <span class="dot active" onclick="setCarouselCard(1)"></span>
-              <span class="dot" onclick="setCarouselCard(2)"></span>
-            </div>
-          </div>
-        </div>
-
-        <!-- RIGHT: Minor Column (Floating Modern White/Glass Academic Card Panel) -->
-        <div class="ocean-minor-panel">
-          <div class="floating-packages-card">
-            
-            <!-- Search & Filter Bar (Matching reference explore header) -->
-            <div class="card-search-header">
-              <div class="search-input-box">
-                <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                <input type="text" id="home-quick-filter" placeholder="Explore publications, grants, themes..." oninput="filterHomePackages(this.value)">
-              </div>
-              <button class="filter-settings-btn" title="Filter Categories" onclick="location.href='publications.html'">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
-              </button>
-            </div>
-
-            <div class="card-panel-heading-row">
-              <h3 class="card-panel-title">Academic Packages &amp; Works</h3>
-              <span class="card-panel-subtitle">Selected High-Impact Contributions</span>
-            </div>
-
-            <!-- 3 Rich Package Cards (Bromo, Lampung, Lombok style) -->
-            <div class="packages-list" id="home-packages-list">
-              
-              <!-- Package 1: Smart Cities AI -->
-              <div class="package-item-card">
-                <div class="package-thumb-box thumb-ai">
-                  <span class="bookmark-icon">★</span>
-                  <div class="thumb-label">MDPI</div>
-                </div>
-                <div class="package-info-col">
-                  <h4 class="package-item-title">Trustworthy AI for Sustainable Cities</h4>
-                  <ul class="package-bullets">
-                    <li>Multimodal Orchestration Agent Framework</li>
-                    <li>MDPI Smart Cities Journal (Scopus Indexed)</li>
-                    <li>Civic Compliance &amp; Ethical Systems</li>
-                  </ul>
-                </div>
-                <div class="package-action-col">
-                  <div class="package-price-metric">
-                    <span class="metric-big">Q1</span>
-                    <span class="metric-sub">Scopus</span>
-                  </div>
-                  <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="package-book-btn">Read Paper</a>
-                </div>
-              </div>
-
-              <!-- Package 2: The Proxy Trap in Agentic AI -->
-              <div class="package-item-card">
-                <div class="package-thumb-box thumb-ethics">
-                  <span class="bookmark-icon">★</span>
-                  <div class="thumb-label">SSRN</div>
-                </div>
-                <div class="package-info-col">
-                  <h4 class="package-item-title">The Proxy Trap in Agentic AI</h4>
-                  <ul class="package-bullets">
-                    <li>When Metrics Replace Human Judgment</li>
-                    <li>High-Impact AI Governance Preprint</li>
-                    <li>Behavioral Decision Theory</li>
-                  </ul>
-                </div>
-                <div class="package-action-col">
-                  <div class="package-price-metric">
-                    <span class="metric-big">2026</span>
-                    <span class="metric-sub">Preprint</span>
-                  </div>
-                  <a href="https://doi.org/10.2139/ssrn.7670124" target="_blank" rel="noopener" class="package-book-btn">Explore</a>
-                </div>
-              </div>
-
-              <!-- Package 3: Attention-Based Design (IEEE Access) -->
-              <div class="package-item-card">
-                <div class="package-thumb-box thumb-heritage">
-                  <span class="bookmark-icon">★</span>
-                  <div class="thumb-label">IEEE</div>
-                </div>
-                <div class="package-info-col">
-                  <h4 class="package-item-title">Attention-Based Design &amp; Decisions</h4>
-                  <ul class="package-bullets">
-                    <li>Information Sharing in Cognitive Computing</li>
-                    <li>IEEE Access Flagship Review</li>
-                    <li>Ph.D. UKM Foundation Research</li>
-                  </ul>
-                </div>
-                <div class="package-action-col">
-                  <div class="package-price-metric">
-                    <span class="metric-big">IEEE</span>
-                    <span class="metric-sub">Q1 Ranked</span>
-                  </div>
-                  <a href="https://doi.org/10.1109/ACCESS.2021.3087740" target="_blank" rel="noopener" class="package-book-btn">View Paper</a>
-                </div>
-              </div>
-
-            </div>
-
-            <!-- Floating Yellow Expand / Scroll-Down Button (Matching reference circular chevron) -->
-            <a href="#full-academic-content" class="floating-expand-btn" title="Explore Detailed Research Agenda">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-            </a>
-
-          </div>
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- 4. DETAILED ACADEMIC FOUNDATIONS & RESEARCH AGENDA -->
-    <section id="full-academic-content" class="golden-academic-details">
+    <!-- 5. GOLDEN RATIO SPLIT SECTION: SPOTLIGHT ARTICLE (~61.8%) & PROFILE CARD (~38.2%) -->
+    <section class="golden-split-section">
       
-      <div class="details-section-header">
-        <h3 class="details-heading">Comprehensive Research Agenda &amp; Academic Leadership</h3>
-        <p class="details-sub">Investigating the intersections of empirical software engineering, cognitive computing, and algorithmic integrity.</p>
-      </div>
-
-      <div class="details-grid-3col">
-"""
-    # Add research pillars
-    for pillar in research["pillars"]:
-        html += f"""
-        <div class="pillar-item-card">
-          <div class="pillar-badge">RESEARCH PILLAR</div>
-          <h4 class="pillar-title">{pillar['title']}</h4>
-          <p class="pillar-desc">{pillar['full_desc']}</p>
-          <span class="pillar-grant-tag">Grant Target: {pillar['grant_alignment']}</span>
+      <!-- LEFT: Major Spotlight Article (61.8% Golden Ratio Proportion) -->
+      <article class="spotlight-article-card">
+        <div class="spotlight-header-row">
+          <span class="spotlight-kicker font-cinzel"><span class="pulse-dot"></span> SPOTLIGHT ARTICLE</span>
+          <span class="spotlight-badge-q1 font-cinzel">Q1 SCOPUS INDEXED</span>
         </div>
-        """
 
-    html += f"""
-      </div>
+        <h2 class="spotlight-article-title">
+          Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance
+        </h2>
 
-      <!-- Action & Portal Connect Strip -->
-      <div class="academic-connect-strip">
-        <div class="strip-left">
-          <h4 class="strip-title">Join the Research Lab &bull; Prospective Postgraduate Candidates</h4>
-          <p class="strip-desc">Actively recruiting Ph.D. and Master&rsquo;s researchers in Human-Computer Interaction, AI Alignment, and Digital Heritage.</p>
+        <div class="spotlight-meta-line">
+          <span class="spotlight-venue font-cinzel">Smart Cities (MDPI)</span>
+          <span class="spotlight-divider">&bull;</span>
+          <span class="spotlight-year">2026 Volume 9</span>
+          <span class="spotlight-divider">&bull;</span>
+          <span class="spotlight-author">Lead Author: Dr. Zaid Amin, Ph.D.</span>
+          <span class="spotlight-divider">&bull;</span>
+          <span class="spotlight-open-access">Open Access</span>
         </div>
-        <div class="strip-right">
-          <a href="prospective-students.html" class="golden-btn golden-btn-primary">Supervision Information {render_svg_icon('arrow-right')}</a>
-          <a href="cv.html" class="golden-btn golden-btn-outline">Curriculum Vitae {render_svg_icon('arrow-right')}</a>
-        </div>
-      </div>
 
-      <!-- Scholarly Network Cluster -->
-      <div class="scholarly-network-bar">
-        <span class="network-label">Scholarly Profiles &amp; Direct Identifiers:</span>
-        <div class="network-links">
-          <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="network-pill">{render_svg_icon('scholar')} Google Scholar</a>
-          <a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="network-pill">{render_svg_icon('orcid')} ORCID</a>
-          <a href="{profile['social_links']['github']}" target="_blank" rel="noopener" class="network-pill">{render_svg_icon('github')} GitHub</a>
-          <a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" class="network-pill">{render_svg_icon('linkedin')} LinkedIn</a>
-          <a href="mailto:{profile['social_links']['email']}" class="network-pill">{render_svg_icon('email')} Institutional Email</a>
+        <p class="spotlight-summary">
+          Addresses critical systemic vulnerabilities in urban autonomous deployments where metric-driven proxies diverge from authentic civic welfare. Introduces an audited multimodal orchestration agent architecture enforcing real-time cybernetic feedback loops, cognitive transparency, and verifiable alignment for municipal governance.
+        </p>
+
+        <div class="spotlight-highlights-grid">
+          <div class="spotlight-highlight-item">
+            <span class="highlight-num font-cinzel">01</span>
+            <div class="highlight-body">
+              <strong>Multi-Agent Governance:</strong> Formal auditing protocols mitigating reward hacking and metric substitution across decentralized municipal nodes.
+            </div>
+          </div>
+          <div class="spotlight-highlight-item">
+            <span class="highlight-num font-cinzel">02</span>
+            <div class="highlight-body">
+              <strong>Civic Behavioral Cybernetics:</strong> Preserving human ethical discretion and attention-driven oversight within automated administrative decisions.
+            </div>
+          </div>
         </div>
-      </div>
+
+        <div class="spotlight-actions-bar">
+          <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="spotlight-btn btn-gold font-cinzel">
+            Read Paper (DOI) &nearr;
+          </a>
+          <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="spotlight-btn btn-outline">
+            PDF Preprint
+          </a>
+          <button onclick="copyBibtex('amin2026trustworthy')" class="spotlight-btn btn-ghost" title="Copy BibTeX Citation">
+            Copy BibTeX
+          </button>
+          <a href="publications.html" class="spotlight-btn btn-more">
+            Explore All 24 Publications &rarr;
+          </a>
+        </div>
+      </article>
+
+      <!-- RIGHT: Profile Card with Circular Photo, Bio & 4 Stacked Rectangular Buttons (~38.2%) -->
+      <aside class="profile-feature-card">
+        <div class="profile-feature-content">
+          
+          <!-- Circular Photo -->
+          <div class="profile-photo-col">
+            <div class="profile-photo-ring">
+              <picture>
+                <source srcset="assets/images/dr-zaid.webp" type="image/webp">
+                <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="profile-circular-avatar" width="110" height="110">
+              </picture>
+              <span class="profile-live-status" title="Active Senior Lecturer &amp; Researcher"></span>
+            </div>
+          </div>
+
+          <!-- Middle Bio Details -->
+          <div class="profile-info-col">
+            <h3 class="profile-person-name">Dr. Zaid Amin</h3>
+            <div class="profile-person-title">Senior Lecturer in Data Science &amp; IT</div>
+            <div class="profile-person-dept">Faculty of Data Science &amp; IT (FDSIT)<br>INTI International University, Malaysia</div>
+            <div class="profile-person-degree font-cinzel">Ph.D. Computer Science &bull; UKM</div>
+            <p class="profile-person-bio">
+              Trustworthy AI &bull; Human-Centered Computing &bull; Civic Cybernetics
+            </p>
+          </div>
+
+          <!-- Right Stack: 4 Rectangular Action Buttons (Matching Wireframe [ ] [ ] [ ] [ ]) -->
+          <div class="profile-actions-stack">
+            <a href="cv.html" class="profile-rect-btn" title="View Full Curriculum Vitae">
+              <span class="rect-btn-icon">📄</span>
+              <span class="rect-btn-text">Full CV</span>
+            </a>
+            <a href="mailto:{profile['social_links']['email']}" class="profile-rect-btn" title="Institutional Email Contact">
+              <span class="rect-btn-icon">✉</span>
+              <span class="rect-btn-text">Email</span>
+            </a>
+            <a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="profile-rect-btn" title="ORCID Profile">
+              <span class="rect-btn-icon">🆔</span>
+              <span class="rect-btn-text">ORCID</span>
+            </a>
+            <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="profile-rect-btn" title="Google Scholar Profile">
+              <span class="rect-btn-icon">🎓</span>
+              <span class="rect-btn-text">Scholar</span>
+            </a>
+          </div>
+
+        </div>
+      </aside>
 
     </section>
-"""
+
+    <!-- 6. LIST OF JOURNAL: ANIMATE FADE IN FADE OUT MOVE FROM TOP TO DOWN -->
+    <section class="journal-ticker-section">
+      <div class="journal-ticker-container">
+        
+        <div class="ticker-label-col font-cinzel">
+          <span class="ticker-star-glyph">✦</span>
+          <span class="ticker-label-text">INDEXED JOURNALS</span>
+        </div>
+
+        <div class="ticker-viewport-col" id="journal-ticker-viewport" onmouseenter="pauseJournalTicker()" onmouseleave="resumeJournalTicker()">
+          
+          <!-- Slide 0: MDPI Smart Cities -->
+          <div class="ticker-slide-item active" data-slide="0">
+            <span class="ticker-tag tag-q1 font-cinzel">Q1 SCOPUS</span>
+            <span class="ticker-venue-name font-cinzel">Smart Cities (MDPI) &bull; 2026</span>
+            <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="ticker-title-link">
+              Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance &nearr;
+            </a>
+          </div>
+
+          <!-- Slide 1: IEEE Access -->
+          <div class="ticker-slide-item" data-slide="1">
+            <span class="ticker-tag tag-q1 font-cinzel">Q1 SCOPUS</span>
+            <span class="ticker-venue-name font-cinzel">IEEE Access &bull; 2021</span>
+            <a href="https://doi.org/10.1109/ACCESS.2021.3087740" target="_blank" rel="noopener" class="ticker-title-link">
+              Attention-Based Design and User Decisions on Information Sharing: Cybernetics Intervention &nearr;
+            </a>
+          </div>
+
+          <!-- Slide 2: IJACSA -->
+          <div class="ticker-slide-item" data-slide="2">
+            <span class="ticker-tag tag-scopus font-cinzel">SCOPUS INDEXED</span>
+            <span class="ticker-venue-name font-cinzel">IJACSA &bull; 2021</span>
+            <a href="https://doi.org/10.14569/IJACSA.2021.0121092" target="_blank" rel="noopener" class="ticker-title-link">
+              Visual Selective Attention System to Intervene User Attention in Digital Environments &nearr;
+            </a>
+          </div>
+
+          <!-- Slide 3: JISTM -->
+          <div class="ticker-slide-item" data-slide="3">
+            <span class="ticker-tag tag-peer font-cinzel">PEER-REVIEWED</span>
+            <span class="ticker-venue-name font-cinzel">JISTM &bull; 2026</span>
+            <a href="https://doi.org/10.35631/JISTM.1141001" target="_blank" rel="noopener" class="ticker-title-link">
+              Srivijayapedia: A Digital Platform for Cultural Heritage Preservation of the Srivijaya Civilization &nearr;
+            </a>
+          </div>
+
+          <!-- Slide 4: Springer Contributions to Management Science -->
+          <div class="ticker-slide-item" data-slide="4">
+            <span class="ticker-tag tag-scopus font-cinzel">SPRINGER</span>
+            <span class="ticker-venue-name font-cinzel">Contributions to Management Science &bull; 2024</span>
+            <a href="https://doi.org/10.1007/978-3-031-52280-2_14" target="_blank" rel="noopener" class="ticker-title-link">
+              Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World &nearr;
+            </a>
+          </div>
+
+          <!-- Slide 5: SSRN AI Governance Series -->
+          <div class="ticker-slide-item" data-slide="5">
+            <span class="ticker-tag tag-preprint font-cinzel">GOVERNANCE PREPRINT</span>
+            <span class="ticker-venue-name font-cinzel">SSRN Series &bull; 2026</span>
+            <a href="https://doi.org/10.2139/ssrn.7670124" target="_blank" rel="noopener" class="ticker-title-link">
+              The Proxy Trap in Agentic AI: When Metrics Replace Judgment in Autonomous Systems &nearr;
+            </a>
+          </div>
+
+        </div>
+
+        <div class="ticker-controls-col">
+          <span class="ticker-slide-counter font-cinzel" id="ticker-counter">1 / 6</span>
+          <div class="ticker-arrows-box">
+            <button class="ticker-arrow-btn" onclick="rotateJournalTicker(-1)" title="Previous Journal (Top)" aria-label="Previous Journal">&uarr;</button>
+            <button class="ticker-arrow-btn" onclick="rotateJournalTicker(1)" title="Next Journal (Down)" aria-label="Next Journal">&darr;</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 7. FOOTER DIVIDER LINE (Matching Wireframe) -->
+    <hr class="golden-footer-divider">
+    """
     html += get_page_footer()
     return html
 
-# ==============================================================================
-# 2. PUBLICATIONS ARCHIVE (publications.html)
-# ==============================================================================
 def generate_publications_page():
     publications = load_json("publications.json")
 
@@ -634,6 +569,7 @@ def generate_supervision_page():
 def generate_cv_page():
     profile = load_json("profile.json")
     publications = load_json("publications.json")
+    talks_data = load_json("talks.json")
 
     html = get_html_head("Curriculum Vitae | Dr. Zaid Amin, Ph.D. | zaidamin.org", "Curriculum Vitae of Dr. Zaid Amin, Senior Lecturer at INTI International University, Ph.D. from UKM.")
     html += get_page_header("cv")
@@ -676,7 +612,7 @@ def generate_cv_page():
       </div>
 
       <div style="margin-bottom: 32px;">
-        <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid rgba(34, 166, 200, 0.25); padding-bottom: 6px; margin-bottom: 16px; color: #ffffff;">2. Academic Leadership History</h2>
+        <div id="achievements"><h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid rgba(34, 166, 200, 0.25); padding-bottom: 6px; margin-bottom: 16px; color: #ffffff;">2. Academic Leadership History &amp; Key Milestones</h2>
     """
     for role in profile["leadership_roles"]:
         html += f"""
@@ -692,9 +628,30 @@ def generate_cv_page():
 
     html += f"""
       </div>
+      </div>
+
+      <!-- Keynotes, Media & Talks Section (Matching Navigation) -->
+      <div id="talks" style="margin-bottom: 32px;">
+        <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid rgba(34, 166, 200, 0.25); padding-bottom: 6px; margin-bottom: 16px; color: #ffffff;">3. Keynotes, Media &amp; Invited Talks</h2>
+    """
+    for talk in talks_data.get("talks", []):
+        venue_str = f" &bull; {talk['venue']}" if talk.get("venue") else ""
+        html += f"""
+        <div style="margin-bottom: 16px; background: rgba(4, 28, 48, 0.50); border: 1px solid rgba(34, 166, 200, 0.15); border-radius: 12px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <strong style="color: #ffffff; font-size: 1.05rem;">{talk['title']}</strong>
+            <span style="color: var(--brand-gold); font-weight: 700;">{talk['year']}</span>
+          </div>
+          <div style="color: var(--brand-blue); font-size: 0.95rem; margin-top: 4px;">{talk.get('topic', 'Invited Speaker')}{venue_str}</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">{talk.get('details', '')}</div>
+        </div>
+        """
+
+    html += f"""
+      </div>
 
       <div style="margin-bottom: 32px;">
-        <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid rgba(34, 166, 200, 0.25); padding-bottom: 6px; margin-bottom: 16px; color: #ffffff;">3. Complete Publication Record ({len(publications)} Works)</h2>
+        <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid rgba(34, 166, 200, 0.25); padding-bottom: 6px; margin-bottom: 16px; color: #ffffff;">4. Complete Publication Record ({len(publications)} Works)</h2>
         <ol style="margin-left: 20px; font-size: 0.9rem; line-height: 1.8; color: var(--text-body);">
     """
     for pub in publications:
