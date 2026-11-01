@@ -9,6 +9,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
+  initCustomSoundtrackPlayer();
   initScholarlyDrawer();
   initJournalTicker();
   initPublicationsFilter();
@@ -331,4 +332,99 @@ function pauseJournalTicker() {
 
 function resumeJournalTicker() {
   isJournalTickerPaused = false;
+}
+
+/* --------------------------------------------------------------------------
+   Custom Soft-Transparent Soundtrack Player (Test Driving Toothless)
+   -------------------------------------------------------------------------- */
+function initCustomSoundtrackPlayer() {
+  const audio = document.getElementById('soundtrack-audio');
+  const playBtn = document.getElementById('royal-play-btn');
+  const playIcon = playBtn ? playBtn.querySelector('.play-icon') : null;
+  const pauseIcon = playBtn ? playBtn.querySelector('.pause-icon') : null;
+  const timeDisplay = document.getElementById('royal-time-display');
+  const progressWrap = document.getElementById('royal-progress-wrap');
+  const progressFill = document.getElementById('royal-progress-fill');
+  const progressThumb = document.getElementById('royal-progress-thumb');
+  const muteBtn = document.getElementById('royal-mute-btn');
+  const volHigh = muteBtn ? muteBtn.querySelector('.volume-high') : null;
+  const volMuted = muteBtn ? muteBtn.querySelector('.volume-muted') : null;
+
+  if (!audio || !playBtn) return;
+
+  function formatTime(sec) {
+    if (isNaN(sec) || sec < 0) return '0:00';
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return `${m}:${s < 10 ? '0' : ''}${s}`;
+  }
+
+  playBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (audio.paused) {
+      audio.play().catch(err => console.log('Audio playback info:', err));
+    } else {
+      audio.pause();
+    }
+  });
+
+  audio.addEventListener('play', () => {
+    if (playIcon) playIcon.style.display = 'none';
+    if (pauseIcon) pauseIcon.style.display = 'block';
+  });
+
+  audio.addEventListener('pause', () => {
+    if (playIcon) playIcon.style.display = 'block';
+    if (pauseIcon) pauseIcon.style.display = 'none';
+  });
+
+  audio.addEventListener('ended', () => {
+    if (playIcon) playIcon.style.display = 'block';
+    if (pauseIcon) pauseIcon.style.display = 'none';
+    if (progressFill) progressFill.style.width = '0%';
+    if (progressThumb) progressThumb.style.left = '0%';
+    audio.currentTime = 0;
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    const cur = audio.currentTime;
+    const dur = audio.duration || 183;
+    const pct = (cur / dur) * 100;
+
+    if (timeDisplay) {
+      timeDisplay.textContent = `${formatTime(cur)} / ${formatTime(dur)}`;
+    }
+    if (progressFill) {
+      progressFill.style.width = `${pct}%`;
+    }
+    if (progressThumb) {
+      progressThumb.style.left = `${pct}%`;
+    }
+  });
+
+  audio.addEventListener('loadedmetadata', () => {
+    if (timeDisplay && audio.duration) {
+      timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+    }
+  });
+
+  if (progressWrap) {
+    progressWrap.addEventListener('click', (e) => {
+      const rect = progressWrap.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const width = rect.width;
+      const pct = Math.max(0, Math.min(1, clickX / width));
+      const dur = audio.duration || 183;
+      audio.currentTime = pct * dur;
+    });
+  }
+
+  if (muteBtn) {
+    muteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      audio.muted = !audio.muted;
+      if (volHigh) volHigh.style.display = audio.muted ? 'none' : 'block';
+      if (volMuted) volMuted.style.display = audio.muted ? 'block' : 'none';
+    });
+  }
 }
