@@ -387,30 +387,16 @@ def generate_golden_ratio_home():
       <aside class="ref-portals-card">
         <!-- 1. Top Main Menu Navigation Grid (Placed Above Dr. Zaid Profile, 3x2 Golden Ratio Layout) -->
         <nav class="ref-top-menu-bar" aria-label="Main Navigation">
-          <a href="index.html" class="ref-menu-tab active" title="Home Landing">
-            <span class="menu-tab-icon">🏛️</span>
-            <span class="menu-tab-text">Home</span>
-          </a>
+          <a href="index.html" class="ref-menu-tab active" title="Home Landing">Home</a>
           <a href="publications.html" class="ref-menu-tab" title="Research &amp; Publications">
-            <span class="menu-tab-icon">📚</span>
-            <span class="menu-tab-text"><span class="tab-txt-full">Research &amp; Pubs</span><span class="tab-txt-compact">Research</span></span>
+            <span class="tab-txt-full">Research &amp; Pubs</span><span class="tab-txt-compact">Research</span>
           </a>
           <a href="cv.html#talks" class="ref-menu-tab" title="Recent Media &amp; Invited Talks">
-            <span class="menu-tab-icon">🎙️</span>
-            <span class="menu-tab-text"><span class="tab-txt-full">Media &amp; Talks</span><span class="tab-txt-compact">Media</span></span>
+            <span class="tab-txt-full">Media &amp; Talks</span><span class="tab-txt-compact">Media</span>
           </a>
-          <a href="research.html" class="ref-menu-tab" title="Funded Projects &amp; Themes">
-            <span class="menu-tab-icon">💡</span>
-            <span class="menu-tab-text">Project</span>
-          </a>
-          <a href="cv.html#achievements" class="ref-menu-tab" title="Awards &amp; Milestones">
-            <span class="menu-tab-icon">🏆</span>
-            <span class="menu-tab-text">Achievement</span>
-          </a>
-          <a href="cv.html" class="ref-menu-tab" title="About &amp; Curriculum Vitae">
-            <span class="menu-tab-icon">📜</span>
-            <span class="menu-tab-text">About &amp; CV</span>
-          </a>
+          <a href="research.html" class="ref-menu-tab" title="Funded Projects &amp; Themes">Project</a>
+          <a href="cv.html#achievements" class="ref-menu-tab" title="Awards &amp; Milestones">Achievement</a>
+          <a href="cv.html" class="ref-menu-tab" title="About &amp; Curriculum Vitae">About &amp; CV</a>
         </nav>
 
         <div class="ref-menu-divider"></div>
