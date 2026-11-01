@@ -343,11 +343,11 @@
   };
 
   // ==========================================================================
-  // 3. PRIMARY ROTATING LIGHTHOUSE BEACON (Ultra-Soft Natural Warm Light & Zero Hard Edges)
+  // 3. PRIMARY ROTATING LIGHTHOUSE BEACON (Golden Contrast & Radiant Shine)
   // ==========================================================================
   const beacon = {
-    get lx() { return width * 0.321; },
-    get ly() { return height * 0.267; },
+    get lx() { return width * 0.318; },
+    get ly() { return height * 0.262; },
     angle: 0.2,
     speed: 0.011, // majestic ~9s per revolution
 
@@ -367,132 +367,125 @@
 
       ctx.save();
 
-      // A. Steady Ultra-Soft Natural Warm Lantern Glow (Zero Cutting Edges, Silky Atmospheric Feather)
-      ctx.save();
+      // A. Steady Radiant Golden Lantern Core Glow
+      const baseCoreGrad = ctx.createRadialGradient(lx, ly, 0, lx, ly, 20);
+      baseCoreGrad.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+      baseCoreGrad.addColorStop(0.25, 'rgba(255, 230, 130, 0.95)');
+      baseCoreGrad.addColorStop(0.55, 'rgba(245, 180, 25, 0.70)');
+      baseCoreGrad.addColorStop(0.82, 'rgba(217, 119, 6, 0.30)');
+      baseCoreGrad.addColorStop(1, 'rgba(217, 119, 6, 0)');
+
       ctx.globalCompositeOperation = 'screen';
-      ctx.filter = 'blur(6px)';
-
-      const baseCoreGrad = ctx.createRadialGradient(lx, ly, 0, lx, ly, 24);
-      baseCoreGrad.addColorStop(0, 'rgba(255, 255, 250, 0.95)');
-      baseCoreGrad.addColorStop(0.20, 'rgba(255, 238, 170, 0.75)');
-      baseCoreGrad.addColorStop(0.48, 'rgba(250, 195, 80, 0.35)');
-      baseCoreGrad.addColorStop(0.78, 'rgba(225, 145, 40, 0.08)');
-      baseCoreGrad.addColorStop(1, 'rgba(200, 110, 20, 0)');
-
       ctx.fillStyle = baseCoreGrad;
       ctx.beginPath();
-      ctx.arc(lx, ly, 36, 0, Math.PI * 2);
+      ctx.arc(lx, ly, 16, 0, Math.PI * 2);
       ctx.fill();
-      ctx.restore();
 
-      // B. Volumetric Sweeping Beam with Soft Feathering & Natural Warm Light (Zero Cutting Edges)
+      // B. Volumetric Beam Sweeping Across the Ocean (Golden Contrast & Radiant Shine)
       if (facingOcean > 0.02) {
-        const beamIntensity = Math.pow(facingOcean, 1.25) * flashBoost;
-        const beamLength = width * 0.72;
-        const beamPitch = 0.015 + Math.sin(this.angle * 2) * 0.010;
-        const baseHalfWidth = 28 + facingOcean * 16;
+        const beamIntensity = Math.pow(facingOcean, 1.3) * flashBoost;
+        const beamLength = width * 0.74;
+        
+        const beamPitch = 0.02 + Math.sin(this.angle * 2) * 0.012;
+        const endY = ly + Math.sin(beamPitch) * beamLength;
+        const baseHalfWidth = 26 + facingOcean * 14;
 
-        ctx.save();
-        ctx.globalCompositeOperation = 'screen';
-        ctx.filter = 'blur(14px)'; // True optical Gaussian feathering dissolving all cutting edges
+        // Apply soft shadowBlur to feather beam edges
+        ctx.shadowColor = 'rgba(245, 185, 30, 0.75)';
+        ctx.shadowBlur = 24;
 
-        // 3-pass warm light volumetric beam
+        // Multi-pass feathered beam layers (Outer aura -> Mid body -> Core)
         const beamLayers = [
-          { widthScale: 1.30, alphaScale: 0.18, lenScale: 0.96 },
-          { widthScale: 0.90, alphaScale: 0.38, lenScale: 0.90 },
-          { widthScale: 0.50, alphaScale: 0.65, lenScale: 0.82 }
+          { widthScale: 1.35, alphaScale: 0.15, lengthScale: 0.95 },
+          { widthScale: 0.95, alphaScale: 0.40, lengthScale: 0.88 },
+          { widthScale: 0.55, alphaScale: 0.75, lengthScale: 0.82 }
         ];
 
         for (let layer of beamLayers) {
           const halfW = baseHalfWidth * layer.widthScale;
-          const curLen = beamLength * layer.lenScale;
-          const layerEndY = ly + Math.sin(beamPitch) * curLen;
+          const curLen = beamLength * layer.lengthScale;
+          const curEndY = ly + Math.sin(beamPitch) * curLen;
 
-          const p1x = lx - 2.0;
-          const p1y = ly - 1.5;
-          const p2x = lx - 2.0;
-          const p2y = ly + 1.5;
+          const p1x = lx;
+          const p1y = ly - 2.0;
+          const p2x = lx;
+          const p2y = ly + 2.0;
           const p3x = lx + curLen;
-          const p3y = layerEndY + halfW;
+          const p3y = curEndY + halfW;
           const p4x = lx + curLen;
-          const p4y = layerEndY - halfW;
+          const p4y = curEndY - halfW;
 
-          const beamGrad = ctx.createLinearGradient(lx, ly, lx + curLen, layerEndY);
-          beamGrad.addColorStop(0, `rgba(255, 252, 238, ${0.85 * beamIntensity * layer.alphaScale})`);
-          beamGrad.addColorStop(0.15, `rgba(255, 230, 140, ${0.60 * beamIntensity * layer.alphaScale})`);
-          beamGrad.addColorStop(0.40, `rgba(248, 192, 75, ${0.30 * beamIntensity * layer.alphaScale})`);
-          beamGrad.addColorStop(0.70, `rgba(225, 145, 40, ${0.10 * beamIntensity * layer.alphaScale})`);
-          beamGrad.addColorStop(0.95, 'rgba(195, 115, 25, 0)');
-          beamGrad.addColorStop(1, 'rgba(195, 115, 25, 0)');
+          const beamGrad = ctx.createLinearGradient(lx, ly, lx + curLen, curEndY);
+          beamGrad.addColorStop(0, `rgba(255, 255, 245, ${0.95 * beamIntensity * layer.alphaScale})`);
+          beamGrad.addColorStop(0.12, `rgba(255, 230, 120, ${0.75 * beamIntensity * layer.alphaScale})`);
+          beamGrad.addColorStop(0.38, `rgba(245, 185, 30, ${0.50 * beamIntensity * layer.alphaScale})`);
+          beamGrad.addColorStop(0.68, `rgba(217, 130, 10, ${0.22 * beamIntensity * layer.alphaScale})`);
+          beamGrad.addColorStop(0.92, 'rgba(180, 105, 5, 0)');
+          beamGrad.addColorStop(1, 'rgba(180, 105, 5, 0)');
 
           ctx.fillStyle = beamGrad;
           ctx.beginPath();
           ctx.moveTo(p1x, p1y);
           ctx.lineTo(p4x, p4y);
-          ctx.quadraticCurveTo(lx + curLen + 25, layerEndY, p3x, p3y);
+          // Soft rounded tip instead of hard cut vertical line
+          ctx.quadraticCurveTo(lx + curLen + 15, curEndY, p3x, p3y);
           ctx.lineTo(p2x, p2y);
           ctx.closePath();
           ctx.fill();
         }
 
-        ctx.restore();
+        ctx.shadowBlur = 0; // reset
       }
 
-      // C. Soft Natural Warm Lens Flare Corona & Anamorphic Glare when Sweeping toward Viewer
+      // C. Soft "Splash into My Eyes" Lens Flare & Eye Bloom
       if (facingViewer > 0.05) {
         const eyeSplash = Math.pow(facingViewer, 3.2);
         const flareAlpha = Math.min(eyeSplash * flashBoost, 1.0);
 
-        ctx.save();
-        ctx.globalCompositeOperation = 'screen';
-        ctx.filter = 'blur(8px)';
-
         // Soft warm atmospheric wash over viewer
         const eyeWashGrad = ctx.createRadialGradient(lx, ly, 10, lx, ly, Math.max(width, height) * 0.75);
-        eyeWashGrad.addColorStop(0, `rgba(255, 248, 225, ${0.16 * flareAlpha})`);
-        eyeWashGrad.addColorStop(0.35, `rgba(255, 220, 110, ${0.06 * flareAlpha})`);
-        eyeWashGrad.addColorStop(0.7, `rgba(240, 175, 60, ${0.015 * flareAlpha})`);
-        eyeWashGrad.addColorStop(1, 'rgba(240, 175, 60, 0)');
+        eyeWashGrad.addColorStop(0, `rgba(255, 250, 220, ${0.18 * flareAlpha})`);
+        eyeWashGrad.addColorStop(0.35, `rgba(253, 224, 71, ${0.07 * flareAlpha})`);
+        eyeWashGrad.addColorStop(0.7, `rgba(186, 230, 253, ${0.02 * flareAlpha})`);
+        eyeWashGrad.addColorStop(1, 'rgba(186, 230, 253, 0)');
 
         ctx.fillStyle = eyeWashGrad;
         ctx.fillRect(0, 0, width, height);
 
-        // Radiant Soft Lens Flare Corona
-        const flareRadius = 55 + eyeSplash * 45;
+        // Radiant Lens Flare Corona
+        const flareRadius = 70 + eyeSplash * 60;
         const coronaGrad = ctx.createRadialGradient(lx, ly, 0, lx, ly, flareRadius);
-        coronaGrad.addColorStop(0, `rgba(255, 255, 250, ${0.95 * flareAlpha})`);
-        coronaGrad.addColorStop(0.20, `rgba(255, 235, 160, ${0.75 * flareAlpha})`);
-        coronaGrad.addColorStop(0.50, `rgba(245, 185, 65, ${0.40 * flareAlpha})`);
-        coronaGrad.addColorStop(0.80, `rgba(215, 130, 30, ${0.10 * flareAlpha})`);
-        coronaGrad.addColorStop(1, 'rgba(200, 110, 20, 0)');
+        coronaGrad.addColorStop(0, `rgba(255, 255, 255, ${0.98 * flareAlpha})`);
+        coronaGrad.addColorStop(0.18, `rgba(255, 238, 140, ${0.85 * flareAlpha})`);
+        coronaGrad.addColorStop(0.45, `rgba(245, 180, 25, ${0.55 * flareAlpha})`);
+        coronaGrad.addColorStop(0.75, `rgba(217, 119, 6, ${0.20 * flareAlpha})`);
+        coronaGrad.addColorStop(1, 'rgba(217, 119, 6, 0)');
 
         ctx.fillStyle = coronaGrad;
         ctx.beginPath();
-        ctx.arc(lx, ly, flareRadius + 15, 0, Math.PI * 2);
+        ctx.arc(lx, ly, flareRadius, 0, Math.PI * 2);
         ctx.fill();
 
-        // Warm Anamorphic Horizontal Glare Streak
-        const streakLength = 100 + eyeSplash * 140;
-        const streakHeight = 2.0 + eyeSplash * 1.8;
+        // Anamorphic Horizontal Glare Streak
+        const streakLength = 110 + eyeSplash * 150;
+        const streakHeight = 2.2 + eyeSplash * 2.0;
         const streakGrad = ctx.createLinearGradient(lx - streakLength, ly, lx + streakLength, ly);
-        streakGrad.addColorStop(0, 'rgba(255, 245, 210, 0)');
-        streakGrad.addColorStop(0.35, `rgba(255, 225, 130, ${0.28 * flareAlpha})`);
-        streakGrad.addColorStop(0.5, `rgba(255, 255, 250, ${0.85 * flareAlpha})`);
-        streakGrad.addColorStop(0.65, `rgba(255, 225, 130, ${0.28 * flareAlpha})`);
-        streakGrad.addColorStop(1, 'rgba(255, 245, 210, 0)');
+        streakGrad.addColorStop(0, 'rgba(255, 255, 255, 0)');
+        streakGrad.addColorStop(0.35, `rgba(186, 230, 253, ${0.30 * flareAlpha})`);
+        streakGrad.addColorStop(0.5, `rgba(255, 255, 255, ${0.85 * flareAlpha})`);
+        streakGrad.addColorStop(0.65, `rgba(186, 230, 253, ${0.30 * flareAlpha})`);
+        streakGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
 
         ctx.fillStyle = streakGrad;
         ctx.beginPath();
         ctx.ellipse(lx, ly, streakLength, streakHeight, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Brilliant Soft Filament Core
-        ctx.fillStyle = `rgba(255, 255, 255, ${0.92 * flareAlpha})`;
+        // Brilliant Filament Core
+        ctx.fillStyle = `rgba(255, 255, 255, ${0.95 * flareAlpha})`;
         ctx.beginPath();
-        ctx.arc(lx, ly, 3.5 + eyeSplash * 2.5, 0, Math.PI * 2);
+        ctx.arc(lx, ly, 4 + eyeSplash * 3, 0, Math.PI * 2);
         ctx.fill();
-
-        ctx.restore();
       }
 
       ctx.restore();
