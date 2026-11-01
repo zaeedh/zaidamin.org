@@ -120,37 +120,18 @@
       </div>
     </section>
 
-    <!-- 3. Top Academic Navigation Bar (Brand + Menu + Photo Avatar + Actions) -->
-    <header class="ocean-top-bar">
-      <a href="index.html" class="ocean-brand">
-        <div class="ocean-logo-badge">ZA</div>
-        <div class="ocean-brand-text">
-          <span class="ocean-brand-name">Dr. Zaid Amin</span>
-          <span class="ocean-brand-title">Ph.D. &bull; Senior Lecturer</span>
-        </div>
-      </a>
-      
-      <nav class="ocean-nav-links">
-        <a href="index.html" class="ocean-nav-link ">HOME</a>
-        <a href="publications.html" class="ocean-nav-link ">PUBLICATIONS</a>
-        <a href="research.html" class="ocean-nav-link ">RESEARCH</a>
-        <a href="prospective-students.html" class="ocean-nav-link ">SUPERVISION</a>
-        <a href="cv.html" class="ocean-nav-link active">ABOUT &amp; CV</a>
+        <!-- 4. Main Menu (Matching User Wireframe) -->
+    <section class="main-menu-section">
+      <div class="main-menu-kicker font-cinzel">MAIN MENU</div>
+      <nav class="main-menu-nav" aria-label="Main Navigation">
+        <a href="index.html" class="main-menu-link ">Home</a>
+        <a href="publications.html" class="main-menu-link ">Research &amp; Publication</a>
+        <a href="cv.html#talks" class="main-menu-link ">Recent Media &amp; Talks</a>
+        <a href="research.html" class="main-menu-link ">Project</a>
+        <a href="cv.html#achievements" class="main-menu-link ">Achievement</a>
+        <a href="cv.html" class="main-menu-link active">About &amp; CV</a>
       </nav>
-      
-      <div class="ocean-profile-actions">
-        <a href="cv.html" class="ocean-avatar-link" title="Dr. Zaid Amin Profile">
-          <picture>
-            <source srcset="assets/images/dr-zaid.webp" type="image/webp">
-            <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="ocean-nav-avatar">
-          </picture>
-          <span class="avatar-status-dot"></span>
-        </a>
-        <a href="mailto:zaid.amin@newinti.edu.my" class="ocean-action-dots" title="Quick Contact">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
-        </a>
-      </div>
-    </header>
+    </section>
 
     <!-- Subpage Content: Curriculum Vitae -->
     <div class="subpage-container" style="max-width: 960px;">
@@ -203,7 +184,7 @@
       </div>
 
       <div style="margin-bottom: 32px;">
-        <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid rgba(34, 166, 200, 0.25); padding-bottom: 6px; margin-bottom: 16px; color: #ffffff;">2. Academic Leadership History</h2>
+        <div id="achievements"><h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid rgba(34, 166, 200, 0.25); padding-bottom: 6px; margin-bottom: 16px; color: #ffffff;">2. Academic Leadership History &amp; Key Milestones</h2>
     
         <div style="margin-bottom: 16px; background: rgba(4, 28, 48, 0.50); border: 1px solid rgba(34, 166, 200, 0.15); border-radius: 12px; padding: 16px;">
           <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
@@ -251,9 +232,52 @@
         </div>
         
       </div>
+      </div>
+
+      <!-- Keynotes, Media & Talks Section (Matching Navigation) -->
+      <div id="talks" style="margin-bottom: 32px;">
+        <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid rgba(34, 166, 200, 0.25); padding-bottom: 6px; margin-bottom: 16px; color: #ffffff;">3. Keynotes, Media &amp; Invited Talks</h2>
+    
+        <div style="margin-bottom: 16px; background: rgba(4, 28, 48, 0.50); border: 1px solid rgba(34, 166, 200, 0.15); border-radius: 12px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <strong style="color: #ffffff; font-size: 1.05rem;">The Proxy Trap in Agentic AI: Why Metric Optimization Fails Human Values</strong>
+            <span style="color: var(--brand-gold); font-weight: 700;">2026</span>
+          </div>
+          <div style="color: var(--brand-blue); font-size: 0.95rem; margin-top: 4px;">Invited Speaker</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;"></div>
+        </div>
+        
+        <div style="margin-bottom: 16px; background: rgba(4, 28, 48, 0.50); border: 1px solid rgba(34, 166, 200, 0.15); border-radius: 12px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <strong style="color: #ffffff; font-size: 1.05rem;">Humane Interface Design: Rewiring User Attention in an Age of Viral Algorithmic Distraction</strong>
+            <span style="color: var(--brand-gold); font-weight: 700;">2025</span>
+          </div>
+          <div style="color: var(--brand-blue); font-size: 0.95rem; margin-top: 4px;">Invited Speaker</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;"></div>
+        </div>
+        
+        <div style="margin-bottom: 16px; background: rgba(4, 28, 48, 0.50); border: 1px solid rgba(34, 166, 200, 0.15); border-radius: 12px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <strong style="color: #ffffff; font-size: 1.05rem;">Tune-Attention Model: Designing Cybernetic Interventions for Responsible Information Sharing</strong>
+            <span style="color: var(--brand-gold); font-weight: 700;">2024</span>
+          </div>
+          <div style="color: var(--brand-blue); font-size: 0.95rem; margin-top: 4px;">Invited Speaker</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;"></div>
+        </div>
+        
+        <div style="margin-bottom: 16px; background: rgba(4, 28, 48, 0.50); border: 1px solid rgba(34, 166, 200, 0.15); border-radius: 12px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <strong style="color: #ffffff; font-size: 1.05rem;">Digital Heritage Digitization: Reconstructing the Srivijaya Maritime Legacy</strong>
+            <span style="color: var(--brand-gold); font-weight: 700;">2023</span>
+          </div>
+          <div style="color: var(--brand-blue); font-size: 0.95rem; margin-top: 4px;">Invited Speaker</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;"></div>
+        </div>
+        
+      </div>
 
       <div style="margin-bottom: 32px;">
-        <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid rgba(34, 166, 200, 0.25); padding-bottom: 6px; margin-bottom: 16px; color: #ffffff;">3. Complete Publication Record (24 Works)</h2>
+        <h2 style="font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid rgba(34, 166, 200, 0.25); padding-bottom: 6px; margin-bottom: 16px; color: #ffffff;">4. Complete Publication Record (24 Works)</h2>
         <ol style="margin-left: 20px; font-size: 0.9rem; line-height: 1.8; color: var(--text-body);">
     
           <li style="margin-bottom: 12px;">
