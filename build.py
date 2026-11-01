@@ -97,12 +97,24 @@ def get_html_head(title="Dr. Zaid Amin | Academic & Computational Researcher | z
 """
 
 def get_page_header(active_page="home"):
+    profile = load_json("profile.json")
+    star_svg = '''<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" class="david-star-svg">
+      <polygon points="12,2 20.66,17 3.34,17" />
+      <polygon points="12,22 3.34,7 20.66,7" />
+    </svg>'''
     return f"""
   <div class="site-wrapper">
     
-    <!-- 1. Top Epigraph: Das Sein, Das Sollen (Kept at the very top) -->
+    <!-- 1. Top Epigraph: Das Sein, Das Sollen & Top-Right Star of David -->
     <header class="epigraph-header">
-      <h1 class="epigraph-title">Das Sein, Das Sollen.</h1>
+      <div class="epigraph-top-flex">
+        <h1 class="epigraph-title">Das Sein, Das Sollen.</h1>
+        <div class="epigraph-top-actions">
+          <button class="david-star-btn top-star-btn" aria-label="Scholarly Profiles & Identifiers" title="Scholarly Profiles & Direct Identifiers" aria-expanded="false">
+            {star_svg}
+          </button>
+        </div>
+      </div>
     </header>
 
     <!-- 2. Clean, Unobstructed Lighthouse Storm Banner (Option 1 Storm - Active on Every Page) -->
@@ -154,11 +166,31 @@ def get_page_header(active_page="home"):
           </picture>
           <span class="avatar-status-dot"></span>
         </a>
-        <a href="mailto:zaid.amin@newinti.edu.my" class="ocean-action-dots" title="Quick Contact">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
-        </a>
+        <button class="david-star-btn menu-star-btn" aria-label="Scholarly Profiles & Identifiers" title="Scholarly Profiles & Direct Identifiers" aria-expanded="false">
+          {star_svg}
+        </button>
       </div>
     </header>
+
+    <!-- Scholarly Profiles Slide-Out Drawer (Animated by Star of David Button) -->
+    <div class="scholarly-header-drawer" id="scholarly-header-drawer" aria-hidden="true">
+      <div class="scholarly-drawer-inner">
+        <div class="drawer-header-label">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.8" stroke-linejoin="round" class="inline-star">
+            <polygon points="12,2 20.66,17 3.34,17" />
+            <polygon points="12,22 3.34,7 20.66,7" />
+          </svg>
+          <span class="drawer-title">Scholarly Profiles &amp; Direct Identifiers:</span>
+        </div>
+        <div class="drawer-network-links">
+          <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="drawer-pill">{render_svg_icon('scholar')} <span>Google Scholar</span></a>
+          <a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="drawer-pill">{render_svg_icon('orcid')} <span>ORCID</span></a>
+          <a href="{profile['social_links']['github']}" target="_blank" rel="noopener" class="drawer-pill">{render_svg_icon('github')} <span>GitHub</span></a>
+          <a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" class="drawer-pill">{render_svg_icon('linkedin')} <span>LinkedIn</span></a>
+          <a href="mailto:{profile['social_links']['email']}" class="drawer-pill">{render_svg_icon('email')} <span>Institutional Email</span></a>
+        </div>
+      </div>
+    </div>
 """
 
 def get_page_footer():
