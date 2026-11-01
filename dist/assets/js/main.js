@@ -725,3 +725,25 @@ function rotatePortalSlotFlip() {
     }, 450);
   }, 400);
 }
+
+
+// ==============================================================================
+// VISITOR METRICS POPUP TOUCH / CLICK TOGGLE
+// ==============================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const statsTrigger = document.querySelector('.stats-title-interactive');
+  if (statsTrigger) {
+    statsTrigger.addEventListener('click', (e) => {
+      if (!e.target.closest('.stats-tooltip-popup')) {
+        const popup = statsTrigger.querySelector('.stats-tooltip-popup');
+        if (popup) popup.classList.toggle('is-active');
+      }
+    });
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.stats-title-interactive')) {
+        const popup = statsTrigger.querySelector('.stats-tooltip-popup');
+        if (popup) popup.classList.remove('is-active');
+      }
+    });
+  }
+});
