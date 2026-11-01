@@ -132,6 +132,19 @@ def get_page_header(active_page="home"):
       </div>
     </header>
 
+    
+    <!-- 4. Main Menu (Matching User Wireframe) -->
+    <section class="main-menu-section">
+      <nav class="main-menu-nav" aria-label="Main Navigation">
+        <a href="index.html" class="main-menu-link {'active' if active_page == 'home' else ''}">Home</a>
+        <a href="publications.html" class="main-menu-link {'active' if active_page == 'publications' else ''}">Research &amp; Publication</a>
+        <a href="cv.html#talks" class="main-menu-link {'active' if active_page == 'talks' else ''}">Recent Media &amp; Talks</a>
+        <a href="research.html" class="main-menu-link {'active' if active_page == 'research' else ''}">Project</a>
+        <a href="cv.html#achievements" class="main-menu-link {'active' if active_page == 'achievements' else ''}">Achievement</a>
+        <a href="cv.html" class="main-menu-link {'active' if active_page == 'cv' else ''}">About &amp; CV</a>
+      </nav>
+    </section>
+
     <!-- 2. Clean, Unobstructed Lighthouse Storm Banner (Option 1 Storm - Active on Every Page) -->
     <section class="lighthouse-banner-frame">
       <picture>
@@ -153,18 +166,6 @@ def get_page_header(active_page="home"):
           <span class="golden-cite-line"></span>
         </cite>
       </div>
-    </section>
-
-        <!-- 4. Main Menu (Matching User Wireframe) -->
-    <section class="main-menu-section">
-      <nav class="main-menu-nav" aria-label="Main Navigation">
-        <a href="index.html" class="main-menu-link {'active' if active_page == 'home' else ''}">Home</a>
-        <a href="publications.html" class="main-menu-link {'active' if active_page == 'publications' else ''}">Research &amp; Publication</a>
-        <a href="cv.html#talks" class="main-menu-link {'active' if active_page == 'talks' else ''}">Recent Media &amp; Talks</a>
-        <a href="research.html" class="main-menu-link {'active' if active_page == 'research' else ''}">Project</a>
-        <a href="cv.html#achievements" class="main-menu-link {'active' if active_page == 'achievements' else ''}">Achievement</a>
-        <a href="cv.html" class="main-menu-link {'active' if active_page == 'cv' else ''}">About &amp; CV</a>
-      </nav>
     </section>
 """
 
