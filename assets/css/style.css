@@ -2920,9 +2920,9 @@ a {
   max-width: 100% !important;
   height: 28px;
   color-scheme: dark;
-  background: rgba(3, 18, 30, 0.38);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(4, 24, 40, 0.32) !important; /* Deep oceanic glass */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
@@ -2932,21 +2932,27 @@ a {
               background 0.3s ease;
 }
 
-.royal-vanish-container:hover audio,
-.royal-vanish-container audio:focus {
+.royal-vanish-container:hover audio {
   opacity: 1;
-  background: rgba(3, 20, 36, 0.60);
+  background: rgba(4, 28, 48, 0.52) !important;
 }
 
-/* Royal Aura Popup: Hidden initially, buttery smooth fade-in / fade-out animation */
+/* Chrome/Edge media controls panel transparent overrides so no grey box shows */
+.royal-vanish-container audio::-webkit-media-controls-panel,
+.royal-vanish-container audio::-webkit-media-controls-enclosure {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Royal Aura Popup: Strictly hidden when not hovering */
 .royal-aura-popup {
   position: absolute;
   bottom: calc(100% + 6px);
   left: 50%;
   transform: translateX(-50%) translateY(6px);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
   background: linear-gradient(135deg, rgba(3, 20, 34, 0.96), rgba(2, 12, 22, 0.98));
   border: 1px solid rgba(212, 175, 55, 0.42);
   border-radius: 8px;
@@ -2957,18 +2963,25 @@ a {
   text-align: center;
   white-space: nowrap;
   z-index: 50;
-  transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 0.32s;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.28s;
 }
 
-/* Smooth fade in on container hover or audio focus */
-.royal-vanish-container:hover .royal-aura-popup,
-.royal-vanish-container:focus-within .royal-aura-popup {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
+/* Show ONLY when the mouse is actively hovering over the container */
+.royal-vanish-container:hover .royal-aura-popup {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateX(-50%) translateY(0) !important;
+}
+
+/* Strictly ensure it is hidden whenever mouse is NOT hovering */
+.royal-vanish-container:not(:hover) .royal-aura-popup {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateX(-50%) translateY(6px) !important;
 }
 
 .royal-title {
