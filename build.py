@@ -113,12 +113,12 @@ def get_page_header(active_page="home"):
         <div class="top-scholarly-cluster">
           <!-- Side-Expanding Scholarly Profiles Links (Activated by Star Button) -->
           <div class="top-scholarly-links" id="top-scholarly-links" aria-hidden="true">
-            <span class="top-scholarly-label">Scholarly Profiles:</span>
-            <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="top-link-pill" title="Google Scholar">{render_svg_icon('scholar')} <span>Scholar</span></a>
+            <span class="top-scholarly-label">Scholarly Profiles &amp; Direct Identifiers:</span>
+            <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="top-link-pill" title="Google Scholar">{render_svg_icon('scholar')} <span>Google Scholar</span></a>
             <a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="top-link-pill" title="ORCID">{render_svg_icon('orcid')} <span>ORCID</span></a>
             <a href="{profile['social_links']['github']}" target="_blank" rel="noopener" class="top-link-pill" title="GitHub">{render_svg_icon('github')} <span>GitHub</span></a>
             <a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" class="top-link-pill" title="LinkedIn">{render_svg_icon('linkedin')} <span>LinkedIn</span></a>
-            <a href="mailto:{profile['social_links']['email']}" class="top-link-pill" title="Institutional Email">{render_svg_icon('email')} <span>Email</span></a>
+            <a href="mailto:{profile['social_links']['email']}" class="top-link-pill" title="Institutional Email">{render_svg_icon('email')} <span>Institutional Email</span></a>
           </div>
 
           <!-- Pure Rotating Star of David Button (No circle boundary!) -->
