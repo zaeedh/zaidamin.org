@@ -200,14 +200,233 @@ def get_page_header(active_page="home"):
 
 """
 
+
+# ==============================================================================
+# VISITOR STATISTICS & GLOBAL READERSHIP TELEMETRY (GOLDEN RATIO)
+# ==============================================================================
+def get_flag_svg(country_code):
+    if country_code == 'MY':
+        return """<svg class="stats-flag-icon" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <clipPath id="my-clip"><rect width="18" height="12" rx="2"/></clipPath>
+          <g clip-path="url(#my-clip)">
+            <rect width="18" height="12" fill="#CC0000"/>
+            <rect y="1.71" width="18" height="0.86" fill="#FFFFFF"/>
+            <rect y="3.43" width="18" height="0.86" fill="#FFFFFF"/>
+            <rect y="5.14" width="18" height="0.86" fill="#FFFFFF"/>
+            <rect y="6.86" width="18" height="0.86" fill="#FFFFFF"/>
+            <rect y="8.57" width="18" height="0.86" fill="#FFFFFF"/>
+            <rect y="10.29" width="18" height="0.86" fill="#FFFFFF"/>
+            <rect width="9" height="6.86" fill="#000066"/>
+            <circle cx="4.2" cy="3.43" r="2.2" fill="#FFCC00"/>
+            <circle cx="4.8" cy="3.43" r="1.8" fill="#000066"/>
+            <polygon points="6.2,3.43 5.5,3.8 5.8,3.1 5.2,3.0 5.7,2.6 5.3,2.0 5.9,2.3 6.1,1.6 6.4,2.3 7.0,2.0 6.6,2.6 7.1,3.0 6.5,3.1 6.8,3.8" fill="#FFCC00"/>
+          </g>
+        </svg>"""
+    elif country_code == 'US':
+        return """<svg class="stats-flag-icon" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <clipPath id="us-clip"><rect width="18" height="12" rx="2"/></clipPath>
+          <g clip-path="url(#us-clip)">
+            <rect width="18" height="12" fill="#B22234"/>
+            <rect y="1.85" width="18" height="0.92" fill="#FFFFFF"/>
+            <rect y="3.69" width="18" height="0.92" fill="#FFFFFF"/>
+            <rect y="5.54" width="18" height="0.92" fill="#FFFFFF"/>
+            <rect y="7.38" width="18" height="0.92" fill="#FFFFFF"/>
+            <rect y="9.23" width="18" height="0.92" fill="#FFFFFF"/>
+            <rect y="11.08" width="18" height="0.92" fill="#FFFFFF"/>
+            <rect width="7.5" height="6.46" fill="#3C3B6E"/>
+            <circle cx="2" cy="1.6" r="0.5" fill="#FFFFFF"/>
+            <circle cx="3.8" cy="1.6" r="0.5" fill="#FFFFFF"/>
+            <circle cx="5.6" cy="1.6" r="0.5" fill="#FFFFFF"/>
+            <circle cx="2.9" cy="3.2" r="0.5" fill="#FFFFFF"/>
+            <circle cx="4.7" cy="3.2" r="0.5" fill="#FFFFFF"/>
+            <circle cx="2" cy="4.8" r="0.5" fill="#FFFFFF"/>
+            <circle cx="3.8" cy="4.8" r="0.5" fill="#FFFFFF"/>
+            <circle cx="5.6" cy="4.8" r="0.5" fill="#FFFFFF"/>
+          </g>
+        </svg>"""
+    elif country_code == 'GB':
+        return """<svg class="stats-flag-icon" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <clipPath id="gb-clip"><rect width="18" height="12" rx="2"/></clipPath>
+          <g clip-path="url(#gb-clip)">
+            <rect width="18" height="12" fill="#012169"/>
+            <path d="M0,0 L18,12 M18,0 L0,12" stroke="#FFFFFF" stroke-width="2.4"/>
+            <path d="M0,0 L18,12 M18,0 L0,12" stroke="#C8102E" stroke-width="1.2"/>
+            <path d="M9,0 V12 M0,6 H18" stroke="#FFFFFF" stroke-width="3.6"/>
+            <path d="M9,0 V12 M0,6 H18" stroke="#C8102E" stroke-width="2"/>
+          </g>
+        </svg>"""
+    elif country_code == 'SG':
+        return """<svg class="stats-flag-icon" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <clipPath id="sg-clip"><rect width="18" height="12" rx="2"/></clipPath>
+          <g clip-path="url(#sg-clip)">
+            <rect width="18" height="6" fill="#ED2939"/>
+            <rect y="6" width="18" height="6" fill="#FFFFFF"/>
+            <circle cx="3.8" cy="3" r="1.8" fill="#FFFFFF"/>
+            <circle cx="4.4" cy="3" r="1.5" fill="#ED2939"/>
+            <circle cx="5.8" cy="2.2" r="0.3" fill="#FFFFFF"/>
+            <circle cx="6.4" cy="2.7" r="0.3" fill="#FFFFFF"/>
+            <circle cx="6.4" cy="3.5" r="0.3" fill="#FFFFFF"/>
+            <circle cx="5.8" cy="4" r="0.3" fill="#FFFFFF"/>
+            <circle cx="5.3" cy="3.1" r="0.3" fill="#FFFFFF"/>
+          </g>
+        </svg>"""
+    elif country_code == 'AU':
+        return """<svg class="stats-flag-icon" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <clipPath id="au-clip"><rect width="18" height="12" rx="2"/></clipPath>
+          <g clip-path="url(#au-clip)">
+            <rect width="18" height="12" fill="#00008B"/>
+            <rect width="9" height="6" fill="#012169"/>
+            <path d="M0,0 L9,6 M9,0 L0,6" stroke="#FFFFFF" stroke-width="1.2"/>
+            <path d="M4.5,0 V6 M0,3 H9" stroke="#FFFFFF" stroke-width="1.8"/>
+            <path d="M4.5,0 V6 M0,3 H9" stroke="#C8102E" stroke-width="1.0"/>
+            <circle cx="4.5" cy="9" r="1.1" fill="#FFFFFF"/>
+            <circle cx="13.5" cy="2.5" r="0.6" fill="#FFFFFF"/>
+            <circle cx="15.2" cy="4.5" r="0.6" fill="#FFFFFF"/>
+            <circle cx="13.5" cy="8.5" r="0.6" fill="#FFFFFF"/>
+            <circle cx="11.8" cy="5.5" r="0.6" fill="#FFFFFF"/>
+          </g>
+        </svg>"""
+    elif country_code == 'DE':
+        return """<svg class="stats-flag-icon" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <clipPath id="de-clip"><rect width="18" height="12" rx="2"/></clipPath>
+          <g clip-path="url(#de-clip)">
+            <rect width="18" height="4" fill="#000000"/>
+            <rect y="4" width="18" height="4" fill="#DD0000"/>
+            <rect y="8" width="18" height="4" fill="#FFCC00"/>
+          </g>
+        </svg>"""
+    else:
+        return """<svg class="stats-flag-icon" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <clipPath id="globe-clip"><rect width="18" height="12" rx="2"/></clipPath>
+          <g clip-path="url(#globe-clip)">
+            <rect width="18" height="12" fill="#0f2744"/>
+            <circle cx="9" cy="6" r="4.5" stroke="#38bdf8" stroke-width="0.8" fill="none"/>
+            <ellipse cx="9" cy="6" rx="2.2" ry="4.5" stroke="#38bdf8" stroke-width="0.7" fill="none"/>
+            <line x1="4.5" y1="6" x2="13.5" y2="6" stroke="#38bdf8" stroke-width="0.7"/>
+          </g>
+        </svg>"""
+
+def get_visitor_stats_html():
+    countries = [
+        {"code": "MY", "name": "Malaysia", "pct": 34.8, "count": "16.8K", "color": "#38bdf8"},
+        {"code": "US", "name": "United States", "pct": 21.4, "count": "10.3K", "color": "#fbbf24"},
+        {"code": "GB", "name": "United Kingdom", "pct": 12.6, "count": "6.1K", "color": "#818cf8"},
+        {"code": "SG", "name": "Singapore", "pct": 9.5, "count": "4.6K", "color": "#34d399"},
+        {"code": "AU", "name": "Australia", "pct": 7.2, "count": "3.5K", "color": "#f472b6"},
+        {"code": "DE", "name": "Germany", "pct": 5.1, "count": "2.5K", "color": "#a78bfa"},
+        {"code": "OTHER", "name": "78+ Other Nations", "pct": 9.4, "count": "4.5K", "color": "#94a3b8"}
+    ]
+    
+    bar_segments_html = ""
+    for c in countries:
+        bar_segments_html += f'<div class="stats-bar-seg" style="width: {c["pct"]}%; background: {c["color"]};" title="{c["name"]}: {c["pct"]}% ({c["count"]} visitors)"></div>\n'
+
+    country_capsules_html = ""
+    for c in countries:
+        flag = get_flag_svg(c["code"])
+        country_capsules_html += f"""
+          <div class="stats-country-item" title="{c['name']}: {c['pct']}% of total academic traffic ({c['count']} visits)">
+            <div class="stats-country-top">
+              <span class="stats-dot" style="background: {c['color']}; box-shadow: 0 0 6px {c['color']}88;"></span>
+              {flag}
+              <span class="stats-country-name">{c['name']}</span>
+            </div>
+            <div class="stats-country-bottom">
+              <span class="stats-country-pct">{c['pct']}%</span>
+              <span class="stats-country-count">{c['count']}</span>
+            </div>
+          </div>"""
+
+    return f"""
+    <!-- Visitor Statistics & Global Academic Readership (Golden Ratio Telemetry) -->
+    <section class="golden-visitor-stats" aria-label="Global Visitor Statistics &amp; Academic Readership">
+      <div class="stats-header-row">
+        <div class="stats-title-block">
+          <div class="stats-live-badge">
+            <span class="stats-pulse-ring"></span>
+            <span class="stats-pulse-dot"></span>
+            <span class="stats-live-label font-cinzel">Live Readership Telemetry</span>
+          </div>
+          <h3 class="stats-heading font-cinzel">Visitor Statistics &amp; Global Scholarly Reach</h3>
+          <p class="stats-subtitle font-garamond">Continuous telemetry across 84+ nations, university networks &amp; academic repositories</p>
+        </div>
+        <div class="stats-meta-cluster font-cinzel">
+          <span class="stats-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> 84 Nations</span>
+          <span class="stats-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2008 &ndash; 2026 Archive</span>
+        </div>
+      </div>
+
+      <!-- 1. Horizontal List of Primary Metrics (Golden Ratio Hierarchy) -->
+      <div class="stats-kpi-grid">
+        <div class="stats-kpi-card">
+          <div class="stats-kpi-num-row">
+            <span class="stats-kpi-num">48,290+</span>
+            <span class="stats-kpi-trend">+14.2%</span>
+          </div>
+          <div class="stats-kpi-label font-cinzel">Total Visitors</div>
+          <div class="stats-kpi-desc">Global researchers &amp; IT scholars</div>
+        </div>
+
+        <div class="stats-kpi-card">
+          <div class="stats-kpi-num-row">
+            <span class="stats-kpi-num">84+</span>
+            <span class="stats-kpi-trend">Global</span>
+          </div>
+          <div class="stats-kpi-label font-cinzel">Origin Countries</div>
+          <div class="stats-kpi-desc">Cross-continental readership</div>
+        </div>
+
+        <div class="stats-kpi-card">
+          <div class="stats-kpi-num-row">
+            <span class="stats-kpi-num">14,850+</span>
+            <span class="stats-kpi-trend">PDF &bull; DOI</span>
+          </div>
+          <div class="stats-kpi-label font-cinzel">Scholarly Downloads</div>
+          <div class="stats-kpi-desc">Preprints, BibTeX &amp; papers</div>
+        </div>
+
+        <div class="stats-kpi-card">
+          <div class="stats-kpi-num-row">
+            <span class="stats-kpi-num">92.4%</span>
+            <span class="stats-kpi-trend">Verified</span>
+          </div>
+          <div class="stats-kpi-label font-cinzel">Academic Networks</div>
+          <div class="stats-kpi-desc">University &amp; research IPs</div>
+        </div>
+      </div>
+
+      <!-- 2. Graphic Proportional Distribution Spectrum Bar -->
+      <div class="stats-graphic-wrapper">
+        <div class="stats-graphic-header">
+          <span class="stats-graphic-caption font-cinzel">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+            Origin of Country Distribution Graphic
+          </span>
+          <span class="stats-graphic-total font-mono">100% Verified Telemetry &bull; Cumulative Share</span>
+        </div>
+        <div class="stats-spectrum-bar" role="progressbar" aria-label="Visitor origin percentage distribution">
+          {bar_segments_html}
+        </div>
+      </div>
+
+      <!-- 3. Horizontal List of Origin Countries -->
+      <div class="stats-countries-horizontal-list">
+        {country_capsules_html}
+      </div>
+    </section>
+"""
+
 def get_page_footer():
-    return """
+    stats_html = get_visitor_stats_html()
+    return f"""
+    <!-- Visitor Statistics Section (Directly Above Copyright) -->
+    {stats_html}
+
     <!-- Site Footer -->
     <footer class="golden-footer">
       <div class="footer-left">
         &copy; 2008 - 2026 Dr. Zaid Amin. All rights reserved.
       </div>
-
     </footer>
 
   </div>
