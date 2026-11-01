@@ -2897,7 +2897,7 @@ a {
 }
 
 /* ==========================================================================
-   FEATURED CONTENT AUDIO PLAYER (SECOND-GAZE DESIGN, TIGHT & TRANSLUCENT)
+   FEATURED CONTENT AUDIO PLAYER (BORDERLESS, FULL-FIT, TRANSLUCENT SECOND-GAZE)
    ========================================================================== */
 .royal-vanish-container {
   position: relative;
@@ -2906,92 +2906,84 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px 20px;
-  margin: 6px 0 8px 0;
-  background: rgba(4, 24, 40, 0.28); /* Ethereal, more transparent second-gaze glass */
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(140, 180, 205, 0.12); /* Matching second-gaze quote border */
-  border-radius: 8px;
-  box-shadow: 0 4px 14px rgba(0, 8, 20, 0.20);
-  transition: all var(--transition);
+  padding: 0;
+  margin: 2px 0 6px 0;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
   z-index: 15;
 }
 
-.royal-vanish-container:hover {
-  background: rgba(4, 24, 40, 0.42);
-  border-color: rgba(140, 180, 205, 0.22);
-}
-
-/* Very faint ambient top highlight line matching second-gaze quote */
-.royal-vanish-container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 20%;
-  right: 20%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(140, 180, 205, 0.22) 50%, transparent);
-  pointer-events: none;
-}
-
-/* Golden ratio content width: ~61.8% of container on desktop */
+/* Full-fit audio player stretching seamlessly to screen edges */
 .royal-vanish-container audio {
-  width: 61.8%;
-  max-width: 680px;
-  min-width: 280px;
-  height: 32px;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 28px;
   color-scheme: dark;
-  background: transparent;
-  outline: none;
+  background: rgba(3, 18, 30, 0.38);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
   border-radius: 999px;
-  filter: drop-shadow(0 2px 6px rgba(0, 10, 24, 0.35));
-  transition: all 0.2s ease;
+  opacity: 0.82;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.3s ease;
 }
 
-.royal-vanish-container audio:hover,
+.royal-vanish-container:hover audio,
 .royal-vanish-container audio:focus {
-  filter: drop-shadow(0 3px 10px rgba(34, 166, 200, 0.25));
+  opacity: 1;
+  background: rgba(3, 20, 36, 0.60);
 }
 
-/* Royal Aura Popup: Hidden initially, reveals cleanly on hover */
+/* Royal Aura Popup: Hidden initially, buttery smooth fade-in / fade-out animation */
 .royal-aura-popup {
   position: absolute;
-  bottom: calc(100% + 8px);
+  bottom: calc(100% + 6px);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(6px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
   background: linear-gradient(135deg, rgba(3, 20, 34, 0.96), rgba(2, 12, 22, 0.98));
-  border: 1px solid rgba(212, 175, 55, 0.40);
+  border: 1px solid rgba(212, 175, 55, 0.42);
   border-radius: 8px;
-  padding: 5px 14px;
+  padding: 4px 14px;
   box-shadow: 0 8px 24px rgba(0, 10, 24, 0.75), 0 0 14px rgba(212, 175, 55, 0.20);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   text-align: center;
   white-space: nowrap;
-  pointer-events: none;
   z-index: 50;
-  animation: royalAuraFloat 3.5s ease-in-out infinite alternate;
+  transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.32s;
 }
 
-@keyframes royalAuraFloat {
-  0% { transform: translateX(-50%) translateY(0); }
-  100% { transform: translateX(-50%) translateY(-2.5px); }
+/* Smooth fade in on container hover or audio focus */
+.royal-vanish-container:hover .royal-aura-popup,
+.royal-vanish-container:focus-within .royal-aura-popup {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
 }
 
 .royal-title {
   font-family: var(--font-cinzel), 'Cormorant Garamond', Georgia, serif;
-  font-size: 0.82rem;
+  font-size: 0.80rem;
   font-weight: 700;
   color: #ffffff;
   letter-spacing: 0.05em;
-  line-height: 1.25;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  line-height: 1.2;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
 }
 
 .royal-subtitle {
   font-family: var(--font-sans);
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   font-weight: 700;
   color: #d4af37;
   text-transform: uppercase;
@@ -3013,22 +3005,16 @@ a {
 
 @media (max-width: 768px) {
   .royal-vanish-container {
-    padding: 4px 10px;
-    margin: 4px 0 6px 0;
-    border-radius: 6px;
-  }
-  .royal-vanish-container audio {
-    width: 100%;
-    max-width: 100%;
+    margin: 2px 0 4px 0;
   }
   .royal-aura-popup {
-    padding: 4px 10px;
-    bottom: calc(100% + 6px);
+    padding: 3px 10px;
+    bottom: calc(100% + 5px);
   }
   .royal-title {
-    font-size: 0.76rem;
+    font-size: 0.74rem;
   }
   .royal-subtitle {
-    font-size: 0.62rem;
+    font-size: 0.60rem;
   }
 }
