@@ -1764,40 +1764,44 @@ a {
 }
 
 /* ==========================================================================
-   STAR OF DAVID ANIMATED BUTTON & SCHOLARLY PROFILES DRAWER
+   TOP RIGHT PURE STAR OF DAVID & SIDE EXPANDING SCHOLARLY LINKS
    ========================================================================== */
 .epigraph-top-flex {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  position: relative;
 }
 
-.david-star-btn {
+.top-scholarly-cluster {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+/* Pure Rotating Star of David Button - NO circle boundary! */
+.david-star-pure-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: rgba(4, 28, 48, 0.72);
-  border: 1px solid rgba(212, 175, 55, 0.35);
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
   color: #d4af37; /* Premium Imperial Gold */
   cursor: pointer;
-  outline: none;
-  padding: 0;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 10px rgba(0, 8, 20, 0.4), 0 0 10px rgba(212, 175, 55, 0.16);
-  position: relative;
+  padding: 4px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
   flex-shrink: 0;
+  user-select: none;
 }
 
-.david-star-btn:hover,
-.david-star-btn.is-active {
-  background: rgba(6, 36, 62, 0.92);
-  border-color: rgba(212, 175, 55, 0.75);
-  box-shadow: 0 4px 18px rgba(0, 10, 24, 0.5), 0 0 20px rgba(212, 175, 55, 0.50);
-  transform: scale(1.08);
+.david-star-pure-btn:hover,
+.david-star-pure-btn.is-active {
+  transform: scale(1.18);
+  filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.85));
 }
 
 .david-star-svg {
@@ -1807,8 +1811,8 @@ a {
   transition: transform 0.3s ease;
 }
 
-.david-star-btn:hover .david-star-svg {
-  animation-duration: 7s; /* Gently accelerates on hover */
+.david-star-pure-btn:hover .david-star-svg {
+  animation-duration: 6s; /* Gently accelerates on hover */
 }
 
 @keyframes starRotateBreathe {
@@ -1828,113 +1832,85 @@ a {
   }
 }
 
-/* Animated Scholarly Profiles Drawer attached to Upper Menu */
-.scholarly-header-drawer {
-  position: relative;
-  width: 100%;
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transform: translateY(-8px) scaleY(0.97);
-  transform-origin: top center;
-  transition: max-height 0.38s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.30s ease,
-              transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
-              margin 0.30s ease;
-  pointer-events: none;
-  margin-top: -16px;
-  margin-bottom: 24px;
-  z-index: 90;
-}
-
-.scholarly-header-drawer.is-open {
-  max-height: 120px;
-  opacity: 1;
-  transform: translateY(0) scaleY(1);
-  pointer-events: auto;
-  margin-top: -12px;
-  margin-bottom: 28px;
-}
-
-.scholarly-drawer-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 12px 24px;
-  background: rgba(4, 28, 48, 0.88);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(212, 175, 55, 0.30);
-  border-radius: 14px;
-  box-shadow: 0 10px 32px rgba(0, 10, 24, 0.50), 0 0 24px rgba(212, 175, 55, 0.12);
-  flex-wrap: wrap;
-}
-
-.drawer-header-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-sans);
-  font-size: 0.86rem;
-  font-weight: 700;
-  color: #c8e0ec;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
-}
-
-.inline-star {
-  animation: starRotateBreathe 14s linear infinite;
-  display: inline-block;
-  flex-shrink: 0;
-}
-
-.drawer-network-links {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.drawer-pill {
+/* Side-Expanding Links Container (Expands to the left of the star) */
+.top-scholarly-links {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 14px;
-  background: rgba(2, 18, 32, 0.65);
-  border: 1px solid rgba(34, 166, 200, 0.28);
+  padding: 4px 10px 4px 14px;
+  background: rgba(4, 28, 48, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.28);
   border-radius: 999px;
-  font-size: 0.82rem;
+  box-shadow: 0 4px 20px rgba(0, 10, 24, 0.45), 0 0 16px rgba(212, 175, 55, 0.10);
+  max-width: 0;
+  opacity: 0;
+  transform: translateX(20px) scale(0.96);
+  transform-origin: right center;
+  overflow: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.28s ease,
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.top-scholarly-links.is-open {
+  max-width: 650px;
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  pointer-events: auto;
+}
+
+.top-scholarly-label {
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #c8e0ec;
+  letter-spacing: -0.01em;
+  margin-right: 2px;
+}
+
+.top-link-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  background: rgba(2, 18, 32, 0.65);
+  border: 1px solid rgba(34, 166, 200, 0.25);
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
   font-weight: 600;
   color: #c8e0ec;
-  transition: all var(--transition);
   text-decoration: none;
+  transition: all var(--transition);
 }
 
-.drawer-pill:hover {
+.top-link-pill:hover {
   background: rgba(34, 166, 200, 0.22);
-  border-color: rgba(212, 175, 55, 0.55);
+  border-color: rgba(212, 175, 55, 0.60);
   color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(0, 10, 24, 0.40), 0 0 12px rgba(212, 175, 55, 0.20);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 12px rgba(0, 10, 24, 0.40), 0 0 10px rgba(212, 175, 55, 0.22);
 }
 
-.drawer-pill svg {
+.top-link-pill svg {
   color: #38b6d0;
   transition: color var(--transition);
 }
 
-.drawer-pill:hover svg {
+.top-link-pill:hover svg {
   color: #d4af37;
 }
 
-@media (max-width: 900px) {
-  .scholarly-drawer-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 14px 18px;
-  }
-  .scholarly-header-drawer.is-open {
-    max-height: 240px;
+@media (max-width: 860px) {
+  .top-scholarly-links.is-open {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    z-index: 100;
   }
 }
