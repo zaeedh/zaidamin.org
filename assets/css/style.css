@@ -2897,7 +2897,7 @@ a {
 }
 
 /* ==========================================================================
-   FEATURED CONTENT AUDIO PLAYER (BORDERLESS, FULL-FIT, TRANSLUCENT SECOND-GAZE)
+   FEATURED CONTENT AUDIO PLAYER (SOFT, TRANSPARENT, SECOND-GAZE HARMONY)
    ========================================================================== */
 .royal-vanish-container {
   position: relative;
@@ -2914,34 +2914,138 @@ a {
   z-index: 15;
 }
 
-/* Full-fit audio player stretching seamlessly to screen edges */
-.royal-vanish-container audio {
-  width: 100% !important;
-  max-width: 100% !important;
+/* Custom Soft-Transparent Player Bar - Embeds naturally into page tone */
+.royal-custom-player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
   height: 28px;
-  color-scheme: dark;
-  background: rgba(4, 24, 40, 0.32) !important; /* Deep oceanic glass */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  padding: 0 4px;
+  background: transparent !important;
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
-  border-radius: 999px;
+  user-select: none;
   opacity: 0.82;
-  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              background 0.3s ease;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.royal-vanish-container:hover audio {
+.royal-vanish-container:hover .royal-custom-player {
   opacity: 1;
-  background: rgba(4, 28, 48, 0.52) !important;
 }
 
-/* Chrome/Edge media controls panel transparent overrides so no grey box shows */
-.royal-vanish-container audio::-webkit-media-controls-panel,
-.royal-vanish-container audio::-webkit-media-controls-enclosure {
+/* Play/Pause Button */
+.royal-play-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
   background: transparent !important;
-  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  color: #7297a8; /* soft sea-pearl tone matching --text-muted */
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.royal-play-btn:hover {
+  color: #d4af37; /* Imperial gold on hover */
+  transform: scale(1.15);
+}
+
+/* Time display: soft sea-pearl tone matching web nuances */
+.royal-time-display {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  color: #7297a8; /* Soft sea-pearl muted text */
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+/* Scrubber bar wrapper: spans across remaining width */
+.royal-progress-wrap {
+  position: relative;
+  flex: 1;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.royal-progress-bar {
+  position: relative;
+  width: 100%;
+  height: 2.5px;
+  background: rgba(140, 180, 205, 0.16); /* ultra-soft transparent track */
+  border-radius: 999px;
+  overflow: visible;
+  transition: height 0.18s ease;
+}
+
+.royal-progress-wrap:hover .royal-progress-bar {
+  height: 4px;
+}
+
+.royal-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, rgba(34, 166, 200, 0.65), rgba(212, 175, 55, 0.85));
+  border-radius: 999px;
+  transition: width 0.1s linear;
+}
+
+.royal-progress-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d4af37; /* Imperial Gold bead */
+  box-shadow: 0 0 6px rgba(212, 175, 55, 0.6);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.royal-progress-wrap:hover .royal-progress-thumb {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Mute Button */
+.royal-mute-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  color: #7297a8;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.royal-mute-btn:hover {
+  color: #d4af37;
+}
+
+/* Hidden raw audio element (controlled via JS API) */
+#soundtrack-audio {
+  display: none !important;
 }
 
 /* Royal Aura Popup: Strictly hidden when not hovering */
