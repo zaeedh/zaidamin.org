@@ -1783,6 +1783,7 @@ a {
   align-items: center;
   gap: 12px;
   position: relative;
+  overflow: visible;
 }
 
 /* Pure Rotating Star of David Button - NO circle boundary! */
@@ -1842,7 +1843,8 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 0 !important;
+  padding: 8px 4px !important;
+  margin: -8px -4px;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -1864,7 +1866,9 @@ a {
   max-width: 850px;
   opacity: 1;
   visibility: visible;
-  padding: 0 !important;
+  overflow: visible; /* Prevents button top edge and box-shadow glow from being clipped on hover */
+  padding: 8px 4px !important;
+  margin: -8px -4px;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -1896,16 +1900,21 @@ a {
   font-weight: 600;
   color: #c4dbe8;
   text-decoration: none;
-  transition: all var(--transition);
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.24s ease,
+              border-color 0.24s ease,
+              box-shadow 0.24s ease,
+              color 0.24s ease;
   box-shadow: 0 2px 8px rgba(0, 10, 24, 0.35);
+  will-change: transform, box-shadow;
 }
 
 .top-link-pill:hover {
   background: rgba(34, 166, 200, 0.22);
   border-color: #d4af37;
   color: #ffffff;
-  transform: translateY(-1.5px);
-  box-shadow: 0 4px 14px rgba(0, 10, 24, 0.45), 0 0 12px rgba(212, 175, 55, 0.30);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 10, 24, 0.50), 0 0 14px rgba(212, 175, 55, 0.35);
 }
 
 .top-link-pill svg {
