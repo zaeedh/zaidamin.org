@@ -208,7 +208,7 @@ a {
   text-align: right;
   z-index: 10;
   pointer-events: auto;
-  animation: quoteDriftFade 15s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+  animation: quoteDriftFade 24s cubic-bezier(0.22, 1, 0.36, 1) infinite;
   will-change: transform, opacity, filter;
 }
 
@@ -219,28 +219,28 @@ a {
 @keyframes quoteDriftFade {
   0% {
     opacity: 0;
-    transform: translateX(-28px);
-    filter: blur(2px);
+    transform: translateX(-18px);
+    filter: blur(2.5px);
   }
-  16% {
+  18% {
     opacity: 1;
     transform: translateX(0);
     filter: blur(0);
   }
-  68% {
+  72% {
     opacity: 1;
-    transform: translateX(8px);
+    transform: translateX(6px);
     filter: blur(0);
   }
-  86% {
+  88% {
     opacity: 0;
-    transform: translateX(34px);
+    transform: translateX(24px);
     filter: blur(2px);
   }
   100% {
     opacity: 0;
-    transform: translateX(-28px);
-    filter: blur(2px);
+    transform: translateX(-18px);
+    filter: blur(2.5px);
   }
 }
 
