@@ -179,7 +179,7 @@ a {
 }
 
 /* ==========================================================================
-   3. SUB-SECTION BELOW OPTION 1 STORM: SLENDER WARM GOLDEN RATIO RIBBON (61.8% : 38.2%)
+   3. SUB-SECTION BELOW STORM: CENTERED WARM GOLDEN RATIO QUOTATION
    ========================================================================== */
 .ocean-quote-subsection {
   margin-top: 0;
@@ -187,119 +187,98 @@ a {
   width: 100%;
 }
 
-.quote-golden-ribbon {
-  display: grid;
-  grid-template-columns: 1.618fr auto 1fr;
+.quote-golden-center {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 20px;
   width: 100%;
-  box-sizing: border-box;
-  padding: 10px 24px;
+}
+
+.ocean-golden-blockquote {
+  position: relative;
+  /* Golden Ratio width relative to 1200px container: 1200 / 1.618 ≈ 742px */
+  max-width: 742px;
+  width: 100%;
+  margin: 0 auto;
+  /* Snug, tailored padding - smaller and compact */
+  padding: 12px 28px 10px 28px;
   background: rgba(4, 24, 40, 0.58);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(210, 195, 175, 0.14);
+  border: 1px solid rgba(210, 195, 175, 0.16);
   border-radius: 10px;
   box-shadow: 0 4px 18px rgba(0, 8, 20, 0.30);
-  position: relative;
+  text-align: center;
   overflow: hidden;
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
-.quote-golden-ribbon:hover {
-  border-color: rgba(210, 195, 175, 0.25);
+.ocean-golden-blockquote:hover {
+  border-color: rgba(210, 195, 175, 0.28);
   box-shadow: 0 6px 22px rgba(0, 8, 20, 0.40);
 }
 
 /* Subtle warm champagne highlight across top edge */
-.quote-golden-ribbon::before {
+.ocean-golden-blockquote::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 10%;
-  right: 10%;
+  left: 15%;
+  right: 15%;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(210, 195, 175, 0.40) 50%, transparent);
   pointer-events: none;
 }
 
-/* Major Column: 61.8% of Golden Ratio */
-.quote-golden-major {
-  display: flex;
-  align-items: center;
-}
-
-.premium-verse-text {
+.golden-quotation-text {
   font-family: var(--font-premium-serif);
   font-style: italic;
   font-weight: 400;
-  font-size: 0.95rem;
+  font-size: 0.96rem;
   color: #d6cec4;
-  line-height: 1.48;
-  margin: 0;
+  line-height: 1.50;
+  margin: 0 0 6px 0;
   letter-spacing: 0.015em;
   text-shadow: none;
 }
 
-/* Vertical Hairline Divider at the Golden Cut */
-.quote-golden-divider {
-  width: 1px;
-  height: 26px;
-  background: linear-gradient(180deg, transparent, rgba(210, 195, 175, 0.22) 50%, transparent);
-}
-
-/* Minor Column: 38.2% of Golden Ratio */
-.quote-golden-minor {
-  display: flex;
+.golden-quotation-cite {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-.quote-golden-citation {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1px;
+  gap: 12px;
   font-style: normal;
 }
 
-.cite-surah {
+.golden-cite-label {
   font-family: var(--font-cinzel), serif;
   font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.16em;
   color: #c4ad88;
   text-transform: uppercase;
   text-shadow: none;
   line-height: 1.2;
 }
 
-.cite-meta {
-  font-family: var(--font-sans);
-  font-size: 0.62rem;
-  font-weight: 400;
-  letter-spacing: 0.03em;
-  color: #8c857b;
-  line-height: 1.2;
+.golden-cite-line {
+  width: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(210, 195, 175, 0.35), transparent);
+  display: inline-block;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 768px) {
   .epigraph-title {
     font-size: 1.35rem;
     letter-spacing: 0.06em;
   }
-  .quote-golden-ribbon {
-    grid-template-columns: 1fr;
-    gap: 8px;
+  .ocean-golden-blockquote {
+    max-width: 100%;
     padding: 10px 16px;
+    border-radius: 8px;
   }
-  .quote-golden-divider {
-    display: none;
-  }
-  .quote-golden-minor {
-    justify-content: flex-start;
-  }
-  .premium-verse-text {
+  .golden-quotation-text {
     font-size: 0.90rem;
     line-height: 1.45;
   }
