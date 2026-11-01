@@ -385,6 +385,36 @@ def generate_golden_ratio_home():
 
       <!-- RIGHT CARD: Academic Portals & Highlights (Matching Reference Inset Tray + Stacked Cards) -->
       <aside class="ref-portals-card">
+        <!-- 1. Top Main Menu Navigation Grid (Placed Above Dr. Zaid Profile, 3x2 Golden Ratio Layout) -->
+        <nav class="ref-top-menu-grid" aria-label="Main Navigation">
+          <a href="index.html" class="ref-menu-btn active" title="Home Landing">
+            <span class="menu-btn-icon">🏛</span>
+            <span class="menu-btn-text">Home</span>
+          </a>
+          <a href="publications.html" class="ref-menu-btn" title="Research &amp; Publications">
+            <span class="menu-btn-icon">📚</span>
+            <span class="menu-btn-text">Research &amp; Pubs</span>
+          </a>
+          <a href="cv.html#talks" class="ref-menu-btn" title="Recent Media &amp; Invited Talks">
+            <span class="menu-btn-icon">🎙</span>
+            <span class="menu-btn-text">Media &amp; Talks</span>
+          </a>
+          <a href="research.html" class="ref-menu-btn" title="Funded Projects &amp; Themes">
+            <span class="menu-btn-icon">💡</span>
+            <span class="menu-btn-text">Project</span>
+          </a>
+          <a href="cv.html#achievements" class="ref-menu-btn" title="Awards &amp; Milestones">
+            <span class="menu-btn-icon">🏆</span>
+            <span class="menu-btn-text">Achievement</span>
+          </a>
+          <a href="cv.html" class="ref-menu-btn" title="About &amp; Curriculum Vitae">
+            <span class="menu-btn-icon">📜</span>
+            <span class="menu-btn-text">About &amp; CV</span>
+          </a>
+        </nav>
+
+        <div class="ref-menu-divider"></div>
+
         
         <!-- Header with Dr. Zaid Amin Profile Summary & Title -->
         <div class="ref-portals-header">
@@ -475,28 +505,6 @@ def generate_golden_ratio_home():
           </div>
 
         </div>
-
-        <!-- 6 Direct Navigation Action Pills (Preserving All Previous Functionalities) -->
-        <nav class="ref-quick-nav-strip" aria-label="Quick Academic Directory">
-          <a href="index.html" class="ref-quick-pill active" title="Home Landing">
-            <span class="pill-icon">🏛</span> Home
-          </a>
-          <a href="publications.html" class="ref-quick-pill" title="Research &amp; Publications">
-            <span class="pill-icon">📚</span> Research &amp; Pubs
-          </a>
-          <a href="cv.html#talks" class="ref-quick-pill" title="Recent Media &amp; Invited Talks">
-            <span class="pill-icon">🎙</span> Media &amp; Talks
-          </a>
-          <a href="research.html" class="ref-quick-pill" title="Funded Projects &amp; Themes">
-            <span class="pill-icon">💡</span> Project
-          </a>
-          <a href="cv.html#achievements" class="ref-quick-pill" title="Awards &amp; Milestones">
-            <span class="pill-icon">🏆</span> Achievement
-          </a>
-          <a href="cv.html" class="ref-quick-pill" title="About &amp; Curriculum Vitae">
-            <span class="pill-icon">📜</span> About &amp; CV
-          </a>
-        </nav>
 
       </aside>
 
