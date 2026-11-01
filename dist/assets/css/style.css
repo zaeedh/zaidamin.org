@@ -1928,69 +1928,89 @@ a {
 /* ==========================================================================
    4. MAIN MENU (MATCHING USER WIREFRAME SPECIFICATION)
    ========================================================================== */
+/* ==========================================================================
+   4. MAIN MENU (RIGHT-JUSTIFIED, BORDERLESS, ULTRA-PREMIUM HOVER ANIMATION)
+   ========================================================================== */
 .main-menu-section {
   width: 100%;
   margin-top: 0;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   box-sizing: border-box;
 }
 
 .main-menu-nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end; /* Right-justified per wireframe arrow */
   width: 100%;
   box-sizing: border-box;
-  background: rgba(4, 24, 40, 0.52);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(140, 180, 205, 0.15);
-  border-radius: 999px;
-  padding: 5px 12px;
-  box-shadow: 0 4px 20px rgba(0, 10, 24, 0.28);
-  position: relative;
-  overflow: hidden;
-}
-
-.main-menu-nav::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 15%;
-  right: 15%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(140, 180, 205, 0.30) 50%, transparent);
-  pointer-events: none;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 4px 0;
+  gap: 8px 24px;
+  flex-wrap: wrap;
 }
 
 .main-menu-link {
+  position: relative;
   font-family: var(--font-sans);
-  font-size: 0.81rem;
+  font-size: 0.84rem;
   font-weight: 600;
-  color: #9cb8cb;
-  padding: 6px 16px;
-  border-radius: 999px;
+  color: #8faec0;
+  padding: 6px 2px;
   text-decoration: none;
-  border: 1px solid transparent;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transition: color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              text-shadow 0.28s ease;
   white-space: nowrap;
   letter-spacing: 0.015em;
-  text-align: center;
+  display: inline-block;
+}
+
+/* Elegant gold accent line expanding from center on hover */
+.main-menu-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #fce09b 0%, #d4af37 50%, #b88d28 100%);
+  border-radius: 999px;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.55), 0 0 16px rgba(34, 166, 200, 0.25);
+  transform: translateX(-50%);
+  transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s ease;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .main-menu-link:hover {
   color: #ffffff;
-  background: rgba(34, 166, 200, 0.14);
-  border-color: rgba(212, 175, 55, 0.35);
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.15);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.45);
 }
 
+.main-menu-link:hover::after {
+  width: 100%;
+  opacity: 1;
+}
+
+/* Active State: Luxurious Imperial Gold with Persistent Under-Glow */
 .main-menu-link.active {
   color: #fce09b;
-  background: rgba(34, 166, 200, 0.16);
-  border: 1px solid rgba(212, 175, 55, 0.60);
-  box-shadow: 0 0 12px rgba(212, 175, 55, 0.20);
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.50);
+}
+
+.main-menu-link.active::after {
+  width: 100%;
+  opacity: 1;
 }
 
 /* ==========================================================================
@@ -2562,11 +2582,12 @@ a {
 
 @media (max-width: 640px) {
   .main-menu-nav {
-    border-radius: 14px;
+    justify-content: center;
+    gap: 6px 14px;
   }
   .main-menu-link {
     font-size: 0.78rem;
-    padding: 6px 12px;
+    padding: 4px 6px;
   }
   .ticker-label-col {
     display: none;
