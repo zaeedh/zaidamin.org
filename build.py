@@ -336,79 +336,12 @@ def get_visitor_stats_html():
     <!-- Visitor Statistics & Global Academic Readership (Golden Ratio Telemetry) -->
     <section class="golden-visitor-stats" aria-label="Global Visitor Statistics &amp; Academic Readership">
       <div class="stats-header-row">
-        <div class="stats-title-block">
-          <div class="stats-live-badge">
-            <span class="stats-pulse-ring"></span>
-            <span class="stats-pulse-dot"></span>
-            <span class="stats-live-label font-cinzel">Live Readership Telemetry</span>
-          </div>
-          
-          <!-- Interactive Title: Hover reveals Metrics Caption Pop-up -->
-          <div class="stats-title-interactive" tabindex="0" role="button" aria-haspopup="true" aria-label="Hover or tap to view detailed visitor metrics">
-            <div class="stats-heading-flex">
-              <h3 class="stats-heading font-cinzel">Visitor Statistics &amp; Global Scholarly Reach</h3>
-              <span class="stats-info-pill font-cinzel">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                Metrics
-              </span>
-            </div>
-
-            <!-- Soft Floating Tooltip / Pop-up Caption -->
-            <div class="stats-tooltip-popup" role="tooltip">
-              <div class="stats-tooltip-arrow"></div>
-              <div class="stats-tooltip-header">
-                <div class="stats-tooltip-lead">
-                  <span class="stats-tooltip-dot"></span>
-                  <span class="stats-tooltip-title font-cinzel">Academic Visitor Metrics</span>
-                </div>
-                <span class="stats-tooltip-badge font-mono">100% Verified Logs</span>
-              </div>
-
-              <!-- 2x2 Metric Grid inside Pop-up -->
-              <div class="stats-tooltip-kpi-grid">
-                <div class="stats-tooltip-kpi-card">
-                  <div class="stats-kpi-num-row">
-                    <span class="stats-kpi-num">48,290+</span>
-                    <span class="stats-kpi-trend">+14.2%</span>
-                  </div>
-                  <div class="stats-kpi-label font-cinzel">Total Visitors</div>
-                  <div class="stats-kpi-desc">Global researchers &amp; IT scholars</div>
-                </div>
-
-                <div class="stats-tooltip-kpi-card">
-                  <div class="stats-kpi-num-row">
-                    <span class="stats-kpi-num">84+</span>
-                    <span class="stats-kpi-trend">Global</span>
-                  </div>
-                  <div class="stats-kpi-label font-cinzel">Origin Countries</div>
-                  <div class="stats-kpi-desc">Cross-continental readership</div>
-                </div>
-
-                <div class="stats-tooltip-kpi-card">
-                  <div class="stats-kpi-num-row">
-                    <span class="stats-kpi-num">14,850+</span>
-                    <span class="stats-kpi-trend">PDF &bull; DOI</span>
-                  </div>
-                  <div class="stats-kpi-label font-cinzel">Scholarly Downloads</div>
-                  <div class="stats-kpi-desc">Preprints, BibTeX &amp; papers</div>
-                </div>
-
-                <div class="stats-tooltip-kpi-card">
-                  <div class="stats-kpi-num-row">
-                    <span class="stats-kpi-num">92.4%</span>
-                    <span class="stats-kpi-trend">Verified</span>
-                  </div>
-                  <div class="stats-kpi-label font-cinzel">Academic Networks</div>
-                  <div class="stats-kpi-desc">University &amp; research IPs</div>
-                </div>
-              </div>
-
-              <p class="stats-tooltip-caption font-garamond">
-                Continuous telemetry across 84+ nations, university networks &amp; academic repositories
-              </p>
-            </div>
-          </div>
+        <div class="stats-live-badge">
+          <span class="stats-pulse-ring"></span>
+          <span class="stats-pulse-dot"></span>
+          <span class="stats-live-label font-cinzel">Live Readership Telemetry</span>
         </div>
+
 
         <div class="stats-meta-cluster font-cinzel">
           <span class="stats-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> 84 Nations</span>
