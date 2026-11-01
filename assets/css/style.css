@@ -103,7 +103,7 @@ a {
 .site-wrapper {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 32px 24px;
+  padding: 18px 24px 32px 24px;
 }
 
 @media (max-width: 768px) {
@@ -113,161 +113,23 @@ a {
 }
 
 /* ==========================================================================
-   1. TOP EPIGRAPH: DAS SEIN, DAS SOLLEN (KEPT AT THE VERY TOP)
+   1. TOP EPIGRAPH: DAS SEIN, DAS SOLLEN (REFINED MONUMENTAL SERIF)
    ========================================================================== */
 .epigraph-header {
-  margin-bottom: 28px;
+  margin-bottom: 10px;
   text-align: left;
 }
 
 .epigraph-title {
-  font-size: 2.2rem;
-  font-weight: 900;
+  font-family: var(--font-cinzel), 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 600;
   color: #ffffff;
-  letter-spacing: -0.02em;
-  margin-bottom: 12px;
-  position: relative;
+  letter-spacing: 0.08em;
+  margin: 0;
+  line-height: 1.2;
   display: inline-block;
-  text-shadow: 0 2px 24px rgba(34, 166, 200, 0.35);
-  line-height: 1.15;
-}
-
-.epigraph-title::after {
-  content: "Das Sein, Das Sollen.";
-  position: absolute;
-  left: 0;
-  top: 96%;
-  transform: scaleY(-0.65) translateY(2px);
-  transform-origin: top;
-  opacity: 0.22;
-  filter: blur(1px);
-  mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.85) 0%, transparent 75%);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.85) 0%, transparent 75%);
-  pointer-events: none;
-  user-select: none;
-}
-
-/* ==========================================================================
-   2. SUB-SECTION BELOW OPTION 1 STORM: FULL FIT PREMIUM CORMORANT GARAMOND
-   ========================================================================== */
-.ocean-quote-subsection {
-  margin-top: 6px;
-  margin-bottom: 30px;
-  width: 100%;
-}
-
-.ocean-quote-full-frame {
-  position: relative;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 30px 48px;
-  background: rgba(4, 28, 48, 0.72);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(34, 166, 200, 0.28);
-  border-radius: 18px;
-  box-shadow: 0 12px 38px rgba(0, 10, 24, 0.45), 0 0 24px rgba(34, 166, 200, 0.08);
-  text-align: center;
-  overflow: hidden;
-  transition: border-color var(--transition), box-shadow var(--transition);
-}
-
-.ocean-quote-full-frame:hover {
-  border-color: rgba(56, 182, 208, 0.45);
-  box-shadow: 0 14px 44px rgba(0, 10, 24, 0.55), 0 0 32px rgba(34, 166, 200, 0.16);
-}
-
-/* Ambient jewel highlights across top and bottom edges */
-.ocean-quote-full-frame::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(56, 182, 208, 0.85) 50%, transparent);
-  pointer-events: none;
-}
-
-.ocean-quote-full-frame::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 20%;
-  right: 20%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(34, 166, 200, 0.4) 50%, transparent);
-  pointer-events: none;
-}
-
-.quote-watermark-glyph {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--font-premium-serif);
-  font-size: 5.5rem;
-  line-height: 1;
-  color: rgba(34, 166, 200, 0.06);
-  pointer-events: none;
-  user-select: none;
-}
-
-.premium-quotation-body {
-  font-family: var(--font-premium-serif);
-  font-style: italic;
-  font-weight: 500;
-  font-size: 1.34rem;
-  color: #e2f2fb;
-  line-height: 1.72;
-  margin: 0 auto 16px auto;
-  max-width: 1040px;
-  position: relative;
-  z-index: 1;
-  letter-spacing: 0.018em;
-  text-shadow: 0 2px 18px rgba(34, 166, 200, 0.22);
-}
-
-.premium-quotation-cite {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  position: relative;
-  z-index: 1;
-}
-
-.premium-quotation-cite .cite-text {
-  font-family: var(--font-cinzel), serif;
-  font-style: normal;
-  font-size: 0.84rem;
-  font-weight: 700;
-  letter-spacing: 0.20em;
-  color: #38b6d0;
-  text-transform: uppercase;
-  text-shadow: 0 0 12px rgba(56, 182, 208, 0.35);
-}
-
-.cite-accent-line {
-  width: 48px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(34, 166, 200, 0.65), transparent);
-  display: inline-block;
-}
-
-@media (max-width: 768px) {
-  .ocean-quote-full-frame {
-    padding: 22px 20px;
-    border-radius: 14px;
-  }
-  .premium-quotation-body {
-    font-size: 1.15rem;
-    line-height: 1.62;
-    margin-bottom: 12px;
-  }
-  .cite-accent-line {
-    width: 28px;
-  }
+  text-shadow: 0 2px 18px rgba(34, 166, 200, 0.28);
 }
 
 /* ==========================================================================
@@ -277,18 +139,18 @@ a {
   position: relative;
   width: 100%;
   aspect-ratio: 21 / 9;
-  min-height: 380px;
-  max-height: 520px;
+  min-height: 360px;
+  max-height: 480px;
   border-radius: 0;
   overflow: hidden;
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
   background-color: transparent;
-  margin-bottom: 20px;
-  /* Seamlessly integrated with background: soft feathered dissolution on all edges */
-  mask-image: radial-gradient(ellipse 98% 90% at 50% 50%, #000000 76%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 98% 90% at 50% 50%, #000000 76%, transparent 100%);
+  margin-bottom: 14px;
+  /* Preserves clouds at top; softly feathers bottom into quotation frame */
+  mask-image: linear-gradient(to bottom, #000000 0%, #000000 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000000 0%, #000000 88%, transparent 100%);
 }
 
 .lighthouse-banner-frame picture {
@@ -314,6 +176,121 @@ a {
   height: 100%;
   z-index: 2;
   pointer-events: none;
+}
+
+/* ==========================================================================
+   3. SUB-SECTION BELOW OPTION 1 STORM: SLIM ELEGANT CORMORANT GARAMOND
+   ========================================================================== */
+.ocean-quote-subsection {
+  margin-top: 0;
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.ocean-quote-full-frame {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 18px 36px 16px 36px;
+  background: rgba(4, 28, 48, 0.70);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(34, 166, 200, 0.22);
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0, 10, 24, 0.40), 0 0 20px rgba(34, 166, 200, 0.06);
+  text-align: center;
+  overflow: hidden;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.ocean-quote-full-frame:hover {
+  border-color: rgba(56, 182, 208, 0.40);
+  box-shadow: 0 10px 36px rgba(0, 10, 24, 0.50), 0 0 24px rgba(34, 166, 200, 0.12);
+}
+
+.ocean-quote-full-frame::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(56, 182, 208, 0.75) 50%, transparent);
+  pointer-events: none;
+}
+
+.quote-watermark-glyph {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-premium-serif);
+  font-size: 4.2rem;
+  line-height: 1;
+  color: rgba(34, 166, 200, 0.05);
+  pointer-events: none;
+  user-select: none;
+}
+
+.premium-quotation-body {
+  font-family: var(--font-premium-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.18rem;
+  color: #ddf0fa;
+  line-height: 1.68;
+  margin: 0 auto 10px auto;
+  max-width: 980px;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.012em;
+  text-shadow: 0 2px 14px rgba(34, 166, 200, 0.18);
+}
+
+.premium-quotation-cite {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+.premium-quotation-cite .cite-text {
+  font-family: var(--font-cinzel), serif;
+  font-style: normal;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: #38b6d0;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(56, 182, 208, 0.28);
+}
+
+.cite-accent-line {
+  width: 36px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(34, 166, 200, 0.55), transparent);
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .epigraph-title {
+    font-size: 1.35rem;
+    letter-spacing: 0.06em;
+  }
+  .ocean-quote-full-frame {
+    padding: 16px 18px 14px 18px;
+    border-radius: 12px;
+  }
+  .premium-quotation-body {
+    font-size: 1.05rem;
+    line-height: 1.58;
+    margin-bottom: 8px;
+  }
+  .cite-accent-line {
+    width: 24px;
+  }
 }
 
 /* ==========================================================================
