@@ -116,7 +116,7 @@ a {
    1. TOP EPIGRAPH: DAS SEIN, DAS SOLLEN (REFINED MONUMENTAL SERIF)
    ========================================================================== */
 .epigraph-header {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   text-align: left;
 }
 
@@ -1930,63 +1930,67 @@ a {
    ========================================================================== */
 .main-menu-section {
   width: 100%;
-  margin-top: 2px;
-  margin-bottom: 22px;
-  text-align: center;
-}
-
-.main-menu-kicker {
-  font-family: var(--font-cinzel), serif;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  color: #d4af37;
-  text-transform: uppercase;
-  margin-bottom: 9px;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.35);
-  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 12px;
+  box-sizing: border-box;
 }
 
 .main-menu-nav {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  background: rgba(4, 26, 44, 0.72);
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(4, 24, 40, 0.52);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(140, 180, 205, 0.16);
+  border: 1px solid rgba(140, 180, 205, 0.15);
   border-radius: 999px;
-  padding: 6px 12px;
-  box-shadow: 0 6px 24px rgba(0, 10, 24, 0.35);
-  flex-wrap: wrap;
-  gap: 4px;
+  padding: 5px 12px;
+  box-shadow: 0 4px 20px rgba(0, 10, 24, 0.28);
+  position: relative;
+  overflow: hidden;
+}
+
+.main-menu-nav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(140, 180, 205, 0.30) 50%, transparent);
+  pointer-events: none;
 }
 
 .main-menu-link {
   font-family: var(--font-sans);
-  font-size: 0.84rem;
+  font-size: 0.81rem;
   font-weight: 600;
   color: #9cb8cb;
-  padding: 7px 18px;
+  padding: 6px 16px;
   border-radius: 999px;
   text-decoration: none;
   border: 1px solid transparent;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
+  letter-spacing: 0.015em;
+  text-align: center;
 }
 
-.main-menu-link:hover,
-.main-menu-link.active {
+.main-menu-link:hover {
   color: #ffffff;
-  background: rgba(34, 166, 200, 0.18);
-  border-color: rgba(212, 175, 55, 0.45);
-  box-shadow: 0 0 14px rgba(212, 175, 55, 0.20);
+  background: rgba(34, 166, 200, 0.14);
+  border-color: rgba(212, 175, 55, 0.35);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.15);
   transform: translateY(-1px);
 }
 
 .main-menu-link.active {
   color: #fce09b;
-  border-color: rgba(212, 175, 55, 0.65);
+  background: rgba(34, 166, 200, 0.16);
+  border: 1px solid rgba(212, 175, 55, 0.60);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.20);
 }
 
 /* ==========================================================================
