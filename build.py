@@ -158,7 +158,7 @@ def get_page_header(active_page="home"):
         </p>
         <cite class="storm-quote-cite font-cinzel">
           <span class="storm-cite-line"></span>
-          <span class="storm-cite-label">&mdash; Qur&rsquo;an 31:27</span>
+          <span class="storm-cite-label">Qur&rsquo;an 31:27</span>
         </cite>
       </div>
     </section>
