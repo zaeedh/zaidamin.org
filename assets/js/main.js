@@ -431,9 +431,13 @@ function initCustomSoundtrackPlayer() {
 }
 
 /* --------------------------------------------------------------------------
-   Inset Tray Portals & Blogger Articles Carousel Controller
-   Paginates 4 slides of 3 cards each with counter, arrows & indicator dots
+   Inset Tray Portals & Blogger Articles Vertical Sliding Ticker
+   Automatically slides top and down like Indexed Journals Section (4 cards/list)
    -------------------------------------------------------------------------- */
+let portalsTickerIndex = 0;
+let portalsTickerInterval = null;
+let isPortalsTickerPaused = false;
+
 function initPortalsTrayCarousel() {
   const carousel = document.getElementById('portals-carousel');
   if (!carousel) return;
@@ -444,26 +448,83 @@ function initPortalsTrayCarousel() {
   const totalEl = carousel.querySelector('.tray-total');
   if (!slides.length) return;
 
-  let currentIndex = 0;
   const total = slides.length;
   if (totalEl) totalEl.textContent = String(total).padStart(2, '0');
 
-  function goToSlide(idx) {
-    if (idx < 0) idx = total - 1;
-    if (idx >= total) idx = 0;
-    currentIndex = idx;
+  // Initialize slides state
+  slides.forEach((slide, idx) => {
+    slide.classList.remove('active', 'slide-out-down', 'slide-out-up');
+    if (idx === 0) slide.classList.add('active');
+  });
 
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === currentIndex);
-    });
+  function rotateTraySlide(dir) {
+    const prevIdx = portalsTickerIndex;
+    portalsTickerIndex = (portalsTickerIndex + dir + total) % total;
 
+    // Reset slide-out classes
+    slides.forEach(s => s.classList.remove('slide-out-down', 'slide-out-up'));
+
+    if (dir >= 0) {
+      // Advancing downwards: current slide moves down, next slide enters from top
+      slides[prevIdx].classList.remove('active');
+      slides[prevIdx].classList.add('slide-out-down');
+
+      slides[portalsTickerIndex].classList.remove('slide-out-down', 'slide-out-up');
+      slides[portalsTickerIndex].classList.add('active');
+    } else {
+      // Moving upwards: current slide moves up, next slide enters from bottom
+      slides[prevIdx].classList.remove('active');
+      slides[prevIdx].classList.add('slide-out-up');
+
+      slides[portalsTickerIndex].classList.remove('slide-out-down', 'slide-out-up');
+      slides[portalsTickerIndex].classList.add('active');
+    }
+
+    // Update indicator dots
     dots.forEach((dot, dIdx) => {
-      dot.classList.toggle('active', dIdx === currentIndex);
+      dot.classList.toggle('active', dIdx === portalsTickerIndex);
     });
 
-    if (currEl) currEl.textContent = String(currentIndex + 1).padStart(2, '0');
+    // Update counter
+    if (currEl) currEl.textContent = String(portalsTickerIndex + 1).padStart(2, '0');
   }
 
+  function goToSlide(targetIdx) {
+    if (targetIdx === portalsTickerIndex) return;
+    const dir = targetIdx > portalsTickerIndex ? 1 : -1;
+    const prevIdx = portalsTickerIndex;
+    portalsTickerIndex = targetIdx;
+
+    slides.forEach(s => s.classList.remove('slide-out-down', 'slide-out-up'));
+    if (dir >= 0) {
+      slides[prevIdx].classList.remove('active');
+      slides[prevIdx].classList.add('slide-out-down');
+    } else {
+      slides[prevIdx].classList.remove('active');
+      slides[prevIdx].classList.add('slide-out-up');
+    }
+    slides[portalsTickerIndex].classList.add('active');
+
+    dots.forEach((dot, dIdx) => {
+      dot.classList.toggle('active', dIdx === portalsTickerIndex);
+    });
+
+    if (currEl) currEl.textContent = String(portalsTickerIndex + 1).padStart(2, '0');
+  }
+
+  // Automatic vertical sliding every 4.8 seconds (matching Indexed Journals)
+  clearInterval(portalsTickerInterval);
+  portalsTickerInterval = setInterval(() => {
+    if (!isPortalsTickerPaused) {
+      rotateTraySlide(1);
+    }
+  }, 4800);
+
+  // Pause on hover so links and articles can be comfortably clicked
+  carousel.addEventListener('mouseenter', () => { isPortalsTickerPaused = true; });
+  carousel.addEventListener('mouseleave', () => { isPortalsTickerPaused = false; });
+
+  // Click controls for buttons and dots
   carousel.addEventListener('click', (e) => {
     const prevBtn = e.target.closest('.tray-arrow-prev, .spotlight-arrow-prev');
     const nextBtn = e.target.closest('.tray-arrow-next, .spotlight-arrow-next');
@@ -471,10 +532,10 @@ function initPortalsTrayCarousel() {
 
     if (prevBtn) {
       e.preventDefault();
-      goToSlide(currentIndex - 1);
+      rotateTraySlide(-1);
     } else if (nextBtn) {
       e.preventDefault();
-      goToSlide(currentIndex + 1);
+      rotateTraySlide(1);
     } else if (dotBtn) {
       e.preventDefault();
       const target = parseInt(dotBtn.getAttribute('data-slide-target'), 10);
@@ -482,21 +543,20 @@ function initPortalsTrayCarousel() {
     }
   });
 
-  // Touch swipe support
-  let touchStartX = 0;
+  // Touch swipe support (vertical swipe)
+  let touchStartY = 0;
   carousel.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
   }, { passive: true });
 
   carousel.addEventListener('touchend', (e) => {
-    const diff = e.changedTouches[0].screenX - touchStartX;
-    if (Math.abs(diff) > 45) {
-      if (diff > 0) goToSlide(currentIndex - 1);
-      else goToSlide(currentIndex + 1);
+    const diff = e.changedTouches[0].screenY - touchStartY;
+    if (Math.abs(diff) > 35) {
+      if (diff > 0) rotateTraySlide(-1); // swipe down -> move up
+      else rotateTraySlide(1);           // swipe up -> move down
     }
   }, { passive: true });
 }
-
 
 // ==============================================================================
 // VISITOR METRICS POPUP TOUCH / CLICK TOGGLE
