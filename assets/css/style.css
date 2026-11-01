@@ -887,10 +887,10 @@ a {
 
 /* Site Footer */
 .golden-footer {
-  border-top: 1px solid var(--border-light);
-  padding: 32px 0 24px 0;
-  margin-top: 48px;
-  font-size: 0.85rem;
+  border-top: none;
+  padding: 0 0 20px 0;
+  margin-top: 0;
+  font-size: 0.78rem;
   color: var(--text-muted);
   display: flex;
   justify-content: center;
@@ -2041,7 +2041,7 @@ a {
   display: grid;
   grid-template-columns: 1.15fr 1fr;
   gap: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
   align-items: stretch;
 }
 
@@ -2891,8 +2891,8 @@ a {
 .golden-footer-divider {
   border: none;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(140, 180, 205, 0.24) 50%, transparent);
-  margin: 28px 0 16px 0;
+  background: linear-gradient(90deg, transparent, rgba(140, 180, 205, 0.28) 25%, rgba(212, 175, 55, 0.40) 50%, rgba(140, 180, 205, 0.28) 75%, transparent);
+  margin: 14px 0 12px 0;
 }
 
 /* Responsive adjustments */
