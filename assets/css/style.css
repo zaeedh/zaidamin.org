@@ -179,11 +179,11 @@ a {
 }
 
 /* ==========================================================================
-   3. SUB-SECTION BELOW OPTION 1 STORM: GOLDEN RATIO COMPOSITION (61.8% : 38.2%)
+   3. SUB-SECTION BELOW OPTION 1 STORM: SLENDER WARM GOLDEN RATIO RIBBON (61.8% : 38.2%)
    ========================================================================== */
 .ocean-quote-subsection {
   margin-top: 0;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   width: 100%;
 }
 
@@ -191,35 +191,35 @@ a {
   display: grid;
   grid-template-columns: 1.618fr auto 1fr;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
   width: 100%;
   box-sizing: border-box;
-  padding: 14px 28px;
-  background: rgba(4, 28, 48, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(34, 166, 200, 0.22);
-  border-radius: 12px;
-  box-shadow: 0 6px 24px rgba(0, 10, 24, 0.35), 0 0 16px rgba(34, 166, 200, 0.05);
+  padding: 10px 24px;
+  background: rgba(4, 24, 40, 0.58);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(210, 195, 175, 0.14);
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(0, 8, 20, 0.30);
   position: relative;
   overflow: hidden;
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
 .quote-golden-ribbon:hover {
-  border-color: rgba(56, 182, 208, 0.38);
-  box-shadow: 0 8px 30px rgba(0, 10, 24, 0.45), 0 0 22px rgba(34, 166, 200, 0.10);
+  border-color: rgba(210, 195, 175, 0.25);
+  box-shadow: 0 6px 22px rgba(0, 8, 20, 0.40);
 }
 
-/* Ambient jewel highlight across the top edge */
+/* Subtle warm champagne highlight across top edge */
 .quote-golden-ribbon::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 8%;
-  right: 8%;
+  left: 10%;
+  right: 10%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(56, 182, 208, 0.75) 50%, transparent);
+  background: linear-gradient(90deg, transparent, rgba(210, 195, 175, 0.40) 50%, transparent);
   pointer-events: none;
 }
 
@@ -233,19 +233,19 @@ a {
   font-family: var(--font-premium-serif);
   font-style: italic;
   font-weight: 400;
-  font-size: 1.14rem;
-  color: #ddf0fa;
-  line-height: 1.55;
+  font-size: 0.95rem;
+  color: #d6cec4;
+  line-height: 1.48;
   margin: 0;
-  letter-spacing: 0.012em;
-  text-shadow: 0 2px 14px rgba(34, 166, 200, 0.16);
+  letter-spacing: 0.015em;
+  text-shadow: none;
 }
 
 /* Vertical Hairline Divider at the Golden Cut */
 .quote-golden-divider {
   width: 1px;
-  height: 38px;
-  background: linear-gradient(180deg, transparent, rgba(34, 166, 200, 0.45) 50%, transparent);
+  height: 26px;
+  background: linear-gradient(180deg, transparent, rgba(210, 195, 175, 0.22) 50%, transparent);
 }
 
 /* Minor Column: 38.2% of Golden Ratio */
@@ -259,27 +259,27 @@ a {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2px;
+  gap: 1px;
   font-style: normal;
 }
 
 .cite-surah {
   font-family: var(--font-cinzel), serif;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  color: #38b6d0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: #c4ad88;
   text-transform: uppercase;
-  text-shadow: 0 0 10px rgba(56, 182, 208, 0.28);
+  text-shadow: none;
   line-height: 1.2;
 }
 
 .cite-meta {
   font-family: var(--font-sans);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: #7297a8;
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: #8c857b;
   line-height: 1.2;
 }
 
@@ -290,8 +290,8 @@ a {
   }
   .quote-golden-ribbon {
     grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 14px 18px;
+    gap: 8px;
+    padding: 10px 16px;
   }
   .quote-golden-divider {
     display: none;
@@ -300,8 +300,8 @@ a {
     justify-content: flex-start;
   }
   .premium-verse-text {
-    font-size: 1.05rem;
-    line-height: 1.52;
+    font-size: 0.90rem;
+    line-height: 1.45;
   }
 }
 
