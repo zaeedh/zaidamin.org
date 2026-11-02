@@ -90,6 +90,91 @@ def save_json_file(filename, data):
     with open(p2, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
+
+def set_universal_homepage_spotlight(source: str, target_id: str, title: str = ""):
+    """
+    Sets the universal Homepage Spotlight across all academic categories:
+      source: 'article' | 'publication' | 'talk' | 'cv'
+      target_id: identifier (slug for article/pub, title for talk/cv)
+    Ensures only ONE item site-wide has featured: True,
+    updates data/spotlight.json, and triggers rebuild_site().
+    """
+    articles = load_json_file("articles.json")
+    if not isinstance(articles, list): articles = []
+
+    pubs = load_json_file("publications.json")
+    if not isinstance(pubs, list): pubs = []
+
+    talks_data = load_json_file("talks.json")
+    if isinstance(talks_data, dict):
+        talks = talks_data.get("talks", [])
+    elif isinstance(talks_data, list):
+        talks = talks_data
+    else:
+        talks = []
+
+    cv = load_json_file("cv_data.json")
+    if not isinstance(cv, dict): cv = {}
+    achievements = cv.get("achievements_and_grants", [])
+    if not isinstance(achievements, list): achievements = []
+
+    resolved_title = title or target_id
+
+    # 1. Reset all featured flags to False across ALL collections
+    for a in articles:
+        a["featured"] = False
+    for p in pubs:
+        p["featured"] = False
+    for t in talks:
+        t["featured"] = False
+    for c in achievements:
+        c["featured"] = False
+
+    # 2. Activate target item
+    if source == "article":
+        match = next((a for a in articles if a.get("id") == target_id or a.get("title") == target_id), None)
+        if match:
+            match["featured"] = True
+            resolved_title = match.get("title", resolved_title)
+    elif source == "publication":
+        match = next((p for p in pubs if p.get("id") == target_id or p.get("title") == target_id), None)
+        if match:
+            match["featured"] = True
+            resolved_title = match.get("title", resolved_title)
+    elif source == "talk":
+        match = next((t for t in talks if t.get("title") == target_id or (t.get("id") and t.get("id") == target_id)), None)
+        if match:
+            match["featured"] = True
+            resolved_title = match.get("title", resolved_title)
+    elif source == "cv":
+        match = next((c for c in achievements if c.get("title") == target_id or (c.get("id") and c.get("id") == target_id)), None)
+        if match:
+            match["featured"] = True
+            resolved_title = match.get("title", resolved_title)
+
+    # 3. Save all datasets back
+    save_json_file("articles.json", articles)
+    save_json_file("publications.json", pubs)
+    if isinstance(talks_data, dict):
+        talks_data["talks"] = talks
+        save_json_file("talks.json", talks_data)
+    else:
+        save_json_file("talks.json", talks)
+    cv["achievements_and_grants"] = achievements
+    save_json_file("cv_data.json", cv)
+
+    # 4. Save spotlight.json configuration
+    spotlight_info = {
+        "source": source,
+        "id": target_id,
+        "title": resolved_title
+    }
+    save_json_file("spotlight.json", spotlight_info)
+
+    # 5. Recompile website HTML
+    rebuild_site()
+    return spotlight_info
+
 class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(DIRECTORY), **kwargs)
@@ -102,6 +187,17 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header("Pragma", "no-cache")
         self.send_header("Expires", "0")
         super().end_headers()
+
+    def do_GET(self):
+        parsed = urllib.parse.urlparse(self.path)
+        path = parsed.path
+        if path == "/api/spotlight":
+            spotlight_data = load_json_file("spotlight.json")
+            if not isinstance(spotlight_data, dict):
+                spotlight_data = {"source": "publication", "id": "amin2026trustworthy", "title": "Trustworthy AI for Sustainable Cities"}
+            self.send_json(200, spotlight_data)
+            return
+        super().do_GET()
 
     def do_OPTIONS(self):
         self.send_response(200, "ok")
@@ -169,6 +265,30 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                 self.send_json(200, {"status": "ok", "url": rel_url, "filename": filename})
                 return
 
+            # Universal Homepage Spotlight Controller
+            elif path == "/api/set-homepage-spotlight":
+                payload = self.read_post_json()
+                source = payload.get("source", "").strip().lower()
+                item_id = payload.get("id", "").strip()
+                title = payload.get("title", "").strip()
+                should_deploy = payload.get("deploy", False)
+
+                if not source or not item_id:
+                    self.send_json(400, {"error": "Missing source or item id"})
+                    return
+
+                spotlight_info = set_universal_homepage_spotlight(source, item_id, title)
+                if should_deploy:
+                    deploy_live()
+
+                self.send_json(200, {
+                    "status": "ok",
+                    "message": f"Homepage Spotlight successfully updated to {source}: {item_id}",
+                    "spotlight": spotlight_info,
+                    "deploying": should_deploy
+                })
+                return
+
             # 1. ARTICLES (Activity & Project)
             elif path == "/api/save-article":
                 payload = self.read_post_json()
@@ -180,10 +300,7 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                     return
 
                 articles = load_json_file("articles.json")
-                if article.get("featured"):
-                    for a in articles:
-                        if a.get("id") != article.get("id"):
-                            a["featured"] = False
+                if not isinstance(articles, list): articles = []
 
                 idx = next((i for i, a in enumerate(articles) if a.get("id") == article.get("id")), None)
                 if idx is not None:
@@ -192,7 +309,11 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                     articles.insert(0, article)
 
                 save_json_file("articles.json", articles)
-                rebuild_site()
+
+                if article.get("featured"):
+                    set_universal_homepage_spotlight("article", article.get("id"), article.get("title", ""))
+                else:
+                    rebuild_site()
                 if should_deploy:
                     deploy_live()
                 self.send_json(200, {"status": "ok", "message": "Article saved", "deploying": should_deploy, "id": article.get("id")})
@@ -225,11 +346,7 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                     return
 
                 pubs = load_json_file("publications.json")
-                # If marked featured, unset featured on all others
-                if pub.get("featured"):
-                    for p in pubs:
-                        if p.get("id") != pub.get("id"):
-                            p["featured"] = False
+                if not isinstance(pubs, list): pubs = []
 
                 idx = next((i for i, p in enumerate(pubs) if p.get("id") == pub.get("id")), None)
                 if idx is not None:
@@ -238,7 +355,11 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                     pubs.insert(0, pub)
 
                 save_json_file("publications.json", pubs)
-                rebuild_site()
+
+                if pub.get("featured"):
+                    set_universal_homepage_spotlight("publication", pub.get("id"), pub.get("title", ""))
+                else:
+                    rebuild_site()
                 if should_deploy:
                     deploy_live()
                 self.send_json(200, {"status": "ok", "message": "Publication saved", "deploying": should_deploy, "id": pub.get("id")})
@@ -273,15 +394,11 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                 talks_data = load_json_file("talks.json")
                 if isinstance(talks_data, dict):
                     talk_list = talks_data.get("talks", [])
-                else:
+                elif isinstance(talks_data, list):
                     talk_list = talks_data
+                else:
+                    talk_list = []
 
-                if talk.get("featured"):
-                    for t in talk_list:
-                        if t.get("title") != talk.get("title"):
-                            t["featured"] = False
-
-                # Upsert by title or id
                 idx = next((i for i, t in enumerate(talk_list) if t.get("title") == talk.get("title") or (talk.get("id") and t.get("id") == talk.get("id"))), None)
                 if idx is not None:
                     talk_list[idx] = talk
@@ -290,11 +407,14 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
 
                 if isinstance(talks_data, dict):
                     talks_data["talks"] = talk_list
+                    save_json_file("talks.json", talks_data)
                 else:
-                    talks_data = talk_list
+                    save_json_file("talks.json", talk_list)
 
-                save_json_file("talks.json", talks_data)
-                rebuild_site()
+                if talk.get("featured"):
+                    set_universal_homepage_spotlight("talk", talk.get("title"), talk.get("title", ""))
+                else:
+                    rebuild_site()
                 if should_deploy:
                     deploy_live()
                 self.send_json(200, {"status": "ok", "message": "Talk saved", "deploying": should_deploy})
@@ -328,11 +448,10 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                     return
 
                 cv = load_json_file("cv_data.json")
+                if not isinstance(cv, dict): cv = {}
                 items = cv.get("achievements_and_grants", [])
-                if item.get("featured"):
-                    for a in items:
-                        if a.get("title") != item.get("title"):
-                            a["featured"] = False
+                if not isinstance(items, list): items = []
+
                 idx = next((i for i, a in enumerate(items) if a.get("title") == item.get("title")), None)
                 if idx is not None:
                     items[idx] = item
@@ -341,7 +460,11 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
 
                 cv["achievements_and_grants"] = items
                 save_json_file("cv_data.json", cv)
-                rebuild_site()
+
+                if item.get("featured"):
+                    set_universal_homepage_spotlight("cv", item.get("title"), item.get("title", ""))
+                else:
+                    rebuild_site()
                 if should_deploy:
                     deploy_live()
                 self.send_json(200, {"status": "ok", "message": "Achievement saved", "deploying": should_deploy})
