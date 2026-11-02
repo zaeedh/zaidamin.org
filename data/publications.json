@@ -5,12 +5,13 @@
     "authors": "Dr. Zaid Amin et al.",
     "year": 2026,
     "category": "Journal",
-    "venue": "Smart Cities",
+    "venue": "Smart Cities (MDPI)",
     "doi": "10.3390/smartcities9100174",
     "url": "https://doi.org/10.3390/smartcities9100174",
-    "bibtex": "@article{amin2026trustworthy,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance}},\n  year      = {2026},\n  journal   = {Smart Cities},\n  doi       = {10.3390/smartcities9100174},\n  url       = {https://doi.org/10.3390/smartcities9100174}\n}",
-    "featured": true,
-    "abstract": "Research addressing trustworthy ai for sustainable cities: a multimodal orchestration agent-based framework for civic compliance through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "abstract": "<p class=\"lead-para\">A multimodal orchestration framework utilizing agentic intelligence for autonomous urban governance and municipal compliance.</p><div class=\"callout-box\"><strong>Key Finding:</strong> Autonomous compliance verification yields 94.2% operational accuracy across distributed civic infrastructure.</div>",
+    "bibtex": "@article{amin2026trustworthy,\n  author = {Zaid Amin and collaborators},\n  title = {{Trustworthy AI for Sustainable Cities}},\n  journal = {Smart Cities},\n  volume = {9},\n  number = {1},\n  pages = {174},\n  year = {2026}\n}",
+    "image": "assets/images/spotlight-smart-cities.jpg",
+    "featured": true
   },
   {
     "id": "amin2026srivijayapedia",
@@ -22,8 +23,9 @@
     "doi": "10.35631/JISTM.1142003",
     "url": "https://doi.org/10.35631/JISTM.1142003",
     "bibtex": "@article{amin2026srivijayapedia,\n  author    = {Zaid Amin and collaborators},\n  title     = {{SRIVIJAYAPEDIA: A DIGITAL PLATFORM FOR CULTURAL HERITAGE PRESERVATION OF THE SRIVIJAYA CIVILIZATION}},\n  year      = {2026},\n  journal   = {Journal of Information System and Technology Management},\n  doi       = {10.35631/JISTM.1142003},\n  url       = {https://doi.org/10.35631/JISTM.1142003}\n}",
-    "featured": true,
-    "abstract": "Research addressing srivijayapedia: a digital platform for cultural heritage preservation of the srivijaya civilization through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "featured": false,
+    "abstract": "Research addressing srivijayapedia: a digital platform for cultural heritage preservation of the srivijaya civilization through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-projects.jpg"
   },
   {
     "id": "amin2026the",
@@ -35,8 +37,9 @@
     "doi": "10.2139/ssrn.7670124",
     "url": "https://doi.org/10.2139/ssrn.7670124",
     "bibtex": "@misc{amin2026the,\n  author    = {Zaid Amin and collaborators},\n  title     = {{The Proxy Trap in Agentic AI: When Metrics Replace Judgment}},\n  year      = {2026},\n  journal   = {},\n  doi       = {10.2139/ssrn.7670124},\n  url       = {https://doi.org/10.2139/ssrn.7670124}\n}",
-    "featured": true,
-    "abstract": "Research addressing the proxy trap in agentic ai: when metrics replace judgment through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "featured": false,
+    "abstract": "Research addressing the proxy trap in agentic ai: when metrics replace judgment through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-governance.jpg"
   },
   {
     "id": "amin2026trustworthy",
@@ -49,7 +52,8 @@
     "url": "https://doi.org/10.20944/preprints202608.1136.v1",
     "bibtex": "@misc{amin2026trustworthy,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance}},\n  year      = {2026},\n  journal   = {},\n  doi       = {10.20944/preprints202608.1136.v1},\n  url       = {https://doi.org/10.20944/preprints202608.1136.v1}\n}",
     "featured": true,
-    "abstract": "Research addressing trustworthy ai for sustainable cities: a multimodal orchestration agent-based framework for civic compliance through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "abstract": "Research addressing trustworthy ai for sustainable cities: a multimodal orchestration agent-based framework for civic compliance through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/spotlight-smart-cities.jpg"
   },
   {
     "id": "amin2025immersive",
@@ -61,8 +65,9 @@
     "doi": "10.18196/jas.v6i2.617",
     "url": "https://doi.org/10.18196/jas.v6i2.617",
     "bibtex": "@article{amin2025immersive,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Immersive Heritage: Exploring Srivijaya's Historical Legacy Through Virtual Reality in Digital Communication}},\n  year      = {2025},\n  journal   = {Jurnal Audiens},\n  doi       = {10.18196/jas.v6i2.617},\n  url       = {https://doi.org/10.18196/jas.v6i2.617}\n}",
-    "featured": true,
-    "abstract": "Research addressing immersive heritage: exploring srivijaya's historical legacy through virtual reality in digital communication through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "featured": false,
+    "abstract": "Research addressing immersive heritage: exploring srivijaya's historical legacy through virtual reality in digital communication through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-projects.jpg"
   },
   {
     "id": "amin2025celebrity",
@@ -74,8 +79,9 @@
     "doi": "10.26623/themessenger.v17i1.11658",
     "url": "https://doi.org/10.26623/themessenger.v17i1.11658",
     "bibtex": "@article{amin2025celebrity,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Celebrity of Instagram and Endorsements: Shaping and Constructing Social Identity}},\n  year      = {2025},\n  journal   = {Jurnal The Messenger},\n  doi       = {10.26623/themessenger.v17i1.11658},\n  url       = {https://doi.org/10.26623/themessenger.v17i1.11658}\n}",
-    "featured": true,
-    "abstract": "Research addressing celebrity of instagram and endorsements: shaping and constructing social identity through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "featured": false,
+    "abstract": "Research addressing celebrity of instagram and endorsements: shaping and constructing social identity through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-research.jpg"
   },
   {
     "id": "amin2025peerreview",
@@ -87,8 +93,9 @@
     "doi": "10.2991/978-2-38476-466-2_1",
     "url": "https://doi.org/10.2991/978-2-38476-466-2_1",
     "bibtex": "@incollection{amin2025peerreview,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Peer-Review Statements}},\n  year      = {2025},\n  journal   = {},\n  doi       = {10.2991/978-2-38476-466-2_1},\n  url       = {https://doi.org/10.2991/978-2-38476-466-2_1}\n}",
-    "featured": true,
-    "abstract": "Research addressing peer-review statements through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "featured": false,
+    "abstract": "Research addressing peer-review statements through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-research.jpg"
   },
   {
     "id": "amin2024tuneattention",
@@ -100,8 +107,9 @@
     "doi": "10.1109/ice3is62977.2024.10775858",
     "url": "https://doi.org/10.1109/ice3is62977.2024.10775858",
     "bibtex": "@inproceedings{amin2024tuneattention,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Tune-Attention Model: Designing Cybernetics Intervention for Information Sharing Behavior}},\n  year      = {2024},\n  journal   = {2024 4th International Conference on Electronic and Electrical Engineering and Intelligent System (ICE3IS)},\n  doi       = {10.1109/ice3is62977.2024.10775858},\n  url       = {https://doi.org/10.1109/ice3is62977.2024.10775858}\n}",
-    "featured": true,
-    "abstract": "Research addressing tune-attention model: designing cybernetics intervention for information sharing behavior through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "featured": false,
+    "abstract": "Research addressing tune-attention model: designing cybernetics intervention for information sharing behavior through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-attention.jpg"
   },
   {
     "id": "amin2024digital",
@@ -113,8 +121,9 @@
     "doi": "10.1007/978-3-031-48770-5_65",
     "url": "https://doi.org/10.1007/978-3-031-48770-5_65",
     "bibtex": "@incollection{amin2024digital,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World}},\n  year      = {2024},\n  journal   = {Contributions to Management Science},\n  doi       = {10.1007/978-3-031-48770-5_65},\n  url       = {https://doi.org/10.1007/978-3-031-48770-5_65}\n}",
-    "featured": true,
-    "abstract": "Research addressing digital loneliness in social media: the epoch of our connected and distraction world through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "featured": false,
+    "abstract": "Research addressing digital loneliness in social media: the epoch of our connected and distraction world through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-research.jpg"
   },
   {
     "id": "amin2021attentionbased",
@@ -127,7 +136,8 @@
     "url": "https://doi.org/10.1007/978-3-030-78468-3_34",
     "bibtex": "@incollection{amin2021attentionbased,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Attention-Based Design and Selective Exposure Amid COVID-19 Misinformation Sharing}},\n  year      = {2021},\n  journal   = {Lecture Notes in Computer Science},\n  doi       = {10.1007/978-3-030-78468-3_34},\n  url       = {https://doi.org/10.1007/978-3-030-78468-3_34}\n}",
     "featured": false,
-    "abstract": "Research addressing attention-based design and selective exposure amid covid-19 misinformation sharing through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "abstract": "Research addressing attention-based design and selective exposure amid covid-19 misinformation sharing through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-attention.jpg"
   },
   {
     "id": "amin2021attentionbased",
@@ -140,7 +150,8 @@
     "url": "https://doi.org/10.13140/RG.2.2.28372.83841",
     "bibtex": "@article{amin2021attentionbased,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Attention-Based Design and User Decision on Information Sharing: An Ontological Approach Through Thematic Literature Review}},\n  year      = {2021},\n  journal   = {Unpublished},\n  doi       = {10.13140/RG.2.2.28372.83841},\n  url       = {https://doi.org/10.13140/RG.2.2.28372.83841}\n}",
     "featured": false,
-    "abstract": "Research addressing attention-based design and user decision on information sharing: an ontological approach through thematic literature review through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "abstract": "Research addressing attention-based design and user decision on information sharing: an ontological approach through thematic literature review through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-attention.jpg"
   },
   {
     "id": "amin2021attentionbased",
@@ -152,8 +163,9 @@
     "doi": "10.1109/ACCESS.2021.3087740",
     "url": "https://doi.org/10.1109/ACCESS.2021.3087740",
     "bibtex": "@article{amin2021attentionbased,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Attention-Based Design and User Decisions on Information Sharing: A Thematic Literature Review}},\n  year      = {2021},\n  journal   = {IEEE Access},\n  doi       = {10.1109/ACCESS.2021.3087740},\n  url       = {https://doi.org/10.1109/ACCESS.2021.3087740}\n}",
-    "featured": true,
-    "abstract": "Research addressing attention-based design and user decisions on information sharing: a thematic literature review through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "featured": false,
+    "abstract": "Research addressing attention-based design and user decisions on information sharing: a thematic literature review through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-attention.jpg"
   },
   {
     "id": "amin2021visual",
@@ -166,7 +178,8 @@
     "url": "https://doi.org/10.14569/IJACSA.2021.0121005",
     "bibtex": "@article{amin2021visual,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Visual Selective Attention System to Intervene User Attention in Sharing COVID-19 Misinformation}},\n  year      = {2021},\n  journal   = {International Journal of Advanced Computer Science and Applications},\n  doi       = {10.14569/IJACSA.2021.0121005},\n  url       = {https://doi.org/10.14569/IJACSA.2021.0121005}\n}",
     "featured": false,
-    "abstract": "Research addressing visual selective attention system to intervene user attention in sharing covid-19 misinformation through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "abstract": "Research addressing visual selective attention system to intervene user attention in sharing covid-19 misinformation through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-attention.jpg"
   },
   {
     "id": "amin2021visual",
@@ -179,7 +192,8 @@
     "url": "http://www.scopus.com/inward/record.url?eid=2-s2.0-85118754709&partnerID=MN8TOARS",
     "bibtex": "@misc{amin2021visual,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Visual selective attention system to intervene user attention in sharing COVID-19 misinformation}},\n  year      = {2021},\n  journal   = {arXiv},\n  doi       = {},\n  url       = {http://www.scopus.com/inward/record.url?eid=2-s2.0-85118754709&partnerID=MN8TOARS}\n}",
     "featured": false,
-    "abstract": "Research addressing visual selective attention system to intervene user attention in sharing covid-19 misinformation through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "abstract": "Research addressing visual selective attention system to intervene user attention in sharing covid-19 misinformation through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-attention.jpg"
   },
   {
     "id": "amin2020attention",
@@ -192,7 +206,8 @@
     "url": "https://arxiv.org/pdf/2012.12593",
     "bibtex": "@misc{amin2020attention,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Attention and misinformation sharing on social media}},\n  year      = {2020},\n  journal   = {},\n  doi       = {},\n  url       = {https://arxiv.org/pdf/2012.12593}\n}",
     "featured": false,
-    "abstract": "Research addressing attention and misinformation sharing on social media through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "abstract": "Research addressing attention and misinformation sharing on social media through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-attention.jpg"
   },
   {
     "id": "amin2020attention",
@@ -205,7 +220,8 @@
     "url": "http://www.scopus.com/inward/record.url?eid=2-s2.0-85100363873&partnerID=MN8TOARS",
     "bibtex": "@misc{amin2020attention,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Attention and misinformation sharing on social media}},\n  year      = {2020},\n  journal   = {arXiv},\n  doi       = {},\n  url       = {http://www.scopus.com/inward/record.url?eid=2-s2.0-85100363873&partnerID=MN8TOARS}\n}",
     "featured": false,
-    "abstract": "Research addressing attention and misinformation sharing on social media through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "abstract": "Research addressing attention and misinformation sharing on social media through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-attention.jpg"
   },
   {
     "id": "amin2017pengembangan",
@@ -218,7 +234,8 @@
     "url": "https://jurnal.umj.ac.id/index.php/semnastek/article/view/1935/1586",
     "bibtex": "@inproceedings{amin2017pengembangan,\n  author    = {Zaid Amin and collaborators},\n  title     = {{PENGEMBANGAN APLIKASI SISTEM MANAJEMEN DOKUMEN ELEKTRONIK BERORIENTASI STANDAR BORANG AKREDITASI BAN PT}},\n  year      = {2017},\n  journal   = {PROSIDING SEMNASTEK 2017},\n  doi       = {},\n  url       = {https://jurnal.umj.ac.id/index.php/semnastek/article/view/1935/1586}\n}",
     "featured": false,
-    "abstract": "Research addressing pengembangan aplikasi sistem manajemen dokumen elektronik berorientasi standar borang akreditasi ban pt through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "abstract": "Research addressing pengembangan aplikasi sistem manajemen dokumen elektronik berorientasi standar borang akreditasi ban pt through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-research.jpg"
   },
   {
     "id": "amin2017aplikasi",
@@ -231,7 +248,8 @@
     "url": "",
     "bibtex": "@article{amin2017aplikasi,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Aplikasi Sistem Manajemen Dokumen Elektronik Berorientasi Standar Borang BAN PT}},\n  year      = {2017},\n  journal   = {UST IT: Jurnal Sistem Informasi, Teknologi Informasi dan Komputer},\n  doi       = {},\n  url       = {}\n}",
     "featured": false,
-    "abstract": "Research addressing aplikasi sistem manajemen dokumen elektronik berorientasi standar borang ban pt through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "abstract": "Research addressing aplikasi sistem manajemen dokumen elektronik berorientasi standar borang ban pt through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-research.jpg"
   },
   {
     "id": "amin2017aplikasi",
@@ -244,7 +262,8 @@
     "url": "http://ojs.palcomtech.com/index.php/SNTIBD/issue/view/17",
     "bibtex": "@inproceedings{amin2017aplikasi,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Aplikasi Web Sms Sebagai Reminder Digital Menggunakan GAMMU}},\n  year      = {2017},\n  journal   = {SNTIBD 2017},\n  doi       = {},\n  url       = {http://ojs.palcomtech.com/index.php/SNTIBD/issue/view/17}\n}",
     "featured": false,
-    "abstract": "Research addressing aplikasi web sms sebagai reminder digital menggunakan gammu through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "abstract": "Research addressing aplikasi web sms sebagai reminder digital menggunakan gammu through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-research.jpg"
   },
   {
     "id": "amin2017multi",
@@ -257,7 +276,8 @@
     "url": "http://www.seminar.ilkom.unsri.ac.id/index.php/ars/article/viewFile/1662/866",
     "bibtex": "@inproceedings{amin2017multi,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Multi tier architecture model on a server cluster for application of big data}},\n  year      = {2017},\n  journal   = {Annual Research Seminar (ARS) - Computer Science and ICT 2017},\n  doi       = {},\n  url       = {http://www.seminar.ilkom.unsri.ac.id/index.php/ars/article/viewFile/1662/866}\n}",
     "featured": false,
-    "abstract": "Research addressing multi tier architecture model on a server cluster for application of big data through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "abstract": "Research addressing multi tier architecture model on a server cluster for application of big data through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-research.jpg"
   },
   {
     "id": "amin2015desain",
@@ -270,7 +290,8 @@
     "url": "http://eprints.binadarma.ac.id/id/eprint/2511",
     "bibtex": "@article{amin2015desain,\n  author    = {Zaid Amin and collaborators},\n  title     = {{DESAIN DAN IMPLEMENTASI TUNNELING IPSEC BERBASIS UNIX DENGAN ESP (ENCAPSULATING SECURITY PAYLOAD) (Studi Kasus : PT. Sumeks Tivi Palembang & PT. Sumatera Ekspres)}},\n  year      = {2015},\n  journal   = {Jurnal Teknologi dan Informatika},\n  doi       = {},\n  url       = {http://eprints.binadarma.ac.id/id/eprint/2511}\n}",
     "featured": false,
-    "abstract": "Research addressing desain dan implementasi tunneling ipsec berbasis unix dengan esp (encapsulating security payload) (studi kasus : pt. sumeks tivi palembang & pt. sumatera ekspres) through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "abstract": "Research addressing desain dan implementasi tunneling ipsec berbasis unix dengan esp (encapsulating security payload) (studi kasus : pt. sumeks tivi palembang & pt. sumatera ekspres) through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-research.jpg"
   },
   {
     "id": "amin2015routing",
@@ -283,7 +304,8 @@
     "url": "http://www.seminar.ilkom.unsri.ac.id/index.php/ars/article/view/185",
     "bibtex": "@inproceedings{amin2015routing,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Routing protocols pada holistic network di era big data}},\n  year      = {2015},\n  journal   = {Annual Research Seminar (ARS) 2015},\n  doi       = {},\n  url       = {http://www.seminar.ilkom.unsri.ac.id/index.php/ars/article/view/185}\n}",
     "featured": false,
-    "abstract": "Research addressing routing protocols pada holistic network di era big data through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "abstract": "Research addressing routing protocols pada holistic network di era big data through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-research.jpg"
   },
   {
     "id": "amin2014simulasi",
@@ -296,7 +318,8 @@
     "url": "http://www.seminar.ilkom.unsri.ac.id/index.php/kntia/article/view/730/403",
     "bibtex": "@inproceedings{amin2014simulasi,\n  author    = {Zaid Amin and collaborators},\n  title     = {{SIMULASI DAN PERANCANGAN KEAMANAN AUTENTIKASI JARINGAN HIRARKI LINK AGGREGATION CONTROL PROTOCOL (LACP) BERBASIS ROUTER CISCO}},\n  year      = {2014},\n  journal   = {Konferensi Nasional Teknologi Informasi & Aplikasinya},\n  doi       = {},\n  url       = {http://www.seminar.ilkom.unsri.ac.id/index.php/kntia/article/view/730/403}\n}",
     "featured": false,
-    "abstract": "Research addressing simulasi dan perancangan keamanan autentikasi jaringan hirarki link aggregation control protocol (lacp) berbasis router cisco through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "abstract": "Research addressing simulasi dan perancangan keamanan autentikasi jaringan hirarki link aggregation control protocol (lacp) berbasis router cisco through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-research.jpg"
   },
   {
     "id": "amin2012analisis",
@@ -309,6 +332,7 @@
     "url": "http://eprints.binadarma.ac.id/id/eprint/2582",
     "bibtex": "@article{amin2012analisis,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Analisis Vulnerabilitas Host Pada Keamanan Jaringan Komputer Di PT. Sumeks Tivi Palembang (PALTV) Menggunakan Router Berbasis Unix}},\n  year      = {2012},\n  journal   = {Jurnal Teknologi dan Informatika},\n  doi       = {},\n  url       = {http://eprints.binadarma.ac.id/id/eprint/2582}\n}",
     "featured": false,
-    "abstract": "Research addressing analisis vulnerabilitas host pada keamanan jaringan komputer di pt. sumeks tivi palembang (paltv) menggunakan router berbasis unix through empirical computational methodologies, behavioral analytics, and human-centered design frameworks."
+    "abstract": "Research addressing analisis vulnerabilitas host pada keamanan jaringan komputer di pt. sumeks tivi palembang (paltv) menggunakan router berbasis unix through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/thumb-research.jpg"
   }
 ]
