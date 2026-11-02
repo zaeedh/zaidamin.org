@@ -3752,28 +3752,41 @@ a {
   opacity: 0.85;
 }
 
-/* Scrubber bar wrapper: spans across remaining width */
+/* Scrubber bar wrapper: spans across remaining width with generous tap target */
 .royal-progress-wrap {
   position: relative;
   flex: 1;
-  height: 18px;
+  height: 28px;
   display: flex;
   align-items: center;
   cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+.royal-progress-wrap::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  bottom: -8px;
+  left: 0;
+  right: 0;
 }
 
 .royal-progress-bar {
   position: relative;
   width: 100%;
-  height: 2.5px;
-  background: rgba(140, 180, 205, 0.16); /* ultra-soft transparent track */
+  height: 3px;
+  background: rgba(140, 180, 205, 0.20); /* ultra-soft transparent track */
   border-radius: 999px;
   overflow: visible;
-  transition: height 0.18s ease;
+  transition: height 0.16s ease;
 }
 
-.royal-progress-wrap:hover .royal-progress-bar {
-  height: 4px;
+.royal-progress-wrap:hover .royal-progress-bar,
+.royal-progress-wrap.is-dragging .royal-progress-bar {
+  height: 5px;
 }
 
 .royal-progress-fill {
@@ -3782,27 +3795,38 @@ a {
   left: 0;
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, rgba(34, 166, 200, 0.65), rgba(212, 175, 55, 0.85));
+  background: linear-gradient(90deg, rgba(34, 166, 200, 0.85), rgba(212, 175, 55, 0.95));
   border-radius: 999px;
-  transition: width 0.1s linear;
+  transition: width 0.08s linear;
+}
+
+.royal-progress-wrap.is-dragging .royal-progress-fill,
+.royal-progress-wrap.is-dragging .royal-progress-thumb {
+  transition: none !important;
 }
 
 .royal-progress-thumb {
   position: absolute;
   top: 50%;
   left: 0%;
-  width: 8px;
-  height: 8px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
-  background: #d4af37; /* Imperial Gold bead */
-  box-shadow: 0 0 6px rgba(212, 175, 55, 0.6);
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #f3e5ab; /* Radiant Golden bead */
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.85), 0 0 16px rgba(34, 166, 200, 0.40);
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s ease;
   pointer-events: none;
 }
 
 .royal-progress-wrap:hover .royal-progress-thumb {
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) scale(1.25);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 1), 0 0 20px rgba(34, 166, 200, 0.60);
+}
+
+.royal-progress-wrap.is-dragging .royal-progress-thumb {
+  transform: translate(-50%, -50%) scale(1.4) !important;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 1), 0 0 28px rgba(34, 166, 200, 0.80) !important;
 }
 
 /* Mute Button */
