@@ -12,6 +12,7 @@ Cryptographically Secured Unified CMS API Endpoints:
 
 import http.server
 import socket
+import time
 import socketserver
 import os
 import sys
@@ -357,19 +358,55 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
         except Exception as e:
             self.send_json(500, {"error": str(e)})
 
+class IPv6Server(http.server.ThreadingHTTPServer):
+    address_family = socket.AF_INET6
+    allow_reuse_address = False
+    def server_bind(self):
+        self.socket.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 1)
+        super().server_bind()
+
+class IPv4Server(http.server.ThreadingHTTPServer):
+    address_family = socket.AF_INET
+    allow_reuse_address = False
+
 def run():
-    with http.server.ThreadingHTTPServer(("0.0.0.0", PORT), AcademicPreviewHandler) as httpd:
-        print("=" * 65)
-        print(f" Academic Server Active (Dual-Stack IPv4 + IPv6):")
-        print(f" - http://127.0.0.1:{PORT}")
-        print(f" - http://localhost:{PORT}")
-        print(f" Serving Root: {DIRECTORY}")
-        print(f" Cryptographic Security: ACTIVE (Admin Key Protected)")
-        print("=" * 65)
-        try:
-            httpd.serve_forever()
-        except KeyboardInterrupt:
-            print("\nServer stopped.")
+    print("=" * 65)
+    print(f" Academic Server Active (Dual-Stack IPv4 + IPv6):")
+    print(f" - http://localhost:{PORT}")
+    print(f" - http://127.0.0.1:{PORT}")
+    print(f" Serving Root: {DIRECTORY}")
+    print(f" Cryptographic Security: ACTIVE (Admin Key Protected)")
+    print("=" * 65)
+
+    s4 = None
+    s6 = None
+
+    try:
+        s4 = IPv4Server(("0.0.0.0", PORT), AcademicPreviewHandler)
+        t4 = threading.Thread(target=s4.serve_forever, daemon=True)
+        t4.start()
+        print(" [Core Engine] IPv4 Listener active on 0.0.0.0:8000")
+    except Exception as e:
+        print(f" [Warning] IPv4 bind error: {e}")
+
+    try:
+        s6 = IPv6Server(("::", PORT), AcademicPreviewHandler)
+        t6 = threading.Thread(target=s6.serve_forever, daemon=True)
+        t6.start()
+        print(" [Core Engine] IPv6 Listener active on [::]:8000")
+    except Exception as e:
+        print(f" [Warning] IPv6 bind error: {e}")
+
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("\nStopping server...")
+        if s4:
+            s4.shutdown()
+        if s6:
+            s6.shutdown()
+        print("Server stopped.")
 
 if __name__ == "__main__":
     run()
