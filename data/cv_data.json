@@ -70,16 +70,16 @@
   },
   "achievements_and_grants": [
     {
-      "year": "2025",
       "title": "2nd Runner Up South Sumatera Innovator Award",
       "organization": "Provincial Government of South Sumatra, Indonesia",
+      "year": "2025",
       "category": "Government Award",
       "badge": "Provincial Honor",
-      "highlight": true,
-      "details": "Recognized in the Innovative Research Award 2025 for the project 'Srivijayapedia: Exploring Digital Heritage of Srivijaya Using Immersive Technology', pioneering digital cultural preservation through immersive systems.",
-      "featured": true,
+      "url": "https://tinyurl.com/5n7yjtht",
       "image": "assets/images/thumb-projects.jpg",
-      "url": "https://tinyurl.com/5n7yjtht"
+      "featured": false,
+      "highlight": true,
+      "details": "Recognized in the Innovative Research Award 2025 for the project 'Srivijayapedia: Exploring Digital Heritage of Srivijaya Using Immersive Technology', pioneering digital cultural preservation through immersive systems."
     },
     {
       "year": "2025",
