@@ -502,6 +502,51 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* Homepage Spotlight Badges & 1-Click Action Buttons */
+    .spotlight-active-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.28), rgba(245, 158, 11, 0.18));
+      border: 1px solid #d4af37;
+      color: #fef08a;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+      white-space: nowrap;
+    }
+    .btn-set-spotlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(212, 175, 55, 0.45);
+      color: #fef08a;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-set-spotlight:hover {
+      background: rgba(212, 175, 55, 0.22);
+      border-color: #d4af37;
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    #cms-active-spotlight-banner:hover {
+      border-color: #d4af37 !important;
+      background: rgba(212, 175, 55, 0.16) !important;
+    }
+
   </style>
 </head>
 <body>
@@ -550,6 +595,14 @@
       <div class="cms-brand">
         <span class="cms-brand-title">Dr. Zaid Amin</span>
         <span class="cms-brand-badge">Secured CMS Studio</span>
+      </div>
+
+      <!-- Active Homepage Spotlight Status Bar -->
+      <div id="cms-active-spotlight-banner" style="display: flex; align-items: center; gap: 9px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 999px; padding: 4px 14px; font-size: 0.78rem; cursor: pointer; transition: all 0.2s ease;" onclick="jumpToSpotlightModule()" title="Current featured item displayed on zaidamin.org Homepage Spotlight card. Click to view.">
+        <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #fbbf24; box-shadow: 0 0 8px #fbbf24;"></span>
+        <span style="color: #fef08a; font-weight: 700; letter-spacing: 0.03em;">HOME SPOTLIGHT:</span>
+        <span id="cms-active-spotlight-title" style="color: #ffffff; font-weight: 600; max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Loading...</span>
+        <span id="cms-active-spotlight-badge" style="background: rgba(186, 230, 253, 0.18); color: #bae6fd; border: 1px solid rgba(186, 230, 253, 0.3); padding: 1px 7px; border-radius: 999px; font-size: 0.68rem; font-weight: 700; text-transform: uppercase;">ARTICLE</span>
       </div>
 
       <div class="cms-nav-actions">
@@ -1528,6 +1581,75 @@
     let activeModule = 'articles';
     let currentAdminKey = '';
 
+    // =============================================================
+    // UNIVERSAL HOMEPAGE SPOTLIGHT STATE & CONTROLS
+    // =============================================================
+    let currentSpotlight = { source: 'article', id: '', title: '' };
+
+    async function loadSpotlightData() {
+      try {
+        let res = await fetch('/api/spotlight?t=' + Date.now());
+        if (!res.ok) res = await fetch('data/spotlight.json?t=' + Date.now());
+        if (res.ok) {
+          currentSpotlight = await res.json();
+          updateSpotlightUI();
+        }
+      } catch (e) {
+        console.warn('Could not load spotlight state', e);
+      }
+    }
+
+    function updateSpotlightUI() {
+      const titleEl = document.getElementById('cms-active-spotlight-title');
+      const badgeEl = document.getElementById('cms-active-spotlight-badge');
+      if (!titleEl || !badgeEl) return;
+
+      const src = (currentSpotlight.source || 'article').toUpperCase();
+      badgeEl.textContent = src === 'CV' ? 'DISTINCTION' : src;
+      titleEl.textContent = currentSpotlight.title || currentSpotlight.id || 'Trustworthy AI for Sustainable Cities';
+      titleEl.title = currentSpotlight.title || '';
+    }
+
+    function jumpToSpotlightModule() {
+      const src = (currentSpotlight.source || 'article').toLowerCase();
+      if (src === 'article') switchModule('articles');
+      else if (src === 'publication') switchModule('pubs');
+      else if (src === 'talk') switchModule('talks');
+      else if (src === 'cv') switchModule('cv');
+    }
+
+    async function setHomepageSpotlight(source, id, title) {
+      const confirmed = confirm(`Set "${title}" as the Featured Spotlight on your Homepage?\n\nThis will immediately recompile index.html and feature this item on your website.`);
+      if (!confirmed) return;
+
+      showToast('Setting Homepage Spotlight & compiling...', false);
+
+      try {
+        const res = await fetch('/api/set-homepage-spotlight', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Admin-Key': currentAdminKey,
+            'Authorization': 'Bearer ' + currentAdminKey
+          },
+          body: JSON.stringify({ source: source, id: id, title: title, deploy: false })
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          currentSpotlight = data.spotlight || { source: source, id: id, title: title };
+          updateSpotlightUI();
+          await loadAllData();
+          showToast(`★ Active Homepage Spotlight set to: "${title}"! View index.html to see it live.`, false);
+        } else {
+          showToast(data.error || 'Failed to update spotlight', true);
+        }
+      } catch (e) {
+        showToast('Network error while updating spotlight', true);
+      }
+    }
+
+
     // Data Stores
     let articlesData = [];
     let pubsData = [];
@@ -1690,6 +1812,7 @@
     // Load All Data Files
     async function loadAllData() {
       try {
+        await loadSpotlightData();
         const [rArt, rPub, rTalk, rCv] = await Promise.all([
           fetch('data/articles.json?t=' + Date.now()),
           fetch('data/publications.json?t=' + Date.now()),
@@ -1729,16 +1852,25 @@
     // -------------------------------------------------------------
     function renderArticlesTable(list) {
       const tbody = document.getElementById('articles-tbody');
-      tbody.innerHTML = list.map((a, i) => `
+      tbody.innerHTML = list.map((a, i) => {
+        const isSpotlight = (currentSpotlight.source === 'article' && (currentSpotlight.id === a.id || currentSpotlight.title === a.title)) || a.featured;
+        const spotlightHtml = isSpotlight
+          ? '<span class="spotlight-active-badge">★ ACTIVE HOME SPOTLIGHT</span>'
+          : `<button type="button" class="btn-set-spotlight" onclick="setHomepageSpotlight('article', '${a.id}', '${escapeQuotes(a.title)}')">★ Set as Home Spotlight</button>`;
+        return `
         <tr>
           <td style="color: #64748b; font-weight: 700;">${i + 1}</td>
           <td>
-            <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
               <span style="font-weight: 700; color: #ffffff;">${escapeHTML(a.title)}</span>
-              ${a.featured ? '<span style="background: rgba(212, 175, 55, 0.2); color: #fef08a; border: 1px solid #d4af37; padding: 2px 7px; border-radius: 4px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em;">★ SPOTLIGHT</span>' : ''}
+              ${spotlightHtml}
             </div>
             <div style="font-size: 0.75rem; color: #94a3b8;">${escapeHTML(a.id)}</div>
-          </td>
+          </td>`;
+      }).join('');
+    }
+
+    function _disabled_old_renderArticlesTable(list) {
           <td><span style="background: rgba(56, 189, 248, 0.12); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">${escapeHTML(a.category || 'General')}</span></td>
           <td style="color: #94a3b8; font-size: 0.82rem;">${a.date || '—'}</td>
           <td style="color: #cbd5e1; font-size: 0.82rem;">${a.reading_time || '—'}</td>
@@ -2081,7 +2213,8 @@
         excerpt: excerpt,
         image: artImg,
         content_html: content,
-        author: "Dr. Zaid Amin"
+        author: "Dr. Zaid Amin",
+        featured: isFeatured
       };
 
       const existingIdx = articlesData.findIndex(a => a.id === (editingArticleSlug || slug));
@@ -2097,7 +2230,8 @@
         if (res.ok) {
           showToast(andDeploy ? 'Article saved & deploying live!' : 'Article saved locally!');
           closeArticleEditor();
-          renderArticlesTable(articlesData);
+          await loadSpotlightData();
+          await loadAllData();
           return;
         }
       } catch (e) {}
@@ -2126,16 +2260,25 @@
     // -------------------------------------------------------------
     function renderPubsTable(list) {
       const tbody = document.getElementById('pubs-tbody');
-      tbody.innerHTML = list.map((p, i) => `
+      tbody.innerHTML = list.map((p, i) => {
+        const isSpotlight = (currentSpotlight.source === 'publication' && (currentSpotlight.id === p.id || currentSpotlight.title === p.title)) || p.featured;
+        const spotlightHtml = isSpotlight
+          ? '<span class="spotlight-active-badge">★ ACTIVE HOME SPOTLIGHT</span>'
+          : `<button type="button" class="btn-set-spotlight" onclick="setHomepageSpotlight('publication', '${p.id}', '${escapeQuotes(p.title)}')">★ Set as Home Spotlight</button>`;
+        return `
         <tr>
           <td style="color: #64748b; font-weight: 700;">${i + 1}</td>
           <td>
-            <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
               <span style="font-weight: 700; color: #ffffff;">${escapeHTML(p.title)}</span>
-              ${p.featured ? '<span style="background: rgba(212, 175, 55, 0.2); color: #fef08a; border: 1px solid #d4af37; padding: 2px 7px; border-radius: 4px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em;">★ SPOTLIGHT</span>' : ''}
+              ${spotlightHtml}
             </div>
             <div style="font-size: 0.75rem; color: #94a3b8;">${escapeHTML(p.authors || '')}</div>
-          </td>
+          </td>`;
+      }).join('');
+    }
+
+    function _disabled_old_renderPubsTable(list) {
           <td><span style="background: rgba(212, 175, 55, 0.12); color: #fef08a; border: 1px solid rgba(212, 175, 55, 0.3); padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">${escapeHTML(p.category || 'Publication')}</span></td>
           <td style="color: #bae6fd; font-size: 0.82rem;">${escapeHTML(p.venue || '—')}</td>
           <td style="color: #94a3b8; font-weight: 700;">${p.year || '—'}</td>
@@ -2591,16 +2734,25 @@
 
     function renderTalksTable(list) {
       const tbody = document.getElementById('talks-tbody');
-      tbody.innerHTML = list.map((t, i) => `
+      tbody.innerHTML = list.map((t, i) => {
+        const isSpotlight = (currentSpotlight.source === 'talk' && (currentSpotlight.id === t.title || currentSpotlight.title === t.title)) || t.featured;
+        const spotlightHtml = isSpotlight
+          ? '<span class="spotlight-active-badge">★ ACTIVE HOME SPOTLIGHT</span>'
+          : `<button type="button" class="btn-set-spotlight" onclick="setHomepageSpotlight('talk', '${escapeQuotes(t.title)}', '${escapeQuotes(t.title)}')">★ Set as Home Spotlight</button>`;
+        return `
         <tr>
           <td style="color: #64748b; font-weight: 700;">${i + 1}</td>
           <td>
-            <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
               <span style="font-weight: 700; color: #ffffff;">${escapeHTML(t.title)}</span>
-              ${t.featured ? '<span style="background: rgba(212, 175, 55, 0.2); color: #fef08a; border: 1px solid #d4af37; padding: 2px 7px; border-radius: 4px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em;">★ SPOTLIGHT</span>' : ''}
+              ${spotlightHtml}
             </div>
             <div style="font-size: 0.75rem; color: #94a3b8;">${escapeHTML(t.location || '')}</div>
-          </td>
+          </td>`;
+      }).join('');
+    }
+
+    function _disabled_old_renderTalksTable(list) {
           <td style="color: #bae6fd; font-size: 0.85rem;">${escapeHTML(t.event || '—')}</td>
           <td><span style="background: rgba(168, 85, 247, 0.12); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.3); padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">${escapeHTML(t.role || 'Speaker')}</span></td>
           <td style="color: #94a3b8; font-weight: 700;">${t.year || '—'}</td>
@@ -2929,16 +3081,25 @@
 
     function renderCvTable(list) {
       const tbody = document.getElementById('cv-tbody');
-      tbody.innerHTML = list.map((a, i) => `
+      tbody.innerHTML = list.map((a, i) => {
+        const isSpotlight = (currentSpotlight.source === 'cv' && (currentSpotlight.id === a.title || currentSpotlight.title === a.title)) || a.featured;
+        const spotlightHtml = isSpotlight
+          ? '<span class="spotlight-active-badge">★ ACTIVE HOME SPOTLIGHT</span>'
+          : `<button type="button" class="btn-set-spotlight" onclick="setHomepageSpotlight('cv', '${escapeQuotes(a.title)}', '${escapeQuotes(a.title)}')">★ Set as Home Spotlight</button>`;
+        return `
         <tr>
           <td style="color: #64748b; font-weight: 700;">${i + 1}</td>
           <td>
-            <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
               <span style="font-weight: 700; color: #ffffff;">${escapeHTML(a.title)}</span>
-              ${a.featured ? '<span style="background: rgba(212, 175, 55, 0.2); color: #fef08a; border: 1px solid #d4af37; padding: 2px 7px; border-radius: 4px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em;">★ SPOTLIGHT</span>' : ''}
+              ${spotlightHtml}
             </div>
             <div style="font-size: 0.75rem; color: #94a3b8;">${escapeHTML(a.category || '')}</div>
-          </td>
+          </td>`;
+      }).join('');
+    }
+
+    function _disabled_old_renderCvTable(list) {
           <td style="color: #bae6fd; font-size: 0.85rem;">${escapeHTML(a.organization || '—')}</td>
           <td><span style="background: rgba(34, 197, 94, 0.12); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.3); padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">${escapeHTML(a.badge || 'Honor')}</span></td>
           <td style="color: #94a3b8; font-weight: 700;">${a.year || '—'}</td>
