@@ -23,3 +23,4 @@ echo.
 start http://localhost:8000/cms.html
 echo CMS launched successfully. You can close this window.
 timeout /t 5
+
