@@ -90,7 +90,7 @@ def get_html_head(title="Dr. Zaid Amin | Academic & Computational Researcher | z
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=3.6">
+  <link rel="stylesheet" href="assets/css/style.css?v=3.7">
   <link rel="icon" href="favicon.ico">
 </head>
 <body>
@@ -321,17 +321,19 @@ def get_visitor_stats_html():
         {"code": "SG", "name": "Singapore", "pct": 9.5, "count": "4.6K", "color": "#34d399"},
         {"code": "AU", "name": "Australia", "pct": 7.2, "count": "3.5K", "color": "#f472b6"},
         {"code": "DE", "name": "Germany", "pct": 5.1, "count": "2.5K", "color": "#a78bfa"},
-        {"code": "OTHER", "name": "78+ Other Nations", "pct": 9.4, "count": "4.5K", "color": "#94a3b8"}
+        {"code": "OTHER", "name": "78+ Nations", "full_name": "78+ Other Nations", "pct": 9.4, "count": "4.5K", "color": "#94a3b8"}
     ]
     country_capsules_html = ""
     for c in countries:
         flag = get_flag_svg(c["code"])
+        display_name = c["name"]
+        full_name = c.get("full_name", display_name)
         country_capsules_html += f"""
-          <div class="stats-country-item" title="{c['name']}: {c['pct']}% of total academic traffic ({c['count']} visits)">
+          <div class="stats-country-item" title="{full_name}: {c['pct']}% of total academic traffic ({c['count']} visits)">
             <div class="stats-country-top">
               <span class="stats-dot" style="background: {c['color']}; box-shadow: 0 0 6px {c['color']}88;"></span>
               {flag}
-              <span class="stats-country-name">{c['name']}</span>
+              <span class="stats-country-name">{display_name}</span>
             </div>
             <div class="stats-country-bottom">
               <span class="stats-country-pct">{c['pct']}%</span>
@@ -349,13 +351,12 @@ def get_visitor_stats_html():
           <span class="stats-live-label">Live Readership Telemetry</span>
         </div>
 
-
         <div class="stats-meta-cluster font-cinzel">
           <span class="stats-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2008 &ndash; 2026 Archive</span>
         </div>
       </div>
 
-      <!-- 3. Horizontal List of Origin Countries -->
+      <!-- Horizontal Grid of Origin Countries -->
       <div class="stats-countries-horizontal-list">
         {country_capsules_html}
       </div>
