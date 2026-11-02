@@ -469,7 +469,7 @@ def get_spotlight_card_html():
         desc = item.get("excerpt", "")
         img_src = item.get("image", "assets/images/spotlight-smart-cities.jpg")
         kicker_badge = "SPOTLIGHT ARTICLE"
-        top_kicker = f"✦ {cat_name.upper()} &bull; ESSAYS & PERSPECTIVES"
+        top_kicker = f"{cat_name.upper()} &bull; ESSAYS & PERSPECTIVES"
         btn_text = "Read Full Essay &rarr;"
         target_blank = ""
         meta_oa = f'<span class="spotlight-oa-pill font-cinzel"><span class="oa-check">&#10003;</span> Open Access Essay</span>'
@@ -489,7 +489,7 @@ def get_spotlight_card_html():
         role_str = item.get("role", "Keynote Speaker")
         type_str = item.get("type", "Keynote")
         kicker_badge = "SPOTLIGHT KEYNOTE"
-        top_kicker = f"✦ {type_str.upper()} &bull; PUBLIC ENGAGEMENT"
+        top_kicker = f"{type_str.upper()} &bull; PUBLIC ENGAGEMENT"
         btn_text = "Watch Keynote / Recording &rarr;" if item.get("url") else "View Keynote &rarr;"
         target_blank = 'target="_blank" rel="noopener"' if item.get("url") else ''
         meta_oa = f'<span class="spotlight-oa-pill font-cinzel" style="color:#d8b4fe; border-color:rgba(168,85,247,0.3);"><span class="oa-check">&#10003;</span> {role_str}</span>'
@@ -508,7 +508,7 @@ def get_spotlight_card_html():
         img_src = item.get("image", "assets/images/thumb-projects.jpg")
         badge_val = item.get("badge", "Provincial Honor")
         kicker_badge = "SPOTLIGHT DISTINCTION"
-        top_kicker = f"✦ {category_val.upper()} &bull; RESEARCH EXCELLENCE"
+        top_kicker = f"{category_val.upper()} &bull; RESEARCH EXCELLENCE"
         btn_text = "Inspect Distinction &rarr;"
         target_blank = 'target="_blank" rel="noopener"' if item.get("url") else ''
         meta_oa = f'<span class="spotlight-oa-pill font-cinzel" style="color:#86efac; border-color:rgba(34,197,94,0.3);"><span class="oa-check">&#10003;</span> {badge_val}</span>'
@@ -526,7 +526,7 @@ def get_spotlight_card_html():
         desc = item.get("abstract", "")
         img_src = item.get("image", "assets/images/spotlight-smart-cities.jpg")
         kicker_badge = "SPOTLIGHT ARTICLE"
-        top_kicker = "✦ Q1 SCOPUS INDEXED &bull; PEER-REVIEWED"
+        top_kicker = "Q1 SCOPUS INDEXED &bull; PEER-REVIEWED"
         btn_text = "Read Full Article &rarr;"
         target_blank = 'target="_blank" rel="noopener"'
         meta_oa = f'<span class="spotlight-oa-pill font-cinzel"><span class="oa-check">&#10003;</span> Open Access</span>'
