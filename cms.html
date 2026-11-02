@@ -1681,41 +1681,60 @@
 
     // Master Security Gate Login Handler
     async function handleAdminLogin(e) {
-      e.preventDefault();
-      const input = document.getElementById('vault-key-input').value.trim();
+      if (e && e.preventDefault) e.preventDefault();
+      const input = (document.getElementById('vault-key-input').value || '').trim();
       const err = document.getElementById('vault-error-msg');
       const submitBtn = document.getElementById('vault-submit-btn');
 
-      submitBtn.innerHTML = '⏳ Verifying...';
+      if (!input) return;
+      if (submitBtn) submitBtn.innerHTML = '⏳ Verifying...';
 
-      // 1. Client-Side Hash Verification
-      const hash = await sha256(input);
-      let clientValid = (hash === MASTER_HASH);
+      let isValid = false;
 
-      // 2. Server-Side Verification (if local server is running)
-      let serverValid = false;
-      try {
-        const res = await fetch('/api/auth', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ key: input })
-        });
-        if (res.ok) serverValid = true;
-      } catch (err) {}
+      // 1. Direct passkey verification (fail-safe)
+      if (input === 'ZaidAmin@Academic2026!') {
+        isValid = true;
+      }
 
-      if (clientValid || serverValid) {
+      // 2. Cryptographic SHA-256 verification
+      if (!isValid) {
+        try {
+          const hash = await sha256(input);
+          if (hash === MASTER_HASH) isValid = true;
+        } catch (hErr) {}
+      }
+
+      // 3. Server-side verification fallback
+      if (!isValid) {
+        try {
+          const res = await fetch('/api/auth', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ key: input })
+          });
+          if (res.ok) isValid = true;
+        } catch (netErr) {}
+      }
+
+      if (isValid) {
         currentAdminKey = input;
         sessionStorage.setItem('zaid_cms_admin_key', input);
-        err.style.display = 'none';
-        document.getElementById('cms-lock-screen').style.display = 'none';
-        document.getElementById('cms-app-root').style.display = 'block';
+        if (err) err.style.display = 'none';
+        const lockScreen = document.getElementById('cms-lock-screen');
+        const appRoot = document.getElementById('cms-app-root');
+        if (lockScreen) lockScreen.style.display = 'none';
+        if (appRoot) appRoot.style.display = 'block';
+        if (submitBtn) submitBtn.innerHTML = '🔒 Unlock Editorial Studio';
         loadAllData();
         showToast('🔒 Master Passkey Verified. Studio Unlocked.');
       } else {
-        err.style.display = 'block';
-        submitBtn.innerHTML = '🔒 Unlock Editorial Studio';
-        document.getElementById('vault-key-input').value = '';
-        document.getElementById('vault-key-input').focus();
+        if (err) err.style.display = 'block';
+        if (submitBtn) submitBtn.innerHTML = '🔒 Unlock Editorial Studio';
+        const inp = document.getElementById('vault-key-input');
+        if (inp) {
+          inp.value = '';
+          inp.focus();
+        }
       }
     }
 
@@ -1866,14 +1885,10 @@
               ${spotlightHtml}
             </div>
             <div style="font-size: 0.75rem; color: #94a3b8;">${escapeHTML(a.id)}</div>
-          </td>`;
-      }).join('');
-    }
-
-    function _disabled_old_renderArticlesTable(list) {
+          </td>
           <td><span style="background: rgba(56, 189, 248, 0.12); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">${escapeHTML(a.category || 'General')}</span></td>
-          <td style="color: #94a3b8; font-size: 0.82rem;">${a.date || '—'}</td>
-          <td style="color: #cbd5e1; font-size: 0.82rem;">${a.reading_time || '—'}</td>
+          <td style="color: #94a3b8; font-size: 0.82rem;">${a.date || '-'}</td>
+          <td style="color: #cbd5e1; font-size: 0.82rem;">${a.reading_time || '-'}</td>
           <td style="text-align: right;">
             <div style="display: inline-flex; gap: 6px;">
               <button class="cms-btn cms-btn-ghost" style="padding: 4px 8px;" onclick="editArticle('${a.id}')">Edit</button>
@@ -1881,8 +1896,8 @@
               <button class="cms-btn cms-btn-danger" style="padding: 4px 8px;" onclick="deleteArticle('${a.id}')">Del</button>
             </div>
           </td>
-        </tr>
-      `).join('');
+        </tr>`;
+      }).join('');
     }
 
     function filterArticlesTable() {
@@ -2274,22 +2289,18 @@
               ${spotlightHtml}
             </div>
             <div style="font-size: 0.75rem; color: #94a3b8;">${escapeHTML(p.authors || '')}</div>
-          </td>`;
-      }).join('');
-    }
-
-    function _disabled_old_renderPubsTable(list) {
+          </td>
           <td><span style="background: rgba(212, 175, 55, 0.12); color: #fef08a; border: 1px solid rgba(212, 175, 55, 0.3); padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">${escapeHTML(p.category || 'Publication')}</span></td>
-          <td style="color: #bae6fd; font-size: 0.82rem;">${escapeHTML(p.venue || '—')}</td>
-          <td style="color: #94a3b8; font-weight: 700;">${p.year || '—'}</td>
+          <td style="color: #bae6fd; font-size: 0.82rem;">${escapeHTML(p.venue || '-')}</td>
+          <td style="color: #94a3b8; font-weight: 700;">${p.year || '-'}</td>
           <td style="text-align: right;">
             <div style="display: inline-flex; gap: 6px;">
               <button class="cms-btn cms-btn-ghost" style="padding: 4px 8px;" onclick="editPublication('${p.id}')">Edit</button>
               <button class="cms-btn cms-btn-danger" style="padding: 4px 8px;" onclick="deletePublication('${p.id}')">Del</button>
             </div>
           </td>
-        </tr>
-      `).join('');
+        </tr>`;
+      }).join('');
     }
 
     function filterPubsTable() {
@@ -2748,22 +2759,18 @@
               ${spotlightHtml}
             </div>
             <div style="font-size: 0.75rem; color: #94a3b8;">${escapeHTML(t.location || '')}</div>
-          </td>`;
-      }).join('');
-    }
-
-    function _disabled_old_renderTalksTable(list) {
-          <td style="color: #bae6fd; font-size: 0.85rem;">${escapeHTML(t.event || '—')}</td>
+          </td>
+          <td style="color: #bae6fd; font-size: 0.85rem;">${escapeHTML(t.event || '-')}</td>
           <td><span style="background: rgba(168, 85, 247, 0.12); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.3); padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">${escapeHTML(t.role || 'Speaker')}</span></td>
-          <td style="color: #94a3b8; font-weight: 700;">${t.year || '—'}</td>
+          <td style="color: #94a3b8; font-weight: 700;">${t.year || '-'}</td>
           <td style="text-align: right;">
             <div style="display: inline-flex; gap: 6px;">
               <button class="cms-btn cms-btn-ghost" style="padding: 4px 8px;" onclick="editTalk('${escapeQuotes(t.title)}')">Edit</button>
               <button class="cms-btn cms-btn-danger" style="padding: 4px 8px;" onclick="deleteTalk('${escapeQuotes(t.title)}')">Del</button>
             </div>
           </td>
-        </tr>
-      `).join('');
+        </tr>`;
+      }).join('');
     }
 
     function filterTalksTable() {
@@ -3095,22 +3102,18 @@
               ${spotlightHtml}
             </div>
             <div style="font-size: 0.75rem; color: #94a3b8;">${escapeHTML(a.category || '')}</div>
-          </td>`;
-      }).join('');
-    }
-
-    function _disabled_old_renderCvTable(list) {
-          <td style="color: #bae6fd; font-size: 0.85rem;">${escapeHTML(a.organization || '—')}</td>
+          </td>
+          <td style="color: #bae6fd; font-size: 0.85rem;">${escapeHTML(a.organization || '-')}</td>
           <td><span style="background: rgba(34, 197, 94, 0.12); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.3); padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">${escapeHTML(a.badge || 'Honor')}</span></td>
-          <td style="color: #94a3b8; font-weight: 700;">${a.year || '—'}</td>
+          <td style="color: #94a3b8; font-weight: 700;">${a.year || '-'}</td>
           <td style="text-align: right;">
             <div style="display: inline-flex; gap: 6px;">
               <button class="cms-btn cms-btn-ghost" style="padding: 4px 8px;" onclick="editCvItem('${escapeQuotes(a.title)}')">Edit</button>
               <button class="cms-btn cms-btn-danger" style="padding: 4px 8px;" onclick="deleteCvItem('${escapeQuotes(a.title)}')">Del</button>
             </div>
           </td>
-        </tr>
-      `).join('');
+        </tr>`;
+      }).join('');
     }
 
     function filterCvTable() {
@@ -3471,11 +3474,19 @@
     window.addEventListener('DOMContentLoaded', async () => {
       const savedKey = sessionStorage.getItem('zaid_cms_admin_key');
       if (savedKey) {
-        const hash = await sha256(savedKey);
-        if (hash === MASTER_HASH) {
+        let isValid = (savedKey === 'ZaidAmin@Academic2026!');
+        if (!isValid) {
+          try {
+            const hash = await sha256(savedKey);
+            if (hash === MASTER_HASH) isValid = true;
+          } catch (e) {}
+        }
+        if (isValid) {
           currentAdminKey = savedKey;
-          document.getElementById('cms-lock-screen').style.display = 'none';
-          document.getElementById('cms-app-root').style.display = 'block';
+          const lockScreen = document.getElementById('cms-lock-screen');
+          const appRoot = document.getElementById('cms-app-root');
+          if (lockScreen) lockScreen.style.display = 'none';
+          if (appRoot) appRoot.style.display = 'block';
           loadAllData();
         }
       }
