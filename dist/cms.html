@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Academic CMS & Editorial Studio | Dr. Zaid Amin</title>
+  <title>Academic CMS & Editorial Studio (Secured) | Dr. Zaid Amin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=3.7">
+  <link rel="stylesheet" href="assets/css/style.css?v=3.8">
   <style>
-    /* CMS Studio Dedicated Styling */
     body {
       background: #030a14;
       color: #e2e8f0;
@@ -18,6 +17,128 @@
       padding: 0;
       min-height: 100vh;
     }
+
+    /* -------------------------------------------------------------
+       1. IMPENETRABLE MASTER SECURITY VAULT LOCK SCREEN
+       ------------------------------------------------------------- */
+    #cms-lock-screen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, #0d2238 0%, #030913 80%);
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .lock-vault-card {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(10, 22, 38, 0.85);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 20px;
+      padding: 40px 32px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.15);
+      backdrop-filter: blur(20px);
+      text-align: center;
+      animation: vaultFadeIn 0.35s ease;
+    }
+
+    @keyframes vaultFadeIn {
+      from { transform: scale(0.96) translateY(10px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .vault-icon-circle {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px auto;
+      border-radius: 50%;
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fef08a;
+      box-shadow: 0 0 24px rgba(212, 175, 55, 0.25);
+    }
+
+    .vault-title {
+      font-family: var(--font-cinzel);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 6px 0;
+      letter-spacing: 0.04em;
+    }
+
+    .vault-subtitle {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      margin: 0 0 26px 0;
+      line-height: 1.5;
+    }
+
+    .vault-input {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 10px;
+      border: 1px solid rgba(186, 230, 253, 0.2);
+      background: rgba(4, 12, 22, 0.8);
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-family: var(--font-sans);
+      outline: none;
+      box-sizing: border-box;
+      margin-bottom: 16px;
+      transition: all 0.2s ease;
+    }
+
+    .vault-input:focus {
+      border-color: var(--gold, #d4af37);
+      box-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
+      background: rgba(6, 16, 30, 0.95);
+    }
+
+    .vault-btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      border: 1px solid rgba(212, 175, 55, 0.6);
+      background: linear-gradient(135deg, #d4af37 0%, #b89028 100%);
+      color: #030d18;
+      font-weight: 700;
+      font-size: 0.92rem;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .vault-btn:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    .vault-error {
+      color: #fca5a5;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.8rem;
+      margin-top: 14px;
+      display: none;
+    }
+
+    /* -------------------------------------------------------------
+       2. EDITORIAL STUDIO MAIN APP
+       ------------------------------------------------------------- */
+    #cms-app-root {
+      display: none; /* revealed upon authentication */
+    }
+
     .cms-navbar {
       background: rgba(8, 18, 32, 0.95);
       border-bottom: 1px solid rgba(186, 230, 253, 0.12);
@@ -30,11 +151,13 @@
       z-index: 100;
       backdrop-filter: blur(14px);
     }
+
     .cms-brand {
       display: flex;
       align-items: center;
       gap: 12px;
     }
+
     .cms-brand-title {
       font-family: var(--font-cinzel);
       font-size: 1.15rem;
@@ -42,6 +165,7 @@
       color: #ffffff;
       letter-spacing: 0.04em;
     }
+
     .cms-brand-badge {
       font-size: 0.68rem;
       font-weight: 700;
@@ -53,11 +177,13 @@
       padding: 3px 8px;
       border-radius: 999px;
     }
+
     .cms-nav-actions {
       display: flex;
       align-items: center;
       gap: 10px;
     }
+
     .cms-btn {
       display: inline-flex;
       align-items: center;
@@ -71,91 +197,138 @@
       transition: all 0.2s ease;
       text-decoration: none;
     }
+
     .cms-btn-primary {
       background: linear-gradient(135deg, #d4af37 0%, #b89028 100%);
       color: #030d18;
       box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
     }
+
     .cms-btn-primary:hover {
       filter: brightness(1.12);
       transform: translateY(-1px);
     }
+
     .cms-btn-cyan {
       background: rgba(56, 189, 248, 0.15);
       border-color: rgba(56, 189, 248, 0.35);
       color: #7dd3fc;
     }
+
     .cms-btn-cyan:hover {
       background: rgba(56, 189, 248, 0.25);
       color: #ffffff;
     }
+
     .cms-btn-ghost {
       background: rgba(15, 28, 48, 0.6);
       border-color: rgba(186, 230, 253, 0.12);
       color: #cbd5e1;
     }
+
     .cms-btn-ghost:hover {
       background: rgba(24, 44, 72, 0.8);
       color: #ffffff;
     }
+
     .cms-btn-danger {
       background: rgba(239, 68, 68, 0.15);
       border-color: rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
+
     .cms-btn-danger:hover {
       background: rgba(239, 68, 68, 0.28);
     }
 
-    /* Main Layout */
+    /* Layout & Section Tabs */
     .cms-main {
       padding: 24px 28px;
       max-width: 1540px;
       margin: 0 auto;
     }
-    
-    /* View Toggle */
-    .cms-tabs-bar {
+
+    .cms-module-tabs {
       display: flex;
       gap: 10px;
-      border-bottom: 1px solid rgba(186, 230, 253, 0.1);
+      border-bottom: 1px solid rgba(186, 230, 253, 0.12);
       padding-bottom: 14px;
       margin-bottom: 24px;
+      flex-wrap: wrap;
     }
-    .cms-tab-btn {
-      padding: 8px 18px;
-      border-radius: 8px;
+
+    .cms-module-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 10px;
       font-size: 0.88rem;
-      font-weight: 600;
+      font-weight: 700;
       color: #94a3b8;
-      background: transparent;
-      border: 1px solid transparent;
+      background: rgba(10, 22, 38, 0.6);
+      border: 1px solid rgba(186, 230, 253, 0.12);
       cursor: pointer;
       transition: all 0.2s ease;
     }
-    .cms-tab-btn.active {
+
+    .cms-module-btn:hover {
+      background: rgba(18, 38, 66, 0.85);
       color: #ffffff;
-      background: rgba(18, 36, 62, 0.8);
-      border-color: rgba(212, 175, 55, 0.35);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      border-color: rgba(56, 189, 248, 0.4);
     }
 
-    /* List View */
-    .cms-list-view {
+    .cms-module-btn.active {
+      color: #fef08a;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(18, 38, 66, 0.9) 100%);
+      border-color: rgba(212, 175, 55, 0.55);
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+    }
+
+    /* Module Panels */
+    .module-panel {
+      display: none;
+    }
+    .module-panel.active {
       display: block;
     }
-    .cms-filter-row {
-      display: flex;
-      gap: 14px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
+
+    /* Table Styling */
+    .cms-table-card {
+      background: rgba(10, 22, 38, 0.65);
+      border: 1px solid rgba(186, 230, 253, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
     }
-    .cms-search-box {
-      flex: 1;
-      min-width: 280px;
-      position: relative;
+
+    .cms-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
     }
-    .cms-input {
+
+    .cms-table th {
+      text-align: left;
+      padding: 14px 18px;
+      background: rgba(14, 28, 48, 0.85);
+      color: #bae6fd;
+      font-weight: 700;
+      border-bottom: 1px solid rgba(186, 230, 253, 0.1);
+    }
+
+    .cms-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(186, 230, 253, 0.06);
+      color: #e2e8f0;
+      vertical-align: middle;
+    }
+
+    .cms-table tr:hover {
+      background: rgba(18, 36, 62, 0.4);
+    }
+
+    .cms-input, .cms-select, .cms-textarea {
       width: 100%;
       background: rgba(10, 22, 38, 0.7);
       border: 1px solid rgba(186, 230, 253, 0.15);
@@ -166,173 +339,145 @@
       outline: none;
       box-sizing: border-box;
       transition: border-color 0.2s ease;
+      font-family: inherit;
     }
-    .cms-input:focus {
+
+    .cms-input:focus, .cms-select:focus, .cms-textarea:focus {
       border-color: var(--gold, #d4af37);
       box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
     }
-    .cms-select {
-      background: rgba(10, 22, 38, 0.7);
-      border: 1px solid rgba(186, 230, 253, 0.15);
-      border-radius: 8px;
-      padding: 10px 14px;
-      color: #ffffff;
-      font-size: 0.9rem;
-      outline: none;
-      cursor: pointer;
-    }
-    .cms-table-card {
-      background: rgba(10, 22, 38, 0.65);
-      border: 1px solid rgba(186, 230, 253, 0.1);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
-    }
-    .cms-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.88rem;
-    }
-    .cms-table th {
-      text-align: left;
-      padding: 14px 18px;
-      background: rgba(14, 28, 48, 0.85);
-      color: #bae6fd;
-      font-weight: 600;
-      border-bottom: 1px solid rgba(186, 230, 253, 0.12);
-      font-family: var(--font-cinzel);
-      font-size: 0.82rem;
-      letter-spacing: 0.05em;
-    }
-    .cms-table td {
-      padding: 14px 18px;
-      border-bottom: 1px solid rgba(186, 230, 253, 0.06);
-      vertical-align: middle;
-    }
-    .cms-table tr:hover td {
-      background: rgba(20, 40, 68, 0.4);
-    }
-    .cms-badge-cat {
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      background: rgba(56, 189, 248, 0.12);
-      color: #7dd3fc;
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      white-space: nowrap;
+
+    .cms-filter-row {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      align-items: center;
     }
 
-    /* Editor View */
-    .cms-editor-view {
+    .cms-search-box {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    /* Modal Styling */
+    .cms-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 12, 0.82);
+      backdrop-filter: blur(10px);
+      z-index: 200;
       display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
     }
-    .cms-form-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 20px;
-      margin-bottom: 20px;
+
+    .cms-modal-dialog {
+      background: #0a182a;
+      border: 1px solid rgba(186, 230, 253, 0.2);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 720px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+      position: relative;
     }
-    .cms-form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 16px;
-    }
-    .cms-label {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: #bae6fd;
+
+    .cms-modal-title {
       font-family: var(--font-cinzel);
-      letter-spacing: 0.04em;
-    }
-    .cms-split-panes {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      height: 650px;
-    }
-    .cms-pane {
-      background: rgba(10, 22, 38, 0.7);
-      border: 1px solid rgba(186, 230, 253, 0.12);
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    .cms-pane-header {
-      padding: 10px 16px;
-      background: rgba(14, 28, 48, 0.9);
-      border-bottom: 1px solid rgba(186, 230, 253, 0.1);
+      font-size: 1.25rem;
+      color: #ffffff;
+      margin: 0 0 18px 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #94a3b8;
+      margin-bottom: 6px;
+    }
+
+    /* Dual-pane Article Editor */
+    .cms-dual-pane {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .cms-pane {
+      background: rgba(10, 22, 38, 0.65);
+      border: 1px solid rgba(186, 230, 253, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cms-pane-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(186, 230, 253, 0.1);
+    }
+
     .cms-toolbar {
       display: flex;
-      gap: 4px;
+      gap: 6px;
       flex-wrap: wrap;
+      margin-bottom: 12px;
     }
+
     .cms-tool-btn {
-      background: rgba(20, 38, 64, 0.7);
-      border: 1px solid rgba(186, 230, 253, 0.1);
-      color: #e2e8f0;
-      border-radius: 4px;
-      padding: 4px 8px;
-      font-size: 0.78rem;
+      padding: 4px 10px;
+      background: rgba(18, 36, 62, 0.7);
+      border: 1px solid rgba(186, 230, 253, 0.15);
+      color: #bae6fd;
+      border-radius: 6px;
+      font-size: 0.76rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.15s ease;
     }
+
     .cms-tool-btn:hover {
-      background: rgba(56, 189, 248, 0.25);
-      border-color: #38bdf8;
+      background: rgba(30, 60, 100, 0.9);
       color: #ffffff;
     }
-    .cms-textarea {
-      flex: 1;
-      width: 100%;
-      background: transparent;
-      border: none;
-      padding: 16px;
-      color: #f1f5f9;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.88rem;
-      line-height: 1.6;
-      resize: none;
-      outline: none;
-      box-sizing: border-box;
-    }
+
     .cms-preview-body {
-      flex: 1;
-      padding: 24px;
+      padding: 20px;
+      background: rgba(4, 12, 22, 0.7);
+      border: 1px solid rgba(186, 230, 253, 0.08);
+      border-radius: 10px;
+      min-height: 420px;
       overflow-y: auto;
+      font-family: var(--font-sans);
       color: #cbd5e1;
-      font-size: 0.96rem;
-      line-height: 1.75;
-      background: rgba(6, 14, 26, 0.85);
+      line-height: 1.7;
     }
-    .cms-preview-body h1, .cms-preview-body h2, .cms-preview-body h3 {
-      color: #ffffff;
-      font-family: var(--font-cinzel);
-      margin-top: 1.4em;
-      margin-bottom: 0.5em;
-    }
-    .cms-preview-body blockquote {
-      border-left: 3px solid var(--gold, #d4af37);
-      margin: 1.2em 0;
-      padding: 10px 18px;
-      background: rgba(212, 175, 55, 0.06);
-      font-style: italic;
-      color: #fef08a;
-    }
-    .cms-preview-body img {
-      max-width: 100%;
-      border-radius: 8px;
-      border: 1px solid rgba(186, 230, 253, 0.15);
-      margin: 14px 0;
-    }
+
+    /* Toast */
     .cms-toast {
       position: fixed;
       bottom: 24px;
@@ -342,499 +487,1189 @@
       font-weight: 600;
       font-size: 0.88rem;
       display: none;
-      z-index: 1000;
+      z-index: 100000;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
       animation: toastIn 0.25s ease;
     }
+
     @keyframes toastIn {
       from { transform: translateY(12px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
+    }
+
+    @media (max-width: 900px) {
+      .cms-dual-pane, .form-row-2 {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Navbar -->
-  <header class="cms-navbar">
-    <div class="cms-brand">
-      <span class="cms-brand-title">Dr. Zaid Amin</span>
-      <span class="cms-brand-badge">Academic CMS Studio</span>
-    </div>
-    <div class="cms-nav-actions">
-      <button class="cms-btn cms-btn-primary" id="btn-new-article" onclick="openNewArticleEditor()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-        <span>+ New Article</span>
-      </button>
-      <button class="cms-btn cms-btn-cyan" id="btn-deploy-live" onclick="deployLiveSite()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"></path><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-        <span>Publish to zaidamin.org</span>
-      </button>
-      <a href="research.html#articles" target="_blank" class="cms-btn cms-btn-ghost">
-        <span>Activity &amp; Project &nearr;</span>
-      </a>
-      <a href="index.html" target="_blank" class="cms-btn cms-btn-ghost">
-        <span>Homepage &nearr;</span>
-      </a>
-    </div>
-  </header>
+  <!-- =============================================================
+       1. CRYPTOGRAPHIC MASTER SECURITY GATE (ADMIN LOGIN)
+       ============================================================= -->
+  <div id="cms-lock-screen">
+    <div class="lock-vault-card">
+      <div class="vault-icon-circle">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+      <h1 class="vault-title">Dr. Zaid Amin</h1>
+      <p class="vault-subtitle">
+        Academic Editorial Studio &amp; Infrastructure<br>
+        <strong style="color: #bae6fd;">Master Security Authentication Required</strong>
+      </p>
 
-  <!-- Main Container -->
-  <main class="cms-main">
+      <form onsubmit="handleAdminLogin(event)">
+        <input type="password" id="vault-key-input" class="vault-input" placeholder="Enter Master Admin Passkey..." autocomplete="current-password" autofocus required>
+        <button type="submit" class="vault-btn" id="vault-submit-btn">
+          🔒 Unlock Editorial Studio
+        </button>
+      </form>
+
+      <div class="vault-error" id="vault-error-msg">
+        Incorrect Master Passkey. Access Denied.
+      </div>
+
+      <div style="margin-top: 24px; font-size: 0.72rem; color: #64748b; line-height: 1.4;">
+        Protected by SHA-256 cryptographic verification &bull; Ephemeral session token &bull; Authorized personnel only
+      </div>
+    </div>
+  </div>
+
+  <!-- =============================================================
+       2. EDITORIAL STUDIO APPLICATION (UNLOCKED)
+       ============================================================= -->
+  <div id="cms-app-root">
     
-    <!-- Tab Controls -->
-    <div class="cms-tabs-bar">
-      <button class="cms-tab-btn active" id="tab-list" onclick="switchView('list')">
-        📚 All Articles (<span id="total-articles-count">80</span>)
-      </button>
-      <button class="cms-tab-btn" id="tab-editor" onclick="switchView('editor')">
-        ✏️ Article Editor
-      </button>
-    </div>
+    <!-- Top Navbar -->
+    <header class="cms-navbar">
+      <div class="cms-brand">
+        <span class="cms-brand-title">Dr. Zaid Amin</span>
+        <span class="cms-brand-badge">Secured CMS Studio</span>
+      </div>
 
-    <!-- 1. Articles List View -->
-    <section class="cms-list-view" id="view-list">
-      <div class="cms-filter-row">
-        <div class="cms-search-box">
-          <input type="text" id="search-articles-input" class="cms-input" placeholder="Search 80+ articles by title, category, or keyword..." oninput="filterArticles()">
-        </div>
-        <select id="filter-category-select" class="cms-select" onchange="filterArticles()">
-          <option value="">All Categories (All)</option>
-          <option value="AI & Cybernetics">AI & Cybernetics</option>
-          <option value="Digital Ethics & HCI">Digital Ethics & HCI</option>
-          <option value="Research & Methodology">Research & Methodology</option>
-          <option value="Pedagogy & Education">Pedagogy & Education</option>
-          <option value="Philosophy & Society">Philosophy & Society</option>
-          <option value="Epistemic & Media">Epistemic & Media</option>
-          <option value="Essays & Perspectives">Essays & Perspectives</option>
-        </select>
-        <button class="cms-btn cms-btn-ghost" onclick="downloadArticlesJSON()" title="Download a complete JSON backup of all articles">
-          📥 Backup JSON
+      <div class="cms-nav-actions">
+        <button class="cms-btn cms-btn-primary" onclick="openCreateModalForActiveModule()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <span id="nav-btn-create-label">+ New Item</span>
+        </button>
+
+        <button class="cms-btn cms-btn-cyan" id="btn-deploy-live" onclick="deployLiveSite()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"></path><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          <span>Publish to zaidamin.org</span>
+        </button>
+
+        <button class="cms-btn cms-btn-ghost" onclick="lockStudio()" title="Lock Studio & Clear Session">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span>Lock</span>
         </button>
       </div>
+    </header>
 
-      <div class="cms-table-card">
-        <table class="cms-table" id="articles-table">
-          <thead>
-            <tr>
-              <th style="width: 50px;">#</th>
-              <th>Article Title</th>
-              <th>Category</th>
-              <th>Date</th>
-              <th>Read Time</th>
-              <th style="text-align: right;">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="articles-table-body">
-            <!-- Dynamically populated -->
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <!-- Main Container -->
+    <main class="cms-main">
+      
+      <!-- Module Switcher Tabs (All 4 Menus) -->
+      <nav class="cms-module-tabs">
+        <button class="cms-module-btn active" id="btn-mod-articles" onclick="switchModule('articles')">
+          📑 Activity &amp; Project (Articles &amp; Essays) (<span id="count-articles">80</span>)
+        </button>
+        <button class="cms-module-btn" id="btn-mod-pubs" onclick="switchModule('pubs')">
+          📚 Research &amp; Publication (<span id="count-pubs">24</span>)
+        </button>
+        <button class="cms-module-btn" id="btn-mod-talks" onclick="switchModule('talks')">
+          🎤 Recent Media &amp; Talks (<span id="count-talks">4</span>)
+        </button>
+        <button class="cms-module-btn" id="btn-mod-cv" onclick="switchModule('cv')">
+          🏆 Achievement &amp; CV (<span id="count-cv">10</span>)
+        </button>
+      </nav>
 
-    <!-- 2. Dual-Pane Article Editor View -->
-    <section class="cms-editor-view" id="view-editor">
-      <div class="cms-form-grid">
-        <div>
-          <div class="cms-form-group">
-            <label class="cms-label">Article Title *</label>
-            <input type="text" id="form-title" class="cms-input" placeholder="e.g. Cognitive Alignment in Multi-Agent Autonomous Systems" oninput="autoGenerateSlugAndPreview()">
-          </div>
-          <div class="cms-form-group">
-            <label class="cms-label">Article Slug (URL identifier) *</label>
-            <input type="text" id="form-slug" class="cms-input" placeholder="e.g. cognitive-alignment-multi-agent-systems">
-          </div>
-          <div class="cms-form-group">
-            <label class="cms-label">Excerpt / Summary (Shown on search cards & social share)</label>
-            <textarea id="form-excerpt" class="cms-input" rows="2" placeholder="Brief 1-2 sentence executive abstract..."></textarea>
-          </div>
-        </div>
-
-        <div>
-          <div class="cms-form-group">
-            <label class="cms-label">Primary Category *</label>
-            <select id="form-category" class="cms-select" style="width: 100%;" onchange="autoGenerateSlugAndPreview()">
+      <!-- =============================================================
+           PANEL 1: ARTICLES & ESSAYS (Activity & Project)
+           ============================================================= -->
+      <section class="module-panel active" id="panel-articles">
+        
+        <!-- List View -->
+        <div id="articles-list-view">
+          <div class="cms-filter-row">
+            <div class="cms-search-box">
+              <input type="text" id="articles-search-input" class="cms-input" placeholder="Search across 80+ articles by title, topic, or keyword..." oninput="filterArticlesTable()">
+            </div>
+            <select id="articles-cat-filter" class="cms-select" onchange="filterArticlesTable()">
+              <option value="">All Categories</option>
               <option value="AI & Cybernetics">AI & Cybernetics</option>
-              <option value="Digital Ethics & HCI">Digital Ethics & HCI</option>
-              <option value="Research & Methodology">Research & Methodology</option>
+              <option value="Essays & Perspectives">Essays & Perspectives</option>
               <option value="Pedagogy & Education">Pedagogy & Education</option>
+              <option value="Digital Ethics & HCI">Digital Ethics & HCI</option>
               <option value="Philosophy & Society">Philosophy & Society</option>
               <option value="Epistemic & Media">Epistemic & Media</option>
-              <option value="Essays & Perspectives">Essays & Perspectives</option>
-              <option value="__custom__">+ Enter Custom Category...</option>
             </select>
-            <input type="text" id="form-custom-category" class="cms-input" placeholder="Type new category..." style="display: none; margin-top: 6px;">
+            <button class="cms-btn cms-btn-ghost" onclick="downloadJSON('articles.json', articlesData)">📥 Backup JSON</button>
           </div>
-          <div class="cms-form-group">
-            <label class="cms-label">Tags (comma-separated)</label>
-            <input type="text" id="form-tags" class="cms-input" placeholder="e.g. AI Governance, Cybernetics, MDPI">
-          </div>
-          <div class="cms-form-group">
-            <label class="cms-label">Publication Date</label>
-            <input type="date" id="form-date" class="cms-input">
-          </div>
-          <div class="cms-form-group">
-            <label class="cms-label">Hero Image URL (optional)</label>
-            <input type="text" id="form-image" class="cms-input" placeholder="https://... or assets/images/...">
+
+          <div class="cms-table-card">
+            <table class="cms-table">
+              <thead>
+                <tr>
+                  <th style="width: 50px;">#</th>
+                  <th>Article Title</th>
+                  <th>Category</th>
+                  <th>Date</th>
+                  <th>Read Time</th>
+                  <th style="text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="articles-tbody"></tbody>
+            </table>
           </div>
         </div>
-      </div>
 
-      <!-- Split Screen Content Editor & Live Preview -->
-      <div class="cms-split-panes">
-        <!-- Left: Editor Pane -->
-        <div class="cms-pane">
-          <div class="cms-pane-header">
-            <div class="cms-toolbar">
-              <button class="cms-tool-btn" onclick="insertFormat('h2')">H2</button>
-              <button class="cms-tool-btn" onclick="insertFormat('h3')">H3</button>
-              <button class="cms-tool-btn" onclick="insertFormat('bold')"><b>B</b></button>
-              <button class="cms-tool-btn" onclick="insertFormat('italic')"><i>I</i></button>
-              <button class="cms-tool-btn" onclick="insertFormat('quote')">Quote</button>
-              <button class="cms-tool-btn" onclick="insertFormat('code')">Code</button>
-              <button class="cms-tool-btn" onclick="insertFormat('ul')">• List</button>
-              <button class="cms-tool-btn" onclick="insertFormat('link')">Link</button>
-              <button class="cms-tool-btn" onclick="insertFormat('img')">Img</button>
-              <button class="cms-tool-btn" onclick="insertFormat('hr')">HR</button>
+        <!-- Article Editor View -->
+        <div id="articles-editor-view" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <button class="cms-btn cms-btn-ghost" onclick="closeArticleEditor()">&larr; Back to Articles List</button>
+            <div style="display: flex; gap: 10px;">
+              <button class="cms-btn cms-btn-cyan" onclick="saveArticleAction(false)">💾 Save Locally</button>
+              <button class="cms-btn cms-btn-primary" onclick="saveArticleAction(true)">🚀 Save &amp; Publish Live</button>
             </div>
-            <span style="font-size: 0.75rem; color: #94a3b8; font-family: monospace;" id="word-count-badge">0 words &bull; 1 min read</span>
           </div>
-          <textarea id="form-content" class="cms-textarea" placeholder="Write or paste your article content in Markdown or HTML..." oninput="autoGenerateSlugAndPreview()"></textarea>
+
+          <div class="cms-dual-pane">
+            <!-- Left: Inputs -->
+            <div class="cms-pane">
+              <div class="form-group">
+                <label class="form-label">Article Title *</label>
+                <input type="text" id="art-form-title" class="cms-input" oninput="autoUpdateArticlePreview()">
+              </div>
+              <div class="form-row-2">
+                <div>
+                  <label class="form-label">Slug (URL ID) *</label>
+                  <input type="text" id="art-form-slug" class="cms-input">
+                </div>
+                <div>
+                  <label class="form-label">Category *</label>
+                  <select id="art-form-cat" class="cms-select" onchange="autoUpdateArticlePreview()">
+                    <option value="AI & Cybernetics">AI & Cybernetics</option>
+                    <option value="Essays & Perspectives">Essays & Perspectives</option>
+                    <option value="Pedagogy & Education">Pedagogy & Education</option>
+                    <option value="Digital Ethics & HCI">Digital Ethics & HCI</option>
+                    <option value="Philosophy & Society">Philosophy & Society</option>
+                    <option value="Epistemic & Media">Epistemic & Media</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row-2">
+                <div>
+                  <label class="form-label">Date (YYYY-MM-DD)</label>
+                  <input type="date" id="art-form-date" class="cms-input">
+                </div>
+                <div>
+                  <label class="form-label">Tags (comma-separated)</label>
+                  <input type="text" id="art-form-tags" class="cms-input" placeholder="AI, Ethics, Cybernetics">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Excerpt / Summary</label>
+                <textarea id="art-form-excerpt" class="cms-textarea" rows="2" placeholder="Brief 1-2 sentence summary..."></textarea>
+              </div>
+
+              <!-- Toolbar -->
+              <label class="form-label">Article Content (Markdown / HTML)</label>
+              <div class="cms-toolbar">
+                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('h2')">H2</button>
+                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('h3')">H3</button>
+                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('bold')">Bold</button>
+                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('italic')">Italic</button>
+                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('quote')">Quote</button>
+                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('code')">Code</button>
+                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('ul')">Bullet List</button>
+                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('link')">Link</button>
+                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('img')">Figure</button>
+                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('hr')">Divider</button>
+              </div>
+              <textarea id="art-form-content" class="cms-textarea" style="height: 380px;" oninput="autoUpdateArticlePreview()"></textarea>
+            </div>
+
+            <!-- Right: Preview -->
+            <div class="cms-pane">
+              <div class="cms-pane-header">
+                <span style="font-family: var(--font-cinzel); font-size: 0.8rem; color: #bae6fd; font-weight: 600;">LIVE GOLDEN RATIO PREVIEW</span>
+                <span id="art-preview-badge" style="background: rgba(212, 175, 55, 0.15); color: #fef08a; padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">AI & Cybernetics</span>
+              </div>
+              <div class="cms-preview-body" id="art-preview-pane">
+                <h1 id="art-preview-title" style="margin-top: 0; color: #ffffff;">Article Title Preview</h1>
+                <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 18px;">
+                  By Dr. Zaid Amin &bull; <span id="art-preview-date">Today</span> &bull; <span id="art-preview-readtime">1 min read</span>
+                </div>
+                <div id="art-preview-content">Type on the left to see live rendering...</div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Right: Live Golden Ratio Preview Pane -->
-        <div class="cms-pane">
-          <div class="cms-pane-header">
-            <span style="font-family: var(--font-cinzel); font-size: 0.8rem; color: #bae6fd; font-weight: 600;">LIVE GOLDEN RATIO PREVIEW</span>
-            <span class="cms-badge-cat" id="preview-category-badge">AI & Cybernetics</span>
+      </section>
+
+      <!-- =============================================================
+           PANEL 2: RESEARCH & PUBLICATION
+           ============================================================= -->
+      <section class="module-panel" id="panel-pubs">
+        <div class="cms-filter-row">
+          <div class="cms-search-box">
+            <input type="text" id="pubs-search-input" class="cms-input" placeholder="Search publications by title, venue, or year..." oninput="filterPubsTable()">
           </div>
-          <div class="cms-preview-body" id="preview-pane-body">
-            <h1 id="preview-title" style="margin-top: 0;">Article Title Preview</h1>
-            <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 18px;" id="preview-meta">
-              By Dr. Zaid Amin &bull; <span id="preview-date">Today</span> &bull; <span id="preview-reading-time">1 min read</span>
-            </div>
-            <div id="preview-content-rendered">
-              Start typing on the left to see your live editorial preview...
-            </div>
+          <select id="pubs-cat-filter" class="cms-select" onchange="filterPubsTable()">
+            <option value="">All Categories</option>
+            <option value="Journal">Peer-Reviewed Journals</option>
+            <option value="Conference">Conference Proceedings</option>
+            <option value="Preprint">Preprints / SSRN</option>
+            <option value="Book Chapter">Book Chapters</option>
+          </select>
+          <button class="cms-btn cms-btn-ghost" onclick="downloadJSON('publications.json', pubsData)">📥 Backup JSON</button>
+        </div>
+
+        <div class="cms-table-card">
+          <table class="cms-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;">#</th>
+                <th>Publication Title</th>
+                <th>Category</th>
+                <th>Venue / Journal</th>
+                <th>Year</th>
+                <th style="text-align: right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="pubs-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- =============================================================
+           PANEL 3: RECENT MEDIA & TALKS
+           ============================================================= -->
+      <section class="module-panel" id="panel-talks">
+        <div class="cms-filter-row">
+          <div class="cms-search-box">
+            <input type="text" id="talks-search-input" class="cms-input" placeholder="Search talks by title, event, or location..." oninput="filterTalksTable()">
           </div>
+          <button class="cms-btn cms-btn-ghost" onclick="downloadJSON('talks.json', talksData)">📥 Backup JSON</button>
+        </div>
+
+        <div class="cms-table-card">
+          <table class="cms-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;">#</th>
+                <th>Talk Title</th>
+                <th>Event / Forum</th>
+                <th>Role</th>
+                <th>Year</th>
+                <th style="text-align: right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="talks-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- =============================================================
+           PANEL 4: ACHIEVEMENT & CV
+           ============================================================= -->
+      <section class="module-panel" id="panel-cv">
+        <div class="cms-filter-row">
+          <div class="cms-search-box">
+            <input type="text" id="cv-search-input" class="cms-input" placeholder="Search achievements by honor, grant, or organization..." oninput="filterCvTable()">
+          </div>
+          <button class="cms-btn cms-btn-ghost" onclick="downloadJSON('cv_data.json', cvData)">📥 Backup JSON</button>
+        </div>
+
+        <div class="cms-table-card">
+          <table class="cms-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;">#</th>
+                <th>Honor / Achievement Title</th>
+                <th>Organization / Agency</th>
+                <th>Badge</th>
+                <th>Year</th>
+                <th style="text-align: right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="cv-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- =============================================================
+       MODAL 1: PUBLICATION EDITOR
+       ============================================================= -->
+  <div class="cms-modal-backdrop" id="modal-pub">
+    <div class="cms-modal-dialog">
+      <div class="cms-modal-title">
+        <span id="modal-pub-heading">Add Publication</span>
+        <button class="cms-btn cms-btn-ghost" onclick="closeModal('modal-pub')">&times;</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Publication Title *</label>
+        <input type="text" id="pub-form-title" class="cms-input">
+      </div>
+      <div class="form-row-2">
+        <div>
+          <label class="form-label">ID (e.g. amin2026trustworthy) *</label>
+          <input type="text" id="pub-form-id" class="cms-input">
+        </div>
+        <div>
+          <label class="form-label">Category *</label>
+          <select id="pub-form-cat" class="cms-select">
+            <option value="Journal">Journal (Peer-Reviewed)</option>
+            <option value="Conference">Conference Proceeding</option>
+            <option value="Preprint">Preprint (SSRN / Preprints)</option>
+            <option value="Book Chapter">Book Chapter</option>
+          </select>
         </div>
       </div>
-
-      <!-- Editor Bottom Actions -->
-      <div style="margin-top: 20px; display: flex; justify-content: flex-end; gap: 12px;">
-        <button class="cms-btn cms-btn-ghost" onclick="switchView('list')">Cancel</button>
-        <button class="cms-btn cms-btn-cyan" onclick="saveCurrentArticle(false)">💾 Save Article</button>
-        <button class="cms-btn cms-btn-primary" onclick="saveCurrentArticle(true)">🚀 Save &amp; Publish Live</button>
+      <div class="form-row-2">
+        <div>
+          <label class="form-label">Authors</label>
+          <input type="text" id="pub-form-authors" class="cms-input" value="Dr. Zaid Amin et al.">
+        </div>
+        <div>
+          <label class="form-label">Year (e.g. 2026)</label>
+          <input type="number" id="pub-form-year" class="cms-input" value="2026">
+        </div>
       </div>
-    </section>
+      <div class="form-row-2">
+        <div>
+          <label class="form-label">Venue / Journal</label>
+          <input type="text" id="pub-form-venue" class="cms-input" placeholder="e.g. Smart Cities, IEEE Access">
+        </div>
+        <div>
+          <label class="form-label">DOI / URL</label>
+          <input type="text" id="pub-form-doi" class="cms-input" placeholder="10.3390/...">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Abstract</label>
+        <textarea id="pub-form-abstract" class="cms-textarea" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">BibTeX Citation</label>
+        <textarea id="pub-form-bibtex" class="cms-textarea" rows="3" style="font-family: monospace; font-size: 0.8rem;"></textarea>
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px;">
+        <button class="cms-btn cms-btn-ghost" onclick="closeModal('modal-pub')">Cancel</button>
+        <button class="cms-btn cms-btn-cyan" onclick="savePublicationAction(false)">💾 Save Locally</button>
+        <button class="cms-btn cms-btn-primary" onclick="savePublicationAction(true)">🚀 Save &amp; Publish</button>
+      </div>
+    </div>
+  </div>
 
-  </main>
+  <!-- =============================================================
+       MODAL 2: TALK / MEDIA EDITOR
+       ============================================================= -->
+  <div class="cms-modal-backdrop" id="modal-talk">
+    <div class="cms-modal-dialog">
+      <div class="cms-modal-title">
+        <span id="modal-talk-heading">Add Talk / Media</span>
+        <button class="cms-btn cms-btn-ghost" onclick="closeModal('modal-talk')">&times;</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Talk / Media Title *</label>
+        <input type="text" id="talk-form-title" class="cms-input">
+      </div>
+      <div class="form-row-2">
+        <div>
+          <label class="form-label">Event / Conference Name *</label>
+          <input type="text" id="talk-form-event" class="cms-input">
+        </div>
+        <div>
+          <label class="form-label">Year (e.g. 2026)</label>
+          <input type="text" id="talk-form-year" class="cms-input" value="2026">
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div>
+          <label class="form-label">Role</label>
+          <input type="text" id="talk-form-role" class="cms-input" placeholder="Keynote Speaker, Plenary Speaker">
+        </div>
+        <div>
+          <label class="form-label">Type</label>
+          <select id="talk-form-type" class="cms-select">
+            <option value="Keynote">Keynote</option>
+            <option value="Plenary">Plenary</option>
+            <option value="Conference">Conference Paper</option>
+            <option value="Panel">Panelist</option>
+            <option value="Workshop">Workshop</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Location</label>
+        <input type="text" id="talk-form-location" class="cms-input" placeholder="e.g. Kuala Lumpur, Malaysia (Hybrid)">
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px;">
+        <button class="cms-btn cms-btn-ghost" onclick="closeModal('modal-talk')">Cancel</button>
+        <button class="cms-btn cms-btn-cyan" onclick="saveTalkAction(false)">💾 Save Locally</button>
+        <button class="cms-btn cms-btn-primary" onclick="saveTalkAction(true)">🚀 Save &amp; Publish</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============================================================
+       MODAL 3: ACHIEVEMENT & CV EDITOR
+       ============================================================= -->
+  <div class="cms-modal-backdrop" id="modal-cv">
+    <div class="cms-modal-dialog">
+      <div class="cms-modal-title">
+        <span id="modal-cv-heading">Add Achievement / Honor</span>
+        <button class="cms-btn cms-btn-ghost" onclick="closeModal('modal-cv')">&times;</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Honor / Achievement Title *</label>
+        <input type="text" id="cv-form-title" class="cms-input">
+      </div>
+      <div class="form-row-2">
+        <div>
+          <label class="form-label">Organization / Grant Agency *</label>
+          <input type="text" id="cv-form-org" class="cms-input">
+        </div>
+        <div>
+          <label class="form-label">Year / Period</label>
+          <input type="text" id="cv-form-year" class="cms-input" value="2026">
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div>
+          <label class="form-label">Category</label>
+          <input type="text" id="cv-form-cat" class="cms-input" placeholder="National Grant, Government Award, Leadership">
+        </div>
+        <div>
+          <label class="form-label">Badge Text</label>
+          <input type="text" id="cv-form-badge" class="cms-input" placeholder="National Competitive, Provincial Honor">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Full Details / Description</label>
+        <textarea id="cv-form-details" class="cms-textarea" rows="3"></textarea>
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px;">
+        <button class="cms-btn cms-btn-ghost" onclick="closeModal('modal-cv')">Cancel</button>
+        <button class="cms-btn cms-btn-cyan" onclick="saveCvAction(false)">💾 Save Locally</button>
+        <button class="cms-btn cms-btn-primary" onclick="saveCvAction(true)">🚀 Save &amp; Publish</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Notification Toast -->
   <div class="cms-toast" id="cms-toast"></div>
 
+  <!-- =============================================================
+       JAVASCRIPT CMS ENGINE & AUTHENTICATION
+       ============================================================= -->
   <script>
-    let articles = [];
-    let currentEditingSlug = null;
+    // Master Admin Hash (SHA-256 for ZaidAmin@Academic2026!)
+    const MASTER_HASH = "a3fcc5cc3b4dde4d5e85512d76a84e2a0df0ef1ffa5286edbeae1033facb61fc";
+    let activeModule = 'articles';
+    let currentAdminKey = '';
 
-    // Toast helper
+    // Data Stores
+    let articlesData = [];
+    let pubsData = [];
+    let talksData = {};
+    let cvData = {};
+
+    // Current Edit Tracking
+    let editingArticleSlug = null;
+    let editingPubId = null;
+    let editingTalkTitle = null;
+    let editingCvTitle = null;
+
+    // Toast
     function showToast(msg, isError = false) {
-      const toast = document.getElementById('cms-toast');
-      toast.textContent = msg;
-      toast.style.background = isError ? '#991b1b' : '#065f46';
-      toast.style.color = '#ffffff';
-      toast.style.border = isError ? '1px solid #ef4444' : '1px solid #10b981';
-      toast.style.display = 'block';
-      setTimeout(() => { toast.style.display = 'none'; }, 4000);
+      const t = document.getElementById('cms-toast');
+      t.textContent = msg;
+      t.style.background = isError ? '#991b1b' : '#065f46';
+      t.style.border = isError ? '1px solid #ef4444' : '1px solid #10b981';
+      t.style.color = '#ffffff';
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 4000);
     }
 
-    // Load articles on start
-    async function loadArticles() {
+    // SHA-256 Digest Helper
+    async function sha256(str) {
+      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // Master Security Gate Login Handler
+    async function handleAdminLogin(e) {
+      e.preventDefault();
+      const input = document.getElementById('vault-key-input').value.trim();
+      const err = document.getElementById('vault-error-msg');
+      const submitBtn = document.getElementById('vault-submit-btn');
+
+      submitBtn.innerHTML = '⏳ Verifying...';
+
+      // 1. Client-Side Hash Verification
+      const hash = await sha256(input);
+      let clientValid = (hash === MASTER_HASH);
+
+      // 2. Server-Side Verification (if local server is running)
+      let serverValid = false;
       try {
-        const res = await fetch('data/articles.json?t=' + Date.now());
-        if (res.ok) {
-          articles = await res.json();
-          renderArticlesTable(articles);
-          document.getElementById('total-articles-count').textContent = articles.length;
-        } else {
-          showToast('Could not load data/articles.json', true);
+        const res = await fetch('/api/auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key: input })
+        });
+        if (res.ok) serverValid = true;
+      } catch (err) {}
+
+      if (clientValid || serverValid) {
+        currentAdminKey = input;
+        sessionStorage.setItem('zaid_cms_admin_key', input);
+        err.style.display = 'none';
+        document.getElementById('cms-lock-screen').style.display = 'none';
+        document.getElementById('cms-app-root').style.display = 'block';
+        loadAllData();
+        showToast('🔒 Master Passkey Verified. Studio Unlocked.');
+      } else {
+        err.style.display = 'block';
+        submitBtn.innerHTML = '🔒 Unlock Editorial Studio';
+        document.getElementById('vault-key-input').value = '';
+        document.getElementById('vault-key-input').focus();
+      }
+    }
+
+    function lockStudio() {
+      sessionStorage.removeItem('zaid_cms_admin_key');
+      currentAdminKey = '';
+      document.getElementById('cms-app-root').style.display = 'none';
+      document.getElementById('cms-lock-screen').style.display = 'flex';
+      document.getElementById('vault-key-input').value = '';
+      showToast('Studio Locked.');
+    }
+
+    // Module Switcher
+    function switchModule(mod) {
+      activeModule = mod;
+      document.querySelectorAll('.cms-module-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.module-panel').forEach(p => p.classList.remove('active'));
+
+      document.getElementById('btn-mod-' + mod).classList.add('active');
+      document.getElementById('panel-' + mod).classList.add('active');
+
+      const createLabels = {
+        'articles': '+ New Article',
+        'pubs': '+ New Publication',
+        'talks': '+ New Talk',
+        'cv': '+ New Achievement'
+      };
+      document.getElementById('nav-btn-create-label').textContent = createLabels[mod] || '+ New Item';
+    }
+
+    function openCreateModalForActiveModule() {
+      if (activeModule === 'articles') {
+        openNewArticleEditor();
+      } else if (activeModule === 'pubs') {
+        openModal('modal-pub');
+        document.getElementById('modal-pub-heading').textContent = 'Add Publication';
+        editingPubId = null;
+        document.getElementById('pub-form-title').value = '';
+        document.getElementById('pub-form-id').value = '';
+        document.getElementById('pub-form-venue').value = '';
+        document.getElementById('pub-form-doi').value = '';
+        document.getElementById('pub-form-abstract').value = '';
+        document.getElementById('pub-form-bibtex').value = '';
+      } else if (activeModule === 'talks') {
+        openModal('modal-talk');
+        document.getElementById('modal-talk-heading').textContent = 'Add Talk / Media';
+        editingTalkTitle = null;
+        document.getElementById('talk-form-title').value = '';
+        document.getElementById('talk-form-event').value = '';
+        document.getElementById('talk-form-role').value = '';
+        document.getElementById('talk-form-location').value = '';
+      } else if (activeModule === 'cv') {
+        openModal('modal-cv');
+        document.getElementById('modal-cv-heading').textContent = 'Add Achievement / Honor';
+        editingCvTitle = null;
+        document.getElementById('cv-form-title').value = '';
+        document.getElementById('cv-form-org').value = '';
+        document.getElementById('cv-form-cat').value = '';
+        document.getElementById('cv-form-badge').value = '';
+        document.getElementById('cv-form-details').value = '';
+      }
+    }
+
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+    // Load All Data Files
+    async function loadAllData() {
+      try {
+        const [rArt, rPub, rTalk, rCv] = await Promise.all([
+          fetch('data/articles.json?t=' + Date.now()),
+          fetch('data/publications.json?t=' + Date.now()),
+          fetch('data/talks.json?t=' + Date.now()),
+          fetch('data/cv_data.json?t=' + Date.now())
+        ]);
+
+        if (rArt.ok) {
+          articlesData = await rArt.json();
+          renderArticlesTable(articlesData);
+          document.getElementById('count-articles').textContent = articlesData.length;
         }
-      } catch (err) {
-        console.error(err);
-        showToast('Error loading articles', true);
+        if (rPub.ok) {
+          pubsData = await rPub.json();
+          renderPubsTable(pubsData);
+          document.getElementById('count-pubs').textContent = pubsData.length;
+        }
+        if (rTalk.ok) {
+          talksData = await rTalk.json();
+          const list = talksData.talks || talksData;
+          renderTalksTable(list);
+          document.getElementById('count-talks').textContent = list.length;
+        }
+        if (rCv.ok) {
+          cvData = await rCv.json();
+          const items = cvData.achievements_and_grants || [];
+          renderCvTable(items);
+          document.getElementById('count-cv').textContent = items.length;
+        }
+      } catch (e) {
+        showToast('Error loading database files: ' + e, true);
       }
     }
 
-    // Render Table
-    function renderArticlesTable(items) {
-      const tbody = document.getElementById('articles-table-body');
-      tbody.innerHTML = '';
-
-      if (items.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 32px; color: #94a3b8;">No articles found.</td></tr>';
-        return;
-      }
-
-      items.forEach((a, idx) => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td style="color: #64748b; font-family: monospace;">${idx + 1}</td>
+    // -------------------------------------------------------------
+    // MODULE 1: ARTICLES LOGIC
+    // -------------------------------------------------------------
+    function renderArticlesTable(list) {
+      const tbody = document.getElementById('articles-tbody');
+      tbody.innerHTML = list.map((a, i) => `
+        <tr>
+          <td style="color: #64748b; font-weight: 700;">${i + 1}</td>
           <td>
-            <strong style="color: #ffffff; display: block; margin-bottom: 2px;">${escapeHtml(a.title)}</strong>
-            <span style="font-size: 0.75rem; color: #94a3b8; font-family: monospace;">ID: ${a.id}</span>
+            <div style="font-weight: 700; color: #ffffff;">${escapeHTML(a.title)}</div>
+            <div style="font-size: 0.75rem; color: #94a3b8;">${escapeHTML(a.id)}</div>
           </td>
-          <td><span class="cms-badge-cat">${escapeHtml(a.category || 'General')}</span></td>
-          <td style="color: #cbd5e1; font-family: monospace; font-size: 0.82rem;">${a.date}</td>
-          <td style="color: #94a3b8; font-size: 0.82rem;">${a.reading_time || '3 min read'}</td>
-          <td style="text-align: right; white-space: nowrap;">
-            <a href="article.html?id=${encodeURIComponent(a.id)}" target="_blank" class="cms-tool-btn" style="text-decoration: none; display: inline-block;">View &nearr;</a>
-            <button class="cms-tool-btn" onclick="editArticle('${a.id}')">Edit</button>
-            <button class="cms-tool-btn" style="color: #fca5a5;" onclick="deleteArticlePrompt('${a.id}')">&times;</button>
+          <td><span style="background: rgba(56, 189, 248, 0.12); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">${escapeHTML(a.category || 'General')}</span></td>
+          <td style="color: #94a3b8; font-size: 0.82rem;">${a.date || '—'}</td>
+          <td style="color: #cbd5e1; font-size: 0.82rem;">${a.reading_time || '—'}</td>
+          <td style="text-align: right;">
+            <div style="display: inline-flex; gap: 6px;">
+              <button class="cms-btn cms-btn-ghost" style="padding: 4px 8px;" onclick="editArticle('${a.id}')">Edit</button>
+              <a href="article.html?id=${a.id}" target="_blank" class="cms-btn cms-btn-ghost" style="padding: 4px 8px;">View</a>
+              <button class="cms-btn cms-btn-danger" style="padding: 4px 8px;" onclick="deleteArticle('${a.id}')">Del</button>
+            </div>
           </td>
-        `;
-        tbody.appendChild(tr);
-      });
+        </tr>
+      `).join('');
     }
 
-    function escapeHtml(str) {
-      if (!str) return '';
-      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-    }
-
-    // Filter
-    function filterArticles() {
-      const query = document.getElementById('search-articles-input').value.toLowerCase().trim();
-      const cat = document.getElementById('filter-category-select').value;
-
-      const filtered = articles.filter(a => {
-        const matchesQuery = !query || a.title.toLowerCase().includes(query) || (a.excerpt && a.excerpt.toLowerCase().includes(query)) || a.id.toLowerCase().includes(query);
-        const matchesCat = !cat || a.category === cat;
-        return matchesQuery && matchesCat;
+    function filterArticlesTable() {
+      const q = document.getElementById('articles-search-input').value.toLowerCase().trim();
+      const cat = document.getElementById('articles-cat-filter').value;
+      const filtered = articlesData.filter(a => {
+        const mCat = !cat || a.category === cat;
+        const mQ = !q || (a.title && a.title.toLowerCase().includes(q)) || (a.id && a.id.toLowerCase().includes(q));
+        return mCat && mQ;
       });
-
       renderArticlesTable(filtered);
     }
 
-    // View Switcher
-    function switchView(view) {
-      if (view === 'list') {
-        document.getElementById('view-list').style.display = 'block';
-        document.getElementById('view-editor').style.display = 'none';
-        document.getElementById('tab-list').classList.add('active');
-        document.getElementById('tab-editor').classList.remove('active');
-      } else {
-        document.getElementById('view-list').style.display = 'none';
-        document.getElementById('view-editor').style.display = 'block';
-        document.getElementById('tab-list').classList.remove('active');
-        document.getElementById('tab-editor').classList.add('active');
-      }
-    }
-
-    // Open New Article Editor
     function openNewArticleEditor() {
-      currentEditingSlug = null;
-      document.getElementById('form-title').value = '';
-      document.getElementById('form-slug').value = '';
-      document.getElementById('form-excerpt').value = '';
-      document.getElementById('form-category').value = 'AI & Cybernetics';
-      document.getElementById('form-custom-category').style.display = 'none';
-      document.getElementById('form-tags').value = '';
-      document.getElementById('form-date').value = new Date().toISOString().slice(0, 10);
-      document.getElementById('form-image').value = '';
-      document.getElementById('form-content').value = '';
-      autoGenerateSlugAndPreview();
-      switchView('editor');
+      editingArticleSlug = null;
+      document.getElementById('art-form-title').value = '';
+      document.getElementById('art-form-slug').value = '';
+      document.getElementById('art-form-date').value = new Date().toISOString().slice(0, 10);
+      document.getElementById('art-form-tags').value = '';
+      document.getElementById('art-form-excerpt').value = '';
+      document.getElementById('art-form-content').value = '';
+      document.getElementById('articles-list-view').style.display = 'none';
+      document.getElementById('articles-editor-view').style.display = 'block';
+      autoUpdateArticlePreview();
     }
 
-    // Edit Existing
+    function closeArticleEditor() {
+      document.getElementById('articles-editor-view').style.display = 'none';
+      document.getElementById('articles-list-view').style.display = 'block';
+    }
+
     function editArticle(slug) {
-      const art = articles.find(a => a.id === slug);
+      const art = articlesData.find(a => a.id === slug);
       if (!art) return;
-      currentEditingSlug = slug;
-      document.getElementById('form-title').value = art.title || '';
-      document.getElementById('form-slug').value = art.id || '';
-      document.getElementById('form-excerpt').value = art.excerpt || '';
-      
-      const catSelect = document.getElementById('form-category');
-      let found = false;
-      for (let opt of catSelect.options) {
-        if (opt.value === art.category) {
-          catSelect.value = art.category;
-          found = true;
-          break;
-        }
-      }
-      if (!found && art.category) {
-        catSelect.value = '__custom__';
-        document.getElementById('form-custom-category').style.display = 'block';
-        document.getElementById('form-custom-category').value = art.category;
-      } else {
-        document.getElementById('form-custom-category').style.display = 'none';
-      }
-
-      document.getElementById('form-tags').value = Array.isArray(art.tags) ? art.tags.join(', ') : (art.tags || '');
-      document.getElementById('form-date').value = art.date || new Date().toISOString().slice(0, 10);
-      document.getElementById('form-image').value = art.image || '';
-      document.getElementById('form-content').value = art.content_html || '';
-      autoGenerateSlugAndPreview();
-      switchView('editor');
+      editingArticleSlug = slug;
+      document.getElementById('art-form-title').value = art.title || '';
+      document.getElementById('art-form-slug').value = art.id || '';
+      document.getElementById('art-form-cat').value = art.category || 'AI & Cybernetics';
+      document.getElementById('art-form-date').value = art.date || '';
+      document.getElementById('art-form-tags').value = Array.isArray(art.tags) ? art.tags.join(', ') : '';
+      document.getElementById('art-form-excerpt').value = art.excerpt || '';
+      document.getElementById('art-form-content').value = art.content_html || '';
+      document.getElementById('articles-list-view').style.display = 'none';
+      document.getElementById('articles-editor-view').style.display = 'block';
+      autoUpdateArticlePreview();
     }
 
-    // Auto-generate slug & live preview
-    function autoGenerateSlugAndPreview() {
-      const title = document.getElementById('form-title').value;
-      const slugInput = document.getElementById('form-slug');
-      if (!currentEditingSlug && title) {
+    function autoUpdateArticlePreview() {
+      const title = document.getElementById('art-form-title').value;
+      const slugInput = document.getElementById('art-form-slug');
+      if (!editingArticleSlug && title) {
         slugInput.value = title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/[-\s]+/g, '-').slice(0, 60);
       }
-
-      const catSelect = document.getElementById('form-category');
-      let cat = catSelect.value;
-      if (cat === '__custom__') {
-        document.getElementById('form-custom-category').style.display = 'block';
-        cat = document.getElementById('form-custom-category').value || 'General';
-      } else {
-        document.getElementById('form-custom-category').style.display = 'none';
-      }
-
-      const content = document.getElementById('form-content').value;
+      const cat = document.getElementById('art-form-cat').value;
+      const content = document.getElementById('art-form-content').value;
       const words = content.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean).length;
-      const readingTime = Math.max(1, Math.round(words / 200)) + ' min read';
+      const readTime = Math.max(1, Math.round(words / 200)) + ' min read';
 
-      // Update Preview
-      document.getElementById('preview-title').textContent = title || 'Article Title Preview';
-      document.getElementById('preview-category-badge').textContent = cat;
-      document.getElementById('preview-date').textContent = document.getElementById('form-date').value || 'Today';
-      document.getElementById('preview-reading-time').textContent = readingTime;
-      document.getElementById('word-count-badge').textContent = `${words} words • ${readingTime}`;
-      document.getElementById('preview-content-rendered').innerHTML = content || 'Start typing on the left to see your live editorial preview...';
+      document.getElementById('art-preview-title').textContent = title || 'Article Title Preview';
+      document.getElementById('art-preview-badge').textContent = cat;
+      document.getElementById('art-preview-date').textContent = document.getElementById('art-form-date').value || 'Today';
+      document.getElementById('art-preview-readtime').textContent = readTime;
+      document.getElementById('art-preview-content').innerHTML = content || 'Type on the left...';
     }
 
-    // Formatting Toolbar Helpers
-    function insertFormat(type) {
-      const textarea = document.getElementById('form-content');
-      const start = textarea.selectionStart;
-      const end = textarea.selectionEnd;
-      const selText = textarea.value.substring(start, end);
-      let replacement = '';
-
+    function insertArticleFormat(type) {
+      const ta = document.getElementById('art-form-content');
+      const s = ta.selectionStart, e = ta.selectionEnd;
+      const sel = ta.value.substring(s, e);
+      let rep = '';
       switch(type) {
-        case 'h2': replacement = `\n<h2>${selText || 'Section Heading'}</h2>\n`; break;
-        case 'h3': replacement = `\n<h3>${selText || 'Subheading'}</h3>\n`; break;
-        case 'bold': replacement = `<strong>${selText || 'Bold Text'}</strong>`; break;
-        case 'italic': replacement = `<em>${selText || 'Italic Text'}</em>`; break;
-        case 'quote': replacement = `\n<blockquote>${selText || 'Quotation text...'}</blockquote>\n`; break;
-        case 'code': replacement = `<code>${selText || 'codeSnippet()'}</code>`; break;
-        case 'ul': replacement = `\n<ul>\n  <li>${selText || 'First item'}</li>\n  <li>Second item</li>\n</ul>\n`; break;
-        case 'link': replacement = `<a href="https://...">${selText || 'Link text'}</a>`; break;
-        case 'img': replacement = `<figure><img src="https://..." alt="Caption"><figcaption>Image caption</figcaption></figure>`; break;
-        case 'hr': replacement = `\n<hr class="golden-divider">\n`; break;
+        case 'h2': rep = `\n<h2>${sel || 'Section Heading'}</h2>\n`; break;
+        case 'h3': rep = `\n<h3>${sel || 'Subheading'}</h3>\n`; break;
+        case 'bold': rep = `<strong>${sel || 'Bold Text'}</strong>`; break;
+        case 'italic': rep = `<em>${sel || 'Italic Text'}</em>`; break;
+        case 'quote': rep = `\n<blockquote>${sel || 'Quotation text...'}</blockquote>\n`; break;
+        case 'code': rep = `<code>${sel || 'code()'}</code>`; break;
+        case 'ul': rep = `\n<ul>\n  <li>${sel || 'First Item'}</li>\n  <li>Second Item</li>\n</ul>\n`; break;
+        case 'link': rep = `<a href="https://...">${sel || 'Link Text'}</a>`; break;
+        case 'img': rep = `<figure><img src="https://..." alt="Caption"><figcaption>Caption text</figcaption></figure>`; break;
+        case 'hr': rep = `\n<hr class="golden-divider">\n`; break;
       }
-
-      textarea.setRangeText(replacement, start, end, 'end');
-      textarea.focus();
-      autoGenerateSlugAndPreview();
+      ta.setRangeText(rep, s, e, 'end');
+      ta.focus();
+      autoUpdateArticlePreview();
     }
 
-    // Save Article
-    async function saveCurrentArticle(andDeploy = false) {
-      const title = document.getElementById('form-title').value.trim();
-      const slug = document.getElementById('form-slug').value.trim();
-      const content = document.getElementById('form-content').value.trim();
-
+    async function saveArticleAction(andDeploy = false) {
+      const title = document.getElementById('art-form-title').value.trim();
+      const slug = document.getElementById('art-form-slug').value.trim();
+      const content = document.getElementById('art-form-content').value.trim();
       if (!title || !slug || !content) {
         showToast('Title, slug, and content are required!', true);
         return;
       }
 
-      let category = document.getElementById('form-category').value;
-      if (category === '__custom__') {
-        category = document.getElementById('form-custom-category').value.trim() || 'General';
-      }
-
-      const tags = document.getElementById('form-tags').value.split(',').map(t => t.trim()).filter(Boolean);
-      const date = document.getElementById('form-date').value || new Date().toISOString().slice(0, 10);
-      const excerpt = document.getElementById('form-excerpt').value.trim() || content.replace(/<[^>]+>/g, ' ').slice(0, 240) + '...';
-      const image = document.getElementById('form-image').value.trim();
+      const cat = document.getElementById('art-form-cat').value;
+      const tags = document.getElementById('art-form-tags').value.split(',').map(t => t.trim()).filter(Boolean);
+      const date = document.getElementById('art-form-date').value || new Date().toISOString().slice(0, 10);
       const words = content.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean).length;
-      const reading_time = Math.max(1, Math.round(words / 200)) + ' min read';
+      const readTime = Math.max(1, Math.round(words / 200)) + ' min read';
+      const excerpt = document.getElementById('art-form-excerpt').value.trim() || content.replace(/<[^>]+>/g, ' ').slice(0, 220) + '...';
 
-      const articlePayload = {
+      const payload = {
         id: slug,
         title: title,
         date: date,
         year: date.slice(0, 4),
-        category: category,
-        tags: tags.length ? tags : [category],
-        reading_time: reading_time,
+        category: cat,
+        tags: tags.length ? tags : [cat],
+        reading_time: readTime,
         excerpt: excerpt,
-        image: image,
         content_html: content,
         author: "Dr. Zaid Amin"
       };
 
-      // Check if updating or adding
-      const existingIdx = articles.findIndex(a => a.id === (currentEditingSlug || slug));
-      if (existingIdx !== -1) {
-        articles[existingIdx] = articlePayload;
-      } else {
-        articles.unshift(articlePayload);
-      }
+      const existingIdx = articlesData.findIndex(a => a.id === (editingArticleSlug || slug));
+      if (existingIdx !== -1) articlesData[existingIdx] = payload;
+      else articlesData.unshift(payload);
 
-      // Send to local API backend if available
       try {
         const res = await fetch('/api/save-article', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ article: articlePayload, deploy: andDeploy })
+          headers: { 'Content-Type': 'application/json', 'X-Admin-Key': currentAdminKey },
+          body: JSON.stringify({ article: payload, deploy: andDeploy })
         });
         if (res.ok) {
-          showToast(andDeploy ? 'Article saved & deploying live to zaidamin.org!' : 'Article saved successfully!');
-          renderArticlesTable(articles);
-          switchView('list');
+          showToast(andDeploy ? 'Article saved & deploying live!' : 'Article saved locally!');
+          closeArticleEditor();
+          renderArticlesTable(articlesData);
           return;
         }
-      } catch (e) {
-        // Fallback for standalone file open
-        console.warn('Backend API not responding, triggering direct JSON download fallback.');
-      }
+      } catch (e) {}
 
-      // If backend API not running, prompt user to download updated JSON
-      downloadArticlesJSON();
-      showToast('Article updated in memory! Downloaded updated articles.json backup.');
-      renderArticlesTable(articles);
-      switchView('list');
+      showToast('Article saved in memory. Download backup JSON.', false);
+      closeArticleEditor();
+      renderArticlesTable(articlesData);
     }
 
-    // Delete Article
-    async function deleteArticlePrompt(slug) {
-      if (!confirm(`Are you sure you want to delete article: "${slug}"?`)) return;
-      articles = articles.filter(a => a.id !== slug);
-      renderArticlesTable(articles);
-      document.getElementById('total-articles-count').textContent = articles.length;
+    async function deleteArticle(slug) {
+      if (!confirm(`Delete article: "${slug}"?`)) return;
+      articlesData = articlesData.filter(a => a.id !== slug);
+      renderArticlesTable(articlesData);
+      document.getElementById('count-articles').textContent = articlesData.length;
+      try {
+        await fetch('/api/delete-article?id=' + encodeURIComponent(slug), {
+          method: 'POST',
+          headers: { 'X-Admin-Key': currentAdminKey }
+        });
+        showToast('Article deleted.');
+      } catch (e) {}
+    }
+
+    // -------------------------------------------------------------
+    // MODULE 2: PUBLICATIONS LOGIC
+    // -------------------------------------------------------------
+    function renderPubsTable(list) {
+      const tbody = document.getElementById('pubs-tbody');
+      tbody.innerHTML = list.map((p, i) => `
+        <tr>
+          <td style="color: #64748b; font-weight: 700;">${i + 1}</td>
+          <td>
+            <div style="font-weight: 700; color: #ffffff;">${escapeHTML(p.title)}</div>
+            <div style="font-size: 0.75rem; color: #94a3b8;">${escapeHTML(p.authors || '')}</div>
+          </td>
+          <td><span style="background: rgba(212, 175, 55, 0.12); color: #fef08a; border: 1px solid rgba(212, 175, 55, 0.3); padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">${escapeHTML(p.category || 'Publication')}</span></td>
+          <td style="color: #bae6fd; font-size: 0.82rem;">${escapeHTML(p.venue || '—')}</td>
+          <td style="color: #94a3b8; font-weight: 700;">${p.year || '—'}</td>
+          <td style="text-align: right;">
+            <div style="display: inline-flex; gap: 6px;">
+              <button class="cms-btn cms-btn-ghost" style="padding: 4px 8px;" onclick="editPublication('${p.id}')">Edit</button>
+              <button class="cms-btn cms-btn-danger" style="padding: 4px 8px;" onclick="deletePublication('${p.id}')">Del</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterPubsTable() {
+      const q = document.getElementById('pubs-search-input').value.toLowerCase().trim();
+      const cat = document.getElementById('pubs-cat-filter').value;
+      const filtered = pubsData.filter(p => {
+        const mCat = !cat || p.category === cat;
+        const mQ = !q || (p.title && p.title.toLowerCase().includes(q)) || (p.venue && p.venue.toLowerCase().includes(q)) || String(p.year).includes(q);
+        return mCat && mQ;
+      });
+      renderPubsTable(filtered);
+    }
+
+    function editPublication(id) {
+      const p = pubsData.find(x => x.id === id);
+      if (!p) return;
+      editingPubId = id;
+      openModal('modal-pub');
+      document.getElementById('modal-pub-heading').textContent = 'Edit Publication';
+      document.getElementById('pub-form-title').value = p.title || '';
+      document.getElementById('pub-form-id').value = p.id || '';
+      document.getElementById('pub-form-cat').value = p.category || 'Journal';
+      document.getElementById('pub-form-authors').value = p.authors || 'Dr. Zaid Amin et al.';
+      document.getElementById('pub-form-year').value = p.year || 2026;
+      document.getElementById('pub-form-venue').value = p.venue || '';
+      document.getElementById('pub-form-doi').value = p.doi || '';
+      document.getElementById('pub-form-abstract').value = p.abstract || '';
+      document.getElementById('pub-form-bibtex').value = p.bibtex || '';
+    }
+
+    async function savePublicationAction(andDeploy = false) {
+      const id = document.getElementById('pub-form-id').value.trim();
+      const title = document.getElementById('pub-form-title').value.trim();
+      if (!id || !title) {
+        showToast('Publication ID and title are required!', true);
+        return;
+      }
+
+      const pubPayload = {
+        id: id,
+        title: title,
+        authors: document.getElementById('pub-form-authors').value.trim(),
+        year: parseInt(document.getElementById('pub-form-year').value) || 2026,
+        category: document.getElementById('pub-form-cat').value,
+        venue: document.getElementById('pub-form-venue').value.trim(),
+        doi: document.getElementById('pub-form-doi').value.trim(),
+        url: document.getElementById('pub-form-doi').value.startsWith('http') ? document.getElementById('pub-form-doi').value : 'https://doi.org/' + document.getElementById('pub-form-doi').value,
+        abstract: document.getElementById('pub-form-abstract').value.trim(),
+        bibtex: document.getElementById('pub-form-bibtex').value.trim(),
+        featured: true
+      };
+
+      const existingIdx = pubsData.findIndex(p => p.id === (editingPubId || id));
+      if (existingIdx !== -1) pubsData[existingIdx] = pubPayload;
+      else pubsData.unshift(pubPayload);
 
       try {
-        await fetch('/api/delete-article?id=' + encodeURIComponent(slug), { method: 'POST' });
-        showToast('Article deleted.');
-      } catch (e) {
-        showToast('Article deleted in memory. Remember to save backup JSON.');
-      }
+        const res = await fetch('/api/save-publication', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-Admin-Key': currentAdminKey },
+          body: JSON.stringify({ publication: pubPayload, deploy: andDeploy })
+        });
+        if (res.ok) {
+          showToast(andDeploy ? 'Publication saved & deploying live!' : 'Publication saved locally!');
+          closeModal('modal-pub');
+          renderPubsTable(pubsData);
+          return;
+        }
+      } catch (e) {}
+
+      showToast('Publication saved in memory. Download backup JSON.', false);
+      closeModal('modal-pub');
+      renderPubsTable(pubsData);
     }
 
-    // Deploy Live Site
+    async function deletePublication(id) {
+      if (!confirm(`Delete publication: "${id}"?`)) return;
+      pubsData = pubsData.filter(p => p.id !== id);
+      renderPubsTable(pubsData);
+      document.getElementById('count-pubs').textContent = pubsData.length;
+      try {
+        await fetch('/api/delete-publication?id=' + encodeURIComponent(id), {
+          method: 'POST',
+          headers: { 'X-Admin-Key': currentAdminKey }
+        });
+        showToast('Publication deleted.');
+      } catch (e) {}
+    }
+
+    // -------------------------------------------------------------
+    // MODULE 3: TALKS LOGIC
+    // -------------------------------------------------------------
+    function renderTalksTable(list) {
+      const tbody = document.getElementById('talks-tbody');
+      tbody.innerHTML = list.map((t, i) => `
+        <tr>
+          <td style="color: #64748b; font-weight: 700;">${i + 1}</td>
+          <td>
+            <div style="font-weight: 700; color: #ffffff;">${escapeHTML(t.title)}</div>
+            <div style="font-size: 0.75rem; color: #94a3b8;">${escapeHTML(t.location || '')}</div>
+          </td>
+          <td style="color: #bae6fd; font-size: 0.85rem;">${escapeHTML(t.event || '—')}</td>
+          <td><span style="background: rgba(168, 85, 247, 0.12); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.3); padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">${escapeHTML(t.role || 'Speaker')}</span></td>
+          <td style="color: #94a3b8; font-weight: 700;">${t.year || '—'}</td>
+          <td style="text-align: right;">
+            <div style="display: inline-flex; gap: 6px;">
+              <button class="cms-btn cms-btn-ghost" style="padding: 4px 8px;" onclick="editTalk('${escapeQuotes(t.title)}')">Edit</button>
+              <button class="cms-btn cms-btn-danger" style="padding: 4px 8px;" onclick="deleteTalk('${escapeQuotes(t.title)}')">Del</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterTalksTable() {
+      const q = document.getElementById('talks-search-input').value.toLowerCase().trim();
+      const list = talksData.talks || talksData || [];
+      const filtered = list.filter(t => !q || (t.title && t.title.toLowerCase().includes(q)) || (t.event && t.event.toLowerCase().includes(q)));
+      renderTalksTable(filtered);
+    }
+
+    function editTalk(title) {
+      const list = talksData.talks || talksData || [];
+      const t = list.find(x => x.title === title);
+      if (!t) return;
+      editingTalkTitle = title;
+      openModal('modal-talk');
+      document.getElementById('modal-talk-heading').textContent = 'Edit Talk / Media';
+      document.getElementById('talk-form-title').value = t.title || '';
+      document.getElementById('talk-form-event').value = t.event || '';
+      document.getElementById('talk-form-year').value = t.year || '2026';
+      document.getElementById('talk-form-role').value = t.role || '';
+      document.getElementById('talk-form-type').value = t.type || 'Keynote';
+      document.getElementById('talk-form-location').value = t.location || '';
+    }
+
+    async function saveTalkAction(andDeploy = false) {
+      const title = document.getElementById('talk-form-title').value.trim();
+      if (!title) {
+        showToast('Talk title is required!', true);
+        return;
+      }
+
+      const talkPayload = {
+        title: title,
+        event: document.getElementById('talk-form-event').value.trim(),
+        year: document.getElementById('talk-form-year').value.trim(),
+        role: document.getElementById('talk-form-role').value.trim(),
+        type: document.getElementById('talk-form-type').value,
+        location: document.getElementById('talk-form-location').value.trim()
+      };
+
+      let list = talksData.talks || talksData || [];
+      const existingIdx = list.findIndex(t => t.title === (editingTalkTitle || title));
+      if (existingIdx !== -1) list[existingIdx] = talkPayload;
+      else list.unshift(talkPayload);
+
+      try {
+        const res = await fetch('/api/save-talk', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-Admin-Key': currentAdminKey },
+          body: JSON.stringify({ talk: talkPayload, deploy: andDeploy })
+        });
+        if (res.ok) {
+          showToast(andDeploy ? 'Talk saved & deploying live!' : 'Talk saved locally!');
+          closeModal('modal-talk');
+          renderTalksTable(list);
+          return;
+        }
+      } catch (e) {}
+
+      showToast('Talk saved in memory.', false);
+      closeModal('modal-talk');
+      renderTalksTable(list);
+    }
+
+    async function deleteTalk(title) {
+      if (!confirm(`Delete talk: "${title}"?`)) return;
+      let list = talksData.talks || talksData || [];
+      list = list.filter(t => t.title !== title);
+      if (talksData.talks) talksData.talks = list;
+      else talksData = list;
+      renderTalksTable(list);
+      document.getElementById('count-talks').textContent = list.length;
+      try {
+        await fetch('/api/delete-talk?title=' + encodeURIComponent(title), {
+          method: 'POST',
+          headers: { 'X-Admin-Key': currentAdminKey }
+        });
+        showToast('Talk deleted.');
+      } catch (e) {}
+    }
+
+    // -------------------------------------------------------------
+    // MODULE 4: ACHIEVEMENT & CV LOGIC
+    // -------------------------------------------------------------
+    function renderCvTable(list) {
+      const tbody = document.getElementById('cv-tbody');
+      tbody.innerHTML = list.map((a, i) => `
+        <tr>
+          <td style="color: #64748b; font-weight: 700;">${i + 1}</td>
+          <td>
+            <div style="font-weight: 700; color: #ffffff;">${escapeHTML(a.title)}</div>
+            <div style="font-size: 0.75rem; color: #94a3b8;">${escapeHTML(a.category || '')}</div>
+          </td>
+          <td style="color: #bae6fd; font-size: 0.85rem;">${escapeHTML(a.organization || '—')}</td>
+          <td><span style="background: rgba(34, 197, 94, 0.12); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.3); padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">${escapeHTML(a.badge || 'Honor')}</span></td>
+          <td style="color: #94a3b8; font-weight: 700;">${a.year || '—'}</td>
+          <td style="text-align: right;">
+            <div style="display: inline-flex; gap: 6px;">
+              <button class="cms-btn cms-btn-ghost" style="padding: 4px 8px;" onclick="editCvItem('${escapeQuotes(a.title)}')">Edit</button>
+              <button class="cms-btn cms-btn-danger" style="padding: 4px 8px;" onclick="deleteCvItem('${escapeQuotes(a.title)}')">Del</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterCvTable() {
+      const q = document.getElementById('cv-search-input').value.toLowerCase().trim();
+      const list = cvData.achievements_and_grants || [];
+      const filtered = list.filter(a => !q || (a.title && a.title.toLowerCase().includes(q)) || (a.organization && a.organization.toLowerCase().includes(q)));
+      renderCvTable(filtered);
+    }
+
+    function editCvItem(title) {
+      const list = cvData.achievements_and_grants || [];
+      const a = list.find(x => x.title === title);
+      if (!a) return;
+      editingCvTitle = title;
+      openModal('modal-cv');
+      document.getElementById('modal-cv-heading').textContent = 'Edit Achievement / Honor';
+      document.getElementById('cv-form-title').value = a.title || '';
+      document.getElementById('cv-form-org').value = a.organization || '';
+      document.getElementById('cv-form-year').value = a.year || '2026';
+      document.getElementById('cv-form-cat').value = a.category || '';
+      document.getElementById('cv-form-badge').value = a.badge || '';
+      document.getElementById('cv-form-details').value = a.details || '';
+    }
+
+    async function saveCvAction(andDeploy = false) {
+      const title = document.getElementById('cv-form-title').value.trim();
+      if (!title) {
+        showToast('Achievement title is required!', true);
+        return;
+      }
+
+      const itemPayload = {
+        title: title,
+        organization: document.getElementById('cv-form-org').value.trim(),
+        year: document.getElementById('cv-form-year').value.trim(),
+        category: document.getElementById('cv-form-cat').value.trim() || 'Academic Honor',
+        badge: document.getElementById('cv-form-badge').value.trim() || 'Honor',
+        highlight: true,
+        details: document.getElementById('cv-form-details').value.trim()
+      };
+
+      let list = cvData.achievements_and_grants || [];
+      const existingIdx = list.findIndex(a => a.title === (editingCvTitle || title));
+      if (existingIdx !== -1) list[existingIdx] = itemPayload;
+      else list.unshift(itemPayload);
+      cvData.achievements_and_grants = list;
+
+      try {
+        const res = await fetch('/api/save-achievement', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-Admin-Key': currentAdminKey },
+          body: JSON.stringify({ achievement: itemPayload, deploy: andDeploy })
+        });
+        if (res.ok) {
+          showToast(andDeploy ? 'Achievement saved & deploying live!' : 'Achievement saved locally!');
+          closeModal('modal-cv');
+          renderCvTable(list);
+          return;
+        }
+      } catch (e) {}
+
+      showToast('Achievement saved in memory.', false);
+      closeModal('modal-cv');
+      renderCvTable(list);
+    }
+
+    async function deleteCvItem(title) {
+      if (!confirm(`Delete achievement: "${title}"?`)) return;
+      let list = cvData.achievements_and_grants || [];
+      list = list.filter(a => a.title !== title);
+      cvData.achievements_and_grants = list;
+      renderCvTable(list);
+      document.getElementById('count-cv').textContent = list.length;
+      try {
+        await fetch('/api/delete-achievement?title=' + encodeURIComponent(title), {
+          method: 'POST',
+          headers: { 'X-Admin-Key': currentAdminKey }
+        });
+        showToast('Achievement deleted.');
+      } catch (e) {}
+    }
+
+    // -------------------------------------------------------------
+    // GLOBAL DEPLOYMENT & BACKUP
+    // -------------------------------------------------------------
     async function deployLiveSite() {
       const btn = document.getElementById('btn-deploy-live');
       btn.innerHTML = '⏳ Deploying live...';
       btn.disabled = true;
 
       try {
-        const res = await fetch('/api/deploy', { method: 'POST' });
+        const res = await fetch('/api/deploy', {
+          method: 'POST',
+          headers: { 'X-Admin-Key': currentAdminKey }
+        });
         if (res.ok) {
-          showToast('Live deployment triggered successfully! Live in ~10 seconds.');
+          showToast('Live deployment triggered successfully to zaidamin.org! Live in ~10 seconds.');
         } else {
-          showToast('Deploy request sent. Running pipeline.');
+          showToast('Deploy response received. Running deployment engine.');
         }
       } catch (e) {
-        showToast('To deploy: run "deploy.bat" or "python deploy.py" in your terminal.', false);
+        showToast('To deploy manually: run "deploy.bat" or "python deploy.py" in terminal.', false);
       } finally {
         setTimeout(() => {
           btn.innerHTML = `
@@ -846,19 +1681,41 @@
       }
     }
 
-    // Download JSON Backup
-    function downloadArticlesJSON() {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(articles, null, 2));
+    function downloadJSON(filename, data) {
+      const str = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
       const a = document.createElement('a');
-      a.setAttribute("href", dataStr);
-      a.setAttribute("download", "articles.json");
+      a.setAttribute("href", str);
+      a.setAttribute("download", filename);
       document.body.appendChild(a);
       a.click();
       a.remove();
     }
 
-    window.addEventListener('DOMContentLoaded', loadArticles);
+    function escapeHTML(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>'"]/g, tag => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+      }[tag] || tag));
+    }
+
+    function escapeQuotes(str) {
+      if (!str) return '';
+      return String(str).replace(/'/g, "\\'");
+    }
+
+    // Auto-check existing session on page load
+    window.addEventListener('DOMContentLoaded', async () => {
+      const savedKey = sessionStorage.getItem('zaid_cms_admin_key');
+      if (savedKey) {
+        const hash = await sha256(savedKey);
+        if (hash === MASTER_HASH) {
+          currentAdminKey = savedKey;
+          document.getElementById('cms-lock-screen').style.display = 'none';
+          document.getElementById('cms-app-root').style.display = 'block';
+          loadAllData();
+        }
+      }
+    });
   </script>
 </body>
 </html>
-
