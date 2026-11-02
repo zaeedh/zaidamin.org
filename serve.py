@@ -180,6 +180,11 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                     return
 
                 articles = load_json_file("articles.json")
+                if article.get("featured"):
+                    for a in articles:
+                        if a.get("id") != article.get("id"):
+                            a["featured"] = False
+
                 idx = next((i for i, a in enumerate(articles) if a.get("id") == article.get("id")), None)
                 if idx is not None:
                     articles[idx] = article
@@ -271,6 +276,11 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                 else:
                     talk_list = talks_data
 
+                if talk.get("featured"):
+                    for t in talk_list:
+                        if t.get("title") != talk.get("title"):
+                            t["featured"] = False
+
                 # Upsert by title or id
                 idx = next((i for i, t in enumerate(talk_list) if t.get("title") == talk.get("title") or (talk.get("id") and t.get("id") == talk.get("id"))), None)
                 if idx is not None:
@@ -319,6 +329,10 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
 
                 cv = load_json_file("cv_data.json")
                 items = cv.get("achievements_and_grants", [])
+                if item.get("featured"):
+                    for a in items:
+                        if a.get("title") != item.get("title"):
+                            a["featured"] = False
                 idx = next((i for i, a in enumerate(items) if a.get("title") == item.get("title")), None)
                 if idx is not None:
                     items[idx] = item
