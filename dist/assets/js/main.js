@@ -354,6 +354,9 @@ function initCustomSoundtrackPlayer() {
 
   if (!audio || !playBtn) return;
 
+  let isDragging = false;
+  let activePct = 0;
+
   function formatTime(sec) {
     if (isNaN(sec) || sec < 0) return '0:00';
     const m = Math.floor(sec / 60);
@@ -389,6 +392,7 @@ function initCustomSoundtrackPlayer() {
   });
 
   audio.addEventListener('timeupdate', () => {
+    if (isDragging) return; // Never overwrite thumb while user is actively sliding!
     const cur = audio.currentTime;
     const dur = audio.duration || 183;
     const pct = (cur / dur) * 100;
@@ -410,14 +414,93 @@ function initCustomSoundtrackPlayer() {
     }
   });
 
-  if (progressWrap) {
-    progressWrap.addEventListener('click', (e) => {
-      const rect = progressWrap.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const width = rect.width;
-      const pct = Math.max(0, Math.min(1, clickX / width));
-      const dur = audio.duration || 183;
+  // Smooth Scrubber Drag & Slide Engine (Instant Response, Zero Lag)
+  function getPctFromEvent(e) {
+    if (!progressWrap) return 0;
+    const rect = progressWrap.getBoundingClientRect();
+    const clientX = e.touches && e.touches.length > 0
+      ? e.touches[0].clientX
+      : (e.changedTouches && e.changedTouches.length > 0 ? e.changedTouches[0].clientX : e.clientX);
+    const clickX = clientX - rect.left;
+    return Math.max(0, Math.min(1, clickX / rect.width));
+  }
+
+  function updateVisual(pct) {
+    activePct = pct;
+    const dur = audio.duration || 183;
+    const currentSec = pct * dur;
+    if (progressFill) {
+      progressFill.style.width = `${pct * 100}%`;
+    }
+    if (progressThumb) {
+      progressThumb.style.left = `${pct * 100}%`;
+    }
+    if (timeDisplay) {
+      timeDisplay.textContent = `${formatTime(currentSec)} / ${formatTime(dur)}`;
+    }
+  }
+
+  function onDragMove(e) {
+    if (!isDragging) return;
+    if (e.cancelable) e.preventDefault(); // Prevent touch-screen scrolling while dragging
+    const pct = getPctFromEvent(e);
+    updateVisual(pct);
+  }
+
+  function onDragEnd(e) {
+    if (!isDragging) return;
+    const pct = getPctFromEvent(e);
+    updateVisual(pct);
+    const dur = audio.duration || 183;
+    
+    try {
       audio.currentTime = pct * dur;
+    } catch (err) {
+      console.log('Seek error:', err);
+    }
+
+    setTimeout(() => {
+      isDragging = false;
+      if (progressWrap) progressWrap.classList.remove('is-dragging');
+    }, 50);
+
+    window.removeEventListener('mousemove', onDragMove);
+    window.removeEventListener('mouseup', onDragEnd);
+    window.removeEventListener('touchmove', onDragMove);
+    window.removeEventListener('touchend', onDragEnd);
+  }
+
+  function startDrag(e) {
+    e.stopPropagation();
+    isDragging = true;
+    if (progressWrap) progressWrap.classList.add('is-dragging');
+    const pct = getPctFromEvent(e);
+    updateVisual(pct);
+
+    window.addEventListener('mousemove', onDragMove, { passive: false });
+    window.addEventListener('mouseup', onDragEnd);
+    window.addEventListener('touchmove', onDragMove, { passive: false });
+    window.addEventListener('touchend', onDragEnd);
+  }
+
+  if (progressWrap) {
+    progressWrap.addEventListener('mousedown', startDrag);
+    progressWrap.addEventListener('touchstart', startDrag, { passive: false });
+
+    // Keyboard support for accessibility (ArrowLeft / ArrowRight)
+    progressWrap.addEventListener('keydown', (e) => {
+      const dur = audio.duration || 183;
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        const nextTime = Math.max(0, audio.currentTime - 5);
+        audio.currentTime = nextTime;
+        updateVisual(nextTime / dur);
+      } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const nextTime = Math.min(dur, audio.currentTime + 5);
+        audio.currentTime = nextTime;
+        updateVisual(nextTime / dur);
+      }
     });
   }
 
