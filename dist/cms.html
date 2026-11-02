@@ -705,27 +705,38 @@
                 </div>
               </div>
 
+              <!-- VISUAL WYSIWYG EDITOR HEADER & MODE TOGGLE -->
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <label class="form-label" style="margin: 0; font-weight: 700; color: #bae6fd; font-size: 0.88rem; display: flex; align-items: center; gap: 6px;">
+                  ✍️ Article Content
+                </label>
+                <div style="display: flex; gap: 4px; background: rgba(4, 12, 22, 0.75); padding: 3px; border-radius: 8px; border: 1px solid rgba(186, 230, 253, 0.15);">
+                  <button type="button" id="btn-art-mode-visual" class="preview-tab-pill active" onclick="setArticleEditorMode('visual')">👁️ Normal Visual Text</button>
+                  <button type="button" id="btn-art-mode-code" class="preview-tab-pill" onclick="setArticleEditorMode('code')">&lt;/&gt; HTML Source</button>
+                </div>
+              </div>
+
               <!-- ENHANCED TYPOGRAPHY TOOLBAR FOR ARTICLES -->
-              <label class="form-label" style="margin-bottom: 6px;">Article Content (Markdown / HTML &amp; Rich Typography)</label>
-              <div class="cms-typography-suite" style="margin-bottom: 10px; padding: 10px 12px;">
+              <div class="cms-typography-suite" style="margin-bottom: 12px; padding: 10px 14px;">
                 <div class="typo-row">
-                  <select id="art-typo-para" class="typo-select" onchange="insertArticleFormat('para', this.value); this.selectedIndex=0;">
+                  <select id="art-typo-para" class="typo-select" onchange="applyArticleVisualFormat('para', this.value); this.selectedIndex=0;">
                     <option value="" disabled selected>Paragraph Style ▾</option>
-                    <option value="lead">Lead Paragraph</option>
-                    <option value="detail">Detail Footnote</option>
-                    <option value="callout">Callout Box</option>
-                    <option value="h2">Heading 2</option>
-                    <option value="h3">Heading 3</option>
-                    <option value="quote">Academic Quote</option>
+                    <option value="p">Normal Body Text</option>
+                    <option value="lead">Lead Paragraph (Emphasized)</option>
+                    <option value="detail">Detail Footnote (Muted)</option>
+                    <option value="callout">Callout / Key Finding Box</option>
+                    <option value="h2">Heading 2 (Section)</option>
+                    <option value="h3">Heading 3 (Subheading)</option>
+                    <option value="quote">Academic Blockquote</option>
                   </select>
-                  <select id="art-typo-font" class="typo-select" onchange="insertArticleFormat('font', this.value); this.selectedIndex=0;">
+                  <select id="art-typo-font" class="typo-select" onchange="applyArticleVisualFormat('font', this.value); this.selectedIndex=0;">
                     <option value="" disabled selected>Font Family ▾</option>
-                    <option value="garamond">Cormorant Garamond</option>
-                    <option value="cinzel">Cinzel</option>
-                    <option value="inter">Inter</option>
-                    <option value="mono">JetBrains Mono</option>
+                    <option value="garamond">Cormorant Garamond (Serif)</option>
+                    <option value="cinzel">Cinzel (Classical Display)</option>
+                    <option value="inter">Inter (Clean Sans)</option>
+                    <option value="mono">JetBrains Mono (Technical)</option>
                   </select>
-                  <select id="art-typo-size" class="typo-select" onchange="insertArticleFormat('size', this.value); this.selectedIndex=0;">
+                  <select id="art-typo-size" class="typo-select" onchange="applyArticleVisualFormat('size', this.value); this.selectedIndex=0;">
                     <option value="" disabled selected>Font Size ▾</option>
                     <option value="sm">Small (13px)</option>
                     <option value="reg">Regular (15px)</option>
@@ -733,18 +744,24 @@
                     <option value="lg">Large (22px)</option>
                     <option value="golden">Golden Ratio (26px)</option>
                   </select>
-                  <button type="button" class="typo-btn" onclick="insertArticleFormat('bold')"><b>B</b></button>
-                  <button type="button" class="typo-btn" onclick="insertArticleFormat('italic')"><i>I</i></button>
-                  <button type="button" class="typo-btn" onclick="insertArticleFormat('underline')"><u>U</u></button>
-                  <button type="button" class="typo-btn typo-btn-gold" onclick="insertArticleFormat('gold')">Gold</button>
-                  <button type="button" class="typo-btn typo-btn-cyan" onclick="insertArticleFormat('cyan')">Cyan</button>
-                  <button type="button" class="typo-btn" onclick="insertArticleFormat('ul')">&bull; List</button>
-                  <button type="button" class="typo-btn" onclick="insertArticleFormat('link')">Link</button>
-                  <button type="button" class="typo-btn" onclick="insertArticleFormat('img')">Figure</button>
-                  <button type="button" class="typo-btn" onclick="insertArticleFormat('hr')">Divider</button>
+                  <button type="button" class="typo-btn" onclick="applyArticleVisualFormat('bold')" title="Bold"><b>B</b></button>
+                  <button type="button" class="typo-btn" onclick="applyArticleVisualFormat('italic')" title="Italic"><i>I</i></button>
+                  <button type="button" class="typo-btn" onclick="applyArticleVisualFormat('underline')" title="Underline"><u>U</u></button>
+                  <button type="button" class="typo-btn typo-btn-gold" onclick="applyArticleVisualFormat('gold')">Gold</button>
+                  <button type="button" class="typo-btn typo-btn-cyan" onclick="applyArticleVisualFormat('cyan')">Cyan</button>
+                  <button type="button" class="typo-btn" onclick="applyArticleVisualFormat('ul')">&bull; Bullet List</button>
+                  <button type="button" class="typo-btn" onclick="applyArticleVisualFormat('ol')">1. Numbered</button>
+                  <button type="button" class="typo-btn" onclick="applyArticleVisualFormat('link')">🔗 Link</button>
+                  <button type="button" class="typo-btn" onclick="applyArticleVisualFormat('img')">🖼️ Figure</button>
+                  <button type="button" class="typo-btn" onclick="applyArticleVisualFormat('hr')">― Divider</button>
                 </div>
               </div>
-              <textarea id="art-form-content" class="cms-textarea" style="height: 380px;" oninput="autoUpdateArticlePreview()"></textarea>
+
+              <!-- WYSIWYG Visual Canvas (Default for Normal Text Editing) -->
+              <div id="art-form-visual-editor" class="cms-visual-editor" contenteditable="true" spellcheck="true" oninput="onVisualArticleInput()"></div>
+
+              <!-- Raw HTML Code Editor (Fallback / Direct HTML Inspection) -->
+              <textarea id="art-form-content" class="cms-textarea" style="height: 480px; display: none; font-family: monospace; font-size: 0.85rem;" oninput="onCodeArticleInput()"></textarea>
             </div>
 
             <!-- Right: Preview -->
@@ -1037,13 +1054,22 @@
             </div>
           </div>
 
-          <!-- Abstract Textarea -->
+          <!-- Abstract Visual / Code Toggle -->
           <div class="form-group">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-              <label class="form-label" style="margin: 0;">Abstract / Summary Text (HTML &amp; Rich Typography Supported)</label>
-              <span style="font-size: 0.74rem; color: #94a3b8;" id="pub-abstract-stats">0 words</span>
+              <label class="form-label" style="margin: 0; font-weight: 700; color: #bae6fd;">Abstract / Research Summary</label>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="display: flex; gap: 4px; background: rgba(4, 12, 22, 0.75); padding: 2px; border-radius: 6px; border: 1px solid rgba(186, 230, 253, 0.12);">
+                  <button type="button" id="btn-pub-mode-visual" class="preview-tab-pill active" onclick="setPubEditorMode('visual')">👁️ Normal Visual Text</button>
+                  <button type="button" id="btn-pub-mode-code" class="preview-tab-pill" onclick="setPubEditorMode('code')">&lt;/&gt; Code</button>
+                </div>
+                <span style="font-size: 0.74rem; color: #94a3b8;" id="pub-abstract-stats">0 words</span>
+              </div>
             </div>
-            <textarea id="pub-form-abstract" class="cms-textarea" rows="6" oninput="updatePubLivePreview()" placeholder="Enter executive abstract or research summary here..."></textarea>
+            <!-- WYSIWYG Visual Canvas for Abstract -->
+            <div id="pub-form-visual-editor" class="cms-visual-editor" style="min-height: 180px; max-height: 280px;" contenteditable="true" spellcheck="true" oninput="onVisualPubInput()"></div>
+            <!-- Raw HTML Code Editor -->
+            <textarea id="pub-form-abstract" class="cms-textarea" rows="6" style="display: none;" oninput="onCodePubInput()" placeholder="Enter executive abstract or research summary here..."></textarea>
           </div>
 
           <!-- BibTeX Textarea -->
@@ -1292,6 +1318,9 @@
         document.getElementById('pub-form-venue').value = '';
         document.getElementById('pub-form-doi').value = '';
         document.getElementById('pub-form-abstract').value = '';
+        const visualPubElem = document.getElementById('pub-form-visual-editor');
+        if (visualPubElem) visualPubElem.innerHTML = '';
+        setPubEditorMode('visual');
         document.getElementById('pub-form-bibtex').value = '';
         document.getElementById('pub-form-image').value = 'assets/images/spotlight-smart-cities.jpg';
         document.getElementById('pub-preview-thumb').src = 'assets/images/spotlight-smart-cities.jpg';
@@ -1401,7 +1430,11 @@
       document.getElementById('art-form-date').value = new Date().toISOString().slice(0, 10);
       document.getElementById('art-form-tags').value = '';
       document.getElementById('art-form-excerpt').value = '';
-      document.getElementById('art-form-content').value = '';
+      const initialText = '<p>Start typing your article here...</p>';
+      document.getElementById('art-form-content').value = initialText;
+      const visualElem = document.getElementById('art-form-visual-editor');
+      if (visualElem) visualElem.innerHTML = initialText;
+      setArticleEditorMode('visual');
       document.getElementById('articles-list-view').style.display = 'none';
       document.getElementById('articles-editor-view').style.display = 'block';
       autoUpdateArticlePreview();
@@ -1422,7 +1455,11 @@
       document.getElementById('art-form-date').value = art.date || '';
       document.getElementById('art-form-tags').value = Array.isArray(art.tags) ? art.tags.join(', ') : '';
       document.getElementById('art-form-excerpt').value = art.excerpt || '';
-      document.getElementById('art-form-content').value = art.content_html || '';
+      const contentHtml = art.content_html || '';
+      document.getElementById('art-form-content').value = contentHtml;
+      const visualElem = document.getElementById('art-form-visual-editor');
+      if (visualElem) visualElem.innerHTML = contentHtml;
+      setArticleEditorMode('visual'); // Always open in clean Normal Visual Text mode!
       const imgVal = art.image || 'assets/images/spotlight-smart-cities.jpg';
       const imgInput = document.getElementById('art-form-image');
       if (imgInput) imgInput.value = imgVal;
@@ -1451,6 +1488,121 @@
       document.getElementById('art-preview-date').textContent = document.getElementById('art-form-date').value || 'Today';
       document.getElementById('art-preview-readtime').textContent = readTime;
       document.getElementById('art-preview-content').innerHTML = content || 'Type on the left...';
+    }
+
+    // ==========================================
+    // ARTICLE WYSIWYG VISUAL TEXT EDITOR ENGINE
+    // ==========================================
+    let currentArticleEditorMode = 'visual';
+
+    function setArticleEditorMode(mode) {
+      currentArticleEditorMode = mode;
+      const visualElem = document.getElementById('art-form-visual-editor');
+      const codeElem = document.getElementById('art-form-content');
+      const btnVisual = document.getElementById('btn-art-mode-visual');
+      const btnCode = document.getElementById('btn-art-mode-code');
+
+      if (mode === 'visual') {
+        visualElem.innerHTML = codeElem.value;
+        visualElem.style.display = 'block';
+        codeElem.style.display = 'none';
+        btnVisual.classList.add('active');
+        btnCode.classList.remove('active');
+      } else {
+        codeElem.value = visualElem.innerHTML;
+        codeElem.style.display = 'block';
+        visualElem.style.display = 'none';
+        btnCode.classList.add('active');
+        btnVisual.classList.remove('active');
+      }
+    }
+
+    function onVisualArticleInput() {
+      const visualElem = document.getElementById('art-form-visual-editor');
+      const codeElem = document.getElementById('art-form-content');
+      codeElem.value = visualElem.innerHTML;
+      autoUpdateArticlePreview();
+    }
+
+    function onCodeArticleInput() {
+      const visualElem = document.getElementById('art-form-visual-editor');
+      const codeElem = document.getElementById('art-form-content');
+      visualElem.innerHTML = codeElem.value;
+      autoUpdateArticlePreview();
+    }
+
+    function applyArticleVisualFormat(type, value) {
+      if (currentArticleEditorMode === 'code') {
+        insertArticleFormat(type, value);
+        return;
+      }
+
+      const visualElem = document.getElementById('art-form-visual-editor');
+      visualElem.focus();
+
+      if (type === 'bold') {
+        document.execCommand('bold', false, null);
+      } else if (type === 'italic') {
+        document.execCommand('italic', false, null);
+      } else if (type === 'underline') {
+        document.execCommand('underline', false, null);
+      } else if (type === 'ul') {
+        document.execCommand('insertUnorderedList', false, null);
+      } else if (type === 'ol') {
+        document.execCommand('insertOrderedList', false, null);
+      } else if (type === 'hr') {
+        document.execCommand('insertHorizontalRule', false, null);
+      } else if (type === 'link') {
+        const url = prompt('Enter link URL (e.g. https://...):', 'https://');
+        if (url) {
+          document.execCommand('createLink', false, url);
+        }
+      } else if (type === 'img') {
+        const url = prompt('Enter image URL or select from presets:', 'assets/images/spotlight-smart-cities.jpg');
+        if (url) {
+          document.execCommand('insertHTML', false, `<figure style="margin: 18px 0; text-align: center;"><img src="${url}" alt="Figure" style="max-width: 100%; border-radius: 8px;"><figcaption style="font-size: 0.85rem; color: #94a3b8; margin-top: 8px; font-style: italic;">Figure caption</figcaption></figure>`);
+        }
+      } else if (type === 'para') {
+        if (value === 'h2') {
+          document.execCommand('formatBlock', false, '<h2>');
+        } else if (value === 'h3') {
+          document.execCommand('formatBlock', false, '<h3>');
+        } else if (value === 'quote') {
+          document.execCommand('formatBlock', false, '<blockquote>');
+        } else if (value === 'p') {
+          document.execCommand('formatBlock', false, '<p>');
+        } else if (value === 'lead') {
+          const sel = window.getSelection().toString();
+          document.execCommand('insertHTML', false, `<p class="lead-para">${sel || 'Lead intro paragraph text...'}</p>`);
+        } else if (value === 'detail') {
+          const sel = window.getSelection().toString();
+          document.execCommand('insertHTML', false, `<p class="detail-para">${sel || 'Detailed footnote or observation...'}</p>`);
+        } else if (value === 'callout') {
+          const sel = window.getSelection().toString();
+          document.execCommand('insertHTML', false, `<div class="callout-box"><strong>Key Finding:</strong> ${sel || 'Synthesized key finding...'}</div>`);
+        }
+      } else if (type === 'font') {
+        const sel = window.getSelection().toString();
+        if (value === 'garamond') document.execCommand('insertHTML', false, `<span style="font-family: 'Cormorant Garamond', serif;">${sel || 'Editorial Serif Text'}</span>`);
+        else if (value === 'cinzel') document.execCommand('insertHTML', false, `<span style="font-family: 'Cinzel', serif; letter-spacing: 0.05em;">${sel || 'Classical Display Text'}</span>`);
+        else if (value === 'inter') document.execCommand('insertHTML', false, `<span style="font-family: 'Inter', sans-serif;">${sel || 'Clean Sans Text'}</span>`);
+        else if (value === 'mono') document.execCommand('insertHTML', false, `<code style="font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: rgba(186, 230, 253, 0.1); padding: 2px 6px; border-radius: 4px;">${sel || 'code/symbol'}</code>`);
+      } else if (type === 'size') {
+        const sel = window.getSelection().toString();
+        if (value === 'sm') document.execCommand('insertHTML', false, `<span style="font-size: 0.85rem;">${sel || 'Small text'}</span>`);
+        else if (value === 'reg') document.execCommand('insertHTML', false, `<span style="font-size: 0.95rem;">${sel || 'Regular text'}</span>`);
+        else if (value === 'md') document.execCommand('insertHTML', false, `<span style="font-size: 1.125rem;">${sel || 'Medium text'}</span>`);
+        else if (value === 'lg') document.execCommand('insertHTML', false, `<span style="font-size: 1.375rem;">${sel || 'Large text'}</span>`);
+        else if (value === 'golden') document.execCommand('insertHTML', false, `<span style="font-size: 1.618rem; line-height: 1.5;">${sel || 'Golden Ratio scale text'}</span>`);
+      } else if (type === 'gold') {
+        const sel = window.getSelection().toString();
+        document.execCommand('insertHTML', false, `<span class="text-gold">${sel || 'Golden Highlight'}</span>`);
+      } else if (type === 'cyan') {
+        const sel = window.getSelection().toString();
+        document.execCommand('insertHTML', false, `<span class="text-cyan">${sel || 'Cyan Highlight'}</span>`);
+      }
+
+      onVisualArticleInput();
     }
 
     function insertArticleFormat(type, value) {
@@ -1507,7 +1659,9 @@
     async function saveArticleAction(andDeploy = false) {
       const title = document.getElementById('art-form-title').value.trim();
       const slug = document.getElementById('art-form-slug').value.trim();
-      const content = document.getElementById('art-form-content').value.trim();
+      const visualElem = document.getElementById('art-form-visual-editor');
+      const codeElem = document.getElementById('art-form-content');
+      const content = (currentArticleEditorMode === 'visual' ? (visualElem ? visualElem.innerHTML : '') : codeElem.value).trim();
       if (!title || !slug || !content) {
         showToast('Title, slug, and content are required!', true);
         return;
@@ -1663,7 +1817,109 @@
       reader.readAsDataURL(file);
     }
 
+    // ==========================================
+    // PUBLICATION ABSTRACT WYSIWYG ENGINE
+    // ==========================================
+    let currentPubEditorMode = 'visual';
+
+    function setPubEditorMode(mode) {
+      currentPubEditorMode = mode;
+      const visualElem = document.getElementById('pub-form-visual-editor');
+      const codeElem = document.getElementById('pub-form-abstract');
+      const btnVisual = document.getElementById('btn-pub-mode-visual');
+      const btnCode = document.getElementById('btn-pub-mode-code');
+
+      if (mode === 'visual') {
+        visualElem.innerHTML = codeElem.value;
+        visualElem.style.display = 'block';
+        codeElem.style.display = 'none';
+        btnVisual.classList.add('active');
+        btnCode.classList.remove('active');
+      } else {
+        codeElem.value = visualElem.innerHTML;
+        codeElem.style.display = 'block';
+        visualElem.style.display = 'none';
+        btnCode.classList.add('active');
+        btnVisual.classList.remove('active');
+      }
+    }
+
+    function onVisualPubInput() {
+      const visualElem = document.getElementById('pub-form-visual-editor');
+      const codeElem = document.getElementById('pub-form-abstract');
+      codeElem.value = visualElem.innerHTML;
+      updatePubLivePreview();
+    }
+
+    function onCodePubInput() {
+      const visualElem = document.getElementById('pub-form-visual-editor');
+      const codeElem = document.getElementById('pub-form-abstract');
+      visualElem.innerHTML = codeElem.value;
+      updatePubLivePreview();
+    }
+
     function applyTypographyFormat(type, value) {
+      if (currentPubEditorMode === 'visual') {
+        const visualElem = document.getElementById('pub-form-visual-editor');
+        visualElem.focus();
+
+        if (type === 'bold') {
+          document.execCommand('bold', false, null);
+        } else if (type === 'italic') {
+          document.execCommand('italic', false, null);
+        } else if (type === 'underline') {
+          document.execCommand('underline', false, null);
+        } else if (type === 'list') {
+          document.execCommand('insertUnorderedList', false, null);
+        } else if (type === 'divider') {
+          document.execCommand('insertHorizontalRule', false, null);
+        } else if (type === 'link') {
+          const url = prompt('Enter Destination URL:', 'https://doi.org/');
+          if (url) document.execCommand('createLink', false, url);
+        } else if (type === 'gold') {
+          const sel = window.getSelection().toString();
+          document.execCommand('insertHTML', false, `<span class="text-gold">${sel || 'Golden Highlight'}</span>`);
+        } else if (type === 'cyan') {
+          const sel = window.getSelection().toString();
+          document.execCommand('insertHTML', false, `<span class="text-cyan">${sel || 'Cyan Highlight'}</span>`);
+        } else if (type === 'badge-oa') {
+          document.execCommand('insertHTML', false, `<span style="background: rgba(14, 165, 233, 0.2); border: 1px solid rgba(56, 189, 248, 0.4); color: #7dd3fc; padding: 3px 9px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">Open Access</span> `);
+        } else if (type === 'badge-q1') {
+          document.execCommand('insertHTML', false, `<span style="background: rgba(212, 175, 55, 0.18); border: 1px solid rgba(212, 175, 55, 0.5); color: #fef08a; padding: 3px 9px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; font-family: var(--font-cinzel);">✦ Q1 SCOPUS</span> `);
+        } else if (type === 'para') {
+          if (value === 'h2') document.execCommand('formatBlock', false, '<h2>');
+          else if (value === 'h3') document.execCommand('formatBlock', false, '<h3>');
+          else if (value === 'quote') document.execCommand('formatBlock', false, '<blockquote>');
+          else if (value === 'lead') {
+            const sel = window.getSelection().toString();
+            document.execCommand('insertHTML', false, `<p class="lead-para">${sel || 'Lead intro paragraph text...'}</p>`);
+          } else if (value === 'detail') {
+            const sel = window.getSelection().toString();
+            document.execCommand('insertHTML', false, `<p class="detail-para">${sel || 'Detailed academic footnote or context...'}</p>`);
+          } else if (value === 'callout') {
+            const sel = window.getSelection().toString();
+            document.execCommand('insertHTML', false, `<div class="callout-box"><strong>Key Finding:</strong> ${sel || 'Important takeaway...'}</div>`);
+          }
+        } else if (type === 'font') {
+          const sel = window.getSelection().toString();
+          if (value === 'garamond') document.execCommand('insertHTML', false, `<span style="font-family: 'Cormorant Garamond', serif;">${sel || 'Serif Text'}</span>`);
+          else if (value === 'cinzel') document.execCommand('insertHTML', false, `<span style="font-family: 'Cinzel', serif; letter-spacing: 0.05em;">${sel || 'Cinzel Text'}</span>`);
+          else if (value === 'inter') document.execCommand('insertHTML', false, `<span style="font-family: 'Inter', sans-serif;">${sel || 'Clean Text'}</span>`);
+          else if (value === 'mono') document.execCommand('insertHTML', false, `<code style="font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: rgba(186, 230, 253, 0.1); padding: 2px 6px; border-radius: 4px;">${sel || 'code'}</code>`);
+        } else if (type === 'size') {
+          const sel = window.getSelection().toString();
+          if (value === 'sm') document.execCommand('insertHTML', false, `<span style="font-size: 0.85rem;">${sel || 'Small'}</span>`);
+          else if (value === 'reg') document.execCommand('insertHTML', false, `<span style="font-size: 0.95rem;">${sel || 'Regular'}</span>`);
+          else if (value === 'md') document.execCommand('insertHTML', false, `<span style="font-size: 1.125rem;">${sel || 'Medium'}</span>`);
+          else if (value === 'lg') document.execCommand('insertHTML', false, `<span style="font-size: 1.375rem;">${sel || 'Large'}</span>`);
+          else if (value === 'golden') document.execCommand('insertHTML', false, `<span style="font-size: 1.618rem; line-height: 1.5;">${sel || 'Golden Scale'}</span>`);
+        }
+
+        onVisualPubInput();
+        return;
+      }
+
+      // Code Mode Fallback
       const ta = document.getElementById('pub-form-abstract');
       const start = ta.selectionStart;
       const end = ta.selectionEnd;
@@ -1714,7 +1970,7 @@
 
       ta.focus();
       ta.setRangeText(rep, start, end, 'end');
-      updatePubLivePreview();
+      onCodePubInput();
     }
 
     function updatePubLivePreview() {
@@ -1849,7 +2105,11 @@
       document.getElementById('pub-form-year').value = p.year || 2026;
       document.getElementById('pub-form-venue').value = p.venue || '';
       document.getElementById('pub-form-doi').value = p.doi || '';
-      document.getElementById('pub-form-abstract').value = p.abstract || '';
+      const abstractContent = p.abstract || '';
+      document.getElementById('pub-form-abstract').value = abstractContent;
+      const visualPubElem = document.getElementById('pub-form-visual-editor');
+      if (visualPubElem) visualPubElem.innerHTML = abstractContent;
+      setPubEditorMode('visual'); // Default to clean Normal Visual Text mode!
       document.getElementById('pub-form-bibtex').value = p.bibtex || '';
       const imgVal = p.image || 'assets/images/spotlight-smart-cities.jpg';
       document.getElementById('pub-form-image').value = imgVal;
@@ -1868,6 +2128,10 @@
 
       const isFeatured = document.getElementById('pub-form-featured').checked;
       const imgPath = document.getElementById('pub-form-image').value.trim() || 'assets/images/spotlight-smart-cities.jpg';
+      const visualPubElem = document.getElementById('pub-form-visual-editor');
+      const codePubElem = document.getElementById('pub-form-abstract');
+      const abstractContent = (currentPubEditorMode === 'visual' ? (visualPubElem ? visualPubElem.innerHTML : '') : codePubElem.value).trim();
+
       const pubPayload = {
         id: id,
         title: title,
@@ -1877,7 +2141,7 @@
         venue: document.getElementById('pub-form-venue').value.trim(),
         doi: document.getElementById('pub-form-doi').value.trim(),
         url: document.getElementById('pub-form-doi').value.startsWith('http') ? document.getElementById('pub-form-doi').value : 'https://doi.org/' + document.getElementById('pub-form-doi').value,
-        abstract: document.getElementById('pub-form-abstract').value.trim(),
+        abstract: abstractContent,
         bibtex: document.getElementById('pub-form-bibtex').value.trim(),
         image: imgPath,
         featured: isFeatured
