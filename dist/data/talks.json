@@ -2,15 +2,15 @@
   "speaking_invitation_statement": "Dr. Zaid Amin is available for international academic keynotes, conference plenary talks, institutional workshops, and expert panel discussions on Human-Computer Interaction, AI Governance, Cognitive Attention Systems, and Digital Ethics. To invite Dr. Amin, please contact zaid.amin@newinti.edu.my.",
   "talks": [
     {
-      "year": "2026",
       "title": "The Proxy Trap in Agentic AI: Why Metric Optimization Fails Human Values",
       "event": "International Symposium on Trustworthy AI and Autonomous Systems",
+      "year": "2026",
       "role": "Keynote Speaker",
-      "location": "Kuala Lumpur, Malaysia (Hybrid)",
       "type": "Keynote",
+      "location": "Kuala Lumpur, Malaysia (Hybrid)",
       "url": "https://tinyurl.com/y54buapz",
       "image": "assets/images/spotlight-smart-cities.jpg",
-      "featured": true,
+      "featured": false,
       "description": "Delivering international keynote address on cognitive alignment, multimodal AI architectures, civic compliance modeling, and why proxy metric optimization diverges from humane values."
     },
     {
