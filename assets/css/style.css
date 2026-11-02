@@ -5000,3 +5000,464 @@ a {
   }
 
 }
+
+/* ==============================================================================
+   GOLDEN RATIO ACADEMIC CV & ACHIEVEMENTS SPECIFICATION (JULY 2026 RESUME)
+   ============================================================================== */
+.cv-page-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 24px 80px 24px;
+}
+
+/* Executive Hero Profile Card */
+.cv-hero-card {
+  position: relative;
+  background: radial-gradient(circle at 12% 18%, rgba(34, 166, 200, 0.12) 0%, rgba(3, 18, 32, 0.90) 100%);
+  border: 1px solid rgba(34, 166, 200, 0.28);
+  border-radius: 20px;
+  padding: 34px 38px;
+  margin-bottom: 34px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 16px 40px rgba(0, 10, 24, 0.45);
+}
+
+.cv-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cv-hero-name {
+  font-size: 2.6rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  line-height: 1.15;
+  margin: 0 0 6px 0;
+}
+
+.cv-hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 14px 0;
+  align-items: center;
+}
+
+.cv-badge-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.38);
+  color: #f3e5ab;
+  border-radius: 999px;
+  padding: 4px 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.cv-badge-cyan {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(34, 166, 200, 0.12);
+  border: 1px solid rgba(34, 166, 200, 0.32);
+  color: #38b6d0;
+  border-radius: 999px;
+  padding: 4px 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.cv-badge-emerald {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #6ee7b7;
+  border-radius: 999px;
+  padding: 4px 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.cv-hero-affiliation {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  line-height: 1.6;
+}
+
+.cv-hero-summary {
+  font-size: 0.94rem;
+  line-height: 1.76;
+  color: #c4dbe8;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(34, 166, 200, 0.18);
+}
+
+.cv-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(34, 166, 200, 0.18);
+}
+
+.cv-action-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(4, 24, 42, 0.65);
+  border: 1px solid rgba(34, 166, 200, 0.28);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #c4dbe8;
+  text-decoration: none;
+  transition: all 0.22s ease;
+}
+
+.cv-action-pill:hover {
+  background: rgba(34, 166, 200, 0.18);
+  border-color: rgba(212, 175, 55, 0.50);
+  color: #ffffff;
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 14px rgba(34, 166, 200, 0.20);
+}
+
+.cv-action-pill-primary {
+  background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%);
+  border: none;
+  color: #021220 !important;
+  font-weight: 800;
+  padding: 7px 18px;
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35);
+  cursor: pointer;
+}
+
+.cv-action-pill-primary:hover {
+  background: linear-gradient(135deg, #e5c158 0%, #f3e5ab 100%);
+  color: #021220 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(212, 175, 55, 0.50);
+}
+
+/* Golden Ratio Quick-Jump Navigation Bar (TOC) */
+.cv-jump-bar {
+  position: sticky;
+  top: 14px;
+  z-index: 40;
+  background: rgba(3, 16, 28, 0.90);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(34, 166, 200, 0.24);
+  border-radius: 999px;
+  padding: 6px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 48px;
+  box-shadow: 0 8px 30px rgba(0, 8, 20, 0.50);
+}
+
+.cv-jump-link {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #94a3b8;
+  padding: 5px 12px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.cv-jump-link:hover {
+  color: #ffffff;
+  background: rgba(34, 166, 200, 0.14);
+  border-color: rgba(34, 166, 200, 0.32);
+}
+
+/* Section Containers & Headers */
+.cv-section {
+  margin-bottom: 55px;
+  scroll-margin-top: 80px;
+}
+
+.cv-section-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brand-gold);
+  margin-bottom: 4px;
+}
+
+.cv-section-title-wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-bottom: 1px solid rgba(34, 166, 200, 0.22);
+  padding-bottom: 10px;
+  margin-bottom: 24px;
+}
+
+.cv-section-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0;
+}
+
+.cv-section-count {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #38b6d0;
+  background: rgba(34, 166, 200, 0.12);
+  border: 1px solid rgba(34, 166, 200, 0.24);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+/* CV Cards & Golden Proportions */
+.cv-card {
+  position: relative;
+  background: rgba(4, 24, 42, 0.55);
+  border: 1px solid rgba(34, 166, 200, 0.18);
+  border-radius: 14px;
+  padding: 22px 26px;
+  margin-bottom: 16px;
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.24s ease,
+              box-shadow 0.24s ease;
+}
+
+.cv-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(34, 166, 200, 0.42);
+  box-shadow: 0 8px 26px rgba(0, 10, 24, 0.45);
+}
+
+.cv-card.is-highlight {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.06) 0%, rgba(4, 24, 42, 0.65) 100%);
+  border-color: rgba(212, 175, 55, 0.32);
+}
+
+.cv-card.is-highlight:hover {
+  border-color: rgba(212, 175, 55, 0.55);
+  box-shadow: 0 8px 28px rgba(0, 10, 24, 0.50), 0 0 16px rgba(212, 175, 55, 0.12);
+}
+
+.cv-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.cv-card-heading {
+  flex: 1 1 320px;
+}
+
+.cv-card-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.cv-card-sub {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--brand-blue);
+  margin-top: 4px;
+}
+
+.cv-card-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cv-year-pill {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--brand-gold);
+  background: rgba(212, 175, 55, 0.10);
+  border: 1px solid rgba(212, 175, 55, 0.30);
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.cv-type-pill {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #38b6d0;
+  background: rgba(34, 166, 200, 0.10);
+  border: 1px solid rgba(34, 166, 200, 0.25);
+  padding: 3px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.cv-card-body {
+  font-size: 0.88rem;
+  line-height: 1.68;
+  color: var(--text-body);
+  margin-top: 10px;
+}
+
+.cv-bullet-list {
+  margin: 8px 0 0 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.cv-bullet-item {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 6px;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text-body);
+}
+
+.cv-bullet-item::before {
+  content: "•";
+  position: absolute;
+  left: 4px;
+  top: 0;
+  color: #38b6d0;
+  font-weight: 900;
+}
+
+/* Grids for Compact Sections */
+.cv-grid-2col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.cv-grid-3col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.cv-mini-card {
+  background: rgba(4, 24, 42, 0.50);
+  border: 1px solid rgba(34, 166, 200, 0.16);
+  border-radius: 12px;
+  padding: 16px 20px;
+  transition: all 0.22s ease;
+}
+
+.cv-mini-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(34, 166, 200, 0.38);
+  box-shadow: 0 6px 20px rgba(0, 10, 24, 0.35);
+}
+
+.cv-ref-name {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.cv-ref-role {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #38b6d0;
+}
+
+.cv-ref-inst {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  line-height: 1.45;
+}
+
+.cv-ref-contact {
+  font-size: 0.82rem;
+  color: var(--text-body);
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(34, 166, 200, 0.15);
+  line-height: 1.6;
+}
+
+/* Print Optimization */
+@media print {
+  .subpage-nav, .cv-jump-bar, .subpage-footer, .theme-toggle-btn, .top-epigraph-menu {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+  .cv-page-container {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  .cv-hero-card, .cv-card, .cv-mini-card {
+    background: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: none !important;
+    color: #111827 !important;
+    page-break-inside: avoid;
+  }
+  .cv-hero-name, .cv-card-title, .cv-section-title, .cv-ref-name {
+    color: #111827 !important;
+  }
+  .cv-card-sub, .cv-ref-role {
+    color: #1d4ed8 !important;
+  }
+  .cv-hero-summary, .cv-card-body, .cv-ref-contact, .cv-bullet-item {
+    color: #374151 !important;
+  }
+}
+/* Refined 2-column balanced grid for Referees & 2-item structures */
+.cv-grid-referees {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+@media (max-width: 768px) {
+  .cv-grid-referees {
+    grid-template-columns: 1fr;
+  }
+  .cv-hero-card {
+    padding: 24px 20px;
+  }
+  .cv-hero-name {
+    font-size: 2.1rem;
+  }
+  .cv-jump-bar {
+    border-radius: 16px;
+    padding: 8px;
+  }
+}
