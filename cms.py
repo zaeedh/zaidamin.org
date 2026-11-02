@@ -196,3 +196,4 @@ if __name__ == "__main__":
             print("Title and content are required.")
     else:
         print_help()
+
