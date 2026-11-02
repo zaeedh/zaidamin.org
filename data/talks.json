@@ -7,7 +7,11 @@
       "event": "International Symposium on Trustworthy AI and Autonomous Systems",
       "role": "Keynote Speaker",
       "location": "Kuala Lumpur, Malaysia (Hybrid)",
-      "type": "Keynote"
+      "type": "Keynote",
+      "url": "https://tinyurl.com/y54buapz",
+      "image": "assets/images/spotlight-smart-cities.jpg",
+      "featured": true,
+      "description": "Delivering international keynote address on cognitive alignment, multimodal AI architectures, civic compliance modeling, and why proxy metric optimization diverges from humane values."
     },
     {
       "year": "2025",
@@ -15,7 +19,11 @@
       "event": "ASEAN HCI & Digital Society Colloquium",
       "role": "Invited Plenary Speaker",
       "location": "Jakarta / Online",
-      "type": "Plenary"
+      "type": "Plenary",
+      "url": "https://tinyurl.com/37j76mxz",
+      "image": "assets/images/thumb-attention.jpg",
+      "featured": false,
+      "description": "Invited plenary discourse on epistemic attention design, cybernetic feedback loops, and empirical interface nudges against automated viral algorithmic distortion."
     },
     {
       "year": "2024",
@@ -23,7 +31,11 @@
       "event": "4th International Conference on Electronic and Electrical Engineering and Intelligent System (ICE3IS)",
       "role": "Conference Paper Presentation & Track Session Chair",
       "location": "Yogyakarta, Indonesia",
-      "type": "Conference"
+      "type": "Conference",
+      "url": "https://doi.org/10.1109/ACCESS.2021.3087740",
+      "image": "assets/images/thumb-governance.jpg",
+      "featured": false,
+      "description": "Presented empirical research on the Tune-Attention model for curbing unreflective digital information spreading; chaired conference technical tracks."
     },
     {
       "year": "2023",
@@ -31,7 +43,11 @@
       "event": "Regional Forum on Cultural Informatics & Immersive VR",
       "role": "Panelist & Presenter",
       "location": "Palembang, Indonesia",
-      "type": "Panel"
+      "type": "Panel",
+      "url": "https://srivijayapedia.org",
+      "image": "assets/images/thumb-projects.jpg",
+      "featured": false,
+      "description": "Expert panelist and project lead demonstrating immersive 3D/VR reconstructions and digital heritage archives for the maritime kingdom of Srivijaya."
     }
   ],
   "academic_service": [
@@ -63,4 +79,3 @@
     }
   ]
 }
-
