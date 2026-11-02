@@ -19,6 +19,9 @@ import json
 import urllib.parse
 import subprocess
 import threading
+import base64
+import re
+from datetime import datetime
 from pathlib import Path
 
 PORT = 8000
@@ -140,8 +143,33 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
             return
 
         try:
+            # 0.5 IMAGE UPLOADER
+            if path == "/api/upload-image":
+                payload = self.read_post_json()
+                raw_filename = payload.get("filename", f"upload_{int(datetime.now().timestamp())}.png")
+                filename = re.sub(r'[^a-zA-Z0-9_.-]', '_', raw_filename)
+                data_b64 = payload.get("data", "")
+                if data_b64.startswith("data:"):
+                    data_b64 = data_b64.split(",", 1)[1]
+
+                img_bytes = base64.b64decode(data_b64)
+                upload_dir_1 = ROOT_DIR / "assets" / "images" / "uploads"
+                upload_dir_2 = DIRECTORY / "assets" / "images" / "uploads"
+                upload_dir_1.mkdir(parents=True, exist_ok=True)
+                upload_dir_2.mkdir(parents=True, exist_ok=True)
+
+                with open(upload_dir_1 / filename, "wb") as f:
+                    f.write(img_bytes)
+                with open(upload_dir_2 / filename, "wb") as f:
+                    f.write(img_bytes)
+
+                rel_url = f"assets/images/uploads/{filename}"
+                print(f" [CMS Engine] Image uploaded successfully: {rel_url}")
+                self.send_json(200, {"status": "ok", "url": rel_url, "filename": filename})
+                return
+
             # 1. ARTICLES (Activity & Project)
-            if path == "/api/save-article":
+            elif path == "/api/save-article":
                 payload = self.read_post_json()
                 article = payload.get("article", {})
                 should_deploy = payload.get("deploy", False)
@@ -191,6 +219,12 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                     return
 
                 pubs = load_json_file("publications.json")
+                # If marked featured, unset featured on all others
+                if pub.get("featured"):
+                    for p in pubs:
+                        if p.get("id") != pub.get("id"):
+                            p["featured"] = False
+
                 idx = next((i for i, p in enumerate(pubs) if p.get("id") == pub.get("id")), None)
                 if idx is not None:
                     pubs[idx] = pub
@@ -323,15 +357,8 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
         except Exception as e:
             self.send_json(500, {"error": str(e)})
 
-class DualStackServer(http.server.ThreadingHTTPServer):
-    address_family = socket.AF_INET6
-
-    def server_bind(self):
-        self.socket.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 0)
-        super().server_bind()
-
 def run():
-    with DualStackServer(("::", PORT), AcademicPreviewHandler) as httpd:
+    with http.server.ThreadingHTTPServer(("0.0.0.0", PORT), AcademicPreviewHandler) as httpd:
         print("=" * 65)
         print(f" Academic Server Active (Dual-Stack IPv4 + IPv6):")
         print(f" - http://127.0.0.1:{PORT}")
