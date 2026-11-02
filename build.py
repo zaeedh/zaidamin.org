@@ -1040,12 +1040,16 @@ def generate_research_page():
         title = a.get("title", "")
         date = a.get("date", "")
         tags_str = ",".join(a.get("tags", [])).lower()
+        is_spotlight = a.get("featured")
+        spotlight_badge = '<span style="background: rgba(212, 175, 55, 0.2); color: #fef08a; border: 1px solid #d4af37; padding: 2px 7px; border-radius: 4px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em;">★ SPOTLIGHT</span>' if is_spotlight else ''
+        card_style = ' style="border: 1px solid rgba(212, 175, 55, 0.45); box-shadow: 0 0 25px rgba(212, 175, 55, 0.12);"' if is_spotlight else ''
 
         cards_html += f'''
-        <article class="article-card" data-category="{cat}" data-title="{title.lower()}" data-tags="{tags_str}">
+        <article class="article-card" data-category="{cat}" data-title="{title.lower()}" data-tags="{tags_str}"{card_style}>
           <div>
             <div class="article-card-meta">
               <span class="article-card-cat">{cat}</span>
+              {spotlight_badge}
               <span class="article-card-read">{read_time}</span>
             </div>
             <h2 class="article-card-title font-cinzel">
@@ -1394,7 +1398,11 @@ def generate_cv_page():
     """
 
     for item in cv['achievements_and_grants']:
-        highlight_cls = "is-highlight" if item.get('highlight') else ""
+        is_spotlight = item.get('featured')
+        highlight_cls = "is-highlight is-spotlight" if is_spotlight else ("is-highlight" if item.get('highlight') else "")
+        spotlight_badge = '<span class="cv-type-pill" style="background:rgba(212,175,55,0.22); color:#fef08a; border:1px solid #d4af37; font-weight:800; letter-spacing:0.04em;">★ SPOTLIGHT</span>' if is_spotlight else ""
+        url_link = f'<a href="{item["url"]}" target="_blank" rel="noopener" class="cv-type-pill" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">{render_svg_icon("external")} Verification Link</a>' if item.get('url') else ''
+        img_tag = f'<div style="margin:12px 0; border-radius:10px; overflow:hidden; max-height:160px; border:1px solid rgba(212,175,55,0.3);"><img src="{item["image"]}" alt="{item["title"]}" style="width:100%; height:100%; object-fit:cover;"></div>' if (is_spotlight and item.get('image')) else ""
         html += f"""
         <div class="cv-card {highlight_cls}">
           <div class="cv-card-top">
@@ -1403,10 +1411,13 @@ def generate_cv_page():
               <div class="cv-card-sub">{item['organization']}</div>
             </div>
             <div class="cv-card-badges">
+              {spotlight_badge}
               <span class="cv-year-pill">{item['year']}</span>
               <span class="cv-type-pill">{item['badge']}</span>
+              {url_link}
             </div>
           </div>
+          {img_tag}
           <div class="cv-card-body">
             {item['details']}
           </div>
@@ -1517,23 +1528,44 @@ def generate_cv_page():
         </div>
     """
 
-    for item in cv['invited_talks_and_media']:
+    talks_data_file = DATA_DIR / "talks.json"
+    talks_items = cv.get('invited_talks_and_media', [])
+    if talks_data_file.exists():
+        loaded_talks = load_json("talks.json")
+        if isinstance(loaded_talks, dict) and "talks" in loaded_talks:
+            talks_items = loaded_talks["talks"]
+        elif isinstance(loaded_talks, list):
+            talks_items = loaded_talks
+
+    for item in talks_items:
+        is_spotlight = item.get('featured')
+        highlight_cls = "is-highlight is-spotlight" if is_spotlight else "is-highlight"
+        spotlight_badge = '<span class="cv-type-pill" style="background:rgba(212,175,55,0.22); color:#fef08a; border:1px solid #d4af37; font-weight:800; letter-spacing:0.04em;">★ SPOTLIGHT</span>' if is_spotlight else ""
         url_link = f'<a href="{item["url"]}" target="_blank" rel="noopener" class="cv-type-pill" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">{render_svg_icon("external")} Verification Link</a>' if item.get('url') else ''
+        img_tag = f'<div style="margin:12px 0; border-radius:10px; overflow:hidden; max-height:160px; border:1px solid rgba(212,175,55,0.3);"><img src="{item["image"]}" alt="{item.get("title", item.get("event", ""))}" style="width:100%; height:100%; object-fit:cover;"></div>' if (is_spotlight and item.get('image')) else ""
+        title_str = item.get('title') or item.get('event')
+        sub_str = item.get('event') if item.get('title') else item.get('venue', '')
+        role_str = item.get('role', 'Keynote Speaker')
+        year_str = item.get('year', '2026')
+        desc_str = item.get('description') or item.get('details', '')
+
         html += f"""
-        <div class="cv-card is-highlight">
+        <div class="cv-card {highlight_cls}">
           <div class="cv-card-top">
             <div class="cv-card-heading">
-              <h3 class="cv-card-title">{item['event']}</h3>
-              <div class="cv-card-sub">{item['venue']}</div>
+              <h3 class="cv-card-title">{title_str}</h3>
+              <div class="cv-card-sub">{sub_str}</div>
             </div>
             <div class="cv-card-badges">
-              <span class="cv-year-pill">{item['year']}</span>
-              <span class="cv-type-pill">{item['role']}</span>
+              {spotlight_badge}
+              <span class="cv-year-pill">{year_str}</span>
+              <span class="cv-type-pill">{role_str}</span>
               {url_link}
             </div>
           </div>
+          {img_tag}
           <div class="cv-card-body">
-            {item['details']}
+            {desc_str}
           </div>
         </div>
         """
