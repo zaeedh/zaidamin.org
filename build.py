@@ -122,9 +122,8 @@ def get_page_header(active_page="home"):
               </svg>
             </a>
             <a href="publications.html" class="main-menu-link {'active' if active_page == 'publications' else ''}">Research &amp; Publication</a>
-            <a href="articles.html" class="main-menu-link {'active' if active_page == 'articles' else ''}">Articles &amp; Essays</a>
             <a href="cv.html#talks" class="main-menu-link {'active' if active_page == 'talks' else ''}">Recent Media &amp; Talks</a>
-            <a href="research.html" class="main-menu-link {'active' if active_page == 'research' else ''}">Activity &amp; Project</a>
+            <a href="research.html" class="main-menu-link {'active' if active_page in ['research', 'articles'] else ''}">Activity &amp; Project</a>
             <a href="cv.html" class="main-menu-link {'active' if active_page in ['cv', 'achievements'] else ''}">Achievement &amp; CV</a>
           </nav>''' if active_page != 'home' else ''}
 
@@ -377,6 +376,12 @@ def get_page_footer(show_visitor_stats=False):
     <footer class="golden-footer">
       <div class="footer-left">
         Copyright &copy; 2008 - 2026 Dr. Zaid Amin. All Rights Reserved.
+      </div>
+      <div class="footer-right" style="display: flex; align-items: center; gap: 16px;">
+        <a href="cms.html" class="footer-cms-link" title="Academic CMS &amp; Editorial Studio">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          <span>Academic CMS</span>
+        </a>
       </div>
     </footer>
 
@@ -886,9 +891,6 @@ def generate_golden_ratio_home():
           <a href="publications.html" class="ref-menu-tab" title="Research &amp; Publications">
             <span class="tab-txt-full">Research &amp; Pubs</span><span class="tab-txt-compact">Research</span>
           </a>
-          <a href="articles.html" class="ref-menu-tab" title="Articles &amp; Thought Leadership">
-            <span class="tab-txt-full">Articles &amp; Essays</span><span class="tab-txt-compact">Articles</span>
-          </a>
           <a href="cv.html#talks" class="ref-menu-tab" title="Recent Media &amp; Invited Talks">
             <span class="tab-txt-full">Media &amp; Talks</span><span class="tab-txt-compact">Media</span>
           </a>
@@ -1006,26 +1008,55 @@ def generate_publications_page():
 # ==============================================================================
 def generate_research_page():
     research = load_json("research.json")
+    articles = load_json("articles.json") if (DATA_DIR / "articles.json").exists() else []
 
-    html = get_html_head("Research Pillars & Grants | Dr. Zaid Amin | zaidamin.org", research["vision"])
+    html = get_html_head("Activity & Project | Dr. Zaid Amin | zaidamin.org", "Scholarly activity, 80+ peer essays, research pillars, and funded grants authored and led by Dr. Zaid Amin.")
     html += get_page_header("research")
 
-    html += f"""
-    <!-- Subpage Content: Research Pillars -->
-    <div class="subpage-container">
-      <div style="margin-bottom: 40px;">
-        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brand-blue);">Scholarly Agenda</span>
-        <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0; color: #ffffff;">Research Pillars &amp; Grants</h1>
-        <p style="font-size: 1.05rem; color: var(--text-muted); max-width: 820px; line-height: 1.6;">
-          {research['vision']}
-        </p>
-      </div>
+    # Categories for articles
+    categories = {}
+    for a in articles:
+        cat = a.get("category", "Essays & Perspectives")
+        categories[cat] = categories.get(cat, 0) + 1
 
-      <div style="display: flex; flex-direction: column; gap: 32px;">
-    """
+    cat_pills_html = f'<button class="article-cat-btn active" data-category="all">All ({len(articles)})</button>'
+    for cat, count in sorted(categories.items(), key=lambda x: x[1], reverse=True):
+        cat_pills_html += f'<button class="article-cat-btn" data-category="{cat}">{cat} ({count})</button>'
+
+    cards_html = ""
+    for a in articles:
+        cat = a.get("category", "Essays & Perspectives")
+        read_time = a.get("reading_time", "3 min read")
+        excerpt = a.get("excerpt", "")
+        slug = a.get("id", "")
+        title = a.get("title", "")
+        date = a.get("date", "")
+        tags_str = ",".join(a.get("tags", [])).lower()
+
+        cards_html += f'''
+        <article class="article-card" data-category="{cat}" data-title="{title.lower()}" data-tags="{tags_str}">
+          <div>
+            <div class="article-card-meta">
+              <span class="article-card-cat">{cat}</span>
+              <span class="article-card-read">{read_time}</span>
+            </div>
+            <h2 class="article-card-title font-cinzel">
+              <a href="article.html?id={slug}">{title}</a>
+            </h2>
+            <div class="article-card-date">{date}</div>
+            <p class="article-card-excerpt">{excerpt}</p>
+          </div>
+          <div class="article-card-action">
+            <a href="article.html?id={slug}" class="article-card-btn font-cinzel">Read Essay &rarr;</a>
+          </div>
+        </article>
+        '''
+
+    # Research Pillars HTML
+    pillars_html = ""
     for pillar in research["pillars"]:
         topics = " ".join([f'<span style="font-size:0.775rem; font-weight:600; padding:4px 10px; background:rgba(4, 32, 54, 0.85); border:1px solid rgba(34, 166, 200, 0.25); color:#c8e0ec; border-radius:4px; margin-right:6px; margin-bottom:6px; display:inline-block;">{t}</span>' for t in pillar["key_topics"]])
-        html += f"""
+        pillars_html += f"""
         <div style="background:rgba(4, 28, 48, 0.75); border:1px solid rgba(34, 166, 200, 0.22); border-radius:18px; padding:36px; box-shadow:0 12px 35px rgba(0,10,24,0.40); backdrop-filter:blur(8px);">
           <div style="font-size:0.75rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--brand-blue); margin-bottom:6px;">RESEARCH DOMAIN</div>
           <h2 style="font-size: 1.7rem; font-weight: 800; margin-bottom: 12px; color:#ffffff;">{pillar['title']}</h2>
@@ -1043,12 +1074,159 @@ def generate_research_page():
           </div>
         </div>
         """
-    html += """
+
+    # Active Grant Themes
+    grants_html = ""
+    for grant in research.get("active_grant_themes", []):
+        grants_html += f"""
+        <div style="background:rgba(10, 24, 42, 0.65); border:1px solid rgba(186, 230, 253, 0.15); border-radius:14px; padding:24px 28px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+            <h3 style="font-size:1.15rem; font-weight:700; color:#ffffff; margin:0;">{grant['title']}</h3>
+            <span style="font-size:0.75rem; font-weight:700; color:#38bdf8; background:rgba(56,189,248,0.12); border:1px solid rgba(56,189,248,0.3); padding:3px 9px; border-radius:999px;">{grant['period']}</span>
+          </div>
+          <div style="font-size:0.85rem; color:#bae6fd; margin-bottom:8px; font-weight:600;">{grant['role']} &bull; {grant['agency']}</div>
+          <p style="font-size:0.92rem; color:#94a3b8; line-height:1.6; margin:0;">{grant['objective']}</p>
+        </div>
+        """
+
+    script_code = """
+    <script>
+    function switchActivityTab(tab) {
+      var isArticles = tab === 'articles';
+      document.getElementById('activity-pane-articles').style.display = isArticles ? 'block' : 'none';
+      document.getElementById('activity-pane-pillars').style.display = isArticles ? 'none' : 'block';
+      document.getElementById('tab-btn-articles').classList.toggle('active', isArticles);
+      document.getElementById('tab-btn-pillars').classList.toggle('active', !isArticles);
+      if (history.replaceState) {
+        history.replaceState(null, null, isArticles ? '#articles' : '#pillars');
+      }
+    }
+
+    (function() {
+      // Handle initial hash
+      var hash = window.location.hash;
+      if (hash === '#pillars' || hash === '#projects' || hash === '#grants') {
+        switchActivityTab('pillars');
+      } else {
+        switchActivityTab('articles');
+      }
+
+      // Articles filter & search
+      var searchInput = document.getElementById('article-search');
+      var catButtons = document.querySelectorAll('.article-cat-btn');
+      var cards = document.querySelectorAll('.article-card');
+      var countDisplay = document.getElementById('article-count-display');
+      var currentCategory = 'all';
+      var currentSearch = '';
+
+      function filterArticles() {
+        var visibleCount = 0;
+        cards.forEach(function(card) {
+          var cardCat = card.getAttribute('data-category') || '';
+          var cardTitle = card.getAttribute('data-title') || '';
+          var cardTags = card.getAttribute('data-tags') || '';
+          var catMatch = (currentCategory === 'all' || cardCat === currentCategory);
+          var searchMatch = !currentSearch || cardTitle.includes(currentSearch) || cardTags.includes(currentSearch);
+          if (catMatch && searchMatch) {
+            card.style.display = 'flex';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        if (countDisplay) {
+          countDisplay.textContent = visibleCount + ' articles found';
+        }
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+          currentSearch = e.target.value.toLowerCase().trim();
+          filterArticles();
+        });
+      }
+
+      catButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          catButtons.forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          currentCategory = btn.getAttribute('data-category');
+          filterArticles();
+        });
+      });
+    })();
+    </script>
+    """
+
+    html += f"""
+    <!-- Subpage Content: Activity & Project -->
+    <div class="subpage-container">
+      <div style="margin-bottom: 32px;">
+        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brand-blue);">Scholarly Archive &amp; Engagements</span>
+        <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0; color: #ffffff;">Activity &amp; Project</h1>
+        <p style="font-size: 1.05rem; color: var(--text-muted); max-width: 860px; line-height: 1.6;">
+          Explore Dr. Zaid Amin's scholarly essays, peer commentaries, funded research grants, and technical project pillars across AI governance, human-computer interaction, and digital humanities.
+        </p>
       </div>
+
+      <!-- Navigation Tabs & Direct CMS Studio Launcher -->
+      <div class="activity-tabs-bar">
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button class="activity-tab-btn active" id="tab-btn-articles" onclick="switchActivityTab('articles')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <span>Scholarly Articles &amp; Essays ({len(articles)})</span>
+          </button>
+          <button class="activity-tab-btn" id="tab-btn-pillars" onclick="switchActivityTab('pillars')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            <span>Research Pillars &amp; Grants</span>
+          </button>
+        </div>
+
+        <a href="cms.html" class="cms-quick-launch-btn" title="Open Academic CMS &amp; Editorial Studio">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          <span>Academic CMS Studio</span>
+        </a>
+      </div>
+
+      <!-- PANE 1: Scholarly Articles & Essays -->
+      <div id="activity-pane-articles">
+        <div class="articles-controls">
+          <div class="articles-search-row">
+            <input type="text" id="article-search" class="article-search-input" placeholder="Search across {len(articles)} scholarly essays by keyword, topic, or title..." autocomplete="off">
+            <div id="article-count-display" style="font-size: 0.85rem; color: #94a3b8; font-weight: 600; white-space: nowrap;">
+              {len(articles)} articles
+            </div>
+          </div>
+          <div class="articles-category-pills">
+            {cat_pills_html}
+          </div>
+        </div>
+
+        <div class="articles-grid" id="articles-grid">
+          {cards_html}
+        </div>
+      </div>
+
+      <!-- PANE 2: Research Pillars & Grants -->
+      <div id="activity-pane-pillars" style="display: none;">
+        <div style="display: flex; flex-direction: column; gap: 32px; margin-bottom: 40px;">
+          {pillars_html}
+        </div>
+
+        <div style="margin-top: 48px; margin-bottom: 24px;">
+          <h2 style="font-size: 1.6rem; font-weight: 800; color: #ffffff; margin-bottom: 16px;">Active &amp; Targeted Grant Themes</h2>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            {grants_html}
+          </div>
+        </div>
+      </div>
+
     </div>
+    {script_code}
     """
     html += get_page_footer()
     return html
+
 
 # ==============================================================================
 # 4. POSTGRADUATE LAB & SUPERVISION (prospective-students.html)
@@ -1576,133 +1754,20 @@ def generate_cv_page():
 
 
 def generate_articles_hub_page():
-    articles = load_json("articles.json") if (DATA_DIR / "articles.json").exists() else []
-
-    html = get_html_head("Articles & Essays (80+) | Dr. Zaid Amin | zaidamin.org", "Comprehensive collection of 80+ peer essays, research commentaries, educational philosophies, and digital ethics discourse authored by Dr. Zaid Amin.")
-    html += get_page_header("articles")
-
-    # Categories
-    categories = {}
-    for a in articles:
-        cat = a.get("category", "Essays & Perspectives")
-        categories[cat] = categories.get(cat, 0) + 1
-
-    cat_pills_html = f'<button class="article-cat-btn active" data-category="all">All ({len(articles)})</button>'
-    for cat, count in sorted(categories.items(), key=lambda x: x[1], reverse=True):
-        cat_pills_html += f'<button class="article-cat-btn" data-category="{cat}">{cat} ({count})</button>'
-
-    cards_html = ""
-    for a in articles:
-        cat = a.get("category", "Essays & Perspectives")
-        read_time = a.get("reading_time", "3 min read")
-        excerpt = a.get("excerpt", "")
-        slug = a.get("id", "")
-        title = a.get("title", "")
-        date = a.get("date", "")
-        tags_str = ",".join(a.get("tags", [])).lower()
-
-        cards_html += f"""
-        <article class="article-card" data-category="{cat}" data-title="{title.lower()}" data-tags="{tags_str}">
-          <div>
-            <div class="article-card-header">
-              <span class="article-badge-cat">&#10022; {cat}</span>
-              <span class="article-time-badge">{read_time}</span>
-            </div>
-            <h2 class="article-card-title">{title}</h2>
-            <p class="article-card-desc">{excerpt}</p>
-          </div>
-          <div class="article-card-footer">
-            <span class="article-card-date">{date}</span>
-            <a href="article.html?id={slug}" class="article-read-btn font-cinzel">Read Article &rarr;</a>
-          </div>
-        </article>"""
-
-    script_code = """
-    <script>
-      (function() {
-        const searchInput = document.getElementById('article-search');
-        const filterBtns = document.querySelectorAll('.article-cat-btn');
-        const cards = document.querySelectorAll('.article-card');
-        const statusEl = document.getElementById('article-search-status');
-        let activeCat = 'all';
-
-        function filterArticles() {
-          const q = searchInput.value.toLowerCase().trim();
-          let visibleCount = 0;
-
-          cards.forEach(card => {
-            const cardCat = card.getAttribute('data-category');
-            const cardTitle = card.getAttribute('data-title');
-            const cardTags = card.getAttribute('data-tags');
-
-            const matchesCat = (activeCat === 'all' || cardCat === activeCat);
-            const matchesQuery = (!q || cardTitle.includes(q) || cardTags.includes(q));
-
-            if (matchesCat && matchesQuery) {
-              card.style.display = 'flex';
-              visibleCount++;
-            } else {
-              card.style.display = 'none';
-            }
-          });
-
-          if (q || activeCat !== 'all') {
-            statusEl.textContent = 'Showing ' + visibleCount + ' of ' + cards.length + ' articles' + (activeCat !== 'all' ? ' in "' + activeCat + '"' : '') + (q ? ' matching "' + q + '"' : '');
-          } else {
-            statusEl.textContent = 'Showing all ' + cards.length + ' articles';
-          }
-        }
-
-        if (searchInput) searchInput.addEventListener('input', filterArticles);
-
-        filterBtns.forEach(btn => {
-          btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            activeCat = btn.getAttribute('data-category');
-            filterArticles();
-          });
-        });
-      })();
-    </script>
+    return """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0; url=research.html#articles">
+  <title>Redirecting to Activity & Project | Dr. Zaid Amin</title>
+  <link rel="canonical" href="https://zaidamin.org/research.html#articles">
+  <script>window.location.replace("research.html#articles");</script>
+</head>
+<body style="background:#030a14;color:#bae6fd;font-family:sans-serif;padding:60px 20px;text-align:center;">
+  <p>Redirecting to <a href="research.html#articles" style="color:#d4af37;font-weight:bold;">Activity &amp; Project &rarr; Articles &amp; Essays</a>...</p>
+</body>
+</html>
 """
-
-    html += f"""
-    <!-- Subpage Content: Articles & Thought Leadership Engine -->
-    <div class="subpage-container">
-      <div style="margin-bottom: 32px;">
-        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold, #d4af37); font-family: var(--font-cinzel);">&#10022; SCHOLARLY ESSAYS &amp; DISCOURSE</span>
-        <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0; color: #ffffff;">Articles &amp; Essays ({len(articles)})</h1>
-        <p style="font-size: 1rem; color: #9bb6cc; max-width: 760px; line-height: 1.6;">
-          Comprehensive archive of 80+ peer essays, research commentaries, educational philosophies, and digital ethics discourse authored by Dr. Zaid Amin. Search in real-time, filter by category, or read directly on-server.
-        </p>
-      </div>
-
-      <!-- Controls: Real-time Search + Category Filter Pills -->
-      <div class="articles-controls">
-        <div class="articles-search-row">
-          <input type="text" id="article-search" class="article-search-input" placeholder="Search 80+ articles by title, category, or keyword..." autocomplete="off">
-        </div>
-        <div class="articles-category-pills" id="article-category-filters">
-          {cat_pills_html}
-        </div>
-      </div>
-
-      <!-- Active Filter Status -->
-      <div style="margin-bottom: 20px; font-size: 0.85rem; color: #64748b;" id="article-search-status">
-        Showing all {len(articles)} articles
-      </div>
-
-      <!-- Articles Grid -->
-      <div class="articles-grid" id="articles-grid">
-        {cards_html}
-      </div>
-    </div>
-    {script_code}
-"""
-    html += get_page_footer(show_visitor_stats=False)
-    return html
-
 def generate_article_reader_page():
     html = get_html_head("Article Reader | Dr. Zaid Amin | zaidamin.org", "Read scholarly essays, research commentaries, and educational discourse by Dr. Zaid Amin.")
     html += get_page_header("articles")
@@ -1757,11 +1822,11 @@ def generate_article_reader_page():
             if (shareX) shareX.href = 'https://twitter.com/intent/tweet?text=' + titleEnc + '&url=' + pageUrl;
           } else {
             document.getElementById('reader-title').textContent = 'Article Not Found';
-            document.getElementById('reader-body').innerHTML = '<p>The requested article could not be located. <a href="articles.html">Browse all articles &rarr;</a></p>';
+            document.getElementById('reader-body').innerHTML = '<p>The requested article could not be located. <a href="research.html#articles">Browse all articles &rarr;</a></p>';
           }
         } catch (err) {
           console.error(err);
-          document.getElementById('reader-body').innerHTML = '<p>Error loading article. <a href="articles.html">Back to Articles &rarr;</a></p>';
+          document.getElementById('reader-body').innerHTML = '<p>Error loading article. <a href="research.html#articles">Back to Activity &amp; Project &rarr;</a></p>';
         }
       })();
 
@@ -1786,7 +1851,7 @@ def generate_article_reader_page():
     <main class="article-reader-container" id="article-reader-root">
       <!-- Back Link -->
       <div class="article-back-bar">
-        <a href="articles.html" class="article-back-link font-cinzel">&larr; Back to Articles &amp; Essays</a>
+        <a href="research.html#articles" class="article-back-link font-cinzel">&larr; Back to Activity &amp; Project</a>
       </div>
 
       <!-- Article Header -->
@@ -1851,8 +1916,8 @@ def generate_article_reader_page():
 
       <!-- Navigation back to hub -->
       <div style="margin-top: 40px; text-align: center;">
-        <a href="articles.html" class="spotlight-btn btn-gold font-cinzel" style="text-decoration: none; display: inline-block;">
-          &larr; Explore All Articles &amp; Essays
+        <a href="research.html#articles" class="spotlight-btn btn-gold font-cinzel" style="text-decoration: none; display: inline-block;">
+          &larr; Explore All Activity &amp; Articles
         </a>
       </div>
     </main>
