@@ -87,9 +87,8 @@
               </svg>
             </a>
             <a href="publications.html" class="main-menu-link ">Research &amp; Publication</a>
-            <a href="articles.html" class="main-menu-link active">Articles &amp; Essays</a>
             <a href="cv.html#talks" class="main-menu-link ">Recent Media &amp; Talks</a>
-            <a href="research.html" class="main-menu-link ">Activity &amp; Project</a>
+            <a href="research.html" class="main-menu-link active">Activity &amp; Project</a>
             <a href="cv.html" class="main-menu-link ">Achievement &amp; CV</a>
           </nav>
 
@@ -178,7 +177,7 @@
     <main class="article-reader-container" id="article-reader-root">
       <!-- Back Link -->
       <div class="article-back-bar">
-        <a href="articles.html" class="article-back-link font-cinzel">&larr; Back to Articles &amp; Essays</a>
+        <a href="research.html#articles" class="article-back-link font-cinzel">&larr; Back to Activity &amp; Project</a>
       </div>
 
       <!-- Article Header -->
@@ -243,8 +242,8 @@
 
       <!-- Navigation back to hub -->
       <div style="margin-top: 40px; text-align: center;">
-        <a href="articles.html" class="spotlight-btn btn-gold font-cinzel" style="text-decoration: none; display: inline-block;">
-          &larr; Explore All Articles &amp; Essays
+        <a href="research.html#articles" class="spotlight-btn btn-gold font-cinzel" style="text-decoration: none; display: inline-block;">
+          &larr; Explore All Activity &amp; Articles
         </a>
       </div>
     </main>
@@ -298,11 +297,11 @@
             if (shareX) shareX.href = 'https://twitter.com/intent/tweet?text=' + titleEnc + '&url=' + pageUrl;
           } else {
             document.getElementById('reader-title').textContent = 'Article Not Found';
-            document.getElementById('reader-body').innerHTML = '<p>The requested article could not be located. <a href="articles.html">Browse all articles &rarr;</a></p>';
+            document.getElementById('reader-body').innerHTML = '<p>The requested article could not be located. <a href="research.html#articles">Browse all articles &rarr;</a></p>';
           }
         } catch (err) {
           console.error(err);
-          document.getElementById('reader-body').innerHTML = '<p>Error loading article. <a href="articles.html">Back to Articles &rarr;</a></p>';
+          document.getElementById('reader-body').innerHTML = '<p>Error loading article. <a href="research.html#articles">Back to Activity &amp; Project &rarr;</a></p>';
         }
       })();
 
@@ -330,6 +329,12 @@
     <footer class="golden-footer">
       <div class="footer-left">
         Copyright &copy; 2008 - 2026 Dr. Zaid Amin. All Rights Reserved.
+      </div>
+      <div class="footer-right" style="display: flex; align-items: center; gap: 16px;">
+        <a href="cms.html" class="footer-cms-link" title="Academic CMS &amp; Editorial Studio">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          <span>Academic CMS</span>
+        </a>
       </div>
     </footer>
 
