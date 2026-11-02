@@ -122,6 +122,7 @@ def get_page_header(active_page="home"):
               </svg>
             </a>
             <a href="publications.html" class="main-menu-link {'active' if active_page == 'publications' else ''}">Research &amp; Publication</a>
+            <a href="articles.html" class="main-menu-link {'active' if active_page == 'articles' else ''}">Articles &amp; Essays</a>
             <a href="cv.html#talks" class="main-menu-link {'active' if active_page == 'talks' else ''}">Recent Media &amp; Talks</a>
             <a href="research.html" class="main-menu-link {'active' if active_page == 'research' else ''}">Activity &amp; Project</a>
             <a href="cv.html" class="main-menu-link {'active' if active_page in ['cv', 'achievements'] else ''}">Achievement &amp; CV</a>
@@ -555,8 +556,8 @@ def get_portals_tray_carousel_html():
                 ],
                 "tag": "AI / 2026",
                 "btn_text": "Read",
-                "btn_url": "https://www.zaidamin.org/2026/02/harmony-human-trusted-ai-and-resilient.html",
-                "is_external": True
+                "btn_url": "article.html?id=harmony-human-trusted-ai-and-resilient-multimodal-orchestration",
+                "is_external": False
             },
             {
                 "thumb_webp": "",
@@ -569,8 +570,8 @@ def get_portals_tray_carousel_html():
                 ],
                 "tag": "Pedagogy",
                 "btn_text": "Read",
-                "btn_url": "https://www.zaidamin.org/2021/05/kehidupan-pendidik-yang-diteladankan.html",
-                "is_external": True
+                "btn_url": "article.html?id=kehidupan-pendidik-yang-diteladankan",
+                "is_external": False
             },
             {
                 "thumb_webp": "",
@@ -583,8 +584,8 @@ def get_portals_tray_carousel_html():
                 ],
                 "tag": "Cognition",
                 "btn_text": "Read",
-                "btn_url": "https://www.zaidamin.org/2020/07/mengenal-tipe-tipe-bias-dalam.html",
-                "is_external": True
+                "btn_url": "article.html?id=tipe-tipe-bias-di-dalam-penelitian",
+                "is_external": False
             },
             {
                 "thumb_webp": "",
@@ -597,8 +598,8 @@ def get_portals_tray_carousel_html():
                 ],
                 "tag": "Cybernetics",
                 "btn_text": "Read",
-                "btn_url": "https://www.zaidamin.org/2019/08/cyberspace-dan-perubahan-perilaku.html",
-                "is_external": True
+                "btn_url": "article.html?id=cyberspace",
+                "is_external": False
             }
         ],
         # Slide 2: Epistemic Vigilance, Governance & Doctoral Path (4 items)
@@ -614,8 +615,8 @@ def get_portals_tray_carousel_html():
                 ],
                 "tag": "Media AI",
                 "btn_text": "Read",
-                "btn_url": "https://www.zaidamin.org/2019/06/tackling-disinformation-fake-news-and.html",
-                "is_external": True
+                "btn_url": "article.html?id=how-can-academics-contribute-to",
+                "is_external": False
             },
             {
                 "thumb_webp": "assets/images/thumb-governance.webp",
@@ -642,8 +643,8 @@ def get_portals_tray_carousel_html():
                 ],
                 "tag": "Academic",
                 "btn_text": "Read",
-                "btn_url": "https://www.zaidamin.org/2018/09/hal-hal-yang-tidak-kuketahui-sebelum.html",
-                "is_external": True
+                "btn_url": "article.html?id=hal-hal-yang-tidak-kuketahui-sebelum",
+                "is_external": False
             },
             {
                 "thumb_webp": "",
@@ -656,8 +657,8 @@ def get_portals_tray_carousel_html():
                 ],
                 "tag": "Philosophy",
                 "btn_text": "Read",
-                "btn_url": "https://www.zaidamin.org/2019/06/dimuliakan-melalui-makan-dan-minum.html",
-                "is_external": True
+                "btn_url": "article.html?id=dimuliakan-melalui-makan-dan-minum",
+                "is_external": False
             }
         ],
         # Slide 3: Startups, Cultural Heritage & Digital Society (4 items)
@@ -673,8 +674,8 @@ def get_portals_tray_carousel_html():
                 ],
                 "tag": "Industry",
                 "btn_text": "Read",
-                "btn_url": "https://www.zaidamin.org/2015/09/talk-show-e-commerce-entrepreneurship.html",
-                "is_external": True
+                "btn_url": "article.html?id=talk-show-e-commerce-entrepreneurship",
+                "is_external": False
             },
             {
                 "thumb_webp": "assets/images/thumb-research.webp",
@@ -884,6 +885,9 @@ def generate_golden_ratio_home():
           </a>
           <a href="publications.html" class="ref-menu-tab" title="Research &amp; Publications">
             <span class="tab-txt-full">Research &amp; Pubs</span><span class="tab-txt-compact">Research</span>
+          </a>
+          <a href="articles.html" class="ref-menu-tab" title="Articles &amp; Thought Leadership">
+            <span class="tab-txt-full">Articles &amp; Essays</span><span class="tab-txt-compact">Articles</span>
           </a>
           <a href="cv.html#talks" class="ref-menu-tab" title="Recent Media &amp; Invited Talks">
             <span class="tab-txt-full">Media &amp; Talks</span><span class="tab-txt-compact">Media</span>
@@ -1570,6 +1574,293 @@ def generate_cv_page():
     html += get_page_footer()
     return html
 
+
+def generate_articles_hub_page():
+    articles = load_json("articles.json") if (DATA_DIR / "articles.json").exists() else []
+
+    html = get_html_head("Articles & Essays (80+) | Dr. Zaid Amin | zaidamin.org", "Comprehensive collection of 80+ peer essays, research commentaries, educational philosophies, and digital ethics discourse authored by Dr. Zaid Amin.")
+    html += get_page_header("articles")
+
+    # Categories
+    categories = {}
+    for a in articles:
+        cat = a.get("category", "Essays & Perspectives")
+        categories[cat] = categories.get(cat, 0) + 1
+
+    cat_pills_html = f'<button class="article-cat-btn active" data-category="all">All ({len(articles)})</button>'
+    for cat, count in sorted(categories.items(), key=lambda x: x[1], reverse=True):
+        cat_pills_html += f'<button class="article-cat-btn" data-category="{cat}">{cat} ({count})</button>'
+
+    cards_html = ""
+    for a in articles:
+        cat = a.get("category", "Essays & Perspectives")
+        read_time = a.get("reading_time", "3 min read")
+        excerpt = a.get("excerpt", "")
+        slug = a.get("id", "")
+        title = a.get("title", "")
+        date = a.get("date", "")
+        tags_str = ",".join(a.get("tags", [])).lower()
+
+        cards_html += f"""
+        <article class="article-card" data-category="{cat}" data-title="{title.lower()}" data-tags="{tags_str}">
+          <div>
+            <div class="article-card-header">
+              <span class="article-badge-cat">&#10022; {cat}</span>
+              <span class="article-time-badge">{read_time}</span>
+            </div>
+            <h2 class="article-card-title">{title}</h2>
+            <p class="article-card-desc">{excerpt}</p>
+          </div>
+          <div class="article-card-footer">
+            <span class="article-card-date">{date}</span>
+            <a href="article.html?id={slug}" class="article-read-btn font-cinzel">Read Article &rarr;</a>
+          </div>
+        </article>"""
+
+    script_code = """
+    <script>
+      (function() {
+        const searchInput = document.getElementById('article-search');
+        const filterBtns = document.querySelectorAll('.article-cat-btn');
+        const cards = document.querySelectorAll('.article-card');
+        const statusEl = document.getElementById('article-search-status');
+        let activeCat = 'all';
+
+        function filterArticles() {
+          const q = searchInput.value.toLowerCase().trim();
+          let visibleCount = 0;
+
+          cards.forEach(card => {
+            const cardCat = card.getAttribute('data-category');
+            const cardTitle = card.getAttribute('data-title');
+            const cardTags = card.getAttribute('data-tags');
+
+            const matchesCat = (activeCat === 'all' || cardCat === activeCat);
+            const matchesQuery = (!q || cardTitle.includes(q) || cardTags.includes(q));
+
+            if (matchesCat && matchesQuery) {
+              card.style.display = 'flex';
+              visibleCount++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          if (q || activeCat !== 'all') {
+            statusEl.textContent = 'Showing ' + visibleCount + ' of ' + cards.length + ' articles' + (activeCat !== 'all' ? ' in "' + activeCat + '"' : '') + (q ? ' matching "' + q + '"' : '');
+          } else {
+            statusEl.textContent = 'Showing all ' + cards.length + ' articles';
+          }
+        }
+
+        if (searchInput) searchInput.addEventListener('input', filterArticles);
+
+        filterBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeCat = btn.getAttribute('data-category');
+            filterArticles();
+          });
+        });
+      })();
+    </script>
+"""
+
+    html += f"""
+    <!-- Subpage Content: Articles & Thought Leadership Engine -->
+    <div class="subpage-container">
+      <div style="margin-bottom: 32px;">
+        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold, #d4af37); font-family: var(--font-cinzel);">&#10022; SCHOLARLY ESSAYS &amp; DISCOURSE</span>
+        <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0; color: #ffffff;">Articles &amp; Essays ({len(articles)})</h1>
+        <p style="font-size: 1rem; color: #9bb6cc; max-width: 760px; line-height: 1.6;">
+          Comprehensive archive of 80+ peer essays, research commentaries, educational philosophies, and digital ethics discourse authored by Dr. Zaid Amin. Search in real-time, filter by category, or read directly on-server.
+        </p>
+      </div>
+
+      <!-- Controls: Real-time Search + Category Filter Pills -->
+      <div class="articles-controls">
+        <div class="articles-search-row">
+          <input type="text" id="article-search" class="article-search-input" placeholder="Search 80+ articles by title, category, or keyword..." autocomplete="off">
+        </div>
+        <div class="articles-category-pills" id="article-category-filters">
+          {cat_pills_html}
+        </div>
+      </div>
+
+      <!-- Active Filter Status -->
+      <div style="margin-bottom: 20px; font-size: 0.85rem; color: #64748b;" id="article-search-status">
+        Showing all {len(articles)} articles
+      </div>
+
+      <!-- Articles Grid -->
+      <div class="articles-grid" id="articles-grid">
+        {cards_html}
+      </div>
+    </div>
+    {script_code}
+"""
+    html += get_page_footer(show_visitor_stats=False)
+    return html
+
+def generate_article_reader_page():
+    html = get_html_head("Article Reader | Dr. Zaid Amin | zaidamin.org", "Read scholarly essays, research commentaries, and educational discourse by Dr. Zaid Amin.")
+    html += get_page_header("articles")
+
+    reader_script = """
+    <script>
+      (async function() {
+        const params = new URLSearchParams(window.location.search);
+        const articleId = params.get('id');
+
+        window.addEventListener('scroll', () => {
+          const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+          const bar = document.getElementById('reading-progress');
+          if (bar) bar.style.width = scrolled + '%';
+        });
+
+        try {
+          const res = await fetch('data/articles.json');
+          const articles = await res.json();
+
+          let article = null;
+          if (articleId) {
+            article = articles.find(a => a.id === articleId);
+          }
+          if (!article && articles.length > 0) {
+            article = articles[0];
+          }
+
+          if (article) {
+            document.title = article.title + ' | Dr. Zaid Amin';
+            document.getElementById('reader-title').textContent = article.title;
+            document.getElementById('reader-cat').textContent = '✦ ' + (article.category || 'Article');
+            document.getElementById('reader-time').textContent = article.reading_time || '3 min read';
+            document.getElementById('reader-date').textContent = 'Published • ' + article.date;
+            document.getElementById('reader-body').innerHTML = article.content_html || ('<p>' + article.excerpt + '</p>');
+
+            if (article.image) {
+              const imgWrap = document.getElementById('reader-hero-img-wrap');
+              const img = document.getElementById('reader-hero-img');
+              img.src = article.image;
+              img.alt = article.title;
+              imgWrap.style.display = 'block';
+            }
+
+            const pageUrl = encodeURIComponent(window.location.href);
+            const titleEnc = encodeURIComponent(article.title);
+            const shareLi = document.getElementById('share-linkedin');
+            const shareX = document.getElementById('share-x');
+            if (shareLi) shareLi.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + pageUrl;
+            if (shareX) shareX.href = 'https://twitter.com/intent/tweet?text=' + titleEnc + '&url=' + pageUrl;
+          } else {
+            document.getElementById('reader-title').textContent = 'Article Not Found';
+            document.getElementById('reader-body').innerHTML = '<p>The requested article could not be located. <a href="articles.html">Browse all articles &rarr;</a></p>';
+          }
+        } catch (err) {
+          console.error(err);
+          document.getElementById('reader-body').innerHTML = '<p>Error loading article. <a href="articles.html">Back to Articles &rarr;</a></p>';
+        }
+      })();
+
+      function copyArticleLink() {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          const btn = document.getElementById('copy-btn-text');
+          if (btn) {
+            btn.textContent = 'Copied!';
+            setTimeout(() => { btn.textContent = 'Copy Link'; }, 2500);
+          }
+        }).catch(() => {
+          prompt('Copy article link:', window.location.href);
+        });
+      }
+    </script>
+"""
+
+    html += f"""
+    <!-- Reading Progress Bar -->
+    <div class="article-reading-progress-bar" id="reading-progress"></div>
+
+    <main class="article-reader-container" id="article-reader-root">
+      <!-- Back Link -->
+      <div class="article-back-bar">
+        <a href="articles.html" class="article-back-link font-cinzel">&larr; Back to Articles &amp; Essays</a>
+      </div>
+
+      <!-- Article Header -->
+      <header class="article-reader-hero">
+        <div class="article-hero-kicker-row">
+          <span class="article-badge-cat" id="reader-cat">&#10022; Article</span>
+          <span class="article-time-badge" id="reader-time">5 min read</span>
+        </div>
+
+        <h1 class="article-reader-title" id="reader-title">Loading Article...</h1>
+
+        <div class="article-reader-meta-row">
+          <div class="article-author-cluster">
+            <picture>
+              <source srcset="assets/images/dr-zaid.webp" type="image/webp">
+              <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="article-author-avatar">
+            </picture>
+            <div>
+              <div class="article-author-name">Dr. Zaid Amin, Ph.D.</div>
+              <div class="article-pub-date" id="reader-date">Published &bull; 2026</div>
+            </div>
+          </div>
+
+          <div class="article-share-group">
+            <button class="article-share-btn" onclick="copyArticleLink()" title="Copy Link to Clipboard">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+              <span id="copy-btn-text">Copy Link</span>
+            </button>
+            <a href="#" id="share-linkedin" target="_blank" rel="noopener" class="article-share-btn" title="Share on LinkedIn">
+              <span>LinkedIn &nearr;</span>
+            </a>
+            <a href="#" id="share-x" target="_blank" rel="noopener" class="article-share-btn" title="Share on X (Twitter)">
+              <span>X &nearr;</span>
+            </a>
+          </div>
+        </div>
+
+        <div id="reader-hero-img-wrap" style="display: none;">
+          <img src="" alt="Hero Image" id="reader-hero-img" class="article-hero-banner">
+        </div>
+      </header>
+
+      <!-- Article Body Content -->
+      <article class="article-reader-body" id="reader-body">
+        <p style="text-align: center; color: #94a3b8; padding: 40px;">Loading article content...</p>
+      </article>
+
+      <!-- Author Bio Box -->
+      <div class="article-author-bio-card">
+        <picture>
+          <source srcset="assets/images/dr-zaid.webp" type="image/webp">
+          <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin, Ph.D." class="article-bio-avatar">
+        </picture>
+        <div>
+          <h3 class="article-bio-name font-cinzel">Zaid Amin, Ph.D.</h3>
+          <div class="article-bio-role">Senior Lecturer &bull; INTI International University, Malaysia</div>
+          <p class="article-bio-text">
+            Computational researcher in Human-Computer Interaction (HCI), Behavior &amp; Social Computing, Digital Ethics, and AI Governance. Ph.D. in Computer Science from Universiti Kebangsaan Malaysia (UKM).
+          </p>
+        </div>
+      </div>
+
+      <!-- Navigation back to hub -->
+      <div style="margin-top: 40px; text-align: center;">
+        <a href="articles.html" class="spotlight-btn btn-gold font-cinzel" style="text-decoration: none; display: inline-block;">
+          &larr; Explore All Articles &amp; Essays
+        </a>
+      </div>
+    </main>
+    {reader_script}
+"""
+    html += get_page_footer(show_visitor_stats=False)
+    return html
+
 def build_all():
     print("Compiling Golden Ratio Standard Academic Site for zaidamin.org...")
     DIST_DIR.mkdir(parents=True, exist_ok=True)
@@ -1577,6 +1868,8 @@ def build_all():
     pages = {
         "index.html": generate_golden_ratio_home(),
         "publications.html": generate_publications_page(),
+        "articles.html": generate_articles_hub_page(),
+        "article.html": generate_article_reader_page(),
         "research.html": generate_research_page(),
         "prospective-students.html": generate_supervision_page(),
         "cv.html": generate_cv_page()
@@ -1595,6 +1888,16 @@ def build_all():
     if dist_assets.exists():
         shutil.rmtree(dist_assets)
     shutil.copytree(ASSETS_DIR, dist_assets)
+
+    # Copy data directory (for articles.json & search items)
+    dist_data = DIST_DIR / "data"
+    if dist_data.exists():
+        shutil.rmtree(dist_data)
+    shutil.copytree(DATA_DIR, dist_data)
+
+    # Copy cms.html
+    if (BASE_DIR / "cms.html").exists():
+        shutil.copy(BASE_DIR / "cms.html", DIST_DIR / "cms.html")
 
     # Copy CNAME, favicon, BibTeX
     for extra in ["CNAME", "favicon.ico", "data/publications.bib"]:
