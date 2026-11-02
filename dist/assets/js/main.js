@@ -958,3 +958,14 @@ function initAdvancedActivitySearch() {
     }
   });
 }
+
+
+/* --------------------------------------------------------------------------
+   Secret Admin Hotkey: Ctrl+Shift+E to open secured Academic CMS
+   -------------------------------------------------------------------------- */
+window.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'E' || e.key === 'e')) {
+    e.preventDefault();
+    window.location.href = 'cms.html';
+  }
+});
