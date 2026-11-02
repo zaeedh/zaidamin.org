@@ -6,6 +6,7 @@ Author: Antigravity AI & Dr. Zaid Amin
 
 import json
 import os
+import re
 import shutil
 from pathlib import Path
 
@@ -397,26 +398,152 @@ def get_page_footer(show_visitor_stats=False):
 # 1. GOLDEN RATIO STANDARD COMPOSITION HOMEPAGE (index.html)
 # ==============================================================================
 def get_spotlight_card_html():
-    pubs = load_json("publications.json")
-    featured_pub = next((p for p in pubs if p.get("featured")), pubs[0] if pubs else {})
+    spotlight_file = DATA_DIR / "spotlight.json"
+    spotlight_cfg = {}
+    if spotlight_file.exists():
+        try:
+            spotlight_cfg = load_json("spotlight.json")
+        except Exception:
+            spotlight_cfg = {}
 
-    title = featured_pub.get("title", "Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance")
-    venue = featured_pub.get("venue", "Smart Cities (MDPI)")
-    year = featured_pub.get("year", 2026)
-    doi = featured_pub.get("doi", "10.3390/smartcities9100174")
-    url = featured_pub.get("url", f"https://doi.org/{doi}" if doi else "#")
-    desc = featured_pub.get("abstract", "")
-    img_src = featured_pub.get("image", "assets/images/spotlight-smart-cities.jpg")
+    source = spotlight_cfg.get("source", "")
+    item = None
+
+    articles = load_json("articles.json") if (DATA_DIR / "articles.json").exists() else []
+    pubs = load_json("publications.json") if (DATA_DIR / "publications.json").exists() else []
+    talks_d = load_json("talks.json") if (DATA_DIR / "talks.json").exists() else {}
+    talks = talks_d.get("talks", []) if isinstance(talks_d, dict) else talks_d
+    cv = load_json("cv_data.json") if (DATA_DIR / "cv_data.json").exists() else {}
+    achievements = cv.get("achievements_and_grants", [])
+
+    # 1. Resolve explicitly configured item from spotlight.json
+    if source == "article":
+        item = next((a for a in articles if a.get("id") == spotlight_cfg.get("id") or a.get("title") == spotlight_cfg.get("title")), None)
+    elif source == "talk":
+        item = next((t for t in talks if t.get("title") == spotlight_cfg.get("id") or t.get("title") == spotlight_cfg.get("title")), None)
+    elif source == "cv":
+        item = next((a for a in achievements if a.get("title") == spotlight_cfg.get("id") or a.get("title") == spotlight_cfg.get("title")), None)
+    elif source == "publication":
+        item = next((p for p in pubs if p.get("id") == spotlight_cfg.get("id") or p.get("title") == spotlight_cfg.get("title")), None)
+
+    # 2. Dynamic Fallback: Check if any item holds the active 'featured' flag
+    if not item:
+        featured_art = next((a for a in articles if a.get("featured")), None)
+        featured_pub = next((p for p in pubs if p.get("featured")), None)
+        featured_talk = next((t for t in talks if t.get("featured")), None)
+        featured_cv = next((a for a in achievements if a.get("featured")), None)
+
+        if source == "article" and featured_art:
+            item = featured_art
+        elif source == "talk" and featured_talk:
+            item = featured_talk
+        elif source == "cv" and featured_cv:
+            item = featured_cv
+        elif source == "publication" and featured_pub:
+            item = featured_pub
+        elif featured_art:
+            item = featured_art
+            source = "article"
+        elif featured_talk:
+            item = featured_talk
+            source = "talk"
+        elif featured_cv:
+            item = featured_cv
+            source = "cv"
+        elif featured_pub:
+            item = featured_pub
+            source = "publication"
+        else:
+            item = pubs[0] if pubs else {}
+            source = "publication"
+
+    # 3. Format Card metadata according to category
+    if source == "article":
+        title = item.get("title", "HARMONY: Human-Trusted AI Framework")
+        cat_name = item.get("category", "AI & Cybernetics")
+        venue = cat_name
+        read_time = item.get("reading_time", "5 min read")
+        date_str = item.get("date", "2026")
+        year_str = f"{date_str} &bull; {read_time}"
+        url = f"article.html?id={item.get('id', '')}"
+        desc = item.get("excerpt", "")
+        img_src = item.get("image", "assets/images/spotlight-smart-cities.jpg")
+        kicker_badge = "SPOTLIGHT ARTICLE"
+        top_kicker = f"✦ {cat_name.upper()} &bull; ESSAYS & PERSPECTIVES"
+        btn_text = "Read Full Essay &rarr;"
+        target_blank = ""
+        meta_oa = f'<span class="spotlight-oa-pill font-cinzel"><span class="oa-check">&#10003;</span> Open Access Essay</span>'
+        author_pre = "Author"
+        author_name = "Dr. Zaid Amin, Ph.D."
+        secondary_pill = '<a href="research.html#articles" class="spotlight-doi-pill font-cinzel" title="Explore All Activity &amp; Articles"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> All Activity &nearr;</a>'
+
+    elif source == "talk":
+        title = item.get("title", item.get("event", "Keynote Address"))
+        venue = item.get("event", "International Symposium")
+        year_val = item.get("year", "2026")
+        location = item.get("location", "Kuala Lumpur, Malaysia")
+        year_str = f"{year_val} &bull; {location}"
+        url = item.get("url") or "cv.html#talks"
+        desc = item.get("description", item.get("details", ""))
+        img_src = item.get("image", "assets/images/spotlight-smart-cities.jpg")
+        role_str = item.get("role", "Keynote Speaker")
+        type_str = item.get("type", "Keynote")
+        kicker_badge = "SPOTLIGHT KEYNOTE"
+        top_kicker = f"✦ {type_str.upper()} &bull; PUBLIC ENGAGEMENT"
+        btn_text = "Watch Keynote / Recording &rarr;" if item.get("url") else "View Keynote &rarr;"
+        target_blank = 'target="_blank" rel="noopener"' if item.get("url") else ''
+        meta_oa = f'<span class="spotlight-oa-pill font-cinzel" style="color:#d8b4fe; border-color:rgba(168,85,247,0.3);"><span class="oa-check">&#10003;</span> {role_str}</span>'
+        author_pre = "Speaker"
+        author_name = "Dr. Zaid Amin, Ph.D."
+        secondary_pill = '<a href="cv.html#talks" class="spotlight-doi-pill font-cinzel" title="Media &amp; Talks Archive"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Media &amp; Talks &nearr;</a>'
+
+    elif source == "cv":
+        title = item.get("title", "Provincial Honor & Innovator Award")
+        venue = item.get("organization", "Provincial Government")
+        year_val = item.get("year", "2025")
+        category_val = item.get("category", "Government Award")
+        year_str = f"{year_val} &bull; {category_val}"
+        url = item.get("url") or "cv.html#honors"
+        desc = item.get("details", "")
+        img_src = item.get("image", "assets/images/thumb-projects.jpg")
+        badge_val = item.get("badge", "Provincial Honor")
+        kicker_badge = "SPOTLIGHT DISTINCTION"
+        top_kicker = f"✦ {category_val.upper()} &bull; RESEARCH EXCELLENCE"
+        btn_text = "Inspect Distinction &rarr;"
+        target_blank = 'target="_blank" rel="noopener"' if item.get("url") else ''
+        meta_oa = f'<span class="spotlight-oa-pill font-cinzel" style="color:#86efac; border-color:rgba(34,197,94,0.3);"><span class="oa-check">&#10003;</span> {badge_val}</span>'
+        author_pre = "Recipient / Lead PI"
+        author_name = "Dr. Zaid Amin, Ph.D."
+        secondary_pill = '<a href="cv.html#honors" class="spotlight-doi-pill font-cinzel" title="Honors &amp; Distinctions"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Honors &amp; CV &nearr;</a>'
+
+    else: # default: publication
+        title = item.get("title", "Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance")
+        venue = item.get("venue", "Smart Cities (MDPI)")
+        year_val = item.get("year", 2026)
+        year_str = f"Vol. 9 ({year_val})"
+        doi = item.get("doi", "10.3390/smartcities9100174")
+        url = item.get("url", f"https://doi.org/{doi}" if doi else "#")
+        desc = item.get("abstract", "")
+        img_src = item.get("image", "assets/images/spotlight-smart-cities.jpg")
+        kicker_badge = "SPOTLIGHT ARTICLE"
+        top_kicker = "✦ Q1 SCOPUS INDEXED &bull; PEER-REVIEWED"
+        btn_text = "Read Full Article &rarr;"
+        target_blank = 'target="_blank" rel="noopener"'
+        meta_oa = f'<span class="spotlight-oa-pill font-cinzel"><span class="oa-check">&#10003;</span> Open Access</span>'
+        author_pre = "Lead Author"
+        author_name = "Zaid Amin, Ph.D."
+        secondary_pill = f'<a href="{url}" target="_blank" rel="noopener" class="spotlight-doi-pill font-cinzel" title="Direct Digital Object Identifier (DOI)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> DOI: {doi} &nearr;</a>' if doi else ''
+
     img_webp = img_src.replace(".jpg", ".webp") if img_src.endswith(".jpg") else img_src
 
-    doi_pill = f'''<a href="{url}" target="_blank" rel="noopener" class="spotlight-doi-pill font-cinzel" title="Direct Digital Object Identifier (DOI)">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      DOI: {doi} &nearr;
-    </a>''' if doi else ''
+    clean_desc = re.sub(r'<[^>]+>', ' ', str(desc or ''))
+    clean_desc = ' '.join(clean_desc.split())
+    if len(clean_desc) > 360:
+        clean_desc = clean_desc[:357] + '...'
 
-    return f'''
+    return f"""
       <!-- LEFT CARD: Chosen Featured Spotlight Article (Clean Editorial Display) -->
-      <article class="ref-spotlight-card" aria-label="Featured Spotlight Publication">
+      <article class="ref-spotlight-card" aria-label="Featured Spotlight {kicker_badge}">
         <div class="ref-spotlight-visual-wrap">
           <picture>
             <source srcset="{img_webp}" type="image/webp">
@@ -425,9 +552,9 @@ def get_spotlight_card_html():
           <div class="ref-visual-overlay"></div>
           
           <div class="ref-spotlight-top-bar">
-            <span class="ref-kicker-pill font-cinzel"><span class="pulse-dot"></span> SPOTLIGHT ARTICLE</span>
+            <span class="ref-kicker-pill font-cinzel"><span class="pulse-dot"></span> {kicker_badge}</span>
             <div class="ref-top-right-group">
-              <span class="ref-bookmark-icon" title="Featured Spotlight Publication" aria-label="Featured Publication Bookmark">
+              <span class="ref-bookmark-icon" title="Featured Spotlight {kicker_badge}" aria-label="Featured Spotlight Bookmark">
                 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
                 </svg>
@@ -437,31 +564,31 @@ def get_spotlight_card_html():
         </div>
 
         <div class="ref-spotlight-body">
-          <div class="ref-scopus-kicker font-cinzel"><span class="kicker-gem">✦</span> Q1 SCOPUS INDEXED</div>
+          <div class="ref-scopus-kicker font-cinzel"><span class="kicker-gem">✦</span> {top_kicker}</div>
           <h2 class="ref-spotlight-title">{title}</h2>
 
           <div class="ref-spotlight-meta">
             <div class="meta-row-pub">
               <span class="spotlight-venue font-cinzel">{venue}</span>
               <span class="spotlight-divider">&bull;</span>
-              <span class="spotlight-year">Vol. 9 ({year})</span>
-              <span class="spotlight-oa-pill font-cinzel"><span class="oa-check">&#10003;</span> Open Access</span>
+              <span class="spotlight-year">{year_str}</span>
+              {meta_oa}
             </div>
             <div class="meta-row-author">
-              <span class="author-pre">Lead Author:</span> <strong class="author-name">Zaid Amin, Ph.D.</strong>
+              <span class="author-pre">{author_pre}:</span> <strong class="author-name">{author_name}</strong>
             </div>
           </div>
 
-          <div class="ref-spotlight-desc">{desc}</div>
+          <div class="ref-spotlight-desc">{clean_desc}</div>
 
           <div class="ref-spotlight-actions">
-            <a href="{url}" target="_blank" rel="noopener" class="spotlight-btn btn-gold font-cinzel">
-              Read Full Article &rarr;
+            <a href="{url}" {target_blank} class="spotlight-btn btn-gold font-cinzel">
+              {btn_text}
             </a>
-            {doi_pill}
+            {secondary_pill}
           </div>
         </div>
-      </article>'''
+      </article>"""
 
 def get_activity_search_bar_html():
     return '''
