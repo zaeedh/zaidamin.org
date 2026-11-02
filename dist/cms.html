@@ -703,6 +703,13 @@
                     </div>
                   </div>
                 </div>
+
+                <!-- Spotlight Checkbox -->
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding-top: 8px; margin-top: 10px; border-top: 1px solid rgba(186, 230, 253, 0.1);">
+                  <input type="checkbox" id="art-form-featured" onchange="autoUpdateArticlePreview()">
+                  <span style="font-size: 0.82rem; font-weight: 700; color: #fef08a;">★ Set as Homepage / Hub Featured Spotlight Article</span>
+                  <span style="font-size: 0.74rem; color: #94a3b8;">(Positions this article prominently as the primary Spotlight Card)</span>
+                </label>
               </div>
 
               <!-- VISUAL WYSIWYG EDITOR HEADER & MODE TOGGLE -->
@@ -766,8 +773,11 @@
 
             <!-- Right: Preview -->
             <div class="cms-pane">
-              <div class="cms-pane-header">
-                <span style="font-family: var(--font-cinzel); font-size: 0.8rem; color: #bae6fd; font-weight: 600;">LIVE GOLDEN RATIO PREVIEW</span>
+              <div class="cms-pane-header" style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                <div class="preview-tab-row" style="margin: 0; padding: 0; border: none; display: flex; gap: 6px;">
+                  <button type="button" class="preview-tab-pill active" id="tab-art-spotlight-preview" onclick="switchArticlePreviewMode('spotlight')">★ Spotlight Card View</button>
+                  <button type="button" class="preview-tab-pill" id="tab-art-reader-preview" onclick="switchArticlePreviewMode('reader')">📰 Reader View</button>
+                </div>
                 <span id="art-preview-badge" style="background: rgba(212, 175, 55, 0.15); color: #fef08a; padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">AI & Cybernetics</span>
               </div>
               <div class="cms-preview-body" id="art-preview-pane">
@@ -1101,99 +1111,407 @@
   </div>
 
   <!-- =============================================================
-       MODAL 2: TALK / MEDIA EDITOR
+       MODAL 2: GRAND EDITORIAL SUITE: RECENT MEDIA & TALKS
        ============================================================= -->
   <div class="cms-modal-backdrop" id="modal-talk">
-    <div class="cms-modal-dialog">
-      <div class="cms-modal-title">
-        <span id="modal-talk-heading">Add Talk / Media</span>
-        <button class="cms-btn cms-btn-ghost" onclick="closeModal('modal-talk')">&times;</button>
+    <div class="cms-modal-dialog-large">
+      <div class="cms-studio-header">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <span style="font-size: 1.5rem;">🎙️</span>
+          <div>
+            <div style="font-family: var(--font-cinzel); font-size: 1.25rem; font-weight: 700; color: #fef08a;" id="modal-talk-heading">Edit Keynote / Talk</div>
+            <div style="font-size: 0.78rem; color: #94a3b8;">Unified Academic Editorial Suite &bull; Visual Thumbnail Studio &bull; Real-Time Golden Ratio Live Preview</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <button type="button" class="cms-btn cms-btn-ghost" onclick="closeModal('modal-talk')">Cancel</button>
+          <button type="button" class="cms-btn cms-btn-cyan" onclick="saveTalkAction(false)">💾 Save Locally</button>
+          <button type="button" class="cms-btn cms-btn-primary" onclick="saveTalkAction(true)">🚀 Save &amp; Publish Live</button>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label">Talk / Media Title *</label>
-        <input type="text" id="talk-form-title" class="cms-input">
-      </div>
-      <div class="form-row-2">
-        <div>
-          <label class="form-label">Event / Conference Name *</label>
-          <input type="text" id="talk-form-event" class="cms-input">
+      <div class="cms-studio-body">
+        <!-- LEFT COLUMN: CONTROLS & CONTENT -->
+        <div class="cms-studio-left">
+          
+          <!-- Essential Metadata -->
+          <div class="form-group">
+            <label class="form-label">Talk / Media Title *</label>
+            <input type="text" id="talk-form-title" class="cms-input" oninput="updateTalkLivePreview()" placeholder="Full Keynote / Presentation Title...">
+          </div>
+
+          <div class="form-row-2">
+            <div>
+              <label class="form-label">Event / Conference / Venue *</label>
+              <input type="text" id="talk-form-event" class="cms-input" oninput="updateTalkLivePreview()" placeholder="e.g. International Symposium on Trustworthy AI">
+            </div>
+            <div>
+              <label class="form-label">Year (e.g. 2026)</label>
+              <input type="text" id="talk-form-year" class="cms-input" value="2026" oninput="updateTalkLivePreview()">
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div>
+              <label class="form-label">Role</label>
+              <input type="text" id="talk-form-role" class="cms-input" placeholder="e.g. Keynote Speaker, Plenary Speaker, Session Chair" oninput="updateTalkLivePreview()">
+            </div>
+            <div>
+              <label class="form-label">Type</label>
+              <select id="talk-form-type" class="cms-select" onchange="updateTalkLivePreview()">
+                <option value="Keynote">Keynote Address</option>
+                <option value="Plenary">Plenary Speaker</option>
+                <option value="Invited Talk">Invited Academic Talk</option>
+                <option value="Conference">Conference Paper Presentation</option>
+                <option value="Media Interview">Media Interview / Broadcast</option>
+                <option value="Panel">Expert Panelist</option>
+                <option value="Workshop">Institutional Workshop</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div>
+              <label class="form-label">Location</label>
+              <input type="text" id="talk-form-location" class="cms-input" placeholder="e.g. Kuala Lumpur, Malaysia (Hybrid)" oninput="updateTalkLivePreview()">
+            </div>
+            <div>
+              <label class="form-label">Verification / Slides / Video URL</label>
+              <input type="text" id="talk-form-url" class="cms-input" placeholder="https://..." oninput="updateTalkLivePreview()">
+            </div>
+          </div>
+
+          <!-- VISUAL THUMBNAIL STUDIO -->
+          <div class="cms-thumbnail-studio">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-weight: 700; color: #bae6fd; font-size: 0.88rem; display: flex; align-items: center; gap: 6px;">
+                🖼️ Keynote Visual Thumbnail
+              </span>
+              <span style="font-size: 0.74rem; color: #94a3b8;">Controls visual display on Keynotes &amp; Talks showcases</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 200px 1fr; gap: 16px; align-items: center;">
+              <!-- Thumbnail Preview Box -->
+              <div class="thumbnail-preview-box" style="height: 140px;">
+                <img id="talk-preview-thumb" src="assets/images/spotlight-smart-cities.jpg" alt="Talk Thumbnail Preview" class="thumbnail-preview-img" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+                <div class="thumbnail-badge-overlay" id="talk-badge-overlay">KEYNOTE PREVIEW</div>
+              </div>
+
+              <!-- Controls -->
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div>
+                  <label class="form-label" style="margin-bottom: 4px;">Image URL / Path</label>
+                  <div style="display: flex; gap: 8px;">
+                    <input type="text" id="talk-form-image" class="cms-input" placeholder="assets/images/..." oninput="onTalkImageInputChanged()" style="font-size: 0.82rem;">
+                    <button type="button" class="cms-btn cms-btn-ghost" onclick="document.getElementById('talk-file-input').click()" style="padding: 6px 12px; font-size: 0.8rem; white-space: nowrap;">
+                      📁 Upload
+                    </button>
+                    <input type="file" id="talk-file-input" accept="image/*" style="display: none;" onchange="handleTalkImageFileUpload(event)">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="form-label" style="margin-bottom: 6px;">Quick Presets</label>
+                  <div class="thumbnail-presets-wrap">
+                    <button type="button" class="preset-pill-btn" onclick="setTalkImagePreset('assets/images/spotlight-smart-cities.jpg')">🌟 Spotlight AI</button>
+                    <button type="button" class="preset-pill-btn" onclick="setTalkImagePreset('assets/images/thumb-projects.jpg')">🏛️ Srivijayapedia</button>
+                    <button type="button" class="preset-pill-btn" onclick="setTalkImagePreset('assets/images/thumb-research.jpg')">🔬 Research Pillars</button>
+                    <button type="button" class="preset-pill-btn" onclick="setTalkImagePreset('assets/images/thumb-attention.jpg')">👁️ HCI Attention</button>
+                    <button type="button" class="preset-pill-btn" onclick="setTalkImagePreset('assets/images/thumb-governance.jpg')">⚖️ Governance</button>
+                    <button type="button" class="preset-pill-btn" onclick="setTalkImagePreset('assets/images/dr-zaid.png')">👤 Dr. Zaid</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Spotlight Checkbox -->
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding-top: 6px; border-top: 1px solid rgba(186, 230, 253, 0.1);">
+              <input type="checkbox" id="talk-form-featured" onchange="updateTalkLivePreview()">
+              <span style="font-size: 0.82rem; font-weight: 700; color: #fef08a;">★ Set as Featured Spotlight Keynote / Talk</span>
+              <span style="font-size: 0.74rem; color: #94a3b8;">(Positions this keynote prominently with a spotlight card in Section 05 on cv.html)</span>
+            </label>
+          </div>
+
+          <!-- ACADEMIC TYPOGRAPHY & KEYNOTE DESCRIPTION SUITE -->
+          <div class="cms-typography-suite">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-weight: 700; color: #fef08a; font-size: 0.85rem; display: flex; align-items: center; gap: 6px;">
+                🖋️ Keynote Abstract &amp; Topics Formatting
+              </span>
+              <span style="font-size: 0.74rem; color: #94a3b8;">Format description or switch to HTML source</span>
+            </div>
+
+            <div class="typo-row">
+              <select id="talk-typo-select-para" class="typo-select" title="Paragraph Style" onchange="applyTalkTypographyFormat('para', this.value); this.selectedIndex=0;">
+                <option value="" disabled selected>Paragraph Style ▾</option>
+                <option value="lead">Lead Paragraph (Emphasized)</option>
+                <option value="detail">Detail Footnote (Muted)</option>
+                <option value="callout">Callout / Key Takeaway Box</option>
+                <option value="h2">Heading 2 (Section)</option>
+                <option value="h3">Heading 3 (Subheading)</option>
+                <option value="quote">Academic Blockquote</option>
+              </select>
+
+              <select id="talk-typo-select-font" class="typo-select" title="Font Family" onchange="applyTalkTypographyFormat('font', this.value); this.selectedIndex=0;">
+                <option value="" disabled selected>Font Family ▾</option>
+                <option value="garamond">Cormorant Garamond (Editorial Serif)</option>
+                <option value="cinzel">Cinzel (Classical Display)</option>
+                <option value="inter">Inter (Clean Sans)</option>
+                <option value="mono">JetBrains Mono (Technical)</option>
+              </select>
+
+              <select id="talk-typo-select-size" class="typo-select" title="Font Size" onchange="applyTalkTypographyFormat('size', this.value); this.selectedIndex=0;">
+                <option value="" disabled selected>Font Size ▾</option>
+                <option value="sm">Small (13px)</option>
+                <option value="reg">Regular (15px)</option>
+                <option value="md">Medium (18px)</option>
+                <option value="lg">Large (22px)</option>
+                <option value="golden">Golden Ratio (26px)</option>
+              </select>
+
+              <button type="button" class="typo-btn" onclick="applyTalkTypographyFormat('bold')" title="Bold"><b>B</b></button>
+              <button type="button" class="typo-btn" onclick="applyTalkTypographyFormat('italic')" title="Italic"><i>I</i></button>
+              <button type="button" class="typo-btn" onclick="applyTalkTypographyFormat('underline')" title="Underline"><u>U</u></button>
+              <button type="button" class="typo-btn typo-btn-gold" onclick="applyTalkTypographyFormat('gold')" title="Gold Accent">Gold Text</button>
+              <button type="button" class="typo-btn typo-btn-cyan" onclick="applyTalkTypographyFormat('cyan')" title="Cyan Accent">Cyan Text</button>
+              <button type="button" class="typo-btn" onclick="applyTalkTypographyFormat('list')" title="Bullet List">&bull; List</button>
+              <button type="button" class="typo-btn" onclick="applyTalkTypographyFormat('link')" title="Insert Link">🔗 Link</button>
+              <button type="button" class="typo-btn" onclick="applyTalkTypographyFormat('divider')" title="Golden Divider">― Divider</button>
+            </div>
+          </div>
+
+          <!-- Description Visual / Code Toggle -->
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label class="form-label" style="margin: 0; font-weight: 700; color: #bae6fd;">Keynote Overview &amp; Abstract</label>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="display: flex; gap: 4px; background: rgba(4, 12, 22, 0.75); padding: 2px; border-radius: 6px; border: 1px solid rgba(186, 230, 253, 0.12);">
+                  <button type="button" id="btn-talk-mode-visual" class="preview-tab-pill active" onclick="setTalkEditorMode('visual')">👁️ Normal Visual Text</button>
+                  <button type="button" id="btn-talk-mode-code" class="preview-tab-pill" onclick="setTalkEditorMode('code')">&lt;/&gt; Code</button>
+                </div>
+                <span style="font-size: 0.74rem; color: #94a3b8;" id="talk-desc-stats">0 words</span>
+              </div>
+            </div>
+            <!-- WYSIWYG Visual Canvas for Talk Description -->
+            <div id="talk-form-visual-editor" class="cms-visual-editor" style="min-height: 180px; max-height: 280px;" contenteditable="true" spellcheck="true" oninput="onVisualTalkInput()"></div>
+            <!-- Raw HTML Code Editor -->
+            <textarea id="talk-form-desc" class="cms-textarea" rows="6" style="display: none;" oninput="onCodeTalkInput()" placeholder="Enter keynote abstract, topic breakdown or public engagement details..."></textarea>
+          </div>
         </div>
-        <div>
-          <label class="form-label">Year (e.g. 2026)</label>
-          <input type="text" id="talk-form-year" class="cms-input" value="2026">
+
+        <!-- RIGHT COLUMN: LIVE REAL-TIME GOLDEN RATIO PREVIEW -->
+        <div class="cms-studio-right">
+          <div style="background: rgba(10, 24, 44, 0.85); border: 1px solid rgba(186, 230, 253, 0.16); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 14px; height: 100%;">
+            <div class="preview-tab-row">
+              <button type="button" class="preview-tab-pill active" id="tab-talk-spotlight-preview" onclick="switchTalkPreviewMode('spotlight')">★ Keynote Spotlight View</button>
+              <button type="button" class="preview-tab-pill" id="tab-talk-archive-preview" onclick="switchTalkPreviewMode('archive')">📋 Archive Card View</button>
+              <span style="margin-left: auto; font-size: 0.72rem; color: #38bdf8; display: flex; align-items: center; gap: 4px;">
+                <span style="width: 7px; height: 7px; border-radius: 50%; background: #38bdf8; display: inline-block; box-shadow: 0 0 6px #38bdf8;"></span> Live Sync
+              </span>
+            </div>
+
+            <!-- Preview Container -->
+            <div class="live-preview-stage" id="talk-live-preview-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="form-row-2">
-        <div>
-          <label class="form-label">Role</label>
-          <input type="text" id="talk-form-role" class="cms-input" placeholder="Keynote Speaker, Plenary Speaker">
-        </div>
-        <div>
-          <label class="form-label">Type</label>
-          <select id="talk-form-type" class="cms-select">
-            <option value="Keynote">Keynote</option>
-            <option value="Plenary">Plenary</option>
-            <option value="Conference">Conference Paper</option>
-            <option value="Panel">Panelist</option>
-            <option value="Workshop">Workshop</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Location</label>
-        <input type="text" id="talk-form-location" class="cms-input" placeholder="e.g. Kuala Lumpur, Malaysia (Hybrid)">
-      </div>
-      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px;">
-        <button class="cms-btn cms-btn-ghost" onclick="closeModal('modal-talk')">Cancel</button>
-        <button class="cms-btn cms-btn-cyan" onclick="saveTalkAction(false)">💾 Save Locally</button>
-        <button class="cms-btn cms-btn-primary" onclick="saveTalkAction(true)">🚀 Save &amp; Publish</button>
       </div>
     </div>
   </div>
 
   <!-- =============================================================
-       MODAL 3: ACHIEVEMENT & CV EDITOR
+       MODAL 3: GRAND EDITORIAL SUITE: ACHIEVEMENT & CV
        ============================================================= -->
   <div class="cms-modal-backdrop" id="modal-cv">
-    <div class="cms-modal-dialog">
-      <div class="cms-modal-title">
-        <span id="modal-cv-heading">Add Achievement / Honor</span>
-        <button class="cms-btn cms-btn-ghost" onclick="closeModal('modal-cv')">&times;</button>
+    <div class="cms-modal-dialog-large">
+      <div class="cms-studio-header">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <span style="font-size: 1.5rem;">🏆</span>
+          <div>
+            <div style="font-family: var(--font-cinzel); font-size: 1.25rem; font-weight: 700; color: #fef08a;" id="modal-cv-heading">Edit Achievement / Honor</div>
+            <div style="font-size: 0.78rem; color: #94a3b8;">Unified Academic Editorial Suite &bull; Visual Thumbnail Studio &bull; Real-Time Golden Ratio Live Preview</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <button type="button" class="cms-btn cms-btn-ghost" onclick="closeModal('modal-cv')">Cancel</button>
+          <button type="button" class="cms-btn cms-btn-cyan" onclick="saveCvAction(false)">💾 Save Locally</button>
+          <button type="button" class="cms-btn cms-btn-primary" onclick="saveCvAction(true)">🚀 Save &amp; Publish Live</button>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label">Honor / Achievement Title *</label>
-        <input type="text" id="cv-form-title" class="cms-input">
-      </div>
-      <div class="form-row-2">
-        <div>
-          <label class="form-label">Organization / Grant Agency *</label>
-          <input type="text" id="cv-form-org" class="cms-input">
+      <div class="cms-studio-body">
+        <!-- LEFT COLUMN: CONTROLS & CONTENT -->
+        <div class="cms-studio-left">
+          
+          <!-- Essential Metadata -->
+          <div class="form-group">
+            <label class="form-label">Honor / Achievement / Grant Title *</label>
+            <input type="text" id="cv-form-title" class="cms-input" oninput="updateCvLivePreview()" placeholder="Full Honor or Research Grant Title...">
+          </div>
+
+          <div class="form-row-2">
+            <div>
+              <label class="form-label">Organization / Awarding Body / Ministry *</label>
+              <input type="text" id="cv-form-org" class="cms-input" oninput="updateCvLivePreview()" placeholder="e.g. Provincial Government of South Sumatra">
+            </div>
+            <div>
+              <label class="form-label">Year / Period (e.g. 2025)</label>
+              <input type="text" id="cv-form-year" class="cms-input" value="2026" oninput="updateCvLivePreview()">
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div>
+              <label class="form-label">Category</label>
+              <input type="text" id="cv-form-cat" class="cms-input" placeholder="e.g. Government Award, National Grant, Academic Honor" oninput="updateCvLivePreview()">
+            </div>
+            <div>
+              <label class="form-label">Badge Text</label>
+              <input type="text" id="cv-form-badge" class="cms-input" placeholder="e.g. Provincial Honor, National Competitive, Tesis Cemerlang" oninput="updateCvLivePreview()">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Verification / Grant / Citation URL</label>
+            <input type="text" id="cv-form-url" class="cms-input" placeholder="https://..." oninput="updateCvLivePreview()">
+          </div>
+
+          <!-- VISUAL THUMBNAIL STUDIO -->
+          <div class="cms-thumbnail-studio">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-weight: 700; color: #bae6fd; font-size: 0.88rem; display: flex; align-items: center; gap: 6px;">
+                🖼️ Distinction Visual Thumbnail
+              </span>
+              <span style="font-size: 0.74rem; color: #94a3b8;">Controls visual display on Honors &amp; Distinctions cards</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 200px 1fr; gap: 16px; align-items: center;">
+              <!-- Thumbnail Preview Box -->
+              <div class="thumbnail-preview-box" style="height: 140px;">
+                <img id="cv-preview-thumb" src="assets/images/thumb-projects.jpg" alt="CV Thumbnail Preview" class="thumbnail-preview-img" onerror="this.src='assets/images/thumb-projects.jpg'">
+                <div class="thumbnail-badge-overlay" id="cv-badge-overlay">HONOR PREVIEW</div>
+              </div>
+
+              <!-- Controls -->
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div>
+                  <label class="form-label" style="margin-bottom: 4px;">Image URL / Path</label>
+                  <div style="display: flex; gap: 8px;">
+                    <input type="text" id="cv-form-image" class="cms-input" placeholder="assets/images/..." oninput="onCvImageInputChanged()" style="font-size: 0.82rem;">
+                    <button type="button" class="cms-btn cms-btn-ghost" onclick="document.getElementById('cv-file-input').click()" style="padding: 6px 12px; font-size: 0.8rem; white-space: nowrap;">
+                      📁 Upload
+                    </button>
+                    <input type="file" id="cv-file-input" accept="image/*" style="display: none;" onchange="handleCvImageFileUpload(event)">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="form-label" style="margin-bottom: 6px;">Quick Presets</label>
+                  <div class="thumbnail-presets-wrap">
+                    <button type="button" class="preset-pill-btn" onclick="setCvImagePreset('assets/images/spotlight-smart-cities.jpg')">🌟 Spotlight AI</button>
+                    <button type="button" class="preset-pill-btn" onclick="setCvImagePreset('assets/images/thumb-projects.jpg')">🏛️ Srivijayapedia</button>
+                    <button type="button" class="preset-pill-btn" onclick="setCvImagePreset('assets/images/thumb-research.jpg')">🔬 Research Pillars</button>
+                    <button type="button" class="preset-pill-btn" onclick="setCvImagePreset('assets/images/thumb-attention.jpg')">👁️ HCI Attention</button>
+                    <button type="button" class="preset-pill-btn" onclick="setCvImagePreset('assets/images/thumb-governance.jpg')">⚖️ Governance</button>
+                    <button type="button" class="preset-pill-btn" onclick="setCvImagePreset('assets/images/dr-zaid.png')">👤 Dr. Zaid</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Spotlight Checkbox -->
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding-top: 6px; border-top: 1px solid rgba(186, 230, 253, 0.1);">
+              <input type="checkbox" id="cv-form-featured" onchange="updateCvLivePreview()">
+              <span style="font-size: 0.82rem; font-weight: 700; color: #fef08a;">★ Set as Featured Spotlight Distinction / Grant</span>
+              <span style="font-size: 0.74rem; color: #94a3b8;">(Positions this honor prominently with a spotlight card in Section 01 on cv.html)</span>
+            </label>
+          </div>
+
+          <!-- ACADEMIC TYPOGRAPHY & DISTINCTION DETAILS SUITE -->
+          <div class="cms-typography-suite">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-weight: 700; color: #fef08a; font-size: 0.85rem; display: flex; align-items: center; gap: 6px;">
+                🖋️ Impact Citation &amp; Evidence Formatting
+              </span>
+              <span style="font-size: 0.74rem; color: #94a3b8;">Format achievement details or switch to HTML source</span>
+            </div>
+
+            <div class="typo-row">
+              <select id="cv-typo-select-para" class="typo-select" title="Paragraph Style" onchange="applyCvTypographyFormat('para', this.value); this.selectedIndex=0;">
+                <option value="" disabled selected>Paragraph Style ▾</option>
+                <option value="lead">Lead Paragraph (Emphasized)</option>
+                <option value="detail">Detail Footnote (Muted)</option>
+                <option value="callout">Callout / Impact Highlight Box</option>
+                <option value="h2">Heading 2 (Section)</option>
+                <option value="h3">Heading 3 (Subheading)</option>
+                <option value="quote">Academic Blockquote</option>
+              </select>
+
+              <select id="cv-typo-select-font" class="typo-select" title="Font Family" onchange="applyCvTypographyFormat('font', this.value); this.selectedIndex=0;">
+                <option value="" disabled selected>Font Family ▾</option>
+                <option value="garamond">Cormorant Garamond (Editorial Serif)</option>
+                <option value="cinzel">Cinzel (Classical Display)</option>
+                <option value="inter">Inter (Clean Sans)</option>
+                <option value="mono">JetBrains Mono (Technical)</option>
+              </select>
+
+              <select id="cv-typo-select-size" class="typo-select" title="Font Size" onchange="applyCvTypographyFormat('size', this.value); this.selectedIndex=0;">
+                <option value="" disabled selected>Font Size ▾</option>
+                <option value="sm">Small (13px)</option>
+                <option value="reg">Regular (15px)</option>
+                <option value="md">Medium (18px)</option>
+                <option value="lg">Large (22px)</option>
+                <option value="golden">Golden Ratio (26px)</option>
+              </select>
+
+              <button type="button" class="typo-btn" onclick="applyCvTypographyFormat('bold')" title="Bold"><b>B</b></button>
+              <button type="button" class="typo-btn" onclick="applyCvTypographyFormat('italic')" title="Italic"><i>I</i></button>
+              <button type="button" class="typo-btn" onclick="applyCvTypographyFormat('underline')" title="Underline"><u>U</u></button>
+              <button type="button" class="typo-btn typo-btn-gold" onclick="applyCvTypographyFormat('gold')" title="Gold Accent">Gold Text</button>
+              <button type="button" class="typo-btn typo-btn-cyan" onclick="applyCvTypographyFormat('cyan')" title="Cyan Accent">Cyan Text</button>
+              <button type="button" class="typo-btn" onclick="applyCvTypographyFormat('list')" title="Bullet List">&bull; List</button>
+              <button type="button" class="typo-btn" onclick="applyCvTypographyFormat('link')" title="Insert Link">🔗 Link</button>
+              <button type="button" class="typo-btn" onclick="applyCvTypographyFormat('divider')" title="Golden Divider">― Divider</button>
+            </div>
+          </div>
+
+          <!-- Details Visual / Code Toggle -->
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label class="form-label" style="margin: 0; font-weight: 700; color: #bae6fd;">Full Details / Impact Description</label>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="display: flex; gap: 4px; background: rgba(4, 12, 22, 0.75); padding: 2px; border-radius: 6px; border: 1px solid rgba(186, 230, 253, 0.12);">
+                  <button type="button" id="btn-cv-mode-visual" class="preview-tab-pill active" onclick="setCvEditorMode('visual')">👁️ Normal Visual Text</button>
+                  <button type="button" id="btn-cv-mode-code" class="preview-tab-pill" onclick="setCvEditorMode('code')">&lt;/&gt; Code</button>
+                </div>
+                <span style="font-size: 0.74rem; color: #94a3b8;" id="cv-details-stats">0 words</span>
+              </div>
+            </div>
+            <!-- WYSIWYG Visual Canvas for CV Details -->
+            <div id="cv-form-visual-editor" class="cms-visual-editor" style="min-height: 180px; max-height: 280px;" contenteditable="true" spellcheck="true" oninput="onVisualCvInput()"></div>
+            <!-- Raw HTML Code Editor -->
+            <textarea id="cv-form-details" class="cms-textarea" rows="6" style="display: none;" oninput="onCodeCvInput()" placeholder="Enter full citation, impact statements, and grant outcomes here..."></textarea>
+          </div>
         </div>
-        <div>
-          <label class="form-label">Year / Period</label>
-          <input type="text" id="cv-form-year" class="cms-input" value="2026">
+
+        <!-- RIGHT COLUMN: LIVE REAL-TIME GOLDEN RATIO PREVIEW -->
+        <div class="cms-studio-right">
+          <div style="background: rgba(10, 24, 44, 0.85); border: 1px solid rgba(186, 230, 253, 0.16); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 14px; height: 100%;">
+            <div class="preview-tab-row">
+              <button type="button" class="preview-tab-pill active" id="tab-cv-spotlight-preview" onclick="switchCvPreviewMode('spotlight')">★ Distinction Spotlight View</button>
+              <button type="button" class="preview-tab-pill" id="tab-cv-archive-preview" onclick="switchCvPreviewMode('archive')">📋 CV Archive View</button>
+              <span style="margin-left: auto; font-size: 0.72rem; color: #38bdf8; display: flex; align-items: center; gap: 4px;">
+                <span style="width: 7px; height: 7px; border-radius: 50%; background: #38bdf8; display: inline-block; box-shadow: 0 0 6px #38bdf8;"></span> Live Sync
+              </span>
+            </div>
+
+            <!-- Preview Container -->
+            <div class="live-preview-stage" id="cv-live-preview-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="form-row-2">
-        <div>
-          <label class="form-label">Category</label>
-          <input type="text" id="cv-form-cat" class="cms-input" placeholder="National Grant, Government Award, Leadership">
-        </div>
-        <div>
-          <label class="form-label">Badge Text</label>
-          <input type="text" id="cv-form-badge" class="cms-input" placeholder="National Competitive, Provincial Honor">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Full Details / Description</label>
-        <textarea id="cv-form-details" class="cms-textarea" rows="3"></textarea>
-      </div>
-      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px;">
-        <button class="cms-btn cms-btn-ghost" onclick="closeModal('modal-cv')">Cancel</button>
-        <button class="cms-btn cms-btn-cyan" onclick="saveCvAction(false)">💾 Save Locally</button>
-        <button class="cms-btn cms-btn-primary" onclick="saveCvAction(true)">🚀 Save &amp; Publish</button>
       </div>
     </div>
   </div>
@@ -1328,21 +1646,41 @@
         updatePubLivePreview();
       } else if (activeModule === 'talks') {
         openModal('modal-talk');
-        document.getElementById('modal-talk-heading').textContent = 'Add Talk / Media';
+        document.getElementById('modal-talk-heading').textContent = 'Add Keynote / Talk';
         editingTalkTitle = null;
         document.getElementById('talk-form-title').value = '';
         document.getElementById('talk-form-event').value = '';
-        document.getElementById('talk-form-role').value = '';
-        document.getElementById('talk-form-location').value = '';
+        document.getElementById('talk-form-year').value = '2026';
+        document.getElementById('talk-form-role').value = 'Keynote Speaker';
+        document.getElementById('talk-form-type').value = 'Keynote';
+        document.getElementById('talk-form-location').value = 'Kuala Lumpur, Malaysia (Hybrid)';
+        document.getElementById('talk-form-url').value = '';
+        document.getElementById('talk-form-image').value = 'assets/images/spotlight-smart-cities.jpg';
+        document.getElementById('talk-preview-thumb').src = 'assets/images/spotlight-smart-cities.jpg';
+        document.getElementById('talk-form-featured').checked = false;
+        document.getElementById('talk-form-desc').value = '';
+        const visTalk = document.getElementById('talk-form-visual-editor');
+        if (visTalk) visTalk.innerHTML = '';
+        setTalkEditorMode('visual');
+        updateTalkLivePreview();
       } else if (activeModule === 'cv') {
         openModal('modal-cv');
         document.getElementById('modal-cv-heading').textContent = 'Add Achievement / Honor';
         editingCvTitle = null;
         document.getElementById('cv-form-title').value = '';
         document.getElementById('cv-form-org').value = '';
-        document.getElementById('cv-form-cat').value = '';
-        document.getElementById('cv-form-badge').value = '';
+        document.getElementById('cv-form-year').value = '2026';
+        document.getElementById('cv-form-cat').value = 'Academic Honor';
+        document.getElementById('cv-form-badge').value = 'Honor';
+        document.getElementById('cv-form-url').value = '';
+        document.getElementById('cv-form-image').value = 'assets/images/thumb-projects.jpg';
+        document.getElementById('cv-preview-thumb').src = 'assets/images/thumb-projects.jpg';
+        document.getElementById('cv-form-featured').checked = false;
         document.getElementById('cv-form-details').value = '';
+        const visCv = document.getElementById('cv-form-visual-editor');
+        if (visCv) visCv.innerHTML = '';
+        setCvEditorMode('visual');
+        updateCvLivePreview();
       }
     }
 
@@ -1395,7 +1733,10 @@
         <tr>
           <td style="color: #64748b; font-weight: 700;">${i + 1}</td>
           <td>
-            <div style="font-weight: 700; color: #ffffff;">${escapeHTML(a.title)}</div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-weight: 700; color: #ffffff;">${escapeHTML(a.title)}</span>
+              ${a.featured ? '<span style="background: rgba(212, 175, 55, 0.2); color: #fef08a; border: 1px solid #d4af37; padding: 2px 7px; border-radius: 4px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em;">★ SPOTLIGHT</span>' : ''}
+            </div>
             <div style="font-size: 0.75rem; color: #94a3b8;">${escapeHTML(a.id)}</div>
           </td>
           <td><span style="background: rgba(56, 189, 248, 0.12); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">${escapeHTML(a.category || 'General')}</span></td>
@@ -1430,6 +1771,7 @@
       document.getElementById('art-form-date').value = new Date().toISOString().slice(0, 10);
       document.getElementById('art-form-tags').value = '';
       document.getElementById('art-form-excerpt').value = '';
+      document.getElementById('art-form-featured').checked = false;
       const initialText = '<p>Start typing your article here...</p>';
       document.getElementById('art-form-content').value = initialText;
       const visualElem = document.getElementById('art-form-visual-editor');
@@ -1437,6 +1779,7 @@
       setArticleEditorMode('visual');
       document.getElementById('articles-list-view').style.display = 'none';
       document.getElementById('articles-editor-view').style.display = 'block';
+      autoUpdateArticlePreview();
       autoUpdateArticlePreview();
     }
 
@@ -1467,8 +1810,19 @@
       if (thumb) thumb.src = imgVal;
       const banner = document.getElementById('art-preview-banner');
       if (banner) banner.src = imgVal;
+      const featBox = document.getElementById('art-form-featured');
+      if (featBox) featBox.checked = !!art.featured;
       document.getElementById('articles-list-view').style.display = 'none';
       document.getElementById('articles-editor-view').style.display = 'block';
+      autoUpdateArticlePreview();
+    }
+
+    let currentArticlePreviewMode = 'spotlight';
+
+    function switchArticlePreviewMode(mode) {
+      currentArticlePreviewMode = mode;
+      document.getElementById('tab-art-spotlight-preview').classList.toggle('active', mode === 'spotlight');
+      document.getElementById('tab-art-reader-preview').classList.toggle('active', mode === 'reader');
       autoUpdateArticlePreview();
     }
 
@@ -1482,12 +1836,52 @@
       const content = document.getElementById('art-form-content').value;
       const words = content.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean).length;
       const readTime = Math.max(1, Math.round(words / 200)) + ' min read';
+      const dateVal = document.getElementById('art-form-date').value || new Date().toISOString().slice(0, 10);
+      const excerptVal = document.getElementById('art-form-excerpt').value.trim() || content.replace(/<[^>]+>/g, ' ').slice(0, 220) + '...';
+      const imgVal = (document.getElementById('art-form-image') ? document.getElementById('art-form-image').value.trim() : '') || 'assets/images/spotlight-smart-cities.jpg';
 
-      document.getElementById('art-preview-title').textContent = title || 'Article Title Preview';
-      document.getElementById('art-preview-badge').textContent = cat;
-      document.getElementById('art-preview-date').textContent = document.getElementById('art-form-date').value || 'Today';
-      document.getElementById('art-preview-readtime').textContent = readTime;
-      document.getElementById('art-preview-content').innerHTML = content || 'Type on the left...';
+      const previewPane = document.getElementById('art-preview-pane');
+      if (!previewPane) return;
+
+      if (currentArticlePreviewMode === 'spotlight') {
+        previewPane.innerHTML = `
+          <div style="background: rgba(8, 20, 36, 0.95); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 16px; overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.6);">
+            <div style="position: relative; width: 100%; height: 210px; overflow: hidden; background: #000;">
+              <img src="${imgVal}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+              <div style="position: absolute; top: 12px; left: 14px; display: flex; gap: 8px;">
+                <span style="background: rgba(4, 12, 22, 0.88); border: 1px solid rgba(212, 175, 55, 0.5); color: #fef08a; padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; font-family: var(--font-cinzel);">SPOTLIGHT ESSAY & PROJECT</span>
+                <span style="background: rgba(56, 189, 248, 0.2); border: 1px solid rgba(56, 189, 248, 0.4); color: #7dd3fc; padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">${cat}</span>
+              </div>
+            </div>
+            <div style="padding: 22px;">
+              <div style="display: flex; gap: 10px; align-items: center; font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">
+                <span style="color: #38bdf8; font-weight: 600;">Dr. Zaid Amin</span>
+                <span>&bull;</span>
+                <span>${dateVal}</span>
+                <span>&bull;</span>
+                <span style="color: #d4af37; font-weight: 600;">${readTime}</span>
+              </div>
+              <h3 style="font-family: var(--font-cinzel); font-size: 1.15rem; color: #ffffff; line-height: 1.4; margin-bottom: 12px; font-weight: 700;">${title || 'Article Title Preview'}</h3>
+              <div style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.65; margin-bottom: 16px;">
+                ${excerptVal}
+              </div>
+              <div style="display: flex; gap: 10px; align-items: center; border-top: 1px solid rgba(186, 230, 253, 0.1); padding-top: 14px;">
+                <span style="padding: 6px 14px; background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 8px; color: #fef08a; font-size: 0.78rem; font-weight: 700;">Read Full Essay &rarr;</span>
+                <span style="padding: 6px 12px; background: rgba(14, 28, 48, 0.6); border: 1px solid rgba(186, 230, 253, 0.18); border-radius: 8px; color: #bae6fd; font-size: 0.75rem;">Interactive Reader</span>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        previewPane.innerHTML = `
+          <img id="art-preview-banner" src="${imgVal}" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 16px; border: 1px solid rgba(212, 175, 55, 0.3);">
+          <h1 id="art-preview-title" style="margin-top: 0; color: #ffffff;">${title || 'Article Title Preview'}</h1>
+          <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 18px;">
+            By Dr. Zaid Amin &bull; <span id="art-preview-date">${dateVal}</span> &bull; <span id="art-preview-readtime">${readTime}</span>
+          </div>
+          <div id="art-preview-content">${content || 'Type on the left to see live rendering...'}</div>
+        `;
+      }
     }
 
     // ==========================================
@@ -1673,6 +2067,7 @@
       const words = content.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean).length;
       const readTime = Math.max(1, Math.round(words / 200)) + ' min read';
       const excerpt = document.getElementById('art-form-excerpt').value.trim() || content.replace(/<[^>]+>/g, ' ').slice(0, 220) + '...';
+      const isFeatured = document.getElementById('art-form-featured').checked;
 
       const artImg = (document.getElementById('art-form-image') ? document.getElementById('art-form-image').value.trim() : '') || 'assets/images/spotlight-smart-cities.jpg';
       const payload = {
@@ -2189,15 +2584,21 @@
     }
 
     // -------------------------------------------------------------
-    // MODULE 3: TALKS LOGIC
+    // MODULE 3: TALKS & KEYNOTES LOGIC (GRAND EDITORIAL SUITE)
     // -------------------------------------------------------------
+    let currentTalkPreviewMode = 'spotlight';
+    let currentTalkEditorMode = 'visual';
+
     function renderTalksTable(list) {
       const tbody = document.getElementById('talks-tbody');
       tbody.innerHTML = list.map((t, i) => `
         <tr>
           <td style="color: #64748b; font-weight: 700;">${i + 1}</td>
           <td>
-            <div style="font-weight: 700; color: #ffffff;">${escapeHTML(t.title)}</div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-weight: 700; color: #ffffff;">${escapeHTML(t.title)}</span>
+              ${t.featured ? '<span style="background: rgba(212, 175, 55, 0.2); color: #fef08a; border: 1px solid #d4af37; padding: 2px 7px; border-radius: 4px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em;">★ SPOTLIGHT</span>' : ''}
+            </div>
             <div style="font-size: 0.75rem; color: #94a3b8;">${escapeHTML(t.location || '')}</div>
           </td>
           <td style="color: #bae6fd; font-size: 0.85rem;">${escapeHTML(t.event || '—')}</td>
@@ -2220,19 +2621,233 @@
       renderTalksTable(filtered);
     }
 
+    function setTalkImagePreset(path) {
+      document.getElementById('talk-form-image').value = path;
+      document.getElementById('talk-preview-thumb').src = path;
+      updateTalkLivePreview();
+    }
+
+    function onTalkImageInputChanged() {
+      const val = document.getElementById('talk-form-image').value.trim();
+      if (val) {
+        document.getElementById('talk-preview-thumb').src = val;
+        updateTalkLivePreview();
+      }
+    }
+
+    async function handleTalkImageFileUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const formData = new FormData();
+      formData.append('image', file);
+      try {
+        const res = await fetch('/api/upload-banner', {
+          method: 'POST',
+          headers: { 'X-Admin-Key': currentAdminKey },
+          body: formData
+        });
+        const data = await res.json();
+        if (res.ok && data.url) {
+          document.getElementById('talk-form-image').value = data.url;
+          document.getElementById('talk-preview-thumb').src = data.url;
+          updateTalkLivePreview();
+          showToast('Keynote thumbnail uploaded!');
+        } else {
+          showToast('Upload failed: ' + (data.error || 'Server error'), true);
+        }
+      } catch (err) {
+        showToast('Network upload error: ' + err, true);
+      }
+    }
+
+    function switchTalkPreviewMode(mode) {
+      currentTalkPreviewMode = mode;
+      document.getElementById('tab-talk-spotlight-preview').classList.toggle('active', mode === 'spotlight');
+      document.getElementById('tab-talk-archive-preview').classList.toggle('active', mode === 'archive');
+      updateTalkLivePreview();
+    }
+
+    function setTalkEditorMode(mode) {
+      currentTalkEditorMode = mode;
+      const visualElem = document.getElementById('talk-form-visual-editor');
+      const codeElem = document.getElementById('talk-form-desc');
+      const btnVis = document.getElementById('btn-talk-mode-visual');
+      const btnCode = document.getElementById('btn-talk-mode-code');
+
+      if (mode === 'visual') {
+        visualElem.innerHTML = codeElem.value;
+        visualElem.style.display = 'block';
+        codeElem.style.display = 'none';
+        btnVis.classList.add('active');
+        btnCode.classList.remove('active');
+      } else {
+        codeElem.value = visualElem.innerHTML;
+        codeElem.style.display = 'block';
+        visualElem.style.display = 'none';
+        btnCode.classList.add('active');
+        btnVis.classList.remove('active');
+      }
+    }
+
+    function onVisualTalkInput() {
+      const visualElem = document.getElementById('talk-form-visual-editor');
+      const codeElem = document.getElementById('talk-form-desc');
+      codeElem.value = visualElem.innerHTML;
+      updateTalkLivePreview();
+    }
+
+    function onCodeTalkInput() {
+      const visualElem = document.getElementById('talk-form-visual-editor');
+      const codeElem = document.getElementById('talk-form-desc');
+      visualElem.innerHTML = codeElem.value;
+      updateTalkLivePreview();
+    }
+
+    function applyTalkTypographyFormat(type, value) {
+      if (currentTalkEditorMode === 'code') {
+        const ta = document.getElementById('talk-form-desc');
+        const start = ta.selectionStart, end = ta.selectionEnd;
+        const sel = ta.value.substring(start, end);
+        let rep = sel;
+        if (type === 'bold') rep = `<strong>${sel || 'Bold Text'}</strong>`;
+        else if (type === 'italic') rep = `<em>${sel || 'Italic Text'}</em>`;
+        else if (type === 'underline') rep = `<u>${sel || 'Underlined Text'}</u>`;
+        else if (type === 'gold') rep = `<span style="color: #fef08a; font-weight: 600;">${sel || 'Gold Accent'}</span>`;
+        else if (type === 'cyan') rep = `<span style="color: #38bdf8; font-weight: 600;">${sel || 'Cyan Accent'}</span>`;
+        else if (type === 'list') rep = `\n<ul>\n  <li>${sel || 'Key topic 1'}</li>\n  <li>Key topic 2</li>\n</ul>\n`;
+        else if (type === 'link') { const u = prompt('Enter link URL:', 'https://'); if (u) rep = `<a href="${u}" target="_blank" style="color: #38bdf8; text-decoration: underline;">${sel || 'Link text'}</a>`; }
+        else if (type === 'divider') rep = `\n<hr style="border: none; border-top: 1px solid rgba(212, 175, 55, 0.4); margin: 20px 0;">\n`;
+        else if (type === 'para') {
+          if (value === 'lead') rep = `<p style="font-size: 1.12rem; line-height: 1.7; color: #f1f5f9;">${sel || 'Lead statement...'}</p>`;
+          else if (value === 'detail') rep = `<p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.6;">${sel || 'Detail note...'}</p>`;
+          else if (value === 'callout') rep = `<div style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid #d4af37; padding: 14px 18px; border-radius: 6px; margin: 16px 0; color: #fef08a;">${sel || 'Key Takeaway'}</div>`;
+          else if (value === 'h2') rep = `<h2 style="font-family: var(--font-cinzel); font-size: 1.35rem; color: #ffffff; margin: 18px 0 8px;">${sel || 'Heading 2'}</h2>`;
+          else if (value === 'h3') rep = `<h3 style="font-family: var(--font-cinzel); font-size: 1.15rem; color: #38bdf8; margin: 14px 0 6px;">${sel || 'Heading 3'}</h3>`;
+          else if (value === 'quote') rep = `<blockquote style="border-left: 3px solid #38bdf8; padding-left: 14px; font-style: italic; color: #cbd5e1; margin: 14px 0;">${sel || 'Quote statement...'}</blockquote>`;
+        }
+        ta.focus();
+        ta.setRangeText(rep, start, end, 'end');
+        onCodeTalkInput();
+        return;
+      }
+
+      const visualElem = document.getElementById('talk-form-visual-editor');
+      visualElem.focus();
+      if (type === 'bold') document.execCommand('bold', false, null);
+      else if (type === 'italic') document.execCommand('italic', false, null);
+      else if (type === 'underline') document.execCommand('underline', false, null);
+      else if (type === 'gold') document.execCommand('insertHTML', false, `<span style="color: #fef08a; font-weight: 600;">${window.getSelection().toString() || 'Gold Accent'}</span>`);
+      else if (type === 'cyan') document.execCommand('insertHTML', false, `<span style="color: #38bdf8; font-weight: 600;">${window.getSelection().toString() || 'Cyan Accent'}</span>`);
+      else if (type === 'list') document.execCommand('insertUnorderedList', false, null);
+      else if (type === 'link') { const u = prompt('Enter link URL:', 'https://'); if (u) document.execCommand('createLink', false, u); }
+      else if (type === 'divider') document.execCommand('insertHorizontalRule', false, null);
+      else if (type === 'para') {
+        const sel = window.getSelection().toString();
+        if (value === 'lead') document.execCommand('insertHTML', false, `<p style="font-size: 1.12rem; line-height: 1.7; color: #f1f5f9;">${sel || 'Lead statement...'}</p>`);
+        else if (value === 'detail') document.execCommand('insertHTML', false, `<p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.6;">${sel || 'Detail note...'}</p>`);
+        else if (value === 'callout') document.execCommand('insertHTML', false, `<div style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid #d4af37; padding: 14px 18px; border-radius: 6px; margin: 16px 0; color: #fef08a;">${sel || 'Key Takeaway'}</div>`);
+        else if (value === 'h2') document.execCommand('insertHTML', false, `<h2 style="font-family: var(--font-cinzel); font-size: 1.35rem; color: #ffffff; margin: 18px 0 8px;">${sel || 'Heading 2'}</h2>`);
+        else if (value === 'h3') document.execCommand('insertHTML', false, `<h3 style="font-family: var(--font-cinzel); font-size: 1.15rem; color: #38bdf8; margin: 14px 0 6px;">${sel || 'Heading 3'}</h3>`);
+        else if (value === 'quote') document.execCommand('insertHTML', false, `<blockquote style="border-left: 3px solid #38bdf8; padding-left: 14px; font-style: italic; color: #cbd5e1; margin: 14px 0;">${sel || 'Quote statement...'}</blockquote>`);
+      }
+      onVisualTalkInput();
+    }
+
+    function updateTalkLivePreview() {
+      const container = document.getElementById('talk-live-preview-container');
+      if (!container) return;
+
+      const title = document.getElementById('talk-form-title').value.trim() || 'The Proxy Trap in Agentic AI: Why Metric Optimization Fails Human Values';
+      const event = document.getElementById('talk-form-event').value.trim() || 'International Symposium on Trustworthy AI';
+      const year = document.getElementById('talk-form-year').value.trim() || '2026';
+      const role = document.getElementById('talk-form-role').value.trim() || 'Keynote Speaker';
+      const type = document.getElementById('talk-form-type').value || 'Keynote';
+      const location = document.getElementById('talk-form-location').value.trim() || 'Kuala Lumpur, Malaysia (Hybrid)';
+      const url = document.getElementById('talk-form-url').value.trim();
+      const desc = document.getElementById('talk-form-desc').value.trim();
+      const img = document.getElementById('talk-form-image').value.trim() || 'assets/images/spotlight-smart-cities.jpg';
+
+      const words = desc.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean).length;
+      const statsElem = document.getElementById('talk-desc-stats');
+      if (statsElem) statsElem.textContent = words + ' words';
+
+      if (currentTalkPreviewMode === 'spotlight') {
+        container.innerHTML = `
+          <div style="background: rgba(8, 20, 36, 0.95); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 16px; overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.6);">
+            <div style="position: relative; width: 100%; height: 210px; overflow: hidden; background: #000;">
+              <img src="${img}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+              <div style="position: absolute; top: 12px; left: 14px; display: flex; gap: 8px;">
+                <span style="background: rgba(4, 12, 22, 0.88); border: 1px solid rgba(212, 175, 55, 0.5); color: #fef08a; padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; font-family: var(--font-cinzel);">SPOTLIGHT KEYNOTE</span>
+                <span style="background: rgba(168, 85, 247, 0.25); border: 1px solid rgba(168, 85, 247, 0.4); color: #d8b4fe; padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">${type}</span>
+              </div>
+            </div>
+            <div style="padding: 22px;">
+              <div style="display: flex; gap: 10px; align-items: center; font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">
+                <span style="color: #38bdf8; font-weight: 600;">${event}</span>
+                <span>&bull;</span>
+                <span>${year}</span>
+                <span>&bull;</span>
+                <span style="color: #d4af37; font-weight: 600;">${role}</span>
+              </div>
+              <h3 style="font-family: var(--font-cinzel); font-size: 1.15rem; color: #ffffff; line-height: 1.4; margin-bottom: 8px; font-weight: 700;">${title}</h3>
+              <div style="font-size: 0.78rem; color: #94a3b8; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                <span>📍 ${location}</span>
+              </div>
+              <div style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.65; margin-bottom: 16px;">
+                ${desc || '<span style="color: #64748b; font-style: italic;">Enter keynote overview or abstract on the left to see live rendering here...</span>'}
+              </div>
+              <div style="display: flex; gap: 10px; align-items: center; border-top: 1px solid rgba(186, 230, 253, 0.1); padding-top: 14px;">
+                ${url ? `<a href="${url}" target="_blank" style="text-decoration: none; padding: 6px 14px; background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 8px; color: #fef08a; font-size: 0.78rem; font-weight: 700;">Watch Keynote / Recording &rarr;</a>` : `<span style="padding: 6px 14px; background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 8px; color: #fef08a; font-size: 0.78rem; font-weight: 700;">Keynote Address &bull; ${year}</span>`}
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <div style="background: rgba(8, 20, 36, 0.85); border: 1px solid rgba(186, 230, 253, 0.18); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 14px;">
+              <div style="flex: 1;">
+                <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;">
+                  <span style="background: rgba(168, 85, 247, 0.15); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.3); padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; font-weight: 700;">${role}</span>
+                  <span style="color: #94a3b8; font-size: 0.75rem;">${year}</span>
+                </div>
+                <h4 style="font-family: var(--font-cinzel); font-size: 1.05rem; color: #ffffff; margin-bottom: 6px;">${title}</h4>
+                <div style="font-size: 0.8rem; color: #bae6fd;">${event} &bull; <span style="color: #94a3b8;">${location}</span></div>
+              </div>
+              <img src="${img}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3); flex-shrink: 0;" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+            </div>
+            <div style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.6; border-top: 1px solid rgba(186, 230, 253, 0.1); padding-top: 10px;">
+              ${desc || '<span style="color: #64748b; font-style: italic;">Enter talk details...</span>'}
+            </div>
+          </div>
+        `;
+      }
+    }
+
     function editTalk(title) {
       const list = talksData.talks || talksData || [];
       const t = list.find(x => x.title === title);
       if (!t) return;
       editingTalkTitle = title;
       openModal('modal-talk');
-      document.getElementById('modal-talk-heading').textContent = 'Edit Talk / Media';
+      document.getElementById('modal-talk-heading').textContent = 'Edit Keynote / Talk';
       document.getElementById('talk-form-title').value = t.title || '';
       document.getElementById('talk-form-event').value = t.event || '';
       document.getElementById('talk-form-year').value = t.year || '2026';
       document.getElementById('talk-form-role').value = t.role || '';
       document.getElementById('talk-form-type').value = t.type || 'Keynote';
       document.getElementById('talk-form-location').value = t.location || '';
+      document.getElementById('talk-form-url').value = t.url || '';
+      const imgVal = t.image || 'assets/images/spotlight-smart-cities.jpg';
+      document.getElementById('talk-form-image').value = imgVal;
+      document.getElementById('talk-preview-thumb').src = imgVal;
+      document.getElementById('talk-form-featured').checked = !!t.featured;
+      const descVal = t.description || t.abstract || '';
+      document.getElementById('talk-form-desc').value = descVal;
+      const visTalk = document.getElementById('talk-form-visual-editor');
+      if (visTalk) visTalk.innerHTML = descVal;
+      setTalkEditorMode('visual');
+      updateTalkLivePreview();
     }
 
     async function saveTalkAction(andDeploy = false) {
@@ -2242,16 +2857,30 @@
         return;
       }
 
+      const isFeatured = document.getElementById('talk-form-featured').checked;
+      const imgPath = document.getElementById('talk-form-image').value.trim() || 'assets/images/spotlight-smart-cities.jpg';
+      const visTalk = document.getElementById('talk-form-visual-editor');
+      const codeTalk = document.getElementById('talk-form-desc');
+      const descContent = (currentTalkEditorMode === 'visual' ? (visTalk ? visTalk.innerHTML : '') : codeTalk.value).trim();
+
       const talkPayload = {
         title: title,
         event: document.getElementById('talk-form-event').value.trim(),
         year: document.getElementById('talk-form-year').value.trim(),
         role: document.getElementById('talk-form-role').value.trim(),
         type: document.getElementById('talk-form-type').value,
-        location: document.getElementById('talk-form-location').value.trim()
+        location: document.getElementById('talk-form-location').value.trim(),
+        url: document.getElementById('talk-form-url').value.trim(),
+        image: imgPath,
+        featured: isFeatured,
+        description: descContent
       };
 
       let list = talksData.talks || talksData || [];
+      if (isFeatured) {
+        list.forEach(t => { if (t.title !== (editingTalkTitle || title)) t.featured = false; });
+      }
+
       const existingIdx = list.findIndex(t => t.title === (editingTalkTitle || title));
       if (existingIdx !== -1) list[existingIdx] = talkPayload;
       else list.unshift(talkPayload);
@@ -2293,15 +2922,21 @@
     }
 
     // -------------------------------------------------------------
-    // MODULE 4: ACHIEVEMENT & CV LOGIC
+    // MODULE 4: ACHIEVEMENT & CV LOGIC (GRAND EDITORIAL SUITE)
     // -------------------------------------------------------------
+    let currentCvPreviewMode = 'spotlight';
+    let currentCvEditorMode = 'visual';
+
     function renderCvTable(list) {
       const tbody = document.getElementById('cv-tbody');
       tbody.innerHTML = list.map((a, i) => `
         <tr>
           <td style="color: #64748b; font-weight: 700;">${i + 1}</td>
           <td>
-            <div style="font-weight: 700; color: #ffffff;">${escapeHTML(a.title)}</div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-weight: 700; color: #ffffff;">${escapeHTML(a.title)}</span>
+              ${a.featured ? '<span style="background: rgba(212, 175, 55, 0.2); color: #fef08a; border: 1px solid #d4af37; padding: 2px 7px; border-radius: 4px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em;">★ SPOTLIGHT</span>' : ''}
+            </div>
             <div style="font-size: 0.75rem; color: #94a3b8;">${escapeHTML(a.category || '')}</div>
           </td>
           <td style="color: #bae6fd; font-size: 0.85rem;">${escapeHTML(a.organization || '—')}</td>
@@ -2324,6 +2959,205 @@
       renderCvTable(filtered);
     }
 
+    function setCvImagePreset(path) {
+      document.getElementById('cv-form-image').value = path;
+      document.getElementById('cv-preview-thumb').src = path;
+      updateCvLivePreview();
+    }
+
+    function onCvImageInputChanged() {
+      const val = document.getElementById('cv-form-image').value.trim();
+      if (val) {
+        document.getElementById('cv-preview-thumb').src = val;
+        updateCvLivePreview();
+      }
+    }
+
+    async function handleCvImageFileUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const formData = new FormData();
+      formData.append('image', file);
+      try {
+        const res = await fetch('/api/upload-banner', {
+          method: 'POST',
+          headers: { 'X-Admin-Key': currentAdminKey },
+          body: formData
+        });
+        const data = await res.json();
+        if (res.ok && data.url) {
+          document.getElementById('cv-form-image').value = data.url;
+          document.getElementById('cv-preview-thumb').src = data.url;
+          updateCvLivePreview();
+          showToast('Distinction image uploaded!');
+        } else {
+          showToast('Upload failed: ' + (data.error || 'Server error'), true);
+        }
+      } catch (err) {
+        showToast('Network upload error: ' + err, true);
+      }
+    }
+
+    function switchCvPreviewMode(mode) {
+      currentCvPreviewMode = mode;
+      document.getElementById('tab-cv-spotlight-preview').classList.toggle('active', mode === 'spotlight');
+      document.getElementById('tab-cv-archive-preview').classList.toggle('active', mode === 'archive');
+      updateCvLivePreview();
+    }
+
+    function setCvEditorMode(mode) {
+      currentCvEditorMode = mode;
+      const visualElem = document.getElementById('cv-form-visual-editor');
+      const codeElem = document.getElementById('cv-form-details');
+      const btnVis = document.getElementById('btn-cv-mode-visual');
+      const btnCode = document.getElementById('btn-cv-mode-code');
+
+      if (mode === 'visual') {
+        visualElem.innerHTML = codeElem.value;
+        visualElem.style.display = 'block';
+        codeElem.style.display = 'none';
+        btnVis.classList.add('active');
+        btnCode.classList.remove('active');
+      } else {
+        codeElem.value = visualElem.innerHTML;
+        codeElem.style.display = 'block';
+        visualElem.style.display = 'none';
+        btnCode.classList.add('active');
+        btnVis.classList.remove('active');
+      }
+    }
+
+    function onVisualCvInput() {
+      const visualElem = document.getElementById('cv-form-visual-editor');
+      const codeElem = document.getElementById('cv-form-details');
+      codeElem.value = visualElem.innerHTML;
+      updateCvLivePreview();
+    }
+
+    function onCodeCvInput() {
+      const visualElem = document.getElementById('cv-form-visual-editor');
+      const codeElem = document.getElementById('cv-form-details');
+      visualElem.innerHTML = codeElem.value;
+      updateCvLivePreview();
+    }
+
+    function applyCvTypographyFormat(type, value) {
+      if (currentCvEditorMode === 'code') {
+        const ta = document.getElementById('cv-form-details');
+        const start = ta.selectionStart, end = ta.selectionEnd;
+        const sel = ta.value.substring(start, end);
+        let rep = sel;
+        if (type === 'bold') rep = `<strong>${sel || 'Bold Text'}</strong>`;
+        else if (type === 'italic') rep = `<em>${sel || 'Italic Text'}</em>`;
+        else if (type === 'underline') rep = `<u>${sel || 'Underlined Text'}</u>`;
+        else if (type === 'gold') rep = `<span style="color: #fef08a; font-weight: 600;">${sel || 'Gold Accent'}</span>`;
+        else if (type === 'cyan') rep = `<span style="color: #38bdf8; font-weight: 600;">${sel || 'Cyan Accent'}</span>`;
+        else if (type === 'list') rep = `\n<ul>\n  <li>${sel || 'Key milestone 1'}</li>\n  <li>Key milestone 2</li>\n</ul>\n`;
+        else if (type === 'link') { const u = prompt('Enter link URL:', 'https://'); if (u) rep = `<a href="${u}" target="_blank" style="color: #38bdf8; text-decoration: underline;">${sel || 'Link text'}</a>`; }
+        else if (type === 'divider') rep = `\n<hr style="border: none; border-top: 1px solid rgba(212, 175, 55, 0.4); margin: 20px 0;">\n`;
+        else if (type === 'para') {
+          if (value === 'lead') rep = `<p style="font-size: 1.12rem; line-height: 1.7; color: #f1f5f9;">${sel || 'Lead impact statement...'}</p>`;
+          else if (value === 'detail') rep = `<p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.6;">${sel || 'Detail note...'}</p>`;
+          else if (value === 'callout') rep = `<div style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid #d4af37; padding: 14px 18px; border-radius: 6px; margin: 16px 0; color: #fef08a;">${sel || 'Key Grant Outcome / Impact'}</div>`;
+          else if (value === 'h2') rep = `<h2 style="font-family: var(--font-cinzel); font-size: 1.35rem; color: #ffffff; margin: 18px 0 8px;">${sel || 'Heading 2'}</h2>`;
+          else if (value === 'h3') rep = `<h3 style="font-family: var(--font-cinzel); font-size: 1.15rem; color: #38bdf8; margin: 14px 0 6px;">${sel || 'Heading 3'}</h3>`;
+          else if (value === 'quote') rep = `<blockquote style="border-left: 3px solid #38bdf8; padding-left: 14px; font-style: italic; color: #cbd5e1; margin: 14px 0;">${sel || 'Quote statement...'}</blockquote>`;
+        }
+        ta.focus();
+        ta.setRangeText(rep, start, end, 'end');
+        onCodeCvInput();
+        return;
+      }
+
+      const visualElem = document.getElementById('cv-form-visual-editor');
+      visualElem.focus();
+      if (type === 'bold') document.execCommand('bold', false, null);
+      else if (type === 'italic') document.execCommand('italic', false, null);
+      else if (type === 'underline') document.execCommand('underline', false, null);
+      else if (type === 'gold') document.execCommand('insertHTML', false, `<span style="color: #fef08a; font-weight: 600;">${window.getSelection().toString() || 'Gold Accent'}</span>`);
+      else if (type === 'cyan') document.execCommand('insertHTML', false, `<span style="color: #38bdf8; font-weight: 600;">${window.getSelection().toString() || 'Cyan Accent'}</span>`);
+      else if (type === 'list') document.execCommand('insertUnorderedList', false, null);
+      else if (type === 'link') { const u = prompt('Enter link URL:', 'https://'); if (u) document.execCommand('createLink', false, u); }
+      else if (type === 'divider') document.execCommand('insertHorizontalRule', false, null);
+      else if (type === 'para') {
+        const sel = window.getSelection().toString();
+        if (value === 'lead') document.execCommand('insertHTML', false, `<p style="font-size: 1.12rem; line-height: 1.7; color: #f1f5f9;">${sel || 'Lead impact statement...'}</p>`);
+        else if (value === 'detail') document.execCommand('insertHTML', false, `<p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.6;">${sel || 'Detail note...'}</p>`);
+        else if (value === 'callout') document.execCommand('insertHTML', false, `<div style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid #d4af37; padding: 14px 18px; border-radius: 6px; margin: 16px 0; color: #fef08a;">${sel || 'Key Grant Outcome / Impact'}</div>`);
+        else if (value === 'h2') document.execCommand('insertHTML', false, `<h2 style="font-family: var(--font-cinzel); font-size: 1.35rem; color: #ffffff; margin: 18px 0 8px;">${sel || 'Heading 2'}</h2>`);
+        else if (value === 'h3') document.execCommand('insertHTML', false, `<h3 style="font-family: var(--font-cinzel); font-size: 1.15rem; color: #38bdf8; margin: 14px 0 6px;">${sel || 'Heading 3'}</h3>`);
+        else if (value === 'quote') document.execCommand('insertHTML', false, `<blockquote style="border-left: 3px solid #38bdf8; padding-left: 14px; font-style: italic; color: #cbd5e1; margin: 14px 0;">${sel || 'Quote statement...'}</blockquote>`);
+      }
+      onVisualCvInput();
+    }
+
+    function updateCvLivePreview() {
+      const container = document.getElementById('cv-live-preview-container');
+      if (!container) return;
+
+      const title = document.getElementById('cv-form-title').value.trim() || '2nd Runner Up South Sumatera Innovator Award';
+      const org = document.getElementById('cv-form-org').value.trim() || 'Provincial Government of South Sumatra';
+      const year = document.getElementById('cv-form-year').value.trim() || '2025';
+      const cat = document.getElementById('cv-form-cat').value.trim() || 'Government Award';
+      const badge = document.getElementById('cv-form-badge').value.trim() || 'Provincial Honor';
+      const url = document.getElementById('cv-form-url').value.trim();
+      const details = document.getElementById('cv-form-details').value.trim();
+      const img = document.getElementById('cv-form-image').value.trim() || 'assets/images/thumb-projects.jpg';
+
+      const words = details.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean).length;
+      const statsElem = document.getElementById('cv-details-stats');
+      if (statsElem) statsElem.textContent = words + ' words';
+
+      if (currentCvPreviewMode === 'spotlight') {
+        container.innerHTML = `
+          <div style="background: rgba(8, 20, 36, 0.95); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 16px; overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.6);">
+            <div style="position: relative; width: 100%; height: 210px; overflow: hidden; background: #000;">
+              <img src="${img}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/images/thumb-projects.jpg'">
+              <div style="position: absolute; top: 12px; left: 14px; display: flex; gap: 8px;">
+                <span style="background: rgba(4, 12, 22, 0.88); border: 1px solid rgba(212, 175, 55, 0.5); color: #fef08a; padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; font-family: var(--font-cinzel);">SPOTLIGHT DISTINCTION</span>
+                <span style="background: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.4); color: #86efac; padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">${badge}</span>
+              </div>
+            </div>
+            <div style="padding: 22px;">
+              <div style="display: flex; gap: 10px; align-items: center; font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">
+                <span style="color: #38bdf8; font-weight: 600;">${org}</span>
+                <span>&bull;</span>
+                <span>${year}</span>
+                <span>&bull;</span>
+                <span style="color: #d4af37; font-weight: 600;">${cat}</span>
+              </div>
+              <h3 style="font-family: var(--font-cinzel); font-size: 1.15rem; color: #ffffff; line-height: 1.4; margin-bottom: 12px; font-weight: 700;">${title}</h3>
+              <div style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.65; margin-bottom: 16px;">
+                ${details || '<span style="color: #64748b; font-style: italic;">Enter distinction details or grant impact citation on the left to see live rendering here...</span>'}
+              </div>
+              <div style="display: flex; gap: 10px; align-items: center; border-top: 1px solid rgba(186, 230, 253, 0.1); padding-top: 14px;">
+                ${url ? `<a href="${url}" target="_blank" style="text-decoration: none; padding: 6px 14px; background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 8px; color: #fef08a; font-size: 0.78rem; font-weight: 700;">Inspect Verification Link &rarr;</a>` : `<span style="padding: 6px 14px; background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 8px; color: #fef08a; font-size: 0.78rem; font-weight: 700;">Verified Distinction &bull; ${year}</span>`}
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <div style="background: rgba(8, 20, 36, 0.85); border: 1px solid rgba(186, 230, 253, 0.18); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 14px;">
+              <div style="flex: 1;">
+                <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;">
+                  <span style="background: rgba(34, 197, 94, 0.15); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.3); padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; font-weight: 700;">${badge}</span>
+                  <span style="color: #94a3b8; font-size: 0.75rem;">${year}</span>
+                </div>
+                <h4 style="font-family: var(--font-cinzel); font-size: 1.05rem; color: #ffffff; margin-bottom: 6px;">${title}</h4>
+                <div style="font-size: 0.8rem; color: #bae6fd;">${org} &bull; <span style="color: #94a3b8;">${cat}</span></div>
+              </div>
+              <img src="${img}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3); flex-shrink: 0;" onerror="this.src='assets/images/thumb-projects.jpg'">
+            </div>
+            <div style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.6; border-top: 1px solid rgba(186, 230, 253, 0.1); padding-top: 10px;">
+              ${details || '<span style="color: #64748b; font-style: italic;">Enter details...</span>'}
+            </div>
+          </div>
+        `;
+      }
+    }
+
     function editCvItem(title) {
       const list = cvData.achievements_and_grants || [];
       const a = list.find(x => x.title === title);
@@ -2336,7 +3170,17 @@
       document.getElementById('cv-form-year').value = a.year || '2026';
       document.getElementById('cv-form-cat').value = a.category || '';
       document.getElementById('cv-form-badge').value = a.badge || '';
-      document.getElementById('cv-form-details').value = a.details || '';
+      document.getElementById('cv-form-url').value = a.url || '';
+      const imgVal = a.image || 'assets/images/thumb-projects.jpg';
+      document.getElementById('cv-form-image').value = imgVal;
+      document.getElementById('cv-preview-thumb').src = imgVal;
+      document.getElementById('cv-form-featured').checked = !!a.featured;
+      const detailsVal = a.details || '';
+      document.getElementById('cv-form-details').value = detailsVal;
+      const visCv = document.getElementById('cv-form-visual-editor');
+      if (visCv) visCv.innerHTML = detailsVal;
+      setCvEditorMode('visual');
+      updateCvLivePreview();
     }
 
     async function saveCvAction(andDeploy = false) {
@@ -2346,21 +3190,33 @@
         return;
       }
 
+      const isFeatured = document.getElementById('cv-form-featured').checked;
+      const imgPath = document.getElementById('cv-form-image').value.trim() || 'assets/images/thumb-projects.jpg';
+      const visCv = document.getElementById('cv-form-visual-editor');
+      const codeCv = document.getElementById('cv-form-details');
+      const detailsContent = (currentCvEditorMode === 'visual' ? (visCv ? visCv.innerHTML : '') : codeCv.value).trim();
+
       const itemPayload = {
         title: title,
         organization: document.getElementById('cv-form-org').value.trim(),
         year: document.getElementById('cv-form-year').value.trim(),
         category: document.getElementById('cv-form-cat').value.trim() || 'Academic Honor',
         badge: document.getElementById('cv-form-badge').value.trim() || 'Honor',
+        url: document.getElementById('cv-form-url').value.trim(),
+        image: imgPath,
+        featured: isFeatured,
         highlight: true,
-        details: document.getElementById('cv-form-details').value.trim()
+        details: detailsContent
       };
 
       let list = cvData.achievements_and_grants || [];
+      if (isFeatured) {
+        list.forEach(a => { if (a.title !== (editingCvTitle || title)) a.featured = false; });
+      }
+
       const existingIdx = list.findIndex(a => a.title === (editingCvTitle || title));
       if (existingIdx !== -1) list[existingIdx] = itemPayload;
       else list.unshift(itemPayload);
-      cvData.achievements_and_grants = list;
 
       try {
         const res = await fetch('/api/save-achievement', {
