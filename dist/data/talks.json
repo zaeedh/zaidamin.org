@@ -1,0 +1,66 @@
+{
+  "speaking_invitation_statement": "Dr. Zaid Amin is available for international academic keynotes, conference plenary talks, institutional workshops, and expert panel discussions on Human-Computer Interaction, AI Governance, Cognitive Attention Systems, and Digital Ethics. To invite Dr. Amin, please contact zaid.amin@newinti.edu.my.",
+  "talks": [
+    {
+      "year": "2026",
+      "title": "The Proxy Trap in Agentic AI: Why Metric Optimization Fails Human Values",
+      "event": "International Symposium on Trustworthy AI and Autonomous Systems",
+      "role": "Keynote Speaker",
+      "location": "Kuala Lumpur, Malaysia (Hybrid)",
+      "type": "Keynote"
+    },
+    {
+      "year": "2025",
+      "title": "Humane Interface Design: Rewiring User Attention in an Age of Viral Algorithmic Distraction",
+      "event": "ASEAN HCI & Digital Society Colloquium",
+      "role": "Invited Plenary Speaker",
+      "location": "Jakarta / Online",
+      "type": "Plenary"
+    },
+    {
+      "year": "2024",
+      "title": "Tune-Attention Model: Designing Cybernetic Interventions for Responsible Information Sharing",
+      "event": "4th International Conference on Electronic and Electrical Engineering and Intelligent System (ICE3IS)",
+      "role": "Conference Paper Presentation & Track Session Chair",
+      "location": "Yogyakarta, Indonesia",
+      "type": "Conference"
+    },
+    {
+      "year": "2023",
+      "title": "Digital Heritage Digitization: Reconstructing the Srivijaya Maritime Legacy",
+      "event": "Regional Forum on Cultural Informatics & Immersive VR",
+      "role": "Panelist & Presenter",
+      "location": "Palembang, Indonesia",
+      "type": "Panel"
+    }
+  ],
+  "academic_service": [
+    {
+      "role": "Peer Reviewer",
+      "venues": [
+        "IEEE Access (IEEE)",
+        "International Journal of Human-Computer Interaction (Taylor & Francis)",
+        "Smart Cities (MDPI)",
+        "International Journal of Advanced Computer Science and Applications (IJACSA)",
+        "Springer Lecture Notes in Computer Science (LNCS)"
+      ]
+    },
+    {
+      "role": "Program Committee & Track Chair",
+      "venues": [
+        "International Conference on Electronic and Electrical Engineering and Intelligent System (ICE3IS)",
+        "Annual Research Seminar (ARS) on Computer Science and ICT",
+        "National Conference on Information Technology and Applications (SNTIBD)"
+      ]
+    },
+    {
+      "role": "Professional Memberships",
+      "memberships": [
+        "IEEE Member (Computer Society, Systems, Man, and Cybernetics Society)",
+        "Association for Computing Machinery (ACM) - SIGCHI Affiliate",
+        "Malaysian Software Engineering Interest Group (MySEIG)"
+      ]
+    }
+  ]
+}
+
