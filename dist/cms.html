@@ -678,19 +678,71 @@
                 <textarea id="art-form-excerpt" class="cms-textarea" rows="2" placeholder="Brief 1-2 sentence summary..."></textarea>
               </div>
 
-              <!-- Toolbar -->
-              <label class="form-label">Article Content (Markdown / HTML)</label>
-              <div class="cms-toolbar">
-                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('h2')">H2</button>
-                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('h3')">H3</button>
-                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('bold')">Bold</button>
-                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('italic')">Italic</button>
-                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('quote')">Quote</button>
-                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('code')">Code</button>
-                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('ul')">Bullet List</button>
-                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('link')">Link</button>
-                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('img')">Figure</button>
-                <button type="button" class="cms-tool-btn" onclick="insertArticleFormat('hr')">Divider</button>
+              <!-- VISUAL THUMBNAIL STUDIO FOR ARTICLES -->
+              <div class="cms-thumbnail-studio" style="margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-weight: 700; color: #bae6fd; font-size: 0.85rem;">🖼️ Article Banner / Thumbnail Image</span>
+                  <span style="font-size: 0.72rem; color: #94a3b8;">Controls visual display on article header and card listings</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 160px 1fr; gap: 14px; align-items: center;">
+                  <div class="thumbnail-preview-box" style="height: 100px;">
+                    <img id="art-preview-thumb" src="assets/images/spotlight-smart-cities.jpg" alt="Article Thumbnail" class="thumbnail-preview-img" onerror="this.src='assets/images/thumb-research.jpg'">
+                  </div>
+                  <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div style="display: flex; gap: 8px;">
+                      <input type="text" id="art-form-image" class="cms-input" placeholder="assets/images/..." oninput="onArtImageInputChanged()" style="font-size: 0.82rem;">
+                      <button type="button" class="cms-btn cms-btn-ghost" onclick="document.getElementById('art-file-input').click()" style="padding: 6px 12px; font-size: 0.8rem; white-space: nowrap;">📤 Upload</button>
+                      <input type="file" id="art-file-input" accept="image/*" style="display: none;" onchange="handleArtImageFileUpload(event)">
+                    </div>
+                    <div class="thumbnail-presets-wrap">
+                      <button type="button" class="preset-pill-btn" onclick="setArtImagePreset('assets/images/spotlight-smart-cities.jpg')">✨ AI Spotlight</button>
+                      <button type="button" class="preset-pill-btn" onclick="setArtImagePreset('assets/images/thumb-projects.jpg')">🏛️ Heritage</button>
+                      <button type="button" class="preset-pill-btn" onclick="setArtImagePreset('assets/images/thumb-research.jpg')">🔬 Research</button>
+                      <button type="button" class="preset-pill-btn" onclick="setArtImagePreset('assets/images/thumb-attention.jpg')">🧠 Attention</button>
+                      <button type="button" class="preset-pill-btn" onclick="setArtImagePreset('assets/images/thumb-governance.jpg')">⚖️ Governance</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ENHANCED TYPOGRAPHY TOOLBAR FOR ARTICLES -->
+              <label class="form-label" style="margin-bottom: 6px;">Article Content (Markdown / HTML &amp; Rich Typography)</label>
+              <div class="cms-typography-suite" style="margin-bottom: 10px; padding: 10px 12px;">
+                <div class="typo-row">
+                  <select id="art-typo-para" class="typo-select" onchange="insertArticleFormat('para', this.value); this.selectedIndex=0;">
+                    <option value="" disabled selected>Paragraph Style ▾</option>
+                    <option value="lead">Lead Paragraph</option>
+                    <option value="detail">Detail Footnote</option>
+                    <option value="callout">Callout Box</option>
+                    <option value="h2">Heading 2</option>
+                    <option value="h3">Heading 3</option>
+                    <option value="quote">Academic Quote</option>
+                  </select>
+                  <select id="art-typo-font" class="typo-select" onchange="insertArticleFormat('font', this.value); this.selectedIndex=0;">
+                    <option value="" disabled selected>Font Family ▾</option>
+                    <option value="garamond">Cormorant Garamond</option>
+                    <option value="cinzel">Cinzel</option>
+                    <option value="inter">Inter</option>
+                    <option value="mono">JetBrains Mono</option>
+                  </select>
+                  <select id="art-typo-size" class="typo-select" onchange="insertArticleFormat('size', this.value); this.selectedIndex=0;">
+                    <option value="" disabled selected>Font Size ▾</option>
+                    <option value="sm">Small (13px)</option>
+                    <option value="reg">Regular (15px)</option>
+                    <option value="md">Medium (18px)</option>
+                    <option value="lg">Large (22px)</option>
+                    <option value="golden">Golden Ratio (26px)</option>
+                  </select>
+                  <button type="button" class="typo-btn" onclick="insertArticleFormat('bold')"><b>B</b></button>
+                  <button type="button" class="typo-btn" onclick="insertArticleFormat('italic')"><i>I</i></button>
+                  <button type="button" class="typo-btn" onclick="insertArticleFormat('underline')"><u>U</u></button>
+                  <button type="button" class="typo-btn typo-btn-gold" onclick="insertArticleFormat('gold')">Gold</button>
+                  <button type="button" class="typo-btn typo-btn-cyan" onclick="insertArticleFormat('cyan')">Cyan</button>
+                  <button type="button" class="typo-btn" onclick="insertArticleFormat('ul')">&bull; List</button>
+                  <button type="button" class="typo-btn" onclick="insertArticleFormat('link')">Link</button>
+                  <button type="button" class="typo-btn" onclick="insertArticleFormat('img')">Figure</button>
+                  <button type="button" class="typo-btn" onclick="insertArticleFormat('hr')">Divider</button>
+                </div>
               </div>
               <textarea id="art-form-content" class="cms-textarea" style="height: 380px;" oninput="autoUpdateArticlePreview()"></textarea>
             </div>
@@ -702,6 +754,7 @@
                 <span id="art-preview-badge" style="background: rgba(212, 175, 55, 0.15); color: #fef08a; padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">AI & Cybernetics</span>
               </div>
               <div class="cms-preview-body" id="art-preview-pane">
+                <img id="art-preview-banner" src="assets/images/spotlight-smart-cities.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 16px; border: 1px solid rgba(212, 175, 55, 0.3);">
                 <h1 id="art-preview-title" style="margin-top: 0; color: #ffffff;">Article Title Preview</h1>
                 <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 18px;">
                   By Dr. Zaid Amin &bull; <span id="art-preview-date">Today</span> &bull; <span id="art-preview-readtime">1 min read</span>
@@ -811,64 +864,212 @@
   <!-- =============================================================
        MODAL 1: PUBLICATION EDITOR
        ============================================================= -->
+  <!-- =============================================================
+       MODAL 1: GRAND EDITORIAL SUITE: RESEARCH & PUBLICATION
+       ============================================================= -->
   <div class="cms-modal-backdrop" id="modal-pub">
-    <div class="cms-modal-dialog">
-      <div class="cms-modal-title">
-        <span id="modal-pub-heading">Add Publication</span>
-        <button class="cms-btn cms-btn-ghost" onclick="closeModal('modal-pub')">&times;</button>
+    <div class="cms-modal-dialog-large">
+      <div class="cms-studio-header">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <span style="font-size: 1.5rem;">📖</span>
+          <div>
+            <div style="font-family: var(--font-cinzel); font-size: 1.25rem; font-weight: 700; color: #fef08a;" id="modal-pub-heading">Edit Publication</div>
+            <div style="font-size: 0.78rem; color: #94a3b8;">Unified Academic Editorial Suite &bull; Visual Thumbnail Studio &bull; Real-Time Golden Ratio Live Preview</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <button type="button" class="cms-btn cms-btn-ghost" onclick="closeModal('modal-pub')">Cancel</button>
+          <button type="button" class="cms-btn cms-btn-cyan" onclick="savePublicationAction(false)">💾 Save Locally</button>
+          <button type="button" class="cms-btn cms-btn-primary" onclick="savePublicationAction(true)">🚀 Save &amp; Publish Live</button>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label">Publication Title *</label>
-        <input type="text" id="pub-form-title" class="cms-input">
-      </div>
-      <div class="form-row-2">
-        <div>
-          <label class="form-label">ID (e.g. amin2026trustworthy) *</label>
-          <input type="text" id="pub-form-id" class="cms-input">
+      <div class="cms-studio-body">
+        <!-- LEFT COLUMN: CONTROLS & CONTENT -->
+        <div class="cms-studio-left">
+          
+          <!-- Essential Metadata -->
+          <div class="form-group">
+            <label class="form-label">Publication Title *</label>
+            <input type="text" id="pub-form-title" class="cms-input" oninput="updatePubLivePreview()" placeholder="Full Academic Title...">
+          </div>
+
+          <div class="form-row-2">
+            <div>
+              <label class="form-label">ID (Slug / Citation Key) *</label>
+              <input type="text" id="pub-form-id" class="cms-input" placeholder="e.g. amin2026trustworthy">
+            </div>
+            <div>
+              <label class="form-label">Category *</label>
+              <select id="pub-form-cat" class="cms-select" onchange="updatePubLivePreview()">
+                <option value="Journal">Journal (Peer-Reviewed)</option>
+                <option value="Conference">Conference Proceeding</option>
+                <option value="Preprint">Preprint (SSRN / Preprints)</option>
+                <option value="Book Chapter">Book Chapter</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div>
+              <label class="form-label">Authors</label>
+              <input type="text" id="pub-form-authors" class="cms-input" value="Dr. Zaid Amin et al." oninput="updatePubLivePreview()">
+            </div>
+            <div>
+              <label class="form-label">Year</label>
+              <input type="number" id="pub-form-year" class="cms-input" value="2026" oninput="updatePubLivePreview()">
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div>
+              <label class="form-label">Venue / Journal / Publisher</label>
+              <input type="text" id="pub-form-venue" class="cms-input" placeholder="e.g. Smart Cities (MDPI), IEEE Access" oninput="updatePubLivePreview()">
+            </div>
+            <div>
+              <label class="form-label">DOI / External URL</label>
+              <input type="text" id="pub-form-doi" class="cms-input" placeholder="10.3390/smartcities..." oninput="updatePubLivePreview()">
+            </div>
+          </div>
+
+          <!-- VISUAL THUMBNAIL STUDIO -->
+          <div class="cms-thumbnail-studio">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-weight: 700; color: #bae6fd; font-size: 0.88rem; display: flex; align-items: center; gap: 6px;">
+                🖼️ Featured Visual Thumbnail
+              </span>
+              <span style="font-size: 0.74rem; color: #94a3b8;">Controls visual display on Homepage Spotlight &amp; Publication cards</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 200px 1fr; gap: 16px; align-items: center;">
+              <!-- Thumbnail Preview Box -->
+              <div class="thumbnail-preview-box" style="height: 140px;">
+                <img id="pub-preview-thumb" src="assets/images/spotlight-smart-cities.jpg" alt="Thumbnail Preview" class="thumbnail-preview-img" onerror="this.src='assets/images/thumb-research.jpg'">
+                <div class="thumbnail-badge-overlay" id="pub-badge-overlay">PREVIEW</div>
+              </div>
+
+              <!-- Controls -->
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div>
+                  <label class="form-label" style="margin-bottom: 4px;">Image URL / Path</label>
+                  <div style="display: flex; gap: 8px;">
+                    <input type="text" id="pub-form-image" class="cms-input" placeholder="assets/images/..." oninput="onPubImageInputChanged()" style="font-size: 0.82rem;">
+                    <button type="button" class="cms-btn cms-btn-ghost" onclick="document.getElementById('pub-file-input').click()" style="padding: 6px 12px; font-size: 0.8rem; white-space: nowrap;">
+                      📤 Upload
+                    </button>
+                    <input type="file" id="pub-file-input" accept="image/*" style="display: none;" onchange="handlePubImageFileUpload(event)">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="form-label" style="margin-bottom: 6px;">Quick Presets</label>
+                  <div class="thumbnail-presets-wrap">
+                    <button type="button" class="preset-pill-btn" onclick="setPubImagePreset('assets/images/spotlight-smart-cities.jpg')">✨ Spotlight AI</button>
+                    <button type="button" class="preset-pill-btn" onclick="setPubImagePreset('assets/images/thumb-projects.jpg')">🏛️ Srivijayapedia</button>
+                    <button type="button" class="preset-pill-btn" onclick="setPubImagePreset('assets/images/thumb-research.jpg')">🔬 Research Pillars</button>
+                    <button type="button" class="preset-pill-btn" onclick="setPubImagePreset('assets/images/thumb-attention.jpg')">🧠 HCI Attention</button>
+                    <button type="button" class="preset-pill-btn" onclick="setPubImagePreset('assets/images/thumb-governance.jpg')">⚖️ Governance</button>
+                    <button type="button" class="preset-pill-btn" onclick="setPubImagePreset('assets/images/dr-zaid.png')">👤 Dr. Zaid</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Spotlight Checkbox -->
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding-top: 6px; border-top: 1px solid rgba(186, 230, 253, 0.1);">
+              <input type="checkbox" id="pub-form-featured" onchange="updatePubLivePreview()">
+              <span style="font-size: 0.82rem; font-weight: 700; color: #fef08a;">★ Set as Homepage Featured Spotlight Card</span>
+              <span style="font-size: 0.74rem; color: #94a3b8;">(Positions this publication prominently in Section 2 on index.html)</span>
+            </label>
+          </div>
+
+          <!-- ACADEMIC TYPOGRAPHY & FORMATTING SUITE -->
+          <div class="cms-typography-suite">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-weight: 700; color: #fef08a; font-size: 0.85rem; display: flex; align-items: center; gap: 6px;">
+                🖋️ Academic Typography &amp; Paragraph Styling
+              </span>
+              <span style="font-size: 0.74rem; color: #94a3b8;">Highlight text in Abstract below or click a style to insert</span>
+            </div>
+
+            <div class="typo-row">
+              <!-- Paragraph Style Dropdown -->
+              <select id="typo-select-para" class="typo-select" title="Paragraph Style" onchange="applyTypographyFormat('para', this.value); this.selectedIndex=0;">
+                <option value="" disabled selected>Paragraph Style ▾</option>
+                <option value="lead">Lead Paragraph (Emphasized)</option>
+                <option value="detail">Detail Footnote (Muted)</option>
+                <option value="callout">Callout / Key Finding Box</option>
+                <option value="h2">Heading 2 (Section)</option>
+                <option value="h3">Heading 3 (Subheading)</option>
+                <option value="quote">Academic Blockquote</option>
+              </select>
+
+              <!-- Font Family Dropdown -->
+              <select id="typo-select-font" class="typo-select" title="Font Family" onchange="applyTypographyFormat('font', this.value); this.selectedIndex=0;">
+                <option value="" disabled selected>Font Family ▾</option>
+                <option value="garamond">Cormorant Garamond (Editorial Serif)</option>
+                <option value="cinzel">Cinzel (Classical Display)</option>
+                <option value="inter">Inter (Clean Sans)</option>
+                <option value="mono">JetBrains Mono (Technical)</option>
+              </select>
+
+              <!-- Font Size Dropdown -->
+              <select id="typo-select-size" class="typo-select" title="Font Size" onchange="applyTypographyFormat('size', this.value); this.selectedIndex=0;">
+                <option value="" disabled selected>Font Size ▾</option>
+                <option value="sm">Small (13px)</option>
+                <option value="reg">Regular (15px)</option>
+                <option value="md">Medium (18px)</option>
+                <option value="lg">Large (22px)</option>
+                <option value="golden">Golden Ratio (26px)</option>
+              </select>
+
+              <!-- Basic Formatting -->
+              <button type="button" class="typo-btn" onclick="applyTypographyFormat('bold')" title="Bold"><b>B</b></button>
+              <button type="button" class="typo-btn" onclick="applyTypographyFormat('italic')" title="Italic"><i>I</i></button>
+              <button type="button" class="typo-btn" onclick="applyTypographyFormat('underline')" title="Underline"><u>U</u></button>
+              <button type="button" class="typo-btn typo-btn-gold" onclick="applyTypographyFormat('gold')" title="Gold Accent">Gold Text</button>
+              <button type="button" class="typo-btn typo-btn-cyan" onclick="applyTypographyFormat('cyan')" title="Cyan Accent">Cyan Text</button>
+              <button type="button" class="typo-btn" onclick="applyTypographyFormat('badge-oa')" title="Open Access Badge">Badge: OA</button>
+              <button type="button" class="typo-btn" onclick="applyTypographyFormat('badge-q1')" title="Q1 Scopus Badge">Badge: Q1</button>
+              <button type="button" class="typo-btn" onclick="applyTypographyFormat('list')" title="Bullet List">&bull; List</button>
+              <button type="button" class="typo-btn" onclick="applyTypographyFormat('link')" title="Insert Link">🔗 Link</button>
+              <button type="button" class="typo-btn" onclick="applyTypographyFormat('divider')" title="Golden Divider">― Divider</button>
+            </div>
+          </div>
+
+          <!-- Abstract Textarea -->
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label class="form-label" style="margin: 0;">Abstract / Summary Text (HTML &amp; Rich Typography Supported)</label>
+              <span style="font-size: 0.74rem; color: #94a3b8;" id="pub-abstract-stats">0 words</span>
+            </div>
+            <textarea id="pub-form-abstract" class="cms-textarea" rows="6" oninput="updatePubLivePreview()" placeholder="Enter executive abstract or research summary here..."></textarea>
+          </div>
+
+          <!-- BibTeX Textarea -->
+          <div class="form-group">
+            <label class="form-label">BibTeX Citation</label>
+            <textarea id="pub-form-bibtex" class="cms-textarea" rows="3" style="font-family: monospace; font-size: 0.8rem;" placeholder="@article{...}"></textarea>
+          </div>
         </div>
-        <div>
-          <label class="form-label">Category *</label>
-          <select id="pub-form-cat" class="cms-select">
-            <option value="Journal">Journal (Peer-Reviewed)</option>
-            <option value="Conference">Conference Proceeding</option>
-            <option value="Preprint">Preprint (SSRN / Preprints)</option>
-            <option value="Book Chapter">Book Chapter</option>
-          </select>
+
+        <!-- RIGHT COLUMN: LIVE REAL-TIME GOLDEN RATIO PREVIEW -->
+        <div class="cms-studio-right">
+          <div style="background: rgba(10, 24, 44, 0.85); border: 1px solid rgba(186, 230, 253, 0.16); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 14px; height: 100%;">
+            <div class="preview-tab-row">
+              <button type="button" class="preview-tab-pill active" id="tab-spotlight-preview" onclick="switchPubPreviewMode('spotlight')">★ Homepage Spotlight View</button>
+              <button type="button" class="preview-tab-pill" id="tab-archive-preview" onclick="switchPubPreviewMode('archive')">📋 Archive Card View</button>
+              <span style="margin-left: auto; font-size: 0.72rem; color: #38bdf8; display: flex; align-items: center; gap: 4px;">
+                <span style="width: 7px; height: 7px; border-radius: 50%; background: #38bdf8; display: inline-block; box-shadow: 0 0 6px #38bdf8;"></span> Live Sync
+              </span>
+            </div>
+
+            <!-- Preview Container -->
+            <div class="live-preview-stage" id="pub-live-preview-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="form-row-2">
-        <div>
-          <label class="form-label">Authors</label>
-          <input type="text" id="pub-form-authors" class="cms-input" value="Dr. Zaid Amin et al.">
-        </div>
-        <div>
-          <label class="form-label">Year (e.g. 2026)</label>
-          <input type="number" id="pub-form-year" class="cms-input" value="2026">
-        </div>
-      </div>
-      <div class="form-row-2">
-        <div>
-          <label class="form-label">Venue / Journal</label>
-          <input type="text" id="pub-form-venue" class="cms-input" placeholder="e.g. Smart Cities, IEEE Access">
-        </div>
-        <div>
-          <label class="form-label">DOI / URL</label>
-          <input type="text" id="pub-form-doi" class="cms-input" placeholder="10.3390/...">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Abstract</label>
-        <textarea id="pub-form-abstract" class="cms-textarea" rows="3"></textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">BibTeX Citation</label>
-        <textarea id="pub-form-bibtex" class="cms-textarea" rows="3" style="font-family: monospace; font-size: 0.8rem;"></textarea>
-      </div>
-      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px;">
-        <button class="cms-btn cms-btn-ghost" onclick="closeModal('modal-pub')">Cancel</button>
-        <button class="cms-btn cms-btn-cyan" onclick="savePublicationAction(false)">💾 Save Locally</button>
-        <button class="cms-btn cms-btn-primary" onclick="savePublicationAction(true)">🚀 Save &amp; Publish</button>
       </div>
     </div>
   </div>
@@ -1092,6 +1293,10 @@
         document.getElementById('pub-form-doi').value = '';
         document.getElementById('pub-form-abstract').value = '';
         document.getElementById('pub-form-bibtex').value = '';
+        document.getElementById('pub-form-image').value = 'assets/images/spotlight-smart-cities.jpg';
+        document.getElementById('pub-preview-thumb').src = 'assets/images/spotlight-smart-cities.jpg';
+        document.getElementById('pub-form-featured').checked = false;
+        updatePubLivePreview();
       } else if (activeModule === 'talks') {
         openModal('modal-talk');
         document.getElementById('modal-talk-heading').textContent = 'Add Talk / Media';
@@ -1218,6 +1423,13 @@
       document.getElementById('art-form-tags').value = Array.isArray(art.tags) ? art.tags.join(', ') : '';
       document.getElementById('art-form-excerpt').value = art.excerpt || '';
       document.getElementById('art-form-content').value = art.content_html || '';
+      const imgVal = art.image || 'assets/images/spotlight-smart-cities.jpg';
+      const imgInput = document.getElementById('art-form-image');
+      if (imgInput) imgInput.value = imgVal;
+      const thumb = document.getElementById('art-preview-thumb');
+      if (thumb) thumb.src = imgVal;
+      const banner = document.getElementById('art-preview-banner');
+      if (banner) banner.src = imgVal;
       document.getElementById('articles-list-view').style.display = 'none';
       document.getElementById('articles-editor-view').style.display = 'block';
       autoUpdateArticlePreview();
@@ -1241,23 +1453,52 @@
       document.getElementById('art-preview-content').innerHTML = content || 'Type on the left...';
     }
 
-    function insertArticleFormat(type) {
+    function insertArticleFormat(type, value) {
       const ta = document.getElementById('art-form-content');
       const s = ta.selectionStart, e = ta.selectionEnd;
       const sel = ta.value.substring(s, e);
       let rep = '';
-      switch(type) {
-        case 'h2': rep = `\n<h2>${sel || 'Section Heading'}</h2>\n`; break;
-        case 'h3': rep = `\n<h3>${sel || 'Subheading'}</h3>\n`; break;
-        case 'bold': rep = `<strong>${sel || 'Bold Text'}</strong>`; break;
-        case 'italic': rep = `<em>${sel || 'Italic Text'}</em>`; break;
-        case 'quote': rep = `\n<blockquote>${sel || 'Quotation text...'}</blockquote>\n`; break;
-        case 'code': rep = `<code>${sel || 'code()'}</code>`; break;
-        case 'ul': rep = `\n<ul>\n  <li>${sel || 'First Item'}</li>\n  <li>Second Item</li>\n</ul>\n`; break;
-        case 'link': rep = `<a href="https://...">${sel || 'Link Text'}</a>`; break;
-        case 'img': rep = `<figure><img src="https://..." alt="Caption"><figcaption>Caption text</figcaption></figure>`; break;
-        case 'hr': rep = `\n<hr class="golden-divider">\n`; break;
+
+      if (type === 'para') {
+        if (value === 'lead') rep = `\n<p class="lead-para">${sel || 'Lead introductory paragraph with emphasized prominence...'}</p>\n`;
+        else if (value === 'detail') rep = `\n<p class="detail-para">${sel || 'Detailed academic context or footnote annotation...'}</p>\n`;
+        else if (value === 'callout') rep = `\n<div class="callout-box"><strong>Key Finding:</strong> ${sel || 'Synthesized empirical conclusion or core discovery...'}</div>\n`;
+        else if (value === 'h2') rep = `\n<h2>${sel || 'Section Heading'}</h2>\n`;
+        else if (value === 'h3') rep = `\n<h3>${sel || 'Subheading'}</h3>\n`;
+        else if (value === 'quote') rep = `\n<blockquote>${sel || 'Academic quotation or theoretical axiom...'}</blockquote>\n`;
+      } else if (type === 'font') {
+        if (value === 'garamond') rep = `<span style="font-family: 'Cormorant Garamond', serif;">${sel || 'Editorial Serif Text'}</span>`;
+        else if (value === 'cinzel') rep = `<span style="font-family: 'Cinzel', serif; letter-spacing: 0.05em;">${sel || 'Classical Display Text'}</span>`;
+        else if (value === 'inter') rep = `<span style="font-family: 'Inter', sans-serif;">${sel || 'Clean Sans Text'}</span>`;
+        else if (value === 'mono') rep = `<code style="font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: rgba(186, 230, 253, 0.1); padding: 2px 6px; border-radius: 4px;">${sel || 'code/symbol'}</code>`;
+      } else if (type === 'size') {
+        if (value === 'sm') rep = `<span style="font-size: 0.85rem;">${sel || 'Small text'}</span>`;
+        else if (value === 'reg') rep = `<span style="font-size: 0.95rem;">${sel || 'Regular text'}</span>`;
+        else if (value === 'md') rep = `<span style="font-size: 1.125rem;">${sel || 'Medium text'}</span>`;
+        else if (value === 'lg') rep = `<span style="font-size: 1.375rem;">${sel || 'Large text'}</span>`;
+        else if (value === 'golden') rep = `<span style="font-size: 1.618rem; line-height: 1.5;">${sel || 'Golden Ratio scale text'}</span>`;
+      } else if (type === 'bold') {
+        rep = `<strong>${sel || 'Bold Text'}</strong>`;
+      } else if (type === 'italic') {
+        rep = `<em>${sel || 'Italic Text'}</em>`;
+      } else if (type === 'underline') {
+        rep = `<u>${sel || 'Underlined Text'}</u>`;
+      } else if (type === 'gold') {
+        rep = `<span class="text-gold">${sel || 'Golden Highlight'}</span>`;
+      } else if (type === 'cyan') {
+        rep = `<span class="text-cyan">${sel || 'Cyan Highlight'}</span>`;
+      } else if (type === 'ul') {
+        rep = `\n<ul>\n  <li>${sel || 'First Item'}</li>\n  <li>Second Item</li>\n</ul>\n`;
+      } else if (type === 'link') {
+        const url = prompt('Enter Destination URL:', 'https://');
+        if (url) rep = `<a href="${url}" target="_blank" rel="noopener">${sel || 'Link Text'}</a>`;
+        else rep = sel;
+      } else if (type === 'img') {
+        rep = `\n<figure style="margin: 20px 0; text-align: center;"><img src="assets/images/spotlight-smart-cities.jpg" alt="Figure Caption" style="max-width: 100%; border-radius: 8px;"><figcaption style="font-size: 0.85rem; color: #94a3b8; margin-top: 8px; font-style: italic;">Figure: Architectural diagram description</figcaption></figure>\n`;
+      } else if (type === 'hr') {
+        rep = `\n<hr class="golden-divider">\n`;
       }
+
       ta.setRangeText(rep, s, e, 'end');
       ta.focus();
       autoUpdateArticlePreview();
@@ -1279,6 +1520,7 @@
       const readTime = Math.max(1, Math.round(words / 200)) + ' min read';
       const excerpt = document.getElementById('art-form-excerpt').value.trim() || content.replace(/<[^>]+>/g, ' ').slice(0, 220) + '...';
 
+      const artImg = (document.getElementById('art-form-image') ? document.getElementById('art-form-image').value.trim() : '') || 'assets/images/spotlight-smart-cities.jpg';
       const payload = {
         id: slug,
         title: title,
@@ -1288,6 +1530,7 @@
         tags: tags.length ? tags : [cat],
         reading_time: readTime,
         excerpt: excerpt,
+        image: artImg,
         content_html: content,
         author: "Dr. Zaid Amin"
       };
@@ -1338,7 +1581,10 @@
         <tr>
           <td style="color: #64748b; font-weight: 700;">${i + 1}</td>
           <td>
-            <div style="font-weight: 700; color: #ffffff;">${escapeHTML(p.title)}</div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-weight: 700; color: #ffffff;">${escapeHTML(p.title)}</span>
+              ${p.featured ? '<span style="background: rgba(212, 175, 55, 0.2); color: #fef08a; border: 1px solid #d4af37; padding: 2px 7px; border-radius: 4px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em;">★ SPOTLIGHT</span>' : ''}
+            </div>
             <div style="font-size: 0.75rem; color: #94a3b8;">${escapeHTML(p.authors || '')}</div>
           </td>
           <td><span style="background: rgba(212, 175, 55, 0.12); color: #fef08a; border: 1px solid rgba(212, 175, 55, 0.3); padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">${escapeHTML(p.category || 'Publication')}</span></td>
@@ -1365,6 +1611,231 @@
       renderPubsTable(filtered);
     }
 
+    // Module 2: Publications Enhanced Visual Studio & Live Sync
+    let currentPubPreviewMode = 'spotlight';
+
+    function switchPubPreviewMode(mode) {
+      currentPubPreviewMode = mode;
+      document.getElementById('tab-spotlight-preview').classList.toggle('active', mode === 'spotlight');
+      document.getElementById('tab-archive-preview').classList.toggle('active', mode === 'archive');
+      updatePubLivePreview();
+    }
+
+    function setPubImagePreset(path) {
+      document.getElementById('pub-form-image').value = path;
+      document.getElementById('pub-preview-thumb').src = path;
+      updatePubLivePreview();
+    }
+
+    function onPubImageInputChanged() {
+      const val = document.getElementById('pub-form-image').value.trim();
+      if (val) {
+        document.getElementById('pub-preview-thumb').src = val;
+      }
+      updatePubLivePreview();
+    }
+
+    async function handlePubImageFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = async function(e) {
+        try {
+          showToast('Uploading visual thumbnail...', false);
+          const res = await fetch('/api/upload-image', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-Admin-Key': currentAdminKey },
+            body: JSON.stringify({ filename: file.name, data: e.target.result })
+          });
+          const data = await res.json();
+          if (res.ok && data.url) {
+            document.getElementById('pub-form-image').value = data.url;
+            document.getElementById('pub-preview-thumb').src = data.url;
+            updatePubLivePreview();
+            showToast('Thumbnail uploaded and applied!');
+          } else {
+            showToast(data.error || 'Upload failed', true);
+          }
+        } catch (err) {
+          showToast('Error uploading: ' + err.message, true);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function applyTypographyFormat(type, value) {
+      const ta = document.getElementById('pub-form-abstract');
+      const start = ta.selectionStart;
+      const end = ta.selectionEnd;
+      const sel = ta.value.substring(start, end);
+      let rep = '';
+
+      if (type === 'para') {
+        if (value === 'lead') rep = `\n<p class="lead-para">${sel || 'Lead introductory paragraph with emphasized prominence...'}</p>\n`;
+        else if (value === 'detail') rep = `\n<p class="detail-para">${sel || 'Detailed academic context or footnote annotation...'}</p>\n`;
+        else if (value === 'callout') rep = `\n<div class="callout-box"><strong>Key Finding:</strong> ${sel || 'Synthesized empirical conclusion or core discovery...'}</div>\n`;
+        else if (value === 'h2') rep = `\n<h2>${sel || 'Section Heading'}</h2>\n`;
+        else if (value === 'h3') rep = `\n<h3>${sel || 'Subheading'}</h3>\n`;
+        else if (value === 'quote') rep = `\n<blockquote class="academic-quote">${sel || 'Academic quotation or theoretical axiom...'}</blockquote>\n`;
+      } else if (type === 'font') {
+        if (value === 'garamond') rep = `<span style="font-family: 'Cormorant Garamond', serif;">${sel || 'Editorial Serif Text'}</span>`;
+        else if (value === 'cinzel') rep = `<span style="font-family: 'Cinzel', serif; letter-spacing: 0.05em;">${sel || 'Classical Display Text'}</span>`;
+        else if (value === 'inter') rep = `<span style="font-family: 'Inter', sans-serif;">${sel || 'Clean Sans Text'}</span>`;
+        else if (value === 'mono') rep = `<code style="font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: rgba(186, 230, 253, 0.1); padding: 2px 6px; border-radius: 4px;">${sel || 'code/symbol'}</code>`;
+      } else if (type === 'size') {
+        if (value === 'sm') rep = `<span style="font-size: 0.85rem;">${sel || 'Small text'}</span>`;
+        else if (value === 'reg') rep = `<span style="font-size: 0.95rem;">${sel || 'Regular text'}</span>`;
+        else if (value === 'md') rep = `<span style="font-size: 1.125rem;">${sel || 'Medium text'}</span>`;
+        else if (value === 'lg') rep = `<span style="font-size: 1.375rem;">${sel || 'Large text'}</span>`;
+        else if (value === 'golden') rep = `<span style="font-size: 1.618rem; line-height: 1.5;">${sel || 'Golden Ratio scale text'}</span>`;
+      } else if (type === 'bold') {
+        rep = `<strong>${sel || 'Bold Text'}</strong>`;
+      } else if (type === 'italic') {
+        rep = `<em>${sel || 'Italic Text'}</em>`;
+      } else if (type === 'underline') {
+        rep = `<u>${sel || 'Underlined Text'}</u>`;
+      } else if (type === 'gold') {
+        rep = `<span class="text-gold">${sel || 'Golden Highlight'}</span>`;
+      } else if (type === 'cyan') {
+        rep = `<span class="text-cyan">${sel || 'Cyan Highlight'}</span>`;
+      } else if (type === 'badge-oa') {
+        rep = `<span style="background: rgba(14, 165, 233, 0.2); border: 1px solid rgba(56, 189, 248, 0.4); color: #7dd3fc; padding: 3px 9px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">Open Access</span>`;
+      } else if (type === 'badge-q1') {
+        rep = `<span style="background: rgba(212, 175, 55, 0.18); border: 1px solid rgba(212, 175, 55, 0.5); color: #fef08a; padding: 3px 9px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; font-family: var(--font-cinzel);">✦ Q1 SCOPUS</span>`;
+      } else if (type === 'list') {
+        rep = `\n<ul>\n  <li>${sel || 'Empirical finding item'}</li>\n  <li>Secondary observation</li>\n</ul>\n`;
+      } else if (type === 'link') {
+        const url = prompt('Enter Destination URL:', 'https://doi.org/');
+        if (url) rep = `<a href="${url}" target="_blank" rel="noopener" style="color: #38bdf8; text-decoration: underline;">${sel || 'Reference Link'}</a>`;
+        else rep = sel;
+      } else if (type === 'divider') {
+        rep = `\n<hr style="margin: 20px 0; border: 0; border-top: 1px solid rgba(212, 175, 55, 0.35);">\n`;
+      }
+
+      ta.focus();
+      ta.setRangeText(rep, start, end, 'end');
+      updatePubLivePreview();
+    }
+
+    function updatePubLivePreview() {
+      const container = document.getElementById('pub-live-preview-container');
+      if (!container) return;
+
+      const title = document.getElementById('pub-form-title').value.trim() || 'Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Framework';
+      const cat = document.getElementById('pub-form-cat').value || 'Journal';
+      const authors = document.getElementById('pub-form-authors').value.trim() || 'Dr. Zaid Amin et al.';
+      const year = document.getElementById('pub-form-year').value.trim() || '2026';
+      const venue = document.getElementById('pub-form-venue').value.trim() || 'Smart Cities (MDPI)';
+      const doi = document.getElementById('pub-form-doi').value.trim() || '10.3390/smartcities9100174';
+      const abstract = document.getElementById('pub-form-abstract').value.trim();
+      const img = document.getElementById('pub-form-image').value.trim() || 'assets/images/spotlight-smart-cities.jpg';
+
+      // Update word stats
+      const words = abstract.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean).length;
+      const statsElem = document.getElementById('pub-abstract-stats');
+      if (statsElem) statsElem.textContent = words + ' words';
+
+      if (currentPubPreviewMode === 'spotlight') {
+        container.innerHTML = `
+          <div style="background: rgba(8, 20, 36, 0.95); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 16px; overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.6);">
+            <div style="position: relative; width: 100%; height: 210px; overflow: hidden; background: #000;">
+              <img src="${img}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+              <div style="position: absolute; top: 12px; left: 14px; display: flex; gap: 8px;">
+                <span style="background: rgba(4, 12, 22, 0.88); border: 1px solid rgba(212, 175, 55, 0.5); color: #fef08a; padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; font-family: var(--font-cinzel);">SPOTLIGHT ARTICLE</span>
+                <span style="background: rgba(14, 165, 233, 0.2); border: 1px solid rgba(56, 189, 248, 0.4); color: #7dd3fc; padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;">Open Access</span>
+              </div>
+            </div>
+            <div style="padding: 22px;">
+              <div style="display: flex; gap: 10px; align-items: center; font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">
+                <span style="color: #38bdf8; font-weight: 600;">${venue}</span>
+                <span>&bull;</span>
+                <span>${year}</span>
+                <span>&bull;</span>
+                <span style="color: #d4af37; font-weight: 600;">${cat}</span>
+              </div>
+              <h3 style="font-family: var(--font-cinzel); font-size: 1.15rem; color: #ffffff; line-height: 1.4; margin-bottom: 12px; font-weight: 700;">${title}</h3>
+              <div style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.65; margin-bottom: 16px;">
+                ${abstract || '<span style="color: #64748b; font-style: italic;">Enter publication abstract or summary in the editor to see live formatted rendering here...</span>'}
+              </div>
+              <div style="display: flex; gap: 10px; align-items: center; border-top: 1px solid rgba(186, 230, 253, 0.1); padding-top: 14px;">
+                <span style="padding: 6px 14px; background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 8px; color: #fef08a; font-size: 0.78rem; font-weight: 700;">Read Full Article &rarr;</span>
+                ${doi ? `<span style="padding: 6px 12px; background: rgba(14, 28, 48, 0.6); border: 1px solid rgba(186, 230, 253, 0.18); border-radius: 8px; color: #bae6fd; font-size: 0.75rem;">DOI: ${doi}</span>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <div style="background: rgba(8, 20, 36, 0.85); border: 1px solid rgba(186, 230, 253, 0.18); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 14px;">
+              <div style="flex: 1;">
+                <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;">
+                  <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; font-weight: 700;">${cat}</span>
+                  <span style="color: #94a3b8; font-size: 0.75rem;">${year}</span>
+                </div>
+                <h4 style="font-family: var(--font-cinzel); font-size: 1.05rem; color: #ffffff; margin-bottom: 6px;">${title}</h4>
+                <div style="font-size: 0.8rem; color: #94a3b8; font-style: italic;">${authors}</div>
+              </div>
+              <img src="${img}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3); flex-shrink: 0;" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+            </div>
+            <div style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.6; border-top: 1px solid rgba(186, 230, 253, 0.1); padding-top: 10px;">
+              ${abstract || '<span style="color: #64748b; font-style: italic;">Enter publication abstract...</span>'}
+            </div>
+            <div style="display: flex; gap: 10px; font-size: 0.78rem; color: #38bdf8;">
+              <span>Venue: ${venue}</span>
+              ${doi ? `<span>&bull; DOI: ${doi}</span>` : ''}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // Article Thumbnail Studio Handlers
+    function setArtImagePreset(path) {
+      document.getElementById('art-form-image').value = path;
+      document.getElementById('art-preview-thumb').src = path;
+      const banner = document.getElementById('art-preview-banner');
+      if (banner) banner.src = path;
+    }
+
+    function onArtImageInputChanged() {
+      const val = document.getElementById('art-form-image').value.trim();
+      if (val) {
+        document.getElementById('art-preview-thumb').src = val;
+        const banner = document.getElementById('art-preview-banner');
+        if (banner) banner.src = val;
+      }
+    }
+
+    async function handleArtImageFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = async function(e) {
+        try {
+          showToast('Uploading article banner...', false);
+          const res = await fetch('/api/upload-image', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-Admin-Key': currentAdminKey },
+            body: JSON.stringify({ filename: file.name, data: e.target.result })
+          });
+          const data = await res.json();
+          if (res.ok && data.url) {
+            document.getElementById('art-form-image').value = data.url;
+            document.getElementById('art-preview-thumb').src = data.url;
+            const banner = document.getElementById('art-preview-banner');
+            if (banner) banner.src = data.url;
+            showToast('Banner uploaded & applied!');
+          } else {
+            showToast(data.error || 'Upload failed', true);
+          }
+        } catch (err) {
+          showToast('Error uploading: ' + err.message, true);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
     function editPublication(id) {
       const p = pubsData.find(x => x.id === id);
       if (!p) return;
@@ -1380,6 +1851,11 @@
       document.getElementById('pub-form-doi').value = p.doi || '';
       document.getElementById('pub-form-abstract').value = p.abstract || '';
       document.getElementById('pub-form-bibtex').value = p.bibtex || '';
+      const imgVal = p.image || 'assets/images/spotlight-smart-cities.jpg';
+      document.getElementById('pub-form-image').value = imgVal;
+      document.getElementById('pub-preview-thumb').src = imgVal;
+      document.getElementById('pub-form-featured').checked = !!p.featured;
+      updatePubLivePreview();
     }
 
     async function savePublicationAction(andDeploy = false) {
@@ -1390,6 +1866,8 @@
         return;
       }
 
+      const isFeatured = document.getElementById('pub-form-featured').checked;
+      const imgPath = document.getElementById('pub-form-image').value.trim() || 'assets/images/spotlight-smart-cities.jpg';
       const pubPayload = {
         id: id,
         title: title,
@@ -1401,8 +1879,13 @@
         url: document.getElementById('pub-form-doi').value.startsWith('http') ? document.getElementById('pub-form-doi').value : 'https://doi.org/' + document.getElementById('pub-form-doi').value,
         abstract: document.getElementById('pub-form-abstract').value.trim(),
         bibtex: document.getElementById('pub-form-bibtex').value.trim(),
-        featured: true
+        image: imgPath,
+        featured: isFeatured
       };
+
+      if (isFeatured) {
+        pubsData.forEach(p => { if (p.id !== id) p.featured = false; });
+      }
 
       const existingIdx = pubsData.findIndex(p => p.id === (editingPubId || id));
       if (existingIdx !== -1) pubsData[existingIdx] = pubPayload;
