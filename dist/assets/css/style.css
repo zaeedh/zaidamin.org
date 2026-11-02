@@ -6325,3 +6325,127 @@ a {
     width: 98vw;
   }
 }
+
+
+/* =============================================================
+   WYSIWYG VISUAL RICH TEXT CANVAS (NORMAL TEXT EDITING)
+   ============================================================= */
+.cms-visual-editor {
+  min-height: 440px;
+  max-height: 620px;
+  overflow-y: auto;
+  background: rgba(4, 12, 24, 0.9);
+  border: 1px solid rgba(186, 230, 253, 0.22);
+  border-radius: 10px;
+  padding: 24px 28px;
+  color: #cbd5e1;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.8;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cms-visual-editor:focus {
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.18);
+}
+
+.cms-visual-editor h2 {
+  color: #ffffff;
+  font-family: 'Cinzel', serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin-top: 1.8em;
+  margin-bottom: 0.6em;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  padding-bottom: 6px;
+}
+
+.cms-visual-editor h3 {
+  color: #bae6fd;
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.cms-visual-editor p {
+  margin-bottom: 1.2em;
+  color: #cbd5e1;
+}
+
+.cms-visual-editor blockquote {
+  border-left: 4px solid #d4af37;
+  padding: 12px 20px;
+  background: rgba(212, 175, 55, 0.08);
+  font-style: italic;
+  color: #fef08a;
+  margin: 18px 0;
+  border-radius: 4px;
+}
+
+.cms-visual-editor img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(186, 230, 253, 0.25);
+  margin: 14px 0;
+  display: inline-block;
+}
+
+.cms-visual-editor figure {
+  margin: 18px 0;
+  text-align: center;
+}
+
+.cms-visual-editor figcaption {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-style: italic;
+  margin-top: 8px;
+}
+
+.cms-visual-editor .callout-box {
+  background: rgba(212, 175, 55, 0.1);
+  border-left: 4px solid #d4af37;
+  padding: 14px 18px;
+  border-radius: 6px;
+  margin: 16px 0;
+  color: #fef08a;
+}
+
+.cms-visual-editor .lead-para {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.cms-visual-editor .detail-para {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #94a3b8;
+  font-style: italic;
+  margin-bottom: 14px;
+}
+
+.cms-visual-editor ul, .cms-visual-editor ol {
+  padding-left: 24px;
+  margin-bottom: 1.2em;
+}
+
+.cms-visual-editor li {
+  margin-bottom: 6px;
+}
+
+.cms-visual-editor a {
+  color: #38bdf8;
+  text-decoration: underline;
+}
+
+.cms-visual-editor .separator {
+  margin: 16px 0;
+}
