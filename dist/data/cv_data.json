@@ -1,0 +1,537 @@
+{
+  "executive_profile": {
+    "name": "Dr. Zaid Amin, Ph.D.",
+    "role_title": "Senior Lecturer & Researcher • QS Deputy Director FDSIT",
+    "institution": "Faculty of Data Science and Information Technology (FDSIT), INTI International University, Malaysia",
+    "distinction": "Ph.D. in Computer Science (UKM) • Tesis Cemerlang (Excellent Thesis) & Graduate on Time (GOT)",
+    "summary": "Accomplished Senior Lecturer and Researcher holding a Ph.D. from Universiti Kebangsaan Malaysia (UKM), recognized with the 'Tesis Cemerlang' and Graduate on Time (GOT) distinction, with a proven track record of heading university informatics departments. A globally recognized scholar and active Q1 journal reviewer (IEEE Access, PLOS ONE, Computers in Human Behavior). Recipient of the prestigious Global Panduit-Cisco Excellence Scholarship and an accomplished book author. Research at the intersection of Human-Computer Interaction (HCI), philosophy, and digital ethics focuses on the engineering of trustworthy multimodal AI architectures to drive positive behavioral change.",
+    "contact": {
+      "email": "zaid.amin@newinti.edu.my",
+      "email_alt": "malayachessa@gmail.com",
+      "phone_my": "+60 - 17886 2090",
+      "phone_id": "+62 - 821 8103 5400",
+      "location": "INTI International University, Nilai, 71800 Negeri Sembilan, Malaysia",
+      "website": "https://zaidamin.org"
+    },
+    "researcher_ids": {
+      "orcid": {
+        "id": "0000-0001-5223-3058",
+        "url": "https://orcid.org/0000-0001-5223-3058"
+      },
+      "scopus": {
+        "id": "57221839785",
+        "url": "https://www.scopus.com/authid/detail.uri?authorId=57221839785"
+      },
+      "wos": {
+        "id": "2411586",
+        "url": "https://www.webofscience.com/wos/author/record/2411586"
+      },
+      "scholar": {
+        "id": "aWTSEXwAAAAJ",
+        "url": "https://scholar.google.com/citations?user=aWTSEXwAAAAJ&hl=id"
+      }
+    },
+    "core_skills": [
+      "Behavior and Social Computing",
+      "Human-Computer Interaction (HCI)",
+      "Digital Ethics",
+      "Trustworthy AI",
+      "Persuasive Technology",
+      "Interaction Design"
+    ],
+    "languages": [
+      {
+        "lang": "English",
+        "level": "Fluent"
+      },
+      {
+        "lang": "Bahasa Indonesia",
+        "level": "Native / Fluent"
+      },
+      {
+        "lang": "Malay",
+        "level": "Fluent"
+      }
+    ],
+    "official_docs": {
+      "teaching_permit": {
+        "title": "Higher Education Teaching Permit (Doctoral, Master, Bachelor)",
+        "url": "https://tinyurl.com/5n7yjtht"
+      },
+      "mqa_cv": {
+        "title": "MQA CV for Higher Education Accreditation",
+        "url": "https://tinyurl.com/4ehzmxyn"
+      },
+      "teaching_portfolio": {
+        "title": "Teaching, Supervision & Examination Portfolio",
+        "url": "https://tinyurl.com/yjd89mcj"
+      }
+    }
+  },
+  "achievements_and_grants": [
+    {
+      "year": "2025",
+      "title": "2nd Runner Up South Sumatera Innovator Award",
+      "organization": "Provincial Government of South Sumatra, Indonesia",
+      "category": "Government Award",
+      "badge": "Provincial Honor",
+      "highlight": true,
+      "details": "Recognized in the Innovative Research Award 2025 for the project 'Srivijayapedia: Exploring Digital Heritage of Srivijaya Using Immersive Technology', pioneering digital cultural preservation through immersive systems."
+    },
+    {
+      "year": "2025",
+      "title": "National Competitive Community Service Grant (BIMA)",
+      "organization": "Ministry of Education, Culture, Research, and Technology (Kemendikbudristek), Indonesia",
+      "category": "National Grant",
+      "badge": "National Competitive",
+      "highlight": true,
+      "details": "Awarded under the Community Partnership Empowerment Scheme (PKM) to drive smart farming and community technology transfer for instant ginger cultivation at UPPKA Kampung KB Palembang."
+    },
+    {
+      "year": "2024",
+      "title": "Conference Chairman: 7th ICIBA & 3rd SOSEIC International Conferences",
+      "organization": "Universitas Bina Darma, Indonesia",
+      "category": "Academic Leadership",
+      "badge": "International Chairman",
+      "highlight": true,
+      "details": "Served as General Chairman for the 7th International Conference on Information Technology, Engineering and Business Application (ICIBA) and the 3rd Social Science & Economic International Conference (SOSEIC 2024/2025)."
+    },
+    {
+      "year": "2024",
+      "title": "The Best Presenter Award (IEEE Xplore Conference)",
+      "organization": "Universitas Muhammadiyah Yogyakarta & IEEE",
+      "category": "Academic Award",
+      "badge": "IEEE Xplore Honor",
+      "highlight": true,
+      "details": "Recipient of The Best Presenter Award at a Scopus-indexed IEEE Xplore international conference recognizing outstanding academic delivery, methodology rigor, and research presentation."
+    },
+    {
+      "year": "2024",
+      "title": "External PhD Proposal Defense Examiner",
+      "organization": "Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM)",
+      "category": "Academic Governance",
+      "badge": "Doctoral Panel",
+      "highlight": false,
+      "details": "Appointed as External Examiner for a Doctoral/Ph.D. Proposal Defense, contributing expert peer evaluation to advanced doctoral research milestones."
+    },
+    {
+      "year": "2024",
+      "title": "University Multidisciplinary Research Grant: PRIDE Quality Culture",
+      "organization": "Universitas Bina Darma",
+      "category": "Institutional Grant",
+      "badge": "Competitive Grant",
+      "highlight": false,
+      "details": "Lead Principal Investigator for the research project 'Enhancement of Universitas Bina Darma's PRIDE Quality Culture Implementation Using Persuasive Technology and Internal Marketing via Gamification'."
+    },
+    {
+      "year": "2023 - 2025",
+      "title": "International Research Fellow",
+      "organization": "INTI International University, Malaysia",
+      "category": "International Fellowship",
+      "badge": "Research Fellowship",
+      "highlight": true,
+      "details": "Advancing high-impact international academic collaboration, co-authoring Q1 peer-reviewed publications, and enriching the postgraduate research ecosystem at INTI International University."
+    },
+    {
+      "year": "2023",
+      "title": "University Multidisciplinary Research Grant: Visual Selective Attention System (VSAS)",
+      "organization": "Universitas Bina Darma",
+      "category": "Institutional Grant",
+      "badge": "Competitive Grant",
+      "highlight": false,
+      "details": "Principal Investigator for 'Development of a Digital Visual Selective Attention System (VSAS) Platform Based on Sociotechnical Design', engineered to improve transparency and democratic civic participation."
+    },
+    {
+      "year": "2021",
+      "title": "Special Best Poster Presenter Award (IPSIR 4.0)",
+      "organization": "Institute of IR4.0, Universiti Kebangsaan Malaysia (UKM)",
+      "category": "Academic Award",
+      "badge": "International Honor",
+      "highlight": true,
+      "details": "Recognized as Special Best Poster Presenter at the 1st International Postgraduate Seminar on Industrial Revolution 4.0 (IPSIR 4.0) for visual research communication on attention-based cognitive design."
+    },
+    {
+      "year": "2020",
+      "title": "Research Grant Recipient (GPK-4IR-2020-019)",
+      "organization": "Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM)",
+      "category": "International Grant",
+      "badge": "UKM 4IR Grant",
+      "highlight": false,
+      "details": "Secured competitive research funding from Universiti Kebangsaan Malaysia for advanced project development under the national Fourth Industrial Revolution (4IR) framework."
+    },
+    {
+      "year": "2017",
+      "title": "National Competitive Research Grant Program",
+      "organization": "Ministry of Research, Technology and Higher Education (Kemristekdikti), Indonesia",
+      "category": "National Grant",
+      "badge": "National Competitive",
+      "highlight": false,
+      "details": "Advancing computational infrastructure through the project 'Multi-Tier Architecture Models and Routing Protocols on Server Clusters for Big Data Implementation', optimizing server throughput and network scalability."
+    },
+    {
+      "year": "2013",
+      "title": "Favorite Lecturer Award",
+      "organization": "Informatics Engineering Study Program, PalComTech Institute of Technology and Business",
+      "category": "Pedagogical Award",
+      "badge": "Teaching Honor",
+      "highlight": false,
+      "details": "Recognized for exemplary student mentorship, innovative instructional design, and dedication to academic excellence."
+    },
+    {
+      "year": "2008",
+      "title": "Global Panduit-Cisco Excellence Scholarship (CLI) Recipient",
+      "organization": "Cisco Learning Institute & Cisco Networking Academy Program (CNAP)",
+      "category": "Global Fellowship",
+      "badge": "Global Top 40 Worldwide",
+      "highlight": true,
+      "details": "Selected as one of only 40 scholars worldwide to receive this elite global award from the Cisco Learning Institute, recognizing premier technical talent and prospective academic leadership in network engineering."
+    },
+    {
+      "year": "2008",
+      "title": "Top 40% Competitors in Asia-Pacific (APAC) Region",
+      "organization": "Academy Netspace Competition, Cisco Systems, Inc.",
+      "category": "Technical Competition",
+      "badge": "Asia-Pacific Region",
+      "highlight": false,
+      "details": "Demonstrated technical network engineering and routing protocols mastery by ranking in the top 40% of competitors across the entire Asia-Pacific theatre."
+    },
+    {
+      "year": "2006",
+      "title": "Champion II, Web Design Championships",
+      "organization": "PalComTech Institute of Technology and Business",
+      "category": "Technical Competition",
+      "badge": "Design Competition",
+      "highlight": false,
+      "details": "Demonstrated front-end architectural excellence, UI engineering, and creative problem solving in digital interface design."
+    },
+    {
+      "year": "2006",
+      "title": "Champion II, Digital Media & Animation Awards",
+      "organization": "PalComTech Institute of Technology and Business",
+      "category": "Creative Competition",
+      "badge": "Animation Honor",
+      "highlight": false,
+      "details": "Recognized for creative motion design, 3D modeling, and narrative multimedia production in the Greeting Contest Animation."
+    }
+  ],
+  "academic_leadership": [
+    {
+      "role": "QS Deputy Director FDSIT",
+      "period": "2026 - Present",
+      "institution": "Faculty of Data Science and Information Technology (FDSIT), INTI International University, Malaysia",
+      "scope": "Strategic Global University Rankings & Research Citations",
+      "responsibilities": "Spearheaded faculty initiatives to align research outputs, citations, and academic reputations with global QS World University Ranking metrics. Cultivated a strategic international network of academic and employer contacts to optimize reputation surveys and institutional standing."
+    },
+    {
+      "role": "Head of Master Program in Informatics Engineering (M.Kom)",
+      "period": "2023 - 2024",
+      "institution": "Universitas Bina Darma, Indonesia",
+      "scope": "Postgraduate Program Direction & Quality Governance",
+      "responsibilities": "Directed curriculum delivery, research initiatives, and community service programs to fulfill 'Tri Dharma Perguruan Tinggi' mandates for the Master of Informatics Engineering Program. Supervised master thesis progression and national accreditation compliance."
+    },
+    {
+      "role": "Head of Information Systems Study Program",
+      "period": "2022 - 2023",
+      "institution": "Universitas Bina Darma, Indonesia",
+      "scope": "Undergraduate Departmental Governance",
+      "responsibilities": "Directed curriculum delivery, faculty instructional evaluation, student capstone research, and community service programs to fulfill accreditation and academic quality benchmarks."
+    },
+    {
+      "role": "Head of Informatics Engineering Study Program",
+      "period": "2013 - 2014",
+      "institution": "PalComTech Institute of Technology and Business, Indonesia",
+      "scope": "Departmental Administration & Laboratory Standards",
+      "responsibilities": "Managed departmental instruction, course development, faculty standards, and student research in software engineering and network computing."
+    },
+    {
+      "role": "Head of Graphic Design and Multimedia Editing",
+      "period": "2006 - 2011",
+      "institution": "Palembang Television (PALTV), Indonesia",
+      "scope": "Broadcast Post-Production & TVC Creative Direction",
+      "responsibilities": "Directed end-to-end post-production phases, from conceptual proposals and creative development to the final broadcast application of Television Commercials (TVC) and network identity branding."
+    }
+  ],
+  "work_experience": [
+    {
+      "role": "Senior Lecturer",
+      "period": "2025 - Present",
+      "institution": "Faculty of Data Science and Information Technology (FDSIT), INTI International University, Malaysia",
+      "description": "Curriculum Design: Developed and delivered advanced undergraduate and postgraduate IT/Data Science curricula. Research Mentorship: Supervised and mentored postgraduate and undergraduate students through rigorous thesis methodologies and publication-ready research. Academic Quality Control: Spearheaded internal quality assurance and program compliance to align instructional design with MQA and international accreditation standards."
+    },
+    {
+      "role": "Lecturer in Faculty of Informatics Engineering",
+      "period": "2014 - 2025",
+      "institution": "Universitas Bina Darma, Indonesia",
+      "description": "Fulfilled 'Tri Dharma Perguruan Tinggi' mandates through active curriculum instruction, peer-reviewed research, institutional grant leadership, and community engagement programs within the Informatics Engineering Study Program."
+    },
+    {
+      "role": "Lecturer in Faculty of Informatics Engineering",
+      "period": "2012 - 2014",
+      "institution": "PalComTech Institute of Technology and Business, Indonesia",
+      "description": "Delivered comprehensive undergraduate coursework in computer networks, systems analysis, and software development, actively mentoring student technical projects."
+    },
+    {
+      "role": "Program Instructor, 1-Year Professional Certification Course",
+      "period": "2005 - 2006",
+      "institution": "PalComTech Institute of Technology and Business, Indonesia",
+      "description": "Delivered comprehensive professional training in Networking (LAN/WAN, Wireless systems, and Windows Server 2003 Administration), Graphic Design, Computer Hardware Engineering, and 3D Studio Max for the 1-Year Professional Certification Program."
+    },
+    {
+      "role": "Software Developer",
+      "period": "2004 - 2005",
+      "institution": "DEPKOMINFO (Dinas Komunikasi dan Informatika) Kota Palembang, South Sumatera",
+      "description": "Developed an interactive, modular multimedia application ('CD Interaktif') serving as the official digital tourist guide for the State Government of South Sumatra Province, Indonesia."
+    }
+  ],
+  "education": [
+    {
+      "degree": "Doctor of Philosophy (Ph.D.) in Computer Science",
+      "period": "2018 - 2022",
+      "institution": "Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM)",
+      "country": "Malaysia",
+      "distinction": "Tesis Cemerlang (Excellent Thesis) & Graduate on Time (GOT)",
+      "focus": "Human-Computer Interaction (HCI), Attention-Based Design, Digital Ethics & Multimodal Cybernetic Interventions."
+    },
+    {
+      "degree": "Master of Informatics Engineering (M.Kom)",
+      "period": "2011 - 2014",
+      "institution": "Universitas Bina Darma",
+      "country": "Indonesia",
+      "distinction": "Graduated with Honors",
+      "focus": "IT Infrastructure, Multi-Tier Server Clustering, Routing Protocols & Scalable Big Data Systems."
+    },
+    {
+      "degree": "Bachelor of Informatics Engineering (S.Kom)",
+      "period": "2007 - 2011",
+      "institution": "PalComTech Institute of Technology and Business",
+      "country": "Indonesia",
+      "distinction": "Graduate in Network Engineering",
+      "focus": "Network Engineering, Wireless Topologies, Systems Analysis & Infrastructure Security."
+    },
+    {
+      "degree": "1-Year Computer Professional Certification Program",
+      "period": "2004 - 2005",
+      "institution": "PalComTech Institute of Technology and Business",
+      "country": "Indonesia",
+      "distinction": "Professional Certification",
+      "focus": "Graphic Design, Multimedia Authoring, Computer Hardware & 3D Visual Modeling."
+    },
+    {
+      "degree": "Sekolah Menengah Umum (SMU)",
+      "period": "2001 - 2004",
+      "institution": "SMU Negeri 5 Palembang",
+      "country": "Indonesia",
+      "distinction": "Secondary School Graduation",
+      "focus": "Social Science Stream Tracking, Humanities & Foundations of Inquiry."
+    }
+  ],
+  "invited_talks_and_media": [
+    {
+      "year": "2026",
+      "role": "Plenary Speaker",
+      "event": "International Conference on Emerging Horizons in Mathematics & Computation (MatCom–2026)",
+      "venue": "School of Sciences, Woxsen University, India",
+      "url": "https://tinyurl.com/y54buapz",
+      "details": "Delivering plenary keynote on multimodal AI architectures, civic compliance modeling, and human-trusted cybernetic systems."
+    },
+    {
+      "year": "2026",
+      "role": "Invited Training Speaker",
+      "event": "Research Mobility Program: 'Trustworthy AI for Behaviour Change'",
+      "venue": "Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM)",
+      "url": "https://tinyurl.com/37j76mxz",
+      "details": "Specialized international research training on persuasive computing, cognitive attention models, and trustworthy AI governance."
+    },
+    {
+      "year": "2025",
+      "role": "Invited Speaker",
+      "event": "Interdisciplinary Seminar: Cultural Heritage & Digital Technology",
+      "venue": "Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM)",
+      "url": "https://tinyurl.com/43tskrrk",
+      "details": "Showcasing sociotechnical digital preservation, interactive 3D heritage systems, and the Srivijayapedia initiative."
+    },
+    {
+      "year": "2024",
+      "role": "Keynote Speaker",
+      "event": "National Academic Seminar: 'AI and Creativity: Human-Technology Collaboration'",
+      "venue": "Universitas Dehasen Bengkulu, Indonesia",
+      "url": "https://tinyurl.com/4jzbhpc9",
+      "details": "Addressed collaborative dynamics between generative AI, human creative agency, and ethical algorithmic guardrails."
+    },
+    {
+      "year": "2016 - 2017",
+      "role": "Invited IT Expert",
+      "event": "National Television IT Talk Show Broadcast",
+      "venue": "TVRI Network (National Television of Indonesia)",
+      "url": "http://bit.ly/4n6pIBK",
+      "details": "Regular television expert commentator discussing digital literacy, public cybersecurity, internet ethics, and technological shifts."
+    }
+  ],
+  "peer_review_and_editorial": {
+    "summary": "Active peer reviewer for world-leading Q1 impact factor journals indexed in Web of Science Core Collection and Scopus, with certified records in Publons / Web of Science.",
+    "comprehensive_link": "https://bit.ly/4gCJqUP",
+    "verified_journals": [
+      {
+        "name": "IEEE Access",
+        "publisher": "IEEE",
+        "tier": "Q1 Journal",
+        "issn": "2169-3536",
+        "url": "https://publons.com/wos-op/review/author/9yDE0VJb/"
+      },
+      {
+        "name": "PLOS ONE",
+        "publisher": "Public Library of Science (PLOS)",
+        "tier": "Q1 Journal",
+        "issn": "1932-6203",
+        "url": "https://tinyurl.com/bddetrmx"
+      },
+      {
+        "name": "Computers in Human Behavior",
+        "publisher": "Elsevier",
+        "tier": "Q1 Journal",
+        "issn": "0747-5632",
+        "url": "https://www.webofscience.com/wos/author/record/ABC-9020-2021"
+      },
+      {
+        "name": "Telematics and Informatics",
+        "publisher": "Elsevier",
+        "tier": "Q1 Journal",
+        "issn": "0736-5853",
+        "url": "https://bit.ly/4g1gfe2"
+      },
+      {
+        "name": "HCI International Series",
+        "publisher": "Taylor & Francis Group / Springer",
+        "tier": "Leading International Venue",
+        "issn": "Top Tier HCI",
+        "url": "https://bit.ly/3Z53W6X"
+      },
+      {
+        "name": "International Journal of Advanced Computer Science and Applications (IJACSA)",
+        "publisher": "The Science and Information Organization (SAI)",
+        "tier": "Q3 Scopus / WoS",
+        "issn": "2156-5570",
+        "url": "https://thesai.org/Reviewers/Details/4694e360-ff9e-466b-9f68-c2dd258b9934"
+      }
+    ],
+    "conference_committees": [
+      {
+        "name": "7th International Conference on Information Technology, Engineering and Business Application (ICIBA 2024/2025)",
+        "role": "General Chairman"
+      },
+      {
+        "name": "3rd Social Science & Economic International Conference (SOSEIC 2024/2025)",
+        "role": "General Chairman"
+      },
+      {
+        "name": "International Conference on Informatics and Computing (ICIC 2025)",
+        "role": "Technical Reviewer"
+      },
+      {
+        "name": "International Conference on Informatics and Computing (ICIC 2023)",
+        "role": "Technical Reviewer"
+      },
+      {
+        "name": "Conference on Information Technology and Systems Management (CITSM 2022)",
+        "role": "Technical Reviewer"
+      }
+    ]
+  },
+  "professional_certifications": [
+    {
+      "name": "Certified Computer Forensic (FCCF), Grade A",
+      "issuer": "FORESEC Authorized Learning Partner",
+      "period": "2016 - 2017",
+      "details": "Advanced digital forensics, chain of custody, evidence acquisition, cyber forensic investigation standards."
+    },
+    {
+      "name": "Microsoft Technology Associate (MTA): HTML5 Application Development Fundamentals",
+      "issuer": "Microsoft / Multimatics",
+      "period": "Certified",
+      "details": "Core web application architecture, client-side lifecycle, HTML5, CSS3, JavaScript state logic."
+    },
+    {
+      "name": "CCNA Exploration: LAN Switching and Wireless",
+      "issuer": "Cisco Systems, Inc.",
+      "period": "Executive Letter (CEO)",
+      "details": "Course Completion with Executive Letter signed by John T. Chambers (CEO, Cisco Systems, Inc.). Covers VLANs, VTP, STP, Inter-VLAN routing, wireless network design, and switch security configurations."
+    },
+    {
+      "name": "CCNA Exploration: Routing Protocols and Concepts",
+      "issuer": "Cisco Networking Academy",
+      "period": "Course Completion",
+      "details": "Cisco Networking Academy Course Completion Certificate. Covers static routing, dynamic routing protocols (RIP, EIGRP, OSPF), VLSM, CIDR, and packet forwarding mechanics."
+    },
+    {
+      "name": "CCNA Exploration: Network Fundamentals",
+      "issuer": "Cisco Systems, Inc.",
+      "period": "Executive Letter (CEO)",
+      "details": "Course Completion with Executive Letter signed by John T. Chambers (CEO, Cisco Systems, Inc.). Covers OSI and TCP/IP layered architecture, addressing schemes, network media, Ethernet framing, and protocols."
+    }
+  ],
+  "core_research_and_books": {
+    "book": {
+      "title": "Information Sharing Behaviour on Social Media",
+      "publisher": "Universiti Kebangsaan Malaysia (UKM) Press",
+      "year": "2023",
+      "author": "Dr. Zaid Amin, Ph.D.",
+      "description": "Scholarly monograph examining cybernetic interventions, selective attention mechanics, and epistemic behavioral models governing digital information dissemination."
+    },
+    "key_domains": [
+      {
+        "domain": "Behavior and Social Computing",
+        "desc": "Modeling user cognition, attention allocation, and online information exchange dynamics."
+      },
+      {
+        "domain": "Human-Computer Interaction (HCI)",
+        "desc": "Designing empirical interventions, nudges, and perceptual interfaces to curb misinformation."
+      },
+      {
+        "domain": "Digital Ethics & Trustworthy AI",
+        "desc": "Engineering multi-agent normative compliance, cybernetic feedback loops, and transparent municipal AI governance."
+      },
+      {
+        "domain": "Persuasive Technology",
+        "desc": "Applying behavioral economics and cognitive psychology to computational system interaction."
+      }
+    ]
+  },
+  "academic_references": [
+    {
+      "name": "Assoc. Prof. Dr. Nazlena Mohamad Ali",
+      "role": "Head of Research & Innovation",
+      "institution": "Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM)",
+      "phone": "+603-8927 2413",
+      "email": "nazlena.ali@ukm.edu.my"
+    },
+    {
+      "name": "Dr. Rahma Santhi Zinaida",
+      "role": "Senior Lecturer",
+      "institution": "School of Communication and Media Studies, Sunway University, Malaysia",
+      "phone": "+60 1111 730302 / +62 813 777 555 36",
+      "email": "rahmaz@sunway.edu.my"
+    },
+    {
+      "name": "Dr. Mohamad Taha Ijab",
+      "role": "Head of Quality Assurance",
+      "institution": "Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM)",
+      "phone": "+603-8927 2429 / 2444",
+      "email": "taha@ukm.edu.my"
+    },
+    {
+      "name": "Prof. Hj. Isnawijayani, M.Si., Ph.D.",
+      "role": "Director of Postgraduate Program",
+      "institution": "Universitas Bina Darma, Indonesia",
+      "phone": "+62 819 1962 2708",
+      "email": "isnawijayani@binadarma.ac.id"
+    }
+  ],
+  "personal_interests": [
+    "Musical Performance",
+    "Scholarly & Philosophical Writing",
+    "Deep Reading & Critical Epistemology",
+    "Fine Arts & Visual Design",
+    "Cultural Exploration & Travelling",
+    "Nature & Fishing"
+  ]
+}
