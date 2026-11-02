@@ -11,7 +11,7 @@
     "abstract": "<p class=\"lead-para\">A multimodal orchestration framework utilizing agentic intelligence for autonomous urban governance and municipal compliance.</p><div class=\"callout-box\"><strong>Key Finding:</strong> Autonomous compliance verification yields 94.2% operational accuracy across distributed civic infrastructure.</div>",
     "bibtex": "@article{amin2026trustworthy,\n  author = {Zaid Amin and collaborators},\n  title = {{Trustworthy AI for Sustainable Cities}},\n  journal = {Smart Cities},\n  volume = {9},\n  number = {1},\n  pages = {174},\n  year = {2026}\n}",
     "image": "assets/images/uploads/spotlight_mdpi.png",
-    "featured": false
+    "featured": true
   },
   {
     "id": "amin2026srivijayapedia",
@@ -51,7 +51,7 @@
     "doi": "10.20944/preprints202608.1136.v1",
     "url": "https://doi.org/10.20944/preprints202608.1136.v1",
     "bibtex": "@misc{amin2026trustworthy,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance}},\n  year      = {2026},\n  journal   = {},\n  doi       = {10.20944/preprints202608.1136.v1},\n  url       = {https://doi.org/10.20944/preprints202608.1136.v1}\n}",
-    "featured": true,
+    "featured": false,
     "abstract": "Research addressing trustworthy ai for sustainable cities: a multimodal orchestration agent-based framework for civic compliance through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
     "image": "assets/images/spotlight-smart-cities.jpg"
   },
