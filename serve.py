@@ -309,6 +309,14 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                     if "id" not in trace_item:
                         trace_item["id"] = f"tr-{int(time.time() * 1000)}"
                     
+                    # Increment article post_reads if trace is an article page view
+                    tpath = trace_item.get("path", "")
+                    slug_match = re.search(r"[?&]slug=([a-zA-Z0-9_-]+)", tpath)
+                    if slug_match:
+                        slug = slug_match.group(1)
+                        post_reads = curr.setdefault("post_reads", {})
+                        post_reads[slug] = post_reads.get(slug, 0) + 1
+
                     traces.insert(0, trace_item)
                     curr["page_traces"] = traces[:100]
                     curr["updated_at"] = datetime.now().isoformat()
@@ -578,6 +586,8 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                     curr["base_counts"] = payload["base_counts"]
                 if "ga_measurement_id" in payload:
                     curr["ga_measurement_id"] = str(payload["ga_measurement_id"]).strip()
+                if "post_reads" in payload:
+                    curr["post_reads"] = payload["post_reads"]
                 curr["updated_at"] = datetime.now().isoformat()
                 save_json_file("analytics.json", curr)
                 rebuild_site()
