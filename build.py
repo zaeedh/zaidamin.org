@@ -1071,18 +1071,6 @@ def get_portals_tray_carousel_html():
 
           <!-- Tray Dynamic Looping & Shuffle Navigation Controls Bar -->
           <div class="tray-controls-bar" role="navigation" aria-label="Portals Carousel Pagination">
-            <button type="button" class="tray-nav-btn tray-arrow-prev" title="Previous Slide (Up)" aria-label="Previous Slide">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="18 15 12 9 6 15"></polyline>
-              </svg>
-            </button>
-
-            <div class="tray-status-pill font-cinzel">
-              <span class="tray-status-counter"><span class="tray-curr">01</span> / <span class="tray-total">{total_slides_str}</span></span>
-              <span class="tray-status-sep">&bull;</span>
-              <span class="tray-status-tag"><span class="kicker-gem">✦</span> ALL 4 PORTALS (124 WORKS)</span>
-            </div>
-
             <button type="button" class="tray-shuffle-btn" id="tray-shuffle-toggle" title="Toggle Random Shuffle Mode" aria-label="Toggle Random Shuffle Mode">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="16 3 21 3 21 8"></polyline>
@@ -1094,11 +1082,18 @@ def get_portals_tray_carousel_html():
               <span class="tray-shuffle-label">Shuffle</span>
             </button>
 
-            <button type="button" class="tray-nav-btn tray-arrow-next" title="Next Slide (Down)" aria-label="Next Slide">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
+            <div class="tray-nav-arrows">
+              <button type="button" class="tray-nav-btn tray-arrow-prev" title="Previous Slide (Up)" aria-label="Previous Slide">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+              </button>
+              <button type="button" class="tray-nav-btn tray-arrow-next" title="Next Slide (Down)" aria-label="Next Slide">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>'''
 
