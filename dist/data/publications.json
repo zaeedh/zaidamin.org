@@ -84,6 +84,34 @@
     "image": "assets/images/thumb-research.jpg"
   },
   {
+    "id": "amin2024digital",
+    "title": "Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World",
+    "authors": "Dr. Zaid Amin et al.",
+    "year": 2024,
+    "category": "Book Chapter",
+    "venue": "Contributions to Management Science",
+    "doi": "10.1007/978-3-031-48770-5_65",
+    "url": "https://doi.org/10.1007/978-3-031-48770-5_65",
+    "bibtex": "@incollection{amin2024digital,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World}},\n  year      = {2024},\n  journal   = {Contributions to Management Science},\n  doi       = {10.1007/978-3-031-48770-5_65},\n  url       = {https://doi.org/10.1007/978-3-031-48770-5_65}\n}",
+    "featured": true,
+    "abstract": "Research addressing digital loneliness in social media: the epoch of our connected and distraction world through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/books/book_digital_loneliness.webp"
+  },
+  {
+    "id": "amin2021attentionbased",
+    "title": "Attention-Based Design and Selective Exposure Amid COVID-19 Misinformation Sharing",
+    "authors": "Dr. Zaid Amin et al.",
+    "year": 2021,
+    "category": "Book Chapter",
+    "venue": "Lecture Notes in Computer Science",
+    "doi": "10.1007/978-3-030-78468-3_34",
+    "url": "https://doi.org/10.1007/978-3-030-78468-3_34",
+    "bibtex": "@incollection{amin2021attentionbased,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Attention-Based Design and Selective Exposure Amid COVID-19 Misinformation Sharing}},\n  year      = {2021},\n  journal   = {Lecture Notes in Computer Science},\n  doi       = {10.1007/978-3-030-78468-3_34},\n  url       = {https://doi.org/10.1007/978-3-030-78468-3_34}\n}",
+    "featured": false,
+    "abstract": "Research addressing attention-based design and selective exposure amid covid-19 misinformation sharing through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
+    "image": "assets/images/books/book_attention_covid.webp"
+  },
+  {
     "id": "amin2025peerreview",
     "title": "Peer-Review Statements",
     "authors": "Dr. Zaid Amin et al.",
@@ -110,34 +138,6 @@
     "featured": false,
     "abstract": "Research addressing tune-attention model: designing cybernetics intervention for information sharing behavior through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
     "image": "assets/images/thumb-attention.jpg"
-  },
-  {
-    "id": "amin2024digital",
-    "title": "Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World",
-    "authors": "Dr. Zaid Amin et al.",
-    "year": 2024,
-    "category": "Book Chapter",
-    "venue": "Contributions to Management Science",
-    "doi": "10.1007/978-3-031-48770-5_65",
-    "url": "https://doi.org/10.1007/978-3-031-48770-5_65",
-    "bibtex": "@incollection{amin2024digital,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World}},\n  year      = {2024},\n  journal   = {Contributions to Management Science},\n  doi       = {10.1007/978-3-031-48770-5_65},\n  url       = {https://doi.org/10.1007/978-3-031-48770-5_65}\n}",
-    "featured": false,
-    "abstract": "Research addressing digital loneliness in social media: the epoch of our connected and distraction world through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
-    "image": "assets/images/books/book_digital_loneliness.webp"
-  },
-  {
-    "id": "amin2021attentionbased",
-    "title": "Attention-Based Design and Selective Exposure Amid COVID-19 Misinformation Sharing",
-    "authors": "Dr. Zaid Amin et al.",
-    "year": 2021,
-    "category": "Book Chapter",
-    "venue": "Lecture Notes in Computer Science",
-    "doi": "10.1007/978-3-030-78468-3_34",
-    "url": "https://doi.org/10.1007/978-3-030-78468-3_34",
-    "bibtex": "@incollection{amin2021attentionbased,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Attention-Based Design and Selective Exposure Amid COVID-19 Misinformation Sharing}},\n  year      = {2021},\n  journal   = {Lecture Notes in Computer Science},\n  doi       = {10.1007/978-3-030-78468-3_34},\n  url       = {https://doi.org/10.1007/978-3-030-78468-3_34}\n}",
-    "featured": false,
-    "abstract": "Research addressing attention-based design and selective exposure amid covid-19 misinformation sharing through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
-    "image": "assets/images/books/book_attention_covid.webp"
   },
   {
     "id": "amin2021attentionbased",
