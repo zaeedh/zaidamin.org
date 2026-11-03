@@ -527,6 +527,7 @@ function initPortalsTrayCarousel() {
   const carousel = document.getElementById('portals-carousel');
   if (!carousel) return;
 
+  const track = carousel.querySelector('.tray-slides-track');
   const slides = carousel.querySelectorAll('.tray-slide');
   const currEl = carousel.querySelector('.tray-curr');
   const totalEl = carousel.querySelector('.tray-total');
@@ -539,16 +540,15 @@ function initPortalsTrayCarousel() {
   let isShuffleMode = false;
   let isTransitioning = false;
 
-  // Initialize slides state: slide 0 is visible, all others are hidden
-  slides.forEach((slide, idx) => {
-    slide.classList.remove('active', 'slide-out-down', 'slide-out-up');
-    if (idx === 0) {
-      slide.classList.add('active');
-      slide.style.visibility = 'visible';
-    } else {
-      slide.style.visibility = 'hidden';
+  function updateTrack() {
+    if (track) {
+      track.style.transform = `translateY(-${portalsTickerIndex * 100}%)`;
     }
-  });
+    if (currEl) currEl.textContent = String(portalsTickerIndex + 1).padStart(2, '0');
+  }
+
+  // Initialize track to slide 0
+  updateTrack();
 
   function rotateTraySlide(dir) {
     if (isTransitioning) return;
@@ -565,84 +565,17 @@ function initPortalsTrayCarousel() {
       portalsTickerIndex = (portalsTickerIndex + dir + total) % total;
     }
 
-    // Hide any slides that are not part of this immediate transition
-    slides.forEach((s, idx) => {
-      if (idx !== prevIdx && idx !== portalsTickerIndex) {
-        s.classList.remove('active', 'slide-out-down', 'slide-out-up');
-        s.style.visibility = 'hidden';
-      }
-    });
+    updateTrack();
 
-    const prevSlide = slides[prevIdx];
-    const nextSlide = slides[portalsTickerIndex];
-
-    if (prevSlide) {
-      prevSlide.classList.remove('active');
-      if (dir >= 0) {
-        prevSlide.classList.add('slide-out-down');
-      } else {
-        prevSlide.classList.add('slide-out-up');
-      }
-    }
-
-    if (nextSlide) {
-      nextSlide.style.visibility = 'visible';
-      nextSlide.classList.remove('slide-out-down', 'slide-out-up');
-      nextSlide.classList.add('active');
-    }
-
-    // Update counter
-    if (currEl) currEl.textContent = String(portalsTickerIndex + 1).padStart(2, '0');
-
-    // Clean up outgoing slide after animation finishes to prevent ghost overlapping
     setTimeout(() => {
-      if (prevSlide && prevSlide !== nextSlide) {
-        prevSlide.classList.remove('slide-out-down', 'slide-out-up');
-        prevSlide.style.visibility = 'hidden';
-      }
       isTransitioning = false;
-    }, 380);
+    }, 450);
   }
 
   function goToSlide(targetIdx) {
     if (targetIdx === portalsTickerIndex || targetIdx < 0 || targetIdx >= total) return;
-    const dir = targetIdx > portalsTickerIndex ? 1 : -1;
-    const prevIdx = portalsTickerIndex;
     portalsTickerIndex = targetIdx;
-
-    slides.forEach((s, idx) => {
-      if (idx !== prevIdx && idx !== portalsTickerIndex) {
-        s.classList.remove('active', 'slide-out-down', 'slide-out-up');
-        s.style.visibility = 'hidden';
-      }
-    });
-
-    const prevSlide = slides[prevIdx];
-    const nextSlide = slides[portalsTickerIndex];
-
-    if (prevSlide) {
-      prevSlide.classList.remove('active');
-      if (dir >= 0) {
-        prevSlide.classList.add('slide-out-down');
-      } else {
-        prevSlide.classList.add('slide-out-up');
-      }
-    }
-
-    if (nextSlide) {
-      nextSlide.style.visibility = 'visible';
-      nextSlide.classList.remove('slide-out-down', 'slide-out-up');
-      nextSlide.classList.add('active');
-    }
-
-    if (currEl) currEl.textContent = String(portalsTickerIndex + 1).padStart(2, '0');
-
-    setTimeout(() => {
-      if (prevSlide && prevSlide !== nextSlide) {
-        prevSlide.classList.remove('slide-out-down', 'slide-out-up');
-        prevSlide.style.visibility = 'hidden';
-      }
-    }, 380);
+    updateTrack();
   }
 
   // Global controller for Advanced Search Engine & Slide Auto-Jump
