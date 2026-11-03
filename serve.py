@@ -190,7 +190,59 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
-        path = parsed.path
+        path = parsed.path.rstrip("/")
+        if not path:
+            path = "/"
+
+        # 1. Direct Root Serving for Local CMS Studio (Offline Isolation)
+        if path in ["/cms", "/cms.html"]:
+            cms_file = ROOT_DIR / "cms.html"
+            if cms_file.exists():
+                with open(cms_file, "rb") as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(content)))
+                self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+                self.end_headers()
+                self.wfile.write(content)
+                return
+
+        # 2. PWA Manifest Serving
+        if path in ["/site.webmanifest", "/manifest.json"]:
+            m_file = ROOT_DIR / "site.webmanifest"
+            if m_file.exists():
+                with open(m_file, "rb") as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "application/manifest+json")
+                self.send_header("Content-Length", str(len(content)))
+                self.end_headers()
+                self.wfile.write(content)
+                return
+
+        # 3. Clean Extensionless URL Routing (e.g., /publications -> /publications.html)
+        if not path.endswith(".html") and path != "/":
+            candidate_html = DIRECTORY / f"{path.lstrip('/')}.html"
+            if candidate_html.exists():
+                with open(candidate_html, "rb") as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(content)))
+                self.end_headers()
+                self.wfile.write(content)
+                return
+            candidate_idx = DIRECTORY / path.lstrip('/') / "index.html"
+            if candidate_idx.exists():
+                with open(candidate_idx, "rb") as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(content)))
+                self.end_headers()
+                self.wfile.write(content)
+                return
         if path == "/api/spotlight":
             spotlight_data = load_json_file("spotlight.json")
             if not isinstance(spotlight_data, dict):
