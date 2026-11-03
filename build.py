@@ -1971,26 +1971,23 @@ def generate_research_page():
 
     html += f"""
     <!-- Subpage Content: Activity & Project -->
-    <div class="subpage-container">
-      <div style="margin-bottom: 24px;">
-        <h1 class="font-cinzel" style="font-size: 2.75rem; font-weight: 900; letter-spacing: -0.02em; margin: 0 0 10px 0; color: #ffffff;">Activity &amp; Project</h1>
-        <p style="font-size: 1.05rem; color: var(--text-muted); max-width: 860px; line-height: 1.6; margin: 0;">
+    <div class="subpage-container activity-page-container">
+      <section class="activity-hero-section">
+        <h1 class="activity-hero-title">Activity &amp; Project</h1>
+        <p class="activity-hero-subtitle">
           Explore Dr. Zaid Amin's scholarly essays, peer commentaries, funded research grants, and technical project pillars across AI governance, human-computer interaction, and digital humanities.
         </p>
-      </div>
-
-      <!-- Navigation Tabs & Direct CMS Studio Launcher -->
-      <div class="activity-tabs-bar">
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <div class="activity-tabs-bar">
           <button class="activity-tab-btn active" id="tab-btn-articles" onclick="switchActivityTab('articles')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -1px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
             <span>Scholarly Articles &amp; Essays ({len(articles)})</span>
           </button>
           <button class="activity-tab-btn" id="tab-btn-pillars" onclick="switchActivityTab('pillars')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -1px;"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
             <span>Research Pillars &amp; Grants</span>
           </button>
         </div>
+      </section>
 
 
       </div>
