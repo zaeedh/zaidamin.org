@@ -302,6 +302,42 @@
   },
   "page_traces": [
     {
+      "id": "tr-1793715551641",
+      "timestamp": "2026-11-03T14:19:11.641Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1793715267489",
+      "timestamp": "2026-11-03T14:14:27.489Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1793715159057",
+      "timestamp": "2026-11-03T14:12:39.057Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
       "id": "tr-1793712742995",
       "timestamp": "2026-11-03T13:32:22.995Z",
       "path": "/publications",
@@ -1180,7 +1216,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-03T21:32:23.009941",
+  "updated_at": "2026-11-03T22:19:11.651735",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
