@@ -3210,10 +3210,9 @@ a {
 .ticker-controls-col {
   display: flex;
   align-items: center;
-  gap: 10px;
   flex-shrink: 0;
   border-left: 1px solid rgba(140, 180, 205, 0.16);
-  padding-left: 14px;
+  padding-left: 10px;
 }
 
 .ticker-slide-counter {
