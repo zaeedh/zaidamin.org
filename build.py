@@ -377,15 +377,15 @@ def get_visitor_stats_html():
         full_name = c.get("full_name", display_name)
         country_capsules_html += f'''
           <div class="stats-country-item" data-country-code="{c['code']}" title="{full_name}: {pct}% of total academic traffic ({count_k} visits)">
+            <span class="stats-origin-badge font-cinzel" data-live-badge="{c['code']}" style="display: none;">✦ YOU</span>
             <div class="stats-country-top">
               <span class="stats-dot" style="background: {c['color']}; box-shadow: 0 0 6px {c['color']}88;"></span>
               {flag}
               <span class="stats-country-name">{display_name}</span>
             </div>
             <div class="stats-country-bottom">
-              <span class="stats-country-pct" data-stat-pct="{c['code']}">{pct}%</span>
-              <span class="stats-live-pill" data-live-badge="{c['code']}" style="display: none;">YOU (LIVE)</span>
-              <span class="stats-country-count" data-stat-count="{c['code']}" data-raw-count="{c['count']}">{count_k}</span>
+              <span class="stats-country-pct font-mono" data-stat-pct="{c['code']}">{pct}%</span>
+              <span class="stats-country-count font-mono" data-stat-count="{c['code']}" data-raw-count="{c['count']}">{count_k}</span>
             </div>
           </div>'''
 
@@ -1050,9 +1050,11 @@ def get_portals_tray_carousel_html():
     return f'''
         <!-- Inset Tray containing Stacked Horizontal Cards with Dynamic Looping Carousel -->
         <div class="ref-inset-tray" id="portals-carousel" aria-roledescription="marquee" aria-label="Academic Portals and Articles">
-          <!-- Tray Carousel Vertical Slides Container -->
+          <!-- Tray Carousel Vertical Slides Container with Physical Translation Track -->
           <div class="tray-slides-wrap">
-            {slides_html}
+            <div class="tray-slides-track">
+              {slides_html}
+            </div>
           </div>
 
           <!-- Tray Dynamic Looping & Shuffle Navigation Controls Bar -->
