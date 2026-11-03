@@ -57,6 +57,7 @@ function initPublicationsFilter() {
   const filterBtns = document.querySelectorAll('.filter-btn');
   const pubItems = document.querySelectorAll('.pub-item');
   const countIndicator = document.getElementById('pub-count-indicator');
+  const sections = document.querySelectorAll('.pub-gallery-section');
 
   if (!pubItems.length) return;
 
@@ -67,32 +68,75 @@ function initPublicationsFilter() {
     let visibleCount = 0;
 
     pubItems.forEach(item => {
-      const category = item.getAttribute('data-category') || '';
-      const textContent = item.textContent.toLowerCase();
+      const category = (item.getAttribute('data-category') || '').toLowerCase();
+      const title = (item.getAttribute('data-title') || '').toLowerCase();
+      const venue = (item.getAttribute('data-venue') || '').toLowerCase();
+      const year = (item.getAttribute('data-year') || '').toLowerCase();
+      const textContent = (item.textContent || '').toLowerCase();
 
-      const matchesCategory = (currentCategory === 'all') || (category.toLowerCase() === currentCategory.toLowerCase());
-      const matchesQuery = !currentQuery || textContent.includes(currentQuery);
+      const matchesCategory = (currentCategory === 'all') || (category === currentCategory.toLowerCase());
+      const matchesQuery = !currentQuery || 
+        title.includes(currentQuery) || 
+        venue.includes(currentQuery) || 
+        year.includes(currentQuery) || 
+        textContent.includes(currentQuery);
 
       if (matchesCategory && matchesQuery) {
-        item.style.display = 'block';
+        item.style.display = '';
         visibleCount++;
       } else {
         item.style.display = 'none';
       }
     });
 
+    // Dynamic section visibility check
+    sections.forEach(sec => {
+      const secItems = sec.querySelectorAll('.pub-item');
+      const hasVisible = Array.from(secItems).some(it => it.style.display !== 'none');
+      sec.style.display = hasVisible ? '' : 'none';
+    });
+
     if (countIndicator) {
-      countIndicator.textContent = `Showing ${visibleCount} of ${pubItems.length} publications`;
+      if (currentQuery) {
+        countIndicator.textContent = `Showing ${visibleCount} matching publication${visibleCount === 1 ? '' : 's'} for "${currentQuery}"`;
+      } else if (currentCategory !== 'all') {
+        countIndicator.textContent = `Showing ${visibleCount} publication${visibleCount === 1 ? '' : 's'} in selected gallery`;
+      } else {
+        countIndicator.textContent = `Showing all ${visibleCount} publications across 4 dedicated galleries`;
+      }
     }
   }
 
-  // Filter pills event
+  // Filter pills event (Smooth scroll to section or filter)
   filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      currentCategory = btn.getAttribute('data-filter') || 'all';
-      applyFilters();
+      const filterVal = btn.getAttribute('data-filter') || 'all';
+      const targetSectionId = btn.getAttribute('data-target-section');
+
+      if (targetSectionId) {
+        // Show all so browsing remains open and scroll to target
+        currentCategory = 'all';
+        applyFilters();
+        const targetEl = document.getElementById(targetSectionId);
+        if (targetEl) {
+          const yOffset = -140; // Offset for sticky navbar + controls
+          const y = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      } else {
+        // "All" clicked: scroll back to top of galleries
+        currentCategory = 'all';
+        applyFilters();
+        const firstSec = document.querySelector('.pub-gallery-section');
+        if (firstSec) {
+          const yOffset = -140;
+          const y = firstSec.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }
     });
   });
 
