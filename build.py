@@ -1648,47 +1648,68 @@ def generate_publications_page():
         cards_html = ""
         for item_idx, pub in enumerate(cat_items, 1):
             download_pill = render_download_pill(pub)
-            featured_pill = '<span class="pub-badge-featured">★ Featured</span>' if pub.get("featured") else ""
+            featured_pill = '<span class="pub-row-featured-pill">★ Featured</span>' if pub.get("featured") else ""
             short_venue = pub.get("venue", "")
-            if len(short_venue) > 28:
-                short_venue = short_venue[:26] + "..."
-            excerpt = clean_excerpt(pub.get("abstract", ""))
+            if len(short_venue) > 34:
+                short_venue = short_venue[:32] + "..."
+            excerpt = clean_excerpt(pub.get("abstract", ""), max_len=160)
+            doi = pub.get("doi", "").strip()
+            url = pub.get("url", "").strip()
+            if not url and doi:
+                url = f"https://doi.org/{doi}"
+            doi_html = f'<div class="pub-row-doi"><span class="pub-row-doi-lbl">DOI:</span> <a href="{url}" target="_blank" rel="noopener" class="pub-row-doi-link">{doi}</a></div>' if doi else ""
+            year = pub.get("year", "")
+            escaped_title = html.escape(pub["title"])
+            escaped_title_lower = html.escape(pub["title"].lower())
+            escaped_venue = html.escape(pub.get("venue", ""))
+            escaped_venue_lower = html.escape(pub.get("venue", "").lower())
+            img_src = pub.get("image", "assets/images/thumb-research.jpg")
+            bibtex_id = pub.get("id", f"pub_{cat_idx}_{item_idx}")
 
             cards_html += f"""
-            <article class="pub-gallery-card pub-item" data-category="{cat['category_key'].lower()}" data-title="{html.escape(pub['title'].lower())}" data-venue="{html.escape(pub.get('venue', '').lower())}" data-year="{pub.get('year', '')}">
-              <div class="pub-card-cover">
-                <img src="{pub.get('image', 'assets/images/thumb-research.jpg')}" alt="{html.escape(pub['title'])}" loading="lazy" class="pub-card-img" />
-                <div class="pub-card-overlay"></div>
-                <div class="pub-card-badges">
-                  <span class="pub-badge-venue" title="{html.escape(pub.get('venue', ''))}">{short_venue}</span>
-                  <span class="pub-badge-year">{pub.get('year', '')}</span>
-                </div>
+            <article class="pub-row-card pub-item" data-category="{cat['category_key'].lower()}" data-title="{escaped_title_lower}" data-venue="{escaped_venue_lower}" data-year="{year}">
+              <!-- Left: Thumbnail (Matches User Icon Box) -->
+              <div class="pub-row-thumb-frame">
+                <img src="{img_src}" alt="{escaped_title}" loading="lazy" class="pub-row-thumb-img" />
+                <div class="pub-row-thumb-overlay"></div>
+                <div class="pub-row-thumb-badge-top">{short_venue}</div>
+                <div class="pub-row-thumb-badge-year">{year}</div>
               </div>
 
-              <div class="pub-card-body">
-                <div class="pub-card-meta-line">
-                  <span class="pub-card-num">#{item_idx:02d}</span>
-                  <span class="pub-card-dot">&bull;</span>
-                  <span class="pub-card-authors">Dr. Zaid Amin et al.</span>
+              <!-- Right: Content & Action Architecture (Matches User Icon Lines) -->
+              <div class="pub-row-content">
+                <div class="pub-row-meta-line">
+                  <span class="pub-row-idx">#{item_idx:02d}</span>
+                  <span class="pub-row-dot">&bull;</span>
+                  <span class="pub-row-cat-pill">{cat['title'].split()[0]}</span>
+                  <span class="pub-row-dot">&bull;</span>
+                  <span class="pub-row-authors">Dr. Zaid Amin et al.</span>
                   {featured_pill}
                 </div>
 
-                <h3 class="pub-card-title">{pub['title']}</h3>
-                <div class="pub-card-venue-text">{pub.get('venue', '')}</div>
-                {f'<p class="pub-card-excerpt">{excerpt}</p>' if excerpt else ''}
-              </div>
+                <h3 class="pub-row-title font-cinzel">{pub['title']}</h3>
+                <div class="pub-row-venue-full">{pub.get('venue', '')}</div>
+                <div class="pub-row-gold-rule"></div>
+                {f'<p class="pub-row-excerpt">{excerpt}</p>' if excerpt else ''}
 
-              <!-- Pill Buttons directly under the card (Following User Sketch) -->
-              <div class="pub-card-actions">
-                {download_pill}
-                <button class="pub-pill-btn pub-pill-secondary btn-bibtex-toggle" data-target="bib-{pub['id']}">
-                  Cite / BibTeX
-                </button>
-              </div>
+                <!-- Bottom Row: DOI & Actions (Gestalt Proximity) -->
+                <div class="pub-row-footer">
+                  <div class="pub-row-doi-wrap">
+                    {doi_html}
+                  </div>
+                  <div class="pub-row-actions">
+                    {download_pill}
+                    <button class="pub-pill-btn pub-pill-secondary btn-bibtex-toggle" data-target="bib-{bibtex_id}">
+                      Cite / BibTeX
+                    </button>
+                  </div>
+                </div>
 
-              <div class="bibtex-box" id="bib-{pub['id']}">
-                <button class="bibtex-copy-btn" data-target="code-{pub['id']}">Copy BibTeX</button>
-                <code id="code-{pub['id']}">{pub['bibtex']}</code>
+                <!-- Collapsible BibTeX Drawer -->
+                <div class="bibtex-box" id="bib-{bibtex_id}">
+                  <button class="bibtex-copy-btn" data-target="code-{bibtex_id}">Copy BibTeX</button>
+                  <code id="code-{bibtex_id}">{pub['bibtex']}</code>
+                </div>
               </div>
             </article>
             """
@@ -1722,9 +1743,9 @@ def generate_publications_page():
               </div>
             </aside>
 
-            <!-- Right Gallery Grid -->
-            <div class="pub-gallery-grid-wrapper">
-              <div class="pub-gallery-grid">
+            <!-- Right Gallery Row List (Matching User's Row/List Icon) -->
+            <div class="pub-gallery-rows-wrapper">
+              <div class="pub-row-list">
                 {cards_html}
               </div>
             </div>
