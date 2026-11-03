@@ -6850,3 +6850,96 @@ a {
     padding: 18px 16px;
   }
 }
+
+/* ==========================================================================
+   INTERACTIVE COIN-FLIP PORTRAIT ENGINE (3D GOLDEN RATIO ROTATION)
+   ========================================================================== */
+.ref-photo-ring.coin-flip-stage {
+  perspective: 900px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.ref-photo-ring.coin-flip-stage:focus-visible {
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.6), 0 6px 22px -2px rgba(0, 10, 24, 0.70);
+}
+
+.coin-disc {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.coin-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+.coin-face-front {
+  transform: rotateY(0deg) translateZ(1px);
+  -webkit-transform: rotateY(0deg) translateZ(1px);
+}
+
+.coin-face-back {
+  transform: rotateY(180deg) translateZ(1px);
+  -webkit-transform: rotateY(180deg) translateZ(1px);
+}
+
+.coin-face picture,
+.coin-face img.ref-photo-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.coin-specular-gleam {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(254, 243, 199, 0.45) 48%,
+    rgba(212, 175, 55, 0.30) 56%,
+    rgba(255, 255, 255, 0) 78%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+  mix-blend-mode: overlay;
+}
+
+.coin-disc.is-flipping .coin-specular-gleam {
+  opacity: 1;
+}
+
+.coin-rim-highlight {
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  border: 1px solid rgba(254, 240, 138, 0.35);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.ref-photo-ring:hover .coin-disc:not(.is-flipping) {
+  filter: brightness(1.04);
+}
