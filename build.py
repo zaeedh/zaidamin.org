@@ -115,9 +115,7 @@ def get_html_head(title="Dr. Zaid Amin | Academic & Computational Researcher | z
   <link rel="icon" href="favicon.ico">
 
   <!-- Enterprise Cyber Threat Defense & Zero-Vulnerability Architecture -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://cloudflare.com https://api.country.is https://www.google-analytics.com https://*.google-analytics.com; object-src 'none'; base-uri 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
 
@@ -413,6 +411,9 @@ def get_visitor_stats_html():
         </div>
 
         <div class="stats-meta-cluster font-cinzel">
+          <button type="button" class="stats-audit-btn" id="stats-audit-trigger" aria-label="Inspect Real-Time Readership Telemetry &amp; GA4 Audit" title="Real-Time Analytics &amp; GeoIP Telemetry Audit">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Audit Telemetry
+          </button>
           <span class="stats-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2008 &ndash; 2026 Archive</span>
         </div>
       </div>
@@ -423,6 +424,7 @@ def get_visitor_stats_html():
       </div>
 
     </section>
+    {get_telemetry_audit_modal_html(ga_id)}
 '''
 
 def get_telemetry_audit_modal_html(ga_id="G-ZAIDAMIN01"):
