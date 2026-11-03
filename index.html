@@ -2730,9 +2730,6 @@
         </div>
 
         <div class="stats-meta-cluster font-cinzel">
-          <button type="button" class="stats-audit-btn" id="stats-audit-trigger" aria-label="Inspect Real-Time Readership Telemetry &amp; GA4 Audit" title="Real-Time Analytics &amp; GeoIP Telemetry Audit">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Audit Telemetry
-          </button>
           <span class="stats-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2008 &ndash; 2026 Archive</span>
         </div>
       </div>
@@ -2913,102 +2910,6 @@
       </div>
 
     </section>
-          <!-- Real-Time Telemetry & GA4 Audit Modal (Option 1 & Option 2 Inspection) -->
-      <div class="telemetry-audit-modal" id="telemetry-audit-modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="audit-modal-title">
-        <div class="audit-modal-backdrop"></div>
-        <div class="audit-modal-content">
-          <div class="audit-modal-header">
-            <div class="audit-modal-title-group">
-              <span class="audit-gem font-cinzel">&#10022;</span>
-              <h3 id="audit-modal-title" class="font-cinzel">Academic Readership Telemetry &amp; Analytics Audit</h3>
-            </div>
-            <button type="button" class="audit-modal-close" aria-label="Close Audit Modal">&times;</button>
-          </div>
-
-          <div class="audit-modal-body">
-            <!-- Active Session Telemetry Card -->
-            <div class="audit-section-box">
-              <div class="audit-section-head font-cinzel">
-                <span class="audit-pulse-dot"></span>
-                <span>Real-Time Visitor Detection (Option 1)</span>
-              </div>
-              <div class="audit-grid-row">
-                <div class="audit-data-cell">
-                  <span class="audit-label">Detected Visitor Origin:</span>
-                  <strong class="audit-val" id="audit-detected-country">Detecting via Cloudflare Edge CDN...</strong>
-                </div>
-                <div class="audit-data-cell">
-                  <span class="audit-label">Detection Method:</span>
-                  <span class="audit-val">Cloudflare CDN Edge Trace (<code class="audit-code">/cdn-cgi/trace</code>) + GeoIP</span>
-                </div>
-                <div class="audit-data-cell">
-                  <span class="audit-label">Session State:</span>
-                  <span class="audit-val" id="audit-session-status">Active Session Verified</span>
-                </div>
-                <div class="audit-data-cell">
-                  <span class="audit-label">Local Hits Logged:</span>
-                  <span class="audit-val" id="audit-local-hits">Syncing...</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Google Analytics 4 Card -->
-            <div class="audit-section-box">
-              <div class="audit-section-head font-cinzel">
-                <span class="audit-google-icon">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
-                </span>
-                <span>Google Analytics 4 Status (Option 2)</span>
-              </div>
-              <div class="audit-grid-row">
-                <div class="audit-data-cell">
-                  <span class="audit-label">Measurement ID:</span>
-                  <strong class="audit-val audit-gold font-cinzel">G-ZAIDAMIN01</strong>
-                </div>
-                <div class="audit-data-cell">
-                  <span class="audit-label">Tracking Engine:</span>
-                  <span class="audit-val">Official Google Tag Manager (<code class="audit-code">gtag.js</code>)</span>
-                </div>
-                <div class="audit-data-cell">
-                  <span class="audit-label">Realtime Dispatch:</span>
-                  <span class="audit-val audit-green">&#10003; Active &bull; IP Anonymized</span>
-                </div>
-                <div class="audit-data-cell">
-                  <span class="audit-label">Audit &amp; Reporting:</span>
-                  <span class="audit-val">Google Analytics Web &amp; Mobile Dashboard</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Readership Country Breakdown Table -->
-            <div class="audit-table-wrap">
-              <div class="audit-section-head font-cinzel">
-                <span>Aggregated Academic Readership Baseline (2008 &ndash; 2026 Archive)</span>
-              </div>
-              <table class="audit-table font-cinzel">
-                <thead>
-                  <tr>
-                    <th>Nation</th>
-                    <th>Archive Base</th>
-                    <th>Live Hit</th>
-                    <th>Total</th>
-                    <th>Share</th>
-                  </tr>
-                </thead>
-                <tbody id="audit-table-body">
-                  <!-- Dynamically populated by main.js -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="audit-modal-footer">
-            <span class="audit-footer-note">All telemetry is privacy-preserving with zero cross-site trackers or cookies.</span>
-            <button type="button" class="spotlight-btn btn-gold font-cinzel audit-modal-close">Close Audit Panel</button>
-          </div>
-        </div>
-      </div>
-
 
 
     <!-- Footer Divider Line (Above Footer Section) -->
