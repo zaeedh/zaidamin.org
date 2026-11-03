@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ['MobileMenu', typeof initMobileMenu === 'function' ? initMobileMenu : null],
     ['VisitorTelemetryEngine', typeof initVisitorTelemetryEngine === 'function' ? initVisitorTelemetryEngine : null],
     ['TelemetryAccessTraceLogger', typeof initTelemetryAccessTraceLogger === 'function' ? initTelemetryAccessTraceLogger : null],
+    ['CoinPortraitEngine', typeof initCoinPortraitEngine === 'function' ? initCoinPortraitEngine : null],
   ];
 
   initModules.forEach(([name, fn]) => {
@@ -1310,4 +1311,149 @@ function initTelemetryAccessTraceLogger() {
     });
 
   } catch (err) {}
+}
+
+/* ==========================================================================
+   INTERACTIVE COIN-FLIP PORTRAIT ENGINE (3D GOLDEN RATIO ROTATION)
+   Rotates Dr. Zaid Amin's portraits 1-4 with stately, continuous coin inertia
+   ========================================================================== */
+function initCoinPortraitEngine() {
+  const coinStage = document.getElementById('dr-zaid-coin');
+  const coinDisc = document.getElementById('coin-disc');
+  const faceFront = document.getElementById('coin-face-front');
+  const faceBack = document.getElementById('coin-face-back');
+
+  if (!coinStage || !coinDisc || !faceFront || !faceBack) return;
+
+  const PORTRAITS = [
+    {
+      webp: 'assets/images/portraits/portrait-1.webp',
+      png: 'assets/images/portraits/portrait-1.png',
+      alt: 'Dr. Zaid Amin, Ph.D. — Academic Portrait'
+    },
+    {
+      webp: 'assets/images/portraits/portrait-2.webp',
+      png: 'assets/images/portraits/portrait-2.png',
+      alt: 'Dr. Zaid Amin, Ph.D. — Singapore'
+    },
+    {
+      webp: 'assets/images/portraits/portrait-3.webp',
+      png: 'assets/images/portraits/portrait-3.png',
+      alt: 'Dr. Zaid Amin, Ph.D. — Barelang Scenic'
+    },
+    {
+      webp: 'assets/images/portraits/portrait-4.webp',
+      png: 'assets/images/portraits/portrait-4.png',
+      alt: 'Dr. Zaid Amin, Ph.D. — Dataran Merdeka KL'
+    }
+  ];
+
+  // Preload all portrait images into memory for instant, buttery flips
+  PORTRAITS.forEach(p => {
+    const img = new Image();
+    img.src = p.png;
+    const imgWebp = new Image();
+    imgWebp.src = p.webp;
+  });
+
+  let currentAngle = 0;
+  let currentIndex = 0;
+  let isFlipping = false;
+  let autoFlipInterval = null;
+  let isPaused = false;
+
+  function updateFaceImage(faceEl, portrait) {
+    const picture = faceEl.querySelector('picture');
+    if (picture) {
+      const source = picture.querySelector('source');
+      const img = picture.querySelector('img');
+      if (source) source.srcset = portrait.webp;
+      if (img) {
+        img.src = portrait.png;
+        img.alt = portrait.alt;
+      }
+    } else {
+      const img = faceEl.querySelector('img');
+      if (img) {
+        img.src = portrait.png;
+        img.alt = portrait.alt;
+      }
+    }
+  }
+
+  function flipCoin() {
+    if (isFlipping) return;
+    isFlipping = true;
+
+    currentAngle += 180;
+    coinDisc.classList.add('is-flipping');
+    coinDisc.style.transform = `rotateY(${currentAngle}deg) scale(1.05)`;
+
+    // Halfway through rotation, restore scale gently for natural coin weight
+    setTimeout(() => {
+      coinDisc.style.transform = `rotateY(${currentAngle}deg) scale(1)`;
+    }, 560);
+
+    // Flip duration is 1150ms
+    setTimeout(() => {
+      coinDisc.classList.remove('is-flipping');
+      currentIndex = (currentIndex + 1) % PORTRAITS.length;
+      const nextIndex = (currentIndex + 1) % PORTRAITS.length;
+
+      // If currentAngle % 360 === 180, back face is facing user, front is hidden:
+      // Update front face with the upcoming next photo
+      if (currentAngle % 360 === 180) {
+        updateFaceImage(faceFront, PORTRAITS[nextIndex]);
+      } else {
+        // Front face is facing user, back face is hidden:
+        // Update back face with the upcoming next photo
+        updateFaceImage(faceBack, PORTRAITS[nextIndex]);
+      }
+
+      isFlipping = false;
+    }, 1150);
+  }
+
+  function startAutoTimer() {
+    clearInterval(autoFlipInterval);
+    // Golden Ratio interval: ~5.2s between coin turns
+    autoFlipInterval = setInterval(() => {
+      if (!isPaused && !document.hidden) {
+        flipCoin();
+      }
+    }, 5200);
+  }
+
+  function resetTimer() {
+    startAutoTimer();
+  }
+
+  // User interactive controls
+  coinStage.addEventListener('click', () => {
+    flipCoin();
+    resetTimer();
+  });
+
+  coinStage.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      flipCoin();
+      resetTimer();
+    }
+  });
+
+  coinStage.addEventListener('mouseenter', () => {
+    isPaused = true;
+  });
+
+  coinStage.addEventListener('mouseleave', () => {
+    isPaused = false;
+    resetTimer();
+  });
+
+  startAutoTimer();
+
+  // Global accessibility hook
+  window.flipPortraitCoin = flipCoin;
+  console.log('[CoinPortraitEngine] Initialized with 4 portraits. Golden ratio cadence active.');
 }
