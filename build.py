@@ -2554,14 +2554,14 @@ def generate_supervision_page():
     <div class="subpage-container">
       <div style="margin-bottom: 36px;">
         <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brand-blue);">Academic Mentorship</span>
-        <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0; color: #ffffff;">{supervision['heading']}</h1>
+        <h1 class="font-cinzel" style="font-size: 2.1rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; margin: 6px 0 10px 0; color: #ffffff; line-height: 1.25;">{supervision['heading']}</h1>
         <p style="font-size: 1.05rem; color: var(--text-body); line-height: 1.7; max-width: 820px;">
           {supervision['statement']}
         </p>
       </div>
 
       <div style="margin-bottom: 40px;">
-        <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 20px; color: #ffffff;">Open Supervised Research Directions</h2>
+        <h2 class="font-cinzel" style="font-size: 1.52rem; font-weight: 700; letter-spacing: 0.025em; margin-bottom: 20px; color: #ffffff;">Open Supervised Research Directions</h2>
         <div style="display: flex; flex-direction: column; gap: 20px;">
     """
     for t in supervision["open_topics"]:
@@ -2614,8 +2614,8 @@ def generate_cv_page():
         <div class="cv-hero-top">
           <div style="flex: 1 1 540px;">
             <div class="cv-section-tag" style="margin-bottom: 6px;">CURRICULUM VITAE &bull; ACADEMIC PORTFOLIO</div>
-            <h1 class="cv-hero-name">{exec_prof['name']}</h1>
-            <div style="font-size: 1.12rem; font-weight: 700; color: var(--brand-blue); margin-bottom: 6px;">
+            <h1 class="cv-hero-name font-cinzel">{exec_prof['name']}</h1>
+            <div class="cv-hero-role font-cinzel">
               {exec_prof['role_title']}
             </div>
             <div class="cv-hero-affiliation">
