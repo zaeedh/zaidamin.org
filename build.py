@@ -155,8 +155,8 @@ def get_page_header(active_page="home"):
               </svg>
             </a>
             <a href="publications.html" class="main-menu-link {'active' if active_page == 'publications' else ''}">Research &amp; Publication</a>
-            <a href="cv.html#talks" class="main-menu-link {'active' if active_page == 'talks' else ''}">Recent Media &amp; Talks</a>
             <a href="research.html" class="main-menu-link {'active' if active_page in ['research', 'articles'] else ''}">Activity &amp; Project</a>
+            <a href="cv.html#talks" class="main-menu-link {'active' if active_page == 'talks' else ''}">Recent Media &amp; Talks</a>
             <a href="cv.html" class="main-menu-link {'active' if active_page in ['cv', 'achievements'] else ''}">Achievement &amp; CV</a>
           </nav>''' if active_page != 'home' else ''}
 
@@ -1203,11 +1203,11 @@ def generate_golden_ratio_home():
           <a href="publications.html" class="ref-menu-tab" title="Research &amp; Publications">
             <span class="tab-txt-full">Research &amp; Pubs</span><span class="tab-txt-compact">Research</span>
           </a>
-          <a href="cv.html#talks" class="ref-menu-tab" title="Recent Media &amp; Invited Talks">
-            <span class="tab-txt-full">Media &amp; Talks</span><span class="tab-txt-compact">Media</span>
-          </a>
           <a href="research.html" class="ref-menu-tab" title="Activities &amp; Funded Projects">
             <span class="tab-txt-full">Activity &amp; Project</span><span class="tab-txt-compact">Activity</span>
+          </a>
+          <a href="cv.html#talks" class="ref-menu-tab" title="Recent Media &amp; Invited Talks">
+            <span class="tab-txt-full">Media &amp; Talks</span><span class="tab-txt-compact">Media</span>
           </a>
           <a href="cv.html" class="ref-menu-tab" title="Achievements, Honors &amp; Curriculum Vitae">
             <span class="tab-txt-full">Achievement &amp; CV</span><span class="tab-txt-compact">CV</span>
