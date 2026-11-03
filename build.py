@@ -1989,9 +1989,6 @@ def generate_research_page():
         </div>
       </section>
 
-
-      </div>
-
       <!-- PANE 1: Scholarly Articles & Essays -->
       <div id="activity-pane-articles">
         <div class="articles-controls">
@@ -2512,7 +2509,7 @@ def generate_talks_page():
       <!-- ====================================================================
            CATEGORY 3: OPINION (Figure Reference)
            ==================================================================== -->
-      <section class="talks-category-section" id="category-opinion" style="margin-bottom: 8px;">
+      <section class="talks-category-section" id="category-opinion" style="margin-bottom: 0; padding-bottom: 0;">
         <div class="service-carousel-header">
           <div class="service-header-left">
             <div class="service-eyebrow">
