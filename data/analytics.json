@@ -11,7 +11,442 @@
     "DE": 2496,
     "OTHER": 4560
   },
+  "timeline_trends": {
+    "24h": {
+      "timeframe": "24h",
+      "label": "Past 24 Hours (Hourly Reads)",
+      "summary": "+18.4% Net Inflow • Peak Surge at 14:00 UTC",
+      "trend_direction": "up",
+      "trend_pct": "+18.4%",
+      "peak_value": 412,
+      "peak_time": "14:00 UTC",
+      "trough_value": 84,
+      "trough_time": "02:00 UTC",
+      "total_window_visits": 2890,
+      "points": [
+        {
+          "time": "00:00",
+          "visits": 92,
+          "delta": "+4%",
+          "trend": "up",
+          "top_resource": "/publications"
+        },
+        {
+          "time": "02:00",
+          "visits": 84,
+          "delta": "-8%",
+          "trend": "down",
+          "top_resource": "/cv"
+        },
+        {
+          "time": "04:00",
+          "visits": 110,
+          "delta": "+31%",
+          "trend": "up",
+          "top_resource": "/research"
+        },
+        {
+          "time": "06:00",
+          "visits": 165,
+          "delta": "+50%",
+          "trend": "up",
+          "top_resource": "/"
+        },
+        {
+          "time": "08:00",
+          "visits": 248,
+          "delta": "+50%",
+          "trend": "up",
+          "top_resource": "/publications"
+        },
+        {
+          "time": "10:00",
+          "visits": 315,
+          "delta": "+27%",
+          "trend": "up",
+          "top_resource": "/article?slug=ethics-of-generative-ai"
+        },
+        {
+          "time": "12:00",
+          "visits": 380,
+          "delta": "+21%",
+          "trend": "up",
+          "top_resource": "/publications"
+        },
+        {
+          "time": "14:00",
+          "visits": 412,
+          "delta": "+8%",
+          "trend": "peak",
+          "top_resource": "/research"
+        },
+        {
+          "time": "16:00",
+          "visits": 365,
+          "delta": "-11%",
+          "trend": "down",
+          "top_resource": "/"
+        },
+        {
+          "time": "18:00",
+          "visits": 298,
+          "delta": "-18%",
+          "trend": "down",
+          "top_resource": "/publications"
+        },
+        {
+          "time": "20:00",
+          "visits": 242,
+          "delta": "-19%",
+          "trend": "down",
+          "top_resource": "/cv"
+        },
+        {
+          "time": "22:00",
+          "visits": 179,
+          "delta": "-26%",
+          "trend": "down",
+          "top_resource": "/talks"
+        }
+      ]
+    },
+    "7d": {
+      "timeframe": "7d",
+      "label": "Past 7 Days (Daily Traffic)",
+      "summary": "+12.6% Week-over-Week Momentum",
+      "trend_direction": "up",
+      "trend_pct": "+12.6%",
+      "peak_value": 2410,
+      "peak_time": "Wednesday",
+      "trough_value": 1580,
+      "trough_time": "Sunday",
+      "total_window_visits": 13940,
+      "points": [
+        {
+          "time": "Mon",
+          "visits": 1920,
+          "delta": "+5.2%",
+          "trend": "up",
+          "top_resource": "/publications"
+        },
+        {
+          "time": "Tue",
+          "visits": 2180,
+          "delta": "+13.5%",
+          "trend": "up",
+          "top_resource": "/research"
+        },
+        {
+          "time": "Wed",
+          "visits": 2410,
+          "delta": "+10.6%",
+          "trend": "peak",
+          "top_resource": "/publications"
+        },
+        {
+          "time": "Thu",
+          "visits": 2290,
+          "delta": "-5.0%",
+          "trend": "down",
+          "top_resource": "/cv"
+        },
+        {
+          "time": "Fri",
+          "visits": 2140,
+          "delta": "-6.5%",
+          "trend": "down",
+          "top_resource": "/article?slug=ethics-of-generative-ai"
+        },
+        {
+          "time": "Sat",
+          "visits": 1620,
+          "delta": "-24.3%",
+          "trend": "down",
+          "top_resource": "/"
+        },
+        {
+          "time": "Sun",
+          "visits": 1580,
+          "delta": "-2.5%",
+          "trend": "down",
+          "top_resource": "/publications"
+        }
+      ]
+    },
+    "30d": {
+      "timeframe": "30d",
+      "label": "Past 30 Days (Weekly Cycles)",
+      "summary": "+24.2% Monthly Academic Momentum",
+      "trend_direction": "up",
+      "trend_pct": "+24.2%",
+      "peak_value": 14200,
+      "peak_time": "Week 4",
+      "trough_value": 9800,
+      "trough_time": "Week 1",
+      "total_window_visits": 48500,
+      "points": [
+        {
+          "time": "Week 1",
+          "visits": 9800,
+          "delta": "Baseline",
+          "trend": "neutral",
+          "top_resource": "/publications"
+        },
+        {
+          "time": "Week 2",
+          "visits": 11400,
+          "delta": "+16.3%",
+          "trend": "up",
+          "top_resource": "/research"
+        },
+        {
+          "time": "Week 3",
+          "visits": 13100,
+          "delta": "+14.9%",
+          "trend": "up",
+          "top_resource": "/publications"
+        },
+        {
+          "time": "Week 4",
+          "visits": 14200,
+          "delta": "+8.4%",
+          "trend": "peak",
+          "top_resource": "/article?slug=ethics-of-generative-ai"
+        }
+      ]
+    },
+    "archive": {
+      "timeframe": "archive",
+      "label": "2008 – 2026 Longitudinal Academic Archive",
+      "summary": "18-Year Continuous Academic Readership Compound Trajectory",
+      "trend_direction": "up",
+      "trend_pct": "+3,940%",
+      "peak_value": 48500,
+      "peak_time": "2026 (Current)",
+      "trough_value": 1200,
+      "trough_time": "2008 (Genesis)",
+      "total_window_visits": 48500,
+      "points": [
+        {
+          "time": "2008",
+          "visits": 1200,
+          "delta": "Archive Genesis",
+          "trend": "neutral",
+          "top_resource": "/cv"
+        },
+        {
+          "time": "2010",
+          "visits": 2800,
+          "delta": "+133%",
+          "trend": "up",
+          "top_resource": "/publications"
+        },
+        {
+          "time": "2012",
+          "visits": 5400,
+          "delta": "+93%",
+          "trend": "up",
+          "top_resource": "/publications"
+        },
+        {
+          "time": "2014",
+          "visits": 9100,
+          "delta": "+68%",
+          "trend": "up",
+          "top_resource": "/research"
+        },
+        {
+          "time": "2016",
+          "visits": 14600,
+          "delta": "+60%",
+          "trend": "up",
+          "top_resource": "/publications"
+        },
+        {
+          "time": "2018",
+          "visits": 21500,
+          "delta": "+47%",
+          "trend": "up",
+          "top_resource": "/publications"
+        },
+        {
+          "time": "2020",
+          "visits": 29800,
+          "delta": "+38%",
+          "trend": "up",
+          "top_resource": "/research"
+        },
+        {
+          "time": "2022",
+          "visits": 37200,
+          "delta": "+25%",
+          "trend": "up",
+          "top_resource": "/cv"
+        },
+        {
+          "time": "2024",
+          "visits": 43900,
+          "delta": "+18%",
+          "trend": "up",
+          "top_resource": "/publications"
+        },
+        {
+          "time": "2026",
+          "visits": 48500,
+          "delta": "+10.5%",
+          "trend": "peak",
+          "top_resource": "/"
+        }
+      ]
+    }
+  },
+  "page_traces": [
+    {
+      "id": "tr-20261103-01",
+      "timestamp": "2026-11-03T11:48:22Z",
+      "path": "/publications",
+      "title": "Research Publications & Academic Output",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop (Chrome / Windows 11)",
+      "referrer": "Internal Navigation / Header"
+    },
+    {
+      "id": "tr-20261103-02",
+      "timestamp": "2026-11-03T11:46:10Z",
+      "path": "/publications#pub-2025-innovator",
+      "title": "2nd Runner Up South Sumatera Innovator Award 2025",
+      "action": "BIBTEX_COPY",
+      "country": "US",
+      "country_name": "United States",
+      "colo": "IAD",
+      "device": "Desktop (Safari / macOS)",
+      "referrer": "Google Scholar"
+    },
+    {
+      "id": "tr-20261103-03",
+      "timestamp": "2026-11-03T11:42:05Z",
+      "path": "/cv",
+      "title": "Curriculum Vitae & Academic Appointments",
+      "action": "PDF_DOWNLOAD",
+      "country": "GB",
+      "country_name": "United Kingdom",
+      "colo": "LHR",
+      "device": "Desktop (Firefox / Linux)",
+      "referrer": "ORCID Academic Profile"
+    },
+    {
+      "id": "tr-20261103-04",
+      "timestamp": "2026-11-03T11:38:50Z",
+      "path": "/article?slug=ethics-of-generative-ai",
+      "title": "Ethical Governance of Large AI Models in Academic Informatics",
+      "action": "PAGE_VIEW",
+      "country": "SG",
+      "country_name": "Singapore",
+      "colo": "SIN",
+      "device": "Mobile (Chrome / Android 14)",
+      "referrer": "LinkedIn Post / Direct"
+    },
+    {
+      "id": "tr-20261103-05",
+      "timestamp": "2026-11-03T11:32:14Z",
+      "path": "https://doi.org/10.1016/j.compbiomed.2024.108291",
+      "title": "Predictive Modeling in Healthcare AI (External DOI Outbound)",
+      "action": "DOI_ACCESS",
+      "country": "AU",
+      "country_name": "Australia",
+      "colo": "SYD",
+      "device": "Desktop (Edge / Windows 11)",
+      "referrer": "PubMed Central (PMC)"
+    },
+    {
+      "id": "tr-20261103-06",
+      "timestamp": "2026-11-03T11:25:40Z",
+      "path": "/",
+      "title": "Dr. Zaid Amin | Homepage & Academic Portal",
+      "action": "PAGE_VIEW",
+      "country": "DE",
+      "country_name": "Germany",
+      "colo": "FRA",
+      "device": "Desktop (Firefox / Windows 10)",
+      "referrer": "ResearchGate Profile"
+    },
+    {
+      "id": "tr-20261103-07",
+      "timestamp": "2026-11-03T11:19:12Z",
+      "path": "/research",
+      "title": "AI & Biomedical Informatics Research Focus",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop (Chrome / Windows 11)",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-20261103-08",
+      "timestamp": "2026-11-03T11:11:05Z",
+      "path": "/#spotlight",
+      "title": "Universal Academic Spotlight: Provincial Honor Award",
+      "action": "SPOTLIGHT_CLICK",
+      "country": "US",
+      "country_name": "United States",
+      "colo": "SFO",
+      "device": "Mobile (Safari / iOS 18)",
+      "referrer": "Direct Academic Search"
+    },
+    {
+      "id": "tr-20261103-09",
+      "timestamp": "2026-11-03T10:58:33Z",
+      "path": "/publications",
+      "title": "Filter: Machine Learning & Health Informatics",
+      "action": "SEARCH_QUERY",
+      "country": "GB",
+      "country_name": "United Kingdom",
+      "colo": "MAN",
+      "device": "Desktop (Chrome / macOS)",
+      "referrer": "Google Scholar"
+    },
+    {
+      "id": "tr-20261103-10",
+      "timestamp": "2026-11-03T10:44:19Z",
+      "path": "/talks",
+      "title": "Recent Media & Keynote Addresses",
+      "action": "PAGE_VIEW",
+      "country": "OTHER",
+      "country_name": "Japan (NRT)",
+      "colo": "NRT",
+      "device": "Desktop (Safari / macOS)",
+      "referrer": "IEEE Xplore Citation"
+    },
+    {
+      "id": "tr-20261103-11",
+      "timestamp": "2026-11-03T10:30:02Z",
+      "path": "/cv#grants",
+      "title": "Grants & Research Funding Portfolio",
+      "action": "PAGE_VIEW",
+      "country": "SG",
+      "country_name": "Singapore",
+      "colo": "SIN",
+      "device": "Desktop (Chrome / Windows 11)",
+      "referrer": "University Portal"
+    },
+    {
+      "id": "tr-20261103-12",
+      "timestamp": "2026-11-03T10:15:47Z",
+      "path": "/publications#pub-ieee-2024",
+      "title": "Deep Learning Architectures in Medical Image Diagnostics",
+      "action": "BIBTEX_COPY",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "PEN",
+      "device": "Mobile (Chrome / Android 14)",
+      "referrer": "Internal Navigation"
+    }
+  ],
   "last_audit_sync": "2026-11-03",
-  "notes": "Google Analytics 4 Measurement ID and Live Readership Telemetry Baseline",
-  "updated_at": "2026-11-03T10:12:18.547037"
+  "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
+  "updated_at": "2026-11-03T11:58:17.208321"
 }
