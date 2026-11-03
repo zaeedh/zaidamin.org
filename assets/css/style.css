@@ -7490,359 +7490,790 @@ a {
 }
 
 /* ============================================================
-   BOOK & CHAPTERS -- PREMIUM 3-COLUMN GRID SHOWCASE
-   Golden Ratio: Left aside (38.2%) | Right grid (61.8%)
+   BOKIFY-STYLE PREMIUM BOOK & CHAPTERS SHOWCASE
+   Exact match to Bokify template: Hero Banner + Curated Volumes
+   Gestalt Proximity & Golden Ratio (61.8% : 38.2%)
    ============================================================ */
 
-/* ── Section Wrapper ─────────────────────────────────────── */
-.book-showcase-section {
-  margin-bottom: 80px;
+/* ── Section Container ───────────────────────────────────── */
+.bokify-showcase-section {
+  margin-bottom: 90px;
   padding-bottom: 72px;
-  border-bottom: 1px solid rgba(34,166,200,0.12);
+  border-bottom: 1px solid rgba(34, 166, 200, 0.15);
   scroll-margin-top: 140px;
 }
 
-/* ── Two-column layout: aside left + grid right ──────────── */
-.book-showcase-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.618fr;   /* Minor : Major = 38.2% : 61.8% */
-  gap: 40px;
-  align-items: start;
+/* ── Hero Banner Wrapper ─────────────────────────────────── */
+.bokify-hero-wrapper {
+  position: relative;
+  background: linear-gradient(145deg, rgba(8, 26, 48, 0.94) 0%, rgba(3, 12, 24, 0.98) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 26px;
+  padding: 42px 48px;
+  margin-bottom: 48px;
+  box-shadow: 0 24px 60px rgba(0, 8, 20, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  overflow: hidden;
 }
 
-/* ── LEFT ASIDE: Portrait + Category Info ────────────────── */
-.book-showcase-aside {
+.bokify-hero-halo {
+  position: absolute;
+  top: -80px;
+  right: -60px;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(34, 166, 200, 0.14) 0%, rgba(212, 175, 55, 0.08) 40%, transparent 70%);
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+/* ── Hero Grid: Golden Ratio 61.8% Content : 38.2% 3D Stage ── */
+.bokify-hero-grid {
+  display: grid;
+  grid-template-columns: 1.618fr 1fr;
+  gap: 48px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Left Content (61.8%) ────────────────────────────────── */
+.bokify-hero-info {
   display: flex;
   flex-direction: column;
   gap: 0;
-  position: sticky;
-  top: 120px;
 }
 
-.book-aside-photo-frame {
-  position: relative;
-  border-radius: 22px;
-  overflow: hidden;
-  aspect-ratio: 3/4;
-  border: 1px solid rgba(212,175,55,0.28);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.55);
-  background: rgba(4,14,26,0.9);
-  margin-bottom: 0;
+.bokify-author-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 18px;
 }
 
-.book-aside-photo {
-  width: 100%;
-  height: 100%;
+.bokify-author-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(3, 10, 20, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  padding: 5px 16px 5px 6px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.bokify-author-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
   object-fit: cover;
-  object-position: center top;
+  border: 2px solid #d4af37;
   display: block;
 }
 
-.book-aside-badge {
-  position: absolute;
-  bottom: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(3,10,20,0.88);
-  border: 1px solid rgba(212,175,55,0.5);
-  color: #fef08a;
+.bokify-author-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.bokify-author-name {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+}
+
+.bokify-author-role {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.bokify-category-tag {
   font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0.1em;
-  padding: 5px 16px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fef08a;
+  background: rgba(212, 175, 55, 0.16);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  padding: 5px 14px;
   border-radius: 9999px;
   white-space: nowrap;
 }
 
-.book-aside-body {
-  padding: 24px 4px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.book-aside-category-pill {
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #22a6c8;
-  margin-bottom: 6px;
-}
-
-.book-aside-title {
-  font-size: 1.55rem;
+.bokify-hero-title {
+  font-size: 2.35rem;
   font-weight: 800;
   color: #ffffff;
   line-height: 1.2;
-  margin: 0 0 12px;
-  font-family: var(--font-cinzel), serif;
+  margin: 0 0 16px;
+  letter-spacing: -0.01em;
 }
 
-.book-aside-gold-line {
-  width: 48px;
-  height: 2px;
-  background: linear-gradient(90deg, #d4af37, transparent);
-  margin-bottom: 14px;
+.bokify-gold-gradient {
+  background: linear-gradient(135deg, #fef08a 0%, #d4af37 60%, #b8860b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
 }
 
-.book-aside-desc {
-  font-size: 0.88rem;
+.bokify-hero-desc {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin: 0 0 24px;
+  max-width: 620px;
+}
+
+/* Hero CTAs */
+.bokify-hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.bokify-btn-hero-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  font-size: 0.825rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(34, 166, 200, 0.35) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  color: #fef08a;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.22);
+}
+
+.bokify-btn-hero-primary:hover {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.45) 0%, rgba(34, 166, 200, 0.5) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(212, 175, 55, 0.35);
+  color: #ffffff;
+}
+
+.bokify-btn-hero-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  background: rgba(6, 20, 38, 0.7);
+  border: 1px solid rgba(34, 166, 200, 0.32);
+  color: #cbd5e1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.bokify-btn-hero-secondary:hover {
+  border-color: #22a6c8;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.bokify-arrow-down {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Publisher Strip (Bokify Audible/Amazon/Google Books style) */
+.bokify-publisher-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bokify-publisher-strip-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.bokify-publisher-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+}
+
+.bokify-pub-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
   color: #94a3b8;
-  line-height: 1.65;
-  margin: 0 0 18px;
+  background: rgba(4, 14, 26, 0.75);
+  border: 1px solid rgba(34, 166, 200, 0.22);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  white-space: nowrap;
 }
 
-.book-aside-stats {
+.bokify-pub-bullet {
+  color: #22a6c8;
+  font-size: 0.8rem;
+}
+
+/* ── Right Stage: Dual 3D Standing Books (38.2%) ─────────── */
+.bokify-hero-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 340px;
+}
+
+.bokify-stage-container {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bokify-stage-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(34, 166, 200, 0.22) 0%, rgba(212, 175, 55, 0.12) 40%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+.bokify-stage-scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1200px;
+}
+
+/* The 3D Standing Book Unit */
+.bokify-standing-book {
+  position: absolute;
+  cursor: pointer;
+}
+
+/* Front standing book */
+.bokify-standing-front {
+  left: 20px;
+  top: 25px;
+  z-index: 3;
+}
+
+.bokify-standing-front .bokify-book-3d {
+  width: 165px;
+  height: 238px;
+  transform: perspective(1000px) rotateY(-22deg) rotateX(4deg);
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.bokify-standing-front:hover .bokify-book-3d {
+  transform: perspective(1000px) rotateY(-12deg) rotateX(2deg) translateY(-8px);
+}
+
+/* Rear standing book */
+.bokify-standing-rear {
+  right: 25px;
+  top: 0px;
+  z-index: 1;
+  opacity: 0.92;
+}
+
+.bokify-standing-rear .bokify-book-3d {
+  width: 155px;
+  height: 224px;
+  transform: perspective(1000px) rotateY(-14deg) rotateX(3deg);
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.bokify-standing-rear:hover .bokify-book-3d {
+  transform: perspective(1000px) rotateY(-6deg) rotateX(1deg) translateY(-8px);
+}
+
+/* 3D Book Anatomy */
+.bokify-book-cover {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px 6px 6px 2px;
+  overflow: hidden;
+  box-shadow: 4px 8px 24px rgba(0, 0, 0, 0.55);
+  background: #040e1a;
+}
+
+.bokify-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bokify-cover-glare {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.03) 40%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Left spine */
+.bokify-book-spine {
+  position: absolute;
+  left: -20px;
+  top: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(3, 10, 20, 0.98) 0%, rgba(14, 34, 58, 0.92) 80%, rgba(212, 175, 55, 0.5) 100%);
+  border-radius: 3px 0 0 3px;
+  transform: rotateY(-90deg);
+  transform-origin: right center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bokify-spine-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #fef08a;
+  white-space: nowrap;
+}
+
+/* Right pages edge (realistic paper lines) */
+.bokify-book-pages {
+  position: absolute;
+  right: -16px;
+  top: 3px;
+  width: 16px;
+  height: calc(100% - 6px);
+  background: repeating-linear-gradient(
+    90deg,
+    #f8fafc 0px,
+    #e2e8f0 1px,
+    #cbd5e1 2px,
+    #f1f5f9 3px
+  );
+  border-radius: 0 3px 3px 0;
+  transform: rotateY(90deg);
+  transform-origin: left center;
+  box-shadow: inset -2px 0 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Ambient shadow on floor */
+.bokify-book-shadow {
+  position: absolute;
+  bottom: -20px;
+  left: -10px;
+  right: -20px;
+  height: 28px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.25) 50%, transparent 75%);
+  border-radius: 50%;
+  transform: scaleY(0.35);
+  pointer-events: none;
+}
+
+.bokify-stage-badge {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #fef08a;
+  background: rgba(3, 10, 20, 0.9);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  padding: 3px 12px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+.bokify-stage-pedestal-line {
+  position: absolute;
+  bottom: 12px;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.3) 50%, transparent 100%);
+}
+
+/* ── CURATED VOLUMES SHELF (Bokify "Top Sales / Featured") ── */
+.bokify-shelf-section {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.bokify-shelf-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(34, 166, 200, 0.15);
+}
+
+.bokify-shelf-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bokify-shelf-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #22a6c8;
+}
+
+.bokify-shelf-heading {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+
+.bokify-shelf-chips {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-/* ── RIGHT: 3-Column Book Grid ───────────────────────────── */
-.book-grid-wrapper {
-  min-width: 0;
-}
-
-.book-grid-3col {
+/* ── 3-Column Bokify Book Cards Grid ─────────────────────── */
+.bokify-cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
+  gap: 28px;
 }
 
-/* ── Individual Book Card ─────────────────────────────────── */
-.book-grid-card {
+/* Individual Book Card */
+.bokify-shelf-card {
   display: flex;
   flex-direction: column;
-  background: linear-gradient(160deg, rgba(8,26,48,0.92) 0%, rgba(4,14,26,0.97) 100%);
-  border: 1px solid rgba(34,166,200,0.20);
-  border-radius: 18px;
+  background: linear-gradient(160deg, rgba(8, 26, 48, 0.92) 0%, rgba(3, 12, 24, 0.97) 100%);
+  border: 1px solid rgba(34, 166, 200, 0.22);
+  border-radius: 22px;
   overflow: hidden;
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 16px 40px rgba(0, 8, 20, 0.45);
+  transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.32s ease, box-shadow 0.32s ease;
 }
 
-.book-grid-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(212,175,55,0.45);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+.bokify-shelf-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 20px rgba(212, 175, 55, 0.15);
 }
 
-/* 3D book cover area */
-.book-grid-cover-wrap {
-  position: relative;
-  padding: 28px 28px 12px;
+/* Card Top 3D Stage */
+.bokify-card-stage {
+  padding: 32px 24px 16px;
+  background: linear-gradient(180deg, rgba(4, 14, 26, 0.7) 0%, transparent 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  background: linear-gradient(180deg, rgba(4,14,26,0.6) 0%, transparent 100%);
+  gap: 14px;
 }
 
-.book-grid-3d {
+.bokify-card-3d-scene {
+  perspective: 800px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.bokify-card-book-3d {
   position: relative;
-  width: 120px;
-  height: 174px;          /* golden: 120 * 1.45 */
-  transform: perspective(700px) rotateY(-16deg) rotateX(3deg);
-  filter: drop-shadow(10px 14px 22px rgba(0,0,0,0.65));
+  width: 124px;
+  height: 180px;
+  transform: perspective(700px) rotateY(-18deg) rotateX(4deg);
+  transform-style: preserve-3d;
   transition: transform 0.35s ease;
-  flex-shrink: 0;
 }
 
-.book-grid-card:hover .book-grid-3d {
-  transform: perspective(700px) rotateY(-8deg) rotateX(1deg);
+.bokify-shelf-card:hover .bokify-card-book-3d {
+  transform: perspective(700px) rotateY(-8deg) rotateX(1deg) translateY(-4px);
 }
 
-.book-grid-front {
+.bokify-card-cover {
   position: absolute;
   inset: 0;
-  border-radius: 0 5px 5px 0;
+  border-radius: 2px 5px 5px 2px;
   overflow: hidden;
+  box-shadow: 3px 6px 18px rgba(0, 0, 0, 0.6);
+  background: #040e1a;
 }
 
-.book-grid-img {
+.bokify-card-cover-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.book-grid-spine {
+.bokify-card-spine {
   position: absolute;
   left: -18px;
   top: 0;
   width: 18px;
   height: 100%;
-  background: linear-gradient(90deg, rgba(4,14,26,0.98) 0%, rgba(10,26,44,0.85) 100%);
-  border-radius: 4px 0 0 4px;
+  background: linear-gradient(90deg, rgba(3, 10, 20, 0.98) 0%, rgba(12, 28, 50, 0.92) 80%, rgba(212, 175, 55, 0.45) 100%);
+  border-radius: 3px 0 0 3px;
   transform: rotateY(-90deg);
   transform-origin: right center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-.book-grid-shadow {
-  position: absolute;
-  bottom: -14px;
-  left: 6px;
-  right: -6px;
-  height: 24px;
-  background: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, transparent 70%);
-  border-radius: 50%;
-  transform: scaleY(0.4);
-}
-
-.book-grid-publisher {
-  font-size: 0.68rem;
+.bokify-spine-micro {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-size: 0.48rem;
   font-weight: 800;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #64748b;
-  text-align: center;
+  color: #fef08a;
+  white-space: nowrap;
 }
 
-/* Book Info */
-.book-grid-info {
-  padding: 0 20px 14px;
+.bokify-card-pages {
+  position: absolute;
+  right: -14px;
+  top: 3px;
+  width: 14px;
+  height: calc(100% - 6px);
+  background: repeating-linear-gradient(
+    90deg,
+    #f8fafc 0px,
+    #e2e8f0 1px,
+    #cbd5e1 2px,
+    #f1f5f9 3px
+  );
+  border-radius: 0 2px 2px 0;
+  transform: rotateY(90deg);
+  transform-origin: left center;
+  box-shadow: inset -1px 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.bokify-card-shadow {
+  position: absolute;
+  bottom: -16px;
+  left: -8px;
+  right: -16px;
+  height: 22px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.2) 50%, transparent 75%);
+  border-radius: 50%;
+  transform: scaleY(0.35);
+  pointer-events: none;
+}
+
+.bokify-card-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bokify-publisher-chip {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  background: rgba(3, 10, 20, 0.7);
+  border: 1px solid rgba(34, 166, 200, 0.25);
+  padding: 2px 9px;
+  border-radius: 9999px;
+}
+
+.bokify-year-chip {
+  font-size: 0.68rem;
+  font-weight: 800;
+  background: rgba(212, 175, 55, 0.18);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  color: #fef08a;
+  padding: 2px 9px;
+  border-radius: 9999px;
+}
+
+/* Card Body */
+.bokify-card-body {
+  padding: 4px 24px 16px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.book-grid-meta-row {
+.bokify-card-meta-line {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 7px;
+  margin-bottom: 8px;
 }
 
-.book-grid-idx {
-  font-size: 0.72rem;
+.bokify-card-idx {
+  font-size: 0.75rem;
   font-weight: 800;
-  color: var(--brand-blue, #22a6c8);
+  color: #22a6c8;
 }
 
-.book-grid-year-chip {
+.bokify-card-dot {
+  color: #64748b;
+  font-size: 0.75rem;
+}
+
+.bokify-card-authors {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.bokify-card-featured-pill {
   font-size: 0.66rem;
   font-weight: 800;
-  background: rgba(212,175,55,0.18);
-  border: 1px solid rgba(212,175,55,0.4);
-  color: #fef08a;
+  color: #fffbeb;
+  background: rgba(212, 175, 55, 0.25);
+  border: 1px solid #d4af37;
   padding: 1px 7px;
   border-radius: 9999px;
+  margin-left: auto;
 }
 
-.book-grid-title {
-  font-size: 0.92rem;
+.bokify-card-title {
+  font-size: 1.05rem;
   font-weight: 800;
-  color: #f8fafc;
-  line-height: 1.38;
-  margin: 0 0 5px;
+  color: #ffffff;
+  line-height: 1.35;
+  margin: 0 0 6px;
 }
 
-.book-grid-venue {
-  font-size: 0.78rem;
+.bokify-card-series {
+  font-size: 0.8rem;
   color: #38bdf8;
   font-style: italic;
   font-family: var(--font-serif, Georgia, serif);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
-.book-grid-rule {
-  width: 36px;
+.bokify-card-divider {
+  width: 44px;
   height: 2px;
   background: linear-gradient(90deg, #d4af37, transparent);
-  margin-bottom: 9px;
+  margin-bottom: 12px;
 }
 
-.book-grid-excerpt {
-  font-size: 0.8rem;
-  color: #94a3b8;
+.bokify-card-excerpt {
+  font-size: 0.84rem;
+  color: #cbd5e1;
   line-height: 1.6;
-  margin: 0;
+  margin: 0 0 12px;
   flex: 1;
 }
 
-/* Book Actions */
-.book-grid-actions {
+.bokify-card-doi {
+  font-size: 0.74rem;
+  color: #64748b;
+  margin-top: auto;
+  padding-top: 6px;
+  font-family: var(--font-mono, monospace);
+  word-break: break-all;
+}
+
+.bokify-doi-lbl {
+  color: #94a3b8;
+  font-weight: 700;
+}
+
+.bokify-doi-link {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.bokify-doi-link:hover {
+  text-decoration: underline;
+}
+
+/* Card Actions (Gestalt Proximity) */
+.bokify-card-actions {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 14px 20px 20px;
+  gap: 9px;
+  padding: 16px 24px 24px;
 }
 
-.book-grid-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  padding: 9px 16px;
-  border-radius: 9999px;
-  font-size: 0.775rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.22s ease;
-  text-decoration: none;
-  border: none;
-  font-family: inherit;
+.bokify-card-actions .pub-pill-btn {
   width: 100%;
+  justify-content: center;
 }
 
-.book-grid-btn-primary {
-  background: linear-gradient(135deg, rgba(212,175,55,0.22), rgba(34,166,200,0.28));
-  border: 1px solid rgba(212,175,55,0.5);
-  color: #fef08a;
-}
-
-.book-grid-btn-primary:hover {
-  background: linear-gradient(135deg, rgba(212,175,55,0.38), rgba(34,166,200,0.42));
-  box-shadow: 0 4px 16px rgba(212,175,55,0.28);
-  transform: translateY(-1px);
-  color: #ffffff;
-}
-
-.book-grid-btn-secondary {
-  background: rgba(6,20,38,0.7);
-  border: 1px solid rgba(34,166,200,0.28);
-  color: #94a3b8;
-}
-
-.book-grid-btn-secondary:hover {
-  border-color: #22a6c8;
-  color: #ffffff;
-}
-
-/* ── Responsive ──────────────────────────────────────────── */
-@media (max-width: 1200px) {
-  .book-showcase-layout {
+/* ── Responsive Rules ────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .bokify-hero-grid {
     grid-template-columns: 1fr;
+    gap: 36px;
   }
-  .book-showcase-aside {
-    position: static;
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 28px;
-    align-items: start;
+  .bokify-hero-stage {
+    min-height: 300px;
   }
-  .book-aside-photo-frame {
-    aspect-ratio: auto;
-    height: 260px;
-  }
-}
-
-@media (max-width: 900px) {
-  .book-grid-3col {
+  .bokify-cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .book-showcase-aside {
+}
+
+@media (max-width: 768px) {
+  .bokify-hero-wrapper {
+    padding: 28px 20px;
+  }
+  .bokify-hero-title {
+    font-size: 1.85rem;
+  }
+  .bokify-cards-grid {
     grid-template-columns: 1fr;
   }
-  .book-aside-photo-frame {
-    height: 220px;
+  .bokify-author-bar {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
-@media (max-width: 580px) {
-  .book-grid-3col {
-    grid-template-columns: 1fr;
-  }
+.bokify-primary-chip {
+  font-size: 0.68rem;
+  font-weight: 800;
+  background: rgba(212, 175, 55, 0.22);
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  color: #fef08a;
+  padding: 2px 9px;
+  border-radius: 9999px;
+  white-space: nowrap;
 }
