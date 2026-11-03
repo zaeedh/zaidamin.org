@@ -810,8 +810,7 @@ def get_portals_tray_carousel_html():
         thumb = a.get('image') or 'assets/images/spotlight-smart-cities.jpg'
         cat = a.get('category', 'Essays & Perspectives')
         bullets = [
-            f"{clean_tray_snippet(cat, 26)} &bull; {a.get('reading_time', '3 min read')}",
-            clean_tray_snippet(a.get('excerpt') or a.get('content_html', ''), 72),
+            f"{clean_tray_snippet(cat, 32)} &bull; {a.get('reading_time', '3 min read')}",
             f"Published: {a.get('date', '2026')}"
         ]
         pool_articles.append({
@@ -832,9 +831,8 @@ def get_portals_tray_carousel_html():
         venue = p.get('venue', 'Journal')
         year = p.get('year', 2026)
         bullets = [
-            f"{clean_tray_snippet(venue, 28)} ({year})",
-            f"Authors: {clean_tray_snippet(p.get('authors', 'Dr. Zaid Amin'), 36)}",
-            clean_tray_snippet(p.get('abstract', ''), 72)
+            f"{clean_tray_snippet(venue, 34)} ({year})",
+            f"Authors: {clean_tray_snippet(p.get('authors', 'Dr. Zaid Amin'), 42)}"
         ]
         url = p.get('url') or (f"https://doi.org/{p['doi']}" if p.get('doi') else f"publications.html#{p.get('id', '')}")
         pool_pubs.append({
@@ -855,9 +853,8 @@ def get_portals_tray_carousel_html():
         event = t.get('event', 'Keynote Address')
         year = t.get('year', 2026)
         bullets = [
-            f"{clean_tray_snippet(event, 28)} ({year})",
-            f"Location: {clean_tray_snippet(t.get('location', 'Malaysia'), 36)}",
-            clean_tray_snippet(t.get('description', ''), 72)
+            f"{clean_tray_snippet(event, 34)} ({year})",
+            f"Location: {clean_tray_snippet(t.get('location', 'Malaysia'), 42)}"
         ]
         url = t.get('url') or 'cv.html#talks'
         pool_talks.append({
@@ -878,9 +875,8 @@ def get_portals_tray_carousel_html():
         org = c.get('organization', 'Academic Honor')
         year = c.get('year', 2025)
         bullets = [
-            f"{clean_tray_snippet(org, 28)} ({year})",
-            f"Category: {clean_tray_snippet(c.get('category', 'Award & Grant'), 34)}",
-            clean_tray_snippet(c.get('details', ''), 72)
+            f"{clean_tray_snippet(org, 34)} ({year})",
+            f"Category: {clean_tray_snippet(c.get('category', 'Award & Grant'), 42)}"
         ]
         url = c.get('url') or 'cv.html#honors'
         pool_cv.append({
@@ -901,9 +897,8 @@ def get_portals_tray_carousel_html():
             "thumb_jpg": "assets/images/dr-zaid.png",
             "title": "About, Talks &amp; Academic CV",
             "bullets": [
-                "Ph.D. in Computer Science (UKM)",
-                "Keynote Speaker, Media Interviews &amp; Panels",
-                "Academic Honors &amp; Leadership Track"
+                "Ph.D. in Computer Science (UKM) &bull; Senior Lecturer",
+                "Keynote Speaker &bull; Academic Leadership Track"
             ],
             "tag": "UKM Ph.D.",
             "btn_text": "View CV",
@@ -916,8 +911,7 @@ def get_portals_tray_carousel_html():
             "title": "Projects &amp; Innovations",
             "bullets": [
                 "FRGS Grant: Civic Compliance Framework",
-                "Multimodal Orchestration Agent Architecture",
-                "Municipal Autonomous Auditing Prototypes"
+                "Multimodal Orchestration Agent Architecture"
             ],
             "tag": "FRGS / AI",
             "btn_text": "Inspect",
@@ -930,8 +924,7 @@ def get_portals_tray_carousel_html():
             "title": "Research &amp; Publications",
             "bullets": [
                 "24 Peer-Reviewed Articles (MDPI, IEEE, Scopus Q1)",
-                "Trustworthy AI &amp; Civic Autonomous Systems",
-                "Full Open-Access Preprints &amp; BibTeX Citations"
+                "Trustworthy AI &bull; Full Open-Access &amp; BibTeX"
             ],
             "tag": "24 Works",
             "btn_text": "Explore",
@@ -944,8 +937,7 @@ def get_portals_tray_carousel_html():
             "title": "Attention-Based Decision Systems",
             "bullets": [
                 "IEEE Access (2021) &bull; Q1 Scopus Indexed",
-                "Visual Attention System for Digital Environments",
-                "Empirical Intervention &amp; Cognitive Feedback Loops"
+                "Visual Attention System for Digital Environments"
             ],
             "tag": "IEEE Access",
             "btn_text": "Read",
