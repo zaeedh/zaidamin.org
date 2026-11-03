@@ -302,6 +302,54 @@
   },
   "page_traces": [
     {
+      "id": "tr-1793723587672",
+      "timestamp": "2026-11-03T16:33:07.672Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1793723226662",
+      "timestamp": "2026-11-03T16:27:06.662Z",
+      "path": "/research",
+      "title": "Activity & Project | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Internal Navigation"
+    },
+    {
+      "id": "tr-1793722980435",
+      "timestamp": "2026-11-03T16:23:00.435Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Internal Navigation"
+    },
+    {
+      "id": "tr-1793722973693",
+      "timestamp": "2026-11-03T16:22:53.693Z",
+      "path": "/research",
+      "title": "Activity & Project | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Internal Navigation"
+    },
+    {
       "id": "tr-1793721980921",
       "timestamp": "2026-11-03T16:06:20.921Z",
       "path": "/publications",
@@ -1432,7 +1480,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-04T00:06:20.925865",
+  "updated_at": "2026-11-04T00:33:07.679544",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
