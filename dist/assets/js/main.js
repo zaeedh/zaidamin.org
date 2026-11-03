@@ -1315,7 +1315,9 @@ function initTelemetryAccessTraceLogger() {
 
 /* ==========================================================================
    INTERACTIVE COIN-FLIP PORTRAIT ENGINE (3D GOLDEN RATIO ROTATION)
-   Rotates Dr. Zaid Amin's portraits 1-4 with stately, continuous coin inertia
+   Rotates Dr. Zaid Amin's portraits 1-4 with stately, continuous coin inertia.
+   Hovering is 100% deactivated to prevent glitching and speed-ups.
+   Flip transition is slowed down to ~1.75s for a calm, luxurious experience.
    ========================================================================== */
 function initCoinPortraitEngine() {
   const coinStage = document.getElementById('dr-zaid-coin');
@@ -1360,7 +1362,6 @@ function initCoinPortraitEngine() {
   let currentIndex = 0;
   let isFlipping = false;
   let autoFlipInterval = null;
-  let isPaused = false;
 
   function updateFaceImage(faceEl, portrait) {
     const picture = faceEl.querySelector('picture');
@@ -1387,14 +1388,15 @@ function initCoinPortraitEngine() {
 
     currentAngle += 180;
     coinDisc.classList.add('is-flipping');
-    coinDisc.style.transform = `rotateY(${currentAngle}deg) scale(1.05)`;
+    // Slow, soft, elegant 3D coin rotation with subtle 1.02 scale
+    coinDisc.style.transform = `rotateY(${currentAngle}deg) scale(1.02)`;
 
-    // Halfway through rotation, restore scale gently for natural coin weight
+    // Halfway through rotation (875ms), gently restore scale to 1
     setTimeout(() => {
       coinDisc.style.transform = `rotateY(${currentAngle}deg) scale(1)`;
-    }, 560);
+    }, 875);
 
-    // Flip duration is 1150ms
+    // Flip duration is 1750ms (buttery smooth and dignified)
     setTimeout(() => {
       coinDisc.classList.remove('is-flipping');
       currentIndex = (currentIndex + 1) % PORTRAITS.length;
@@ -1411,24 +1413,24 @@ function initCoinPortraitEngine() {
       }
 
       isFlipping = false;
-    }, 1150);
+    }, 1750);
   }
 
   function startAutoTimer() {
     clearInterval(autoFlipInterval);
-    // Golden Ratio interval: ~5.2s between coin turns
+    // Calm Golden Ratio rhythm: 6.5s dwell on each photo
     autoFlipInterval = setInterval(() => {
-      if (!isPaused && !document.hidden) {
+      if (!document.hidden) {
         flipCoin();
       }
-    }, 5200);
+    }, 6500);
   }
 
   function resetTimer() {
     startAutoTimer();
   }
 
-  // User interactive controls
+  // User interactive controls: Click or Keyboard only (Hovering inactive for glitch-free smoothness)
   coinStage.addEventListener('click', () => {
     flipCoin();
     resetTimer();
@@ -1442,18 +1444,10 @@ function initCoinPortraitEngine() {
     }
   });
 
-  coinStage.addEventListener('mouseenter', () => {
-    isPaused = true;
-  });
-
-  coinStage.addEventListener('mouseleave', () => {
-    isPaused = false;
-    resetTimer();
-  });
+  // Note: Hovering (mouseenter/mouseleave) deliberately omitted to guarantee silky uninterrupted motion
 
   startAutoTimer();
 
-  // Global accessibility hook
   window.flipPortraitCoin = flipCoin;
-  console.log('[CoinPortraitEngine] Initialized with 4 portraits. Golden ratio cadence active.');
+  console.log('[CoinPortraitEngine] Initialized with 4 strictly-centered Golden Ratio portraits. Slow 1.75s filmic flip active.');
 }
