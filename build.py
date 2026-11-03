@@ -400,10 +400,6 @@ def get_visitor_stats_html():
         </div>
 
         <div class="stats-meta-cluster font-cinzel">
-          <button type="button" class="stats-pill stats-audit-btn" id="stats-audit-trigger" title="Inspect real-time telemetry stream &amp; audit tracking data">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span>Audit Telemetry</span>
-          </button>
           <span class="stats-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2008 &ndash; 2026 Archive</span>
         </div>
       </div>
@@ -541,8 +537,6 @@ def get_page_footer(show_visitor_stats=False):
 
   </div>
 
-  <!-- Real-Time Telemetry & GA4 Audit Modal (Option 1 & 2 Full Viewport Overlay) -->
-  {get_telemetry_audit_modal_html() if show_visitor_stats else ""}
 
   <script src="assets/js/rain-lighting.js"></script>
   <script src="assets/js/main.js?v=3.6"></script>
