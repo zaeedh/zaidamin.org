@@ -95,7 +95,7 @@
     "bibtex": "@incollection{amin2025peerreview,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Peer-Review Statements}},\n  year      = {2025},\n  journal   = {},\n  doi       = {10.2991/978-2-38476-466-2_1},\n  url       = {https://doi.org/10.2991/978-2-38476-466-2_1}\n}",
     "featured": false,
     "abstract": "Research addressing peer-review statements through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
-    "image": "assets/images/thumb-research.jpg"
+    "image": "assets/images/books/book_peer_review.webp"
   },
   {
     "id": "amin2024tuneattention",
@@ -123,7 +123,7 @@
     "bibtex": "@incollection{amin2024digital,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World}},\n  year      = {2024},\n  journal   = {Contributions to Management Science},\n  doi       = {10.1007/978-3-031-48770-5_65},\n  url       = {https://doi.org/10.1007/978-3-031-48770-5_65}\n}",
     "featured": false,
     "abstract": "Research addressing digital loneliness in social media: the epoch of our connected and distraction world through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
-    "image": "assets/images/thumb-research.jpg"
+    "image": "assets/images/books/book_digital_loneliness.webp"
   },
   {
     "id": "amin2021attentionbased",
@@ -137,7 +137,7 @@
     "bibtex": "@incollection{amin2021attentionbased,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Attention-Based Design and Selective Exposure Amid COVID-19 Misinformation Sharing}},\n  year      = {2021},\n  journal   = {Lecture Notes in Computer Science},\n  doi       = {10.1007/978-3-030-78468-3_34},\n  url       = {https://doi.org/10.1007/978-3-030-78468-3_34}\n}",
     "featured": false,
     "abstract": "Research addressing attention-based design and selective exposure amid covid-19 misinformation sharing through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
-    "image": "assets/images/thumb-attention.jpg"
+    "image": "assets/images/books/book_attention_covid.webp"
   },
   {
     "id": "amin2021attentionbased",
