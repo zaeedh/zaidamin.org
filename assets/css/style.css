@@ -2839,14 +2839,14 @@ a {
   background: rgba(2, 14, 25, 0.65);
   border: 1px solid rgba(140, 180, 205, 0.14);
   border-radius: 14px;
-  padding: 10px 10px 8px 10px;
+  padding: 10px 10px 10px 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 8px;
-  height: 504px;
-  min-height: 504px;
-  max-height: 504px;
+  justify-content: flex-start;
+  gap: 8px; /* Fibonacci 8px vertical proximity */
+  height: 496px;
+  min-height: 496px;
+  max-height: 496px;
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
@@ -2862,9 +2862,9 @@ a {
   grid-template-columns: 70px 1fr 60px;
   align-items: center;
   gap: 11px;
-  height: 98px;
-  min-height: 98px;
-  max-height: 98px;
+  height: 101px;
+  min-height: 101px;
+  max-height: 101px;
   flex-shrink: 0;
   box-sizing: border-box;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
@@ -4599,8 +4599,10 @@ a {
 
 .tray-slides-wrap {
   position: relative;
-  flex: 1;
-  min-height: 0;
+  height: 434px;
+  min-height: 434px;
+  max-height: 434px;
+  flex: 0 0 434px;
   overflow: hidden;
   width: 100%;
 }
@@ -4616,15 +4618,15 @@ a {
 
 .tray-slide {
   flex: 0 0 100%;
-  height: 100%;
-  min-height: 100%;
-  max-height: 100%;
+  height: 434px;
+  min-height: 434px;
+  max-height: 434px;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 8px;
-  padding: 1px 3px 6px 3px;
+  padding: 2px 3px 4px 3px;
   box-sizing: border-box;
   opacity: 1 !important;
   visibility: visible !important;
@@ -4638,8 +4640,11 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: 4px 4px 2px 4px;
-  margin-top: auto;
+  padding: 0 4px;
+  height: 34px;
+  min-height: 34px;
+  max-height: 34px;
+  margin-top: 0; /* Remove excess dead space */
   flex-shrink: 0;
   width: 100%;
   box-sizing: border-box;
