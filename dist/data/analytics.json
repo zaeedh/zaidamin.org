@@ -302,6 +302,54 @@
   },
   "page_traces": [
     {
+      "id": "tr-1793712742995",
+      "timestamp": "2026-11-03T13:32:22.995Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1793712708011",
+      "timestamp": "2026-11-03T13:31:48.011Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1793712500029",
+      "timestamp": "2026-11-03T13:28:20.029Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Internal Navigation"
+    },
+    {
+      "id": "tr-1793712327344",
+      "timestamp": "2026-11-03T13:25:27.344Z",
+      "path": "/",
+      "title": "Dr. Zaid Amin | Das Sein, Das Sollen | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Internal Navigation"
+    },
+    {
       "id": "tr-1793707985441",
       "timestamp": "2026-11-03T12:13:05.441Z",
       "path": "/publications",
@@ -1132,7 +1180,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-03T20:13:05.462683",
+  "updated_at": "2026-11-03T21:32:23.009941",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
