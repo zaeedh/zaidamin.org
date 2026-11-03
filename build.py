@@ -112,7 +112,11 @@ def get_html_head(title="Dr. Zaid Amin | Academic & Computational Researcher | z
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css?v=3.8">
-  <link rel="icon" href="favicon.ico">
+  <!-- High-Definition Monogram Favicon Suite (Dr. Zaid Amin) -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
   <!-- Enterprise Cyber Threat Defense & Zero-Vulnerability Architecture -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -2323,7 +2327,7 @@ def build_all():
             f.write(page_content)
 
     # Copy CNAME, favicon, BibTeX, site.webmanifest
-    for extra in ["CNAME", "favicon.ico", "site.webmanifest", "data/publications.bib"]:
+    for extra in ["CNAME", "favicon.ico", "favicon-16x16.png", "favicon-32x32.png", "apple-touch-icon.png", "android-chrome-192x192.png", "android-chrome-512x512.png", "favicon.png", "faviconzaid.png", "site.webmanifest", "data/publications.bib"]:
         src = BASE_DIR / extra
         if src.exists():
             shutil.copy(src, DIST_DIR / Path(extra).name)
