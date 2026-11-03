@@ -2853,44 +2853,49 @@ a {
   box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.35);
 }
 
+/* ==========================================================================
+   REF-ITEM-CARD GOLDEN RATIO STANDARD (PROXIMITY, HIERARCHY & BREATHING SPACE)
+   Aspect Ratio phi = 1.618 (76px x 47px thumb), 13px Fibonacci gaps,
+   2 crisp metadata lines, zero truncated sentence noise, subtle navy glass.
+   ========================================================================== */
 .ref-item-card {
-  background: #041424; /* Solid opaque background to strictly eliminate ghost text overlap */
-  border: 1px solid rgba(140, 180, 205, 0.16);
-  border-radius: 10px;
-  padding: 0 12px;
+  background: linear-gradient(180deg, rgba(6, 22, 38, 0.90) 0%, rgba(3, 14, 26, 0.96) 100%);
+  border: 1px solid rgba(140, 180, 205, 0.18);
+  border-radius: 12px;
+  padding: 0 14px;
   display: grid;
-  grid-template-columns: 70px 1fr 60px;
+  grid-template-columns: 76px 1fr 68px;
   align-items: center;
-  gap: 11px;
+  gap: 13px; /* Fibonacci 13px proximity */
   height: 101px;
   min-height: 101px;
   max-height: 101px;
   flex-shrink: 0;
   box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 8, 18, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.25s ease,
               background 0.25s ease,
               box-shadow 0.25s ease;
-  box-shadow: 0 2px 7px rgba(0, 10, 24, 0.30);
-  position: relative;
 }
 
 .ref-item-card:hover {
-  transform: none;
-  border-color: rgba(212, 175, 55, 0.65);
-  background: rgba(6, 28, 50, 0.96);
-  box-shadow: 0 4px 18px rgba(0, 12, 28, 0.50), inset 0 0 14px rgba(212, 175, 55, 0.12);
+  transform: translateY(-1px);
+  border-color: rgba(212, 175, 55, 0.50);
+  background: linear-gradient(180deg, rgba(8, 28, 48, 0.95) 0%, rgba(4, 18, 34, 0.98) 100%);
+  box-shadow: 0 6px 20px rgba(0, 12, 28, 0.55), 0 0 12px rgba(212, 175, 55, 0.14), inset 0 1px 0 rgba(254, 240, 138, 0.10);
   z-index: 5;
 }
 
 .ref-item-thumb-box {
-  width: 70px;
-  height: 48px;
-  border-radius: 7px;
+  width: 76px;
+  height: 47px; /* 76 / 47 = 1.617 ≈ phi (Golden Ratio) */
+  border-radius: 8px; /* Fibonacci 8px */
   overflow: hidden;
   flex-shrink: 0;
-  border: 1px solid rgba(140, 180, 205, 0.20);
+  border: 1px solid rgba(140, 180, 205, 0.22);
   background: #021220;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.40);
 }
 
 .ref-item-thumb {
@@ -2916,28 +2921,29 @@ a {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .ref-kicker-tag {
   font-family: var(--font-cinzel), serif;
-  font-size: 0.58rem;
-  font-weight: 700;
+  font-size: 0.62rem;
   letter-spacing: 0.08em;
   color: #d4af37;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
 .ref-item-title {
   font-family: var(--font-cinzel), serif;
-  font-size: 0.77rem;
+  font-size: 0.74rem;
   font-weight: 700;
   color: #ffffff;
-  margin: 0 0 3px 0;
+  margin: 0 0 5px 0; /* Fibonacci 5px */
   letter-spacing: 0.02em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.25;
 }
 
 .ref-item-bullets {
@@ -2946,23 +2952,22 @@ a {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
 }
 
 .ref-item-bullets li {
-  font-size: 0.61rem;
+  font-size: 0.63rem;
   color: #8da9bc;
-  line-height: 1.18;
+  line-height: 1.25;
   position: relative;
   padding-left: 9px;
-  margin-bottom: 0px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .ref-item-bullets li::before {
-  content: "\2022";
+  content: "•";
   position: absolute;
   left: 0;
   color: #d4af37;
@@ -2973,7 +2978,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 64px;
+  width: 68px;
   flex-shrink: 0;
 }
 
@@ -2982,23 +2987,26 @@ a {
   align-items: center;
   justify-content: center;
   background: rgba(212, 175, 55, 0.08);
-  border: 1px solid rgba(212, 175, 55, 0.35);
+  border: 1px solid rgba(212, 175, 55, 0.38);
   color: #fce09b;
   padding: 4px 12px;
   border-radius: 999px;
-  font-size: 0.69rem;
+  font-family: var(--font-cinzel), serif;
+  font-size: 0.68rem;
   font-weight: 600;
+  letter-spacing: 0.04em;
   text-decoration: none;
   transition: all 0.22s ease;
   white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 .ref-item-btn:hover {
-  background: linear-gradient(135deg, #fce09b 0%, #d4af37 100%);
-  color: #020c15;
+  background: linear-gradient(135deg, rgba(254, 240, 138, 0.25), rgba(212, 175, 55, 0.35));
+  color: #ffffff;
   border-color: #d4af37;
   transform: translateY(-1px);
-  box-shadow: 0 3px 10px rgba(212, 175, 55, 0.35);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.30);
 }
 
 @media (max-width: 1200px) and (min-width: 992px) {
