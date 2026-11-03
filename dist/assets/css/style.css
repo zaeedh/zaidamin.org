@@ -163,6 +163,76 @@ a {
   border-radius: 999px;
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.55), 0 0 20px rgba(212, 175, 55, 0.20);
   pointer-events: none;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+}
+
+/* ==========================================================================
+   DAS 1: SOFT & ELEGANT SCRABBLE FLIP CIPHER ANIMATION FOR 'DAS SEIN, DAS SOLLEN.'
+   Preset Name: DAS 1
+   ========================================================================== */
+.epigraph-title.das-1-active {
+  cursor: pointer;
+  user-select: none;
+  perspective: 600px;
+}
+
+.das-1-char {
+  display: inline-block;
+  will-change: transform, color, opacity, text-shadow;
+  transition: transform 0.16s cubic-bezier(0.2, 0.8, 0.2, 1),
+              color 0.22s ease,
+              text-shadow 0.22s ease,
+              opacity 0.18s ease;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.das-1-char.is-space {
+  width: 0.32em;
+}
+
+.das-1-char.is-scrambling {
+  color: #bae6fd;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.85), 0 0 22px rgba(212, 175, 55, 0.45);
+  transform: translateY(-1.5px) scale(1.05);
+}
+
+.das-1-char.is-flip-step {
+  transform: rotateX(68deg) translateY(-2px);
+  opacity: 0.72;
+  color: #fce09b;
+}
+
+.das-1-char.is-settling {
+  color: #fef08a;
+  text-shadow: 0 0 14px rgba(254, 240, 138, 0.95), 0 0 28px rgba(56, 189, 248, 0.7);
+  transform: translateY(0) scale(1.02);
+}
+
+.das-1-char.is-resolved {
+  color: #ffffff;
+  transform: translateY(0) scale(1);
+  text-shadow: 0 2px 18px rgba(34, 166, 200, 0.28);
+}
+
+/* Subtle Golden Beam Sweep when DAS 1 animates */
+.epigraph-golden-line.das-1-gleam {
+  animation: das1GoldenBeamSweep 1.35s ease-out forwards;
+}
+
+@keyframes das1GoldenBeamSweep {
+  0% {
+    filter: brightness(1) drop-shadow(0 0 6px rgba(212, 175, 55, 0.4));
+    width: 240px;
+  }
+  45% {
+    filter: brightness(1.45) drop-shadow(0 0 15px rgba(254, 240, 138, 0.9));
+    width: 300px;
+  }
+  100% {
+    filter: brightness(1) drop-shadow(0 0 6px rgba(212, 175, 55, 0.4));
+    width: 240px;
+  }
 }
 
 
