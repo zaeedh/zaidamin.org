@@ -1802,35 +1802,63 @@ def generate_research_page():
     for cat, count in sorted(categories.items(), key=lambda x: x[1], reverse=True):
         cat_pills_html += f'<button class="article-cat-btn" data-category="{cat}">{cat} ({count})</button>'
 
+    def clean_article_excerpt(raw_text, max_len=135):
+        if not raw_text:
+            return ""
+        clean = re.sub(r'<[^>]+>', ' ', raw_text)
+        clean = ' '.join(clean.split())
+        if len(clean) > max_len:
+            clean = clean[:max_len].rstrip() + "..."
+        return clean
+
     cards_html = ""
+    import html as _html_mod
     for a in articles:
         cat = a.get("category", "Essays & Perspectives")
         read_time = a.get("reading_time", "3 min read")
-        excerpt = a.get("excerpt", "")
+        excerpt = clean_article_excerpt(a.get("excerpt", ""), max_len=135)
         slug = a.get("id", "")
         title = a.get("title", "")
         date = a.get("date", "")
         tags_str = ",".join(a.get("tags", [])).lower()
+        img_url = a.get("image", "").strip() or "assets/images/thumb-research.jpg"
         is_spotlight = a.get("featured")
-        spotlight_badge = '<span style="background: rgba(212, 175, 55, 0.2); color: #fef08a; border: 1px solid #d4af37; padding: 2px 7px; border-radius: 4px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em;">★ SPOTLIGHT</span>' if is_spotlight else ''
-        card_style = ' style="border: 1px solid rgba(212, 175, 55, 0.45); box-shadow: 0 0 25px rgba(212, 175, 55, 0.12);"' if is_spotlight else ''
+        spotlight_badge = '<span class="article-card-spotlight-pill">★ SPOTLIGHT</span>' if is_spotlight else ''
+        card_spotlight_class = " article-card-spotlight" if is_spotlight else ""
+        escaped_title = _html_mod.escape(title)
 
         cards_html += f'''
-        <article class="article-card" data-category="{cat}" data-title="{title.lower()}" data-tags="{tags_str}"{card_style}>
-          <div>
+        <article class="article-card{card_spotlight_class}" data-category="{cat}" data-title="{title.lower()}" data-tags="{tags_str}">
+          <!-- Small Thumbnail Frame (Golden Ratio Harmonic Proportion) -->
+          <a href="article.html?id={slug}" class="article-card-thumb-wrap" aria-label="{escaped_title}">
+            <img src="{img_url}" alt="{escaped_title}" class="article-card-thumb" loading="lazy" onerror="this.onerror=null; this.src=\'assets/images/thumb-research.jpg\';">
+            <div class="article-card-thumb-overlay"></div>
+            <span class="article-card-cat-badge">{cat}</span>
+            {spotlight_badge}
+          </a>
+
+          <!-- Content Body (Gestalt Proximity) -->
+          <div class="article-card-body">
             <div class="article-card-meta">
-              <span class="article-card-cat">{cat}</span>
-              {spotlight_badge}
+              <span class="article-card-date">{date}</span>
+              <span class="article-card-dot">&bull;</span>
               <span class="article-card-read">{read_time}</span>
             </div>
-            <h2 class="article-card-title font-cinzel">
+            <h3 class="article-card-title font-cinzel">
               <a href="article.html?id={slug}">{title}</a>
-            </h2>
-            <div class="article-card-date">{date}</div>
+            </h3>
             <p class="article-card-excerpt">{excerpt}</p>
           </div>
+
+          <!-- Elegant Read Essay Button (Golden Ratio Capsule Pill) -->
           <div class="article-card-action">
-            <a href="article.html?id={slug}" class="article-card-btn font-cinzel">Read Essay &rarr;</a>
+            <a href="article.html?id={slug}" class="article-card-btn font-cinzel">
+              <span>Read Essay</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="article-btn-icon">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
           </div>
         </article>
         '''
