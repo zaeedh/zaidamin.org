@@ -2327,7 +2327,7 @@ def build_all():
             f.write(page_content)
 
     # Copy CNAME, favicon, BibTeX, site.webmanifest
-    for extra in ["CNAME", "favicon.ico", "favicon-16x16.png", "favicon-32x32.png", "apple-touch-icon.png", "android-chrome-192x192.png", "android-chrome-512x512.png", "favicon.png", "faviconzaid.png", "site.webmanifest", "data/publications.bib"]:
+    for extra in [".nojekyll", "CNAME", "favicon.ico", "favicon-16x16.png", "favicon-32x32.png", "apple-touch-icon.png", "android-chrome-192x192.png", "android-chrome-512x512.png", "favicon.png", "faviconzaid.png", "site.webmanifest", "data/publications.bib"]:
         src = BASE_DIR / extra
         if src.exists():
             shutil.copy(src, DIST_DIR / Path(extra).name)
