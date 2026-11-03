@@ -142,7 +142,7 @@ def get_page_header(active_page="home"):
     <header class="epigraph-header">
       <div class="epigraph-top-flex">
         <div class="epigraph-title-group">
-          <h1 class="epigraph-title das-1-epigraph" id="das-1-title" data-das1="Das Sein, Das Sollen.">Das Sein, Das Sollen.</h1>
+          <h1 class="epigraph-title">Das Sein, Das Sollen.</h1>
           <div class="epigraph-golden-line" aria-hidden="true"></div>
         </div>
         
