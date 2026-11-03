@@ -113,6 +113,19 @@ def get_html_head(title="Dr. Zaid Amin | Academic & Computational Researcher | z
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css?v=3.8">
   <link rel="icon" href="favicon.ico">
+
+  <!-- Enterprise Cyber Threat Defense & Zero-Vulnerability Architecture -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://cloudflare.com https://api.country.is https://www.google-analytics.com https://*.google-analytics.com; object-src 'none'; base-uri 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+
+  <!-- Seamless Address Bar Immersion & Native PWA App Manifest -->
+  <meta name="theme-color" content="#020b14">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="site.webmanifest">
   {ga_snippet}
 </head>
 <body>
@@ -619,7 +632,8 @@ def get_spotlight_card_html():
         desc = item.get("excerpt", "")
         img_src = item.get("image", "assets/images/spotlight-smart-cities.jpg")
         kicker_badge = "SPOTLIGHT ARTICLE"
-        top_kicker = f"{cat_name.upper()} &bull; ESSAYS & PERSPECTIVES"
+        clean_cat = re.sub(r'^[✦✧★\s\u2726]+', '', str(cat_name)).strip()
+        top_kicker = f"{clean_cat.upper()} &bull; ESSAYS & PERSPECTIVES"
         btn_text = "Read Full Essay &rarr;"
         target_blank = ""
         meta_oa = f'<span class="spotlight-oa-pill font-cinzel"><span class="oa-check">&#10003;</span> Open Access Essay</span>'
@@ -639,7 +653,8 @@ def get_spotlight_card_html():
         role_str = item.get("role", "Keynote Speaker")
         type_str = item.get("type", "Keynote")
         kicker_badge = "SPOTLIGHT KEYNOTE"
-        top_kicker = f"{type_str.upper()} &bull; PUBLIC ENGAGEMENT"
+        clean_type = re.sub(r'^[✦✧★\s\u2726]+', '', str(type_str)).strip()
+        top_kicker = f"{clean_type.upper()} &bull; PUBLIC ENGAGEMENT"
         btn_text = "Watch Keynote / Recording &rarr;" if item.get("url") else "View Keynote &rarr;"
         target_blank = 'target="_blank" rel="noopener"' if item.get("url") else ''
         meta_oa = f'<span class="spotlight-oa-pill font-cinzel" style="color:#d8b4fe; border-color:rgba(168,85,247,0.3);"><span class="oa-check">&#10003;</span> {role_str}</span>'
@@ -658,7 +673,8 @@ def get_spotlight_card_html():
         img_src = item.get("image", "assets/images/thumb-projects.jpg")
         badge_val = item.get("badge", "Provincial Honor")
         kicker_badge = "SPOTLIGHT DISTINCTION"
-        top_kicker = f"{category_val.upper()} &bull; RESEARCH EXCELLENCE"
+        clean_cat_val = re.sub(r'^[✦✧★\s\u2726]+', '', str(category_val)).strip()
+        top_kicker = f"{clean_cat_val.upper()} &bull; RESEARCH EXCELLENCE"
         btn_text = "Inspect Distinction &rarr;"
         target_blank = 'target="_blank" rel="noopener"' if item.get("url") else ''
         meta_oa = f'<span class="spotlight-oa-pill font-cinzel" style="color:#86efac; border-color:rgba(34,197,94,0.3);"><span class="oa-check">&#10003;</span> {badge_val}</span>'
@@ -714,7 +730,7 @@ def get_spotlight_card_html():
         </div>
 
         <div class="ref-spotlight-body">
-          <div class="ref-scopus-kicker font-cinzel"><span class="kicker-gem">✦</span> {top_kicker}</div>
+          <div class="ref-scopus-kicker font-cinzel"><span class="kicker-gem">✦</span> {re.sub(r'^[✦✧★\s\u2726]+', '', str(top_kicker)).strip()}</div>
           <h2 class="ref-spotlight-title">{title}</h2>
 
           <div class="ref-spotlight-meta">
@@ -2287,12 +2303,30 @@ def build_all():
         shutil.rmtree(dist_data)
     shutil.copytree(DATA_DIR, dist_data)
 
-    # Copy cms.html
-    if (BASE_DIR / "cms.html").exists():
-        shutil.copy(BASE_DIR / "cms.html", DIST_DIR / "cms.html")
+    # Note: cms.html is strictly offline/local only for security.
+    # It is never copied to dist/ to guarantee 100% cyber threat immunity on public GitHub Pages.
 
-    # Copy CNAME, favicon, BibTeX
-    for extra in ["CNAME", "favicon.ico", "data/publications.bib"]:
+    # Generate Clean URL Folders (e.g. /publications/index.html so .html is stripped from address bar)
+    clean_routes = {
+        "publications": pages["publications.html"],
+        "articles": pages["articles.html"],
+        "article": pages["article.html"],
+        "research": pages["research.html"],
+        "prospective-students": pages["prospective-students.html"],
+        "cv": pages["cv.html"]
+    }
+    for route_name, page_content in clean_routes.items():
+        route_dist = DIST_DIR / route_name
+        route_dist.mkdir(parents=True, exist_ok=True)
+        with open(route_dist / "index.html", "w", encoding="utf-8") as f:
+            f.write(page_content)
+        route_base = BASE_DIR / route_name
+        route_base.mkdir(parents=True, exist_ok=True)
+        with open(route_base / "index.html", "w", encoding="utf-8") as f:
+            f.write(page_content)
+
+    # Copy CNAME, favicon, BibTeX, site.webmanifest
+    for extra in ["CNAME", "favicon.ico", "site.webmanifest", "data/publications.bib"]:
         src = BASE_DIR / extra
         if src.exists():
             shutil.copy(src, DIST_DIR / Path(extra).name)
