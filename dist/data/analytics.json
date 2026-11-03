@@ -302,6 +302,42 @@
   },
   "page_traces": [
     {
+      "id": "tr-1793691881652",
+      "timestamp": "2026-11-03T07:44:41.652Z",
+      "path": "/",
+      "title": "Dr. Zaid Amin | Das Sein, Das Sollen | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1793691859075",
+      "timestamp": "2026-11-03T07:44:19.075Z",
+      "path": "/publications",
+      "title": "Publications (24+) | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1793691236525",
+      "timestamp": "2026-11-03T07:33:56.525Z",
+      "path": "/",
+      "title": "Dr. Zaid Amin | Das Sein, Das Sollen | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Internal Navigation"
+    },
+    {
       "id": "tr-1793691192291",
       "timestamp": "2026-11-03T07:33:12.291Z",
       "path": "/",
@@ -712,7 +748,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-03T15:33:12.439095",
+  "updated_at": "2026-11-03T15:44:41.672944",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
