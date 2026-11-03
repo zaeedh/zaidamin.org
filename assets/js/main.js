@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ['MobileMenu', typeof initMobileMenu === 'function' ? initMobileMenu : null],
     ['VisitorTelemetryEngine', typeof initVisitorTelemetryEngine === 'function' ? initVisitorTelemetryEngine : null],
     ['TelemetryAccessTraceLogger', typeof initTelemetryAccessTraceLogger === 'function' ? initTelemetryAccessTraceLogger : null],
+    ['Das1ScrambleAnimation', typeof initDas1ScrambleAnimation === 'function' ? initDas1ScrambleAnimation : null],
   ];
 
   initModules.forEach(([name, fn]) => {
@@ -1316,4 +1317,158 @@ function initTelemetryAccessTraceLogger() {
     });
 
   } catch (err) {}
+}
+
+
+/* ==========================================================================
+   DAS 1: SOFT & ELEGANT SCRABBLE FLIP CIPHER ENGINE
+   Target Epigraph: "DAS SEIN, DAS SOLLEN."
+   Preset Name: DAS 1
+   ========================================================================== */
+function initDas1ScrambleAnimation() {
+  const titleEl = document.querySelector('.epigraph-title, #das-1-title');
+  if (!titleEl) return;
+
+  const goldenLine = document.querySelector('.epigraph-golden-line');
+  const TARGET_TEXT = (titleEl.getAttribute('data-das1') || titleEl.textContent || 'Das Sein, Das Sollen.').trim();
+
+  // Refined classical glyphs: Greek philosophical characters, classical Latin capitals, math harmony
+  const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ∆ΣΩΨΦ§◊ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ";
+
+  titleEl.classList.add('das-1-active');
+  titleEl.setAttribute('data-das1-active', 'true');
+  titleEl.setAttribute('title', 'Das Sein, Das Sollen — Click or hover to initiate DAS 1 cipher harmony');
+
+  let isAnimating = false;
+  let lastTriggerTime = 0;
+
+  // Build character spans once to ensure crisp layout without shift
+  function setupSpans() {
+    titleEl.innerHTML = '';
+    const chars = Array.from(TARGET_TEXT);
+    chars.forEach((ch, idx) => {
+      const span = document.createElement('span');
+      span.className = 'das-1-char is-resolved';
+      span.dataset.index = idx;
+      span.dataset.char = ch;
+      if (ch === ' ') {
+        span.classList.add('is-space');
+        span.innerHTML = '&nbsp;';
+      } else {
+        span.textContent = ch;
+      }
+      titleEl.appendChild(span);
+    });
+  }
+
+  setupSpans();
+
+  function triggerDas1() {
+    const now = Date.now();
+    // Cooldown guard to preserve serenity (minimum 2.2s between triggers)
+    if (isAnimating || (now - lastTriggerTime < 2200)) return;
+    isAnimating = true;
+    lastTriggerTime = now;
+
+    // Trigger golden underline harmonic gleam
+    if (goldenLine) {
+      goldenLine.classList.remove('das-1-gleam');
+      void goldenLine.offsetWidth; // Force reflow
+      goldenLine.classList.add('das-1-gleam');
+    }
+
+    const spans = Array.from(titleEl.querySelectorAll('.das-1-char'));
+
+    // Configure per-character scramble cycles:
+    // Left-to-right cascade settling wave with organic micro-variations
+    const charStates = spans.map((span, i) => {
+      const targetChar = span.dataset.char;
+      const isFixed = (targetChar === ' ' || targetChar === ',' || targetChar === '.');
+
+      // Fixed punctuation remains stable to anchor layout rhythm
+      const totalCycles = isFixed ? 0 : Math.floor(10 + (i * 1.35) + (Math.random() * 3));
+      return {
+        span,
+        targetChar,
+        isFixed,
+        remaining: totalCycles,
+        total: totalCycles
+      };
+    });
+
+    const frameRate = 42; // ~24fps calm filmic cadence
+    const interval = setInterval(() => {
+      let activeCount = 0;
+
+      charStates.forEach(state => {
+        if (state.isFixed) return;
+
+        if (state.remaining > 0) {
+          activeCount++;
+          state.remaining--;
+
+          // Soft 3D micro-flip effect alternating on ticks
+          const isFlipTick = (state.remaining % 2 === 0);
+          state.span.className = `das-1-char is-scrambling ${isFlipTick ? 'is-flip-step' : ''}`;
+
+          // Random glyph from refined philosophical set
+          const randomGlyph = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+          state.span.textContent = randomGlyph;
+        } else if (state.remaining === 0) {
+          // Moment of settling: gold flash lock-in
+          state.remaining = -1;
+          state.span.className = 'das-1-char is-settling';
+          state.span.textContent = state.targetChar;
+
+          // Transition to serene default state
+          setTimeout(() => {
+            state.span.className = 'das-1-char is-resolved';
+          }, 240);
+        }
+      });
+
+      if (activeCount === 0) {
+        clearInterval(interval);
+        isAnimating = false;
+        // Guarantee all final characters match original exactly
+        charStates.forEach(s => {
+          s.span.className = 'das-1-char is-resolved';
+          s.span.textContent = s.targetChar === ' ' ? ' ' : s.targetChar;
+        });
+        if (goldenLine) goldenLine.classList.remove('das-1-gleam');
+      }
+    }, frameRate);
+  }
+
+  // Hook 1: Entrance hook (plays softly ~900ms after load)
+  setTimeout(() => {
+    triggerDas1();
+  }, 900);
+
+  // Hook 2: Interactive sneaky hook on hover and click
+  titleEl.addEventListener('mouseenter', () => {
+    triggerDas1();
+  });
+  titleEl.addEventListener('click', () => {
+    triggerDas1();
+  });
+
+  // Hook 3: Timely subtle ambient cycle (every 32s if tab is active)
+  setInterval(() => {
+    if (!document.hidden && !isAnimating) {
+      triggerDas1();
+    }
+  }, 32000);
+
+  // Expose global DAS 1 API
+  window.triggerDas1Animation = triggerDas1;
+  window.DAS_1 = {
+    name: "DAS 1",
+    version: "1.0",
+    description: "Soft & elegant scrabble flip cipher animation for 'DAS SEIN, DAS SOLLEN.'",
+    trigger: triggerDas1,
+    status: "active"
+  };
+
+  console.log("[DAS 1] Initialized successfully. Epigraph target:", TARGET_TEXT);
 }
