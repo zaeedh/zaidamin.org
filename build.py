@@ -1232,11 +1232,24 @@ def generate_golden_ratio_home():
               Digital Ethics <span class="ref-gold-dot">&bull;</span> Behavior &amp; Social Computing <span class="ref-gold-dot">&bull;</span> HCI
             </div>
           </div>
-          <div class="ref-photo-ring">
-            <picture>
-              <source srcset="assets/images/dr-zaid.webp" type="image/webp">
-              <img src="assets/images/dr-zaid.png" alt="Zaid Amin, Ph.D." class="ref-photo-img" width="114" height="114">
-            </picture>
+          <div class="ref-photo-ring coin-flip-stage" id="dr-zaid-coin" role="button" tabindex="0" title="Dr. Zaid Amin, Ph.D. • Click to rotate portrait coin">
+            <div class="coin-disc" id="coin-disc" aria-label="Interactive Portrait Coin">
+              <div class="coin-face coin-face-front" id="coin-face-front">
+                <picture>
+                  <source srcset="assets/images/portraits/portrait-1.webp" type="image/webp">
+                  <img src="assets/images/portraits/portrait-1.png" alt="Dr. Zaid Amin, Ph.D. — Academic Portrait" class="ref-photo-img" width="114" height="114">
+                </picture>
+                <div class="coin-specular-gleam"></div>
+              </div>
+              <div class="coin-face coin-face-back" id="coin-face-back">
+                <picture>
+                  <source srcset="assets/images/portraits/portrait-2.webp" type="image/webp">
+                  <img src="assets/images/portraits/portrait-2.png" alt="Dr. Zaid Amin, Ph.D. — Singapore" class="ref-photo-img" width="114" height="114">
+                </picture>
+                <div class="coin-specular-gleam"></div>
+              </div>
+              <div class="coin-rim-highlight"></div>
+            </div>
             <span class="ref-live-status" title="Active Senior Lecturer &amp; Researcher"></span>
           </div>
         </div>
