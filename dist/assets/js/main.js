@@ -8,6 +8,8 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initCyberShield();
+  initCleanAddressBar();
   initThemeToggle();
   initCustomSoundtrackPlayer();
   initScholarlyDrawer();
