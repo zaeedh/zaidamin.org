@@ -4634,6 +4634,18 @@ a {
 }
 
 /* Dynamic Carousel Controls Bar (Replacing cramped dots for 32 slides) */
+
+.tray-nav-arrows {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.tray-status-pill {
+  display: none !important;
+}
+
 .tray-controls-bar {
   display: flex;
   align-items: center;
@@ -5161,7 +5173,19 @@ a {
     padding: 3px 9px;
     font-size: 0.63rem;
   }
-  .tray-controls-bar {
+  
+.tray-nav-arrows {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.tray-status-pill {
+  display: none !important;
+}
+
+.tray-controls-bar {
     padding: 4px 0 0 0;
     gap: 5px;
   }
