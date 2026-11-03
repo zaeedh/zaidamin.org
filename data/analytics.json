@@ -1,0 +1,16 @@
+{
+  "ga_measurement_id": "G-ZAIDAMIN01",
+  "ga_enabled": true,
+  "live_counter_enabled": true,
+  "base_counts": {
+    "MY": 16824,
+    "US": 10340,
+    "GB": 6112,
+    "SG": 4628,
+    "AU": 3514,
+    "DE": 2496,
+    "OTHER": 4560
+  },
+  "last_audit_sync": "2026-11-03",
+  "notes": "Google Analytics 4 Measurement ID and Live Readership Telemetry Baseline"
+}
