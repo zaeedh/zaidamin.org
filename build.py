@@ -1972,10 +1972,9 @@ def generate_research_page():
     html += f"""
     <!-- Subpage Content: Activity & Project -->
     <div class="subpage-container">
-      <div style="margin-bottom: 32px;">
-        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brand-blue);">Scholarly Archive &amp; Engagements</span>
-        <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0; color: #ffffff;">Activity &amp; Project</h1>
-        <p style="font-size: 1.05rem; color: var(--text-muted); max-width: 860px; line-height: 1.6;">
+      <div style="margin-bottom: 24px;">
+        <h1 class="font-cinzel" style="font-size: 2.75rem; font-weight: 900; letter-spacing: -0.02em; margin: 0 0 10px 0; color: #ffffff;">Activity &amp; Project</h1>
+        <p style="font-size: 1.05rem; color: var(--text-muted); max-width: 860px; line-height: 1.6; margin: 0;">
           Explore Dr. Zaid Amin's scholarly essays, peer commentaries, funded research grants, and technical project pillars across AI governance, human-computer interaction, and digital humanities.
         </p>
       </div>
