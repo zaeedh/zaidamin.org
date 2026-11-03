@@ -2109,77 +2109,100 @@ def generate_talks_page():
 
     playlist_joined = "\n".join(playlist_items_html)
 
-    # Render Categories 2 & 3: Posters
-    def render_posters(items, default_type="SPEAKER"):
-        cards = []
-        barcode_svg = """<svg width="60" height="18" viewBox="0 0 60 18" fill="currentColor" aria-hidden="true">
-          <rect x="0" y="0" width="2" height="18"/>
-          <rect x="4" y="0" width="1" height="18"/>
-          <rect x="7" y="0" width="3" height="18"/>
-          <rect x="12" y="0" width="1" height="18"/>
-          <rect x="15" y="0" width="2" height="18"/>
-          <rect x="19" y="0" width="4" height="18"/>
-          <rect x="25" y="0" width="1" height="18"/>
-          <rect x="28" y="0" width="2" height="18"/>
-          <rect x="32" y="0" width="1" height="18"/>
-          <rect x="35" y="0" width="3" height="18"/>
-          <rect x="40" y="0" width="2" height="18"/>
-          <rect x="44" y="0" width="1" height="18"/>
-          <rect x="47" y="0" width="4" height="18"/>
-          <rect x="53" y="0" width="2" height="18"/>
-          <rect x="57" y="0" width="2" height="18"/>
-        </svg>"""
-        
-        for item in items:
-            palette = item.get("palette", "ivory")
-            arch = item.get("arch_style", "arch-cathedral")
-            badge = item.get("badge", default_type)
-            date_disp = item.get("date_display", item.get("year", "2026"))
-            title = _html_mod.escape(item.get("title", ""))
-            venue = _html_mod.escape(item.get("venue", item.get("publication", "zaidamin.org")))
-            abstract = _html_mod.escape(item.get("abstract", ""))
-            url = _html_mod.escape(item.get("url", "#"))
-            img = item.get("image", "assets/images/spotlight-smart-cities.jpg")
-            action_text = "READ OPINION &nearr;" if default_type == "OPINION" else "INVITATION &nearr;"
+    # Reusable Icon library for top-right circular badge
+    icon_map = {
+        "podium": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>',
+        "brain": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2a9 9 0 0 1 9 9c0 3.6-2.1 6.7-5.2 8.1"/><path d="M12 22a9 9 0 0 1-9-9c0-3.6 2.1-6.7 5.2-8.1"/></svg>',
+        "governance": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>',
+        "heritage": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 10a3 3 0 0 1 6 0v11H9V10z"/></svg>',
+        "creativity": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="M12 18v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="m16.24 16.24 2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="m16.24 7.76 2.83-2.83"/></svg>',
+        "attention": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/></svg>',
+        "philosophy": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>',
+        "trap": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg>',
+        "quill": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>'
+    }
 
-            card_html = f"""
-        <article class="exhibition-poster-card poster-{palette}">
-          <div>
-            <div class="poster-top-header">
-              <div class="poster-monogram-group">
-                <span class="poster-monogram-symbol">&#10022;</span>
-                <span class="poster-badge-text">{badge}</span>
-              </div>
-              <div class="poster-date-display">{date_disp}</div>
-            </div>
+    # Render Category 2: Keynote Carousel Cards (Figure Reference)
+    keynotes_cards_html = []
+    keynote_icons = ["podium", "brain", "governance", "heritage", "creativity", "attention"]
+    for idx, k in enumerate(keynotes):
+        k_title = _html_mod.escape(k.get("title", ""))
+        k_venue = _html_mod.escape(k.get("venue", ""))
+        k_abstract = _html_mod.escape(k.get("abstract", ""))
+        k_url = _html_mod.escape(k.get("url", "#"))
+        k_badge = _html_mod.escape(k.get("badge", f"0{idx+1} • Keynote"))
+        k_img = k.get("image", "assets/images/spotlight-smart-cities.jpg")
+        icon_svg = icon_map.get(keynote_icons[idx % len(keynote_icons)], icon_map["podium"])
 
-            <!-- Architectural Cutout Frame -->
-            <div class="poster-cutout-frame {arch}">
-              <img src="{img}" alt="{title}" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
-            </div>
+        card_html = f"""
+        <div class="service-portrait-card">
+          <img src="{k_img}" alt="{k_title}" class="service-card-bg-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+          <div class="service-card-gradient-top"></div>
+          <div class="service-card-gradient-bottom"></div>
 
-            <!-- Editorial Typography -->
-            <div class="poster-body-content">
-              <h3 class="poster-headline">{title}</h3>
-              <div class="poster-venue-text">{venue}</div>
-              <p class="poster-abstract-text">{abstract}</p>
+          <!-- Top Row: Frosted Tag & Icon Badge -->
+          <div class="service-card-top-row">
+            <span class="service-card-tag">{k_badge}</span>
+            <div class="service-card-icon-badge" aria-hidden="true">
+              {icon_svg}
             </div>
           </div>
 
-          <div class="poster-footer-row">
-            <div class="poster-barcode-wrap" title="Archival Identifier">
-              {barcode_svg}
-            </div>
-            <a href="{url}" {"target='_blank' rel='noopener'" if url.startswith("http") else ""} class="poster-action-btn">
-              {action_text}
+          <!-- Bottom Content: Venue, Title, Synopsis, Capsule Button -->
+          <div class="service-card-bottom">
+            <div class="service-card-venue">{k_venue}</div>
+            <h3 class="service-card-title">{k_title}</h3>
+            <p class="service-card-desc">{k_abstract}</p>
+            <a href="{k_url}" {"target='_blank' rel='noopener'" if k_url.startswith("http") else ""} class="service-card-btn">
+              <span>Learn More</span>
+              <span class="service-card-btn-disc">&nearr;</span>
             </a>
           </div>
-        </article>"""
-            cards.append(card_html)
-        return "\n".join(cards)
+        </div>"""
+        keynotes_cards_html.append(card_html)
 
-    keynotes_posters_html = render_posters(keynotes, default_type="SPEAKER")
-    opinions_posters_html = render_posters(opinions, default_type="OPINION")
+    keynotes_carousel_joined = "\n".join(keynotes_cards_html)
+
+    # Render Category 3: Opinion Carousel Cards (Figure Reference)
+    opinions_cards_html = []
+    opinion_icons = ["philosophy", "trap", "attention", "heritage", "governance", "quill"]
+    for idx, o in enumerate(opinions):
+        o_title = _html_mod.escape(o.get("title", ""))
+        o_pub = _html_mod.escape(o.get("publication", "Treatise Archive"))
+        o_abstract = _html_mod.escape(o.get("abstract", ""))
+        o_url = _html_mod.escape(o.get("url", "#"))
+        o_badge = _html_mod.escape(o.get("badge", f"Essay 0{idx+1}"))
+        o_img = o.get("image", "assets/images/spotlight-smart-cities.jpg")
+        icon_svg = icon_map.get(opinion_icons[idx % len(opinion_icons)], icon_map["philosophy"])
+
+        card_html = f"""
+        <div class="service-portrait-card">
+          <img src="{o_img}" alt="{o_title}" class="service-card-bg-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+          <div class="service-card-gradient-top"></div>
+          <div class="service-card-gradient-bottom"></div>
+
+          <!-- Top Row: Frosted Tag & Icon Badge -->
+          <div class="service-card-top-row">
+            <span class="service-card-tag">{o_badge}</span>
+            <div class="service-card-icon-badge" aria-hidden="true">
+              {icon_svg}
+            </div>
+          </div>
+
+          <!-- Bottom Content: Publication, Title, Synopsis, Capsule Button -->
+          <div class="service-card-bottom">
+            <div class="service-card-venue">{o_pub}</div>
+            <h3 class="service-card-title">{o_title}</h3>
+            <p class="service-card-desc">{o_abstract}</p>
+            <a href="{o_url}" {"target='_blank' rel='noopener'" if o_url.startswith("http") else ""} class="service-card-btn">
+              <span>Read Essay</span>
+              <span class="service-card-btn-disc">&nearr;</span>
+            </a>
+          </div>
+        </div>"""
+        opinions_cards_html.append(card_html)
+
+    opinions_carousel_joined = "\n".join(opinions_cards_html)
 
     feat_title = _html_mod.escape(featured.get("title", ""))
     feat_desc = _html_mod.escape(featured.get("description", ""))
@@ -2191,9 +2214,10 @@ def generate_talks_page():
     feat_duration = _html_mod.escape(featured.get("duration", "28:40"))
 
     js_controller = """
-    <!-- Client-side Interactive Controller for Video Stage -->
+    <!-- Client-side Interactive Controller for Video Stage & Carousels -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        // 1. Video Gallery Stage Interaction
         const stagePoster = document.getElementById("stage-poster-img");
         const stageTitle = document.getElementById("stage-title");
         const stageDesc = document.getElementById("stage-description");
@@ -2281,6 +2305,29 @@ def generate_talks_page():
             }
           });
         }
+
+        // 2. Category 2 & 3 Carousel Track Controllers
+        function setupCarousel(prevId, nextId, trackId) {
+          const pBtn = document.getElementById(prevId);
+          const nBtn = document.getElementById(nextId);
+          const track = document.getElementById(trackId);
+          if (!track || !pBtn || !nBtn) return;
+
+          nBtn.addEventListener("click", function () {
+            const card = track.querySelector(".service-portrait-card");
+            const shift = card ? card.offsetWidth + 20 : 320;
+            track.scrollBy({ left: shift, behavior: "smooth" });
+          });
+
+          pBtn.addEventListener("click", function () {
+            const card = track.querySelector(".service-portrait-card");
+            const shift = card ? card.offsetWidth + 20 : 320;
+            track.scrollBy({ left: -shift, behavior: "smooth" });
+          });
+        }
+
+        setupCarousel("keynote-prev-btn", "keynote-next-btn", "keynote-track");
+        setupCarousel("opinion-prev-btn", "opinion-next-btn", "opinion-track");
       });
     </script>
     """
@@ -2296,7 +2343,7 @@ def generate_talks_page():
         </p>
         <div class="talks-nav-bar" aria-label="Media &amp; Talks Navigation">
           <a href="#category-talkshow" class="talks-nav-pill active">01. Talkshow (Video Gallery)</a>
-          <a href="#category-keynotes" class="talks-nav-pill">02. Keynote &amp; Visiting Speaker</a>
+          <a href="#category-keynotes" class="talks-nav-pill">02. Keynote, Guest &amp; Visiting Speaker</a>
           <a href="#category-opinion" class="talks-nav-pill">03. Opinion</a>
         </div>
       </section>
@@ -2391,34 +2438,108 @@ def generate_talks_page():
       </section>
 
       <!-- ====================================================================
-           CATEGORY 2: KEYNOTE, GUEST AND VISITING SPEAKER
+           SPEAKING INVITATION BANNER (Top Block of User Reference Image)
            ==================================================================== -->
-      <section class="talks-category-section" id="category-keynotes">
-        <div class="talks-category-header">
-          <div class="talks-category-title-group">
-            <h2>02. Keynote, Guest and Visiting Speaker</h2>
-            <p class="talks-category-subtitle">International Plenary Lectures &bull; Academic Symposia &bull; Visiting Scholar Sessions</p>
+      <section class="talks-invite-banner" aria-label="Keynote Speaking Invitation">
+        <div class="talks-invite-img-col">
+          <div class="talks-invite-img-frame">
+            <img src="assets/images/portraits/portrait-1.webp" alt="Dr. Zaid Amin" loading="lazy">
+          </div>
+          <div class="talks-invite-social-row">
+            <a href="https://scholar.google.com/citations?user=k37uIeQAAAAJ" target="_blank" rel="noopener" title="Google Scholar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </a>
+            <a href="https://orcid.org/0000-0002-3686-2489" target="_blank" rel="noopener" title="ORCID">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 8v8M12 8v8M15 8v8"/></svg>
+            </a>
+            <a href="https://github.com/zaeedh" target="_blank" rel="noopener" title="GitHub">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" title="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
           </div>
         </div>
 
-        <div class="exhibition-posters-grid">
-          {keynotes_posters_html}
+        <div class="talks-invite-content">
+          <div class="talks-invite-eyebrow">
+            <span class="talks-invite-dot"></span>
+            <span>Scholarly Invitation &bull; Global Engagements</span>
+          </div>
+          <p class="talks-invite-p">
+            Dr. Zaid Amin is available for international academic keynotes, conference plenary talks, institutional research workshops, and expert panel discussions on Human-Computer Interaction, AI Governance, Cognitive Attention Systems, and Digital Ethics.
+          </p>
+          <div class="talks-invite-actions">
+            <a href="mailto:zaid.amin@newinti.edu.my" class="talks-invite-btn-primary">
+              <span>Invite for Keynote</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+            <a href="cv.html" class="talks-invite-link-sec">
+              <span>View Academic Curriculum Vitae &nearr;</span>
+            </a>
+          </div>
         </div>
       </section>
 
       <!-- ====================================================================
-           CATEGORY 3: OPINION
+           CATEGORY 2: KEYNOTE, GUEST AND VISITING SPEAKER (Figure Reference)
            ==================================================================== -->
-      <section class="talks-category-section" id="category-opinion" style="margin-bottom: 6px;">
-        <div class="talks-category-header">
-          <div class="talks-category-title-group">
-            <h2>03. Opinion</h2>
-            <p class="talks-category-subtitle">Public Intellectual Essays &bull; Philosophical Treatises &bull; Critical Commentary</p>
+      <section class="talks-category-section" id="category-keynotes">
+        <div class="service-carousel-header">
+          <div class="service-header-left">
+            <div class="service-eyebrow">
+              <span class="service-eyebrow-dot"></span>
+              <span>02. Keynote, Guest &amp; Visiting Speaker</span>
+            </div>
+            <h2 class="service-heading">Global <em>Keynotes</em> &amp; Visiting Orations</h2>
+          </div>
+          
+          <div class="service-header-right">
+            <p class="service-subtext">Delivering international plenary keynotes, visiting research lectures, and academic symposia across institutions.</p>
+            <div class="service-arrow-nav">
+              <button class="service-arrow-btn" id="keynote-prev-btn" title="Previous Keynote" type="button" aria-label="Previous Keynotes">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button class="service-arrow-btn" id="keynote-next-btn" title="Next Keynote" type="button" aria-label="Next Keynotes">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
           </div>
         </div>
 
-        <div class="exhibition-posters-grid">
-          {opinions_posters_html}
+        <div class="service-carousel-track" id="keynote-track">
+          {keynotes_carousel_joined}
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           CATEGORY 3: OPINION (Figure Reference)
+           ==================================================================== -->
+      <section class="talks-category-section" id="category-opinion" style="margin-bottom: 8px;">
+        <div class="service-carousel-header">
+          <div class="service-header-left">
+            <div class="service-eyebrow">
+              <span class="service-eyebrow-dot gold-dot"></span>
+              <span>03. Opinion &amp; Public Intellect</span>
+            </div>
+            <h2 class="service-heading">Philosophical <em>Treatises</em> &amp; Critical Inquiries</h2>
+          </div>
+          
+          <div class="service-header-right">
+            <p class="service-subtext">Critical public commentaries, epistemic investigations, and philosophical critiques on AI ethics and cognitive sovereignty.</p>
+            <div class="service-arrow-nav">
+              <button class="service-arrow-btn" id="opinion-prev-btn" title="Previous Opinion" type="button" aria-label="Previous Opinions">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button class="service-arrow-btn" id="opinion-next-btn" title="Next Opinion" type="button" aria-label="Next Opinions">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-carousel-track" id="opinion-track">
+          {opinions_carousel_joined}
         </div>
       </section>
 
