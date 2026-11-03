@@ -1648,68 +1648,71 @@ def generate_publications_page():
         cards_html = ""
         for item_idx, pub in enumerate(cat_items, 1):
             download_pill = render_download_pill(pub)
-            featured_pill = '<span class="pub-row-featured-pill">★ Featured</span>' if pub.get("featured") else ""
+            featured_pill = '<span class="pub-strip-featured-pill">★ Featured Work</span>' if pub.get("featured") else ""
             short_venue = pub.get("venue", "")
-            if len(short_venue) > 34:
-                short_venue = short_venue[:32] + "..."
-            excerpt = clean_excerpt(pub.get("abstract", ""), max_len=160)
+            if len(short_venue) > 42:
+                short_venue = short_venue[:40] + "..."
+            excerpt = clean_excerpt(pub.get("abstract", ""), max_len=180)
             doi = pub.get("doi", "").strip()
             url = pub.get("url", "").strip()
             if not url and doi:
                 url = f"https://doi.org/{doi}"
-            doi_html = f'<div class="pub-row-doi"><span class="pub-row-doi-lbl">DOI:</span> <a href="{url}" target="_blank" rel="noopener" class="pub-row-doi-link">{doi}</a></div>' if doi else ""
+            doi_html = f'<span class="pub-strip-doi-inline"><span class="pub-strip-doi-lbl">DOI:</span> <a href="{url}" target="_blank" rel="noopener" class="pub-strip-doi-link">{doi}</a></span>' if doi else ""
             year = pub.get("year", "")
             escaped_title = html.escape(pub["title"])
             escaped_title_lower = html.escape(pub["title"].lower())
             escaped_venue = html.escape(pub.get("venue", ""))
             escaped_venue_lower = html.escape(pub.get("venue", "").lower())
-            img_src = pub.get("image", "assets/images/thumb-research.jpg")
             bibtex_id = pub.get("id", f"pub_{cat_idx}_{item_idx}")
+            cat_badge_label = cat["title"].replace(" Papers", "").upper()
 
             cards_html += f"""
-            <article class="pub-row-card pub-item" data-category="{cat['category_key'].lower()}" data-title="{escaped_title_lower}" data-venue="{escaped_venue_lower}" data-year="{year}">
-              <!-- Left: Thumbnail (Matches User Icon Box) -->
-              <div class="pub-row-thumb-frame">
-                <img src="{img_src}" alt="{escaped_title}" loading="lazy" class="pub-row-thumb-img" />
-                <div class="pub-row-thumb-overlay"></div>
-                <div class="pub-row-thumb-badge-top">{short_venue}</div>
-                <div class="pub-row-thumb-badge-year">{year}</div>
+            <article class="pub-strip-card pub-item" data-category="{cat['category_key'].lower()}" data-title="{escaped_title_lower}" data-venue="{escaped_venue_lower}" data-year="{year}">
+              <div class="pub-strip-main">
+                <!-- Left Scholarly Content (Golden Ratio ~75%) -->
+                <div class="pub-strip-content">
+                  <!-- Row 1: Badges, Index, Year & Venue (Gestalt Proximity) -->
+                  <div class="pub-strip-header">
+                    <div class="pub-strip-tags">
+                      <span class="pub-strip-idx">#{item_idx:02d}</span>
+                      <span class="pub-strip-cat-pill">{cat_badge_label}</span>
+                      <span class="pub-strip-year-pill">{year}</span>
+                      <span class="pub-strip-venue-chip" title="{escaped_venue}">{short_venue}</span>
+                    </div>
+                    {featured_pill}
+                  </div>
+
+                  <!-- Row 2: Article / Paper Title -->
+                  <h3 class="pub-strip-title font-cinzel">{pub['title']}</h3>
+                  
+                  <!-- Row 3: Full Venue, Authors & DOI Line -->
+                  <div class="pub-strip-venue-line">
+                    <span class="pub-strip-venue-name">{pub.get('venue', '')}</span>
+                    <span class="pub-strip-dot">&bull;</span>
+                    <span class="pub-strip-authors">Dr. Zaid Amin et al.</span>
+                    {f'<span class="pub-strip-dot">&bull;</span> {doi_html}' if doi_html else ''}
+                  </div>
+
+                  <!-- Row 4: Abstract Excerpt (Compact 1-2 lines) -->
+                  {f'<p class="pub-strip-excerpt">{excerpt}</p>' if excerpt else ''}
+                </div>
+
+                <!-- Right Action Pills Dock (Golden Ratio ~25%, Tight & Neat) -->
+                <div class="pub-strip-actions">
+                  {download_pill}
+                  <button class="pub-pill-btn pub-pill-secondary btn-bibtex-toggle" data-target="bib-{bibtex_id}">
+                    Cite / BibTeX
+                  </button>
+                </div>
               </div>
 
-              <!-- Right: Content & Action Architecture (Matches User Icon Lines) -->
-              <div class="pub-row-content">
-                <div class="pub-row-meta-line">
-                  <span class="pub-row-idx">#{item_idx:02d}</span>
-                  <span class="pub-row-dot">&bull;</span>
-                  <span class="pub-row-cat-pill">{cat['title'].split()[0]}</span>
-                  <span class="pub-row-dot">&bull;</span>
-                  <span class="pub-row-authors">Dr. Zaid Amin et al.</span>
-                  {featured_pill}
-                </div>
-
-                <h3 class="pub-row-title font-cinzel">{pub['title']}</h3>
-                <div class="pub-row-venue-full">{pub.get('venue', '')}</div>
-                <div class="pub-row-gold-rule"></div>
-                {f'<p class="pub-row-excerpt">{excerpt}</p>' if excerpt else ''}
-
-                <!-- Bottom Row: DOI & Actions (Gestalt Proximity) -->
-                <div class="pub-row-footer">
-                  <div class="pub-row-doi-wrap">
-                    {doi_html}
-                  </div>
-                  <div class="pub-row-actions">
-                    {download_pill}
-                    <button class="pub-pill-btn pub-pill-secondary btn-bibtex-toggle" data-target="bib-{bibtex_id}">
-                      Cite / BibTeX
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Collapsible BibTeX Drawer -->
-                <div class="bibtex-box" id="bib-{bibtex_id}">
+              <!-- Collapsible BibTeX Drawer -->
+              <div class="bibtex-box" id="bib-{bibtex_id}">
+                <div class="bibtex-box-header">
+                  <span class="bibtex-box-label">BibTeX Citation Entry</span>
                   <button class="bibtex-copy-btn" data-target="code-{bibtex_id}">Copy BibTeX</button>
-                  <code id="code-{bibtex_id}">{pub['bibtex']}</code>
                 </div>
+                <code id="code-{bibtex_id}">{pub['bibtex']}</code>
               </div>
             </article>
             """
@@ -1717,38 +1720,25 @@ def generate_publications_page():
         chips_html = "".join([f'<span class="pub-stat-chip">{c}</span>' for c in cat["chips"]])
 
         sections_html += f"""
-        <section class="pub-gallery-section" id="{cat['id']}" data-category-section="{cat['category_key'].lower()}">
-          <div class="pub-gallery-layout">
-            <!-- Left Golden Ratio Anchor: "My Photo" + Category Scholarly Scope -->
-            <aside class="pub-anchor-card">
-              <div class="pub-anchor-photo-frame">
-                <picture>
-                  <source srcset="{cat['photo_webp']}" type="image/webp">
-                  <img src="{cat['photo_png']}" alt="{cat['photo_alt']}" class="pub-anchor-photo" loading="lazy">
-                </picture>
-                <div class="pub-anchor-badge-floating">{cat['badge'].split(' • ')[0]}</div>
+        <section class="pub-gallery-section pub-pure-strip-section" id="{cat['id']}" data-category-section="{cat['category_key'].lower()}">
+          <!-- Full-Width Pure Strip Header (No Portrait Anchor - Clean & Elegant) -->
+          <header class="pub-pure-section-header">
+            <div class="pub-pure-header-info">
+              <div class="pub-pure-badge-row">
+                <span class="pub-pure-badge">{cat['badge']}</span>
               </div>
-
-              <div class="pub-anchor-body">
-                <div class="pub-anchor-category-pill">{cat['badge'].split(' • ')[1]}</div>
-                <h2 class="pub-anchor-title font-cinzel">{cat['title']}</h2>
-                <div class="pub-anchor-gold-line"></div>
-                <p class="pub-anchor-desc">
-                  {cat['description']}
-                </p>
-
-                <div class="pub-anchor-stats">
-                  {chips_html}
-                </div>
-              </div>
-            </aside>
-
-            <!-- Right Gallery Row List (Matching User's Row/List Icon) -->
-            <div class="pub-gallery-rows-wrapper">
-              <div class="pub-row-list">
-                {cards_html}
-              </div>
+              <h2 class="pub-pure-title font-cinzel">{cat['title']}</h2>
+              <div class="pub-pure-gold-line"></div>
+              <p class="pub-pure-desc">{cat['description']}</p>
             </div>
+            <div class="pub-pure-chips-wrapper">
+              {chips_html}
+            </div>
+          </header>
+
+          <!-- Pure Full-Width Horizontal Strip Cards Stack -->
+          <div class="pub-pure-strip-list">
+            {cards_html}
           </div>
         </section>
         """
