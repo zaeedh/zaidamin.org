@@ -527,73 +527,121 @@ function initPortalsTrayCarousel() {
   if (!carousel) return;
 
   const slides = carousel.querySelectorAll('.tray-slide');
-  const dots = carousel.querySelectorAll('.spotlight-dot');
   const currEl = carousel.querySelector('.tray-curr');
   const totalEl = carousel.querySelector('.tray-total');
+  const shuffleBtn = carousel.querySelector('#tray-shuffle-toggle, .tray-shuffle-btn');
   if (!slides.length) return;
 
   const total = slides.length;
   if (totalEl) totalEl.textContent = String(total).padStart(2, '0');
 
-  // Initialize slides state
+  let isShuffleMode = false;
+  let isTransitioning = false;
+
+  // Initialize slides state: slide 0 is visible, all others are hidden
   slides.forEach((slide, idx) => {
     slide.classList.remove('active', 'slide-out-down', 'slide-out-up');
-    if (idx === 0) slide.classList.add('active');
+    if (idx === 0) {
+      slide.classList.add('active');
+      slide.style.visibility = 'visible';
+    } else {
+      slide.style.visibility = 'hidden';
+    }
   });
 
   function rotateTraySlide(dir) {
+    if (isTransitioning) return;
+    isTransitioning = true;
+
     const prevIdx = portalsTickerIndex;
-    portalsTickerIndex = (portalsTickerIndex + dir + total) % total;
-
-    // Reset slide-out classes
-    slides.forEach(s => s.classList.remove('slide-out-down', 'slide-out-up'));
-
-    if (dir >= 0) {
-      // Advancing downwards: current slide moves down, next slide enters from top
-      slides[prevIdx].classList.remove('active');
-      slides[prevIdx].classList.add('slide-out-down');
-
-      slides[portalsTickerIndex].classList.remove('slide-out-down', 'slide-out-up');
-      slides[portalsTickerIndex].classList.add('active');
+    if (isShuffleMode && dir > 0) {
+      let randIdx;
+      do {
+        randIdx = Math.floor(Math.random() * total);
+      } while (randIdx === prevIdx && total > 1);
+      portalsTickerIndex = randIdx;
     } else {
-      // Moving upwards: current slide moves up, next slide enters from bottom
-      slides[prevIdx].classList.remove('active');
-      slides[prevIdx].classList.add('slide-out-up');
-
-      slides[portalsTickerIndex].classList.remove('slide-out-down', 'slide-out-up');
-      slides[portalsTickerIndex].classList.add('active');
+      portalsTickerIndex = (portalsTickerIndex + dir + total) % total;
     }
 
-    // Update indicator dots
-    dots.forEach((dot, dIdx) => {
-      dot.classList.toggle('active', dIdx === portalsTickerIndex);
+    // Hide any slides that are not part of this immediate transition
+    slides.forEach((s, idx) => {
+      if (idx !== prevIdx && idx !== portalsTickerIndex) {
+        s.classList.remove('active', 'slide-out-down', 'slide-out-up');
+        s.style.visibility = 'hidden';
+      }
     });
+
+    const prevSlide = slides[prevIdx];
+    const nextSlide = slides[portalsTickerIndex];
+
+    if (prevSlide) {
+      prevSlide.classList.remove('active');
+      if (dir >= 0) {
+        prevSlide.classList.add('slide-out-down');
+      } else {
+        prevSlide.classList.add('slide-out-up');
+      }
+    }
+
+    if (nextSlide) {
+      nextSlide.style.visibility = 'visible';
+      nextSlide.classList.remove('slide-out-down', 'slide-out-up');
+      nextSlide.classList.add('active');
+    }
 
     // Update counter
     if (currEl) currEl.textContent = String(portalsTickerIndex + 1).padStart(2, '0');
+
+    // Clean up outgoing slide after animation finishes to prevent ghost overlapping
+    setTimeout(() => {
+      if (prevSlide && prevSlide !== nextSlide) {
+        prevSlide.classList.remove('slide-out-down', 'slide-out-up');
+        prevSlide.style.visibility = 'hidden';
+      }
+      isTransitioning = false;
+    }, 380);
   }
 
   function goToSlide(targetIdx) {
-    if (targetIdx === portalsTickerIndex) return;
+    if (targetIdx === portalsTickerIndex || targetIdx < 0 || targetIdx >= total) return;
     const dir = targetIdx > portalsTickerIndex ? 1 : -1;
     const prevIdx = portalsTickerIndex;
     portalsTickerIndex = targetIdx;
 
-    slides.forEach(s => s.classList.remove('slide-out-down', 'slide-out-up'));
-    if (dir >= 0) {
-      slides[prevIdx].classList.remove('active');
-      slides[prevIdx].classList.add('slide-out-down');
-    } else {
-      slides[prevIdx].classList.remove('active');
-      slides[prevIdx].classList.add('slide-out-up');
-    }
-    slides[portalsTickerIndex].classList.add('active');
-
-    dots.forEach((dot, dIdx) => {
-      dot.classList.toggle('active', dIdx === portalsTickerIndex);
+    slides.forEach((s, idx) => {
+      if (idx !== prevIdx && idx !== portalsTickerIndex) {
+        s.classList.remove('active', 'slide-out-down', 'slide-out-up');
+        s.style.visibility = 'hidden';
+      }
     });
 
+    const prevSlide = slides[prevIdx];
+    const nextSlide = slides[portalsTickerIndex];
+
+    if (prevSlide) {
+      prevSlide.classList.remove('active');
+      if (dir >= 0) {
+        prevSlide.classList.add('slide-out-down');
+      } else {
+        prevSlide.classList.add('slide-out-up');
+      }
+    }
+
+    if (nextSlide) {
+      nextSlide.style.visibility = 'visible';
+      nextSlide.classList.remove('slide-out-down', 'slide-out-up');
+      nextSlide.classList.add('active');
+    }
+
     if (currEl) currEl.textContent = String(portalsTickerIndex + 1).padStart(2, '0');
+
+    setTimeout(() => {
+      if (prevSlide && prevSlide !== nextSlide) {
+        prevSlide.classList.remove('slide-out-down', 'slide-out-up');
+        prevSlide.style.visibility = 'hidden';
+      }
+    }, 380);
   }
 
   // Global controller for Advanced Search Engine & Slide Auto-Jump
@@ -634,7 +682,7 @@ function initPortalsTrayCarousel() {
     }, 140);
   };
 
-  // Automatic vertical sliding every 4.8 seconds (matching Indexed Journals)
+  // Automatic vertical sliding every 4.8 seconds
   clearInterval(portalsTickerInterval);
   portalsTickerInterval = setInterval(() => {
     if (!isPortalsTickerPaused) {
@@ -646,11 +694,16 @@ function initPortalsTrayCarousel() {
   carousel.addEventListener('mouseenter', () => { isPortalsTickerPaused = true; });
   carousel.addEventListener('mouseleave', () => { isPortalsTickerPaused = false; });
 
-  // Click controls for buttons and dots
+  // Pause when browser tab is inactive to avoid queued animations
+  document.addEventListener('visibilitychange', () => {
+    isPortalsTickerPaused = document.hidden;
+  });
+
+  // Click controls for buttons and shuffle toggle
   carousel.addEventListener('click', (e) => {
     const prevBtn = e.target.closest('.tray-arrow-prev, .spotlight-arrow-prev');
     const nextBtn = e.target.closest('.tray-arrow-next, .spotlight-arrow-next');
-    const dotBtn = e.target.closest('.spotlight-dot');
+    const shuffleToggle = e.target.closest('#tray-shuffle-toggle, .tray-shuffle-btn');
 
     if (prevBtn) {
       e.preventDefault();
@@ -658,10 +711,13 @@ function initPortalsTrayCarousel() {
     } else if (nextBtn) {
       e.preventDefault();
       rotateTraySlide(1);
-    } else if (dotBtn) {
+    } else if (shuffleToggle) {
       e.preventDefault();
-      const target = parseInt(dotBtn.getAttribute('data-slide-target'), 10);
-      if (!isNaN(target)) goToSlide(target);
+      isShuffleMode = !isShuffleMode;
+      shuffleToggle.classList.toggle('active', isShuffleMode);
+      if (isShuffleMode) {
+        rotateTraySlide(1);
+      }
     }
   });
 
