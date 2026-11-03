@@ -1252,6 +1252,143 @@ def generate_golden_ratio_home():
     html += get_page_footer(show_visitor_stats=True)
     return html
 
+
+import re as _re_mod
+import html as _html_mod
+
+def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_download_pill_fn, clean_excerpt_fn, html_mod):
+    """
+    Premium Book & Chapters showcase layout.
+    Left: large portrait photo + category info (golden ratio minor column 38.2%)
+    Right: 3-column grid of book cards with 3D cover effect (golden ratio major 61.8%)
+    """
+    cat_items = [p for p in publications if p.get("category") == cat["category_key"]]
+    if not cat_items:
+        return ""
+
+    chips_html = "".join([
+        f'<span class="pub-stat-chip">{c}</span>' for c in cat["chips"]
+    ])
+
+    def get_publisher(venue, doi):
+        v = venue or ""
+        d = doi or ""
+        if "Springer" in v or "LNCS" in v or "Contributions" in v:
+            return "Springer Nature"
+        if "Atlantis" in v or "2991" in d:
+            return "Atlantis Press"
+        return "Academic Press"
+
+    def render_book_card(pub, idx):
+        url = pub.get("url", "").strip()
+        doi = pub.get("doi", "").strip()
+        if not url and doi:
+            url = f"https://doi.org/{doi}"
+        venue = pub.get("venue", "Academic Publication")
+        publisher = get_publisher(venue, doi)
+        excerpt = clean_excerpt_fn(pub.get("abstract", ""), max_len=110)
+        escaped_title = _html_mod.escape(pub["title"])
+        escaped_title_lower = _html_mod.escape(pub["title"].lower())
+        escaped_venue = _html_mod.escape(venue)
+        escaped_venue_lower = _html_mod.escape(venue.lower())
+        year = pub.get("year", "")
+        img = pub.get("image", "assets/images/thumb-research.jpg")
+        bibtex_id = pub.get("id", f"book{idx}")
+
+        # Download pill
+        if url:
+            label = "Download / DOI"
+            if "arxiv.org" in url:
+                label = "Download (arXiv)"
+            elif "ssrn" in url:
+                label = "Download (SSRN)"
+            dl_btn = f'<a href="{url}" target="_blank" rel="noopener" class="book-grid-btn book-grid-btn-primary">{render_svg_icon_fn("download")} <span>{label}</span></a>'
+        else:
+            title_enc = _html_mod.escape(pub.get("title", ""))
+            mailto = f"mailto:zaid.amin@newinti.edu.my?subject=Requesting%20Full-Text:%20{title_enc}"
+            dl_btn = f'<a href="{mailto}" class="book-grid-btn book-grid-btn-primary">{render_svg_icon_fn("email")} <span>Request Full-Text</span></a>'
+
+        bibtex_raw = pub.get("bibtex", "")
+
+        return f"""
+        <article class="book-grid-card pub-item" data-category="{cat["category_key"].lower()}" data-title="{escaped_title_lower}" data-venue="{escaped_venue_lower}" data-year="{year}">
+          <!-- 3D Book Cover -->
+          <div class="book-grid-cover-wrap">
+            <div class="book-grid-3d">
+              <div class="book-grid-front">
+                <img src="{img}" alt="{escaped_title}" class="book-grid-img" loading="lazy"/>
+              </div>
+              <div class="book-grid-spine"></div>
+              <div class="book-grid-shadow"></div>
+            </div>
+            <div class="book-grid-publisher">{publisher}</div>
+          </div>
+          <!-- Book Info -->
+          <div class="book-grid-info">
+            <div class="book-grid-meta-row">
+              <span class="book-grid-idx">#{idx:02d}</span>
+              <span class="book-grid-year-chip">{year}</span>
+            </div>
+            <h3 class="book-grid-title">{pub["title"]}</h3>
+            <div class="book-grid-venue">{venue}</div>
+            <div class="book-grid-rule"></div>
+            {f'<p class="book-grid-excerpt">{excerpt}</p>' if excerpt else ''}
+          </div>
+          <!-- Actions -->
+          <div class="book-grid-actions">
+            {dl_btn}
+            <button class="book-grid-btn book-grid-btn-secondary btn-bibtex-toggle" data-target="bib-{bibtex_id}">
+              Cite / BibTeX
+            </button>
+          </div>
+          <div class="bibtex-box" id="bib-{bibtex_id}">
+            <button class="bibtex-copy-btn" data-target="code-{bibtex_id}">Copy BibTeX</button>
+            <code id="code-{bibtex_id}">{bibtex_raw}</code>
+          </div>
+        </article>
+        """
+
+    # Render all book cards
+    books_html = ""
+    for i, pub in enumerate(cat_items, 1):
+        books_html += render_book_card(pub, i)
+
+    return f"""
+    <section class="pub-gallery-section book-showcase-section" id="{cat['id']}" data-category-section="{cat['category_key'].lower()}">
+      <div class="book-showcase-layout">
+
+        <!-- LEFT: Portrait + Category Info (Golden Ratio Minor: 38.2%) -->
+        <aside class="book-showcase-aside">
+          <div class="book-aside-photo-frame">
+            <picture>
+              <source srcset="{cat['photo_webp']}" type="image/webp">
+              <img src="{cat['photo_png']}" alt="{cat['photo_alt']}" class="book-aside-photo" loading="lazy">
+            </picture>
+            <div class="book-aside-badge">{cat['badge'].split(' • ')[0]}</div>
+          </div>
+          <div class="book-aside-body">
+            <div class="book-aside-category-pill">{cat['badge'].split(' • ')[1]}</div>
+            <h2 class="book-aside-title font-cinzel">{cat['title']}</h2>
+            <div class="book-aside-gold-line"></div>
+            <p class="book-aside-desc">{cat['description']}</p>
+            <div class="book-aside-stats">
+              {chips_html}
+            </div>
+          </div>
+        </aside>
+
+        <!-- RIGHT: 3-Column Book Grid (Golden Ratio Major: 61.8%) -->
+        <div class="book-grid-wrapper">
+          <div class="book-grid-3col">
+            {books_html}
+          </div>
+        </div>
+
+      </div>
+    </section>
+    """
+
+
 def generate_publications_page():
     publications = load_json("publications.json")
 
@@ -1346,6 +1483,13 @@ def generate_publications_page():
     # Build category sections
     sections_html = ""
     for cat_idx, cat in enumerate(categories_config, 1):
+        # Premium Book Showcase layout for Book & Chapters
+        if cat["category_key"] == "Book Chapter":
+            sections_html += render_book_showcase_section(
+                publications, cat, render_svg_icon, render_download_pill, clean_excerpt, html
+            )
+            continue
+
         cat_items = [p for p in publications if p.get("category") == cat["category_key"]]
         
         cards_html = ""
