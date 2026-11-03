@@ -302,6 +302,42 @@
   },
   "page_traces": [
     {
+      "id": "tr-1793695846338",
+      "timestamp": "2026-11-03T08:50:46.338Z",
+      "path": "/test_footer",
+      "title": "Academic Portal",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1793695783410",
+      "timestamp": "2026-11-03T08:49:43.410Z",
+      "path": "/article",
+      "title": "Article Reader | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1793695733237",
+      "timestamp": "2026-11-03T08:48:53.237Z",
+      "path": "/publications",
+      "title": "Publications (24+) | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
       "id": "tr-1793694897439",
       "timestamp": "2026-11-03T08:34:57.439Z",
       "path": "/",
@@ -808,7 +844,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-03T16:34:57.468686",
+  "updated_at": "2026-11-03T16:50:46.367995",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
