@@ -10322,3 +10322,53 @@ a {
 .article-reader-container {
   padding-bottom: 10px !important;
 }
+
+
+/* ==========================================================================
+   UNIFIED EXECUTIVE HEADING & TYPOGRAPHY SYSTEM (CV & ALL SUBPAGES)
+   Standardized across: Homepage, Publications, Activity, Talks, CV, Supervision
+   Following Golden Ratio (Phi ~ 1.618) and Gestalt proximity:
+   - Primary Heading: Cinzel Roman Serif, 2.15rem, 700 weight, 0.03em tracking
+   - Secondary Subtitle: Cinzel Small-Caps, 0.98rem, 600 weight, 0.04em tracking, cyan #38bdf8
+   - Section Titles: Cinzel Roman Serif, 1.52rem, 700 weight, 0.025em tracking
+   ========================================================================== */
+
+.cv-hero-name,
+h1.cv-hero-name {
+  font-family: 'Cinzel', Georgia, serif !important;
+  font-size: 2.15rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.03em !important;
+  text-transform: uppercase !important;
+  color: #ffffff !important;
+  line-height: 1.25 !important;
+  margin: 0 0 6px 0 !important;
+}
+
+.cv-hero-role {
+  font-family: 'Cinzel', Georgia, serif !important;
+  font-size: 0.98rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  color: #38bdf8 !important;
+  line-height: 1.4 !important;
+  margin: 0 0 6px 0 !important;
+}
+
+.cv-hero-affiliation {
+  font-family: var(--font-sans) !important;
+  font-size: 0.92rem !important;
+  color: #94a3b8 !important;
+  line-height: 1.55 !important;
+  margin-bottom: 4px !important;
+}
+
+.cv-section-title {
+  font-family: 'Cinzel', Georgia, serif !important;
+  font-size: 1.52rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.025em !important;
+  color: #ffffff !important;
+  margin: 0 !important;
+}
