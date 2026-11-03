@@ -292,6 +292,32 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                 self.send_json(500, {"error": str(e)})
             return
 
+        # 0.1 Public Telemetry Beacon / Access Trace Endpoint (Anonymous visitor analytics ingestion)
+        if path == "/api/telemetry/trace":
+            try:
+                trace_item = self.read_post_json()
+                if trace_item and isinstance(trace_item, dict):
+                    curr = load_json_file("analytics.json")
+                    if not isinstance(curr, dict):
+                        curr = {}
+                    traces = curr.get("page_traces", [])
+                    if not isinstance(traces, list):
+                        traces = []
+                    
+                    if "timestamp" not in trace_item:
+                        trace_item["timestamp"] = datetime.now().isoformat()
+                    if "id" not in trace_item:
+                        trace_item["id"] = f"tr-{int(time.time() * 1000)}"
+                    
+                    traces.insert(0, trace_item)
+                    curr["page_traces"] = traces[:100]
+                    curr["updated_at"] = datetime.now().isoformat()
+                    save_json_file("analytics.json", curr)
+                self.send_json(200, {"status": "ok", "message": "Trace logged successfully"})
+            except Exception as e:
+                self.send_json(500, {"error": str(e)})
+            return
+
         # STRICT SECURITY GATE: All other endpoints require valid authentication
         if not verify_auth(self):
             print(f" [SECURITY] Unauthorized attempt to access {path} from {self.client_address[0]}")
@@ -556,6 +582,17 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                 save_json_file("analytics.json", curr)
                 rebuild_site()
                 self.send_json(200, {"status": "ok", "message": "Telemetry & Analytics calibrated successfully", "data": curr})
+                return
+
+            # 4.76 CLEAR TELEMETRY ACCESS TRACES
+            elif path == "/api/telemetry/clear-traces":
+                curr = load_json_file("analytics.json")
+                if not isinstance(curr, dict):
+                    curr = {}
+                curr["page_traces"] = []
+                curr["updated_at"] = datetime.now().isoformat()
+                save_json_file("analytics.json", curr)
+                self.send_json(200, {"status": "ok", "message": "All access traces cleared"})
                 return
 
             # 5. DEPLOY TO LIVE GITHUB PAGES
