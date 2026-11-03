@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ['BibtexButtons', typeof initBibtexButtons === 'function' ? initBibtexButtons : null],
     ['MobileMenu', typeof initMobileMenu === 'function' ? initMobileMenu : null],
     ['VisitorTelemetryEngine', typeof initVisitorTelemetryEngine === 'function' ? initVisitorTelemetryEngine : null],
+    ['TelemetryAccessTraceLogger', typeof initTelemetryAccessTraceLogger === 'function' ? initTelemetryAccessTraceLogger : null],
   ];
 
   initModules.forEach(([name, fn]) => {
@@ -1221,4 +1222,98 @@ function initCyberShield() {
   } catch (e) {
     // Fail silently without blocking UI
   }
+}
+
+/* --------------------------------------------------------------------------
+   Academic Page & Resource Access Trace Telemetry Logger
+   - Real-time anonymous audit telemetry capturing visited resources & actions
+   - Captures: PAGE_VIEW, BIBTEX_COPY, DOI_ACCESS, PDF_DOWNLOAD, SPOTLIGHT_CLICK
+   - Stores locally in localStorage ('zaidamin_access_traces') & beacons to server
+   -------------------------------------------------------------------------- */
+function initTelemetryAccessTraceLogger() {
+  try {
+    const loc = window.location;
+    const path = loc.pathname || '/';
+    const cleanPath = path.replace(/index\.html$/, '') || '/';
+    
+    // Helper to log a trace item
+    function recordTrace(action, targetPath, targetTitle, meta = {}) {
+      const country = sessionStorage.getItem('zaidamin_visitor_country') || 'MY';
+      const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+      const trace = {
+        id: 'tr-' + Date.now(),
+        timestamp: new Date().toISOString(),
+        path: targetPath || cleanPath,
+        title: targetTitle || document.title || 'Academic Portal',
+        action: action || 'PAGE_VIEW',
+        country: country,
+        country_name: country === 'MY' ? 'Malaysia' : (country === 'US' ? 'United States' : (country === 'GB' ? 'United Kingdom' : (country === 'SG' ? 'Singapore' : (country === 'AU' ? 'Australia' : (country === 'DE' ? 'Germany' : 'Global Visitor'))))),
+        colo: 'KUL',
+        device: isMobile ? 'Mobile' : 'Desktop',
+        referrer: document.referrer ? (document.referrer.includes(loc.hostname) ? 'Internal Navigation' : document.referrer) : 'Direct Navigation',
+        ...meta
+      };
+
+      // 1. Store locally for offline / GitHub Pages
+      try {
+        const traces = JSON.parse(localStorage.getItem('zaidamin_access_traces') || '[]');
+        traces.unshift(trace);
+        if (traces.length > 50) traces.pop();
+        localStorage.setItem('zaidamin_access_traces', JSON.stringify(traces));
+      } catch (e) {}
+
+      // 2. Dispatch beacon to server
+      try {
+        const payload = JSON.stringify(trace);
+        if (navigator.sendBeacon) {
+          const blob = new Blob([payload], { type: 'application/json' });
+          navigator.sendBeacon('/api/telemetry/trace', blob);
+        } else {
+          fetch('/api/telemetry/trace', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: payload,
+            keepalive: true
+          }).catch(() => {});
+        }
+      } catch (e) {}
+    }
+
+    // Auto-record Page View once per session navigation
+    const lastLogged = sessionStorage.getItem('zaidamin_last_trace_path');
+    if (lastLogged !== cleanPath) {
+      sessionStorage.setItem('zaidamin_last_trace_path', cleanPath);
+      recordTrace('PAGE_VIEW', cleanPath, document.title);
+    }
+
+    // Intercept clicks on key academic interactions
+    document.addEventListener('click', (e) => {
+      // BibTeX copy buttons
+      const bibBtn = e.target.closest('.bibtex-btn, .btn-bibtex, [data-copy-bibtex]');
+      if (bibBtn) {
+        const card = bibBtn.closest('.publication-card, .ref-item-card, .pub-item, article');
+        const pubTitle = card ? (card.querySelector('.pub-title, .ref-card-title, h3, h4')?.textContent?.trim() || 'Academic Publication') : 'Academic Publication';
+        recordTrace('BIBTEX_COPY', cleanPath + '#bibtex', pubTitle);
+      }
+
+      // DOI links
+      const doiLink = e.target.closest('a[href*="doi.org"]');
+      if (doiLink) {
+        recordTrace('DOI_ACCESS', doiLink.href, doiLink.textContent?.trim() || 'DOI Outbound Access');
+      }
+
+      // PDF downloads
+      const pdfLink = e.target.closest('a[href$=".pdf"], [data-download-pdf]');
+      if (pdfLink) {
+        recordTrace('PDF_DOWNLOAD', pdfLink.getAttribute('href') || cleanPath, pdfLink.textContent?.trim() || 'Curriculum Vitae / Paper PDF');
+      }
+
+      // Spotlight items
+      const spotBtn = e.target.closest('.spotlight-btn, [data-spotlight-inspect], .spotlight-card a');
+      if (spotBtn) {
+        recordTrace('SPOTLIGHT_CLICK', cleanPath + '#spotlight', 'Homepage Spotlight Feature');
+      }
+    });
+
+  } catch (err) {}
 }
