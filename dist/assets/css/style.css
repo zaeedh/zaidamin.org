@@ -10201,3 +10201,124 @@ a {
   color: #ffffff !important;
   box-shadow: 0 4px 14px rgba(34, 166, 200, 0.25) !important;
 }
+
+
+/* ==========================================================================
+   GLOBAL GOLDEN RATIO PROXIMITY & SPACING CALIBRATION (ALL PAGES)
+   Eliminates visual voids across all devices and aligns with Gestalt proximity.
+   Harmonic proportions (Phi ~ 1.618):
+   - Card/element to bottom edge: 0 - 4px
+   - Container bottom padding: 8px - 10px
+   - Footer divider margin: 10px 0 6px 0
+   - Footer copyright padding: 0 0 6px 0
+   - Total card-to-divider distance: 18px - 22px
+   ========================================================================== */
+
+/* Universal Footer Proximity */
+.golden-footer-divider {
+  margin: 10px 0 6px 0 !important;
+}
+
+.golden-footer {
+  padding: 0 0 6px 0 !important;
+  margin: 0 !important;
+}
+
+/* 1. Media & Talks Page (talks.html) */
+.talks-page-container {
+  padding-bottom: 8px !important;
+}
+
+#category-opinion,
+.talks-category-section:last-of-type {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+#opinion-track.service-carousel-track,
+.talks-category-section:last-of-type .service-carousel-track {
+  padding-bottom: 4px !important;
+}
+
+/* 2. Activity & Project Page (research.html) */
+.activity-page-container,
+.subpage-container.activity-page-container {
+  padding-top: 24px !important;
+  padding-bottom: 8px !important;
+}
+
+.articles-controls {
+  margin-bottom: 22px !important;
+}
+
+.articles-grid {
+  margin-bottom: 8px !important;
+}
+
+#activity-pane-articles,
+#activity-pane-pillars {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+#activity-pane-pillars > div:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* 3. Research & Publications Gallery (publications.html) */
+.pub-gallery-container,
+.subpage-container.pub-gallery-container {
+  padding-top: 24px !important;
+  padding-bottom: 8px !important;
+}
+
+.pub-sections-wrapper {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.pub-pure-strip-section:last-of-type,
+.pub-gallery-section:last-of-type,
+#section-preprints {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  border-bottom: none !important;
+}
+
+.pub-pure-strip-section:last-of-type .pub-strip-cards .pub-strip-card:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* 4. Curriculum Vitae Page (cv.html) */
+.cv-page-container {
+  padding-top: 28px !important;
+  padding-bottom: 8px !important;
+}
+
+.cv-section {
+  margin-bottom: 32px !important;
+}
+
+.cv-section:last-of-type,
+#references.cv-section {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+#references.cv-section .cv-mini-card:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* 5. Home Page (index.html) */
+.golden-visitor-stats {
+  margin: 20px 0 10px 0 !important;
+}
+
+/* 6. Supervision & Subpages */
+.subpage-container {
+  padding-bottom: 10px !important;
+}
+
+.article-reader-container {
+  padding-bottom: 10px !important;
+}
