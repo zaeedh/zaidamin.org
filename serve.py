@@ -197,6 +197,13 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                 spotlight_data = {"source": "publication", "id": "amin2026trustworthy", "title": "Trustworthy AI for Sustainable Cities"}
             self.send_json(200, spotlight_data)
             return
+
+        if path == "/api/analytics" or path == "/api/telemetry":
+            analytics_data = load_json_file("analytics.json")
+            if not isinstance(analytics_data, dict):
+                analytics_data = {}
+            self.send_json(200, analytics_data)
+            return
         super().do_GET()
 
     def do_OPTIONS(self):
@@ -481,6 +488,22 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                 save_json_file("cv_data.json", cv)
                 rebuild_site()
                 self.send_json(200, {"status": "ok", "message": f"Achievement '{title}' deleted"})
+                return
+
+            # 4.75 SAVE ANALYTICS & TELEMETRY CALIBRATION
+            elif path == "/api/save-analytics":
+                payload = self.read_post_json()
+                curr = load_json_file("analytics.json")
+                if not isinstance(curr, dict):
+                    curr = {}
+                if "base_counts" in payload:
+                    curr["base_counts"] = payload["base_counts"]
+                if "ga_measurement_id" in payload:
+                    curr["ga_measurement_id"] = str(payload["ga_measurement_id"]).strip()
+                curr["updated_at"] = datetime.now().isoformat()
+                save_json_file("analytics.json", curr)
+                rebuild_site()
+                self.send_json(200, {"status": "ok", "message": "Telemetry & Analytics calibrated successfully", "data": curr})
                 return
 
             # 5. DEPLOY TO LIVE GITHUB PAGES
