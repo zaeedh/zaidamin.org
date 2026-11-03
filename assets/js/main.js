@@ -309,8 +309,6 @@ function initJournalTicker() {
     if (idx === 0) slide.classList.add('active');
   });
 
-  const counter = document.getElementById('ticker-counter');
-  if (counter) counter.textContent = `1 / ${slides.length}`;
 
   // Start smooth auto-advance every 4.8s
   clearInterval(journalTickerInterval);
@@ -336,10 +334,6 @@ function rotateJournalTicker(dir) {
   slides[journalTickerIndex].classList.remove('slide-out-down');
   slides[journalTickerIndex].classList.add('active');
 
-  const counter = document.getElementById('ticker-counter');
-  if (counter) {
-    counter.textContent = `${journalTickerIndex + 1} / ${slides.length}`;
-  }
 }
 
 function pauseJournalTicker() {
