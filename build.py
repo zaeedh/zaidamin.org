@@ -1256,37 +1256,75 @@ def generate_golden_ratio_home():
 import re as _re_mod
 import html as _html_mod
 
+import re as _re_mod
+import html as _html_mod
+
+import re as _re_mod
+import html as _html_mod
+
+import re as _re_mod
+import html as _html_mod
+
 def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_download_pill_fn, clean_excerpt_fn, html_mod):
     """
-    Premium Book & Chapters showcase layout.
-    Left: large portrait photo + category info (golden ratio minor column 38.2%)
-    Right: 3-column grid of book cards with 3D cover effect (golden ratio major 61.8%)
+    Bokify-Style Premium Book Showcase for Book & Chapters section.
+    1. Bokify Hero Stage: Asymmetric Golden Ratio (61.8% text/actions | 38.2% 3D standing books).
+    2. Curated Volumes Shelf: 3-column Golden Ratio grid with 3D standing book cards.
     """
     cat_items = [p for p in publications if p.get("category") == cat["category_key"]]
     if not cat_items:
         return ""
 
-    chips_html = "".join([
-        f'<span class="pub-stat-chip">{c}</span>' for c in cat["chips"]
-    ])
+    chips_html = "".join([f'<span class="pub-stat-chip">{c}</span>' for c in cat["chips"]])
 
     def get_publisher(venue, doi):
         v = venue or ""
         d = doi or ""
-        if "Springer" in v or "LNCS" in v or "Contributions" in v:
+        if "Springer" in v or "LNCS" in v or "Computer Science" in v or "Contributions" in v:
             return "Springer Nature"
         if "Atlantis" in v or "2991" in d:
             return "Atlantis Press"
         return "Academic Press"
 
-    def render_book_card(pub, idx):
+    def get_series(venue):
+        v = venue or ""
+        if "Contributions to Management" in v:
+            return "Contributions to Management Science"
+        if "Lecture Notes in Computer Science" in v or "LNCS" in v:
+            return "Lecture Notes in Computer Science (LNCS)"
+        if "Atlantis" in v or "Academic" in v:
+            return "Atlantis Press Monograph Series"
+        return v
+
+    # Front featured book (2024 Springer Digital Loneliness)
+    featured_book = None
+    for b in cat_items:
+        if "digital" in b.get("id", "") or b.get("year") == 2024:
+            featured_book = b
+            break
+    if not featured_book:
+        featured_book = cat_items[0]
+
+    # Rear book (2021 LNCS Attention-Based)
+    rear_book = None
+    for b in cat_items:
+        if "covid" in b.get("id", "") or "attention" in b.get("id", "") or b.get("year") == 2021:
+            rear_book = b
+            break
+    if not rear_book and len(cat_items) > 1:
+        rear_book = cat_items[1]
+
+    # Render each book card in the Curated Shelf
+    shelf_cards_html = ""
+    for idx, pub in enumerate(cat_items, 1):
         url = pub.get("url", "").strip()
         doi = pub.get("doi", "").strip()
         if not url and doi:
             url = f"https://doi.org/{doi}"
         venue = pub.get("venue", "Academic Publication")
+        series_text = get_series(venue)
         publisher = get_publisher(venue, doi)
-        excerpt = clean_excerpt_fn(pub.get("abstract", ""), max_len=110)
+        excerpt = clean_excerpt_fn(pub.get("abstract", ""), max_len=140)
         escaped_title = _html_mod.escape(pub["title"])
         escaped_title_lower = _html_mod.escape(pub["title"].lower())
         escaped_venue = _html_mod.escape(venue)
@@ -1294,6 +1332,9 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
         year = pub.get("year", "")
         img = pub.get("image", "assets/images/thumb-research.jpg")
         bibtex_id = pub.get("id", f"book{idx}")
+        bibtex_raw = pub.get("bibtex", "")
+        is_featured = pub.get("featured", False) or ("digital" in pub.get("id", ""))
+        primary_tag = '<span class="bokify-primary-chip">★ Primary Volume</span>' if is_featured else ""
 
         # Download pill
         if url:
@@ -1302,45 +1343,62 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
                 label = "Download (arXiv)"
             elif "ssrn" in url:
                 label = "Download (SSRN)"
-            dl_btn = f'<a href="{url}" target="_blank" rel="noopener" class="book-grid-btn book-grid-btn-primary">{render_svg_icon_fn("download")} <span>{label}</span></a>'
+            dl_btn = f'<a href="{url}" target="_blank" rel="noopener" class="pub-pill-btn pub-pill-primary">{render_svg_icon_fn("download")} <span>{label}</span></a>'
         else:
             title_enc = _html_mod.escape(pub.get("title", ""))
             mailto = f"mailto:zaid.amin@newinti.edu.my?subject=Requesting%20Full-Text:%20{title_enc}"
-            dl_btn = f'<a href="{mailto}" class="book-grid-btn book-grid-btn-primary">{render_svg_icon_fn("email")} <span>Request Full-Text</span></a>'
+            dl_btn = f'<a href="{mailto}" class="pub-pill-btn pub-pill-primary">{render_svg_icon_fn("email")} <span>Request Full-Text</span></a>'
 
-        bibtex_raw = pub.get("bibtex", "")
+        doi_html = f'<div class="bokify-card-doi"><span class="bokify-doi-lbl">DOI:</span> <a href="{url}" target="_blank" rel="noopener" class="bokify-doi-link">{doi}</a></div>' if doi else ""
 
-        return f"""
-        <article class="book-grid-card pub-item" data-category="{cat["category_key"].lower()}" data-title="{escaped_title_lower}" data-venue="{escaped_venue_lower}" data-year="{year}">
-          <!-- 3D Book Cover -->
-          <div class="book-grid-cover-wrap">
-            <div class="book-grid-3d">
-              <div class="book-grid-front">
-                <img src="{img}" alt="{escaped_title}" class="book-grid-img" loading="lazy"/>
+        shelf_cards_html += f"""
+        <article class="bokify-shelf-card pub-item" data-category="{cat["category_key"].lower()}" data-title="{escaped_title_lower}" data-venue="{escaped_venue_lower}" data-year="{year}">
+          <!-- Top 3D Book Showcase on Card -->
+          <div class="bokify-card-stage">
+            <div class="bokify-card-3d-scene">
+              <div class="bokify-card-book-3d">
+                <div class="bokify-card-cover">
+                  <img src="{img}" alt="{escaped_title}" class="bokify-card-cover-img" loading="lazy" />
+                  <div class="bokify-cover-shine"></div>
+                </div>
+                <div class="bokify-card-spine">
+                  <span class="bokify-spine-micro">{publisher.upper()}</span>
+                </div>
+                <div class="bokify-card-pages"></div>
+                <div class="bokify-card-shadow"></div>
               </div>
-              <div class="book-grid-spine"></div>
-              <div class="book-grid-shadow"></div>
             </div>
-            <div class="book-grid-publisher">{publisher}</div>
-          </div>
-          <!-- Book Info -->
-          <div class="book-grid-info">
-            <div class="book-grid-meta-row">
-              <span class="book-grid-idx">#{idx:02d}</span>
-              <span class="book-grid-year-chip">{year}</span>
+            <div class="bokify-card-tags">
+              <span class="bokify-publisher-chip">{publisher}</span>
+              <span class="bokify-year-chip">{year}</span>
+              {primary_tag}
             </div>
-            <h3 class="book-grid-title">{pub["title"]}</h3>
-            <div class="book-grid-venue">{venue}</div>
-            <div class="book-grid-rule"></div>
-            {f'<p class="book-grid-excerpt">{excerpt}</p>' if excerpt else ''}
           </div>
-          <!-- Actions -->
-          <div class="book-grid-actions">
+
+          <!-- Card Content -->
+          <div class="bokify-card-body">
+            <div class="bokify-card-meta-line">
+              <span class="bokify-card-idx">#{idx:02d}</span>
+              <span class="bokify-card-dot">•</span>
+              <span class="bokify-card-authors">Dr. Zaid Amin et al.</span>
+            </div>
+
+            <h4 class="bokify-card-title font-cinzel">{pub["title"]}</h4>
+            <div class="bokify-card-series">{series_text}</div>
+            <div class="bokify-card-divider"></div>
+            {f'<p class="bokify-card-excerpt">{excerpt}</p>' if excerpt else ''}
+            {doi_html}
+          </div>
+
+          <!-- Card Actions (Gestalt Proximity) -->
+          <div class="bokify-card-actions">
             {dl_btn}
-            <button class="book-grid-btn book-grid-btn-secondary btn-bibtex-toggle" data-target="bib-{bibtex_id}">
+            <button class="pub-pill-btn pub-pill-secondary btn-bibtex-toggle" data-target="bib-{bibtex_id}">
               Cite / BibTeX
             </button>
           </div>
+
+          <!-- BibTeX Drawer -->
           <div class="bibtex-box" id="bib-{bibtex_id}">
             <button class="bibtex-copy-btn" data-target="code-{bibtex_id}">Copy BibTeX</button>
             <code id="code-{bibtex_id}">{bibtex_raw}</code>
@@ -1348,43 +1406,138 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
         </article>
         """
 
-    # Render all book cards
-    books_html = ""
-    for i, pub in enumerate(cat_items, 1):
-        books_html += render_book_card(pub, i)
+    # Primary featured download URL
+    primary_url = featured_book.get("url", "") or f"https://doi.org/{featured_book.get('doi', '')}"
 
     return f"""
-    <section class="pub-gallery-section book-showcase-section" id="{cat['id']}" data-category-section="{cat['category_key'].lower()}">
-      <div class="book-showcase-layout">
+    <section class="pub-gallery-section bokify-showcase-section" id="{cat['id']}" data-category-section="{cat['category_key'].lower()}">
 
-        <!-- LEFT: Portrait + Category Info (Golden Ratio Minor: 38.2%) -->
-        <aside class="book-showcase-aside">
-          <div class="book-aside-photo-frame">
-            <picture>
-              <source srcset="{cat['photo_webp']}" type="image/webp">
-              <img src="{cat['photo_png']}" alt="{cat['photo_alt']}" class="book-aside-photo" loading="lazy">
-            </picture>
-            <div class="book-aside-badge">{cat['badge'].split(' • ')[0]}</div>
-          </div>
-          <div class="book-aside-body">
-            <div class="book-aside-category-pill">{cat['badge'].split(' • ')[1]}</div>
-            <h2 class="book-aside-title font-cinzel">{cat['title']}</h2>
-            <div class="book-aside-gold-line"></div>
-            <p class="book-aside-desc">{cat['description']}</p>
-            <div class="book-aside-stats">
-              {chips_html}
+      <!-- ========================================================
+           BOKIFY HERO BANNER (Golden Ratio 61.8% : 38.2%)
+           ======================================================== -->
+      <div class="bokify-hero-wrapper">
+        <div class="bokify-hero-halo"></div>
+
+        <div class="bokify-hero-grid">
+          <!-- LEFT COLUMN: Typography & Actions (61.8%) -->
+          <div class="bokify-hero-info">
+            <!-- Author Pill & Category Badge -->
+            <div class="bokify-author-bar">
+              <div class="bokify-author-pill">
+                <picture>
+                  <source srcset="assets/images/portraits/portrait-1.webp" type="image/webp">
+                  <img src="assets/images/portraits/portrait-1.png" alt="Dr. Zaid Amin" class="bokify-author-avatar" loading="lazy">
+                </picture>
+                <div class="bokify-author-text">
+                  <span class="bokify-author-name">Dr. Zaid Amin, Ph.D.</span>
+                  <span class="bokify-author-role">Senior Lecturer &bull; FDSIT, INTI International University</span>
+                </div>
+              </div>
+              <span class="bokify-category-tag">01 / 04 &bull; MONOGRAPHS &amp; CHAPTERS</span>
+            </div>
+
+            <!-- Big Bokify Headline -->
+            <h2 class="bokify-hero-title font-cinzel">
+              Meet Your Next <span class="bokify-gold-gradient">Scholarly Treatise</span>
+            </h2>
+
+            <!-- Description -->
+            <p class="bokify-hero-desc">
+              Comprehensive academic monographs, peer-reviewed book chapters, and curated editorial treatises exploring sociotechnical systems, digital loneliness, and behavioral interventions in information diffusion. Published with leading international academic presses including Springer Nature (Contributions to Management Science, Lecture Notes in Computer Science) and Atlantis Press.
+            </p>
+
+            <!-- Call to Actions -->
+            <div class="bokify-hero-ctas">
+              <a href="{primary_url}" target="_blank" rel="noopener" class="bokify-btn-hero-primary">
+                {render_svg_icon_fn("download")}
+                <span>Download Primary Volume (Springer)</span>
+              </a>
+              <a href="#bokify-volumes-shelf" class="bokify-btn-hero-secondary">
+                <span>Browse All 3 Volumes</span>
+                <span class="bokify-arrow-down">&darr;</span>
+              </a>
+            </div>
+
+            <!-- Trust / Publisher Strip (Bokify Audible/Amazon/Google Books style) -->
+            <div class="bokify-publisher-strip">
+              <span class="bokify-publisher-strip-label">PUBLISHED &amp; INDEXED WITH</span>
+              <div class="bokify-publisher-badges">
+                <span class="bokify-pub-pill"><span class="bokify-pub-bullet">&bull;</span> Springer Nature</span>
+                <span class="bokify-pub-pill"><span class="bokify-pub-bullet">&bull;</span> LNCS Series</span>
+                <span class="bokify-pub-pill"><span class="bokify-pub-bullet">&bull;</span> Atlantis Press</span>
+                <span class="bokify-pub-pill"><span class="bokify-pub-bullet">&bull;</span> Scopus Indexed</span>
+                <span class="bokify-pub-pill"><span class="bokify-pub-bullet">&bull;</span> Gold Open Access</span>
+              </div>
             </div>
           </div>
-        </aside>
 
-        <!-- RIGHT: 3-Column Book Grid (Golden Ratio Major: 61.8%) -->
-        <div class="book-grid-wrapper">
-          <div class="book-grid-3col">
-            {books_html}
+          <!-- RIGHT COLUMN: Dual 3D Standing Book Showcase (38.2%) -->
+          <div class="bokify-hero-stage">
+            <div class="bokify-stage-container">
+              <!-- Radial Stage Spotlight -->
+              <div class="bokify-stage-glow"></div>
+
+              <!-- 3D Book Stage Scene -->
+              <div class="bokify-stage-scene">
+                <!-- Front Standing Book (Digital Loneliness - 2024) -->
+                <div class="bokify-standing-book bokify-standing-front">
+                  <div class="bokify-book-3d">
+                    <div class="bokify-book-cover">
+                      <img src="assets/images/books/book_digital_loneliness.webp" alt="Digital Loneliness in Social Media" class="bokify-cover-img" loading="lazy">
+                      <div class="bokify-cover-glare"></div>
+                    </div>
+                    <div class="bokify-book-spine">
+                      <span class="bokify-spine-text">SPRINGER NATURE &bull; 2024</span>
+                    </div>
+                    <div class="bokify-book-pages"></div>
+                    <div class="bokify-book-shadow"></div>
+                  </div>
+                  <div class="bokify-stage-badge">★ PRIMARY MONOGRAPH (2024)</div>
+                </div>
+
+                <!-- Rear Standing Book (Attention-Based Design - 2021) -->
+                <div class="bokify-standing-book bokify-standing-rear">
+                  <div class="bokify-book-3d">
+                    <div class="bokify-book-cover">
+                      <img src="assets/images/books/book_attention_covid.webp" alt="Attention-Based Design" class="bokify-cover-img" loading="lazy">
+                      <div class="bokify-cover-glare"></div>
+                    </div>
+                    <div class="bokify-book-spine">
+                      <span class="bokify-spine-text">LNCS &bull; 2021</span>
+                    </div>
+                    <div class="bokify-book-pages"></div>
+                    <div class="bokify-book-shadow"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floor Grounding Ambient Line -->
+              <div class="bokify-stage-pedestal-line"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================================
+           CURATED VOLUMES SHELF (Bokify "Top Sales / Featured")
+           ======================================================== -->
+      <div class="bokify-shelf-section" id="bokify-volumes-shelf">
+        <div class="bokify-shelf-header">
+          <div class="bokify-shelf-title-wrap">
+            <span class="bokify-shelf-eyebrow">✦ CURATED CORPUS</span>
+            <h3 class="bokify-shelf-heading font-cinzel">All Published Volumes &amp; Chapters</h3>
+          </div>
+          <div class="bokify-shelf-chips">
+            {chips_html}
           </div>
         </div>
 
+        <!-- 3-Column Golden Ratio Cards Grid -->
+        <div class="bokify-cards-grid">
+          {shelf_cards_html}
+        </div>
       </div>
+
     </section>
     """
 
