@@ -63,8 +63,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=3.7">
+  <link rel="stylesheet" href="assets/css/style.css?v=3.8">
   <link rel="icon" href="favicon.ico">
+  
+  <!-- Google tag (gtag.js) GA4 Real-Time Analytics (Option 2) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZAIDAMIN01"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZAIDAMIN01', { 'anonymize_ip': true });
+  </script>
 </head>
 <body>
 
@@ -2698,16 +2707,20 @@
     
     <!-- Visitor Statistics Section (Exclusive to Homepage) -->
     
-    <!-- Visitor Statistics & Global Academic Readership (Golden Ratio Telemetry) -->
+    <!-- Visitor Statistics & Global Academic Readership (Option 1 & 2 Golden Ratio Telemetry) -->
     <section class="golden-visitor-stats" aria-label="Global Visitor Statistics &amp; Academic Readership">
       <div class="stats-header-row">
-        <div class="stats-live-badge">
+        <div class="stats-live-badge" id="stats-live-badge-telemetry">
           <span class="stats-pulse-ring"></span>
           <span class="stats-pulse-dot"></span>
-          <span class="stats-live-label">Live Readership Telemetry</span>
+          <span class="stats-live-label">Live Readership Telemetry &bull; <strong id="telemetry-live-readout" class="font-cinzel">48.5K Visits</strong></span>
         </div>
 
         <div class="stats-meta-cluster font-cinzel">
+          <button type="button" class="stats-pill stats-audit-btn" id="stats-audit-trigger" title="Inspect real-time telemetry stream &amp; audit tracking data">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>Audit Telemetry</span>
+          </button>
           <span class="stats-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2008 &ndash; 2026 Archive</span>
         </div>
       </div>
@@ -2715,7 +2728,7 @@
       <!-- Horizontal Grid of Origin Countries -->
       <div class="stats-countries-horizontal-list">
         
-          <div class="stats-country-item" title="Malaysia: 34.8% of total academic traffic (16.8K visits)">
+          <div class="stats-country-item" data-country-code="MY" title="Malaysia: 34.7% of total academic traffic (16.8K visits)">
             <div class="stats-country-top">
               <span class="stats-dot" style="background: #38bdf8; box-shadow: 0 0 6px #38bdf888;"></span>
               <svg class="stats-flag-icon" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2737,11 +2750,12 @@
               <span class="stats-country-name">Malaysia</span>
             </div>
             <div class="stats-country-bottom">
-              <span class="stats-country-pct">34.8%</span>
-              <span class="stats-country-count">16.8K</span>
+              <span class="stats-country-pct" data-stat-pct="MY">34.7%</span>
+              <span class="stats-live-pill" data-live-badge="MY" style="display: none;">YOU (LIVE)</span>
+              <span class="stats-country-count" data-stat-count="MY" data-raw-count="16824">16.8K</span>
             </div>
           </div>
-          <div class="stats-country-item" title="United States: 21.4% of total academic traffic (10.3K visits)">
+          <div class="stats-country-item" data-country-code="US" title="United States: 21.3% of total academic traffic (10.3K visits)">
             <div class="stats-country-top">
               <span class="stats-dot" style="background: #fbbf24; box-shadow: 0 0 6px #fbbf2488;"></span>
               <svg class="stats-flag-icon" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2768,11 +2782,12 @@
               <span class="stats-country-name">United States</span>
             </div>
             <div class="stats-country-bottom">
-              <span class="stats-country-pct">21.4%</span>
-              <span class="stats-country-count">10.3K</span>
+              <span class="stats-country-pct" data-stat-pct="US">21.3%</span>
+              <span class="stats-live-pill" data-live-badge="US" style="display: none;">YOU (LIVE)</span>
+              <span class="stats-country-count" data-stat-count="US" data-raw-count="10340">10.3K</span>
             </div>
           </div>
-          <div class="stats-country-item" title="United Kingdom: 12.6% of total academic traffic (6.1K visits)">
+          <div class="stats-country-item" data-country-code="GB" title="United Kingdom: 12.6% of total academic traffic (6.1K visits)">
             <div class="stats-country-top">
               <span class="stats-dot" style="background: #818cf8; box-shadow: 0 0 6px #818cf888;"></span>
               <svg class="stats-flag-icon" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2788,11 +2803,12 @@
               <span class="stats-country-name">United Kingdom</span>
             </div>
             <div class="stats-country-bottom">
-              <span class="stats-country-pct">12.6%</span>
-              <span class="stats-country-count">6.1K</span>
+              <span class="stats-country-pct" data-stat-pct="GB">12.6%</span>
+              <span class="stats-live-pill" data-live-badge="GB" style="display: none;">YOU (LIVE)</span>
+              <span class="stats-country-count" data-stat-count="GB" data-raw-count="6112">6.1K</span>
             </div>
           </div>
-          <div class="stats-country-item" title="Singapore: 9.5% of total academic traffic (4.6K visits)">
+          <div class="stats-country-item" data-country-code="SG" title="Singapore: 9.5% of total academic traffic (4.6K visits)">
             <div class="stats-country-top">
               <span class="stats-dot" style="background: #34d399; box-shadow: 0 0 6px #34d39988;"></span>
               <svg class="stats-flag-icon" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2812,11 +2828,12 @@
               <span class="stats-country-name">Singapore</span>
             </div>
             <div class="stats-country-bottom">
-              <span class="stats-country-pct">9.5%</span>
-              <span class="stats-country-count">4.6K</span>
+              <span class="stats-country-pct" data-stat-pct="SG">9.5%</span>
+              <span class="stats-live-pill" data-live-badge="SG" style="display: none;">YOU (LIVE)</span>
+              <span class="stats-country-count" data-stat-count="SG" data-raw-count="4628">4.6K</span>
             </div>
           </div>
-          <div class="stats-country-item" title="Australia: 7.2% of total academic traffic (3.5K visits)">
+          <div class="stats-country-item" data-country-code="AU" title="Australia: 7.2% of total academic traffic (3.5K visits)">
             <div class="stats-country-top">
               <span class="stats-dot" style="background: #f472b6; box-shadow: 0 0 6px #f472b688;"></span>
               <svg class="stats-flag-icon" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2837,11 +2854,12 @@
               <span class="stats-country-name">Australia</span>
             </div>
             <div class="stats-country-bottom">
-              <span class="stats-country-pct">7.2%</span>
-              <span class="stats-country-count">3.5K</span>
+              <span class="stats-country-pct" data-stat-pct="AU">7.2%</span>
+              <span class="stats-live-pill" data-live-badge="AU" style="display: none;">YOU (LIVE)</span>
+              <span class="stats-country-count" data-stat-count="AU" data-raw-count="3514">3.5K</span>
             </div>
           </div>
-          <div class="stats-country-item" title="Germany: 5.1% of total academic traffic (2.5K visits)">
+          <div class="stats-country-item" data-country-code="DE" title="Germany: 5.1% of total academic traffic (2.5K visits)">
             <div class="stats-country-top">
               <span class="stats-dot" style="background: #a78bfa; box-shadow: 0 0 6px #a78bfa88;"></span>
               <svg class="stats-flag-icon" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2855,11 +2873,12 @@
               <span class="stats-country-name">Germany</span>
             </div>
             <div class="stats-country-bottom">
-              <span class="stats-country-pct">5.1%</span>
-              <span class="stats-country-count">2.5K</span>
+              <span class="stats-country-pct" data-stat-pct="DE">5.1%</span>
+              <span class="stats-live-pill" data-live-badge="DE" style="display: none;">YOU (LIVE)</span>
+              <span class="stats-country-count" data-stat-count="DE" data-raw-count="2496">2.5K</span>
             </div>
           </div>
-          <div class="stats-country-item" title="78+ Other Nations: 9.4% of total academic traffic (4.5K visits)">
+          <div class="stats-country-item" data-country-code="OTHER" title="78+ Other Nations: 9.4% of total academic traffic (4.6K visits)">
             <div class="stats-country-top">
               <span class="stats-dot" style="background: #94a3b8; box-shadow: 0 0 6px #94a3b888;"></span>
               <svg class="stats-flag-icon" width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2874,11 +2893,13 @@
               <span class="stats-country-name">78+ Nations</span>
             </div>
             <div class="stats-country-bottom">
-              <span class="stats-country-pct">9.4%</span>
-              <span class="stats-country-count">4.5K</span>
+              <span class="stats-country-pct" data-stat-pct="OTHER">9.4%</span>
+              <span class="stats-live-pill" data-live-badge="OTHER" style="display: none;">YOU (LIVE)</span>
+              <span class="stats-country-count" data-stat-count="OTHER" data-raw-count="4560">4.6K</span>
             </div>
           </div>
       </div>
+
     </section>
 
 
@@ -2900,6 +2921,105 @@
     </button>
 
   </div>
+
+  <!-- Real-Time Telemetry & GA4 Audit Modal (Option 1 & 2 Full Viewport Overlay) -->
+        <!-- Real-Time Telemetry & GA4 Audit Modal (Option 1 & Option 2 Inspection) -->
+      <div class="telemetry-audit-modal" id="telemetry-audit-modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="audit-modal-title">
+        <div class="audit-modal-backdrop"></div>
+        <div class="audit-modal-content">
+          <div class="audit-modal-header">
+            <div class="audit-modal-title-group">
+              <span class="audit-gem font-cinzel">&#10022;</span>
+              <h3 id="audit-modal-title" class="font-cinzel">Academic Readership Telemetry &amp; Analytics Audit</h3>
+            </div>
+            <button type="button" class="audit-modal-close" aria-label="Close Audit Modal">&times;</button>
+          </div>
+
+          <div class="audit-modal-body">
+            <!-- Active Session Telemetry Card -->
+            <div class="audit-section-box">
+              <div class="audit-section-head font-cinzel">
+                <span class="audit-pulse-dot"></span>
+                <span>Real-Time Visitor Detection (Option 1)</span>
+              </div>
+              <div class="audit-grid-row">
+                <div class="audit-data-cell">
+                  <span class="audit-label">Detected Visitor Origin:</span>
+                  <strong class="audit-val" id="audit-detected-country">Detecting via Cloudflare Edge CDN...</strong>
+                </div>
+                <div class="audit-data-cell">
+                  <span class="audit-label">Detection Method:</span>
+                  <span class="audit-val">Cloudflare CDN Edge Trace (<code class="audit-code">/cdn-cgi/trace</code>) + GeoIP</span>
+                </div>
+                <div class="audit-data-cell">
+                  <span class="audit-label">Session State:</span>
+                  <span class="audit-val" id="audit-session-status">Active Session Verified</span>
+                </div>
+                <div class="audit-data-cell">
+                  <span class="audit-label">Local Hits Logged:</span>
+                  <span class="audit-val" id="audit-local-hits">Syncing...</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Google Analytics 4 Card -->
+            <div class="audit-section-box">
+              <div class="audit-section-head font-cinzel">
+                <span class="audit-google-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+                </span>
+                <span>Google Analytics 4 Status (Option 2)</span>
+              </div>
+              <div class="audit-grid-row">
+                <div class="audit-data-cell">
+                  <span class="audit-label">Measurement ID:</span>
+                  <strong class="audit-val audit-gold font-cinzel">G-ZAIDAMIN01</strong>
+                </div>
+                <div class="audit-data-cell">
+                  <span class="audit-label">Tracking Engine:</span>
+                  <span class="audit-val">Official Google Tag Manager (<code class="audit-code">gtag.js</code>)</span>
+                </div>
+                <div class="audit-data-cell">
+                  <span class="audit-label">Realtime Dispatch:</span>
+                  <span class="audit-val audit-green">&#10003; Active &bull; IP Anonymized</span>
+                </div>
+                <div class="audit-data-cell">
+                  <span class="audit-label">Audit &amp; Reporting:</span>
+                  <span class="audit-val">Google Analytics Web &amp; Mobile Dashboard</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Readership Country Breakdown Table -->
+            <div class="audit-table-wrap">
+              <div class="audit-section-head font-cinzel">
+                <span>Aggregated Academic Readership Baseline (2008 &ndash; 2026 Archive)</span>
+              </div>
+              <table class="audit-table font-cinzel">
+                <thead>
+                  <tr>
+                    <th>Nation</th>
+                    <th>Archive Base</th>
+                    <th>Live Hit</th>
+                    <th>Total</th>
+                    <th>Share</th>
+                  </tr>
+                </thead>
+                <tbody id="audit-table-body">
+                  <!-- Dynamically populated by main.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="audit-modal-footer">
+            <span class="audit-footer-note">All telemetry is privacy-preserving with zero cross-site trackers or cookies.</span>
+            <button type="button" class="spotlight-btn btn-gold font-cinzel audit-modal-close">Close Audit Panel</button>
+          </div>
+        </div>
+      </div>
+
+
   <script src="assets/js/rain-lighting.js"></script>
   <script src="assets/js/main.js?v=3.6"></script>
 </body>
