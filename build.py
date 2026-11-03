@@ -162,7 +162,7 @@ def get_page_header(active_page="home"):
             </a>
             <a href="publications.html" class="main-menu-link {'active' if active_page == 'publications' else ''}">Research &amp; Publication</a>
             <a href="research.html" class="main-menu-link {'active' if active_page in ['research', 'articles'] else ''}">Activity &amp; Project</a>
-            <a href="cv.html#talks" class="main-menu-link {'active' if active_page == 'talks' else ''}">Recent Media &amp; Talks</a>
+            <a href="talks.html" class="main-menu-link {'active' if active_page == 'talks' else ''}">Media &amp; Talks</a>
             <a href="cv.html" class="main-menu-link {'active' if active_page in ['cv', 'achievements'] else ''}">Achievement &amp; CV</a>
           </nav>''' if active_page != 'home' else ''}
 
@@ -651,7 +651,7 @@ def get_spotlight_card_html():
         year_val = item.get("year", "2026")
         location = item.get("location", "Kuala Lumpur, Malaysia")
         year_str = f"{year_val} &bull; {location}"
-        url = item.get("url") or "cv.html#talks"
+        url = item.get("url") or "talks.html"
         desc = item.get("description", item.get("details", ""))
         img_src = item.get("image", "assets/images/spotlight-smart-cities.jpg")
         role_str = item.get("role", "Keynote Speaker")
@@ -664,7 +664,7 @@ def get_spotlight_card_html():
         meta_oa = f'<span class="spotlight-oa-pill font-cinzel" style="color:#d8b4fe; border-color:rgba(168,85,247,0.3);"><span class="oa-check">&#10003;</span> {role_str}</span>'
         author_pre = "Speaker"
         author_name = "Dr. Zaid Amin, Ph.D."
-        secondary_pill = '<a href="cv.html#talks" class="spotlight-doi-pill font-cinzel" title="Media &amp; Talks Archive"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Media &amp; Talks &nearr;</a>'
+        secondary_pill = '<a href="talks.html" class="spotlight-doi-pill font-cinzel" title="Media &amp; Talks Archive"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Media &amp; Talks &nearr;</a>'
 
     elif source == "cv":
         title = item.get("title", "Provincial Honor & Innovator Award")
@@ -858,10 +858,10 @@ def get_portals_tray_carousel_html():
             f"{clean_tray_snippet(event, 34)} ({year})",
             f"Location: {clean_tray_snippet(t.get('location', 'Malaysia'), 42)}"
         ]
-        url = t.get('url') or 'cv.html#talks'
+        url = t.get('url') or 'talks.html'
         pool_talks.append({
             'type': 'talk',
-            'menu': 'Recent Media & Talks',
+            'menu': 'Media & Talks',
             'tag': (t.get('role') or 'Keynote Speaker')[:22],
             'title': t.get('title', 'Talk'),
             'thumb_jpg': thumb,
@@ -1198,7 +1198,7 @@ def generate_golden_ratio_home():
           <a href="research.html" class="ref-menu-tab" title="Activities &amp; Funded Projects">
             <span class="tab-txt-full">Activity &amp; Project</span><span class="tab-txt-compact">Activity</span>
           </a>
-          <a href="cv.html#talks" class="ref-menu-tab" title="Recent Media &amp; Invited Talks">
+          <a href="talks.html" class="ref-menu-tab" title="Recent Media &amp; Invited Talks">
             <span class="tab-txt-full">Media &amp; Talks</span><span class="tab-txt-compact">Media</span>
           </a>
           <a href="cv.html" class="ref-menu-tab" title="Achievements, Honors &amp; Curriculum Vitae">
@@ -2038,6 +2038,396 @@ def generate_research_page():
 # ==============================================================================
 # 4. POSTGRADUATE LAB & SUPERVISION (prospective-students.html)
 # ==============================================================================
+
+# ==============================================================================
+# 5. MEDIA & TALKS (talks.html)
+# ==============================================================================
+def generate_talks_page():
+    media_data = load_json("media_talks.json") if (DATA_DIR / "media_talks.json").exists() else {}
+    talkshows = media_data.get("talkshows", [])
+    keynotes = media_data.get("keynotes", [])
+    opinions = media_data.get("opinions", [])
+
+    page_head = get_html_head(
+        "Media & Talks | Dr. Zaid Amin | zaidamin.org",
+        "Televised talkshows, international keynotes, visiting speaker discourses, and critical philosophical opinions by Dr. Zaid Amin."
+    )
+    page_header = get_page_header("talks")
+
+    featured = talkshows[0] if talkshows else {
+        "title": "LIVE Talk Show: E-Commerce Architecture & Digital Startup Ecosystems",
+        "channel": "TVRI Network Broadcast",
+        "category_tag": "Televised Talkshow",
+        "date": "May 8, 2015",
+        "duration": "28:40",
+        "description": "Televised live expert discourse on modern e-commerce platform infrastructure, digital transformation for regional business ecosystems, and low-barrier digital architecture deployment.",
+        "poster": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhW5JewkiMm4SgKuFID1hWK_h8DxdvBqabnZ-FUAzDd_1ekWJng90GKMs17scwnf1KDBCSP5HiJzzovOKkK15ruNYlO1EEWSZPRwKoKm_-SFKJZDinsmR9Dd2SWTPYFTnmliNw1GCSxNHs/s1600/IMG_20150508_152040.jpg",
+        "video_url": "http://bit.ly/4n6pIBK"
+    }
+
+    # Render Category 1: Playlist items
+    playlist_items_html = []
+    for idx, v in enumerate(talkshows):
+        is_active = "active" if idx == 0 else ""
+        v_title = _html_mod.escape(v.get("title", ""))
+        v_desc = _html_mod.escape(v.get("description", ""))
+        v_channel = _html_mod.escape(v.get("channel", ""))
+        v_tag = _html_mod.escape(v.get("category_tag", "Talkshow"))
+        v_date = _html_mod.escape(v.get("date", ""))
+        v_poster = _html_mod.escape(v.get("poster", ""))
+        v_url = _html_mod.escape(v.get("video_url", "https://youtube.com"))
+        v_duration = _html_mod.escape(v.get("duration", "20:00"))
+
+        item_html = f"""
+        <button class="video-playlist-item {is_active}" 
+                data-index="{idx}"
+                data-title="{v_title}"
+                data-description="{v_desc}"
+                data-channel="{v_channel}"
+                data-category="{v_tag}"
+                data-date="{v_date}"
+                data-poster="{v_poster}"
+                data-url="{v_url}"
+                data-duration="{v_duration}"
+                type="button"
+                aria-label="Select {v_title}">
+          <div class="video-item-thumb-box">
+            <img src="{v_poster}" alt="{v_title}" class="video-item-thumb-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+            <div class="video-item-thumb-yt-badge">
+              <svg width="14" height="10" viewBox="0 0 68 48">
+                <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"/>
+                <path d="M 45,24 27,14 27,34" fill="#ffffff"/>
+              </svg>
+            </div>
+          </div>
+          <div class="video-item-meta">
+            <div class="video-item-channel">{v_channel}</div>
+            <div class="video-item-desc">{v_title}</div>
+          </div>
+        </button>"""
+        playlist_items_html.append(item_html)
+
+    playlist_joined = "\n".join(playlist_items_html)
+
+    # Render Categories 2 & 3: Posters
+    def render_posters(items, default_type="SPEAKER"):
+        cards = []
+        barcode_svg = """<svg width="60" height="18" viewBox="0 0 60 18" fill="currentColor" aria-hidden="true">
+          <rect x="0" y="0" width="2" height="18"/>
+          <rect x="4" y="0" width="1" height="18"/>
+          <rect x="7" y="0" width="3" height="18"/>
+          <rect x="12" y="0" width="1" height="18"/>
+          <rect x="15" y="0" width="2" height="18"/>
+          <rect x="19" y="0" width="4" height="18"/>
+          <rect x="25" y="0" width="1" height="18"/>
+          <rect x="28" y="0" width="2" height="18"/>
+          <rect x="32" y="0" width="1" height="18"/>
+          <rect x="35" y="0" width="3" height="18"/>
+          <rect x="40" y="0" width="2" height="18"/>
+          <rect x="44" y="0" width="1" height="18"/>
+          <rect x="47" y="0" width="4" height="18"/>
+          <rect x="53" y="0" width="2" height="18"/>
+          <rect x="57" y="0" width="2" height="18"/>
+        </svg>"""
+        
+        for item in items:
+            palette = item.get("palette", "ivory")
+            arch = item.get("arch_style", "arch-cathedral")
+            badge = item.get("badge", default_type)
+            date_disp = item.get("date_display", item.get("year", "2026"))
+            title = _html_mod.escape(item.get("title", ""))
+            venue = _html_mod.escape(item.get("venue", item.get("publication", "zaidamin.org")))
+            abstract = _html_mod.escape(item.get("abstract", ""))
+            url = _html_mod.escape(item.get("url", "#"))
+            img = item.get("image", "assets/images/spotlight-smart-cities.jpg")
+            action_text = "READ OPINION &nearr;" if default_type == "OPINION" else "INVITATION &nearr;"
+
+            card_html = f"""
+        <article class="exhibition-poster-card poster-{palette}">
+          <div>
+            <div class="poster-top-header">
+              <div class="poster-monogram-group">
+                <span class="poster-monogram-symbol">&#10022;</span>
+                <span class="poster-badge-text">{badge}</span>
+              </div>
+              <div class="poster-date-display">{date_disp}</div>
+            </div>
+
+            <!-- Architectural Cutout Frame -->
+            <div class="poster-cutout-frame {arch}">
+              <img src="{img}" alt="{title}" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+            </div>
+
+            <!-- Editorial Typography -->
+            <div class="poster-body-content">
+              <h3 class="poster-headline">{title}</h3>
+              <div class="poster-venue-text">{venue}</div>
+              <p class="poster-abstract-text">{abstract}</p>
+            </div>
+          </div>
+
+          <div class="poster-footer-row">
+            <div class="poster-barcode-wrap" title="Archival Identifier">
+              {barcode_svg}
+            </div>
+            <a href="{url}" {"target='_blank' rel='noopener'" if url.startswith("http") else ""} class="poster-action-btn">
+              {action_text}
+            </a>
+          </div>
+        </article>"""
+            cards.append(card_html)
+        return "\n".join(cards)
+
+    keynotes_posters_html = render_posters(keynotes, default_type="SPEAKER")
+    opinions_posters_html = render_posters(opinions, default_type="OPINION")
+
+    feat_title = _html_mod.escape(featured.get("title", ""))
+    feat_desc = _html_mod.escape(featured.get("description", ""))
+    feat_channel = _html_mod.escape(featured.get("channel", "Broadcast Archive"))
+    feat_tag = _html_mod.escape(featured.get("category_tag", "Talkshow"))
+    feat_date = _html_mod.escape(featured.get("date", "2015"))
+    feat_poster = _html_mod.escape(featured.get("poster", ""))
+    feat_url = _html_mod.escape(featured.get("video_url", "https://youtube.com"))
+    feat_duration = _html_mod.escape(featured.get("duration", "28:40"))
+
+    js_controller = """
+    <!-- Client-side Interactive Controller for Video Stage -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const stagePoster = document.getElementById("stage-poster-img");
+        const stageTitle = document.getElementById("stage-title");
+        const stageDesc = document.getElementById("stage-description");
+        const stageNetworkTitle = document.getElementById("stage-network-title");
+        const stageNetworkSub = document.getElementById("stage-network-sub");
+        const stageDate = document.getElementById("stage-date");
+        const stageBadge = document.getElementById("stage-badge");
+        const stageWatchLink = document.getElementById("stage-watch-link");
+        const stageDuration = document.getElementById("stage-duration");
+        const stagePlayBtn = document.getElementById("stage-play-center");
+        const playlistItems = document.querySelectorAll(".video-playlist-item");
+
+        let activeIndex = 0;
+
+        function activateVideo(index) {
+          if (index < 0 || index >= playlistItems.length) return;
+          activeIndex = index;
+
+          playlistItems.forEach((item, i) => {
+            if (i === index) {
+              item.classList.add("active");
+              const d = item.dataset;
+              if (stagePoster) stagePoster.src = d.poster;
+              if (stageTitle) stageTitle.textContent = d.title;
+              if (stageDesc) stageDesc.textContent = d.description;
+              if (stageNetworkTitle) stageNetworkTitle.textContent = d.channel;
+              if (stageNetworkSub) stageNetworkSub.textContent = d.category;
+              if (stageDate) stageDate.textContent = d.date;
+              if (stageBadge) stageBadge.textContent = d.category;
+              if (stageWatchLink) stageWatchLink.href = d.url;
+              if (stageDuration) {
+                stageDuration.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ' + d.duration;
+              }
+            } else {
+              item.classList.remove("active");
+            }
+          });
+        }
+
+        playlistItems.forEach((item, idx) => {
+          item.addEventListener("click", function (e) {
+            e.preventDefault();
+            activateVideo(idx);
+          });
+        });
+
+        const prevBtn = document.getElementById("video-prev-btn");
+        const nextBtn = document.getElementById("video-next-btn");
+
+        if (prevBtn) {
+          prevBtn.addEventListener("click", function () {
+            const nextIdx = (activeIndex - 1 + playlistItems.length) % playlistItems.length;
+            activateVideo(nextIdx);
+          });
+        }
+        if (nextBtn) {
+          nextBtn.addEventListener("click", function () {
+            const nextIdx = (activeIndex + 1) % playlistItems.length;
+            activateVideo(nextIdx);
+          });
+        }
+
+        if (stagePlayBtn) {
+          stagePlayBtn.addEventListener("click", function () {
+            const activeItem = playlistItems[activeIndex];
+            if (activeItem && activeItem.dataset.url) {
+              window.open(activeItem.dataset.url, "_blank");
+            }
+          });
+        }
+
+        const shareBtn = document.getElementById("stage-share-btn");
+        if (shareBtn) {
+          shareBtn.addEventListener("click", function () {
+            const activeItem = playlistItems[activeIndex];
+            const url = activeItem && activeItem.dataset.url ? activeItem.dataset.url : window.location.href;
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(url).then(() => {
+                alert("Video link copied to clipboard!");
+              }).catch(() => {
+                prompt("Copy video link:", url);
+              });
+            } else {
+              prompt("Copy video link:", url);
+            }
+          });
+        }
+      });
+    </script>
+    """
+
+    body_html = f"""
+    <main class="talks-page-container" id="main-content">
+
+      <!-- Hero Header -->
+      <section class="talks-hero-section">
+        <h1 class="talks-hero-title">Media &amp; Talks</h1>
+        <p class="talks-hero-subtitle">
+          Curated televised talkshows, international plenary keynote addresses, visiting speaker engagements, and critical philosophical opinions authored by Dr. Zaid Amin.
+        </p>
+        <div class="talks-nav-bar" aria-label="Media &amp; Talks Navigation">
+          <a href="#category-talkshow" class="talks-nav-pill active">01. Talkshow (Video Gallery)</a>
+          <a href="#category-keynotes" class="talks-nav-pill">02. Keynote &amp; Visiting Speaker</a>
+          <a href="#category-opinion" class="talks-nav-pill">03. Opinion</a>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           CATEGORY 1: TALKSHOW (VIDEO GALLERY)
+           ==================================================================== -->
+      <section class="talks-category-section" id="category-talkshow">
+        <div class="talks-category-header">
+          <div class="talks-category-title-group">
+            <h2>01. Talkshow (Video Gallery)</h2>
+            <p class="talks-category-subtitle">Televised Broadcasts &bull; Expert Commentary &bull; Studio Discourse</p>
+          </div>
+          <a href="https://youtube.com" target="_blank" rel="noopener" class="yt-header-pill" title="YouTube Video Archive">
+            <svg width="15" height="11" viewBox="0 0 68 48" style="vertical-align: -1px;">
+              <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ffffff"/>
+              <path d="M 45,24 27,14 27,34" fill="#cc0000"/>
+            </svg>
+            <span>SUBSCRIBE</span>
+          </a>
+        </div>
+
+        <div class="video-gallery-grid">
+          
+          <!-- Left: Active Cinema Stage (61.8% Golden Ratio) -->
+          <div class="video-stage-frame">
+            <div class="video-stage-poster-layer">
+              <img id="stage-poster-img" src="{feat_poster}" alt="{feat_title}" class="video-stage-poster-img" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+            </div>
+            <div class="video-stage-gradient-top"></div>
+            <div class="video-stage-gradient-bottom"></div>
+
+            <!-- Top bar -->
+            <div class="video-stage-top-meta">
+              <img src="assets/images/portraits/portrait-1.webp" alt="Dr. Zaid Amin" class="video-stage-avatar">
+              <div>
+                <div class="video-stage-network-title" id="stage-network-title">{feat_channel}</div>
+                <div class="video-stage-network-sub" id="stage-network-sub">{feat_tag}</div>
+              </div>
+            </div>
+
+            <!-- Center YouTube Big Play Button -->
+            <button class="video-stage-play-center" id="stage-play-center" aria-label="Play Active Video" type="button">
+              <svg viewBox="0 0 68 48" width="68" height="48">
+                <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"/>
+                <path d="M 45,24 27,14 27,34" fill="#ffffff"/>
+              </svg>
+            </button>
+
+            <!-- Bottom content & controls -->
+            <div class="video-stage-content">
+              <div class="video-stage-badge-row">
+                <span class="video-stage-badge" id="stage-badge">{feat_tag}</span>
+                <span class="video-stage-date" id="stage-date">{feat_date}</span>
+              </div>
+              <h3 class="video-stage-title" id="stage-title">{feat_title}</h3>
+              <p class="video-stage-description" id="stage-description">{feat_desc}</p>
+              
+              <div class="video-stage-action-bar">
+                <a id="stage-watch-link" href="{feat_url}" target="_blank" rel="noopener" class="video-stage-watch-link">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  <span>WATCH ON YOUTUBE</span>
+                </a>
+                <button class="video-stage-btn-icon" id="stage-share-btn" title="Share Video Link" type="button" aria-label="Share Video">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                </button>
+                <div class="video-stage-duration" id="stage-duration">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>{feat_duration}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Playlist Stack (38.2% Golden Ratio) -->
+          <div class="video-playlist-container">
+            <div class="video-playlist-stack" id="video-playlist-stack">
+              {playlist_joined}
+            </div>
+
+            <!-- Bottom Navigation Arrows -->
+            <div class="video-playlist-footer">
+              <button class="video-nav-arrow-btn" id="video-prev-btn" title="Previous Video" type="button" aria-label="Previous Video">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button class="video-nav-arrow-btn" id="video-next-btn" title="Next Video" type="button" aria-label="Next Video">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           CATEGORY 2: KEYNOTE, GUEST AND VISITING SPEAKER
+           ==================================================================== -->
+      <section class="talks-category-section" id="category-keynotes">
+        <div class="talks-category-header">
+          <div class="talks-category-title-group">
+            <h2>02. Keynote, Guest and Visiting Speaker</h2>
+            <p class="talks-category-subtitle">International Plenary Lectures &bull; Academic Symposia &bull; Visiting Scholar Sessions</p>
+          </div>
+        </div>
+
+        <div class="exhibition-posters-grid">
+          {keynotes_posters_html}
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           CATEGORY 3: OPINION
+           ==================================================================== -->
+      <section class="talks-category-section" id="category-opinion" style="margin-bottom: 6px;">
+        <div class="talks-category-header">
+          <div class="talks-category-title-group">
+            <h2>03. Opinion</h2>
+            <p class="talks-category-subtitle">Public Intellectual Essays &bull; Philosophical Treatises &bull; Critical Commentary</p>
+          </div>
+        </div>
+
+        <div class="exhibition-posters-grid">
+          {opinions_posters_html}
+        </div>
+      </section>
+
+    </main>
+    """
+
+    return page_head + page_header + body_html + js_controller + get_page_footer()
+
+
 def generate_supervision_page():
     supervision = load_json("supervision.json")
 
@@ -2322,7 +2712,7 @@ def generate_cv_page():
         <div class="cv-section-tag">05 / PUBLIC ENGAGEMENT</div>
         <div class="cv-section-title-wrap">
           <h2 class="cv-section-title">Keynotes, Media &amp; Invited Talks</h2>
-          <span class="cv-section-count">{len(cv['invited_talks_and_media'])} Keynotes</span>
+          <span class="cv-section-count">{len(cv['invited_talks_and_media'])} Keynotes</span> <a href="talks.html" class="pub-pill-btn primary" style="font-size:0.72rem; padding:4px 12px; margin-left:12px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">Full Interactive Gallery &nearr;</a>
         </div>
     """
 
@@ -2772,6 +3162,7 @@ def build_all():
         "article.html": generate_article_reader_page(),
         "research.html": generate_research_page(),
         "prospective-students.html": generate_supervision_page(),
+        "talks.html": generate_talks_page(),
         "cv.html": generate_cv_page()
     }
 
@@ -2805,6 +3196,7 @@ def build_all():
         "article": pages["article.html"],
         "research": pages["research.html"],
         "prospective-students": pages["prospective-students.html"],
+        "talks": pages["talks.html"],
         "cv": pages["cv.html"]
     }
     for route_name, page_content in clean_routes.items():
