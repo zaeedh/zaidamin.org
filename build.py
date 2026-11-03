@@ -1748,7 +1748,6 @@ def generate_publications_page():
     <!-- Subpage Content: Research & Publication Gallery Engine -->
     <div class="subpage-container pub-gallery-container">
       <div class="pub-gallery-hero">
-        <span class="pub-gallery-badge">✦ SCHOLARLY ARCHIVE • PEER-REVIEWED CORPUS</span>
         <h1 class="pub-gallery-title">Research &amp; Publications Gallery</h1>
         <p class="pub-gallery-subtitle">
           An authoritative repository of {len(publications)} indexed works across Human-Computer Interaction, AI Governance, Behavioral Computing, and Information Systems. Explore by scholarly domain or search in real time.
