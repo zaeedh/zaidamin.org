@@ -29,7 +29,9 @@ def render_svg_icon(name):
         "email": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>',
         "arrow-right": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>',
         "arrow-left": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
-        "external": '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>'
+        "external": '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>',
+        "download": '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>',
+        "search": '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>'
     }
     return icons.get(name, "")
 
@@ -1253,71 +1255,226 @@ def generate_golden_ratio_home():
 def generate_publications_page():
     publications = load_json("publications.json")
 
-    html = get_html_head("Publications (24+) | Dr. Zaid Amin | zaidamin.org", "Complete indexed research publications by Dr. Zaid Amin across Human-Computer Interaction, AI Governance, and Behavioral Computing.")
-    html += get_page_header("publications")
+    page_head = get_html_head(
+        "Research & Publication Gallery | Dr. Zaid Amin | zaidamin.org",
+        "A premium scholarly gallery of 24+ peer-reviewed works, books, journal articles, conference proceedings, and preprints across Human-Computer Interaction, AI Governance, and Behavioral Computing by Dr. Zaid Amin."
+    )
+    page_header = get_page_header("publications")
 
-    html += f"""
-    <!-- Subpage Content: Publications Engine -->
-    <div class="subpage-container">
-      <div style="margin-bottom: 32px;">
-        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brand-blue);">Scholarly Archive</span>
-        <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin: 6px 0 10px 0; color: #ffffff;">Publications &amp; Citations ({len(publications)})</h1>
-        <p style="font-size: 1rem; color: var(--text-muted); max-width: 760px;">
-          Complete indexed works across Human-Computer Interaction, AI Governance, Behavioral Computing, and Information Systems. Search in real-time or filter by category.
+    categories_config = [
+        {
+            "id": "section-books",
+            "category_key": "Book Chapter",
+            "title": "Book & Chapters",
+            "badge": "01 / 04 • MONOGRAPHS & CHAPTERS",
+            "photo_webp": "assets/images/portraits/portrait-1.webp",
+            "photo_png": "assets/images/portraits/portrait-1.png",
+            "photo_alt": "Dr. Zaid Amin - Books & Chapters",
+            "description": "Comprehensive academic monographs, peer-reviewed book chapters, and curated editorial treatises exploring sociotechnical systems, digital loneliness, and behavioral interventions in information diffusion. Published with leading international academic presses including Springer Nature (Contributions to Management Science, Lecture Notes in Computer Science) and Atlantis Press.",
+            "chips": ["3 Published Volumes", "Springer Nature & Atlantis", "Scopus & LNCS Indexed"]
+        },
+        {
+            "id": "section-journals",
+            "category_key": "Journal",
+            "title": "Journal Papers",
+            "badge": "02 / 04 • REFEREED JOURNALS",
+            "photo_webp": "assets/images/portraits/portrait-2.webp",
+            "photo_png": "assets/images/portraits/portrait-2.png",
+            "photo_alt": "Dr. Zaid Amin - Journal Papers",
+            "description": "High-impact, international peer-reviewed journal articles focusing on trustworthy AI for sustainable cities, multimodal agentic frameworks, visual selective attention modeling, and cultural heritage informatics. Featured across premier international venues including MDPI Smart Cities, IEEE Access, and JISTM.",
+            "chips": ["10 Refereed Journal Articles", "Scopus Q1 & IEEE Access", "Gold Open Access"]
+        },
+        {
+            "id": "section-conferences",
+            "category_key": "Conference",
+            "title": "Conference Papers",
+            "badge": "03 / 04 • PROCEEDINGS & SYMPOSIUMS",
+            "photo_webp": "assets/images/portraits/portrait-4.webp",
+            "photo_png": "assets/images/portraits/portrait-4.png",
+            "photo_alt": "Dr. Zaid Amin - Conference Papers",
+            "description": "Peer-reviewed conference proceedings and international symposium presentations advancing cybernetic models of information sharing, enterprise document architecture, and server clustering for big data. Presented across premier IEEE and national engineering conferences.",
+            "chips": ["6 Conference Papers", "IEEE ICE3IS & SEMNASTEK", "International Proceedings"]
+        },
+        {
+            "id": "section-preprints",
+            "category_key": "Preprint",
+            "title": "Preprint Papers",
+            "badge": "04 / 04 • OPEN SCIENCE & PREPRINTS",
+            "photo_webp": "assets/images/portraits/portrait-3.webp",
+            "photo_png": "assets/images/portraits/portrait-3.png",
+            "photo_alt": "Dr. Zaid Amin - Preprint Papers",
+            "description": "Early-access preprints and working manuscripts deposited on open-science repositories (SSRN, arXiv) to accelerate scientific discourse prior to formal peer review. Covers cutting-edge frontiers in agentic AI alignment, the proxy trap in autonomous systems, and digital attention intervention architectures.",
+            "chips": ["5 Working Preprints", "SSRN & arXiv Repositories", "Open Science Early Access"]
+        }
+    ]
+
+    def clean_excerpt(raw_text, max_len=130):
+        if not raw_text:
+            return ""
+        clean = re.sub(r'<[^>]+>', ' ', raw_text)
+        clean = ' '.join(clean.split())
+        if len(clean) > max_len:
+            clean = clean[:max_len].rstrip() + "..."
+        return clean
+
+    def render_download_pill(pub):
+        url = pub.get("url", "").strip()
+        doi = pub.get("doi", "").strip()
+        if not url and doi:
+            url = f"https://doi.org/{doi}"
+
+        if url:
+            label = "Download"
+            if "arxiv.org" in url:
+                label = "Download (arXiv)"
+            elif "ssrn" in url or "2139/ssrn" in url:
+                label = "Download (SSRN)"
+            elif "doi.org" in url:
+                label = "Download / DOI"
+            elif "scopus.com" in url:
+                label = "Scopus Record"
+            elif "eprints" in url:
+                label = "Download / ePrints"
+            else:
+                label = "Download / Access"
+            return f'<a href="{url}" target="_blank" rel="noopener" class="pub-pill-btn pub-pill-primary">{render_svg_icon("download")} <span>{label}</span></a>'
+        else:
+            title_enc = html.escape(pub.get("title", ""))
+            mailto = f"mailto:zaid.amin@newinti.edu.my?subject=Requesting%20Full-Text:%20{title_enc}"
+            return f'<a href="{mailto}" class="pub-pill-btn pub-pill-primary">{render_svg_icon("email")} <span>Request Full-Text</span></a>'
+
+    # Build category sections
+    sections_html = ""
+    for cat_idx, cat in enumerate(categories_config, 1):
+        cat_items = [p for p in publications if p.get("category") == cat["category_key"]]
+        
+        cards_html = ""
+        for item_idx, pub in enumerate(cat_items, 1):
+            download_pill = render_download_pill(pub)
+            featured_pill = '<span class="pub-badge-featured">★ Featured</span>' if pub.get("featured") else ""
+            short_venue = pub.get("venue", "")
+            if len(short_venue) > 28:
+                short_venue = short_venue[:26] + "..."
+            excerpt = clean_excerpt(pub.get("abstract", ""))
+
+            cards_html += f"""
+            <article class="pub-gallery-card pub-item" data-category="{cat['category_key'].lower()}" data-title="{html.escape(pub['title'].lower())}" data-venue="{html.escape(pub.get('venue', '').lower())}" data-year="{pub.get('year', '')}">
+              <div class="pub-card-cover">
+                <img src="{pub.get('image', 'assets/images/thumb-research.jpg')}" alt="{html.escape(pub['title'])}" loading="lazy" class="pub-card-img" />
+                <div class="pub-card-overlay"></div>
+                <div class="pub-card-badges">
+                  <span class="pub-badge-venue" title="{html.escape(pub.get('venue', ''))}">{short_venue}</span>
+                  <span class="pub-badge-year">{pub.get('year', '')}</span>
+                </div>
+              </div>
+
+              <div class="pub-card-body">
+                <div class="pub-card-meta-line">
+                  <span class="pub-card-num">#{item_idx:02d}</span>
+                  <span class="pub-card-dot">&bull;</span>
+                  <span class="pub-card-authors">Dr. Zaid Amin et al.</span>
+                  {featured_pill}
+                </div>
+
+                <h3 class="pub-card-title">{pub['title']}</h3>
+                <div class="pub-card-venue-text">{pub.get('venue', '')}</div>
+                {f'<p class="pub-card-excerpt">{excerpt}</p>' if excerpt else ''}
+              </div>
+
+              <!-- Pill Buttons directly under the card (Following User Sketch) -->
+              <div class="pub-card-actions">
+                {download_pill}
+                <button class="pub-pill-btn pub-pill-secondary btn-bibtex-toggle" data-target="bib-{pub['id']}">
+                  Cite / BibTeX
+                </button>
+              </div>
+
+              <div class="bibtex-box" id="bib-{pub['id']}">
+                <button class="bibtex-copy-btn" data-target="code-{pub['id']}">Copy BibTeX</button>
+                <code id="code-{pub['id']}">{pub['bibtex']}</code>
+              </div>
+            </article>
+            """
+
+        chips_html = "".join([f'<span class="pub-stat-chip">{c}</span>' for c in cat["chips"]])
+
+        sections_html += f"""
+        <section class="pub-gallery-section" id="{cat['id']}" data-category-section="{cat['category_key'].lower()}">
+          <div class="pub-gallery-layout">
+            <!-- Left Golden Ratio Anchor: "My Photo" + Category Scholarly Scope -->
+            <aside class="pub-anchor-card">
+              <div class="pub-anchor-photo-frame">
+                <picture>
+                  <source srcset="{cat['photo_webp']}" type="image/webp">
+                  <img src="{cat['photo_png']}" alt="{cat['photo_alt']}" class="pub-anchor-photo" loading="lazy">
+                </picture>
+                <div class="pub-anchor-badge-floating">{cat['badge'].split(' • ')[0]}</div>
+              </div>
+
+              <div class="pub-anchor-body">
+                <div class="pub-anchor-category-pill">{cat['badge'].split(' • ')[1]}</div>
+                <h2 class="pub-anchor-title font-cinzel">{cat['title']}</h2>
+                <div class="pub-anchor-gold-line"></div>
+                <p class="pub-anchor-desc">
+                  {cat['description']}
+                </p>
+
+                <div class="pub-anchor-stats">
+                  {chips_html}
+                </div>
+              </div>
+            </aside>
+
+            <!-- Right Gallery Grid -->
+            <div class="pub-gallery-grid-wrapper">
+              <div class="pub-gallery-grid">
+                {cards_html}
+              </div>
+            </div>
+          </div>
+        </section>
+        """
+
+    # Assemble complete page
+    html_content = page_head + page_header + f"""
+    <!-- Subpage Content: Research & Publication Gallery Engine -->
+    <div class="subpage-container pub-gallery-container">
+      <div class="pub-gallery-hero">
+        <span class="pub-gallery-badge">✦ SCHOLARLY ARCHIVE • PEER-REVIEWED CORPUS</span>
+        <h1 class="pub-gallery-title">Research &amp; Publications Gallery</h1>
+        <p class="pub-gallery-subtitle">
+          An authoritative repository of {len(publications)} indexed works across Human-Computer Interaction, AI Governance, Behavioral Computing, and Information Systems. Explore by scholarly domain or search in real time.
         </p>
       </div>
 
-      <div class="publications-controls">
-        <input type="text" id="pub-search" class="search-input" placeholder="Search by paper title, venue, year, or keyword...">
-
-        <div class="filter-pills">
-          <button class="filter-btn active" data-filter="all">All ({len(publications)})</button>
-          <button class="filter-btn" data-filter="journal">Journals</button>
-          <button class="filter-btn" data-filter="conference">Conferences</button>
-          <button class="filter-btn" data-filter="book chapter">Book Chapters</button>
-          <button class="filter-btn" data-filter="preprint">Preprints</button>
+      <!-- Sticky Controls & Category Nav Bar -->
+      <div class="pub-controls-bar">
+        <div class="pub-search-wrapper">
+          <span class="pub-search-icon">{render_svg_icon("search")}</span>
+          <input type="text" id="pub-search" class="pub-search-input" placeholder="Search across all 24 publications by title, venue, year, or keyword..." aria-label="Search publications">
         </div>
+
+        <nav class="pub-nav-pills" aria-label="Publication Categories">
+          <button class="pub-nav-pill filter-btn active" data-filter="all">✦ All ({len(publications)})</button>
+          <button class="pub-nav-pill filter-btn" data-filter="book chapter" data-target-section="section-books">01. Book &amp; Chapters (3)</button>
+          <button class="pub-nav-pill filter-btn" data-filter="journal" data-target-section="section-journals">02. Journals (10)</button>
+          <button class="pub-nav-pill filter-btn" data-filter="conference" data-target-section="section-conferences">03. Conferences (6)</button>
+          <button class="pub-nav-pill filter-btn" data-filter="preprint" data-target-section="section-preprints">04. Preprints (5)</button>
+        </nav>
       </div>
 
-      <div id="pub-count-indicator" style="margin-bottom: 16px; font-size: 0.85rem; color: var(--text-muted); font-weight: 700;">
-        Showing all {len(publications)} publications
+      <div id="pub-count-indicator" style="margin: -24px 0 28px 4px; font-size: 0.85rem; color: var(--text-muted); font-weight: 700;">
+        Showing all {len(publications)} publications across 4 dedicated galleries
       </div>
 
-      <div class="publications-list">
-    """
-    for pub in publications:
-        doi_link = f'<a href="{pub["url"]}" target="_blank" rel="noopener" class="pub-btn">DOI: {pub["doi"]} {render_svg_icon("external")}</a>' if pub.get("doi") else ""
-
-        html += f"""
-        <article class="pub-item" data-category="{pub['category'].lower()}">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-            <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--brand-blue);">{pub['category']} &bull; {pub['year']}</span>
-            {f'<span style="font-size:0.75rem; color:var(--brand-gold); font-weight:800;">★ Featured</span>' if pub.get('featured') else ''}
-          </div>
-
-          <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:6px; line-height:1.35; color:#ffffff;">{pub['title']}</h3>
-          <div style="font-size:0.9rem; color:var(--text-body); margin-bottom:6px;"><strong>Dr. Zaid Amin</strong> and collaborators</div>
-          <div style="font-size:0.875rem; color:var(--text-muted); font-style:italic; font-family:var(--font-serif); margin-bottom:14px;">{pub['venue']}</div>
-
-          <div style="display:flex; gap:10px; align-items:center;">
-            {doi_link}
-            <button class="pub-btn btn-bibtex-toggle" data-target="bib-{pub['id']}">Cite / BibTeX</button>
-          </div>
-
-          <div class="bibtex-box" id="bib-{pub['id']}">
-            <button class="bibtex-copy-btn" data-target="code-{pub['id']}">Copy BibTeX</button>
-            <code id="code-{pub['id']}">{pub['bibtex']}</code>
-          </div>
-        </article>
-        """
-
-    html += """
+      <!-- 4 Gallery Sections -->
+      <div class="pub-sections-wrapper">
+        {sections_html}
       </div>
     </div>
-    """
-    html += get_page_footer()
-    return html
+    """ + get_page_footer()
 
+    return html_content
 # ==============================================================================
 # 3. RESEARCH PILLARS (research.html)
 # ==============================================================================
