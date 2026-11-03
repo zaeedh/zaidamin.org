@@ -6853,6 +6853,7 @@ a {
 
 /* ==========================================================================
    INTERACTIVE COIN-FLIP PORTRAIT ENGINE (3D GOLDEN RATIO ROTATION)
+   Smooth, calm, slow 1.75s filmic flip with zero hover disturbance
    ========================================================================== */
 .ref-photo-ring.coin-flip-stage {
   perspective: 900px;
@@ -6862,8 +6863,14 @@ a {
   outline: none;
 }
 
+/* Inactive hovering: no hover scale or transform to guarantee 100% glitch-free smooth rotation */
+.ref-photo-ring:hover {
+  transform: none !important;
+  box-shadow: 0 4px 18px -2px rgba(0, 10, 24, 0.60), 0 0 14px rgba(212, 175, 55, 0.18) !important;
+}
+
 .ref-photo-ring.coin-flip-stage:focus-visible {
-  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.6), 0 6px 22px -2px rgba(0, 10, 24, 0.70);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.6), 0 4px 18px -2px rgba(0, 10, 24, 0.60);
 }
 
 .coin-disc {
@@ -6874,7 +6881,8 @@ a {
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
   will-change: transform;
-  transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+  /* Luxurious, slow, buttery smooth 1.75s cubic-bezier ease */
+  transition: transform 1.75s cubic-bezier(0.38, 0.04, 0.22, 1);
 }
 
 .coin-face {
@@ -6917,13 +6925,13 @@ a {
   background: linear-gradient(
     115deg,
     rgba(255, 255, 255, 0) 20%,
-    rgba(254, 243, 199, 0.45) 48%,
-    rgba(212, 175, 55, 0.30) 56%,
+    rgba(254, 243, 199, 0.38) 48%,
+    rgba(212, 175, 55, 0.22) 56%,
     rgba(255, 255, 255, 0) 78%
   );
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.45s ease;
+  transition: opacity 0.75s ease;
   mix-blend-mode: overlay;
 }
 
@@ -6938,8 +6946,4 @@ a {
   border: 1px solid rgba(254, 240, 138, 0.35);
   pointer-events: none;
   opacity: 0.6;
-}
-
-.ref-photo-ring:hover .coin-disc:not(.is-flipping) {
-  filter: brightness(1.04);
 }
