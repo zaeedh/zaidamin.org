@@ -8,6 +8,7 @@ import json
 import os
 import re
 import shutil
+import html
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -622,245 +623,225 @@ def get_activity_search_bar_html():
           </div>
         </div>'''
 
+def clean_tray_snippet(text, max_len=75):
+    t = re.sub(r'<[^>]+>', ' ', str(text or ''))
+    t = ' '.join(t.split())
+    if len(t) > max_len:
+        return t[:max_len].rstrip() + '&hellip;'
+    return t or 'Scholarly perspective and insights.'
+
 def get_portals_tray_carousel_html():
-    slides_data = [
-        # Slide 0: Core Portals & Top Academic Highlights (4 items)
-        [
-            {
-                "thumb_webp": "assets/images/dr-zaid.webp",
-                "thumb_jpg": "assets/images/dr-zaid.png",
-                "title": "About, Talks &amp; Academic CV",
-                "bullets": [
-                    "Ph.D. in Computer Science (UKM)",
-                    "Keynote Speaker, Media Interviews &amp; Panels",
-                    "Academic Honors &amp; Leadership Track"
-                ],
-                "tag": "UKM Ph.D.",
-                "btn_text": "View CV",
-                "btn_url": "cv.html",
-                "is_external": False
-            },
-            {
-                "thumb_webp": "assets/images/thumb-projects.webp",
-                "thumb_jpg": "assets/images/thumb-projects.jpg",
-                "title": "Projects &amp; Innovations",
-                "bullets": [
-                    "FRGS Grant: Civic Compliance Framework",
-                    "Multimodal Orchestration Agent Architecture",
-                    "Municipal Autonomous Auditing Prototypes"
-                ],
-                "tag": "FRGS / AI",
-                "btn_text": "Inspect",
-                "btn_url": "research.html",
-                "is_external": False
-            },
-            {
-                "thumb_webp": "assets/images/thumb-research.webp",
-                "thumb_jpg": "assets/images/thumb-research.jpg",
-                "title": "Research &amp; Publications",
-                "bullets": [
-                    "24 Peer-Reviewed Articles (MDPI, IEEE, Scopus Q1)",
-                    "Trustworthy AI &amp; Civic Autonomous Systems",
-                    "Full Open-Access Preprints &amp; BibTeX Citations"
-                ],
-                "tag": "24 Works",
-                "btn_text": "Explore",
-                "btn_url": "publications.html",
-                "is_external": False
-            },
-            {
-                "thumb_webp": "assets/images/thumb-attention.webp",
-                "thumb_jpg": "assets/images/thumb-attention.jpg",
-                "title": "Attention-Based Decision Systems",
-                "bullets": [
-                    "IEEE Access (2021) &bull; Q1 Scopus Indexed",
-                    "Visual Attention System for Digital Environments",
-                    "Empirical Intervention &amp; Cognitive Feedback Loops"
-                ],
-                "tag": "IEEE Access",
-                "btn_text": "Read",
-                "btn_url": "https://doi.org/10.1109/ACCESS.2021.3087740",
-                "is_external": True
-            }
-        ],
-        # Slide 1: Blogger: AI, Pedagogy, Cognition & Cybernetics (4 items)
-        [
-            {
-                "thumb_webp": "",
-                "thumb_jpg": "assets/images/blogger/post_1.png",
-                "title": "HARMONY: Human-Trusted AI Framework",
-                "bullets": [
-                    "Multi-agent normative alignment framework",
-                    "Grounded ethical orchestration &amp; cybernetics",
-                    "Civic trust modeling in urban autonomous systems"
-                ],
-                "tag": "AI / 2026",
-                "btn_text": "Read",
-                "btn_url": "article.html?id=harmony-human-trusted-ai-and-resilient-multimodal-orchestration",
-                "is_external": False
-            },
-            {
-                "thumb_webp": "",
-                "thumb_jpg": "assets/images/blogger/post_2.jpg",
-                "title": "Kehidupan Pendidik Teladan Rasulullah",
-                "bullets": [
-                    "Pedagogical philosophy &amp; exemplary mentorship",
-                    "Nurturing ethical intellect and civic empathy",
-                    "Scholarly reflections on holistic education"
-                ],
-                "tag": "Pedagogy",
-                "btn_text": "Read",
-                "btn_url": "article.html?id=kehidupan-pendidik-yang-diteladankan",
-                "is_external": False
-            },
-            {
-                "thumb_webp": "",
-                "thumb_jpg": "assets/images/blogger/post_3.jpg",
-                "title": "Mengenal Tipe-Tipe Bias Kognitif",
-                "bullets": [
-                    "Cognitive heuristics &amp; systemic decision errors",
-                    "Algorithmic and human bias systemic parallels",
-                    "De-biasing methodologies for critical judgment"
-                ],
-                "tag": "Cognition",
-                "btn_text": "Read",
-                "btn_url": "article.html?id=tipe-tipe-bias-di-dalam-penelitian",
-                "is_external": False
-            },
-            {
-                "thumb_webp": "",
-                "thumb_jpg": "assets/images/blogger/post_4.jpg",
-                "title": "Cyberspace &amp; Perubahan Perilaku",
-                "bullets": [
-                    "Digital sociology &amp; psychological transformations",
-                    "Hyper-connected environments &amp; attention economy",
-                    "Human-computer behavioral paradigm shifts"
-                ],
-                "tag": "Cybernetics",
-                "btn_text": "Read",
-                "btn_url": "article.html?id=cyberspace",
-                "is_external": False
-            }
-        ],
-        # Slide 2: Epistemic Vigilance, Governance & Doctoral Path (4 items)
-        [
-            {
-                "thumb_webp": "",
-                "thumb_jpg": "assets/images/blogger/post_5.jpg",
-                "title": "Tackling Disinformation: Fake News",
-                "bullets": [
-                    "Cognitive resistance against online disinformation",
-                    "Epistemic vigilance in algorithm-curated media",
-                    "Information literacy &amp; truth verification models"
-                ],
-                "tag": "Media AI",
-                "btn_text": "Read",
-                "btn_url": "article.html?id=how-can-academics-contribute-to",
-                "is_external": False
-            },
-            {
-                "thumb_webp": "assets/images/thumb-governance.webp",
-                "thumb_jpg": "assets/images/thumb-governance.jpg",
-                "title": "The Proxy Trap in Agentic AI",
-                "bullets": [
-                    "AI Governance Series &bull; SSRN Preprint 2026",
-                    "When Metrics Replace Judgment in Autonomous Nodes",
-                    "Preserving Civic Human Oversight in Admin Protocols"
-                ],
-                "tag": "Governance",
-                "btn_text": "Examine",
-                "btn_url": "https://doi.org/10.2139/ssrn.7670124",
-                "is_external": True
-            },
-            {
-                "thumb_webp": "",
-                "thumb_jpg": "assets/images/blogger/post_7.jpg",
-                "title": "Hal yang Tidak Kuketahui Sebelum UKM",
-                "bullets": [
-                    "Doctoral milestones &amp; postgraduate research life",
-                    "Research rigor, perseverance &amp; publication path",
-                    "Academic mentorship &amp; community building"
-                ],
-                "tag": "Academic",
-                "btn_text": "Read",
-                "btn_url": "article.html?id=hal-hal-yang-tidak-kuketahui-sebelum",
-                "is_external": False
-            },
-            {
-                "thumb_webp": "",
-                "thumb_jpg": "assets/images/blogger/post_6.jpg",
-                "title": "Dimuliakan Melalui Makan &amp; Minum",
-                "bullets": [
-                    "Philosophical reflections on gratitude and mindfulness",
-                    "Everyday rituals as avenues for dignified living",
-                    "Moral cultivation in contemporary society"
-                ],
-                "tag": "Philosophy",
-                "btn_text": "Read",
-                "btn_url": "article.html?id=dimuliakan-melalui-makan-dan-minum",
-                "is_external": False
-            }
-        ],
-        # Slide 3: Startups, Cultural Heritage & Digital Society (4 items)
-        [
-            {
-                "thumb_webp": "",
-                "thumb_jpg": "assets/images/blogger/post_8.jpg",
-                "title": "E-Commerce &amp; Startup Ecosystem",
-                "bullets": [
-                    "Digital economy trends &amp; startup ecosystem",
-                    "Empowering student innovation in commerce tech",
-                    "Technology-driven enterprise development"
-                ],
-                "tag": "Industry",
-                "btn_text": "Read",
-                "btn_url": "article.html?id=talk-show-e-commerce-entrepreneurship",
-                "is_external": False
-            },
-            {
-                "thumb_webp": "assets/images/thumb-research.webp",
-                "thumb_jpg": "assets/images/thumb-research.jpg",
-                "title": "Srivijayapedia Heritage Platform",
-                "bullets": [
-                    "JISTM (2026) &bull; Cultural Heritage Preservation",
-                    "Srivijaya Civilization Semantic Digital Archive",
-                    "Human-Centered Cultural Informatics Mapping"
-                ],
-                "tag": "JISTM 2026",
-                "btn_text": "Read",
-                "btn_url": "https://doi.org/10.35631/JISTM.1141001",
-                "is_external": True
-            },
-            {
-                "thumb_webp": "assets/images/thumb-attention.webp",
-                "thumb_jpg": "assets/images/thumb-attention.jpg",
-                "title": "Digital Loneliness &amp; Screen Epoch",
-                "bullets": [
-                    "Contributions to Management Science (Springer 2024)",
-                    "Cognitive Distraction in Social Media Ecosystems",
-                    "Algorithmic Attention Capture &amp; Behavioral Health"
-                ],
-                "tag": "Springer",
-                "btn_text": "Read",
-                "btn_url": "https://doi.org/10.1007/978-3-031-52280-2_14",
-                "is_external": True
-            },
-            {
-                "thumb_webp": "assets/images/spotlight-smart-cities.webp",
-                "thumb_jpg": "assets/images/spotlight-smart-cities.jpg",
-                "title": "Municipal Autonomous Auditing",
-                "bullets": [
-                    "MDPI Smart Cities (2026) &bull; Multi-Agent Governance",
-                    "Real-Time Cybernetic Civic Feedback Loops",
-                    "Mitigating Metric Divergence in Urban Systems"
-                ],
-                "tag": "Smart Cities",
-                "btn_text": "Inspect",
-                "btn_url": "https://doi.org/10.3390/smartcities9100174",
-                "is_external": True
-            }
+    articles = load_json("articles.json") if (DATA_DIR / "articles.json").exists() else []
+    pubs = load_json("publications.json") if (DATA_DIR / "publications.json").exists() else []
+    talks_d = load_json("talks.json") if (DATA_DIR / "talks.json").exists() else {}
+    talks = talks_d.get("talks", []) if isinstance(talks_d, dict) else talks_d
+    cv_d = load_json("cv_data.json") if (DATA_DIR / "cv_data.json").exists() else {}
+    achievements = cv_d.get("achievements_and_grants", [])
+
+    pool_articles = []
+    for a in articles:
+        thumb = a.get('image') or 'assets/images/spotlight-smart-cities.jpg'
+        cat = a.get('category', 'Essays & Perspectives')
+        bullets = [
+            f"{clean_tray_snippet(cat, 26)} &bull; {a.get('reading_time', '3 min read')}",
+            clean_tray_snippet(a.get('excerpt') or a.get('content_html', ''), 72),
+            f"Published: {a.get('date', '2026')}"
         ]
+        pool_articles.append({
+            'type': 'article',
+            'menu': 'Activity & Project',
+            'tag': cat[:22],
+            'title': a.get('title', 'Article'),
+            'thumb_jpg': thumb,
+            'bullets': bullets,
+            'btn_text': 'Read',
+            'btn_url': f"article.html?id={a.get('id', '')}",
+            'is_external': False
+        })
+
+    pool_pubs = []
+    for p in pubs:
+        thumb = p.get('image') or 'assets/images/thumb-research.jpg'
+        venue = p.get('venue', 'Journal')
+        year = p.get('year', 2026)
+        bullets = [
+            f"{clean_tray_snippet(venue, 28)} ({year})",
+            f"Authors: {clean_tray_snippet(p.get('authors', 'Dr. Zaid Amin'), 36)}",
+            clean_tray_snippet(p.get('abstract', ''), 72)
+        ]
+        url = p.get('url') or (f"https://doi.org/{p['doi']}" if p.get('doi') else f"publications.html#{p.get('id', '')}")
+        pool_pubs.append({
+            'type': 'publication',
+            'menu': 'Research & Publication',
+            'tag': (p.get('category') or 'Scopus Q1')[:22],
+            'title': p.get('title', 'Publication'),
+            'thumb_jpg': thumb,
+            'bullets': bullets,
+            'btn_text': 'Explore',
+            'btn_url': url,
+            'is_external': url.startswith('http')
+        })
+
+    pool_talks = []
+    for t in talks:
+        thumb = t.get('image') or 'assets/images/thumb-projects.jpg'
+        event = t.get('event', 'Keynote Address')
+        year = t.get('year', 2026)
+        bullets = [
+            f"{clean_tray_snippet(event, 28)} ({year})",
+            f"Location: {clean_tray_snippet(t.get('location', 'Malaysia'), 36)}",
+            clean_tray_snippet(t.get('description', ''), 72)
+        ]
+        url = t.get('url') or 'cv.html#talks'
+        pool_talks.append({
+            'type': 'talk',
+            'menu': 'Recent Media & Talks',
+            'tag': (t.get('role') or 'Keynote Speaker')[:22],
+            'title': t.get('title', 'Talk'),
+            'thumb_jpg': thumb,
+            'bullets': bullets,
+            'btn_text': 'View Talk',
+            'btn_url': url,
+            'is_external': url.startswith('http')
+        })
+
+    pool_cv = []
+    for c in achievements:
+        thumb = c.get('image') or 'assets/images/thumb-projects.jpg'
+        org = c.get('organization', 'Academic Honor')
+        year = c.get('year', 2025)
+        bullets = [
+            f"{clean_tray_snippet(org, 28)} ({year})",
+            f"Category: {clean_tray_snippet(c.get('category', 'Award & Grant'), 34)}",
+            clean_tray_snippet(c.get('details', ''), 72)
+        ]
+        url = c.get('url') or 'cv.html#honors'
+        pool_cv.append({
+            'type': 'cv',
+            'menu': 'Achievement & CV',
+            'tag': (c.get('badge') or c.get('category') or 'Distinction')[:22],
+            'title': c.get('title', 'Achievement'),
+            'thumb_jpg': thumb,
+            'bullets': bullets,
+            'btn_text': 'Inspect',
+            'btn_url': url,
+            'is_external': url.startswith('http')
+        })
+
+    slide_0 = [
+        {
+            "thumb_webp": "assets/images/dr-zaid.webp",
+            "thumb_jpg": "assets/images/dr-zaid.png",
+            "title": "About, Talks &amp; Academic CV",
+            "bullets": [
+                "Ph.D. in Computer Science (UKM)",
+                "Keynote Speaker, Media Interviews &amp; Panels",
+                "Academic Honors &amp; Leadership Track"
+            ],
+            "tag": "UKM Ph.D.",
+            "btn_text": "View CV",
+            "btn_url": "cv.html",
+            "is_external": False
+        },
+        {
+            "thumb_webp": "assets/images/thumb-projects.webp",
+            "thumb_jpg": "assets/images/thumb-projects.jpg",
+            "title": "Projects &amp; Innovations",
+            "bullets": [
+                "FRGS Grant: Civic Compliance Framework",
+                "Multimodal Orchestration Agent Architecture",
+                "Municipal Autonomous Auditing Prototypes"
+            ],
+            "tag": "FRGS / AI",
+            "btn_text": "Inspect",
+            "btn_url": "research.html",
+            "is_external": False
+        },
+        {
+            "thumb_webp": "assets/images/thumb-research.webp",
+            "thumb_jpg": "assets/images/thumb-research.jpg",
+            "title": "Research &amp; Publications",
+            "bullets": [
+                "24 Peer-Reviewed Articles (MDPI, IEEE, Scopus Q1)",
+                "Trustworthy AI &amp; Civic Autonomous Systems",
+                "Full Open-Access Preprints &amp; BibTeX Citations"
+            ],
+            "tag": "24 Works",
+            "btn_text": "Explore",
+            "btn_url": "publications.html",
+            "is_external": False
+        },
+        {
+            "thumb_webp": "assets/images/thumb-attention.webp",
+            "thumb_jpg": "assets/images/thumb-attention.jpg",
+            "title": "Attention-Based Decision Systems",
+            "bullets": [
+                "IEEE Access (2021) &bull; Q1 Scopus Indexed",
+                "Visual Attention System for Digital Environments",
+                "Empirical Intervention &amp; Cognitive Feedback Loops"
+            ],
+            "tag": "IEEE Access",
+            "btn_text": "Read",
+            "btn_url": "https://doi.org/10.1109/ACCESS.2021.3087740",
+            "is_external": True
+        }
     ]
+
+    slides_data = [slide_0]
+
+    art_idx = 0
+    pub_idx = 0
+    talk_idx = 0
+    cv_idx = 0
+
+    while art_idx < len(pool_articles) or pub_idx < len(pool_pubs) or talk_idx < len(pool_talks) or cv_idx < len(pool_cv):
+        current_slide = []
+
+        # Slot 1: Article (if available)
+        if art_idx < len(pool_articles):
+            current_slide.append(pool_articles[art_idx])
+            art_idx += 1
+        elif pub_idx < len(pool_pubs):
+            current_slide.append(pool_pubs[pub_idx])
+            pub_idx += 1
+
+        # Slot 2: Publication (if available) or Article
+        if pub_idx < len(pool_pubs):
+            current_slide.append(pool_pubs[pub_idx])
+            pub_idx += 1
+        elif art_idx < len(pool_articles):
+            current_slide.append(pool_articles[art_idx])
+            art_idx += 1
+
+        # Slot 3: Talk (if available), else CV (if available), else Article
+        if talk_idx < len(pool_talks):
+            current_slide.append(pool_talks[talk_idx])
+            talk_idx += 1
+        elif cv_idx < len(pool_cv):
+            current_slide.append(pool_cv[cv_idx])
+            cv_idx += 1
+        elif art_idx < len(pool_articles):
+            current_slide.append(pool_articles[art_idx])
+            art_idx += 1
+        elif pub_idx < len(pool_pubs):
+            current_slide.append(pool_pubs[pub_idx])
+            pub_idx += 1
+
+        # Slot 4: CV (if available), else Pub, else Article
+        if cv_idx < len(pool_cv):
+            current_slide.append(pool_cv[cv_idx])
+            cv_idx += 1
+        elif pub_idx < len(pool_pubs):
+            current_slide.append(pool_pubs[pub_idx])
+            pub_idx += 1
+        elif art_idx < len(pool_articles):
+            current_slide.append(pool_articles[art_idx])
+            art_idx += 1
+
+        if current_slide:
+            while len(current_slide) < 4:
+                current_slide.append(pool_articles[len(current_slide) % len(pool_articles)])
+            slides_data.append(current_slide)
 
     slides_html = ""
     total_slides = len(slides_data)
@@ -868,16 +849,22 @@ def get_portals_tray_carousel_html():
         active_cls = " active" if s_idx == 0 else ""
         cards_html = ""
         for card in cards:
-            if card.get("thumb_webp"):
+            thumb_jpg = card.get("thumb_jpg") or "assets/images/thumb-research.jpg"
+            thumb_webp = card.get("thumb_webp") or ""
+            has_webp = thumb_webp and (not thumb_jpg.startswith("http")) and (BASE_DIR / thumb_webp).exists()
+            safe_title = html.escape(str(card["title"]), quote=True)
+
+            if has_webp:
                 img_html = f'''<picture>
-                  <source srcset="{card['thumb_webp']}" type="image/webp">
-                  <img src="{card['thumb_jpg']}" alt="{card['title']}" class="ref-item-thumb" width="78" height="56" loading="lazy">
+                  <source srcset="{thumb_webp}" type="image/webp">
+                  <img src="{thumb_jpg}" alt="{safe_title}" class="ref-item-thumb" width="78" height="56" loading="lazy" onerror="this.onerror=null;this.src='assets/images/thumb-research.jpg';">
                 </picture>'''
             else:
-                img_html = f'''<img src="{card['thumb_jpg']}" alt="{card['title']}" class="ref-item-thumb" width="78" height="56" loading="lazy">'''
+                img_html = f'''<img src="{thumb_jpg}" alt="{safe_title}" class="ref-item-thumb" width="78" height="56" loading="lazy" onerror="this.onerror=null;this.src='assets/images/thumb-research.jpg';">'''
 
             bullets_html = "".join([f"<li>{b}</li>" for b in card["bullets"]])
             ext_attr = ' target="_blank" rel="noopener"' if card.get("is_external") else ""
+            clean_tag = re.sub(r'^[✦✧★\s\u2726]+', '', str(card.get("tag", ""))).strip()
 
             cards_html += f'''
             <div class="ref-item-card">
@@ -886,9 +873,9 @@ def get_portals_tray_carousel_html():
               </div>
               <div class="ref-item-info">
                 <div class="ref-card-kicker-row">
-                  <span class="ref-kicker-tag font-cinzel">&#10022; {card['tag']}</span>
+                  <span class="ref-kicker-tag font-cinzel"><span class="kicker-gem">✦</span> {clean_tag}</span>
                 </div>
-                <h4 class="ref-item-title font-cinzel">{card['title']}</h4>
+                <h4 class="ref-item-title font-cinzel" title="{safe_title}">{card['title']}</h4>
                 <ul class="ref-item-bullets">
                   {bullets_html}
                 </ul>
@@ -903,24 +890,49 @@ def get_portals_tray_carousel_html():
           {cards_html}
         </div>'''
 
-    dots_html = ""
-    for d_idx in range(total_slides):
-        active_cls = " active" if d_idx == 0 else ""
-        dots_html += f'<button class="spotlight-dot{active_cls}" data-slide-target="{d_idx}" aria-label="Slide {d_idx+1}" type="button"></button>'
+    total_slides_str = f"{total_slides:02d}"
 
     return f'''
-        <!-- Inset Tray containing 4 Stacked Horizontal Cards with Vertical Sliding Ticker -->
+        <!-- Inset Tray containing Stacked Horizontal Cards with Dynamic Looping Carousel -->
         <div class="ref-inset-tray" id="portals-carousel" aria-roledescription="marquee" aria-label="Academic Portals and Articles">
           <!-- Tray Carousel Vertical Slides Container -->
           <div class="tray-slides-wrap">
             {slides_html}
           </div>
 
-          <!-- Tray Indicator Dots -->
-          <div class="tray-dots-bar">
-            {dots_html}
+          <!-- Tray Dynamic Looping & Shuffle Navigation Controls Bar -->
+          <div class="tray-controls-bar" role="navigation" aria-label="Portals Carousel Pagination">
+            <button type="button" class="tray-nav-btn tray-arrow-prev" title="Previous Slide (Up)" aria-label="Previous Slide">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"></polyline>
+              </svg>
+            </button>
+
+            <div class="tray-status-pill font-cinzel">
+              <span class="tray-status-counter"><span class="tray-curr">01</span> / <span class="tray-total">{total_slides_str}</span></span>
+              <span class="tray-status-sep">&bull;</span>
+              <span class="tray-status-tag"><span class="kicker-gem">✦</span> ALL 4 PORTALS (124 WORKS)</span>
+            </div>
+
+            <button type="button" class="tray-shuffle-btn" id="tray-shuffle-toggle" title="Toggle Random Shuffle Mode" aria-label="Toggle Random Shuffle Mode">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 3 21 3 21 8"></polyline>
+                <line x1="4" y1="20" x2="21" y2="3"></line>
+                <polyline points="21 16 21 21 16 21"></polyline>
+                <line x1="15" y1="15" x2="21" y2="21"></line>
+                <line x1="4" y1="4" x2="9" y2="9"></line>
+              </svg>
+              <span class="tray-shuffle-label">Shuffle</span>
+            </button>
+
+            <button type="button" class="tray-nav-btn tray-arrow-next" title="Next Slide (Down)" aria-label="Next Slide">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
           </div>
         </div>'''
+
 
 def generate_golden_ratio_home():
     profile = load_json("profile.json")
