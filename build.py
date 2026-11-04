@@ -2077,6 +2077,8 @@ def generate_talks_page():
         v_url = _html_mod.escape(v.get("video_url", "https://youtube.com"))
         v_duration = _html_mod.escape(v.get("duration", "20:00"))
 
+        v_embed = _html_mod.escape(v.get("embed_url", v_url))
+
         item_html = f"""
         <button class="video-playlist-item {is_active}" 
                 data-index="{idx}"
@@ -2087,6 +2089,7 @@ def generate_talks_page():
                 data-date="{v_date}"
                 data-poster="{v_poster}"
                 data-url="{v_url}"
+                data-embed="{v_embed}"
                 data-duration="{v_duration}"
                 type="button"
                 aria-label="Select {v_title}">
@@ -2231,13 +2234,34 @@ def generate_talks_page():
 
         let activeIndex = 0;
 
-        function activateVideo(index) {
+        let isPlayerActive = false;
+        const stageIframe = document.getElementById("stage-video-iframe");
+        const stageCloseBtn = document.getElementById("stage-close-player");
+
+        function startVideoPlayer(embedUrl) {
+          if (!stageIframe || !embedUrl) return;
+          stageIframe.src = embedUrl;
+          stageIframe.classList.add("active");
+          if (stageCloseBtn) stageCloseBtn.classList.add("active");
+          isPlayerActive = true;
+        }
+
+        function closeVideoPlayer() {
+          if (!stageIframe) return;
+          stageIframe.src = "";
+          stageIframe.classList.remove("active");
+          if (stageCloseBtn) stageCloseBtn.classList.remove("active");
+          isPlayerActive = false;
+        }
+
+        function activateVideo(index, playNow) {
           if (index < 0 || index >= playlistItems.length) return;
           activeIndex = index;
 
           playlistItems.forEach((item, i) => {
             if (i === index) {
               item.classList.add("active");
+              try { item.scrollIntoView({ behavior: "smooth", block: "nearest" }); } catch(err){}
               const d = item.dataset;
               if (stagePoster) stagePoster.src = d.poster;
               if (stageTitle) stageTitle.textContent = d.title;
@@ -2249,6 +2273,9 @@ def generate_talks_page():
               if (stageWatchLink) stageWatchLink.href = d.url;
               if (stageDuration) {
                 stageDuration.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ' + d.duration;
+              }
+              if (playNow || isPlayerActive) {
+                startVideoPlayer(d.embed || d.url);
               }
             } else {
               item.classList.remove("active");
@@ -2282,9 +2309,17 @@ def generate_talks_page():
         if (stagePlayBtn) {
           stagePlayBtn.addEventListener("click", function () {
             const activeItem = playlistItems[activeIndex];
-            if (activeItem && activeItem.dataset.url) {
-              window.open(activeItem.dataset.url, "_blank");
+            if (activeItem) {
+              const embed = activeItem.dataset.embed || activeItem.dataset.url;
+              startVideoPlayer(embed);
             }
+          });
+        }
+
+        if (stageCloseBtn) {
+          stageCloseBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            closeVideoPlayer();
           });
         }
 
@@ -2356,7 +2391,7 @@ def generate_talks_page():
             <h2>01. Talkshow (Video Gallery)</h2>
             <p class="talks-category-subtitle">Televised Broadcasts &bull; Expert Commentary &bull; Studio Discourse</p>
           </div>
-          <a href="https://youtube.com" target="_blank" rel="noopener" class="yt-header-pill" title="YouTube Video Archive">
+          <a href="https://drive.google.com/drive/folders/1KB6A1C3cubX5q3CwWNZDAOYdjIwtkqzm" target="_blank" rel="noopener" class="yt-header-pill" title="Full Google Drive Video Repository">
             <svg width="15" height="11" viewBox="0 0 68 48" style="vertical-align: -1px;">
               <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ffffff"/>
               <path d="M 45,24 27,14 27,34" fill="#cc0000"/>
@@ -2368,12 +2403,19 @@ def generate_talks_page():
         <div class="video-gallery-grid">
           
           <!-- Left: Active Cinema Stage (61.8% Golden Ratio) -->
-          <div class="video-stage-frame">
+          <div class="video-stage-frame" id="video-stage-frame">
             <div class="video-stage-poster-layer">
               <img id="stage-poster-img" src="{feat_poster}" alt="{feat_title}" class="video-stage-poster-img" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
             </div>
             <div class="video-stage-gradient-top"></div>
             <div class="video-stage-gradient-bottom"></div>
+
+            <!-- Embedded Video Iframe for Instant In-Page Playback -->
+            <iframe id="stage-video-iframe" src="" title="{feat_title}" class="video-stage-iframe" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <button class="video-stage-close-player" id="stage-close-player" title="Close Video Player" type="button" aria-label="Close Video Player">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <span>Close Player</span>
+            </button>
 
             <!-- Top bar -->
             <div class="video-stage-top-meta">
@@ -2404,7 +2446,7 @@ def generate_talks_page():
               <div class="video-stage-action-bar">
                 <a id="stage-watch-link" href="{feat_url}" target="_blank" rel="noopener" class="video-stage-watch-link">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                  <span>WATCH ON YOUTUBE</span>
+                  <span>WATCH BROADCAST</span>
                 </a>
                 <button class="video-stage-btn-icon" id="stage-share-btn" title="Share Video Link" type="button" aria-label="Share Video">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
