@@ -218,8 +218,13 @@
       <div id="activity-pane-articles">
         <div class="articles-controls">
           <div class="articles-search-row">
-            <input type="text" id="article-search" class="article-search-input" placeholder="Search across 80 scholarly essays by keyword, topic, or title..." autocomplete="off">
-            <div id="article-count-display" style="font-size: 0.85rem; color: #94a3b8; font-weight: 600; white-space: nowrap;">
+            <div class="articles-search-wrap">
+              <span class="articles-search-icon">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              </span>
+              <input type="text" id="article-search" class="article-search-input" placeholder="Search across 80 scholarly essays by keyword, topic, or title..." autocomplete="off">
+            </div>
+            <div id="article-count-display" class="article-count-badge">
               80 articles
             </div>
           </div>
