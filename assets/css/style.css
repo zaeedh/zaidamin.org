@@ -5224,9 +5224,11 @@ a {
    GOLDEN RATIO ACADEMIC CV & ACHIEVEMENTS SPECIFICATION (JULY 2026 RESUME)
    ============================================================================== */
 .cv-page-container {
-  max-width: 1080px;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 40px 24px 80px 24px;
+  padding: 24px 0 80px 0;
+  box-sizing: border-box;
 }
 
 /* Executive Hero Profile Card */
@@ -10408,8 +10410,14 @@ a {
 
 /* 4. Curriculum Vitae Page (cv.html) */
 .cv-page-container {
-  padding-top: 28px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 24px !important;
   padding-bottom: 8px !important;
+  box-sizing: border-box !important;
 }
 
 .cv-section {
