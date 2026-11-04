@@ -219,7 +219,7 @@
             <h2>01. Talkshow (Video Gallery)</h2>
             <p class="talks-category-subtitle">Televised Broadcasts &bull; Expert Commentary &bull; Studio Discourse</p>
           </div>
-          <a href="https://youtube.com" target="_blank" rel="noopener" class="yt-header-pill" title="YouTube Video Archive">
+          <a href="https://drive.google.com/drive/folders/1KB6A1C3cubX5q3CwWNZDAOYdjIwtkqzm" target="_blank" rel="noopener" class="yt-header-pill" title="Full Google Drive Video Repository">
             <svg width="15" height="11" viewBox="0 0 68 48" style="vertical-align: -1px;">
               <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ffffff"/>
               <path d="M 45,24 27,14 27,34" fill="#cc0000"/>
@@ -231,18 +231,25 @@
         <div class="video-gallery-grid">
           
           <!-- Left: Active Cinema Stage (61.8% Golden Ratio) -->
-          <div class="video-stage-frame">
+          <div class="video-stage-frame" id="video-stage-frame">
             <div class="video-stage-poster-layer">
-              <img id="stage-poster-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhW5JewkiMm4SgKuFID1hWK_h8DxdvBqabnZ-FUAzDd_1ekWJng90GKMs17scwnf1KDBCSP5HiJzzovOKkK15ruNYlO1EEWSZPRwKoKm_-SFKJZDinsmR9Dd2SWTPYFTnmliNw1GCSxNHs/s1600/IMG_20150508_152040.jpg" alt="LIVE Talk Show: E-Commerce Architecture &amp; Digital Startup Ecosystems" class="video-stage-poster-img" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+              <img id="stage-poster-img" src="assets/images/talks/tvri-virtual-machine.jpg" alt="TVRI Talk Show: Arsitektur Virtual Machine &amp; Cloud Virtualization" class="video-stage-poster-img" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
             </div>
             <div class="video-stage-gradient-top"></div>
             <div class="video-stage-gradient-bottom"></div>
+
+            <!-- Embedded Video Iframe for Instant In-Page Playback -->
+            <iframe id="stage-video-iframe" src="" title="TVRI Talk Show: Arsitektur Virtual Machine &amp; Cloud Virtualization" class="video-stage-iframe" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <button class="video-stage-close-player" id="stage-close-player" title="Close Video Player" type="button" aria-label="Close Video Player">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <span>Close Player</span>
+            </button>
 
             <!-- Top bar -->
             <div class="video-stage-top-meta">
               <img src="assets/images/portraits/portrait-1.webp" alt="Dr. Zaid Amin" class="video-stage-avatar">
               <div>
-                <div class="video-stage-network-title" id="stage-network-title">TVRI Network Broadcast</div>
+                <div class="video-stage-network-title" id="stage-network-title">TVRI Sumatera Selatan</div>
                 <div class="video-stage-network-sub" id="stage-network-sub">Televised Talkshow</div>
               </div>
             </div>
@@ -259,22 +266,22 @@
             <div class="video-stage-content">
               <div class="video-stage-badge-row">
                 <span class="video-stage-badge" id="stage-badge">Televised Talkshow</span>
-                <span class="video-stage-date" id="stage-date">May 8, 2015</span>
+                <span class="video-stage-date" id="stage-date">Mei 2015</span>
               </div>
-              <h3 class="video-stage-title" id="stage-title">LIVE Talk Show: E-Commerce Architecture &amp; Digital Startup Ecosystems</h3>
-              <p class="video-stage-description" id="stage-description">Televised live expert discourse on modern e-commerce platform infrastructure, digital transformation for regional business ecosystems, and low-barrier digital architecture deployment.</p>
+              <h3 class="video-stage-title" id="stage-title">TVRI Talk Show: Arsitektur Virtual Machine &amp; Cloud Virtualization</h3>
+              <p class="video-stage-description" id="stage-description">Siaran langsung TVRI Sumsel segmen Teknologi Informasi bersama Dr. Zaid Amin membahas konsep arsitektur virtual machine, efisiensi komputasi server, dan fondasi awal teknologi cloud virtualization.</p>
               
               <div class="video-stage-action-bar">
-                <a id="stage-watch-link" href="http://bit.ly/4n6pIBK" target="_blank" rel="noopener" class="video-stage-watch-link">
+                <a id="stage-watch-link" href="https://drive.google.com/file/d/1wwR4DKr2JZfh2tpEKIl1xeESSqtyNf2k/view?usp=sharing" target="_blank" rel="noopener" class="video-stage-watch-link">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                  <span>WATCH ON YOUTUBE</span>
+                  <span>WATCH BROADCAST</span>
                 </a>
                 <button class="video-stage-btn-icon" id="stage-share-btn" title="Share Video Link" type="button" aria-label="Share Video">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
                 </button>
                 <div class="video-stage-duration" id="stage-duration">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  <span>28:40</span>
+                  <span>24:30</span>
                 </div>
               </div>
             </div>
@@ -286,18 +293,19 @@
               
         <button class="video-playlist-item active" 
                 data-index="0"
-                data-title="LIVE Talk Show: E-Commerce Architecture &amp; Digital Startup Ecosystems"
-                data-description="Televised live expert discourse on modern e-commerce platform infrastructure, digital transformation for regional business ecosystems, and low-barrier digital architecture deployment."
-                data-channel="TVRI Network Broadcast"
+                data-title="TVRI Talk Show: Arsitektur Virtual Machine &amp; Cloud Virtualization"
+                data-description="Siaran langsung TVRI Sumsel segmen Teknologi Informasi bersama Dr. Zaid Amin membahas konsep arsitektur virtual machine, efisiensi komputasi server, dan fondasi awal teknologi cloud virtualization."
+                data-channel="TVRI Sumatera Selatan"
                 data-category="Televised Talkshow"
-                data-date="May 8, 2015"
-                data-poster="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhW5JewkiMm4SgKuFID1hWK_h8DxdvBqabnZ-FUAzDd_1ekWJng90GKMs17scwnf1KDBCSP5HiJzzovOKkK15ruNYlO1EEWSZPRwKoKm_-SFKJZDinsmR9Dd2SWTPYFTnmliNw1GCSxNHs/s1600/IMG_20150508_152040.jpg"
-                data-url="http://bit.ly/4n6pIBK"
-                data-duration="28:40"
+                data-date="Mei 2015"
+                data-poster="assets/images/talks/tvri-virtual-machine.jpg"
+                data-url="https://drive.google.com/file/d/1wwR4DKr2JZfh2tpEKIl1xeESSqtyNf2k/view?usp=sharing"
+                data-embed="https://drive.google.com/file/d/1wwR4DKr2JZfh2tpEKIl1xeESSqtyNf2k/preview"
+                data-duration="24:30"
                 type="button"
-                aria-label="Select LIVE Talk Show: E-Commerce Architecture &amp; Digital Startup Ecosystems">
+                aria-label="Select TVRI Talk Show: Arsitektur Virtual Machine &amp; Cloud Virtualization">
           <div class="video-item-thumb-box">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhW5JewkiMm4SgKuFID1hWK_h8DxdvBqabnZ-FUAzDd_1ekWJng90GKMs17scwnf1KDBCSP5HiJzzovOKkK15ruNYlO1EEWSZPRwKoKm_-SFKJZDinsmR9Dd2SWTPYFTnmliNw1GCSxNHs/s1600/IMG_20150508_152040.jpg" alt="LIVE Talk Show: E-Commerce Architecture &amp; Digital Startup Ecosystems" class="video-item-thumb-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+            <img src="assets/images/talks/tvri-virtual-machine.jpg" alt="TVRI Talk Show: Arsitektur Virtual Machine &amp; Cloud Virtualization" class="video-item-thumb-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
             <div class="video-item-thumb-yt-badge">
               <svg width="14" height="10" viewBox="0 0 68 48">
                 <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"/>
@@ -306,25 +314,26 @@
             </div>
           </div>
           <div class="video-item-meta">
-            <div class="video-item-channel">TVRI Network Broadcast</div>
-            <div class="video-item-desc">LIVE Talk Show: E-Commerce Architecture &amp; Digital Startup Ecosystems</div>
+            <div class="video-item-channel">TVRI Sumatera Selatan</div>
+            <div class="video-item-desc">TVRI Talk Show: Arsitektur Virtual Machine &amp; Cloud Virtualization</div>
           </div>
         </button>
 
         <button class="video-playlist-item " 
                 data-index="1"
-                data-title="National Television Broadcast: Cybersecurity, Public Internet Ethics &amp; Technological Disruption"
-                data-description="Regular invited television expert commentary discussing digital literacy, public cybersecurity defense, societal privacy norms, and algorithmic awareness for national broadcast audiences."
-                data-channel="TVRI National Network"
-                data-category="National TV Series"
-                data-date="2016 - 2017"
-                data-poster="assets/images/spotlight-smart-cities.jpg"
-                data-url="http://bit.ly/4n6pIBK"
-                data-duration="32:15"
+                data-title="TVRI Talk Show: Virtual LAN (VLAN) &amp; Performa Jaringan Enterprise"
+                data-description="Pembahasan interaktif siaran langsung TVRI mengenai segmentasi jaringan logis (VLAN), manajemen broadcast domain, serta rekayasa performa jaringan komputer skala enterprise."
+                data-channel="TVRI Sumatera Selatan"
+                data-category="Televised Talkshow"
+                data-date="Mei 2015"
+                data-poster="assets/images/talks/tvri-virtual-lan.jpg"
+                data-url="https://drive.google.com/file/d/1ko5ot7ALjfFQfnkQbG6ZpHBHmWbJmKB9/view?usp=sharing"
+                data-embed="https://drive.google.com/file/d/1ko5ot7ALjfFQfnkQbG6ZpHBHmWbJmKB9/preview"
+                data-duration="23:45"
                 type="button"
-                aria-label="Select National Television Broadcast: Cybersecurity, Public Internet Ethics &amp; Technological Disruption">
+                aria-label="Select TVRI Talk Show: Virtual LAN (VLAN) &amp; Performa Jaringan Enterprise">
           <div class="video-item-thumb-box">
-            <img src="assets/images/spotlight-smart-cities.jpg" alt="National Television Broadcast: Cybersecurity, Public Internet Ethics &amp; Technological Disruption" class="video-item-thumb-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+            <img src="assets/images/talks/tvri-virtual-lan.jpg" alt="TVRI Talk Show: Virtual LAN (VLAN) &amp; Performa Jaringan Enterprise" class="video-item-thumb-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
             <div class="video-item-thumb-yt-badge">
               <svg width="14" height="10" viewBox="0 0 68 48">
                 <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"/>
@@ -333,25 +342,26 @@
             </div>
           </div>
           <div class="video-item-meta">
-            <div class="video-item-channel">TVRI National Network</div>
-            <div class="video-item-desc">National Television Broadcast: Cybersecurity, Public Internet Ethics &amp; Technological Disruption</div>
+            <div class="video-item-channel">TVRI Sumatera Selatan</div>
+            <div class="video-item-desc">TVRI Talk Show: Virtual LAN (VLAN) &amp; Performa Jaringan Enterprise</div>
           </div>
         </button>
 
         <button class="video-playlist-item " 
                 data-index="2"
-                data-title="Broadcast Informatics: Post-Production Architecture &amp; Commercial Direction"
-                data-description="Behind-the-scenes broadcast studio engineering, digital identity design, and commercial audiovisual workflow orchestration across regional television networks."
-                data-channel="PALTV Television Studios"
-                data-category="Broadcast Studio Series"
-                data-date="Media Production Archive"
-                data-poster="assets/images/thumb-governance.jpg"
-                data-url="https://zaidamin.org"
-                data-duration="22:50"
+                data-title="TVRI Talk Show: Dinamika Routing Jaringan &amp; Sistem Otonomus (AS)"
+                data-description="Eksplorasi mendalam protokol dynamic routing (OSPF, BGP), tabel routing hierarkis, dan mekanisme pengalihan paket data cerdas pada backbone infrastruktur internet."
+                data-channel="TVRI Sumatera Selatan"
+                data-category="Televised Talkshow"
+                data-date="Juni 2015"
+                data-poster="assets/images/talks/tvri-network-routing.jpg"
+                data-url="https://drive.google.com/file/d/1N_cIRKImjXMDbHPwAydI10zM_CQfGqsM/view?usp=sharing"
+                data-embed="https://drive.google.com/file/d/1N_cIRKImjXMDbHPwAydI10zM_CQfGqsM/preview"
+                data-duration="25:10"
                 type="button"
-                aria-label="Select Broadcast Informatics: Post-Production Architecture &amp; Commercial Direction">
+                aria-label="Select TVRI Talk Show: Dinamika Routing Jaringan &amp; Sistem Otonomus (AS)">
           <div class="video-item-thumb-box">
-            <img src="assets/images/thumb-governance.jpg" alt="Broadcast Informatics: Post-Production Architecture &amp; Commercial Direction" class="video-item-thumb-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+            <img src="assets/images/talks/tvri-network-routing.jpg" alt="TVRI Talk Show: Dinamika Routing Jaringan &amp; Sistem Otonomus (AS)" class="video-item-thumb-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
             <div class="video-item-thumb-yt-badge">
               <svg width="14" height="10" viewBox="0 0 68 48">
                 <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"/>
@@ -360,25 +370,26 @@
             </div>
           </div>
           <div class="video-item-meta">
-            <div class="video-item-channel">PALTV Television Studios</div>
-            <div class="video-item-desc">Broadcast Informatics: Post-Production Architecture &amp; Commercial Direction</div>
+            <div class="video-item-channel">TVRI Sumatera Selatan</div>
+            <div class="video-item-desc">TVRI Talk Show: Dinamika Routing Jaringan &amp; Sistem Otonomus (AS)</div>
           </div>
         </button>
 
         <button class="video-playlist-item " 
                 data-index="3"
-                data-title="Trustworthy AI for Behaviour Change: Cognitive Attention Models in Governance"
-                data-description="Specialized international research training and plenary lecture on persuasive computing, cognitive feedback loops, and human-centered algorithmic guardrails to prevent viral metric manipulation."
-                data-channel="Academic Video Discourse"
-                data-category="Research Mobility Lecture"
-                data-date="2026 Colloquium"
-                data-poster="assets/images/thumb-attention.jpg"
-                data-url="https://tinyurl.com/37j76mxz"
-                data-duration="45:10"
+                data-title="TVRI Talk Show: Desain Topologi Jaringan &amp; Infrastruktur Tangguh"
+                data-description="Kupas tuntas metodologi perencanaan topologi fisik dan logis jaringan komputer, redundansi jalur data, dan strategi mitigasi single point of failure (SPOF)."
+                data-channel="TVRI Sumatera Selatan"
+                data-category="Televised Talkshow"
+                data-date="Juni 2015"
+                data-poster="assets/images/talks/tvri-network-topology.jpg"
+                data-url="https://drive.google.com/file/d/1r7Tf7cJhF0g83tg6KVy8jbWRzXiZ6Ebs/view?usp=sharing"
+                data-embed="https://drive.google.com/file/d/1r7Tf7cJhF0g83tg6KVy8jbWRzXiZ6Ebs/preview"
+                data-duration="18:20"
                 type="button"
-                aria-label="Select Trustworthy AI for Behaviour Change: Cognitive Attention Models in Governance">
+                aria-label="Select TVRI Talk Show: Desain Topologi Jaringan &amp; Infrastruktur Tangguh">
           <div class="video-item-thumb-box">
-            <img src="assets/images/thumb-attention.jpg" alt="Trustworthy AI for Behaviour Change: Cognitive Attention Models in Governance" class="video-item-thumb-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+            <img src="assets/images/talks/tvri-network-topology.jpg" alt="TVRI Talk Show: Desain Topologi Jaringan &amp; Infrastruktur Tangguh" class="video-item-thumb-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
             <div class="video-item-thumb-yt-badge">
               <svg width="14" height="10" viewBox="0 0 68 48">
                 <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"/>
@@ -387,25 +398,26 @@
             </div>
           </div>
           <div class="video-item-meta">
-            <div class="video-item-channel">Academic Video Discourse</div>
-            <div class="video-item-desc">Trustworthy AI for Behaviour Change: Cognitive Attention Models in Governance</div>
+            <div class="video-item-channel">TVRI Sumatera Selatan</div>
+            <div class="video-item-desc">TVRI Talk Show: Desain Topologi Jaringan &amp; Infrastruktur Tangguh</div>
           </div>
         </button>
 
         <button class="video-playlist-item " 
                 data-index="4"
-                data-title="Digital Heritage Digitization: 3D Reconstructions of the Maritime Kingdom of Srivijaya"
-                data-description="High-fidelity 3D interactive virtual tour and digital archival preservation of maritime artifacts, temple complexes, and inscriptions from the ancient maritime kingdom of Srivijaya."
-                data-channel="Visual Informatics Series"
-                data-category="Interactive 3D Walkthrough"
-                data-date="2025 Showcase"
-                data-poster="assets/images/thumb-projects.jpg"
-                data-url="https://srivijayapedia.org"
-                data-duration="18:20"
+                data-title="TVRI Talk Show: Arsitektur Jaringan Berkecepatan Tinggi untuk Big Data"
+                data-description="Dialog siaran langsung mengenai tantangan transmisi volume data masif (Big Data), throughput tinggi, latensi rendah, dan rancang bangun jaringan data center modern."
+                data-channel="TVRI Sumatera Selatan"
+                data-category="Televised Talkshow"
+                data-date="Juli 2015"
+                data-poster="assets/images/talks/tvri-network-bigdata.jpg"
+                data-url="https://drive.google.com/file/d/1EzYtSRmgv_NWWpRY9x3KQDvhP3EWkG8F/view?usp=sharing"
+                data-embed="https://drive.google.com/file/d/1EzYtSRmgv_NWWpRY9x3KQDvhP3EWkG8F/preview"
+                data-duration="24:50"
                 type="button"
-                aria-label="Select Digital Heritage Digitization: 3D Reconstructions of the Maritime Kingdom of Srivijaya">
+                aria-label="Select TVRI Talk Show: Arsitektur Jaringan Berkecepatan Tinggi untuk Big Data">
           <div class="video-item-thumb-box">
-            <img src="assets/images/thumb-projects.jpg" alt="Digital Heritage Digitization: 3D Reconstructions of the Maritime Kingdom of Srivijaya" class="video-item-thumb-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+            <img src="assets/images/talks/tvri-network-bigdata.jpg" alt="TVRI Talk Show: Arsitektur Jaringan Berkecepatan Tinggi untuk Big Data" class="video-item-thumb-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
             <div class="video-item-thumb-yt-badge">
               <svg width="14" height="10" viewBox="0 0 68 48">
                 <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"/>
@@ -414,8 +426,64 @@
             </div>
           </div>
           <div class="video-item-meta">
-            <div class="video-item-channel">Visual Informatics Series</div>
-            <div class="video-item-desc">Digital Heritage Digitization: 3D Reconstructions of the Maritime Kingdom of Srivijaya</div>
+            <div class="video-item-channel">TVRI Sumatera Selatan</div>
+            <div class="video-item-desc">TVRI Talk Show: Arsitektur Jaringan Berkecepatan Tinggi untuk Big Data</div>
+          </div>
+        </button>
+
+        <button class="video-playlist-item " 
+                data-index="5"
+                data-title="TVRI Talk Show: Simulasi dan Pemodelan Kinerja Jaringan Komputer"
+                data-description="Panduan praktis dan konseptual simulasi jaringan menggunakan simulator event-driven (Cisco Packet Tracer / NS2/NS3) sebelum implementasi skala penuh di industri."
+                data-channel="TVRI Sumatera Selatan"
+                data-category="Televised Talkshow"
+                data-date="Agustus 2015"
+                data-poster="assets/images/talks/tvri-network-simulation.jpg"
+                data-url="https://drive.google.com/file/d/1enQ_jbhkV6MEd3LKnNlSGVeqdC01JKAP/view?usp=sharing"
+                data-embed="https://drive.google.com/file/d/1enQ_jbhkV6MEd3LKnNlSGVeqdC01JKAP/preview"
+                data-duration="35:10"
+                type="button"
+                aria-label="Select TVRI Talk Show: Simulasi dan Pemodelan Kinerja Jaringan Komputer">
+          <div class="video-item-thumb-box">
+            <img src="assets/images/talks/tvri-network-simulation.jpg" alt="TVRI Talk Show: Simulasi dan Pemodelan Kinerja Jaringan Komputer" class="video-item-thumb-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+            <div class="video-item-thumb-yt-badge">
+              <svg width="14" height="10" viewBox="0 0 68 48">
+                <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"/>
+                <path d="M 45,24 27,14 27,34" fill="#ffffff"/>
+              </svg>
+            </div>
+          </div>
+          <div class="video-item-meta">
+            <div class="video-item-channel">TVRI Sumatera Selatan</div>
+            <div class="video-item-desc">TVRI Talk Show: Simulasi dan Pemodelan Kinerja Jaringan Komputer</div>
+          </div>
+        </button>
+
+        <button class="video-playlist-item " 
+                data-index="6"
+                data-title="TVRI Talk Show: Jaringan Masa Depan &amp; Konektivitas di Era Big Data"
+                data-description="Visi masa depan arsitektur konektivitas global, Software-Defined Networking (SDN), komputasi terdistribusi, dan ekosistem internet cerdas di era Big Data."
+                data-channel="TVRI Sumatera Selatan"
+                data-category="Televised Talkshow"
+                data-date="September 2015"
+                data-poster="assets/images/talks/tvri-future-network.jpg"
+                data-url="https://drive.google.com/file/d/1FFemA7CgnyF0r8w9w7Yg5WMAKb1q6LWw/view?usp=sharing"
+                data-embed="https://drive.google.com/file/d/1FFemA7CgnyF0r8w9w7Yg5WMAKb1q6LWw/preview"
+                data-duration="31:40"
+                type="button"
+                aria-label="Select TVRI Talk Show: Jaringan Masa Depan &amp; Konektivitas di Era Big Data">
+          <div class="video-item-thumb-box">
+            <img src="assets/images/talks/tvri-future-network.jpg" alt="TVRI Talk Show: Jaringan Masa Depan &amp; Konektivitas di Era Big Data" class="video-item-thumb-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+            <div class="video-item-thumb-yt-badge">
+              <svg width="14" height="10" viewBox="0 0 68 48">
+                <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"/>
+                <path d="M 45,24 27,14 27,34" fill="#ffffff"/>
+              </svg>
+            </div>
+          </div>
+          <div class="video-item-meta">
+            <div class="video-item-channel">TVRI Sumatera Selatan</div>
+            <div class="video-item-desc">TVRI Talk Show: Jaringan Masa Depan &amp; Konektivitas di Era Big Data</div>
           </div>
         </button>
             </div>
@@ -857,13 +925,34 @@
 
         let activeIndex = 0;
 
-        function activateVideo(index) {
+        let isPlayerActive = false;
+        const stageIframe = document.getElementById("stage-video-iframe");
+        const stageCloseBtn = document.getElementById("stage-close-player");
+
+        function startVideoPlayer(embedUrl) {
+          if (!stageIframe || !embedUrl) return;
+          stageIframe.src = embedUrl;
+          stageIframe.classList.add("active");
+          if (stageCloseBtn) stageCloseBtn.classList.add("active");
+          isPlayerActive = true;
+        }
+
+        function closeVideoPlayer() {
+          if (!stageIframe) return;
+          stageIframe.src = "";
+          stageIframe.classList.remove("active");
+          if (stageCloseBtn) stageCloseBtn.classList.remove("active");
+          isPlayerActive = false;
+        }
+
+        function activateVideo(index, playNow) {
           if (index < 0 || index >= playlistItems.length) return;
           activeIndex = index;
 
           playlistItems.forEach((item, i) => {
             if (i === index) {
               item.classList.add("active");
+              try { item.scrollIntoView({ behavior: "smooth", block: "nearest" }); } catch(err){}
               const d = item.dataset;
               if (stagePoster) stagePoster.src = d.poster;
               if (stageTitle) stageTitle.textContent = d.title;
@@ -875,6 +964,9 @@
               if (stageWatchLink) stageWatchLink.href = d.url;
               if (stageDuration) {
                 stageDuration.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ' + d.duration;
+              }
+              if (playNow || isPlayerActive) {
+                startVideoPlayer(d.embed || d.url);
               }
             } else {
               item.classList.remove("active");
@@ -908,9 +1000,17 @@
         if (stagePlayBtn) {
           stagePlayBtn.addEventListener("click", function () {
             const activeItem = playlistItems[activeIndex];
-            if (activeItem && activeItem.dataset.url) {
-              window.open(activeItem.dataset.url, "_blank");
+            if (activeItem) {
+              const embed = activeItem.dataset.embed || activeItem.dataset.url;
+              startVideoPlayer(embed);
             }
+          });
+        }
+
+        if (stageCloseBtn) {
+          stageCloseBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            closeVideoPlayer();
           });
         }
 
