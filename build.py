@@ -1749,9 +1749,9 @@ def generate_publications_page():
     <div class="subpage-container pub-gallery-container">
       <div class="pub-gallery-hero">
         <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> Scholarly Archive &bull; Peer-Reviewed Corpus</div>
-        <h1 class="pub-gallery-title">Research &amp; Publications Gallery</h1>
+        <h1 class="pub-gallery-title">Research &amp; Publications</h1>
         <p class="pub-gallery-subtitle">
-          An authoritative repository of {len(publications)} indexed works across Human-Computer Interaction, AI Governance, Behavioral Computing, and Information Systems. Explore by scholarly domain or search in real time.
+          {len(publications)} indexed works across Human-Computer Interaction, AI Governance, and Behavioral Computing.
         </p>
       </div>
 
@@ -1771,7 +1771,7 @@ def generate_publications_page():
         </nav>
       </div>
 
-      <div id="pub-count-indicator" style="margin: -24px 0 28px 4px; font-size: 0.85rem; color: var(--text-muted); font-weight: 700;">
+      <div id="pub-count-indicator" style="display: none; margin: -10px 0 16px 4px; font-size: 0.80rem; color: var(--text-muted); font-weight: 600;">
         Showing all {len(publications)} publications across 4 dedicated galleries
       </div>
 
@@ -1977,7 +1977,7 @@ def generate_research_page():
         <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> Scholarly Archive &bull; Technical Initiatives</div>
         <h1 class="activity-hero-title">Activity &amp; Project</h1>
         <p class="activity-hero-subtitle">
-          Explore Dr. Zaid Amin's scholarly essays, peer commentaries, funded research grants, and technical project pillars across AI governance, human-computer interaction, and digital humanities.
+          80 scholarly essays, peer commentaries, core research pillars, and active funded grant themes.
         </p>
         <div class="activity-tabs-bar">
           <button class="activity-tab-btn active" id="tab-btn-articles" onclick="switchActivityTab('articles')">
@@ -2376,7 +2376,7 @@ def generate_talks_page():
         <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> Audio-Visual Archive &bull; Keynote Engagements</div>
         <h1 class="talks-hero-title">Media &amp; Talks</h1>
         <p class="talks-hero-subtitle">
-          Curated televised talkshows, international plenary keynote addresses, visiting speaker engagements, and critical philosophical opinions authored by Dr. Zaid Amin.
+          Televised broadcasts, keynote addresses, and critical philosophical treatises.
         </p>
         <div class="talks-nav-bar" aria-label="Media &amp; Talks Navigation">
           <a href="#category-talkshow" class="talks-nav-pill active">01. Talkshow (Video Gallery)</a>
@@ -2602,10 +2602,10 @@ def generate_supervision_page():
     html += f"""
     <!-- Subpage Content: Mentorship & Supervision -->
     <div class="subpage-container">
-      <div style="margin-bottom: 36px;">
+      <div style="margin-bottom: 24px;">
         <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> Academic Mentorship &bull; Postgraduate Lab</div>
-        <h1 class="font-cinzel" style="font-size: 2.1rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; margin: 6px 0 10px 0; color: #ffffff; line-height: 1.25;">{supervision['heading']}</h1>
-        <p style="font-size: 1.05rem; color: var(--text-body); line-height: 1.7; max-width: 820px;">
+        <h1 class="subpage-hero-title font-cinzel">{supervision['heading']}</h1>
+        <p class="subpage-hero-subtitle">
           {supervision['statement']}
         </p>
       </div>
