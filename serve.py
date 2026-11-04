@@ -576,6 +576,190 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                 self.send_json(200, {"status": "ok", "message": f"Achievement '{title}' deleted"})
                 return
 
+            # 3.1 ADVANCED MEDIA & TALKS (Talkshows, Keynotes, Opinions)
+            elif path == "/api/save-media-talk":
+                payload = self.read_post_json()
+                category = payload.get("category", "talkshows") # talkshows | keynotes | opinions
+                item = payload.get("item", {})
+                should_deploy = payload.get("deploy", False)
+
+                if not item.get("id") and not item.get("title"):
+                    self.send_json(400, {"error": "Missing item id or title"})
+                    return
+
+                if not item.get("id"):
+                    item["id"] = re.sub(r'[^a-z0-9]+', '-', item.get("title", "").lower()).strip('-')
+
+                media_data = load_json_file("media_talks.json")
+                if not isinstance(media_data, dict):
+                    media_data = {"talkshows": [], "keynotes": [], "opinions": []}
+
+                cat_list = media_data.get(category, [])
+                if not isinstance(cat_list, list):
+                    cat_list = []
+
+                idx = next((i for i, t in enumerate(cat_list) if t.get("id") == item.get("id") or t.get("title") == item.get("title")), None)
+                if idx is not None:
+                    cat_list[idx] = item
+                else:
+                    cat_list.insert(0, item)
+
+                media_data[category] = cat_list
+                save_json_file("media_talks.json", media_data)
+
+                # Sync legacy talks.json if keynote/talkshow
+                if category in ["talkshows", "keynotes"]:
+                    legacy_talks = load_json_file("talks.json")
+                    l_list = legacy_talks.get("talks", []) if isinstance(legacy_talks, dict) else (legacy_talks if isinstance(legacy_talks, list) else [])
+                    l_idx = next((i for i, t in enumerate(l_list) if t.get("title") == item.get("title") or (item.get("id") and t.get("id") == item.get("id"))), None)
+                    legacy_item = {
+                        "id": item.get("id"),
+                        "title": item.get("title"),
+                        "event": item.get("event") or item.get("channel", "Academic Broadcast"),
+                        "role": item.get("role") or item.get("category_tag", "Speaker"),
+                        "year": item.get("year", "2026"),
+                        "date": item.get("date_display") or item.get("date", ""),
+                        "location": item.get("venue", "Malaysia"),
+                        "abstract": item.get("abstract") or item.get("description", "")
+                    }
+                    if l_idx is not None:
+                        l_list[l_idx] = legacy_item
+                    else:
+                        l_list.insert(0, legacy_item)
+                    if isinstance(legacy_talks, dict):
+                        legacy_talks["talks"] = l_list
+                        save_json_file("talks.json", legacy_talks)
+                    else:
+                        save_json_file("talks.json", l_list)
+
+                rebuild_site()
+                if should_deploy:
+                    deploy_live()
+                self.send_json(200, {"status": "ok", "message": f"Saved to {category}", "deploying": should_deploy, "id": item.get("id")})
+                return
+
+            elif path == "/api/delete-media-talk":
+                payload = self.read_post_json()
+                category = payload.get("category", "talkshows")
+                item_id = payload.get("id", "")
+                title = payload.get("title", "")
+
+                media_data = load_json_file("media_talks.json")
+                if isinstance(media_data, dict):
+                    cat_list = media_data.get(category, [])
+                    media_data[category] = [t for t in cat_list if t.get("id") != item_id and t.get("title") != title]
+                    save_json_file("media_talks.json", media_data)
+
+                rebuild_site()
+                self.send_json(200, {"status": "ok", "message": f"Deleted from {category}"})
+                return
+
+            # 4.1 ADVANCED CV SECTIONS (Leadership, Education, Experience, Certifications, Referees)
+            elif path == "/api/save-cv-section":
+                payload = self.read_post_json()
+                section = payload.get("section", "achievements_and_grants")
+                item = payload.get("item", {})
+                should_deploy = payload.get("deploy", False)
+
+                cv = load_json_file("cv_data.json")
+                if not isinstance(cv, dict): cv = {}
+                sec_list = cv.get(section, [])
+                if not isinstance(sec_list, list): sec_list = []
+
+                def item_key(x):
+                    return x.get("id") or x.get("title") or x.get("name") or x.get("degree") or x.get("role") or x.get("certification")
+
+                target_k = item_key(item)
+                idx = next((i for i, x in enumerate(sec_list) if item_key(x) == target_k), None) if target_k else None
+                if idx is not None:
+                    sec_list[idx] = item
+                else:
+                    sec_list.insert(0, item)
+
+                cv[section] = sec_list
+                save_json_file("cv_data.json", cv)
+
+                if item.get("featured"):
+                    set_universal_homepage_spotlight("cv", target_k, item.get("title", target_k))
+                else:
+                    rebuild_site()
+                if should_deploy:
+                    deploy_live()
+                self.send_json(200, {"status": "ok", "message": f"CV item saved in {section}", "deploying": should_deploy})
+                return
+
+            elif path == "/api/delete-cv-section":
+                payload = self.read_post_json()
+                section = payload.get("section", "achievements_and_grants")
+                target_k = payload.get("key") or payload.get("title") or payload.get("name") or payload.get("id")
+
+                cv = load_json_file("cv_data.json")
+                if isinstance(cv, dict):
+                    sec_list = cv.get(section, [])
+                    def item_key(x):
+                        return x.get("id") or x.get("title") or x.get("name") or x.get("degree") or x.get("role") or x.get("certification")
+                    cv[section] = [x for x in sec_list if item_key(x) != target_k]
+                    save_json_file("cv_data.json", cv)
+
+                rebuild_site()
+                self.send_json(200, {"status": "ok", "message": f"Deleted from {section}"})
+                return
+
+            elif path == "/api/save-cv-profile":
+                payload = self.read_post_json()
+                profile = payload.get("executive_profile", {})
+                should_deploy = payload.get("deploy", False)
+
+                cv = load_json_file("cv_data.json")
+                if not isinstance(cv, dict): cv = {}
+                cv["executive_profile"] = profile
+                save_json_file("cv_data.json", cv)
+
+                rebuild_site()
+                if should_deploy:
+                    deploy_live()
+                self.send_json(200, {"status": "ok", "message": "Executive profile saved", "deploying": should_deploy})
+                return
+
+            # 5. RESEARCH PILLARS & ACTIVE GRANTS (Activity & Project Tab 2)
+            elif path == "/api/save-research":
+                payload = self.read_post_json()
+                research_data = payload.get("research", {})
+                should_deploy = payload.get("deploy", False)
+
+                save_json_file("research.json", research_data)
+                rebuild_site()
+                if should_deploy:
+                    deploy_live()
+                self.send_json(200, {"status": "ok", "message": "Research pillars & grants saved", "deploying": should_deploy})
+                return
+
+            # 6. SUPERVISION / PH.D. (Supervision & Prospective Students)
+            elif path == "/api/save-supervision":
+                payload = self.read_post_json()
+                supervision_data = payload.get("supervision", {})
+                should_deploy = payload.get("deploy", False)
+
+                save_json_file("supervision.json", supervision_data)
+                rebuild_site()
+                if should_deploy:
+                    deploy_live()
+                self.send_json(200, {"status": "ok", "message": "Supervision directions saved", "deploying": should_deploy})
+                return
+
+            # 7. GLOBAL PROFILE & HOME IDENTITY (profile.json)
+            elif path == "/api/save-profile":
+                payload = self.read_post_json()
+                profile_data = payload.get("profile", {})
+                should_deploy = payload.get("deploy", False)
+
+                save_json_file("profile.json", profile_data)
+                rebuild_site()
+                if should_deploy:
+                    deploy_live()
+                self.send_json(200, {"status": "ok", "message": "Profile & Identity saved", "deploying": should_deploy})
+                return
+
             # 4.75 SAVE ANALYTICS & TELEMETRY CALIBRATION
             elif path == "/api/save-analytics":
                 payload = self.read_post_json()
