@@ -10573,3 +10573,376 @@ h1.cv-hero-name {
   font-family: 'Playfair Display', Georgia, serif !important;
   text-transform: uppercase !important;
 }
+
+
+/* ==============================================================================
+   GOLDEN RATIO MINIMALIST OPENING INTRO & GRID ALIGNMENT SPECIFICATION
+   Subordinate Quiet Intros, Zero Visual Noise, Seamless Audio & Grid Alignment
+   ============================================================================== */
+
+/* 1. Universal Container & Audio Player Grid Alignment */
+.pub-gallery-container,
+.activity-page-container,
+.talks-page-container,
+.cv-page-container,
+.subpage-container {
+  width: 100% !important;
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  padding-top: 20px !important;
+  padding-bottom: 8px !important;
+  box-sizing: border-box !important;
+}
+
+.royal-vanish-container {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 1280px !important;
+  margin: 4px auto 10px auto !important;
+  padding: 0 24px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 15 !important;
+}
+
+/* 2. Unified Eyebrows (Minimalist Quiet Orientation) */
+.subpage-eyebrow,
+.pub-gallery-badge,
+.cv-section-tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: rgba(56, 189, 248, 0.75) !important;
+  margin-bottom: 4px !important;
+}
+
+.subpage-eyebrow .eyebrow-dot {
+  font-size: 0.65rem !important;
+  color: rgba(212, 175, 55, 0.85) !important;
+}
+
+/* 3. Subordinate H1 Hero Titles (Golden Ratio phi ~ 1.618 Hierarchy) */
+.activity-hero-title,
+.talks-hero-title,
+.pub-gallery-title,
+.cv-hero-name,
+h1.cv-hero-name,
+.subpage-hero-title {
+  font-family: 'Cinzel', Georgia, serif !important;
+  font-size: 1.62rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.025em !important;
+  color: #ffffff !important;
+  margin: 0 0 6px 0 !important;
+  text-transform: uppercase !important;
+  line-height: 1.25 !important;
+}
+
+/* 4. Subordinate Concise Subtitles */
+.activity-hero-subtitle,
+.talks-hero-subtitle,
+.pub-gallery-subtitle,
+.subpage-hero-subtitle {
+  font-family: var(--font-sans) !important;
+  font-size: 0.86rem !important;
+  color: #94a3b8 !important;
+  max-width: 720px !important;
+  line-height: 1.5 !important;
+  margin: 0 0 16px 0 !important;
+}
+
+/* 5. Minimalist Single-Tier Controls Bar (publications.html) */
+.pub-controls-bar {
+  position: sticky !important;
+  top: 76px !important;
+  z-index: 40 !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  margin-bottom: 20px !important;
+  padding: 6px 12px !important;
+  background: rgba(3, 14, 26, 0.55) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(186, 230, 253, 0.10) !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+}
+
+.pub-search-wrapper {
+  flex: 0 1 280px !important;
+  position: relative !important;
+  height: 32px !important;
+  margin: 0 !important;
+}
+
+.pub-search-input {
+  width: 100% !important;
+  height: 32px !important;
+  padding: 4px 10px 4px 30px !important;
+  font-size: 0.80rem !important;
+  border-radius: 6px !important;
+  background: rgba(2, 11, 20, 0.65) !important;
+  border: 1px solid rgba(186, 230, 253, 0.12) !important;
+  color: #ffffff !important;
+  outline: none !important;
+}
+
+.pub-search-input:focus {
+  border-color: rgba(56, 189, 248, 0.50) !important;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.15) !important;
+}
+
+.pub-search-icon {
+  position: absolute !important;
+  left: 8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #64748b !important;
+  display: flex !important;
+  align-items: center !important;
+  pointer-events: none !important;
+}
+
+.pub-search-icon svg {
+  width: 13px !important;
+  height: 13px !important;
+}
+
+.pub-nav-pills {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin: 0 !important;
+}
+
+.pub-nav-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  height: 28px !important;
+  padding: 4px 10px !important;
+  font-size: 0.73rem !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  border: 1px solid rgba(186, 230, 253, 0.10) !important;
+  background: transparent !important;
+  color: #94a3b8 !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.pub-nav-pill:hover {
+  color: #ffffff !important;
+  border-color: rgba(186, 230, 253, 0.25) !important;
+  background: rgba(186, 230, 253, 0.05) !important;
+}
+
+.pub-nav-pill.active {
+  background: rgba(34, 166, 200, 0.15) !important;
+  color: #38bdf8 !important;
+  border-color: rgba(56, 189, 248, 0.40) !important;
+  font-weight: 700 !important;
+}
+
+/* 6. Refined Navigation Controls for Media & Talks */
+.talks-nav-bar {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-bottom: 20px !important;
+}
+
+.talks-nav-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  height: 28px !important;
+  padding: 4px 10px !important;
+  font-size: 0.73rem !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  border: 1px solid rgba(186, 230, 253, 0.10) !important;
+  background: transparent !important;
+  color: #94a3b8 !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.talks-nav-pill:hover {
+  color: #ffffff !important;
+  border-color: rgba(186, 230, 253, 0.25) !important;
+}
+
+.talks-nav-pill.active {
+  background: rgba(34, 166, 200, 0.15) !important;
+  color: #38bdf8 !important;
+  border-color: rgba(56, 189, 248, 0.40) !important;
+  font-weight: 700 !important;
+}
+
+/* 7. Refined Activity & Project Controls */
+.activity-tabs-bar {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-bottom: 16px !important;
+}
+
+.activity-tab-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  height: 28px !important;
+  padding: 4px 10px !important;
+  font-size: 0.73rem !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  border: 1px solid rgba(186, 230, 253, 0.10) !important;
+  background: transparent !important;
+  color: #94a3b8 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.activity-tab-btn:hover {
+  color: #ffffff !important;
+  border-color: rgba(186, 230, 253, 0.25) !important;
+}
+
+.activity-tab-btn.active {
+  background: rgba(34, 166, 200, 0.15) !important;
+  color: #38bdf8 !important;
+  border-color: rgba(56, 189, 248, 0.40) !important;
+  font-weight: 700 !important;
+}
+
+.articles-controls {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  margin-bottom: 18px !important;
+  padding: 6px 12px !important;
+  background: rgba(3, 14, 26, 0.55) !important;
+  border: 1px solid rgba(186, 230, 253, 0.10) !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+}
+
+.articles-search-input {
+  height: 32px !important;
+  font-size: 0.80rem !important;
+  padding: 4px 10px 4px 30px !important;
+  border-radius: 6px !important;
+  background: rgba(2, 11, 20, 0.65) !important;
+  border: 1px solid rgba(186, 230, 253, 0.12) !important;
+}
+
+.article-cat-btn {
+  height: 26px !important;
+  padding: 3px 8px !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  border: 1px solid rgba(186, 230, 253, 0.10) !important;
+  background: transparent !important;
+  color: #94a3b8 !important;
+}
+
+.article-cat-btn.active {
+  background: rgba(34, 166, 200, 0.15) !important;
+  color: #38bdf8 !important;
+  border-color: rgba(56, 189, 248, 0.40) !important;
+  font-weight: 700 !important;
+}
+
+/* 8. Subordinate CV Hero Card (Clean Sub-Element Hierarchy) */
+.cv-hero-card {
+  position: relative !important;
+  background: radial-gradient(circle at 12% 18%, rgba(34, 166, 200, 0.08) 0%, rgba(3, 18, 32, 0.75) 100%) !important;
+  border: 1px solid rgba(34, 166, 200, 0.20) !important;
+  border-radius: 16px !important;
+  padding: 22px 28px !important;
+  margin-bottom: 24px !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  box-shadow: none !important;
+}
+
+.cv-hero-name {
+  font-family: 'Cinzel', Georgia, serif !important;
+  font-size: 1.62rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.025em !important;
+  color: #ffffff !important;
+  margin: 0 0 4px 0 !important;
+  text-transform: uppercase !important;
+  line-height: 1.25 !important;
+}
+
+.cv-hero-role {
+  font-family: 'Cinzel', Georgia, serif !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em !important;
+  color: #38bdf8 !important;
+  line-height: 1.35 !important;
+  margin: 0 0 4px 0 !important;
+}
+
+.cv-hero-affiliation {
+  font-family: var(--font-sans) !important;
+  font-size: 0.82rem !important;
+  color: #94a3b8 !important;
+  line-height: 1.4 !important;
+  margin: 0 0 12px 0 !important;
+}
+
+.cv-hero-summary {
+  font-family: var(--font-sans) !important;
+  font-size: 0.85rem !important;
+  color: #cbd5e1 !important;
+  line-height: 1.55 !important;
+  max-width: 820px !important;
+  margin-top: 12px !important;
+  margin-bottom: 0 !important;
+}
+
+.cv-hero-badges {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin: 0 !important;
+}
+
+.cv-hero-badges span {
+  padding: 3px 8px !important;
+  font-size: 0.70rem !important;
+  border-radius: 6px !important;
+}
+
+.cv-jump-bar {
+  padding: 4px 8px !important;
+  margin-bottom: 24px !important;
+  background: rgba(3, 14, 26, 0.75) !important;
+  border: 1px solid rgba(186, 230, 253, 0.12) !important;
+}
+
+.cv-jump-link {
+  padding: 3px 8px !important;
+  font-size: 0.72rem !important;
+  border-radius: 6px !important;
+}
