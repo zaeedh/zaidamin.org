@@ -1748,6 +1748,7 @@ def generate_publications_page():
     <!-- Subpage Content: Research & Publication Gallery Engine -->
     <div class="subpage-container pub-gallery-container">
       <div class="pub-gallery-hero">
+        <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> Scholarly Archive &bull; Peer-Reviewed Corpus</div>
         <h1 class="pub-gallery-title">Research &amp; Publications Gallery</h1>
         <p class="pub-gallery-subtitle">
           An authoritative repository of {len(publications)} indexed works across Human-Computer Interaction, AI Governance, Behavioral Computing, and Information Systems. Explore by scholarly domain or search in real time.
@@ -1870,7 +1871,7 @@ def generate_research_page():
         pillars_html += f"""
         <div style="background:rgba(4, 28, 48, 0.75); border:1px solid rgba(34, 166, 200, 0.22); border-radius:18px; padding:36px; box-shadow:0 12px 35px rgba(0,10,24,0.40); backdrop-filter:blur(8px);">
           <div style="font-size:0.75rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--brand-blue); margin-bottom:6px;">RESEARCH DOMAIN</div>
-          <h2 style="font-size: 1.7rem; font-weight: 800; margin-bottom: 12px; color:#ffffff;">{pillar['title']}</h2>
+          <h2 class="activity-section-title">{pillar['title']}</h2>
           <p style="font-size: 1rem; color: var(--text-body); line-height: 1.7; margin-bottom: 20px;">
             {pillar['full_desc']}
           </p>
@@ -1973,6 +1974,7 @@ def generate_research_page():
     <!-- Subpage Content: Activity & Project -->
     <div class="subpage-container activity-page-container">
       <section class="activity-hero-section">
+        <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> Scholarly Archive &bull; Technical Initiatives</div>
         <h1 class="activity-hero-title">Activity &amp; Project</h1>
         <p class="activity-hero-subtitle">
           Explore Dr. Zaid Amin's scholarly essays, peer commentaries, funded research grants, and technical project pillars across AI governance, human-computer interaction, and digital humanities.
@@ -2020,7 +2022,7 @@ def generate_research_page():
         </div>
 
         <div style="margin-top: 48px; margin-bottom: 24px;">
-          <h2 style="font-size: 1.6rem; font-weight: 800; color: #ffffff; margin-bottom: 16px;">Active &amp; Targeted Grant Themes</h2>
+          <h2 class="activity-section-title" style="margin-bottom: 16px;">Active &amp; Targeted Grant Themes</h2>
           <div style="display: flex; flex-direction: column; gap: 16px;">
             {grants_html}
           </div>
@@ -2371,6 +2373,7 @@ def generate_talks_page():
 
       <!-- Hero Header -->
       <section class="talks-hero-section">
+        <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> Audio-Visual Archive &bull; Keynote Engagements</div>
         <h1 class="talks-hero-title">Media &amp; Talks</h1>
         <p class="talks-hero-subtitle">
           Curated televised talkshows, international plenary keynote addresses, visiting speaker engagements, and critical philosophical opinions authored by Dr. Zaid Amin.
@@ -2600,7 +2603,7 @@ def generate_supervision_page():
     <!-- Subpage Content: Mentorship & Supervision -->
     <div class="subpage-container">
       <div style="margin-bottom: 36px;">
-        <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brand-blue);">Academic Mentorship</span>
+        <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> Academic Mentorship &bull; Postgraduate Lab</div>
         <h1 class="font-cinzel" style="font-size: 2.1rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; margin: 6px 0 10px 0; color: #ffffff; line-height: 1.25;">{supervision['heading']}</h1>
         <p style="font-size: 1.05rem; color: var(--text-body); line-height: 1.7; max-width: 820px;">
           {supervision['statement']}
