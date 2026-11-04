@@ -98,11 +98,14 @@ function initPublicationsFilter() {
 
     if (countIndicator) {
       if (currentQuery) {
+        countIndicator.style.display = 'block';
         countIndicator.textContent = `Showing ${visibleCount} matching publication${visibleCount === 1 ? '' : 's'} for "${currentQuery}"`;
       } else if (currentCategory !== 'all') {
+        countIndicator.style.display = 'block';
         countIndicator.textContent = `Showing ${visibleCount} publication${visibleCount === 1 ? '' : 's'} in selected gallery`;
       } else {
-        countIndicator.textContent = `Showing all ${visibleCount} publications across 4 dedicated galleries`;
+        countIndicator.style.display = 'none';
+        countIndicator.textContent = '';
       }
     }
   }
