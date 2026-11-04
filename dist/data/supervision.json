@@ -1,0 +1,67 @@
+{
+  "heading": "Postgraduate Research Opportunities (Ph.D. & Master's by Research)",
+  "subheading": "Join Dr. Zaid Amin's Research Initiative in Human-Centered AI, Digital Ethics, and Attention Systems at INTI International University",
+  "statement": "I am actively seeking highly motivated, intellectually curious postgraduate scholars (Ph.D. candidates and Master's by Research students) who wish to solve profound problems at the intersection of Human-Computer Interaction (HCI), AI Governance, Cognitive Attention Systems, and Digital Society. If you want your research to move beyond incremental benchmarking and directly impact human well-being and technological policy, our group provides an intellectually rigorous and supportive home.",
+  "what_we_offer": [
+    {
+      "title": "Rigorous International Publication Track",
+      "description": "Direct, hands-on mentorship aimed at publishing in top-tier conferences and journals (e.g., ACM CHI, CSCW, IEEE Access, Springer LNCS, MDPI)."
+    },
+    {
+      "title": "Interdisciplinary Synthesis",
+      "description": "A unique research bridge connecting deep computer science and data analytics with behavioral psychology, ethics, and cybernetics."
+    },
+    {
+      "title": "Career Acceleration",
+      "description": "Graduates from our programs are prepared for high-impact careers in academic professorships, industrial AI research labs, and policy institutes."
+    },
+    {
+      "title": "Collaborative Network",
+      "description": "Active research linkages across Malaysian top universities (UKM, etc.), regional Southeast Asian institutions, and international collaborators."
+    }
+  ],
+  "open_topics": [
+    {
+      "id": "topic-1",
+      "title": "Agentic AI Safety & The Proxy Trap",
+      "degree_levels": ["Ph.D.", "Master's"],
+      "skills_required": "Python, LLM frameworks, Reinforcement Learning, Alignment concepts, or formal evaluation methods.",
+      "description": "Investigating how multi-agent systems diverge from human goals when optimizing surrogate rewards, and constructing verified audit mechanisms for automated civic and enterprise decision-making."
+    },
+    {
+      "id": "topic-2",
+      "title": "Attention-Based Interface Interventions & Digital Well-Being",
+      "degree_levels": ["Ph.D.", "Master's"],
+      "skills_required": "HCI methods, Frontend/Fullstack prototyping, Eye-tracking/Behavioral analytics, Quantitative user study design.",
+      "description": "Extending the Tune-Attention model to design cognitive micro-frictions and intentional friction systems that reduce information overload, dark pattern susceptibility, and misinformation dissemination."
+    },
+    {
+      "id": "topic-3",
+      "title": "Multimodal AI Orchestration for Sustainable Urban Governance",
+      "degree_levels": ["Ph.D.", "Master's"],
+      "skills_required": "Data Science, Computer Vision, Geospatial analytics, Agent frameworks.",
+      "description": "Developing verifiable, edge-deployable multi-agent systems for municipal compliance, environmental reporting, and civic citizen-in-the-loop engagement."
+    },
+    {
+      "id": "topic-4",
+      "title": "Immersive Virtual Heritage & Spatial Social Computing",
+      "degree_levels": ["Master's"],
+      "skills_required": "Unity / Unreal Engine, WebXR, 3D modeling, Cultural informatics.",
+      "description": "Pioneering interactive virtual heritage platforms (extending the Srivijayapedia initiative) using immersive VR to reconstruct lost civilizational records and explore collective memory."
+    }
+  ],
+  "how_to_apply": {
+    "prerequisites": [
+      "A strong academic background in Computer Science, Software Engineering, Information Technology, Data Science, or related interdisciplinary fields.",
+      "Demonstrated programming capability (Python, modern web/XR frameworks, or statistical packages like R/SPSS).",
+      "Solid English writing and scientific literature review competence.",
+      "Self-driven motivation and intellectual curiosity."
+    ],
+    "application_steps": [
+      "1. Review my recent publications (e.g., IEEE Access 2021, Smart Cities 2026, SSRN 2026) to ensure our research interests genuinely align.",
+      "2. Prepare a 1-page Research Statement explaining the specific problem you want to tackle and how it connects to our research group.",
+      "3. Send your CV (including academic transcripts, publication list, and GitHub/portfolio link) with the subject: '[Prospective Postgraduate] - [Your Full Name] - [Ph.D./Master]' to zaid.amin@newinti.edu.my."
+    ]
+  }
+}
+
