@@ -149,6 +149,22 @@ def get_navigation_data():
                     {"id": "publications", "label": "Publications", "url": "publications.html", "target": "_self", "icon": "📚", "enabled": True},
                     {"id": "contact", "label": "Contact Inquiry", "url": "mailto:zaid.amin@newinti.edu.my", "target": "_self", "icon": "✉️", "enabled": True}
                 ]
+            if "page_shortcuts" not in data:
+                data["page_shortcuts"] = [
+                    {
+                        "id": "pub_team_pill",
+                        "page": "publications.html",
+                        "page_label": "Research & Publications (publications.html)",
+                        "label": "Research Team Shortcut Pill",
+                        "display_text": "👥 Research Team ↗",
+                        "title": "View Research Team & Supervision Roster",
+                        "url": "research-team.html",
+                        "target": "_self",
+                        "icon": "👥",
+                        "enabled": True,
+                        "description": "Category navigation shortcut pill in the Publications page header"
+                    }
+                ]
             return data
     except Exception:
         pass
@@ -702,17 +718,6 @@ def get_telemetry_audit_modal_html(ga_id="G-ZAIDAMIN01"):
 
 def get_page_footer(show_visitor_stats=False):
     stats_html = get_visitor_stats_html() if show_visitor_stats else ""
-    nav_data = get_navigation_data()
-    footer_links = [l for l in nav_data.get("footer_links", []) if l.get("enabled", True)]
-    footer_links_html = ""
-    if footer_links:
-        links_rendered = []
-        for fl in footer_links:
-            target_attr = f' target="{fl.get("target", "_self")}"' if fl.get("target") and fl.get("target") != "_self" else ""
-            icon_str = f'<span style="opacity:0.8;margin-right:4px;">{fl.get("icon", "")}</span>' if fl.get("icon") and fl.get("icon") != "none" else ""
-            links_rendered.append(f'<a href="{fl.get("url", "#")}" class="golden-footer-link"{target_attr}>{icon_str}{fl.get("label", "")}</a>')
-        footer_links_html = f'<div class="footer-nav-links">{" &bull; ".join(links_rendered)}</div>'
-
     return f"""
     <!-- Visitor Statistics Section (Exclusive to Homepage) -->
     {stats_html}
@@ -720,12 +725,9 @@ def get_page_footer(show_visitor_stats=False):
     <!-- Footer Divider Line (Above Footer Section) -->
     <hr class="golden-footer-divider">
 
-    <!-- Site Footer -->
+    <!-- Site Footer (Restored Clean Center Alignment) -->
     <footer class="golden-footer">
-      <div class="footer-left">
-        Copyright &copy; 2008 - 2026 Zaid Amin. All Rights Reserved.
-      </div>
-      {footer_links_html}
+      Copyright &copy; 2008 - 2026 Zaid Amin. All Rights Reserved.
     </footer>
 
     <!-- Floating Scroll to Top Direct Button -->
@@ -2242,6 +2244,24 @@ def generate_publications_page():
         </section>
         """
 
+    # Check in-page shortcut pills from navigation.json
+    nav_data = get_navigation_data()
+    shortcuts = {s.get("id"): s for s in nav_data.get("page_shortcuts", [])}
+    team_pill_cfg = shortcuts.get("pub_team_pill", {
+        "enabled": True,
+        "display_text": "👥 Research Team &nearr;",
+        "title": "View Research Team & Supervision Roster",
+        "url": "research-team.html",
+        "target": "_self"
+    })
+    team_pill_html = ""
+    if team_pill_cfg.get("enabled", True):
+        p_text = team_pill_cfg.get("display_text", "👥 Research Team &nearr;")
+        p_title = team_pill_cfg.get("title", "View Research Team & Supervision Roster")
+        p_url = team_pill_cfg.get("url", "research-team.html")
+        p_target = team_pill_cfg.get("target", "_self")
+        team_pill_html = f'<a href="{p_url}" target="{p_target}" class="pub-nav-pill team-shortcut-pill" title="{p_title}">{p_text}</a>'
+
     # Assemble complete page
     html_content = page_head + page_header + f"""
     <!-- Subpage Content: Research & Publication Gallery Engine -->
@@ -2267,7 +2287,7 @@ def generate_publications_page():
           <button class="pub-nav-pill filter-btn" data-filter="journal" data-target-section="section-journals">02. Journals (10)</button>
           <button class="pub-nav-pill filter-btn" data-filter="conference" data-target-section="section-conferences">03. Conferences (6)</button>
           <button class="pub-nav-pill filter-btn" data-filter="preprint" data-target-section="section-preprints">04. Preprints (5)</button>
-          <a href="research-team.html" class="pub-nav-pill team-shortcut-pill" title="View Research Team & Supervision Roster">👥 Research Team &nearr;</a>
+          {team_pill_html}
         </nav>
       </div>
 
@@ -2669,6 +2689,7 @@ def generate_talks_page():
         playlist_items_html.append(item_html)
 
     playlist_joined = "\n".join(playlist_items_html)
+    total_episodes_count = f"{len(talkshows):02d}"
 
     # Reusable Icon library for top-right circular badge
     icon_map = {
@@ -2839,14 +2860,52 @@ def generate_talks_page():
           isPlayerActive = false;
         }
 
+        // Category 1: Talk Show Vertical Carousel Slider (Top-to-Down Auto-Advance)
+        let playlistTimer = null;
+        let isPlaylistHovered = false;
+        const PLAYLIST_INTERVAL = 4800; // Calibrated 4.8s golden interval
+
+        function updatePlaylistCounter(idx) {
+          const counter = document.getElementById("video-playlist-counter");
+          if (!counter) return;
+          const currSpan = counter.querySelector(".counter-curr");
+          if (currSpan) {
+            currSpan.textContent = String(idx + 1).padStart(2, "0");
+          }
+        }
+
+        function scrollPlaylistItemIntoView(item) {
+          const stack = document.getElementById("video-playlist-stack");
+          if (!stack || !item) return;
+          const itemTop = item.offsetTop - stack.offsetTop;
+          const targetScroll = Math.max(0, Math.min(
+            stack.scrollHeight - stack.clientHeight,
+            itemTop - (stack.clientHeight - item.offsetHeight) / 2
+          ));
+          stack.scrollTo({ top: targetScroll, behavior: "smooth" });
+        }
+
         function activateVideo(index, playNow) {
           if (index < 0 || index >= playlistItems.length) return;
           activeIndex = index;
 
-          playlistItems.forEach((item, i) => {
+          // Soft luxury crossfade effect on stage
+          const stageContent = document.querySelector(".video-stage-content");
+          if (stageContent && stagePoster) {
+            stageContent.classList.add("stage-fading");
+            stagePoster.classList.add("stage-fading");
+            setTimeout(function () {
+              stageContent.classList.remove("stage-fading");
+              stagePoster.classList.remove("stage-fading");
+            }, 220);
+          }
+
+          playlistItems.forEach(function (item, i) {
             if (i === index) {
               item.classList.add("active");
-              try { item.scrollIntoView({ behavior: "smooth", block: "nearest" }); } catch(err){}
+              scrollPlaylistItemIntoView(item);
+              updatePlaylistCounter(index);
+
               const d = item.dataset;
               if (stagePoster) stagePoster.src = d.poster;
               if (stageTitle) stageTitle.textContent = d.title;
@@ -2868,10 +2927,43 @@ def generate_talks_page():
           });
         }
 
-        playlistItems.forEach((item, idx) => {
+        function slidePlaylistNext() {
+          const nextIdx = (activeIndex + 1) % playlistItems.length;
+          activateVideo(nextIdx);
+        }
+
+        function slidePlaylistPrev() {
+          const prevIdx = (activeIndex - 1 + playlistItems.length) % playlistItems.length;
+          activateVideo(prevIdx);
+        }
+
+        function startPlaylistTimer() {
+          stopPlaylistTimer();
+          playlistTimer = setInterval(function () {
+            // Only auto-advance if not hovered, document visible, and NOT actively playing video
+            if (!isPlaylistHovered && !document.hidden && !isPlayerActive) {
+              slidePlaylistNext();
+            }
+          }, PLAYLIST_INTERVAL);
+        }
+
+        function stopPlaylistTimer() {
+          if (playlistTimer) {
+            clearInterval(playlistTimer);
+            playlistTimer = null;
+          }
+        }
+
+        function resetPlaylistTimer() {
+          stopPlaylistTimer();
+          startPlaylistTimer();
+        }
+
+        playlistItems.forEach(function (item, idx) {
           item.addEventListener("click", function (e) {
             e.preventDefault();
             activateVideo(idx);
+            resetPlaylistTimer();
           });
         });
 
@@ -2880,16 +2972,60 @@ def generate_talks_page():
 
         if (prevBtn) {
           prevBtn.addEventListener("click", function () {
-            const nextIdx = (activeIndex - 1 + playlistItems.length) % playlistItems.length;
-            activateVideo(nextIdx);
+            slidePlaylistPrev();
+            resetPlaylistTimer();
           });
         }
         if (nextBtn) {
           nextBtn.addEventListener("click", function () {
-            const nextIdx = (activeIndex + 1) % playlistItems.length;
-            activateVideo(nextIdx);
+            slidePlaylistNext();
+            resetPlaylistTimer();
           });
         }
+
+        // Pause on mouse hover (Figure-Ground Law: Focus on card interaction)
+        const playlistElements = [
+          document.getElementById("video-playlist-stack"),
+          document.querySelector(".video-playlist-container"),
+          document.getElementById("video-stage-frame")
+        ].filter(Boolean);
+
+        playlistElements.forEach(function (el) {
+          el.addEventListener("mouseenter", function () {
+            isPlaylistHovered = true;
+            stopPlaylistTimer();
+          });
+          el.addEventListener("mouseleave", function () {
+            isPlaylistHovered = false;
+            startPlaylistTimer();
+          });
+        });
+
+        // Touch gestures on mobile
+        const playlistStack = document.getElementById("video-playlist-stack");
+        if (playlistStack) {
+          playlistStack.addEventListener("touchstart", function () {
+            isPlaylistHovered = true;
+            stopPlaylistTimer();
+          }, { passive: true });
+          playlistStack.addEventListener("touchend", function () {
+            isPlaylistHovered = false;
+            resetPlaylistTimer();
+          }, { passive: true });
+        }
+
+        // Page visibility
+        document.addEventListener("visibilitychange", function () {
+          if (document.hidden) {
+            stopPlaylistTimer();
+          } else if (!isPlaylistHovered && !isPlayerActive) {
+            startPlaylistTimer();
+          }
+        });
+
+        // Initialize playlist counter and autoplay
+        updatePlaylistCounter(0);
+        startPlaylistTimer();
 
         if (stagePlayBtn) {
           stagePlayBtn.addEventListener("click", function () {
@@ -3231,14 +3367,19 @@ def generate_talks_page():
               {playlist_joined}
             </div>
 
-            <!-- Bottom Navigation Arrows -->
+            <!-- Bottom Navigation Arrows & Counter (Golden Ratio Harmonic Proportions) -->
             <div class="video-playlist-footer">
-              <button class="video-nav-arrow-btn" id="video-prev-btn" title="Previous Video" type="button" aria-label="Previous Video">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"/></svg>
-              </button>
-              <button class="video-nav-arrow-btn" id="video-next-btn" title="Next Video" type="button" aria-label="Next Video">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
-              </button>
+              <div class="video-playlist-counter" id="video-playlist-counter" aria-label="Episode index">
+                <span class="counter-curr">01</span><span class="counter-sep">/</span><span class="counter-total">{total_episodes_count}</span>
+              </div>
+              <div class="video-nav-arrows-group">
+                <button class="video-nav-arrow-btn" id="video-prev-btn" title="Previous Video" type="button" aria-label="Previous Video">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <button class="video-nav-arrow-btn" id="video-next-btn" title="Next Video" type="button" aria-label="Next Video">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
