@@ -243,6 +243,13 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                 self.end_headers()
                 self.wfile.write(content)
                 return
+        if path == "/api/books-hero":
+            hero_data = load_json_file("books_hero.json")
+            if not isinstance(hero_data, dict):
+                hero_data = {}
+            self.send_json(200, hero_data)
+            return
+
         if path == "/api/spotlight":
             spotlight_data = load_json_file("spotlight.json")
             if not isinstance(spotlight_data, dict):
@@ -255,6 +262,20 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
             if not isinstance(analytics_data, dict):
                 analytics_data = {}
             self.send_json(200, analytics_data)
+            return
+
+        if path == "/api/team":
+            team_data = load_json_file("team.json")
+            if not isinstance(team_data, dict):
+                team_data = {}
+            self.send_json(200, team_data)
+            return
+
+        if path in ["/api/navigation", "/api/menus"]:
+            nav_data = load_json_file("navigation.json")
+            if not isinstance(nav_data, dict):
+                nav_data = {"main_menu": []}
+            self.send_json(200, nav_data)
             return
         super().do_GET()
 
@@ -429,6 +450,17 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                 return
 
             # 2. PUBLICATIONS (Research & Publication)
+            elif path == "/api/save-books-hero":
+                payload = self.read_post_json()
+                hero_data = payload.get("hero", {})
+                should_deploy = payload.get("deploy", False)
+                save_json_file("books_hero.json", hero_data)
+                rebuild_site()
+                if should_deploy:
+                    deploy_live()
+                self.send_json(200, {"status": "ok", "message": "Hero settings saved", "deploying": should_deploy})
+                return
+
             elif path == "/api/save-publication":
                 payload = self.read_post_json()
                 pub = payload.get("publication", {})
@@ -443,16 +475,26 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
 
                 idx = next((i for i, p in enumerate(pubs) if p.get("id") == pub.get("id")), None)
                 if idx is not None:
+                    # Preserve existing bibtex and other fields if not provided
+                    for k, v in pubs[idx].items():
+                        if (k not in pub or pub[k] is None or pub[k] == "") and v:
+                            pub[k] = v
                     pubs[idx] = pub
                 else:
                     pubs.insert(0, pub)
 
+                # If this is a Book Chapter marked as featured, ensure it is the primary monograph
+                if pub.get("category") == "Book Chapter" and pub.get("featured"):
+                    for p in pubs:
+                        if p.get("category") == "Book Chapter" and p.get("id") != pub.get("id"):
+                            p["featured"] = False
+
                 save_json_file("publications.json", pubs)
 
+                # Always rebuild site so publications.html and index.html get updated!
+                rebuild_site()
                 if pub.get("featured"):
                     set_universal_homepage_spotlight("publication", pub.get("id"), pub.get("title", ""))
-                else:
-                    rebuild_site()
                 if should_deploy:
                     deploy_live()
                 self.send_json(200, {"status": "ok", "message": "Publication saved", "deploying": should_deploy, "id": pub.get("id")})
@@ -669,12 +711,17 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                 def item_key(x):
                     return x.get("id") or x.get("title") or x.get("name") or x.get("degree") or x.get("role") or x.get("certification")
 
+                old_key = payload.get("old_key")
                 target_k = item_key(item)
-                idx = next((i for i, x in enumerate(sec_list) if item_key(x) == target_k), None) if target_k else None
+                idx = None
+                if old_key:
+                    idx = next((i for i, x in enumerate(sec_list) if item_key(x) == old_key), None)
+                if idx is None and target_k:
+                    idx = next((i for i, x in enumerate(sec_list) if item_key(x) == target_k), None)
                 if idx is not None:
                     sec_list[idx] = item
                 else:
-                    sec_list.insert(0, item)
+                    sec_list.append(item)
 
                 cv[section] = sec_list
                 save_json_file("cv_data.json", cv)
@@ -747,6 +794,52 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                 self.send_json(200, {"status": "ok", "message": "Supervision directions saved", "deploying": should_deploy})
                 return
 
+            # 6.5 RESEARCH TEAM ROSTER & LAB SUPERVISION (team.json)
+            elif path == "/api/save-team":
+                payload = self.read_post_json()
+                team_data = payload.get("team", {})
+                should_deploy = payload.get("deploy", False)
+
+                save_json_file("team.json", team_data)
+                rebuild_site()
+                if should_deploy:
+                    deploy_live()
+                self.send_json(200, {"status": "ok", "message": "Research team roster saved successfully", "deploying": should_deploy})
+                return
+
+            # 6.6 MAIN NAVIGATION & MENUS (navigation.json)
+            elif path in ["/api/save-navigation", "/api/save-menus"]:
+                payload = self.read_post_json()
+                nav_data = payload.get("navigation") or ({"main_menu": payload["main_menu"]} if "main_menu" in payload else {})
+                should_deploy = payload.get("deploy", False)
+
+                if nav_data and isinstance(nav_data, dict) and "main_menu" in nav_data:
+                    save_json_file("navigation.json", nav_data)
+                    rebuild_site()
+                if should_deploy:
+                    deploy_live()
+                self.send_json(200, {"status": "ok", "message": "Navigation menus saved successfully", "deploying": should_deploy})
+                return
+
+            # 6.9 HOMEPAGE PORTALS HEADER & COIN PROFILE (profile.json)
+            elif path == "/api/save-portals-header":
+                payload = self.read_post_json()
+                portals_hdr = payload.get("portals_header")
+                if portals_hdr is None or not isinstance(portals_hdr, dict):
+                    portals_hdr = {k: v for k, v in payload.items() if k not in ("deploy", "portals_header")}
+                should_deploy = payload.get("deploy", False)
+
+                curr_prof = load_json_file("profile.json")
+                if not isinstance(curr_prof, dict):
+                    curr_prof = {}
+                curr_prof["portals_header"] = portals_hdr
+                save_json_file("profile.json", curr_prof)
+                rebuild_site()
+                if should_deploy:
+                    deploy_live()
+                self.send_json(200, {"status": "ok", "message": "Homepage Portals Header saved and site recompiled", "portals_header": portals_hdr, "deploying": should_deploy})
+                return
+
             # 7. GLOBAL PROFILE & HOME IDENTITY (profile.json)
             elif path == "/api/save-profile":
                 payload = self.read_post_json()
@@ -772,6 +865,10 @@ class AcademicPreviewHandler(http.server.SimpleHTTPRequestHandler):
                     curr["ga_measurement_id"] = str(payload["ga_measurement_id"]).strip()
                 if "post_reads" in payload:
                     curr["post_reads"] = payload["post_reads"]
+                if "page_traces" in payload:
+                    curr["page_traces"] = payload["page_traces"]
+                if "timeline_trends" in payload:
+                    curr["timeline_trends"] = payload["timeline_trends"]
                 curr["updated_at"] = datetime.now().isoformat()
                 save_json_file("analytics.json", curr)
                 rebuild_site()
