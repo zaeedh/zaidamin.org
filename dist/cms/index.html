@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMS Studio Portal • Dr. Zaid Amin</title>
+  <link rel="icon" type="image/png" href="../favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      background: radial-gradient(circle at 50% 20%, #06182c 0%, #020b14 70%);
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Inter', -apple-system, sans-serif;
+      margin: 0;
+      padding: 24px;
+    }
+    .cms-bridge-card {
+      max-width: 640px;
+      width: 100%;
+      background: rgba(8, 23, 38, 0.9);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 16px;
+      padding: 44px 40px;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7), 0 0 32px rgba(56, 189, 248, 0.1);
+      backdrop-filter: blur(12px);
+      text-align: center;
+      position: relative;
+    }
+    .cms-bridge-emblem {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(56, 189, 248, 0.2));
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fce09b;
+      box-shadow: 0 0 24px rgba(212, 175, 55, 0.3);
+    }
+    .cms-bridge-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.85rem;
+      color: #fce09b;
+      margin: 0 0 8px;
+      letter-spacing: 0.05em;
+    }
+    .cms-bridge-subtitle {
+      color: #94a3b8;
+      font-size: 0.85rem;
+      margin: 0 0 28px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+    .cms-status-box {
+      background: rgba(2, 11, 20, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+    .cms-status-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      color: #4ade80;
+    }
+    .status-badge.offline {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.4);
+      color: #f87171;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px #4ade80;
+      animation: pulse 2s infinite;
+    }
+    .pulse-dot.red {
+      background: #f87171;
+      box-shadow: 0 0 8px #f87171;
+      animation: none;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.2); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .cms-note {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .cms-btn-primary {
+      display: block;
+      width: 100%;
+      padding: 15px 24px;
+      background: linear-gradient(135deg, #d4af37 0%, #b89628 100%);
+      color: #020b14;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.05em;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.35);
+      transition: all 0.25s ease;
+      margin-bottom: 14px;
+    }
+    .cms-btn-primary:hover {
+      background: linear-gradient(135deg, #fce09b 0%, #d4af37 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(212, 175, 55, 0.5);
+    }
+    .cms-btn-secondary {
+      display: inline-block;
+      color: #94a3b8;
+      font-size: 0.88rem;
+      text-decoration: none;
+      padding: 8px 16px;
+      transition: color 0.2s ease;
+    }
+    .cms-btn-secondary:hover {
+      color: #fce09b;
+    }
+    .quick-start-code {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px dashed rgba(212, 175, 55, 0.3);
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #38bdf8;
+      margin: 14px 0 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="cms-bridge-card">
+    <div class="cms-bridge-emblem">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 20h9"/>
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+      </svg>
+    </div>
+    
+    <h1 class="cms-bridge-title">Academic CMS Studio</h1>
+    <p class="cms-bridge-subtitle">Secure Local Editorial &amp; Authoring Environment</p>
+    
+    <div class="cms-status-box">
+      <div class="cms-status-header">
+        <span style="font-size:0.85rem; color:#94a3b8; font-weight:600;">STUDIO ENVIRONMENT</span>
+        <span id="status-pill" class="status-badge">
+          <span class="pulse-dot"></span> Checking Local Server...
+        </span>
+      </div>
+      <p class="cms-note">
+        Dr. Zaid Amin's Editorial CMS runs inside your local workspace at <strong style="color:#fce09b;">http://localhost:8000/cms.html</strong> to protect your website datasets and ensure private, authenticated authoring before publishing live.
+      </p>
+      <div class="quick-start-code" id="start-hint">
+        Click below to launch your editor, or run <strong>open_cms.bat</strong> on your computer.
+      </div>
+    </div>
+    
+    <a id="cms-launch-btn" href="http://localhost:8000/cms.html" class="cms-btn-primary">
+      Open Local CMS Editor &rarr;
+    </a>
+    
+    <a href="../index.html" class="cms-btn-secondary">
+      &larr; Return to Public Website (zaidamin.org)
+    </a>
+  </div>
+
+  <script>
+    // Live probe to verify if localhost:8000 preview server is active
+    fetch('http://localhost:8000/api/auth', { method: 'GET', mode: 'no-cors' })
+      .then(() => {
+        const pill = document.getElementById('status-pill');
+        if (pill) {
+          pill.className = 'status-badge';
+          pill.innerHTML = '<span class="pulse-dot"></span> Active on Port 8000';
+        }
+        const hint = document.getElementById('start-hint');
+        if (hint) {
+          hint.innerHTML = '✓ Local server is active. Click the button above to enter CMS Studio.';
+          hint.style.borderColor = 'rgba(34, 197, 94, 0.4)';
+          hint.style.color = '#86efac';
+        }
+      })
+      .catch(() => {
+        const pill = document.getElementById('status-pill');
+        if (pill) {
+          pill.className = 'status-badge offline';
+          pill.innerHTML = '<span class="pulse-dot red"></span> Local Server Inactive';
+        }
+        const hint = document.getElementById('start-hint');
+        if (hint) {
+          hint.innerHTML = 'To start: double-click <strong>open_cms.bat</strong> in your project folder.';
+        }
+      });
+  </script>
+</body>
+</html>
