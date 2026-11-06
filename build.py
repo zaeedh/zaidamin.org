@@ -896,6 +896,8 @@ def get_spotlight_card_html():
     if len(clean_desc) > 360:
         clean_desc = clean_desc[:357] + '...'
 
+    clean_top_kicker = re.sub(r'^[✦✧★\s\u2726]+', '', str(top_kicker)).strip()
+
     return f"""
       <!-- LEFT CARD: Chosen Featured Spotlight Article (Clean Editorial Display) -->
       <article class="ref-spotlight-card" aria-label="Featured Spotlight {kicker_badge}">
@@ -919,7 +921,7 @@ def get_spotlight_card_html():
         </div>
 
         <div class="ref-spotlight-body">
-          <div class="ref-scopus-kicker font-cinzel"><span class="kicker-gem">✦</span> {re.sub(r'^[✦✧★\s\u2726]+', '', str(top_kicker)).strip()}</div>
+          <div class="ref-scopus-kicker font-cinzel"><span class="kicker-gem">✦</span> {clean_top_kicker}</div>
           <h2 class="ref-spotlight-title">{title}</h2>
 
           <div class="ref-spotlight-meta">
