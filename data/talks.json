@@ -2,16 +2,57 @@
   "speaking_invitation_statement": "Dr. Zaid Amin is available for international academic keynotes, conference plenary talks, institutional workshops, and expert panel discussions on Human-Computer Interaction, AI Governance, Cognitive Attention Systems, and Digital Ethics. To invite Dr. Amin, please contact zaid.amin@newinti.edu.my.",
   "talks": [
     {
-      "title": "The Proxy Trap in Agentic AI: Why Metric Optimization Fails Human Values",
-      "event": "International Symposium on Trustworthy AI and Autonomous Systems",
+      "id": "keynote-1793961197946",
+      "title": "Speaker at Mobility International Program",
+      "event": "Mobility International Program IVI and UBD",
+      "role": "Invited Visiting Training Speaker",
       "year": "2026",
+      "date": "MARCH | 2026",
+      "location": "Institute of Visual Informatics (IVI), UKM - Kuala Lumpur, Malaysia",
+      "abstract": "AI & Social Media Training for Master’s Students in Communication Studies, Bina Darma University (UBD), at Universiti Kebangsaan Malaysia (UKM)"
+    },
+    {
+      "id": "keynote-1793869451640",
+      "title": "Keynote Speaker at Universitas Dehasen on AI and Creativity",
+      "event": "AI and Creativity: Human-Technology Collaboration in the Modern Era",
       "role": "Keynote Speaker",
-      "type": "Keynote",
-      "location": "Kuala Lumpur, Malaysia (Hybrid)",
-      "url": "https://tinyurl.com/y54buapz",
-      "image": "assets/images/spotlight-smart-cities.jpg",
-      "featured": false,
-      "description": "Delivering international keynote address on cognitive alignment, multimodal AI architectures, civic compliance modeling, and why proxy metric optimization diverges from humane values."
+      "year": "2026",
+      "date": "DECEMBER | 2026",
+      "location": "University of Dehasen Bengkulu, Indonesia",
+      "abstract": "Keynote presentation on 'AI and Creativity: Human-Technology Collaboration in the Modern Era,' organized by the Information Systems Student Association, Faculty of Computer Science, Universitas Dehasen Bengkulu (2024)",
+      "featured": false
+    },
+    {
+      "id": "keynote-ukm-trustworthy-ai",
+      "title": "The Influence of AI on Interpersonal Communication",
+      "event": "The Influence of AI on Interpersonal Communication",
+      "role": "Invited Visiting Training Speaker",
+      "year": "2026",
+      "date": "JULY | 2026",
+      "location": "Department of Islamic Communication and Broadcasting, State Islamic Institute of Kendari, Indonesia",
+      "abstract": "Specialized international research training on cognitive attention modeling, epistemic interface nudges, and trustworthy algorithmic oversight.",
+      "featured": false
+    },
+    {
+      "id": "keynote-matcom-2026",
+      "title": "Keynote Speaker at School of Sciences, Woxsen University",
+      "event": "International Conference on Emerging Horizons in Mathematics & Computation (MatCom–2026)",
+      "role": "Plenary Keynote Address",
+      "year": "2026",
+      "date": "MARCH | 2026",
+      "location": "School of Sciences, Woxsen University, Hyderabad, India",
+      "abstract": "Delivering international plenary keynote on multimodal foundation models, civic compliance modeling, and human-trusted cybernetic architectures."
+    },
+    {
+      "id": "keynote-autonomous-systems-2026",
+      "title": "Srivijayapedia: Exploring The History of Sriwijaya Kingdom Through Digital Communication Using Immersive Technology",
+      "event": "Digital Heritage and Preservation",
+      "role": "Keynote Speaker",
+      "year": "2025",
+      "date": "FEBRUARY | 2025",
+      "location": "Kuala Lumpur, Malaysia (Hybrid International)",
+      "abstract": "A seminar examining Srivijayapedia, an innovative initiative leveraging immersive technology and digital communication to visualize, preserve, and communicate the historical legacy of the ancient Sriwijaya Kingdom",
+      "featured": false
     },
     {
       "year": "2025",
