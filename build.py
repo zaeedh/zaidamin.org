@@ -27,6 +27,8 @@ def render_svg_icon(name):
         "github": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>',
         "linkedin": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>',
         "email": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>',
+        "sciprofiles": '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>',
+        "researchgate": '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.586 0c-.818 0-1.508.19-2.073.565-.563.377-.97.936-1.213 1.68a3.193 3.193 0 0 0-.112.437 8.365 8.365 0 0 0-.078.53 9 9 0 0 0-.05.572c-.01.199-.02.403-.02.613v.143c0 .01.01.02.01.03v.01c.285 2.115 1.5 3.336 3.642 3.664.13.02.26.03.39.03.88 0 1.62-.26 2.22-.78.6-.52.9-1.23.9-2.13 0-.9-.3-1.61-.9-2.13-.6-.52-1.34-.78-2.22-.78l-.49.03v-.02zm-8.8 8.08c-1.5 0-2.77.53-3.8 1.58-1.03 1.05-1.55 2.37-1.55 3.96 0 1.6.52 2.92 1.55 3.96 1.03 1.05 2.3 1.58 3.8 1.58 1.5 0 2.76-.53 3.8-1.58 1.03-1.04 1.55-2.36 1.55-3.96 0-1.59-.52-2.91-1.55-3.96-1.04-1.05-2.3-1.58-3.8-1.58zm0 2.1c.88 0 1.62.33 2.22 1 .6.67.9 1.48.9 2.44 0 .96-.3 1.77-.9 2.44-.6.67-1.34 1-2.22 1-.88 0-1.62-.33-2.22-1-.6-.67-.9-1.48-.9-2.44 0-.96.3-1.77.9-2.44.6-.67 1.34-1 2.22-1z"/></svg>',
         "arrow-right": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>',
         "arrow-left": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
         "external": '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>',
@@ -135,8 +137,192 @@ def get_html_head(title="Dr. Zaid Amin | Academic & Computational Researcher | z
 <body>
 """
 
+def get_navigation_data():
+    try:
+        data = load_json("navigation.json")
+        if data and isinstance(data, dict) and "main_menu" in data:
+            if "footer_links" not in data:
+                data["footer_links"] = [
+                    {"id": "team", "label": "Research Team", "url": "research-team.html", "target": "_self", "icon": "👥", "enabled": True},
+                    {"id": "supervision", "label": "Supervision Lab", "url": "prospective-students.html", "target": "_self", "icon": "🎓", "enabled": True},
+                    {"id": "activity", "label": "Activity & Essays", "url": "research.html#articles", "target": "_self", "icon": "📑", "enabled": True},
+                    {"id": "publications", "label": "Publications", "url": "publications.html", "target": "_self", "icon": "📚", "enabled": True},
+                    {"id": "contact", "label": "Contact Inquiry", "url": "mailto:zaid.amin@newinti.edu.my", "target": "_self", "icon": "✉️", "enabled": True}
+                ]
+            return data
+    except Exception:
+        pass
+    return {
+        "main_menu": [
+            {"id": "home", "label": "Home", "short_label": "Home", "url": "index.html", "target": "_self", "icon": "home", "enabled": True, "active_pages": ["home"], "has_dropdown": False, "dropdown_items": []},
+            {"id": "publications", "label": "Research & Pubs", "short_label": "Research", "url": "publications.html", "target": "_self", "icon": "none", "enabled": True, "active_pages": ["publications", "team"], "has_dropdown": True, "dropdown_items": [
+                {"id": "team", "label": "Research Team", "url": "research-team.html", "target": "_self", "icon": "✦", "enabled": True, "active_pages": ["team"]}
+            ]},
+            {"id": "research", "label": "Activity & Project", "short_label": "Activity", "url": "research.html", "target": "_self", "icon": "none", "enabled": True, "active_pages": ["research", "articles"], "has_dropdown": False, "dropdown_items": []},
+            {"id": "talks", "label": "Media & Talks", "short_label": "Media", "url": "talks.html", "target": "_self", "icon": "none", "enabled": True, "active_pages": ["talks"], "has_dropdown": False, "dropdown_items": []},
+            {"id": "cv", "label": "Achievement & CV", "short_label": "CV", "url": "cv.html", "target": "_self", "icon": "none", "enabled": True, "active_pages": ["cv", "achievements"], "has_dropdown": False, "dropdown_items": []}
+        ]
+    }
+
+def render_subpage_nav(active_page="home"):
+    nav_data = get_navigation_data()
+    items = nav_data.get("main_menu", [])
+    html_items = []
+    for item in items:
+        if not item.get("enabled", True):
+            continue
+        item_id = item.get("id", "")
+        url = item.get("url", "#")
+        label = item.get("label", "")
+        target = item.get("target", "_self")
+        target_attr = f' target="{target}"' if target and target != "_self" else ""
+        icon = item.get("icon", "none")
+        active_pages = item.get("active_pages", [item_id])
+        
+        is_active = (active_page in active_pages) or (active_page == item_id)
+        
+        if icon == "home" or item_id == "home":
+            active_class = "active" if is_active else ""
+            html_items.append(f'''<a href="{url}" class="main-menu-link {active_class}" title="{label}" aria-label="{label}"{target_attr}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;" aria-hidden="true">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </a>''')
+            continue
+            
+        dropdown_items = [d for d in item.get("dropdown_items", []) if d.get("enabled", True)]
+        if item.get("has_dropdown", False) and dropdown_items:
+            for d in dropdown_items:
+                if active_page in d.get("active_pages", [d.get("id")]):
+                    is_active = True
+                    break
+            active_class = "active" if is_active else ""
+            sub_links = []
+            for d in dropdown_items:
+                d_url = d.get("url", "#")
+                d_label = d.get("label", "")
+                d_target = d.get("target", "_self")
+                d_target_attr = f' target="{d_target}"' if d_target and d_target != "_self" else ""
+                d_active = "active" if active_page in d.get("active_pages", [d.get("id")]) else ""
+                sparkle = f'<span class="nav-team-sparkle">{d.get("icon", "✦")}</span>' if d.get("icon") else ''
+                sub_links.append(f'''<a href="{d_url}" class="nav-dropdown-team-link {d_active}" role="menuitem" title="{d_label}"{d_target_attr}>
+                  <div class="nav-team-label-wrap">
+                    {sparkle}
+                    <span class="nav-team-label">{d_label}</span>
+                  </div>
+                  <span class="nav-team-arrow">&nearr;</span>
+                </a>''')
+            rendered_sub = "\n                ".join(sub_links)
+            html_items.append(f'''<div class="nav-dropdown-item">
+              <a href="{url}" class="main-menu-link {active_class}" aria-haspopup="true" aria-expanded="false" title="{label}"{target_attr}>
+                {label} <span class="nav-chevron">▾</span>
+              </a>
+              <div class="nav-dropdown-menu" role="menu">
+                {rendered_sub}
+              </div>
+            </div>''')
+        else:
+            active_class = "active" if is_active else ""
+            html_items.append(f'''<a href="{url}" class="main-menu-link {active_class}" title="{label}"{target_attr}>{label}</a>''')
+            
+    rendered_menu = "\n            ".join(html_items)
+    return f'''<nav class="top-epigraph-menu" id="top-main-nav" aria-label="Main Navigation">
+            {rendered_menu}
+          </nav>'''
+
+def render_homepage_nav():
+    nav_data = get_navigation_data()
+    items = nav_data.get("main_menu", [])
+    html_items = []
+    for item in items:
+        if not item.get("enabled", True):
+            continue
+        item_id = item.get("id", "")
+        url = item.get("url", "#")
+        label = item.get("label", "")
+        short_label = item.get("short_label") or label
+        target = item.get("target", "_self")
+        target_attr = f' target="{target}"' if target and target != "_self" else ""
+        icon = item.get("icon", "none")
+        
+        if icon == "home" or item_id == "home":
+            html_items.append(f'''<a href="{url}" class="ref-menu-tab tab-home active" title="{label}" aria-label="{label}"{target_attr}>
+            <svg class="tab-icon-home" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </a>''')
+            continue
+            
+        dropdown_items = [d for d in item.get("dropdown_items", []) if d.get("enabled", True)]
+        if item.get("has_dropdown", False) and dropdown_items:
+            sub_links = []
+            for d in dropdown_items:
+                d_url = d.get("url", "#")
+                d_label = d.get("label", "")
+                d_target = d.get("target", "_self")
+                d_target_attr = f' target="{d_target}"' if d_target and d_target != "_self" else ""
+                sparkle = f'<span class="ref-team-sparkle">{d.get("icon", "✦")}</span>' if d.get("icon") else ''
+                sub_links.append(f'''<a href="{d_url}" class="ref-dropdown-team-link" role="menuitem" title="{d_label}"{d_target_attr}>
+                <div class="ref-team-label-wrap">
+                  {sparkle}
+                  <span class="ref-team-label">{d_label}</span>
+                </div>
+                <span class="ref-team-arrow">&nearr;</span>
+              </a>''')
+            rendered_sub = "\n              ".join(sub_links)
+            html_items.append(f'''<div class="ref-menu-dropdown-wrapper">
+            <a href="{url}" class="ref-menu-tab" title="{label}" aria-haspopup="true" aria-expanded="false"{target_attr}>
+              <span class="tab-txt-full">{label} <span class="ref-chevron">▾</span></span>
+              <span class="tab-txt-compact">{short_label} <span class="ref-chevron">▾</span></span>
+            </a>
+            <div class="ref-menu-dropdown-menu" role="menu">
+              {rendered_sub}
+            </div>
+          </div>''')
+        else:
+            html_items.append(f'''<a href="{url}" class="ref-menu-tab" title="{label}"{target_attr}>
+            <span class="tab-txt-full">{label}</span>
+            <span class="tab-txt-compact">{short_label}</span>
+          </a>''')
+            
+    rendered_menu = "\n          ".join(html_items)
+    return f'''<nav class="ref-top-menu-bar" aria-label="Main Navigation">
+          {rendered_menu}
+        </nav>'''
+
 def get_page_header(active_page="home"):
     profile = load_json("profile.json")
+    social = profile.get("social_links", {})
+    cluster_cfg = profile.get("top_cluster", {})
+
+    items_def = [
+        ("scholar", "Google Scholar", social.get("scholar", ""), "scholar"),
+        ("orcid", "ORCID", social.get("orcid", ""), "orcid"),
+        ("github", "GitHub", social.get("github", ""), "github"),
+        ("linkedin", "LinkedIn", social.get("linkedin", ""), "linkedin"),
+        ("email", "Institutional Email", social.get("email", ""), "email"),
+        ("sciprofiles", "SciProfiles", social.get("sciprofiles", ""), "sciprofiles"),
+        ("researchgate", "ResearchGate", social.get("researchgate", ""), "researchgate"),
+    ]
+
+    pills_html = []
+    for key, def_label, val, icon in items_def:
+        cfg = cluster_cfg.get(key, {})
+        is_enabled = cfg.get("enabled", True if key in ["scholar", "orcid", "github", "linkedin", "email"] else False)
+        if not is_enabled or not val:
+            continue
+        label = cfg.get("label", def_label)
+        if key in ["email", "personal_email"]:
+            href = val if val.startswith("mailto:") else f"mailto:{val}"
+            target_str = ""
+        else:
+            href = val
+            target_str = ' target="_blank" rel="noopener"'
+        pills_html.append(f'<a href="{href}"{target_str} class="top-link-pill" title="{label}">{render_svg_icon(icon)} <span>{label}</span></a>')
+
+    scholarly_links_rendered = "\n              ".join(pills_html)
     star_svg = '''<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" class="david-star-svg">
       <polygon points="12,2 20.66,17 3.34,17" />
       <polygon points="12,22 3.34,7 20.66,7" />
@@ -153,27 +339,12 @@ def get_page_header(active_page="home"):
         </div>
         
         <div class="epigraph-right-cluster">
-          {f'''<nav class="top-epigraph-menu" id="top-main-nav" aria-label="Main Navigation">
-            <a href="index.html" class="main-menu-link {'active' if active_page == 'home' else ''}" title="Home" aria-label="Home">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;" aria-hidden="true">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                <polyline points="9 22 9 12 15 12 15 22"/>
-              </svg>
-            </a>
-            <a href="publications.html" class="main-menu-link {'active' if active_page == 'publications' else ''}">Research &amp; Publication</a>
-            <a href="research.html" class="main-menu-link {'active' if active_page in ['research', 'articles'] else ''}">Activity &amp; Project</a>
-            <a href="talks.html" class="main-menu-link {'active' if active_page == 'talks' else ''}">Media &amp; Talks</a>
-            <a href="cv.html" class="main-menu-link {'active' if active_page in ['cv', 'achievements'] else ''}">Achievement &amp; CV</a>
-          </nav>''' if active_page != 'home' else ''}
+          {render_subpage_nav(active_page) if active_page != 'home' else ''}
 
           <!-- Top-Right Star of David Button & Side-Expanding Scholarly Profiles -->
           <div class="top-scholarly-cluster">
             <div class="top-scholarly-links" id="top-scholarly-links" aria-hidden="true">
-              <a href="{profile['social_links']['scholar']}" target="_blank" rel="noopener" class="top-link-pill" title="Google Scholar">{render_svg_icon('scholar')} <span>Google Scholar</span></a>
-              <a href="{profile['social_links']['orcid']}" target="_blank" rel="noopener" class="top-link-pill" title="ORCID">{render_svg_icon('orcid')} <span>ORCID</span></a>
-              <a href="{profile['social_links']['github']}" target="_blank" rel="noopener" class="top-link-pill" title="GitHub">{render_svg_icon('github')} <span>GitHub</span></a>
-              <a href="{profile['social_links']['linkedin']}" target="_blank" rel="noopener" class="top-link-pill" title="LinkedIn">{render_svg_icon('linkedin')} <span>LinkedIn</span></a>
-              <a href="mailto:{profile['social_links']['email']}" class="top-link-pill" title="Institutional Email">{render_svg_icon('email')} <span>Institutional Email</span></a>
+              {scholarly_links_rendered}
             </div>
 
             <!-- Pure Rotating Star of David Button (No circle boundary!) -->
@@ -531,6 +702,17 @@ def get_telemetry_audit_modal_html(ga_id="G-ZAIDAMIN01"):
 
 def get_page_footer(show_visitor_stats=False):
     stats_html = get_visitor_stats_html() if show_visitor_stats else ""
+    nav_data = get_navigation_data()
+    footer_links = [l for l in nav_data.get("footer_links", []) if l.get("enabled", True)]
+    footer_links_html = ""
+    if footer_links:
+        links_rendered = []
+        for fl in footer_links:
+            target_attr = f' target="{fl.get("target", "_self")}"' if fl.get("target") and fl.get("target") != "_self" else ""
+            icon_str = f'<span style="opacity:0.8;margin-right:4px;">{fl.get("icon", "")}</span>' if fl.get("icon") and fl.get("icon") != "none" else ""
+            links_rendered.append(f'<a href="{fl.get("url", "#")}" class="golden-footer-link"{target_attr}>{icon_str}{fl.get("label", "")}</a>')
+        footer_links_html = f'<div class="footer-nav-links">{" &bull; ".join(links_rendered)}</div>'
+
     return f"""
     <!-- Visitor Statistics Section (Exclusive to Homepage) -->
     {stats_html}
@@ -543,6 +725,7 @@ def get_page_footer(show_visitor_stats=False):
       <div class="footer-left">
         Copyright &copy; 2008 - 2026 Zaid Amin. All Rights Reserved.
       </div>
+      {footer_links_html}
     </footer>
 
     <!-- Floating Scroll to Top Direct Button -->
@@ -642,7 +825,7 @@ def get_spotlight_card_html():
         target_blank = ""
         meta_oa = f'<span class="spotlight-oa-pill font-cinzel"><span class="oa-check">&#10003;</span> Open Access Essay</span>'
         author_pre = "Author"
-        author_name = "Dr. Zaid Amin, Ph.D."
+        author_name = "Dr. Zaid Amin"
         secondary_pill = '<a href="research.html#articles" class="spotlight-doi-pill font-cinzel" title="Explore All Activity &amp; Articles"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> All Activity &nearr;</a>'
 
     elif source == "talk":
@@ -663,7 +846,7 @@ def get_spotlight_card_html():
         target_blank = 'target="_blank" rel="noopener"' if item.get("url") else ''
         meta_oa = f'<span class="spotlight-oa-pill font-cinzel" style="color:#d8b4fe; border-color:rgba(168,85,247,0.3);"><span class="oa-check">&#10003;</span> {role_str}</span>'
         author_pre = "Speaker"
-        author_name = "Dr. Zaid Amin, Ph.D."
+        author_name = "Dr. Zaid Amin"
         secondary_pill = '<a href="talks.html" class="spotlight-doi-pill font-cinzel" title="Media &amp; Talks Archive"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Media &amp; Talks &nearr;</a>'
 
     elif source == "cv":
@@ -683,7 +866,7 @@ def get_spotlight_card_html():
         target_blank = 'target="_blank" rel="noopener"' if item.get("url") else ''
         meta_oa = f'<span class="spotlight-oa-pill font-cinzel" style="color:#86efac; border-color:rgba(34,197,94,0.3);"><span class="oa-check">&#10003;</span> {badge_val}</span>'
         author_pre = "Recipient / Lead PI"
-        author_name = "Dr. Zaid Amin, Ph.D."
+        author_name = "Dr. Zaid Amin"
         secondary_pill = '<a href="cv.html#honors" class="spotlight-doi-pill font-cinzel" title="Honors &amp; Distinctions"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Honors &amp; CV &nearr;</a>'
 
     else: # default: publication
@@ -701,7 +884,7 @@ def get_spotlight_card_html():
         target_blank = 'target="_blank" rel="noopener"'
         meta_oa = f'<span class="spotlight-oa-pill font-cinzel"><span class="oa-check">&#10003;</span> Open Access</span>'
         author_pre = "Lead Author"
-        author_name = "Zaid Amin, Ph.D."
+        author_name = "Dr. Zaid Amin"
         secondary_pill = f'<a href="{url}" target="_blank" rel="noopener" class="spotlight-doi-pill font-cinzel" title="Direct Digital Object Identifier (DOI)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> DOI: {doi} &nearr;</a>' if doi else ''
 
     img_webp = img_src.replace(".jpg", ".webp") if img_src.endswith(".jpg") else img_src
@@ -802,18 +985,22 @@ def clean_tray_snippet(text, max_len=75):
 def get_portals_tray_carousel_html():
     articles = load_json("articles.json") if (DATA_DIR / "articles.json").exists() else []
     pubs = load_json("publications.json") if (DATA_DIR / "publications.json").exists() else []
-    talks_d = load_json("talks.json") if (DATA_DIR / "talks.json").exists() else {}
-    talks = talks_d.get("talks", []) if isinstance(talks_d, dict) else talks_d
-    cv_d = load_json("cv_data.json") if (DATA_DIR / "cv_data.json").exists() else {}
-    achievements = cv_d.get("achievements_and_grants", [])
+    media_talks = load_json("media_talks.json") if (DATA_DIR / "media_talks.json").exists() else {}
+    fallback_talks_d = load_json("talks.json") if (DATA_DIR / "talks.json").exists() else {}
+    fallback_talks = fallback_talks_d.get("talks", []) if isinstance(fallback_talks_d, dict) else fallback_talks_d
+    cv_data = load_json("cv_data.json") if (DATA_DIR / "cv_data.json").exists() else {}
+    supervision_data = load_json("supervision.json") if (DATA_DIR / "supervision.json").exists() else {}
 
+    # 1. STREAM: Activity & Project (80 Scholarly Articles, Essays, and Frameworks)
     pool_articles = []
     for a in articles:
         thumb = a.get('image') or 'assets/images/spotlight-smart-cities.jpg'
         cat = a.get('category', 'Essays & Perspectives')
+        read_time = a.get('reading_time', '3 min read')
+        date_str = a.get('date', '2026')
         bullets = [
-            f"{clean_tray_snippet(cat, 32)} &bull; {a.get('reading_time', '3 min read')}",
-            f"Published: {a.get('date', '2026')}"
+            f"{clean_tray_snippet(cat, 32)} &bull; {read_time}",
+            f"Published: {date_str}"
         ]
         pool_articles.append({
             'type': 'article',
@@ -827,20 +1014,32 @@ def get_portals_tray_carousel_html():
             'is_external': False
         })
 
+    # 2. STREAM: Research & Publications (24 Peer-Reviewed Works)
     pool_pubs = []
     for p in pubs:
         thumb = p.get('image') or 'assets/images/thumb-research.jpg'
         venue = p.get('venue', 'Journal')
         year = p.get('year', 2026)
+        cat = p.get('category') or 'Scopus Q1'
+        tag = cat
+        if 'journal' in cat.lower() or 'scopus' in str(venue).lower():
+            tag = 'Scopus Q1 Journal' if 'q1' in str(p.get('indexing', '')).lower() or 'mdpi' in str(venue).lower() or 'ieee' in str(venue).lower() else 'Journal'
+        elif 'conference' in cat.lower():
+            tag = 'Conference'
+        elif 'chapter' in cat.lower() or 'book' in cat.lower():
+            tag = 'Book Chapter'
+        elif 'preprint' in cat.lower():
+            tag = 'Preprint'
+
         bullets = [
             f"{clean_tray_snippet(venue, 34)} ({year})",
-            f"Authors: {clean_tray_snippet(p.get('authors', 'Dr. Zaid Amin'), 42)}"
+            f"Authors: {clean_tray_snippet(p.get('authors', 'Dr. Zaid Amin et al.'), 42)}"
         ]
         url = p.get('url') or (f"https://doi.org/{p['doi']}" if p.get('doi') else f"publications.html#{p.get('id', '')}")
         pool_pubs.append({
             'type': 'publication',
             'menu': 'Research & Publication',
-            'tag': (p.get('category') or 'Scopus Q1')[:22],
+            'tag': tag[:22],
             'title': p.get('title', 'Publication'),
             'thumb_jpg': thumb,
             'bullets': bullets,
@@ -849,43 +1048,117 @@ def get_portals_tray_carousel_html():
             'is_external': url.startswith('http')
         })
 
-    pool_talks = []
-    for t in talks:
-        thumb = t.get('image') or 'assets/images/thumb-projects.jpg'
-        event = t.get('event', 'Keynote Address')
-        year = t.get('year', 2026)
+    # 3. STREAM: Media & Talks (19 Televised Talkshows, Keynotes, Tech Opinions)
+    pool_media = []
+    # 7 Talkshows
+    for ts in media_talks.get('talkshows', []):
+        thumb = ts.get('poster') or 'assets/images/thumb-projects.jpg'
+        channel = ts.get('channel', 'TV Broadcast')
+        duration = ts.get('duration', '30 min')
         bullets = [
-            f"{clean_tray_snippet(event, 34)} ({year})",
-            f"Location: {clean_tray_snippet(t.get('location', 'Malaysia'), 42)}"
+            f"{clean_tray_snippet(channel, 30)} &bull; {duration}",
+            f"Broadcast: {ts.get('date', 'Archive')}"
         ]
-        url = t.get('url') or 'talks.html'
-        pool_talks.append({
-            'type': 'talk',
+        url = f"talks.html#{ts.get('id', '')}"
+        pool_media.append({
+            'type': 'talkshow',
             'menu': 'Media & Talks',
-            'tag': (t.get('role') or 'Keynote Speaker')[:22],
-            'title': t.get('title', 'Talk'),
+            'tag': 'TV Talkshow',
+            'title': ts.get('title', 'Broadcast Talkshow'),
             'thumb_jpg': thumb,
             'bullets': bullets,
-            'btn_text': 'View Talk',
+            'btn_text': 'Watch',
             'btn_url': url,
-            'is_external': url.startswith('http')
+            'is_external': False
         })
+    # 6 Keynotes
+    for kn in media_talks.get('keynotes', []):
+        thumb = kn.get('image') or 'assets/images/spotlight-smart-cities.jpg'
+        event = kn.get('event', 'Keynote Address')
+        year = kn.get('year', 2026)
+        venue = kn.get('venue', 'International Symposium')
+        bullets = [
+            f"{clean_tray_snippet(event, 34)} ({year})",
+            f"Venue: {clean_tray_snippet(venue, 38)}"
+        ]
+        url = f"talks.html#{kn.get('id', '')}"
+        pool_media.append({
+            'type': 'keynote',
+            'menu': 'Media & Talks',
+            'tag': 'Keynote Speaker',
+            'title': kn.get('title', 'Keynote Talk'),
+            'thumb_jpg': thumb,
+            'bullets': bullets,
+            'btn_text': 'View',
+            'btn_url': url,
+            'is_external': False
+        })
+    # 6 Tech Opinions
+    for op in media_talks.get('opinions', []):
+        thumb = op.get('image') or 'assets/images/thumb-attention.jpg'
+        pub = op.get('publication', 'Tech Column')
+        year = op.get('year', 2025)
+        abstract = op.get('abstract', 'Critical discourse on computational systems and ethics.')
+        bullets = [
+            f"{clean_tray_snippet(pub, 32)} ({year})",
+            f"Focus: {clean_tray_snippet(abstract, 38)}"
+        ]
+        url = f"talks.html#{op.get('id', '')}"
+        pool_media.append({
+            'type': 'opinion',
+            'menu': 'Media & Talks',
+            'tag': 'Tech Opinion',
+            'title': op.get('title', 'Perspective & Column'),
+            'thumb_jpg': thumb,
+            'bullets': bullets,
+            'btn_text': 'Read',
+            'btn_url': url,
+            'is_external': False
+        })
+    # If media_talks empty, use fallback_talks
+    if not pool_media and fallback_talks:
+        for t in fallback_talks:
+            thumb = t.get('image') or 'assets/images/thumb-projects.jpg'
+            event = t.get('event', 'Keynote Address')
+            year = t.get('year', 2026)
+            pool_media.append({
+                'type': 'talk',
+                'menu': 'Media & Talks',
+                'tag': (t.get('role') or 'Keynote Speaker')[:22],
+                'title': t.get('title', 'Talk'),
+                'thumb_jpg': thumb,
+                'bullets': [f"{clean_tray_snippet(event, 34)} ({year})", f"Location: {clean_tray_snippet(t.get('location', 'Malaysia'), 42)}"],
+                'btn_text': 'View',
+                'btn_url': t.get('url') or 'talks.html',
+                'is_external': False
+            })
 
+    # 4. STREAM: Achievement & CV (Honors, Awards, Leadership, Book, Editorial, Certifications)
     pool_cv = []
-    for c in achievements:
-        thumb = c.get('image') or 'assets/images/thumb-projects.jpg'
-        org = c.get('organization', 'Academic Honor')
-        year = c.get('year', 2025)
+    for a in cv_data.get('achievements_and_grants', []):
+        thumb = a.get('image') or 'assets/images/thumb-projects.jpg'
+        org = a.get('organization', 'Academic Honor')
+        year = a.get('year', 2024)
+        cat = a.get('category', 'Award & Grant')
+        badge = a.get('badge') or cat
         bullets = [
             f"{clean_tray_snippet(org, 34)} ({year})",
-            f"Category: {clean_tray_snippet(c.get('category', 'Award & Grant'), 42)}"
+            f"Distinction: {clean_tray_snippet(badge, 38)}"
         ]
-        url = c.get('url') or 'cv.html#honors'
+        url = a.get('url') or 'cv.html#honors'
+        tag = 'Honor & Award'
+        if 'grant' in cat.lower():
+            tag = 'Research Grant'
+        elif 'global' in badge.lower() or 'cisco' in badge.lower():
+            tag = 'Global Award'
+        elif 'thesis' in str(a.get('title', '')).lower() or 'ph.d.' in str(a.get('title', '')).lower():
+            tag = 'Ph.D. Distinction'
+
         pool_cv.append({
-            'type': 'cv',
+            'type': 'cv_award',
             'menu': 'Achievement & CV',
-            'tag': (c.get('badge') or c.get('category') or 'Distinction')[:22],
-            'title': c.get('title', 'Achievement'),
+            'tag': tag[:22],
+            'title': a.get('title', 'Achievement'),
             'thumb_jpg': thumb,
             'bullets': bullets,
             'btn_text': 'Inspect',
@@ -893,6 +1166,98 @@ def get_portals_tray_carousel_html():
             'is_external': url.startswith('http')
         })
 
+    for l in cv_data.get('academic_leadership', []):
+        thumb = 'assets/images/dr-zaid.png'
+        inst = l.get('institution', 'INTI International University')
+        period = l.get('period', 'Academic Leadership')
+        pool_cv.append({
+            'type': 'cv_leadership',
+            'menu': 'Achievement & CV',
+            'tag': 'Academic Leadership',
+            'title': l.get('role', 'Leadership Role'),
+            'thumb_jpg': thumb,
+            'bullets': [f"{clean_tray_snippet(inst, 36)}", f"Tenure: {period}"],
+            'btn_text': 'Inspect',
+            'btn_url': 'cv.html#leadership',
+            'is_external': False
+        })
+
+    book = cv_data.get('core_research_and_books', {}).get('book')
+    if book:
+        pool_cv.append({
+            'type': 'cv_book',
+            'menu': 'Achievement & CV',
+            'tag': 'Authored Book',
+            'title': book.get('title', 'Information Sharing Behaviour on Social Media'),
+            'thumb_jpg': 'assets/images/thumb-research.jpg',
+            'bullets': ['Academic Monograph & Book', 'ISBN / Scholarly Reference Volume'],
+            'btn_text': 'Explore',
+            'btn_url': 'cv.html#books',
+            'is_external': False
+        })
+
+    pool_cv.append({
+        'type': 'cv_reviewer',
+        'menu': 'Achievement & CV',
+        'tag': 'Q1 Peer Reviewer',
+        'title': 'Active Q1 Peer Reviewer: IEEE Access, PLOS ONE, Elsevier CHB',
+        'thumb_jpg': 'assets/images/thumb-attention.jpg',
+        'bullets': ['IEEE Access &bull; PLOS ONE &bull; Elsevier CHB', 'Top-Tier Computational & Social Informatics'],
+        'btn_text': 'Inspect',
+        'btn_url': 'cv.html#peer-review',
+        'is_external': False
+    })
+
+    for cert in cv_data.get('professional_certifications', []):
+        issuer = cert.get('issuer', 'Professional Body')
+        period = cert.get('period', 'Certified')
+        pool_cv.append({
+            'type': 'cv_cert',
+            'menu': 'Achievement & CV',
+            'tag': 'Certification',
+            'title': cert.get('name', 'Professional Certification'),
+            'thumb_jpg': 'assets/images/thumb-projects.jpg',
+            'bullets': [f"Issuer: {clean_tray_snippet(issuer, 32)}", f"Credential Period: {period}"],
+            'btn_text': 'Inspect',
+            'btn_url': 'cv.html#certifications',
+            'is_external': False
+        })
+
+    # 5. STREAM: Supervision (Open Funded Ph.D. & Master's Topics)
+    pool_supervision = []
+    for top in supervision_data.get('open_topics', []):
+        thumb = 'assets/images/thumb-projects.jpg'
+        levels = ', '.join(top.get('degree_levels', ['Ph.D.', "Master's"]))
+        req = top.get('skills_required', 'Computational Research')
+        pool_supervision.append({
+            'type': 'supervision',
+            'menu': 'Supervision',
+            'tag': 'Ph.D. Supervision',
+            'title': top.get('title', 'Funded Research Topic'),
+            'thumb_jpg': thumb,
+            'bullets': [f"Degree Level: {levels} Track", f"Prerequisites: {clean_tray_snippet(req, 36)}"],
+            'btn_text': 'Apply',
+            'btn_url': f"supervision.html#{top.get('id', '')}",
+            'is_external': False
+        })
+
+    # Combine CV and Supervision into one balanced Stream of 32 items
+    stream_cv_sup = []
+    sup_idx = 0
+    for i, cv_item in enumerate(pool_cv):
+        stream_cv_sup.append(cv_item)
+        if (i % 6 == 2 or i % 6 == 5) and sup_idx < len(pool_supervision):
+            stream_cv_sup.append(pool_supervision[sup_idx])
+            sup_idx += 1
+    while sup_idx < len(pool_supervision):
+        stream_cv_sup.append(pool_supervision[sup_idx])
+        sup_idx += 1
+
+    stream_pubs = pool_pubs
+    stream_media = pool_media
+    stream_articles = pool_articles
+
+    # Slide 0: Executive Anchor / Showcase Slide across Core Academic Portals
     slide_0 = [
         {
             "thumb_webp": "assets/images/dr-zaid.webp",
@@ -903,7 +1268,7 @@ def get_portals_tray_carousel_html():
                 "Keynote Speaker &bull; Academic Leadership Track"
             ],
             "tag": "UKM Ph.D.",
-            "btn_text": "View CV",
+            "btn_text": "View",
             "btn_url": "cv.html",
             "is_external": False
         },
@@ -948,61 +1313,32 @@ def get_portals_tray_carousel_html():
         }
     ]
 
-    slides_data = [slide_0]
+    # Permutation rotation matrix so each slide has a unique layout cadence
+    perms = [
+        [0, 1, 2, 3],  # Pub, Media, CV/Sup, Article
+        [3, 2, 1, 0],  # Article, CV/Sup, Media, Pub
+        [1, 0, 3, 2],  # Media, Pub, Article, CV/Sup
+        [2, 3, 0, 1],  # CV/Sup, Article, Pub, Media
+        [1, 2, 0, 3],  # Media, CV/Sup, Pub, Article
+        [3, 0, 2, 1],  # Article, Pub, CV/Sup, Media
+        [0, 2, 1, 3],  # Pub, CV/Sup, Media, Article
+        [2, 1, 3, 0]   # CV/Sup, Media, Article, Pub
+    ]
 
-    art_idx = 0
-    pub_idx = 0
-    talk_idx = 0
-    cv_idx = 0
+    num_shuffled_slides = 36
+    shuffled_slides = []
 
-    while art_idx < len(pool_articles) or pub_idx < len(pool_pubs) or talk_idx < len(pool_talks) or cv_idx < len(pool_cv):
-        current_slide = []
+    for s in range(num_shuffled_slides):
+        c_pub = stream_pubs[s % len(stream_pubs)]
+        c_med = stream_media[s % len(stream_media)]
+        c_cv = stream_cv_sup[s % len(stream_cv_sup)]
+        c_art = stream_articles[s % len(stream_articles)]
 
-        # Slot 1: Article (if available)
-        if art_idx < len(pool_articles):
-            current_slide.append(pool_articles[art_idx])
-            art_idx += 1
-        elif pub_idx < len(pool_pubs):
-            current_slide.append(pool_pubs[pub_idx])
-            pub_idx += 1
+        raw_quartet = [c_pub, c_med, c_cv, c_art]
+        perm = perms[s % len(perms)]
+        shuffled_slides.append([raw_quartet[p] for p in perm])
 
-        # Slot 2: Publication (if available) or Article
-        if pub_idx < len(pool_pubs):
-            current_slide.append(pool_pubs[pub_idx])
-            pub_idx += 1
-        elif art_idx < len(pool_articles):
-            current_slide.append(pool_articles[art_idx])
-            art_idx += 1
-
-        # Slot 3: Talk (if available), else CV (if available), else Article
-        if talk_idx < len(pool_talks):
-            current_slide.append(pool_talks[talk_idx])
-            talk_idx += 1
-        elif cv_idx < len(pool_cv):
-            current_slide.append(pool_cv[cv_idx])
-            cv_idx += 1
-        elif art_idx < len(pool_articles):
-            current_slide.append(pool_articles[art_idx])
-            art_idx += 1
-        elif pub_idx < len(pool_pubs):
-            current_slide.append(pool_pubs[pub_idx])
-            pub_idx += 1
-
-        # Slot 4: CV (if available), else Pub, else Article
-        if cv_idx < len(pool_cv):
-            current_slide.append(pool_cv[cv_idx])
-            cv_idx += 1
-        elif pub_idx < len(pool_pubs):
-            current_slide.append(pool_pubs[pub_idx])
-            pub_idx += 1
-        elif art_idx < len(pool_articles):
-            current_slide.append(pool_articles[art_idx])
-            art_idx += 1
-
-        if current_slide:
-            while len(current_slide) < 4:
-                current_slide.append(pool_articles[len(current_slide) % len(pool_articles)])
-            slides_data.append(current_slide)
+    slides_data = [slide_0] + shuffled_slides
 
     slides_html = ""
     total_slides = len(slides_data)
@@ -1099,6 +1435,25 @@ def generate_golden_ratio_home():
     html = get_html_head("Dr. Zaid Amin | Das Sein, Das Sollen | zaidamin.org")
     html += get_page_header("home")
 
+    # Dynamic Portals Header (Configurable via CMS)
+    portals_hdr = profile.get("portals_header", {})
+    ph_name = portals_hdr.get("name", "Dr. Zaid Amin")
+    ph_role = portals_hdr.get("role_line", "Senior Lecturer &bull; Faculty of Data Science &amp; IT (FDSIT)").replace("•", "&bull;")
+    ph_inst = portals_hdr.get("institution", "INTI International University, Malaysia")
+    ph_fields_raw = portals_hdr.get("research_fields", "Digital Ethics • Behavior & Social Computing • HCI")
+    import re as _re_bld
+    _flist = [f.strip() for f in _re_bld.split(r'•|&bull;|,', ph_fields_raw) if f.strip()]
+    ph_fields_html = ' <span class="ref-gold-dot">&bull;</span> '.join(_flist) if _flist else ph_fields_raw
+    ph_front_webp = portals_hdr.get("photo_front", "assets/images/portraits/portrait-1.webp")
+    ph_front_png = portals_hdr.get("photo_front_fallback", ph_front_webp.replace(".webp", ".png"))
+    ph_front_alt = portals_hdr.get("photo_front_alt", f"{ph_name} — Academic Portrait")
+    ph_back_webp = portals_hdr.get("photo_back", "assets/images/portraits/portrait-2.webp")
+    ph_back_png = portals_hdr.get("photo_back_fallback", ph_back_webp.replace(".webp", ".png"))
+    ph_back_alt = portals_hdr.get("photo_back_alt", f"{ph_name} — Secondary Portrait")
+    ph_status_enabled = portals_hdr.get("status_dot_enabled", True)
+    ph_status_text = portals_hdr.get("status_text", "Active Senior Lecturer & Researcher")
+    ph_status_html = f'<span class="ref-live-status" title="{ph_status_text}"></span>' if ph_status_enabled else ''
+
     html += f"""
     <!-- 6. LIST OF JOURNAL: ANIMATE FADE IN FADE OUT MOVE FROM TOP TO DOWN -->
     <section class="journal-ticker-section">
@@ -1185,61 +1540,42 @@ def generate_golden_ratio_home():
       <!-- RIGHT CARD: Academic Portals & Highlights (Matching Reference Inset Tray + Stacked Cards) -->
       <aside class="ref-portals-card">
         <!-- 1. Top Main Menu Navigation Grid (Placed Above Dr. Zaid Profile, 3x2 Golden Ratio Layout) -->
-        <nav class="ref-top-menu-bar" aria-label="Main Navigation">
-          <a href="index.html" class="ref-menu-tab tab-home active" title="Home" aria-label="Home">
-            <svg class="tab-icon-home" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-              <polyline points="9 22 9 12 15 12 15 22"/>
-            </svg>
-          </a>
-          <a href="publications.html" class="ref-menu-tab" title="Research &amp; Publications">
-            <span class="tab-txt-full">Research &amp; Pubs</span><span class="tab-txt-compact">Research</span>
-          </a>
-          <a href="research.html" class="ref-menu-tab" title="Activities &amp; Funded Projects">
-            <span class="tab-txt-full">Activity &amp; Project</span><span class="tab-txt-compact">Activity</span>
-          </a>
-          <a href="talks.html" class="ref-menu-tab" title="Recent Media &amp; Invited Talks">
-            <span class="tab-txt-full">Media &amp; Talks</span><span class="tab-txt-compact">Media</span>
-          </a>
-          <a href="cv.html" class="ref-menu-tab" title="Achievements, Honors &amp; Curriculum Vitae">
-            <span class="tab-txt-full">Achievement &amp; CV</span><span class="tab-txt-compact">CV</span>
-          </a>
-        </nav>
+        {render_homepage_nav()}
 
         <div class="ref-menu-divider"></div>
 
         
-        <!-- Header with Dr. Zaid Amin Profile Summary & Title -->
+        <!-- Header with Dr. Zaid Amin Profile Summary & Title (Dynamic from profile.json) -->
         <div class="ref-portals-header">
           <div class="ref-profile-info-col">
-            <h3 class="ref-profile-name font-cinzel">Zaid Amin, Ph.D.</h3>
+            <h3 class="ref-profile-name font-cinzel">{ph_name}</h3>
             <div class="ref-profile-role">
-              Senior Lecturer &bull; Faculty of Data Science &amp; IT (FDSIT)<br>
-              <span class="ref-profile-inst">INTI International University, Malaysia</span>
+              {ph_role}<br>
+              <span class="ref-profile-inst">{ph_inst}</span>
             </div>
             <div class="ref-profile-fields">
-              Digital Ethics <span class="ref-gold-dot">&bull;</span> Behavior &amp; Social Computing <span class="ref-gold-dot">&bull;</span> HCI
+              {ph_fields_html}
             </div>
           </div>
-          <div class="ref-photo-ring coin-flip-stage" id="dr-zaid-coin" role="button" tabindex="0" title="Dr. Zaid Amin, Ph.D. • Click to rotate portrait coin">
+          <div class="ref-photo-ring coin-flip-stage" id="dr-zaid-coin" role="button" tabindex="0" title="{ph_name} • Click to rotate portrait coin">
             <div class="coin-disc" id="coin-disc" aria-label="Interactive Portrait Coin">
               <div class="coin-face coin-face-front" id="coin-face-front">
                 <picture>
-                  <source srcset="assets/images/portraits/portrait-1.webp" type="image/webp">
-                  <img src="assets/images/portraits/portrait-1.png" alt="Dr. Zaid Amin, Ph.D. — Academic Portrait" class="ref-photo-img" width="114" height="114">
+                  <source srcset="{ph_front_webp}" type="image/webp">
+                  <img src="{ph_front_png}" alt="{ph_front_alt}" class="ref-photo-img" width="114" height="114">
                 </picture>
                 <div class="coin-specular-gleam"></div>
               </div>
               <div class="coin-face coin-face-back" id="coin-face-back">
                 <picture>
-                  <source srcset="assets/images/portraits/portrait-2.webp" type="image/webp">
-                  <img src="assets/images/portraits/portrait-2.png" alt="Dr. Zaid Amin, Ph.D. — Singapore" class="ref-photo-img" width="114" height="114">
+                  <source srcset="{ph_back_webp}" type="image/webp">
+                  <img src="{ph_back_png}" alt="{ph_back_alt}" class="ref-photo-img" width="114" height="114">
                 </picture>
                 <div class="coin-specular-gleam"></div>
               </div>
               <div class="coin-rim-highlight"></div>
             </div>
-            <span class="ref-live-status" title="Active Senior Lecturer &amp; Researcher"></span>
+            {ph_status_html}
           </div>
         </div>
 
@@ -1296,23 +1632,34 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
             return "Atlantis Press Monograph Series"
         return v
 
-    # Front featured book (2024 Springer Digital Loneliness)
-    featured_book = None
-    for b in cat_items:
-        if "digital" in b.get("id", "") or b.get("year") == 2024:
-            featured_book = b
-            break
+    # 1. Front Primary Monograph (Featured Book)
+    featured_book = next((b for b in cat_items if b.get("featured")), None)
+    if not featured_book:
+        for b in cat_items:
+            if "digital" in b.get("id", "") or b.get("year") == 2024:
+                featured_book = b
+                break
     if not featured_book:
         featured_book = cat_items[0]
 
-    # Rear book (2021 LNCS Attention-Based)
-    rear_book = None
-    for b in cat_items:
-        if "covid" in b.get("id", "") or "attention" in b.get("id", "") or b.get("year") == 2021:
-            rear_book = b
-            break
+    featured_img = featured_book.get("image") or "assets/images/books/book_digital_loneliness.webp"
+    featured_title = _html_mod.escape(featured_book.get("title", "Primary Monograph"))
+    featured_year = featured_book.get("year", 2024)
+    featured_venue = featured_book.get("venue", "Academic Publication")
+    featured_pub = get_publisher(featured_venue, featured_book.get("doi"))
+    primary_url = featured_book.get("url", "").strip() or (f"https://doi.org/{featured_book.get('doi', '').strip()}" if featured_book.get("doi") else "#bokify-volumes-shelf")
+    primary_pub_short = featured_pub.split()[0] if featured_pub else "Volume"
+
+    # 2. Rear Companion Book
+    rear_book = next((b for b in cat_items if b.get("id") != featured_book.get("id")), None)
     if not rear_book and len(cat_items) > 1:
         rear_book = cat_items[1]
+
+    rear_img = (rear_book.get("image") or "assets/images/books/book_attention_covid.webp") if rear_book else ""
+    rear_title = _html_mod.escape(rear_book.get("title", "Scholarly Volume")) if rear_book else ""
+    rear_year = rear_book.get("year", 2021) if rear_book else ""
+    rear_venue = rear_book.get("venue", "Academic Publication") if rear_book else ""
+    rear_pub = get_publisher(rear_venue, rear_book.get("doi")) if rear_book else ""
 
     # Render each book card in the Curated Shelf
     shelf_cards_html = ""
@@ -1333,7 +1680,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
         img = pub.get("image", "assets/images/thumb-research.jpg")
         bibtex_id = pub.get("id", f"book{idx}")
         bibtex_raw = pub.get("bibtex", "")
-        is_featured = pub.get("featured", False) or ("digital" in pub.get("id", ""))
+        is_featured = (pub.get("id") == featured_book.get("id"))
         primary_tag = '<span class="bokify-primary-chip">★ Primary Volume</span>' if is_featured else ""
 
         # Download pill
@@ -1349,7 +1696,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
             mailto = f"mailto:zaid.amin@newinti.edu.my?subject=Requesting%20Full-Text:%20{title_enc}"
             dl_btn = f'<a href="{mailto}" class="pub-pill-btn pub-pill-primary">{render_svg_icon_fn("email")} <span>Request Full-Text</span></a>'
 
-        doi_html = f'<div class="bokify-card-doi"><span class="bokify-doi-lbl">DOI:</span> <a href="{url}" target="_blank" rel="noopener" class="bokify-doi-link">{doi}</a></div>' if doi else ""
+        doi_html = f'<div class="bokify-card-doi"><span class="bokify-doi-lbl">DOI:</span> <span class="bokify-doi-val">{doi}</span></div>' if doi else ""
 
         shelf_cards_html += f"""
         <article class="bokify-shelf-card pub-item" data-category="{cat["category_key"].lower()}" data-title="{escaped_title_lower}" data-venue="{escaped_venue_lower}" data-year="{year}">
@@ -1406,6 +1753,162 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
         </article>
         """
 
+    # Dynamic Wireframe / Forthcoming Slots to complete the Golden Ratio 3-column grid
+    remainder = len(cat_items) % 3
+    needed_slots = (3 - remainder) % 3 if remainder != 0 else 0
+    if needed_slots > 0:
+        pipeline_file = BASE_DIR / "data" / "books_pipeline.json"
+        pipeline_items = []
+        if pipeline_file.exists():
+            try:
+                with open(pipeline_file, "r", encoding="utf-8") as pf:
+                    loaded_pipe = json.load(pf)
+                    if isinstance(loaded_pipe, list):
+                        pipeline_items = loaded_pipe
+            except Exception:
+                pass
+
+        for p_idx in range(needed_slots):
+            total_card_idx = len(cat_items) + p_idx + 1
+            p_data = pipeline_items[p_idx] if p_idx < len(pipeline_items) else {
+                "title": f"Forthcoming Monograph Vol. {total_card_idx:02d}",
+                "series": "Monograph in Preparation • Target: Springer Nature",
+                "publisher": "Academic Press Pipeline",
+                "year": "2026/2027",
+                "status": "Manuscript in Editorial Preparation",
+                "abstract": "Upcoming peer-reviewed scholarly monograph currently in editorial pipeline and peer evaluation.",
+                "authors": "Dr. Zaid Amin et al."
+            }
+            p_title = _html_mod.escape(p_data.get("title", f"Forthcoming Monograph #{total_card_idx:02d}"))
+            p_series = _html_mod.escape(p_data.get("series", "Academic Press Pipeline"))
+            p_publisher = _html_mod.escape(p_data.get("publisher", "Academic Press Pipeline"))
+            p_year = _html_mod.escape(str(p_data.get("year", "2026/2027")))
+            p_status = _html_mod.escape(p_data.get("status", "Manuscript in Preparation"))
+            p_abstract = _html_mod.escape(p_data.get("abstract", ""))
+            p_authors = _html_mod.escape(p_data.get("authors", "Dr. Zaid Amin et al."))
+            p_title_lower = p_title.lower()
+
+            shelf_cards_html += f"""
+        <article class="bokify-shelf-card bokify-card-wireframe pub-item" data-category="{cat['category_key'].lower()}" data-title="{p_title_lower}" data-venue="pipeline" data-year="{p_year}">
+          <!-- Top 3D Book Wireframe Stage -->
+          <div class="bokify-card-stage">
+            <div class="bokify-card-3d-scene">
+              <div class="bokify-card-book-3d">
+                <div class="bokify-card-cover bokify-card-wireframe-cover">
+                  <svg class="bokify-wireframe-blueprint-svg" viewBox="0 0 124 180" width="100%" height="100%" preserveAspectRatio="none">
+                    <defs>
+                      <pattern id="wf-grid-{total_card_idx}" width="12" height="12" patternUnits="userSpaceOnUse">
+                        <path d="M 12 0 L 0 0 0 12" fill="none" stroke="rgba(56, 189, 248, 0.12)" stroke-width="0.8" />
+                      </pattern>
+                      <radialGradient id="wf-glow-{total_card_idx}" cx="50%" cy="45%" r="60%">
+                        <stop offset="0%" stop-color="rgba(212, 175, 55, 0.18)" />
+                        <stop offset="50%" stop-color="rgba(56, 189, 248, 0.08)" />
+                        <stop offset="100%" stop-color="rgba(2, 8, 16, 0.95)" />
+                      </radialGradient>
+                    </defs>
+                    <rect width="124" height="180" fill="url(#wf-glow-{total_card_idx})" rx="3" />
+                    <rect width="124" height="180" fill="url(#wf-grid-{total_card_idx})" rx="3" />
+                    <rect x="5" y="5" width="114" height="170" fill="none" stroke="rgba(212, 175, 55, 0.45)" stroke-width="1.2" stroke-dasharray="4 3" rx="2" />
+                    <circle cx="62" cy="74" r="30" fill="none" stroke="rgba(56, 189, 248, 0.28)" stroke-width="0.8" stroke-dasharray="2 2" />
+                    <circle cx="62" cy="74" r="20" fill="none" stroke="rgba(212, 175, 55, 0.35)" stroke-width="1" />
+                    <path d="M62 62 L65 71 L74 74 L65 77 L62 86 L59 77 L50 74 L59 71 Z" fill="rgba(252, 224, 155, 0.85)" />
+                    <path d="M 9 9 L 17 9 M 9 9 L 9 17" fill="none" stroke="rgba(56, 189, 248, 0.6)" stroke-width="1.2" />
+                    <path d="M 115 9 L 107 9 M 115 9 L 115 17" fill="none" stroke="rgba(56, 189, 248, 0.6)" stroke-width="1.2" />
+                    <path d="M 9 171 L 17 171 M 9 171 L 9 163" fill="none" stroke="rgba(56, 189, 248, 0.6)" stroke-width="1.2" />
+                    <path d="M 115 171 L 107 171 M 115 171 L 115 163" fill="none" stroke="rgba(56, 189, 248, 0.6)" stroke-width="1.2" />
+                    <text x="62" y="24" text-anchor="middle" font-family="'Cinzel', serif" font-size="6.5" font-weight="700" fill="#94a3b8" letter-spacing="1.5">DR. ZAID AMIN</text>
+                    <text x="62" y="32" text-anchor="middle" font-family="'Inter', sans-serif" font-size="5" font-weight="600" fill="rgba(56, 189, 248, 0.75)" letter-spacing="1">MONOGRAPH PIPELINE</text>
+                    <text x="62" y="130" text-anchor="middle" font-family="'Cinzel', serif" font-size="7.5" font-weight="700" fill="#fef08a" letter-spacing="1">FORTHCOMING</text>
+                    <text x="62" y="140" text-anchor="middle" font-family="'Cinzel', serif" font-size="6.5" font-weight="600" fill="#cbd5e1" letter-spacing="0.8">SCHOLARLY WORK</text>
+                    <rect x="22" y="150" width="80" height="15" rx="7.5" fill="rgba(8, 28, 50, 0.85)" stroke="rgba(212, 175, 55, 0.5)" stroke-width="0.8" />
+                    <text x="62" y="160.5" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="5.2" font-weight="700" fill="#fce09b" letter-spacing="0.8">IN PREPARATION</text>
+                  </svg>
+                  <div class="bokify-cover-shine"></div>
+                </div>
+                <div class="bokify-card-spine">
+                  <span class="bokify-spine-micro">PIPELINE</span>
+                </div>
+                <div class="bokify-card-pages"></div>
+                <div class="bokify-card-shadow"></div>
+              </div>
+            </div>
+            <div class="bokify-card-tags">
+              <span class="bokify-publisher-chip" style="border-style: dashed; border-color: rgba(56, 189, 248, 0.4); color: #7dd3fc;">EDITORIAL PIPELINE</span>
+              <span class="bokify-year-chip" style="border-style: dashed; color: #fef08a;">{p_year}</span>
+              <span class="bokify-primary-chip" style="background: rgba(212, 175, 55, 0.12); border: 1px dashed rgba(212, 175, 55, 0.45); color: #fef08a;">✦ Future Slot</span>
+            </div>
+          </div>
+
+          <!-- Card Content -->
+          <div class="bokify-card-body">
+            <div class="bokify-card-meta-line">
+              <span class="bokify-card-idx">#{total_card_idx:02d}</span>
+              <span class="bokify-card-dot">•</span>
+              <span class="bokify-card-authors">{p_authors}</span>
+            </div>
+
+            <h4 class="bokify-card-title font-cinzel bokify-wireframe-title">{p_title}</h4>
+            <div class="bokify-card-series" style="color: #7dd3fc; font-style: italic;">{p_series}</div>
+            <div class="bokify-card-divider" style="border-bottom: 1px dashed rgba(212, 175, 55, 0.25);"></div>
+            <p class="bokify-card-excerpt">{p_abstract}</p>
+            <div class="bokify-card-doi"><span class="bokify-doi-lbl">STATUS:</span> <span class="bokify-doi-val" style="color: #fef08a; font-weight: 600;">{p_status}</span></div>
+          </div>
+
+          <!-- Card Actions (Gestalt Proximity) -->
+          <div class="bokify-card-actions">
+            <a href="mailto:zaid.amin@newinti.edu.my?subject=Advance%20Inquiry:%20{p_title}" class="pub-pill-btn pub-pill-primary bokify-btn-wireframe" title="Inquire about upcoming publication / manuscript advance">
+              {render_svg_icon_fn("email")}
+              <span>Advance Inquiry / Notice</span>
+            </a>
+            <span class="pub-pill-btn pub-pill-secondary bokify-pill-wireframe-slot" title="Reserved slot for forthcoming publication">✦ Pipeline Slot</span>
+          </div>
+        </article>
+        """
+
+    hero_cfg = {
+        "kicker": "01 / 04 • MONOGRAPHS & CHAPTERS",
+        "headline_prefix": "Explore Research",
+        "headline_highlight": "Monographs & Chapters",
+        "description": "Comprehensive academic monographs, peer-reviewed book chapters, and curated editorial volumes exploring sociotechnical systems, digital loneliness, and behavioral interventions in information diffusion. Published with leading international academic presses including Springer Nature (Contributions to Management Science, Lecture Notes in Computer Science) and Atlantis Press.",
+        "publisher_badges": ["Springer Nature", "LNCS Series", "Atlantis Press", "Scopus Indexed", "Gold Open Access"]
+    }
+    hero_json_file = BASE_DIR / "data" / "books_hero.json"
+    if hero_json_file.exists():
+        try:
+            with open(hero_json_file, "r", encoding="utf-8") as f:
+                loaded_h = json.load(f)
+                if isinstance(loaded_h, dict):
+                    hero_cfg.update(loaded_h)
+        except Exception:
+            pass
+
+    prof_file = BASE_DIR / "data" / "profile.json"
+    author_name = "Dr. Zaid Amin"
+    author_role = "Senior Lecturer • FDSIT, INTI International University"
+    if prof_file.exists():
+        try:
+            with open(prof_file, "r", encoding="utf-8") as f:
+                prof_data = json.load(f)
+                name = prof_data.get("name", "Dr. Zaid Amin")
+                author_name = name.replace(", Ph.D.", "").replace(", Ph.D", "").replace(", PhD", "").strip()
+                title = prof_data.get("title", "Senior Lecturer")
+                if "Senior Lecturer" in title:
+                    title = "Senior Lecturer"
+                aff = prof_data.get("affiliation")
+                inst = "FDSIT, INTI International University"
+                if isinstance(aff, dict):
+                    inst = f"FDSIT, {aff.get('institution', 'INTI International University')}"
+                elif isinstance(aff, str):
+                    inst = aff
+                author_role = f"{title} • {inst}"
+        except Exception:
+            pass
+
+    badges_html = "".join([
+        f'<span class="bokify-pub-pill"><span class="bokify-pub-bullet">&bull;</span> {_html_mod.escape(b)}</span>'
+        for b in hero_cfg.get("publisher_badges", [])
+    ])
+
     # Primary featured download URL
     primary_url = featured_book.get("url", "") or f"https://doi.org/{featured_book.get('doi', '')}"
 
@@ -1429,45 +1932,33 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
                   <img src="assets/images/portraits/portrait-1.png" alt="Dr. Zaid Amin" class="bokify-author-avatar" loading="lazy">
                 </picture>
                 <div class="bokify-author-text">
-                  <span class="bokify-author-name">Dr. Zaid Amin, Ph.D.</span>
-                  <span class="bokify-author-role">Senior Lecturer &bull; FDSIT, INTI International University</span>
+                  <span class="bokify-author-name">{author_name}</span>
+                  <span class="bokify-author-role">{author_role}</span>
                 </div>
               </div>
-              <span class="bokify-category-tag">01 / 04 &bull; MONOGRAPHS &amp; CHAPTERS</span>
+              <span class="bokify-category-tag">{hero_cfg.get("kicker", "01 / 04 • MONOGRAPHS & CHAPTERS")}</span>
             </div>
 
             <!-- Big Bokify Headline -->
             <h2 class="bokify-hero-title font-cinzel">
-              Meet Your Next <span class="bokify-gold-gradient">Scholarly Treatise</span>
+              {_html_mod.escape(hero_cfg.get("headline_prefix", "Meet Your Next"))} <span class="bokify-gold-gradient">{_html_mod.escape(hero_cfg.get("headline_highlight", "Scholarly Treatise"))}</span>
             </h2>
 
             <!-- Description -->
             <p class="bokify-hero-desc">
-              Comprehensive academic monographs, peer-reviewed book chapters, and curated editorial treatises exploring sociotechnical systems, digital loneliness, and behavioral interventions in information diffusion. Published with leading international academic presses including Springer Nature (Contributions to Management Science, Lecture Notes in Computer Science) and Atlantis Press.
+              {_html_mod.escape(hero_cfg.get("description", ""))}
             </p>
 
             <!-- Call to Actions -->
             <div class="bokify-hero-ctas">
               <a href="{primary_url}" target="_blank" rel="noopener" class="bokify-btn-hero-primary">
                 {render_svg_icon_fn("download")}
-                <span>Download Primary Volume (Springer)</span>
+                <span>Download Primary Volume ({primary_pub_short})</span>
               </a>
               <a href="#bokify-volumes-shelf" class="bokify-btn-hero-secondary">
-                <span>Browse All 3 Volumes</span>
+                <span>Browse All {len(cat_items)} Volumes</span>
                 <span class="bokify-arrow-down">&darr;</span>
               </a>
-            </div>
-
-            <!-- Trust / Publisher Strip (Bokify Audible/Amazon/Google Books style) -->
-            <div class="bokify-publisher-strip">
-              <span class="bokify-publisher-strip-label">PUBLISHED &amp; INDEXED WITH</span>
-              <div class="bokify-publisher-badges">
-                <span class="bokify-pub-pill"><span class="bokify-pub-bullet">&bull;</span> Springer Nature</span>
-                <span class="bokify-pub-pill"><span class="bokify-pub-bullet">&bull;</span> LNCS Series</span>
-                <span class="bokify-pub-pill"><span class="bokify-pub-bullet">&bull;</span> Atlantis Press</span>
-                <span class="bokify-pub-pill"><span class="bokify-pub-bullet">&bull;</span> Scopus Indexed</span>
-                <span class="bokify-pub-pill"><span class="bokify-pub-bullet">&bull;</span> Gold Open Access</span>
-              </div>
             </div>
           </div>
 
@@ -1479,40 +1970,48 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
               <!-- 3D Book Stage Scene -->
               <div class="bokify-stage-scene">
-                <!-- Front Standing Book (Digital Loneliness - 2024) -->
+                <!-- Front Standing Book (Primary Monograph) -->
                 <div class="bokify-standing-book bokify-standing-front">
                   <div class="bokify-book-3d">
                     <div class="bokify-book-cover">
-                      <img src="assets/images/books/book_digital_loneliness.webp" alt="Digital Loneliness in Social Media" class="bokify-cover-img" loading="lazy">
+                      <img src="{featured_img}" alt="{featured_title}" class="bokify-cover-img" loading="lazy">
                       <div class="bokify-cover-glare"></div>
                     </div>
                     <div class="bokify-book-spine">
-                      <span class="bokify-spine-text">SPRINGER NATURE &bull; 2024</span>
+                      <span class="bokify-spine-text">{featured_pub.upper()} &bull; {featured_year}</span>
                     </div>
                     <div class="bokify-book-pages"></div>
                     <div class="bokify-book-shadow"></div>
                   </div>
-                  <div class="bokify-stage-badge">★ PRIMARY MONOGRAPH (2024)</div>
+                  <div class="bokify-stage-badge">★ PRIMARY MONOGRAPH ({featured_year})</div>
                 </div>
 
-                <!-- Rear Standing Book (Attention-Based Design - 2021) -->
-                <div class="bokify-standing-book bokify-standing-rear">
+                <!-- Rear Standing Book (Companion Volume) -->
+                {f'''<div class="bokify-standing-book bokify-standing-rear">
                   <div class="bokify-book-3d">
                     <div class="bokify-book-cover">
-                      <img src="assets/images/books/book_attention_covid.webp" alt="Attention-Based Design" class="bokify-cover-img" loading="lazy">
+                      <img src="{rear_img}" alt="{rear_title}" class="bokify-cover-img" loading="lazy">
                       <div class="bokify-cover-glare"></div>
                     </div>
                     <div class="bokify-book-spine">
-                      <span class="bokify-spine-text">LNCS &bull; 2021</span>
+                      <span class="bokify-spine-text">{rear_pub.upper()} &bull; {rear_year}</span>
                     </div>
                     <div class="bokify-book-pages"></div>
                     <div class="bokify-book-shadow"></div>
                   </div>
-                </div>
+                </div>''' if rear_book else ''}
               </div>
 
               <!-- Floor Grounding Ambient Line -->
               <div class="bokify-stage-pedestal-line"></div>
+            </div>
+          </div>
+
+          <!-- Trust / Publisher Strip (Full-Width Harmonic Row 2) -->
+          <div class="bokify-publisher-strip">
+            <span class="bokify-publisher-strip-label">PUBLISHED &amp; INDEXED WITH</span>
+            <div class="bokify-publisher-badges">
+              {badges_html}
             </div>
           </div>
         </div>
@@ -1560,7 +2059,7 @@ def generate_publications_page():
             "photo_webp": "assets/images/portraits/portrait-1.webp",
             "photo_png": "assets/images/portraits/portrait-1.png",
             "photo_alt": "Dr. Zaid Amin - Books & Chapters",
-            "description": "Comprehensive academic monographs, peer-reviewed book chapters, and curated editorial treatises exploring sociotechnical systems, digital loneliness, and behavioral interventions in information diffusion. Published with leading international academic presses including Springer Nature (Contributions to Management Science, Lecture Notes in Computer Science) and Atlantis Press.",
+            "description": "Comprehensive academic monographs, peer-reviewed book chapters, and curated editorial volumes exploring sociotechnical systems, digital loneliness, and behavioral interventions in information diffusion. Published with leading international academic presses including Springer Nature (Contributions to Management Science, Lecture Notes in Computer Science) and Atlantis Press.",
             "chips": ["3 Published Volumes", "Springer Nature & Atlantis", "Scopus & LNCS Indexed"]
         },
         {
@@ -1657,7 +2156,7 @@ def generate_publications_page():
             url = pub.get("url", "").strip()
             if not url and doi:
                 url = f"https://doi.org/{doi}"
-            doi_html = f'<span class="pub-strip-doi-inline"><span class="pub-strip-doi-lbl">DOI:</span> <a href="{url}" target="_blank" rel="noopener" class="pub-strip-doi-link">{doi}</a></span>' if doi else ""
+            doi_html = f'<span class="pub-strip-doi-inline"><span class="pub-strip-doi-lbl">DOI:</span> <span class="pub-strip-doi-val">{doi}</span></span>' if doi else ""
             year = pub.get("year", "")
             escaped_title = html.escape(pub["title"])
             escaped_title_lower = html.escape(pub["title"].lower())
@@ -1759,7 +2258,7 @@ def generate_publications_page():
       <div class="pub-controls-bar">
         <div class="pub-search-wrapper">
           <span class="pub-search-icon">{render_svg_icon("search")}</span>
-          <input type="text" id="pub-search" class="pub-search-input" placeholder="Search across all 24 publications by title, venue, year, or keyword..." aria-label="Search publications">
+          <input type="text" id="pub-search" class="pub-search-input" placeholder="Search by title, venue, year..." aria-label="Search all {len(publications)} publications by title, venue, year, or keyword">
         </div>
 
         <nav class="pub-nav-pills" aria-label="Publication Categories">
@@ -1768,6 +2267,7 @@ def generate_publications_page():
           <button class="pub-nav-pill filter-btn" data-filter="journal" data-target-section="section-journals">02. Journals (10)</button>
           <button class="pub-nav-pill filter-btn" data-filter="conference" data-target-section="section-conferences">03. Conferences (6)</button>
           <button class="pub-nav-pill filter-btn" data-filter="preprint" data-target-section="section-preprints">04. Preprints (5)</button>
+          <a href="research-team.html" class="pub-nav-pill team-shortcut-pill" title="View Research Team & Supervision Roster">👥 Research Team &nearr;</a>
         </nav>
       </div>
 
@@ -1799,7 +2299,7 @@ def generate_research_page():
         cat = a.get("category", "Essays & Perspectives")
         categories[cat] = categories.get(cat, 0) + 1
 
-    cat_pills_html = f'<button class="article-cat-btn active" data-category="all">All ({len(articles)})</button>'
+    cat_pills_html = f'<button class="article-cat-btn active" data-category="all">✦ All ({len(articles)})</button>'
     for cat, count in sorted(categories.items(), key=lambda x: x[1], reverse=True):
         cat_pills_html += f'<button class="article-cat-btn" data-category="{cat}">{cat} ({count})</button>'
 
@@ -1947,7 +2447,12 @@ def generate_research_page():
           }
         });
         if (countDisplay) {
-          countDisplay.textContent = visibleCount + ' articles found';
+          if (currentSearch || currentCategory !== 'all') {
+            countDisplay.style.display = 'block';
+            countDisplay.textContent = 'Showing ' + visibleCount + ' of ' + cards.length + ' articles';
+          } else {
+            countDisplay.style.display = 'none';
+          }
         }
       }
 
@@ -1973,12 +2478,15 @@ def generate_research_page():
     html += f"""
     <!-- Subpage Content: Activity & Project -->
     <div class="subpage-container activity-page-container">
+      <!-- Subpage Content: Activity & Project (Golden Ratio Split Composition) -->
       <section class="activity-hero-section">
-        <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> Scholarly Archive &bull; Technical Initiatives</div>
-        <h1 class="activity-hero-title">Activity &amp; Project</h1>
-        <p class="activity-hero-subtitle">
-          80 scholarly essays, peer commentaries, core research pillars, and active funded grant themes.
-        </p>
+        <div class="activity-hero-content">
+          <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> Scholarly Archive &bull; Technical Initiatives</div>
+          <h1 class="activity-hero-title">Activity &amp; Project</h1>
+          <p class="activity-hero-subtitle">
+            80 scholarly essays, peer commentaries, core research pillars, and active funded grant themes.
+          </p>
+        </div>
         <div class="activity-tabs-bar">
           <button class="activity-tab-btn active" id="tab-btn-articles" onclick="switchActivityTab('articles')">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -1px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
@@ -1994,20 +2502,18 @@ def generate_research_page():
       <!-- PANE 1: Scholarly Articles & Essays -->
       <div id="activity-pane-articles">
         <div class="articles-controls">
-          <div class="articles-search-row">
-            <div class="articles-search-wrap">
-              <span class="articles-search-icon">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-              </span>
-              <input type="text" id="article-search" class="article-search-input" placeholder="Search across {len(articles)} scholarly essays by keyword, topic, or title..." autocomplete="off">
-            </div>
-            <div id="article-count-display" class="article-count-badge">
-              {len(articles)} articles
-            </div>
+          <div class="articles-search-wrap">
+            <span class="articles-search-icon">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </span>
+            <input type="text" id="article-search" class="article-search-input" placeholder="Search essays..." aria-label="Search across {len(articles)} scholarly essays by keyword, topic, or title" autocomplete="off">
           </div>
-          <div class="articles-category-pills">
+          <nav class="articles-category-pills" aria-label="Article Categories">
             {cat_pills_html}
-          </div>
+          </nav>
+        </div>
+        <div id="article-count-display" class="article-count-indicator" style="display: none; margin: -12px 0 16px 4px; font-size: 0.80rem; color: #94a3b8; font-weight: 600;">
+          Showing all {len(articles)} articles
         </div>
 
         <div class="articles-grid" id="articles-grid">
@@ -2032,6 +2538,30 @@ def generate_research_page():
     </div>
     {script_code}
     """
+    
+    html += """
+    <script>
+      function filterDistinctions(btn, cat) {
+        const dock = btn.parentElement;
+        if (dock) {
+          dock.querySelectorAll('.cv-distinction-filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        }
+        const cards = document.querySelectorAll('.cv-distinction-card');
+        cards.forEach(card => {
+          const match = (cat === 'all' || card.getAttribute('data-category') === cat);
+          if (match) {
+            card.classList.remove('is-hidden');
+            card.style.removeProperty('display');
+          } else {
+            card.classList.add('is-hidden');
+            card.style.setProperty('display', 'none', 'important');
+          }
+        });
+      }
+    </script>
+    """
+
     html += get_page_footer()
     return html
 
@@ -2043,6 +2573,33 @@ def generate_research_page():
 # ==============================================================================
 # 5. MEDIA & TALKS (talks.html)
 # ==============================================================================
+def resolve_talkshow_video_urls(v):
+    raw_url = (v.get("youtube_url") or v.get("youtube_id") or v.get("video_url") or v.get("url") or "").strip()
+    yt_id = None
+    if raw_url:
+        import re
+        if len(raw_url) == 11 and re.match(r'^[a-zA-Z0-9_-]{11}$', raw_url) and "drive" not in raw_url.lower():
+            yt_id = raw_url
+        else:
+            m = re.search(r'(?:youtube\.com/(?:watch\?v=|embed/|v/)|youtu\.be/)([a-zA-Z0-9_-]{11})', raw_url)
+            if m:
+                yt_id = m.group(1)
+                
+    if yt_id:
+        watch_url = f"https://www.youtube.com/watch?v={yt_id}"
+        embed_url = f"https://www.youtube-nocookie.com/embed/{yt_id}?autoplay=1&rel=0&modestbranding=1&enablejsapi=1"
+        return watch_url, embed_url, "youtube"
+        
+    import re
+    drive_m = re.search(r'drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)', raw_url)
+    if drive_m:
+        drive_id = drive_m.group(1)
+        watch_url = f"https://drive.google.com/file/d/{drive_id}/view?usp=sharing"
+        embed_url = f"https://drive.google.com/file/d/{drive_id}/preview"
+        return watch_url, embed_url, "drive"
+        
+    return raw_url, v.get("embed_url", raw_url), "other"
+
 def generate_talks_page():
     media_data = load_json("media_talks.json") if (DATA_DIR / "media_talks.json").exists() else {}
     talkshows = media_data.get("talkshows", [])
@@ -2076,10 +2633,10 @@ def generate_talks_page():
         v_tag = _html_mod.escape(v.get("category_tag", "Talkshow"))
         v_date = _html_mod.escape(v.get("date", ""))
         v_poster = _html_mod.escape(v.get("poster", ""))
-        v_url = _html_mod.escape(v.get("video_url", "https://youtube.com"))
+        v_watch, v_embed_raw, v_type = resolve_talkshow_video_urls(v)
+        v_url = _html_mod.escape(v_watch)
+        v_embed = _html_mod.escape(v_embed_raw)
         v_duration = _html_mod.escape(v.get("duration", "20:00"))
-
-        v_embed = _html_mod.escape(v.get("embed_url", v_url))
 
         item_html = f"""
         <button class="video-playlist-item {is_active}" 
@@ -2127,6 +2684,24 @@ def generate_talks_page():
     }
 
     # Render Category 2: Keynote Carousel Cards (Figure Reference)
+    def check_is_poster_img(img_path):
+        if not img_path:
+            return False
+        low = img_path.lower()
+        if any(kw in low for kw in ["flyer", "poster", "whatsapp", "lecture", "seminar"]):
+            return True
+        try:
+            import os
+            from PIL import Image
+            clean_path = img_path.split("?")[0].replace("/", os.sep)
+            if os.path.exists(clean_path):
+                with Image.open(clean_path) as im:
+                    w, h = im.size
+                    return h >= w * 0.9
+        except Exception:
+            pass
+        return False
+
     keynotes_cards_html = []
     keynote_icons = ["podium", "brain", "governance", "heritage", "creativity", "attention"]
     for idx, k in enumerate(keynotes):
@@ -2138,18 +2713,19 @@ def generate_talks_page():
         k_img = k.get("image", "assets/images/spotlight-smart-cities.jpg")
         icon_svg = icon_map.get(keynote_icons[idx % len(keynote_icons)], icon_map["podium"])
 
+        media_stage_html = f'''<div class="service-card-media-stage">
+            <img src="{k_img}" alt="" class="service-card-bg-glow" aria-hidden="true">
+            <img src="{k_img}" alt="{k_title}" class="service-card-fg-poster" loading="lazy" onerror="this.src=\'assets/images/spotlight-smart-cities.jpg\'">
+          </div>'''
+
         card_html = f"""
         <div class="service-portrait-card">
-          <img src="{k_img}" alt="{k_title}" class="service-card-bg-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+          {media_stage_html}
           <div class="service-card-gradient-top"></div>
-          <div class="service-card-gradient-bottom"></div>
 
-          <!-- Top Row: Frosted Tag & Icon Badge -->
+          <!-- Top Row: Frosted Tag -->
           <div class="service-card-top-row">
             <span class="service-card-tag">{k_badge}</span>
-            <div class="service-card-icon-badge" aria-hidden="true">
-              {icon_svg}
-            </div>
           </div>
 
           <!-- Bottom Content: Venue, Title, Synopsis, Capsule Button -->
@@ -2179,18 +2755,19 @@ def generate_talks_page():
         o_img = o.get("image", "assets/images/spotlight-smart-cities.jpg")
         icon_svg = icon_map.get(opinion_icons[idx % len(opinion_icons)], icon_map["philosophy"])
 
+        media_stage_html = f'''<div class="service-card-media-stage">
+            <img src="{o_img}" alt="" class="service-card-bg-glow" aria-hidden="true">
+            <img src="{o_img}" alt="{o_title}" class="service-card-fg-poster" loading="lazy" onerror="this.src=\'assets/images/spotlight-smart-cities.jpg\'">
+          </div>'''
+
         card_html = f"""
         <div class="service-portrait-card">
-          <img src="{o_img}" alt="{o_title}" class="service-card-bg-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+          {media_stage_html}
           <div class="service-card-gradient-top"></div>
-          <div class="service-card-gradient-bottom"></div>
 
-          <!-- Top Row: Frosted Tag & Icon Badge -->
+          <!-- Top Row: Frosted Tag -->
           <div class="service-card-top-row">
             <span class="service-card-tag">{o_badge}</span>
-            <div class="service-card-icon-badge" aria-hidden="true">
-              {icon_svg}
-            </div>
           </div>
 
           <!-- Bottom Content: Publication, Title, Synopsis, Capsule Button -->
@@ -2208,13 +2785,14 @@ def generate_talks_page():
 
     opinions_carousel_joined = "\n".join(opinions_cards_html)
 
+    feat_watch, feat_embed, feat_type = resolve_talkshow_video_urls(featured)
     feat_title = _html_mod.escape(featured.get("title", ""))
     feat_desc = _html_mod.escape(featured.get("description", ""))
     feat_channel = _html_mod.escape(featured.get("channel", "Broadcast Archive"))
     feat_tag = _html_mod.escape(featured.get("category_tag", "Talkshow"))
     feat_date = _html_mod.escape(featured.get("date", "2015"))
     feat_poster = _html_mod.escape(featured.get("poster", ""))
-    feat_url = _html_mod.escape(featured.get("video_url", "https://youtube.com"))
+    feat_url = _html_mod.escape(feat_watch)
     feat_duration = _html_mod.escape(featured.get("duration", "28:40"))
 
     js_controller = """
@@ -2242,7 +2820,12 @@ def generate_talks_page():
 
         function startVideoPlayer(embedUrl) {
           if (!stageIframe || !embedUrl) return;
-          stageIframe.src = embedUrl;
+          let finalEmbed = embedUrl;
+          const ytMatch = embedUrl.match(/(?:youtube[.]com\\/(?:watch[?]v=|embed\\/|v\\/)|youtu[.]be\\/)([a-zA-Z0-9_-]{11})/);
+          if (ytMatch) {
+            finalEmbed = `https://www.youtube-nocookie.com/embed/${ytMatch[1]}?autoplay=1&rel=0&modestbranding=1&enablejsapi=1`;
+          }
+          stageIframe.src = finalEmbed;
           stageIframe.classList.add("active");
           if (stageCloseBtn) stageCloseBtn.classList.add("active");
           isPlayerActive = true;
@@ -2332,7 +2915,13 @@ def generate_talks_page():
             const url = activeItem && activeItem.dataset.url ? activeItem.dataset.url : window.location.href;
             if (navigator.clipboard) {
               navigator.clipboard.writeText(url).then(() => {
-                alert("Video link copied to clipboard!");
+                const origTitle = shareBtn.getAttribute("title") || "Share Broadcast Link";
+                shareBtn.setAttribute("title", "Link Copied!");
+                shareBtn.classList.add("copied");
+                setTimeout(() => {
+                  shareBtn.setAttribute("title", origTitle);
+                  shareBtn.classList.remove("copied");
+                }, 2000);
               }).catch(() => {
                 prompt("Copy video link:", url);
               });
@@ -2342,28 +2931,203 @@ def generate_talks_page():
           });
         }
 
-        // 2. Category 2 & 3 Carousel Track Controllers
-        function setupCarousel(prevId, nextId, trackId) {
+        // 2. Category 2 & 3 Smooth Auto-Advancing Carousel Controllers (Golden Ratio & Gestalt Harmonic Alignment)
+        function setupCarousel(prevId, nextId, trackId, paginationId, intervalMs) {
           const pBtn = document.getElementById(prevId);
           const nBtn = document.getElementById(nextId);
           const track = document.getElementById(trackId);
-          if (!track || !pBtn || !nBtn) return;
+          const pag = paginationId ? document.getElementById(paginationId) : null;
+          if (!track) return;
 
-          nBtn.addEventListener("click", function () {
-            const card = track.querySelector(".service-portrait-card");
-            const shift = card ? card.offsetWidth + 20 : 320;
-            track.scrollBy({ left: shift, behavior: "smooth" });
+          const cards = Array.from(track.querySelectorAll(".service-portrait-card"));
+          if (cards.length === 0) return;
+
+          const delay = intervalMs || 3800;
+          let timer = null;
+          let isHovered = false;
+          let activeIndex = 0;
+
+          // Render Gestalt Pagination Indicator Dots
+          if (pag) {
+            pag.innerHTML = "";
+            cards.forEach(function (card, idx) {
+              const dot = document.createElement("button");
+              dot.className = "service-carousel-dot" + (idx === 0 ? " active" : "");
+              dot.type = "button";
+              dot.setAttribute("aria-label", "Go to slide " + (idx + 1));
+              dot.addEventListener("click", function () {
+                scrollToIndex(idx);
+                resetTimer();
+              });
+              pag.appendChild(dot);
+            });
+          }
+
+          function getShift() {
+            const card = cards[0];
+            return card ? card.offsetWidth + 20 : 375;
+          }
+
+          function updateActiveDot(idx) {
+            if (!pag) return;
+            const dots = pag.querySelectorAll(".service-carousel-dot");
+            dots.forEach(function (d, i) {
+              d.classList.toggle("active", i === idx);
+            });
+          }
+
+          function scrollToIndex(idx) {
+            if (idx < 0) idx = 0;
+            if (idx >= cards.length) idx = cards.length - 1;
+            const targetCard = cards[idx];
+            if (targetCard) {
+              const left = targetCard.offsetLeft - track.offsetLeft;
+              track.scrollTo({ left: left, behavior: "smooth" });
+              activeIndex = idx;
+              updateActiveDot(activeIndex);
+            }
+          }
+
+          function slideNext() {
+            const shift = getShift();
+            const maxScroll = track.scrollWidth - track.clientWidth;
+            // When reaching or near the end, loop smoothly and elegantly back to the beginning
+            if (track.scrollLeft >= maxScroll - 20) {
+              track.scrollTo({ left: 0, behavior: "smooth" });
+              activeIndex = 0;
+              updateActiveDot(0);
+            } else {
+              track.scrollBy({ left: shift, behavior: "smooth" });
+              activeIndex = Math.min(cards.length - 1, activeIndex + 1);
+              updateActiveDot(activeIndex);
+            }
+          }
+
+          function slidePrev() {
+            const shift = getShift();
+            // When at or near the start, loop smoothly to the end
+            if (track.scrollLeft <= 20) {
+              const maxScroll = track.scrollWidth - track.clientWidth;
+              track.scrollTo({ left: maxScroll, behavior: "smooth" });
+              activeIndex = cards.length - 1;
+              updateActiveDot(activeIndex);
+            } else {
+              track.scrollBy({ left: -shift, behavior: "smooth" });
+              activeIndex = Math.max(0, activeIndex - 1);
+              updateActiveDot(activeIndex);
+            }
+          }
+
+          if (nBtn) {
+            nBtn.addEventListener("click", function () {
+              slideNext();
+              resetTimer();
+            });
+          }
+
+          if (pBtn) {
+            pBtn.addEventListener("click", function () {
+              slidePrev();
+              resetTimer();
+            });
+          }
+
+          // Active indicator sync on scroll
+          let scrollDebounce = null;
+          track.addEventListener("scroll", function () {
+            clearTimeout(scrollDebounce);
+            scrollDebounce = setTimeout(function () {
+              const trackLeft = track.scrollLeft;
+              const shift = getShift();
+              const currentIdx = Math.round(trackLeft / shift);
+              const clamped = Math.max(0, Math.min(cards.length - 1, currentIdx));
+              if (clamped !== activeIndex) {
+                activeIndex = clamped;
+                updateActiveDot(activeIndex);
+              }
+            }, 60);
+          }, { passive: true });
+
+          // Smooth Automatic Sliding Cycle (Cadence)
+          function startTimer() {
+            stopTimer();
+            timer = setInterval(function () {
+              if (!isHovered && !document.hidden) {
+                slideNext();
+              }
+            }, delay);
+          }
+
+          function stopTimer() {
+            if (timer) {
+              clearInterval(timer);
+              timer = null;
+            }
+          }
+
+          function resetTimer() {
+            stopTimer();
+            startTimer();
+          }
+
+          // Pause on mouse hover (Figure-Ground Law: Focus on card interaction)
+          const hoverElements = [track, pBtn, nBtn, pag].filter(Boolean);
+          hoverElements.forEach(function (el) {
+            el.addEventListener("mouseenter", function () {
+              isHovered = true;
+              stopTimer();
+            });
+            el.addEventListener("mouseleave", function () {
+              isHovered = false;
+              startTimer();
+            });
           });
 
-          pBtn.addEventListener("click", function () {
-            const card = track.querySelector(".service-portrait-card");
-            const shift = card ? card.offsetWidth + 20 : 320;
-            track.scrollBy({ left: -shift, behavior: "smooth" });
+          // Pause on mobile touch interactions
+          track.addEventListener("touchstart", function () {
+            isHovered = true;
+            stopTimer();
+          }, { passive: true });
+          track.addEventListener("touchend", function () {
+            isHovered = false;
+            resetTimer();
+          }, { passive: true });
+
+          // Visibility State Handler
+          document.addEventListener("visibilitychange", function () {
+            if (document.hidden) {
+              stopTimer();
+            } else if (!isHovered) {
+              startTimer();
+            }
           });
+
+          startTimer();
         }
 
-        setupCarousel("keynote-prev-btn", "keynote-next-btn", "keynote-track");
-        setupCarousel("opinion-prev-btn", "opinion-next-btn", "opinion-track");
+        setupCarousel("keynote-prev-btn", "keynote-next-btn", "keynote-track", "keynote-pagination", 3800);
+        setupCarousel("opinion-prev-btn", "opinion-next-btn", "opinion-track", "opinion-pagination", 4200);
+
+        // Automatically ensure any portrait/flyer image fits responsively with ambient glow
+        document.querySelectorAll(".service-card-media-stage").forEach(function(stage) {
+          const fg = stage.querySelector(".service-card-fg-poster, .service-card-bg-img");
+          if (!fg) return;
+          function autoFit() {
+            if (fg.naturalHeight >= fg.naturalWidth * 0.9) {
+              stage.classList.add("service-card-poster-mode");
+              if (!stage.querySelector(".service-card-bg-glow")) {
+                const glow = document.createElement("img");
+                glow.src = fg.src;
+                glow.className = "service-card-bg-glow";
+                glow.setAttribute("aria-hidden", "true");
+                stage.prepend(glow);
+              }
+              fg.className = "service-card-fg-poster";
+            }
+          }
+          if (fg.complete && fg.naturalWidth > 0) autoFit();
+          else fg.addEventListener("load", autoFit);
+        });
       });
     </script>
     """
@@ -2371,15 +3135,17 @@ def generate_talks_page():
     body_html = f"""
     <main class="talks-page-container" id="main-content">
 
-      <!-- Hero Header -->
+      <!-- Hero Header (Golden Ratio Split Composition) -->
       <section class="talks-hero-section">
-        <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> Audio-Visual Archive &bull; Keynote Engagements</div>
-        <h1 class="talks-hero-title">Media &amp; Talks</h1>
-        <p class="talks-hero-subtitle">
-          Televised broadcasts, keynote addresses, and critical philosophical treatises.
-        </p>
+        <div class="talks-hero-content">
+          <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> Audio-Visual Archive &bull; Keynote Engagements</div>
+          <h1 class="talks-hero-title">Media &amp; Talks</h1>
+          <p class="talks-hero-subtitle">
+            Televised broadcasts, keynote addresses, and critical philosophical treatises.
+          </p>
+        </div>
         <div class="talks-nav-bar" aria-label="Media &amp; Talks Navigation">
-          <a href="#category-talkshow" class="talks-nav-pill active">01. Talkshow (Video Gallery)</a>
+          <a href="#category-talkshow" class="talks-nav-pill active">01. Talk Show</a>
           <a href="#category-keynotes" class="talks-nav-pill">02. Keynote, Guest &amp; Visiting Speaker</a>
           <a href="#category-opinion" class="talks-nav-pill">03. Opinion</a>
         </div>
@@ -2391,16 +3157,23 @@ def generate_talks_page():
       <section class="talks-category-section" id="category-talkshow">
         <div class="talks-category-header">
           <div class="talks-category-title-group">
-            <h2>01. Talkshow (Video Gallery)</h2>
+            <h2>Talk Show</h2>
             <p class="talks-category-subtitle">Televised Broadcasts &bull; Expert Commentary &bull; Studio Discourse</p>
           </div>
-          <a href="https://drive.google.com/drive/folders/1KB6A1C3cubX5q3CwWNZDAOYdjIwtkqzm" target="_blank" rel="noopener" class="yt-header-pill" title="Full Google Drive Video Repository">
-            <svg width="15" height="11" viewBox="0 0 68 48" style="vertical-align: -1px;">
-              <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ffffff"/>
-              <path d="M 45,24 27,14 27,34" fill="#cc0000"/>
-            </svg>
-            <span>SUBSCRIBE</span>
-          </a>
+
+          <!-- Header Actions: Watch Broadcast & Share (Golden Ratio Composition Alignment) -->
+          <div class="talks-header-actions">
+            <a id="stage-watch-link" href="{feat_url}" target="_blank" rel="noopener" class="talks-watch-header-btn" title="Watch Broadcast on YouTube">
+              <span class="talks-watch-icon-box">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </span>
+              <span class="talks-watch-btn-text">Watch Broadcast</span>
+              <span class="talks-watch-arrow">&nearr;</span>
+            </a>
+            <button class="talks-share-header-btn" id="stage-share-btn" title="Share Broadcast Link" type="button" aria-label="Share Broadcast Link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            </button>
+          </div>
         </div>
 
         <div class="video-gallery-grid">
@@ -2414,7 +3187,7 @@ def generate_talks_page():
             <div class="video-stage-gradient-bottom"></div>
 
             <!-- Embedded Video Iframe for Instant In-Page Playback -->
-            <iframe id="stage-video-iframe" src="" title="{feat_title}" class="video-stage-iframe" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <iframe id="stage-video-iframe" src="" title="{feat_title}" class="video-stage-iframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
             <button class="video-stage-close-player" id="stage-close-player" title="Close Video Player" type="button" aria-label="Close Video Player">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
               <span>Close Player</span>
@@ -2437,28 +3210,18 @@ def generate_talks_page():
               </svg>
             </button>
 
-            <!-- Bottom content & controls -->
+            <!-- Bottom content on stage (Clean breathing room without overlay buttons) -->
             <div class="video-stage-content">
               <div class="video-stage-badge-row">
                 <span class="video-stage-badge" id="stage-badge">{feat_tag}</span>
                 <span class="video-stage-date" id="stage-date">{feat_date}</span>
+                <span class="video-stage-duration-tag" id="stage-duration">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>{feat_duration}</span>
+                </span>
               </div>
               <h3 class="video-stage-title" id="stage-title">{feat_title}</h3>
               <p class="video-stage-description" id="stage-description">{feat_desc}</p>
-              
-              <div class="video-stage-action-bar">
-                <a id="stage-watch-link" href="{feat_url}" target="_blank" rel="noopener" class="video-stage-watch-link">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                  <span>WATCH BROADCAST</span>
-                </a>
-                <button class="video-stage-btn-icon" id="stage-share-btn" title="Share Video Link" type="button" aria-label="Share Video">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-                </button>
-                <div class="video-stage-duration" id="stage-duration">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  <span>{feat_duration}</span>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -2489,20 +3252,7 @@ def generate_talks_page():
           <div class="talks-invite-img-frame">
             <img src="assets/images/portraits/portrait-1.webp" alt="Dr. Zaid Amin" loading="lazy">
           </div>
-          <div class="talks-invite-social-row">
-            <a href="https://scholar.google.com/citations?user=k37uIeQAAAAJ" target="_blank" rel="noopener" title="Google Scholar">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            </a>
-            <a href="https://orcid.org/0000-0002-3686-2489" target="_blank" rel="noopener" title="ORCID">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 8v8M12 8v8M15 8v8"/></svg>
-            </a>
-            <a href="https://github.com/zaeedh" target="_blank" rel="noopener" title="GitHub">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener" title="LinkedIn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            </a>
-          </div>
+
         </div>
 
         <div class="talks-invite-content">
@@ -2554,6 +3304,7 @@ def generate_talks_page():
         <div class="service-carousel-track" id="keynote-track">
           {keynotes_carousel_joined}
         </div>
+        <div class="service-carousel-pagination" id="keynote-pagination" aria-label="Keynote slide indicators"></div>
       </section>
 
       <!-- ====================================================================
@@ -2585,6 +3336,7 @@ def generate_talks_page():
         <div class="service-carousel-track" id="opinion-track">
           {opinions_carousel_joined}
         </div>
+        <div class="service-carousel-pagination" id="opinion-pagination" aria-label="Opinion slide indicators"></div>
       </section>
 
     </main>
@@ -2638,19 +3390,93 @@ def generate_supervision_page():
       </div>
     </div>
     """
+    
+    html += """
+    <script>
+      function filterDistinctions(btn, cat) {
+        const dock = btn.parentElement;
+        if (dock) {
+          dock.querySelectorAll('.cv-distinction-filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        }
+        const cards = document.querySelectorAll('.cv-distinction-card');
+        cards.forEach(card => {
+          const match = (cat === 'all' || card.getAttribute('data-category') === cat);
+          if (match) {
+            card.classList.remove('is-hidden');
+            card.style.removeProperty('display');
+          } else {
+            card.classList.add('is-hidden');
+            card.style.setProperty('display', 'none', 'important');
+          }
+        });
+      }
+    </script>
+    """
+
     html += get_page_footer()
     return html
 
 # ==============================================================================
 # 5. CURRICULUM VITAE (cv.html)
 # ==============================================================================
+
+def get_distinction_meta(item):
+    badge = (item.get('badge') or '').lower()
+    cat = (item.get('category') or '').lower()
+    title = (item.get('title') or '').lower()
+
+    if any(k in badge or k in cat or k in title for k in ['grant', 'bima', 'gpk', 'kemenristekdikti']):
+        return "cyan", "grants", "Competitive Research Grant"
+    elif any(k in badge or k in cat or k in title for k in ['chairman', 'examiner', 'fellow', 'scholarship', 'apac', 'leadership', 'governance']):
+        return "indigo", "governance", "Governance & Fellowship"
+    else:
+        return "gold", "awards", "Honors & Prestigious Award"
+
+def get_distinction_emblem(theme):
+    if theme == "gold":
+        return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7v4h10v-4h-2c-.55 0-1-.45-1-1v-2.34"></path><path d="M6 4h12v7a6 6 0 0 1-12 0V4z"></path></svg>'
+    elif theme == "cyan":
+        return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="21"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="12" y1="3" x2="12" y2="8"></line><path d="M4 21V10a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v11"></path><path d="M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"></path></svg>'
+    else:
+        return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path><circle cx="12" cy="12" r="4"></circle></svg>'
+
 def generate_cv_page():
     cv = load_json("cv_data.json")
     exec_prof = cv["executive_profile"]
     publications = load_json("publications.json")
 
+    photo_src = exec_prof.get("photo") or "assets/images/portraits/portrait-1.webp"
+    photo_kicker = exec_prof.get("kicker") or "Ph.D. • UKM 2024"
+    cv_pdf_url = exec_prof.get("cv_pdf_url") or "assets/docs/dr-zaid-amin-cv-july-2026.pdf"
+    edition_label = exec_prof.get("edition_label") or "July 2026 Academic Edition • 1.1 MB"
+
+    orcid_data = exec_prof.get('researcher_ids', {}).get('orcid', {})
+    orcid_id = orcid_data.get('id', '0000-0001-5223-3058') if isinstance(orcid_data, dict) else str(orcid_data)
+    orcid_url = orcid_data.get('url', f'https://orcid.org/{orcid_id}') if isinstance(orcid_data, dict) else f'https://orcid.org/{orcid_id}'
+
+    scopus_data = exec_prof.get('researcher_ids', {}).get('scopus', {})
+    scopus_id = scopus_data.get('id', '57221839785') if isinstance(scopus_data, dict) else str(scopus_data)
+    scopus_url = scopus_data.get('url', f'https://www.scopus.com/authid/detail.uri?authorId={scopus_id}') if isinstance(scopus_data, dict) else f'https://www.scopus.com/authid/detail.uri?authorId={scopus_id}'
+
+    wos_data = exec_prof.get('researcher_ids', {}).get('wos', {})
+    wos_id = wos_data.get('id', '2411586') if isinstance(wos_data, dict) else str(wos_data)
+    wos_url = wos_data.get('url', f'https://www.webofscience.com/wos/author/record/{wos_id}') if isinstance(wos_data, dict) else f'https://www.webofscience.com/wos/author/record/{wos_id}'
+
+    scholar_data = exec_prof.get('researcher_ids', {}).get('scholar', {})
+    scholar_url = scholar_data.get('url', 'https://scholar.google.com/citations?user=aWTSEXwAAAAJ&hl=id') if isinstance(scholar_data, dict) else str(scholar_data)
+
+    permit_data = exec_prof.get('official_docs', {}).get('teaching_permit', {})
+    permit_url = permit_data.get('url', 'https://tinyurl.com/5n7yjtht') if isinstance(permit_data, dict) else str(permit_data)
+
+    mqa_data = exec_prof.get('official_docs', {}).get('mqa_cv', {})
+    mqa_url = mqa_data.get('url', 'https://tinyurl.com/4ehzmxyn') if isinstance(mqa_data, dict) else str(mqa_data)
+
+    portfolio_data = exec_prof.get('official_docs', {}).get('teaching_portfolio', {})
+    portfolio_url = portfolio_data.get('url', 'https://tinyurl.com/yjd89mcj') if isinstance(portfolio_data, dict) else str(portfolio_data)
+
     html = get_html_head(
-        "Achievement & Curriculum Vitae | Dr. Zaid Amin, Ph.D. | zaidamin.org",
+        "Achievement & Curriculum Vitae | Dr. Zaid Amin | zaidamin.org",
         "Official Curriculum Vitae and Achievements of Dr. Zaid Amin, Senior Lecturer & QS Deputy Director at INTI International University, Ph.D. from UKM (Tesis Cemerlang & GOT)."
     )
     html += get_page_header("cv")
@@ -2659,17 +3485,71 @@ def generate_cv_page():
     <!-- Subpage Content: Achievement & Curriculum Vitae (July 2026 Official Resume) -->
     <div class="cv-page-container">
       
-      <!-- Executive Hero Profile Card -->
+      <!-- Executive Hero Profile Card (Golden Ratio Composition with Left Portrait & Right Download Cluster) -->
       <section class="cv-hero-card">
         <div class="cv-hero-top">
-          <div style="flex: 1 1 540px;">
-            <div class="cv-section-tag" style="margin-bottom: 6px;">CURRICULUM VITAE &bull; ACADEMIC PORTFOLIO</div>
-            <h1 class="cv-hero-name font-cinzel">{exec_prof['name']}</h1>
-            <div class="cv-hero-role font-cinzel">
-              {exec_prof['role_title']}
+          <!-- LEFT: Official Academic Portrait Frame -->
+          <div class="cv-portrait-col">
+            <div class="cv-portrait-frame">
+              <picture>
+                <source srcset="{photo_src}" type="image/webp">
+                <img src="{photo_src.replace('.webp', '.png')}" alt="{exec_prof['name']}" class="cv-portrait-img" width="144" height="174" loading="eager">
+              </picture>
+              <div class="cv-portrait-glare"></div>
             </div>
-            <div class="cv-hero-affiliation">
-              {exec_prof['institution']}
+            <div class="cv-portrait-kicker">
+              <span class="cv-portrait-dot"></span>
+              <span>{photo_kicker}</span>
+            </div>
+          </div>
+
+          <!-- CENTER / MAIN: Academic Credentials & Details -->
+          <div class="cv-hero-main-block">
+            <div class="cv-hero-header-row">
+              <div class="cv-hero-headings">
+                <div class="cv-section-tag" style="margin-bottom: 6px;">CURRICULUM VITAE &bull; ACADEMIC PORTFOLIO</div>
+                <h1 class="cv-hero-name font-cinzel">{exec_prof['name']}</h1>
+                <div class="cv-hero-role font-cinzel">
+                  {exec_prof['role_title']}
+                </div>
+                <div class="cv-hero-affiliation">
+                  {exec_prof['institution']}
+                </div>
+              </div>
+
+              <!-- RIGHT: Rounded Rectangle ("round tangle") Download & Print Cluster -->
+              <div class="cv-hero-cta-cluster">
+                <!-- Primary Download Button (Rounded Rectangle / Capsule) -->
+                <a href="{cv_pdf_url}" download="Dr_Zaid_Amin_Curriculum_Vitae_July_2026.pdf" target="_blank" rel="noopener" class="cv-round-btn-download" title="Download Verified Academic CV">
+                  <span class="cv-round-icon-wrap">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="7 10 12 15 17 10"></polyline>
+                      <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                  </span>
+                  <span class="cv-round-labels">
+                    <span class="cv-round-kicker">OFFICIAL VERIFIED CV</span>
+                    <span class="cv-round-title">Download CV (PDF)</span>
+                  </span>
+                </a>
+
+                <!-- Secondary Action: Print / Save as PDF (Golden Ratio 32px height) -->
+                <button type="button" onclick="window.print()" class="cv-round-btn-secondary" title="Print or save one-page verified academic portfolio">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <rect x="6" y="14" width="12" height="8"></rect>
+                  </svg>
+                  <span>PRINT / SAVE AS PDF</span>
+                </button>
+
+                <!-- Status Verification Pill (Centered on Vertical Axis) -->
+                <div class="cv-edition-tag">
+                  <span class="cv-edition-status-dot"></span>
+                  <span>{edition_label}</span>
+                </div>
+              </div>
             </div>
 
             <div class="cv-hero-badges">
@@ -2687,42 +3567,59 @@ def generate_cv_page():
               </span>
             </div>
           </div>
-
-          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
-            <button onclick="window.print()" class="cv-action-pill cv-action-pill-primary" title="Print or save verified PDF copy">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-              Print / Save as PDF
-            </button>
-            <span style="font-size: 0.76rem; color: var(--text-muted); font-family: monospace;">July 2026 Academic Edition</span>
-          </div>
         </div>
 
         <div class="cv-hero-summary">
           {exec_prof['summary']}
         </div>
 
-        <div class="cv-hero-actions">
-          <a href="{exec_prof['researcher_ids']['orcid']['url']}" target="_blank" rel="noopener" class="cv-action-pill" title="ORCID Verified Record">
-            {render_svg_icon('orcid')} <span>ORCID: {exec_prof['researcher_ids']['orcid']['id']}</span>
-          </a>
-          <a href="{exec_prof['researcher_ids']['scopus']['url']}" target="_blank" rel="noopener" class="cv-action-pill" title="Scopus Author Profile">
-            {render_svg_icon('external')} <span>Scopus ID: {exec_prof['researcher_ids']['scopus']['id']}</span>
-          </a>
-          <a href="{exec_prof['researcher_ids']['wos']['url']}" target="_blank" rel="noopener" class="cv-action-pill" title="Web of Science Profile">
-            {render_svg_icon('external')} <span>WoS ResearcherID: {exec_prof['researcher_ids']['wos']['id']}</span>
-          </a>
-          <a href="{exec_prof['researcher_ids']['scholar']['url']}" target="_blank" rel="noopener" class="cv-action-pill" title="Google Scholar Profile">
-            {render_svg_icon('scholar')} <span>Google Scholar</span>
-          </a>
-          <a href="mailto:{exec_prof['contact']['email']}" class="cv-action-pill" title="Institutional Email">
-            {render_svg_icon('email')} <span>{exec_prof['contact']['email']}</span>
-          </a>
-          <a href="{exec_prof['official_docs']['teaching_permit']['url']}" target="_blank" rel="noopener" class="cv-action-pill" title="Higher Education Teaching Permit">
-            {render_svg_icon('external')} <span>Teaching Permit</span>
-          </a>
-          <a href="{exec_prof['official_docs']['mqa_cv']['url']}" target="_blank" rel="noopener" class="cv-action-pill" title="MQA CV Accreditation Document">
-            {render_svg_icon('external')} <span>MQA Official CV</span>
-          </a>
+        <!-- Two-Tier Harmonious Sub-Layer Dock (Gestalt Common Region & Reduced Visual Noise) -->
+        <div class="cv-hero-sublayer">
+          <!-- Tier 1: Scholarly & Citation Identifiers -->
+          <div class="cv-sublayer-row">
+            <div class="cv-sublayer-kicker cv-sublayer-kicker-gold">
+              <span class="cv-sublayer-dot cv-sublayer-dot-gold"></span>
+              <span>RESEARCH INDICES</span>
+            </div>
+            <div class="cv-sublayer-pills">
+              <a href="{orcid_url}" target="_blank" rel="noopener" class="cv-sublayer-pill" title="ORCID Verified Record: {orcid_id}">
+                {render_svg_icon('orcid')} <span><span class="cv-sublayer-dim">ORCID:</span> <strong class="cv-sublayer-val">{orcid_id}</strong></span>
+              </a>
+              <a href="{scopus_url}" target="_blank" rel="noopener" class="cv-sublayer-pill" title="Scopus Author Profile: {scopus_id}">
+                {render_svg_icon('external')} <span><span class="cv-sublayer-dim">Scopus:</span> <strong class="cv-sublayer-val">{scopus_id}</strong></span>
+              </a>
+              <a href="{wos_url}" target="_blank" rel="noopener" class="cv-sublayer-pill" title="Web of Science Profile: {wos_id}">
+                {render_svg_icon('external')} <span><span class="cv-sublayer-dim">WoS:</span> <strong class="cv-sublayer-val">{wos_id}</strong></span>
+              </a>
+              <a href="{scholar_url}" target="_blank" rel="noopener" class="cv-sublayer-pill" title="Google Scholar Verified Citation Profile">
+                {render_svg_icon('scholar')} <span>Google Scholar</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="cv-sublayer-separator"></div>
+
+          <!-- Tier 2: Institutional & Official Accreditation -->
+          <div class="cv-sublayer-row">
+            <div class="cv-sublayer-kicker cv-sublayer-kicker-cyan">
+              <span class="cv-sublayer-dot cv-sublayer-dot-cyan"></span>
+              <span>VERIFICATION</span>
+            </div>
+            <div class="cv-sublayer-pills">
+              <a href="mailto:{exec_prof['contact']['email']}" class="cv-sublayer-pill" title="Official Institutional Academic Email">
+                {render_svg_icon('email')} <span>{exec_prof['contact']['email']}</span>
+              </a>
+              <a href="{permit_url}" target="_blank" rel="noopener" class="cv-sublayer-pill" title="Higher Education Teaching Permit (Ministry of Higher Education)">
+                {render_svg_icon('external')} <span>Teaching Permit</span>
+              </a>
+              <a href="{mqa_url}" target="_blank" rel="noopener" class="cv-sublayer-pill" title="MQA CV for Higher Education Accreditation">
+                {render_svg_icon('external')} <span>MQA Official CV</span>
+              </a>
+              <a href="{portfolio_url}" target="_blank" rel="noopener" class="cv-sublayer-pill" title="Teaching, Supervision & Examination Portfolio">
+                {render_svg_icon('external')} <span>Teaching Portfolio</span>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -2740,38 +3637,81 @@ def generate_cv_page():
         <a href="#references" class="cv-jump-link">References</a>
       </nav>
 
-      <!-- SECTION 1: PRESTIGIOUS HONORS, AWARDS & RESEARCH GRANTS -->
-      <section id="honors" class="cv-section">
+            <!-- SECTION 1: PRESTIGIOUS HONORS, AWARDS & RESEARCH GRANTS -->
+      <section id="honors" class="cv-section cv-honors-section">
         <div id="achievements"></div>
         <div class="cv-section-tag">01 / HONORS &amp; DISTINCTIONS</div>
         <div class="cv-section-title-wrap">
           <h2 class="cv-section-title">Prestigious Honors, Awards &amp; Research Grants</h2>
           <span class="cv-section-count">{len(cv['achievements_and_grants'])} Distinctions</span>
         </div>
+
+        <!-- Gestalt Category Filter Dock (Reduced Visual Noise & Instant Hook) -->
+        <div class="cv-distinction-filter-dock" role="tablist" aria-label="Filter Honors & Distinctions">
+          <button type="button" class="cv-distinction-filter-btn active" onclick="filterDistinctions(this, 'all')">
+            <span>All Distinctions</span>
+            <span class="cv-filter-count">{len(cv['achievements_and_grants'])}</span>
+          </button>
+          <button type="button" class="cv-distinction-filter-btn" onclick="filterDistinctions(this, 'awards')">
+            <span class="cv-filter-dot cv-filter-dot-gold"></span>
+            <span>Honors &amp; Awards</span>
+            <span class="cv-filter-count">6</span>
+          </button>
+          <button type="button" class="cv-distinction-filter-btn" onclick="filterDistinctions(this, 'grants')">
+            <span class="cv-filter-dot cv-filter-dot-cyan"></span>
+            <span>Competitive Grants</span>
+            <span class="cv-filter-count">5</span>
+          </button>
+          <button type="button" class="cv-distinction-filter-btn" onclick="filterDistinctions(this, 'governance')">
+            <span class="cv-filter-dot cv-filter-dot-indigo"></span>
+            <span>Governance &amp; Chairs</span>
+            <span class="cv-filter-count">5</span>
+          </button>
+        </div>
     """
 
-    for item in cv['achievements_and_grants']:
+    for idx, item in enumerate(cv['achievements_and_grants'], 1):
+        theme, cat_group, cat_label = get_distinction_meta(item)
+        emblem_svg = get_distinction_emblem(theme)
+
         is_spotlight = item.get('featured')
         highlight_cls = "is-highlight is-spotlight" if is_spotlight else ("is-highlight" if item.get('highlight') else "")
-        spotlight_badge = '<span class="cv-type-pill" style="background:rgba(212,175,55,0.22); color:#fef08a; border:1px solid #d4af37; font-weight:800; letter-spacing:0.04em;">★ SPOTLIGHT</span>' if is_spotlight else ""
-        url_link = f'<a href="{item["url"]}" target="_blank" rel="noopener" class="cv-type-pill" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">{render_svg_icon("external")} Verification Link</a>' if item.get('url') else ''
-        img_tag = f'<div style="margin:12px 0; border-radius:10px; overflow:hidden; max-height:160px; border:1px solid rgba(212,175,55,0.3);"><img src="{item["image"]}" alt="{item["title"]}" style="width:100%; height:100%; object-fit:cover;"></div>' if (is_spotlight and item.get('image')) else ""
+        spotlight_badge = '<span class="cv-spotlight-pill">★ SPOTLIGHT</span>' if is_spotlight else ""
+        
+        item_url = item.get('url')
+        ext_icon = render_svg_icon("external")
+        url_link = f'''<a href="{item_url}" target="_blank" rel="noopener" class="cv-verification-link" title="Verify Official Distinction Record">
+          <span>Verification Link</span>
+          {ext_icon}
+        </a>''' if item_url else ''
+        
+        img_src = item.get('image')
+        img_title = item.get('title')
+        img_tag = f'<div class="cv-distinction-media"><img src="{img_src}" alt="{img_title}" loading="lazy"></div>' if (is_spotlight and img_src) else ""
+
         html += f"""
-        <div class="cv-card {highlight_cls}">
-          <div class="cv-card-top">
-            <div class="cv-card-heading">
-              <h3 class="cv-card-title">{item['title']}</h3>
-              <div class="cv-card-sub">{item['organization']}</div>
-            </div>
-            <div class="cv-card-badges">
-              {spotlight_badge}
+        <div class="cv-card cv-distinction-card {highlight_cls}" data-category="{cat_group}">
+          <!-- Metadata & Action Row (Gestalt Proximity: Index + Year + Tier on Left, CTA on Right) -->
+          <div class="cv-distinction-top">
+            <div class="cv-distinction-tags">
+              <span class="pub-strip-idx">#{idx:02d}</span>
+              <span class="cv-type-pill cv-tier-{theme}">{item['badge']}</span>
               <span class="cv-year-pill">{item['year']}</span>
-              <span class="cv-type-pill">{item['badge']}</span>
-              {url_link}
+              {spotlight_badge}
             </div>
+            {url_link}
           </div>
+
+          <!-- Title & Institution Hierarchy (Pure Minimal Typography) -->
+          <div class="cv-distinction-header">
+            <h3 class="cv-card-title cv-distinction-title">{item['title']}</h3>
+            <div class="cv-card-sub cv-distinction-org">{item['organization']}</div>
+          </div>
+
           {img_tag}
-          <div class="cv-card-body">
+
+          <!-- Soft Elegant Narrative Body -->
+          <div class="cv-card-body cv-distinction-body">
             {item['details']}
           </div>
         </div>
@@ -2789,7 +3729,7 @@ def generate_cv_page():
         </div>
     """
 
-    for item in cv['academic_leadership']:
+    for idx, item in enumerate(cv['academic_leadership'], 1):
         html += f"""
         <div class="cv-card is-highlight">
           <div class="cv-card-top">
@@ -2798,8 +3738,9 @@ def generate_cv_page():
               <div class="cv-card-sub">{item['institution']}</div>
             </div>
             <div class="cv-card-badges">
-              <span class="cv-year-pill">{item['period']}</span>
+              <span class="pub-strip-idx">#{idx:02d}</span>
               <span class="cv-type-pill">{item['scope']}</span>
+              <span class="cv-year-pill">{item['period']}</span>
             </div>
           </div>
           <div class="cv-card-body">
@@ -2820,7 +3761,7 @@ def generate_cv_page():
         </div>
     """
 
-    for item in cv['work_experience']:
+    for idx, item in enumerate(cv['work_experience'], 1):
         html += f"""
         <div class="cv-card">
           <div class="cv-card-top">
@@ -2829,6 +3770,7 @@ def generate_cv_page():
               <div class="cv-card-sub">{item['institution']}</div>
             </div>
             <div class="cv-card-badges">
+              <span class="pub-strip-idx">#{idx:02d}</span>
               <span class="cv-year-pill">{item['period']}</span>
             </div>
           </div>
@@ -2850,7 +3792,7 @@ def generate_cv_page():
         </div>
     """
 
-    for item in cv['education']:
+    for idx, item in enumerate(cv['education'], 1):
         html += f"""
         <div class="cv-card">
           <div class="cv-card-top">
@@ -2859,8 +3801,9 @@ def generate_cv_page():
               <div class="cv-card-sub">{item['institution']} &bull; {item['country']}</div>
             </div>
             <div class="cv-card-badges">
-              <span class="cv-year-pill">{item['period']}</span>
+              <span class="pub-strip-idx">#{idx:02d}</span>
               <span class="cv-type-pill">{item['distinction']}</span>
+              <span class="cv-year-pill">{item['period']}</span>
             </div>
           </div>
           <div class="cv-card-body">
@@ -2890,11 +3833,11 @@ def generate_cv_page():
         elif isinstance(loaded_talks, list):
             talks_items = loaded_talks
 
-    for item in talks_items:
+    for idx, item in enumerate(talks_items, 1):
         is_spotlight = item.get('featured')
         highlight_cls = "is-highlight is-spotlight" if is_spotlight else "is-highlight"
-        spotlight_badge = '<span class="cv-type-pill" style="background:rgba(212,175,55,0.22); color:#fef08a; border:1px solid #d4af37; font-weight:800; letter-spacing:0.04em;">★ SPOTLIGHT</span>' if is_spotlight else ""
-        url_link = f'<a href="{item["url"]}" target="_blank" rel="noopener" class="cv-type-pill" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">{render_svg_icon("external")} Verification Link</a>' if item.get('url') else ''
+        spotlight_badge = '<span class="cv-spotlight-pill">★ SPOTLIGHT</span>' if is_spotlight else ""
+        url_link = f'<a href="{item["url"]}" target="_blank" rel="noopener" class="cv-verification-link" title="Verify Official Keynote Record"><span>Verification Link</span> {render_svg_icon("external")}</a>' if item.get('url') else ''
         img_tag = f'<div style="margin:12px 0; border-radius:10px; overflow:hidden; max-height:160px; border:1px solid rgba(212,175,55,0.3);"><img src="{item["image"]}" alt="{item.get("title", item.get("event", ""))}" style="width:100%; height:100%; object-fit:cover;"></div>' if (is_spotlight and item.get('image')) else ""
         title_str = item.get('title') or item.get('event')
         sub_str = item.get('event') if item.get('title') else item.get('venue', '')
@@ -2910,9 +3853,10 @@ def generate_cv_page():
               <div class="cv-card-sub">{sub_str}</div>
             </div>
             <div class="cv-card-badges">
-              {spotlight_badge}
-              <span class="cv-year-pill">{year_str}</span>
+              <span class="pub-strip-idx">#{idx:02d}</span>
               <span class="cv-type-pill">{role_str}</span>
+              <span class="cv-year-pill">{year_str}</span>
+              {spotlight_badge}
               {url_link}
             </div>
           </div>
@@ -2940,22 +3884,27 @@ def generate_cv_page():
         </p>
 
         <h3 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 14px;">Verified High-Impact Q1 Journals</h3>
-        <div class="cv-grid-2col" style="margin-bottom: 24px;">
+        <div class="cv-journals-grid">
     """
 
     for jnl in cv['peer_review_and_editorial']['verified_journals']:
         html += f"""
-          <div class="cv-mini-card">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-              <strong style="color: #ffffff; font-size: 0.98rem;">{jnl['name']}</strong>
-              <span class="cv-type-pill">{jnl['tier']}</span>
+          <article class="cv-journal-card">
+            <div class="cv-journal-kicker-row">
+              <span class="cv-journal-tier font-cinzel">{jnl['tier']}</span>
+              <span class="cv-journal-issn">ISSN: {jnl['issn']}</span>
             </div>
-            <div style="font-size: 0.85rem; color: var(--brand-blue); margin-top: 4px;">{jnl['publisher']}</div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 0.78rem; color: var(--text-muted);">
-              <span>ISSN: {jnl['issn']}</span>
-              <a href="{jnl['url']}" target="_blank" rel="noopener" style="color: var(--brand-gold); text-decoration: underline; font-weight: 700;">Verified Record &rarr;</a>
+            <div class="cv-journal-body">
+              <h4 class="cv-journal-title font-cinzel">{jnl['name']}</h4>
+              <div class="cv-journal-publisher">{jnl['publisher']}</div>
             </div>
-          </div>
+            <div class="cv-journal-footer">
+              <a href="{jnl['url']}" target="_blank" rel="noopener" class="cv-journal-link">
+                <span>Verified Record</span>
+                <span class="link-arrow">&rarr;</span>
+              </a>
+            </div>
+          </article>
         """
 
     html += f"""
@@ -3139,6 +4088,30 @@ def generate_cv_page():
     </div>
     """
 
+    
+    html += """
+    <script>
+      function filterDistinctions(btn, cat) {
+        const dock = btn.parentElement;
+        if (dock) {
+          dock.querySelectorAll('.cv-distinction-filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        }
+        const cards = document.querySelectorAll('.cv-distinction-card');
+        cards.forEach(card => {
+          const match = (cat === 'all' || card.getAttribute('data-category') === cat);
+          if (match) {
+            card.classList.remove('is-hidden');
+            card.style.removeProperty('display');
+          } else {
+            card.classList.add('is-hidden');
+            card.style.setProperty('display', 'none', 'important');
+          }
+        });
+      }
+    </script>
+    """
+
     html += get_page_footer()
     return html
 
@@ -3194,13 +4167,57 @@ def generate_article_reader_page():
             document.getElementById('reader-cat').textContent = '✦ ' + (article.category || 'Article');
             document.getElementById('reader-time').textContent = article.reading_time || '3 min read';
             document.getElementById('reader-date').textContent = 'Published • ' + article.date;
-            document.getElementById('reader-body').innerHTML = article.content_html || ('<p>' + article.excerpt + '</p>');
+            const bodyElem = document.getElementById('reader-body');
+            bodyElem.innerHTML = article.content_html || ('<p>' + article.excerpt + '</p>');
+
+            // 1. Clean up any missing, corrupt, or 404 images dynamically
+            bodyElem.querySelectorAll('img').forEach(function(img) {
+              img.addEventListener('error', function() {
+                var parentA = this.closest('a');
+                var parentBox = this.closest('.separator') || this.closest('.tr-caption-container') || this.parentElement;
+                if (parentA) parentA.remove();
+                else this.remove();
+                if (parentBox && !parentBox.textContent.trim() && parentBox.querySelectorAll('img').length === 0) {
+                  parentBox.remove();
+                }
+              });
+            });
+
+            // 2. Client-side deduplication against Hero image
+            if (article.image) {
+              var heroFileName = article.image.split('/').pop().split('?')[0];
+              bodyElem.querySelectorAll('img').forEach(function(img) {
+                var src = img.getAttribute('src') || '';
+                if (src === article.image || (heroFileName && heroFileName.length > 5 && src.includes(heroFileName))) {
+                  var parentA = img.closest('a');
+                  var parentBox = img.closest('.separator') || img.closest('.tr-caption-container') || img.parentElement;
+                  if (parentA) parentA.remove();
+                  else img.remove();
+                  if (parentBox && !parentBox.textContent.trim() && parentBox.querySelectorAll('img').length === 0) {
+                    parentBox.remove();
+                  }
+                }
+              });
+            }
+
+            // 3. Dynamic guarantee against inline white highlights or backgrounds
+            bodyElem.querySelectorAll('*').forEach(function(el) {
+              if (el.style.backgroundColor && el.style.backgroundColor !== 'transparent') {
+                el.style.backgroundColor = 'transparent';
+              }
+              if (el.style.background && !el.style.background.includes('gradient')) {
+                el.style.background = 'transparent';
+              }
+            });
 
             if (article.image) {
               const imgWrap = document.getElementById('reader-hero-img-wrap');
               const img = document.getElementById('reader-hero-img');
               img.src = article.image;
               img.alt = article.title;
+              img.onerror = function() {
+                imgWrap.style.display = 'none';
+              };
               imgWrap.style.display = 'block';
             }
 
@@ -3260,7 +4277,7 @@ def generate_article_reader_page():
               <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="article-author-avatar">
             </picture>
             <div>
-              <div class="article-author-name">Dr. Zaid Amin, Ph.D.</div>
+              <div class="article-author-name">Dr. Zaid Amin</div>
               <div class="article-pub-date" id="reader-date">Published &bull; 2026</div>
             </div>
           </div>
@@ -3293,10 +4310,10 @@ def generate_article_reader_page():
       <div class="article-author-bio-card">
         <picture>
           <source srcset="assets/images/dr-zaid.webp" type="image/webp">
-          <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin, Ph.D." class="article-bio-avatar">
+          <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="article-bio-avatar">
         </picture>
         <div>
-          <h3 class="article-bio-name font-cinzel">Zaid Amin, Ph.D.</h3>
+          <h3 class="article-bio-name font-cinzel">Dr. Zaid Amin</h3>
           <div class="article-bio-role">Senior Lecturer &bull; INTI International University, Malaysia</div>
           <p class="article-bio-text">
             Computational researcher in Human-Computer Interaction (HCI), Behavior &amp; Social Computing, Digital Ethics, and AI Governance. Ph.D. in Computer Science from Universiti Kebangsaan Malaysia (UKM).
@@ -3316,6 +4333,235 @@ def generate_article_reader_page():
     html += get_page_footer(show_visitor_stats=False)
     return html
 
+
+# ==============================================================================
+# RESEARCH TEAM & SUPERVISION ROSTER (research-team.html)
+# ==============================================================================
+def generate_team_page():
+    team_data = load_json("team.json")
+    page_head = get_html_head(
+        "Research Team & Supervision Roster | Dr. Zaid Amin",
+        "Doctoral candidates, Master's by Research scholars, and international research collaborators under the academic supervision and mentorship of Dr. Zaid Amin."
+    )
+    page_header = get_page_header("team")
+
+    # Render PhD cards
+    phd_cards = ""
+    for s in team_data.get("phd_students", []):
+        phd_cards += f"""
+          <article class="team-card" data-category="phd">
+            <div class="team-avatar-frame">
+              <img src="{s['photo']}" alt="{s['name']}" class="team-avatar-img" onerror="this.src='assets/images/avatar.svg'">
+            </div>
+            <div class="team-info-stack">
+              <div class="team-card-header-row">
+                <h3 class="team-person-name font-cinzel">{s['name']}</h3>
+                <span class="team-badge font-cinzel">{s.get('badge', 'Doctoral Research')}</span>
+              </div>
+              <div class="team-role-period">
+                <span class="team-role">{s['role']}</span>, <span class="team-period">{s['period']}</span>
+              </div>
+              <div class="team-thesis-text">
+                <span class="thesis-label">Thesis title:</span> &ldquo;{s['thesis_title']}&rdquo;
+              </div>
+            </div>
+          </article>
+        """
+
+    # Render Master cards
+    master_cards = ""
+    for s in team_data.get("master_students", []):
+        master_cards += f"""
+          <article class="team-card" data-category="master">
+            <div class="team-avatar-frame">
+              <img src="{s['photo']}" alt="{s['name']}" class="team-avatar-img" onerror="this.src='assets/images/avatar.svg'">
+            </div>
+            <div class="team-info-stack">
+              <div class="team-card-header-row">
+                <h3 class="team-person-name font-cinzel">{s['name']}</h3>
+                <span class="team-badge font-cinzel">{s.get('badge', "Postgraduate Scholar")}</span>
+              </div>
+              <div class="team-role-period">
+                <span class="team-role">{s['role']}</span>, <span class="team-period">{s['period']}</span>
+              </div>
+              <div class="team-thesis-text">
+                <span class="thesis-label">Thesis title:</span> &ldquo;{s['thesis_title']}&rdquo;
+              </div>
+            </div>
+          </article>
+        """
+
+    # Render Collaborator cards
+    collab_cards = ""
+    for c in team_data.get("collaborators", []):
+        collab_cards += f"""
+          <article class="team-card team-card-collab" data-category="collaborator">
+            <div class="team-avatar-frame">
+              <img src="{c['photo']}" alt="{c['name']}" class="team-avatar-img" onerror="this.src='assets/images/avatar.svg'">
+            </div>
+            <div class="team-info-stack">
+              <div class="team-card-header-row">
+                <h3 class="team-person-name font-cinzel">{c['name']}</h3>
+                <span class="team-badge font-cinzel">{c.get('badge', 'Academic Collaborator')}</span>
+              </div>
+              <div class="team-role-period">
+                <span class="team-role">{c['role']}</span> &bull; <span class="team-period">{c['period']}</span>
+              </div>
+              <div class="team-inst-text">{c.get('institution', '')}</div>
+              <div class="team-thesis-text">
+                <span class="thesis-label">Collaboration Focus:</span> &ldquo;{c['focus']}&rdquo;
+              </div>
+            </div>
+          </article>
+        """
+
+    team_script = """
+    <script>
+      function filterTeam(cat, btn) {
+        document.querySelectorAll('.team-filter-pill').forEach(function(b) {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        if (btn) {
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+        }
+        var sections = document.querySelectorAll('.team-category-section');
+        sections.forEach(function(sec) {
+          if (cat === 'all' || sec.getAttribute('data-category') === cat) {
+            sec.style.display = 'block';
+          } else {
+            sec.style.display = 'none';
+          }
+        });
+      }
+
+      window.addEventListener('DOMContentLoaded', function() {
+        var hash = window.location.hash;
+        if (hash === '#cat-phd') {
+          var btn = document.querySelector('.team-filter-pill[onclick*="phd"]');
+          if (btn) filterTeam('phd', btn);
+        } else if (hash === '#cat-master') {
+          var btn = document.querySelector('.team-filter-pill[onclick*="master"]');
+          if (btn) filterTeam('master', btn);
+        } else if (hash === '#cat-collaborator') {
+          var btn = document.querySelector('.team-filter-pill[onclick*="collaborator"]');
+          if (btn) filterTeam('collaborator', btn);
+        }
+      });
+    </script>
+    """
+
+    meta = team_data.get("page_meta", {})
+    eyebrow_text = meta.get("eyebrow", "✦ Academic Mentorship • Laboratory Scholars • Global Network").replace('✦', '').strip()
+    title_text = meta.get("title", "Research Team")
+    subtitle_text = meta.get("subtitle", "Doctoral candidates, Master's by Research scholars, and international research collaborators under the academic supervision and mentorship of Dr. Zaid Amin.")
+
+    statement_text = team_data.get("statement", "").strip()
+    statement_html = ""
+    if statement_text:
+        statement_html = f"""
+      <div style="margin: -10px auto 32px auto; max-width: 960px; padding: 18px 26px; background: rgba(8, 20, 36, 0.65); border: 1px solid rgba(56, 189, 248, 0.22); border-left: 3px solid #d4af37; border-radius: 12px; backdrop-filter: blur(8px); text-align: center;">
+        <p style="font-family: var(--font-cormorant); font-size: 1.15rem; font-style: italic; color: #bae6fd; margin: 0; line-height: 1.6;">
+          &ldquo;{statement_text}&rdquo;
+        </p>
+      </div>
+        """
+
+    phd_count = len(team_data.get("phd_students", []))
+    master_count = len(team_data.get("master_students", []))
+    collab_count = len(team_data.get("collaborators", []))
+    total_count = phd_count + master_count + collab_count
+
+    cta = team_data.get("cta_banner", {})
+    cta_eyebrow = cta.get("eyebrow", "✦ Postgraduate Admissions & Supervision")
+    cta_title = cta.get("title", "Interested in Joining Our Research Lab?")
+    cta_desc = cta.get("description", "Dr. Zaid Amin is actively seeking self-driven Ph.D. and Master's candidates interested in Human-Computer Interaction, AI Governance, Multimodal Foundation Models, and Cognitive Attention Systems.")
+    cta_p_text = cta.get("primary_btn_text", "View Open Topics & How to Apply →")
+    cta_p_url = cta.get("primary_btn_url", "prospective-students.html")
+    cta_s_text = cta.get("secondary_btn_text", "Submit Research Inquiry ↗")
+    cta_s_url = cta.get("secondary_btn_url", "mailto:zaid.amin@newinti.edu.my")
+
+    body_html = f"""
+    <!-- Subpage Content: Research Team & Supervision Roster -->
+    <div class="subpage-container team-page-container">
+      <div class="pub-gallery-hero team-hero-header">
+        <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> {eyebrow_text}</div>
+        <h1 class="pub-gallery-title font-cinzel">{title_text}</h1>
+        <p class="pub-gallery-subtitle">
+          {subtitle_text}
+        </p>
+      </div>
+
+      {statement_html}
+
+      <!-- Category Filter Controls -->
+      <div class="team-nav-pills" role="tablist" aria-label="Team Categories">
+        <button class="team-filter-pill active" onclick="filterTeam('all', this)" role="tab" aria-selected="true">✦ All Members ({total_count})</button>
+        <button class="team-filter-pill" onclick="filterTeam('phd', this)" role="tab" aria-selected="false">01. PhD Students ({phd_count})</button>
+        <button class="team-filter-pill" onclick="filterTeam('master', this)" role="tab" aria-selected="false">02. Master Students ({master_count})</button>
+        <button class="team-filter-pill" onclick="filterTeam('collaborator', this)" role="tab" aria-selected="false">03. Collaborators ({collab_count})</button>
+      </div>
+
+      <!-- SECTION 1: PhD Students -->
+      <section class="team-category-section" id="cat-phd" data-category="phd">
+        <div class="team-category-header">
+          <div class="team-category-title-wrap">
+            <span class="team-category-num font-cinzel">01</span>
+            <h2 class="team-category-title font-cinzel">PhD Students</h2>
+          </div>
+          <span class="team-category-count font-cinzel">{phd_count} Doctoral Candidates</span>
+        </div>
+        <div class="team-grid-2col">
+          {phd_cards}
+        </div>
+      </section>
+
+      <!-- SECTION 2: Master Students -->
+      <section class="team-category-section" id="cat-master" data-category="master">
+        <div class="team-category-header">
+          <div class="team-category-title-wrap">
+            <span class="team-category-num font-cinzel">02</span>
+            <h2 class="team-category-title font-cinzel">Master Students</h2>
+          </div>
+          <span class="team-category-count font-cinzel">{master_count} Master's by Research Scholars</span>
+        </div>
+        <div class="team-grid-2col">
+          {master_cards}
+        </div>
+      </section>
+
+      <!-- SECTION 3: Collaborators -->
+      <section class="team-category-section" id="cat-collaborator" data-category="collaborator">
+        <div class="team-category-header">
+          <div class="team-category-title-wrap">
+            <span class="team-category-num font-cinzel">03</span>
+            <h2 class="team-category-title font-cinzel">Collaborators</h2>
+          </div>
+          <span class="team-category-count font-cinzel">{collab_count} International Scholarly Partners</span>
+        </div>
+        <div class="team-grid-2col">
+          {collab_cards}
+        </div>
+      </section>
+
+      <!-- Supervision & Laboratory Inquiries CTA -->
+      <div class="team-cta-banner">
+        <div class="team-cta-content">
+          <span class="team-cta-eyebrow font-cinzel">{cta_eyebrow}</span>
+          <h3 class="team-cta-title font-cinzel">{cta_title}</h3>
+          <p class="team-cta-desc">{cta_desc}</p>
+          <div class="team-cta-btns">
+            <a href="{cta_p_url}" class="team-cta-btn-primary">{cta_p_text}</a>
+            <a href="{cta_s_url}" class="team-cta-btn-secondary">{cta_s_text}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    """
+
+    return page_head + page_header + body_html + team_script + get_page_footer()
+
 def build_all():
     print("Compiling Golden Ratio Standard Academic Site for zaidamin.org...")
     DIST_DIR.mkdir(parents=True, exist_ok=True)
@@ -3327,6 +4573,8 @@ def build_all():
         "article.html": generate_article_reader_page(),
         "research.html": generate_research_page(),
         "prospective-students.html": generate_supervision_page(),
+        "research-team.html": generate_team_page(),
+        "team.html": generate_team_page(),
         "talks.html": generate_talks_page(),
         "cv.html": generate_cv_page()
     }
@@ -3361,6 +4609,8 @@ def build_all():
         "article": pages["article.html"],
         "research": pages["research.html"],
         "prospective-students": pages["prospective-students.html"],
+        "research-team": pages["research-team.html"],
+        "team": pages["research-team.html"],
         "talks": pages["talks.html"],
         "cv": pages["cv.html"]
     }
