@@ -1,0 +1,25 @@
+[
+  {
+    "id": "forthcoming-monograph-01",
+    "title": "Autonomous Systems & The Proxy Trap",
+    "series": "Monograph in Preparation • Target: Springer Nature",
+    "publisher": "Academic Press Pipeline",
+    "year": "2026",
+    "status": "Manuscript in Editorial Preparation",
+    "abstract": "Investigating foundational alignment dynamics, proxy reward vulnerabilities, and behavioral governance in agentic AI and multi-agent autonomous decision systems.",
+    "authors": "Dr. Zaid Amin et al.",
+    "is_pipeline": true
+  },
+  {
+    "id": "forthcoming-monograph-02",
+    "title": "Computational Ethics & Behavioral Cybernetics",
+    "series": "Peer-Reviewed Chapter • In Editorial Review",
+    "publisher": "LNCS / Atlantis Series",
+    "year": "2027",
+    "status": "Proposal in Editorial Pipeline",
+    "abstract": "Empirical formulations of algorithmic nudge mechanisms, human-computer behavioral dynamics, and ethical intervention architectures in digital information ecosystems.",
+    "authors": "Dr. Zaid Amin et al.",
+    "is_pipeline": true
+  }
+]
+
