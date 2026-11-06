@@ -9,7 +9,8 @@
       "year": "2026",
       "date": "MARCH | 2026",
       "location": "Institute of Visual Informatics (IVI), UKM - Kuala Lumpur, Malaysia",
-      "abstract": "AI & Social Media Training for Master’s Students in Communication Studies, Bina Darma University (UBD), at Universiti Kebangsaan Malaysia (UKM)"
+      "abstract": "AI & Social Media Training for Master’s Students in Communication Studies, Bina Darma University (UBD), at Universiti Kebangsaan Malaysia (UKM)",
+      "featured": false
     },
     {
       "id": "keynote-1793869451640",
@@ -41,7 +42,8 @@
       "year": "2026",
       "date": "MARCH | 2026",
       "location": "School of Sciences, Woxsen University, Hyderabad, India",
-      "abstract": "Delivering international plenary keynote on multimodal foundation models, civic compliance modeling, and human-trusted cybernetic architectures."
+      "abstract": "Delivering international plenary keynote on multimodal foundation models, civic compliance modeling, and human-trusted cybernetic architectures.",
+      "featured": false
     },
     {
       "id": "keynote-autonomous-systems-2026",
