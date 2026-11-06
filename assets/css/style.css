@@ -7819,7 +7819,7 @@ a {
   background: linear-gradient(145deg, rgba(8, 26, 48, 0.94) 0%, rgba(3, 12, 24, 0.98) 100%);
   border: 1px solid rgba(212, 175, 55, 0.28);
   border-radius: 26px;
-  padding: 36px 42px;
+  padding: 34px 40px 24px 40px;
   margin-bottom: 22px;
   box-shadow: 0 24px 60px rgba(0, 8, 20, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   overflow: hidden;
@@ -7840,7 +7840,8 @@ a {
 .bokify-hero-grid {
   display: grid;
   grid-template-columns: 1.618fr 1fr;
-  gap: 48px;
+  column-gap: 44px;
+  row-gap: 18px;
   align-items: center;
   position: relative;
   z-index: 2;
@@ -7932,27 +7933,27 @@ a {
 .bokify-hero-desc {
   font-size: 0.95rem;
   color: #cbd5e1;
-  line-height: 1.7;
-  margin: 0 0 24px;
+  line-height: 1.65;
+  margin: 0 0 18px;
   max-width: 620px;
 }
 
-/* Hero CTAs */
+/* Hero CTAs (Harmonized Proximity with Strip) */
 .bokify-hero-ctas {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 28px;
+  gap: 12px;
+  margin-bottom: 0;
 }
 
 .bokify-btn-hero-primary {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  padding: 12px 24px;
+  padding: 11px 22px;
   border-radius: 9999px;
-  font-size: 0.825rem;
+  font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -7976,9 +7977,9 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 11px 22px;
+  padding: 10px 20px;
   border-radius: 9999px;
-  font-size: 0.8rem;
+  font-size: 0.79rem;
   font-weight: 700;
   letter-spacing: 0.03em;
   background: rgba(6, 20, 38, 0.7);
@@ -8006,9 +8007,9 @@ a {
   display: flex !important;
   flex-direction: column !important;
   gap: 8px !important;
-  padding-top: 18px !important;
-  margin-top: 12px !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding-top: 16px !important;
+  margin-top: 0 !important;
+  border-top: 1px solid rgba(212, 175, 55, 0.22) !important;
   width: 100% !important;
 }
 
@@ -8016,7 +8017,7 @@ a {
   font-size: 0.68rem !important;
   font-weight: 800 !important;
   letter-spacing: 0.14em !important;
-  color: #64748b !important;
+  color: #94a3b8 !important;
   text-transform: uppercase !important;
 }
 
@@ -8650,10 +8651,11 @@ a {
 @media (max-width: 1100px) {
   .bokify-hero-grid {
     grid-template-columns: 1fr;
-    gap: 36px;
+    row-gap: 20px;
+    column-gap: 28px;
   }
   .bokify-hero-stage {
-    min-height: 300px;
+    min-height: 280px;
   }
   .bokify-cards-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -13393,44 +13395,15 @@ h1.cv-hero-name,
   transform: translateY(-2px);
 }
 
-/* Global Footer Links Styling */
+/* Site Footer (Centered Alignment Restored) */
 .golden-footer {
   display: flex !important;
-  justify-content: space-between !important;
+  justify-content: center !important;
   align-items: center !important;
-  flex-wrap: wrap !important;
-  gap: 12px !important;
-  padding: 8px 0 12px 0 !important;
-  margin: 0 !important;
+  text-align: center !important;
+  width: 100% !important;
+  padding: 6px 0 10px 0 !important;
+  margin: 0 auto !important;
   font-size: 0.78rem !important;
   color: var(--text-muted) !important;
-}
-.footer-nav-links {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 10px !important;
-  flex-wrap: wrap !important;
-  color: rgba(255, 255, 255, 0.25) !important;
-  font-size: 0.76rem !important;
-}
-.golden-footer-link {
-  color: #94a3b8 !important;
-  text-decoration: none !important;
-  font-size: 0.78rem !important;
-  transition: color 0.2s ease, transform 0.2s ease !important;
-  display: inline-flex !important;
-  align-items: center !important;
-}
-.golden-footer-link:hover {
-  color: var(--gold-accent, #d4af37) !important;
-}
-@media (max-width: 768px) {
-  .golden-footer {
-    flex-direction: column !important;
-    text-align: center !important;
-    gap: 8px !important;
-  }
-  .footer-nav-links {
-    justify-content: center !important;
-  }
 }
