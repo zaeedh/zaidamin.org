@@ -501,14 +501,19 @@
         </button>
             </div>
 
-            <!-- Bottom Navigation Arrows -->
+            <!-- Bottom Navigation Arrows & Counter (Golden Ratio Harmonic Proportions) -->
             <div class="video-playlist-footer">
-              <button class="video-nav-arrow-btn" id="video-prev-btn" title="Previous Video" type="button" aria-label="Previous Video">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"/></svg>
-              </button>
-              <button class="video-nav-arrow-btn" id="video-next-btn" title="Next Video" type="button" aria-label="Next Video">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
-              </button>
+              <div class="video-playlist-counter" id="video-playlist-counter" aria-label="Episode index">
+                <span class="counter-curr">01</span><span class="counter-sep">/</span><span class="counter-total">07</span>
+              </div>
+              <div class="video-nav-arrows-group">
+                <button class="video-nav-arrow-btn" id="video-prev-btn" title="Previous Video" type="button" aria-label="Previous Video">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <button class="video-nav-arrow-btn" id="video-next-btn" title="Next Video" type="button" aria-label="Next Video">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -844,14 +849,52 @@
           isPlayerActive = false;
         }
 
+        // Category 1: Talk Show Vertical Carousel Slider (Top-to-Down Auto-Advance)
+        let playlistTimer = null;
+        let isPlaylistHovered = false;
+        const PLAYLIST_INTERVAL = 4800; // Calibrated 4.8s golden interval
+
+        function updatePlaylistCounter(idx) {
+          const counter = document.getElementById("video-playlist-counter");
+          if (!counter) return;
+          const currSpan = counter.querySelector(".counter-curr");
+          if (currSpan) {
+            currSpan.textContent = String(idx + 1).padStart(2, "0");
+          }
+        }
+
+        function scrollPlaylistItemIntoView(item) {
+          const stack = document.getElementById("video-playlist-stack");
+          if (!stack || !item) return;
+          const itemTop = item.offsetTop - stack.offsetTop;
+          const targetScroll = Math.max(0, Math.min(
+            stack.scrollHeight - stack.clientHeight,
+            itemTop - (stack.clientHeight - item.offsetHeight) / 2
+          ));
+          stack.scrollTo({ top: targetScroll, behavior: "smooth" });
+        }
+
         function activateVideo(index, playNow) {
           if (index < 0 || index >= playlistItems.length) return;
           activeIndex = index;
 
-          playlistItems.forEach((item, i) => {
+          // Soft luxury crossfade effect on stage
+          const stageContent = document.querySelector(".video-stage-content");
+          if (stageContent && stagePoster) {
+            stageContent.classList.add("stage-fading");
+            stagePoster.classList.add("stage-fading");
+            setTimeout(function () {
+              stageContent.classList.remove("stage-fading");
+              stagePoster.classList.remove("stage-fading");
+            }, 220);
+          }
+
+          playlistItems.forEach(function (item, i) {
             if (i === index) {
               item.classList.add("active");
-              try { item.scrollIntoView({ behavior: "smooth", block: "nearest" }); } catch(err){}
+              scrollPlaylistItemIntoView(item);
+              updatePlaylistCounter(index);
+
               const d = item.dataset;
               if (stagePoster) stagePoster.src = d.poster;
               if (stageTitle) stageTitle.textContent = d.title;
@@ -873,10 +916,43 @@
           });
         }
 
-        playlistItems.forEach((item, idx) => {
+        function slidePlaylistNext() {
+          const nextIdx = (activeIndex + 1) % playlistItems.length;
+          activateVideo(nextIdx);
+        }
+
+        function slidePlaylistPrev() {
+          const prevIdx = (activeIndex - 1 + playlistItems.length) % playlistItems.length;
+          activateVideo(prevIdx);
+        }
+
+        function startPlaylistTimer() {
+          stopPlaylistTimer();
+          playlistTimer = setInterval(function () {
+            // Only auto-advance if not hovered, document visible, and NOT actively playing video
+            if (!isPlaylistHovered && !document.hidden && !isPlayerActive) {
+              slidePlaylistNext();
+            }
+          }, PLAYLIST_INTERVAL);
+        }
+
+        function stopPlaylistTimer() {
+          if (playlistTimer) {
+            clearInterval(playlistTimer);
+            playlistTimer = null;
+          }
+        }
+
+        function resetPlaylistTimer() {
+          stopPlaylistTimer();
+          startPlaylistTimer();
+        }
+
+        playlistItems.forEach(function (item, idx) {
           item.addEventListener("click", function (e) {
             e.preventDefault();
             activateVideo(idx);
+            resetPlaylistTimer();
           });
         });
 
@@ -885,16 +961,60 @@
 
         if (prevBtn) {
           prevBtn.addEventListener("click", function () {
-            const nextIdx = (activeIndex - 1 + playlistItems.length) % playlistItems.length;
-            activateVideo(nextIdx);
+            slidePlaylistPrev();
+            resetPlaylistTimer();
           });
         }
         if (nextBtn) {
           nextBtn.addEventListener("click", function () {
-            const nextIdx = (activeIndex + 1) % playlistItems.length;
-            activateVideo(nextIdx);
+            slidePlaylistNext();
+            resetPlaylistTimer();
           });
         }
+
+        // Pause on mouse hover (Figure-Ground Law: Focus on card interaction)
+        const playlistElements = [
+          document.getElementById("video-playlist-stack"),
+          document.querySelector(".video-playlist-container"),
+          document.getElementById("video-stage-frame")
+        ].filter(Boolean);
+
+        playlistElements.forEach(function (el) {
+          el.addEventListener("mouseenter", function () {
+            isPlaylistHovered = true;
+            stopPlaylistTimer();
+          });
+          el.addEventListener("mouseleave", function () {
+            isPlaylistHovered = false;
+            startPlaylistTimer();
+          });
+        });
+
+        // Touch gestures on mobile
+        const playlistStack = document.getElementById("video-playlist-stack");
+        if (playlistStack) {
+          playlistStack.addEventListener("touchstart", function () {
+            isPlaylistHovered = true;
+            stopPlaylistTimer();
+          }, { passive: true });
+          playlistStack.addEventListener("touchend", function () {
+            isPlaylistHovered = false;
+            resetPlaylistTimer();
+          }, { passive: true });
+        }
+
+        // Page visibility
+        document.addEventListener("visibilitychange", function () {
+          if (document.hidden) {
+            stopPlaylistTimer();
+          } else if (!isPlaylistHovered && !isPlayerActive) {
+            startPlaylistTimer();
+          }
+        });
+
+        // Initialize playlist counter and autoplay
+        updatePlaylistCounter(0);
+        startPlaylistTimer();
 
         if (stagePlayBtn) {
           stagePlayBtn.addEventListener("click", function () {
@@ -1142,12 +1262,9 @@
     <!-- Footer Divider Line (Above Footer Section) -->
     <hr class="golden-footer-divider">
 
-    <!-- Site Footer -->
+    <!-- Site Footer (Restored Clean Center Alignment) -->
     <footer class="golden-footer">
-      <div class="footer-left">
-        Copyright &copy; 2008 - 2026 Zaid Amin. All Rights Reserved.
-      </div>
-      <div class="footer-nav-links"><a href="research-team.html" class="golden-footer-link"><span style="opacity:0.8;margin-right:4px;">👥</span>Research Team</a> &bull; <a href="prospective-students.html" class="golden-footer-link"><span style="opacity:0.8;margin-right:4px;">🎓</span>Supervision Lab</a> &bull; <a href="research.html#articles" class="golden-footer-link"><span style="opacity:0.8;margin-right:4px;">📑</span>Activity & Essays</a> &bull; <a href="publications.html" class="golden-footer-link"><span style="opacity:0.8;margin-right:4px;">📚</span>Publications</a> &bull; <a href="mailto:zaid.amin@newinti.edu.my" class="golden-footer-link"><span style="opacity:0.8;margin-right:4px;">✉️</span>Contact Inquiry</a></div>
+      Copyright &copy; 2008 - 2026 Zaid Amin. All Rights Reserved.
     </footer>
 
     <!-- Floating Scroll to Top Direct Button -->
