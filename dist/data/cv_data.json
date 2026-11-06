@@ -1,7 +1,7 @@
 {
   "executive_profile": {
-    "name": "Dr. Zaid Amin, Ph.D.",
-    "role_title": "Senior Lecturer & Researcher • QS Deputy Director FDSIT",
+    "name": "Dr. Zaid Amin",
+    "role_title": "Senior Lecturer & Researcher",
     "institution": "Faculty of Data Science and Information Technology (FDSIT), INTI International University, Malaysia",
     "distinction": "Ph.D. in Computer Science (UKM) • Tesis Cemerlang (Excellent Thesis) & Graduate on Time (GOT)",
     "summary": "Accomplished Senior Lecturer and Researcher holding a Ph.D. from Universiti Kebangsaan Malaysia (UKM), recognized with the 'Tesis Cemerlang' and Graduate on Time (GOT) distinction, with a proven track record of heading university informatics departments. A globally recognized scholar and active Q1 journal reviewer (IEEE Access, PLOS ONE, Computers in Human Behavior). Recipient of the prestigious Global Panduit-Cisco Excellence Scholarship and an accomplished book author. Research at the intersection of Human-Computer Interaction (HCI), philosophy, and digital ethics focuses on the engineering of trustworthy multimodal AI architectures to drive positive behavioral change.",
@@ -29,7 +29,9 @@
       "scholar": {
         "id": "aWTSEXwAAAAJ",
         "url": "https://scholar.google.com/citations?user=aWTSEXwAAAAJ&hl=id"
-      }
+      },
+      "scopus_id": "",
+      "wos_id": ""
     },
     "core_skills": [
       "Behavior and Social Computing",
@@ -55,7 +57,7 @@
     ],
     "official_docs": {
       "teaching_permit": {
-        "title": "Higher Education Teaching Permit (Doctoral, Master, Bachelor)",
+        "title": "Higher Education Teaching Permit",
         "url": "https://tinyurl.com/5n7yjtht"
       },
       "mqa_cv": {
@@ -66,7 +68,11 @@
         "title": "Teaching, Supervision & Examination Portfolio",
         "url": "https://tinyurl.com/yjd89mcj"
       }
-    }
+    },
+    "photo": "assets/images/portraits/portrait-1.webp",
+    "kicker": "Ph.D. • UKM 2022",
+    "cv_pdf_url": "assets/docs/dr-zaid-amin-cv-july-2026.pdf",
+    "edition_label": "July 2026 Academic Edition • 1.1 MB"
   },
   "achievements_and_grants": [
     {
@@ -78,7 +84,7 @@
       "url": "https://tinyurl.com/5n7yjtht",
       "image": "assets/images/thumb-projects.jpg",
       "featured": false,
-      "highlight": true,
+      "highlight": false,
       "details": "Recognized in the Innovative Research Award 2025 for the project 'Srivijayapedia: Exploring Digital Heritage of Srivijaya Using Immersive Technology', pioneering digital cultural preservation through immersive systems."
     },
     {
@@ -87,7 +93,7 @@
       "organization": "Ministry of Education, Culture, Research, and Technology (Kemendikbudristek), Indonesia",
       "category": "National Grant",
       "badge": "National Competitive",
-      "highlight": true,
+      "highlight": false,
       "details": "Awarded under the Community Partnership Empowerment Scheme (PKM) to drive smart farming and community technology transfer for instant ginger cultivation at UPPKA Kampung KB Palembang.",
       "featured": false,
       "image": "assets/images/spotlight-smart-cities.jpg",
@@ -99,7 +105,7 @@
       "organization": "Universitas Bina Darma, Indonesia",
       "category": "Academic Leadership",
       "badge": "International Chairman",
-      "highlight": true,
+      "highlight": false,
       "details": "Served as General Chairman for the 7th International Conference on Information Technology, Engineering and Business Application (ICIBA) and the 3rd Social Science & Economic International Conference (SOSEIC 2024/2025).",
       "featured": false,
       "image": "assets/images/thumb-governance.jpg",
@@ -111,7 +117,7 @@
       "organization": "Universitas Muhammadiyah Yogyakarta & IEEE",
       "category": "Academic Award",
       "badge": "IEEE Xplore Honor",
-      "highlight": true,
+      "highlight": false,
       "details": "Recipient of The Best Presenter Award at a Scopus-indexed IEEE Xplore international conference recognizing outstanding academic delivery, methodology rigor, and research presentation.",
       "featured": false,
       "image": "assets/images/thumb-attention.jpg",
@@ -127,7 +133,7 @@
       "details": "Appointed as External Examiner for a Doctoral/Ph.D. Proposal Defense, contributing expert peer evaluation to advanced doctoral research milestones.",
       "featured": false,
       "image": "assets/images/thumb-research.jpg",
-      "url": ""
+      "url": "https://tinyurl.com/yjd89mcj"
     },
     {
       "year": "2024",
@@ -139,7 +145,7 @@
       "details": "Lead Principal Investigator for the research project 'Enhancement of Universitas Bina Darma's PRIDE Quality Culture Implementation Using Persuasive Technology and Internal Marketing via Gamification'.",
       "featured": false,
       "image": "assets/images/thumb-research.jpg",
-      "url": ""
+      "url": "https://lppm.binadarma.ac.id"
     },
     {
       "year": "2023 - 2025",
@@ -147,11 +153,11 @@
       "organization": "INTI International University, Malaysia",
       "category": "International Fellowship",
       "badge": "Research Fellowship",
-      "highlight": true,
+      "highlight": false,
       "details": "Advancing high-impact international academic collaboration, co-authoring Q1 peer-reviewed publications, and enriching the postgraduate research ecosystem at INTI International University.",
       "featured": false,
       "image": "assets/images/thumb-research.jpg",
-      "url": ""
+      "url": "https://newinti.edu.my"
     },
     {
       "year": "2023",
@@ -163,7 +169,7 @@
       "details": "Principal Investigator for 'Development of a Digital Visual Selective Attention System (VSAS) Platform Based on Sociotechnical Design', engineered to improve transparency and democratic civic participation.",
       "featured": false,
       "image": "assets/images/thumb-research.jpg",
-      "url": ""
+      "url": "https://lppm.binadarma.ac.id"
     },
     {
       "year": "2021",
@@ -171,11 +177,11 @@
       "organization": "Institute of IR4.0, Universiti Kebangsaan Malaysia (UKM)",
       "category": "Academic Award",
       "badge": "International Honor",
-      "highlight": true,
+      "highlight": false,
       "details": "Recognized as Special Best Poster Presenter at the 1st International Postgraduate Seminar on Industrial Revolution 4.0 (IPSIR 4.0) for visual research communication on attention-based cognitive design.",
       "featured": false,
       "image": "assets/images/thumb-research.jpg",
-      "url": ""
+      "url": "https://www.ukm.my/iir4/"
     },
     {
       "year": "2020",
@@ -187,7 +193,7 @@
       "details": "Secured competitive research funding from Universiti Kebangsaan Malaysia for advanced project development under the national Fourth Industrial Revolution (4IR) framework.",
       "featured": false,
       "image": "assets/images/thumb-research.jpg",
-      "url": ""
+      "url": "https://www.ukm.my/ivi/"
     },
     {
       "year": "2017",
@@ -199,7 +205,7 @@
       "details": "Advancing computational infrastructure through the project 'Multi-Tier Architecture Models and Routing Protocols on Server Clusters for Big Data Implementation', optimizing server throughput and network scalability.",
       "featured": false,
       "image": "assets/images/thumb-research.jpg",
-      "url": ""
+      "url": "https://bima.kemdikbud.go.id"
     },
     {
       "year": "2013",
@@ -211,7 +217,7 @@
       "details": "Recognized for exemplary student mentorship, innovative instructional design, and dedication to academic excellence.",
       "featured": false,
       "image": "assets/images/thumb-research.jpg",
-      "url": ""
+      "url": "https://palcomtech.ac.id"
     },
     {
       "year": "2008",
@@ -219,11 +225,11 @@
       "organization": "Cisco Learning Institute & Cisco Networking Academy Program (CNAP)",
       "category": "Global Fellowship",
       "badge": "Global Top 40 Worldwide",
-      "highlight": true,
+      "highlight": false,
       "details": "Selected as one of only 40 scholars worldwide to receive this elite global award from the Cisco Learning Institute, recognizing premier technical talent and prospective academic leadership in network engineering.",
       "featured": false,
       "image": "assets/images/thumb-research.jpg",
-      "url": ""
+      "url": "https://www.netacad.com"
     },
     {
       "year": "2008",
@@ -235,7 +241,7 @@
       "details": "Demonstrated technical network engineering and routing protocols mastery by ranking in the top 40% of competitors across the entire Asia-Pacific theatre.",
       "featured": false,
       "image": "assets/images/thumb-research.jpg",
-      "url": ""
+      "url": "https://www.netacad.com"
     },
     {
       "year": "2006",
@@ -247,7 +253,7 @@
       "details": "Demonstrated front-end architectural excellence, UI engineering, and creative problem solving in digital interface design.",
       "featured": false,
       "image": "assets/images/thumb-research.jpg",
-      "url": ""
+      "url": "https://palcomtech.ac.id"
     },
     {
       "year": "2006",
@@ -259,7 +265,7 @@
       "details": "Recognized for creative motion design, 3D modeling, and narrative multimedia production in the Greeting Contest Animation.",
       "featured": false,
       "image": "assets/images/thumb-research.jpg",
-      "url": ""
+      "url": "https://palcomtech.ac.id"
     }
   ],
   "academic_leadership": [
@@ -450,7 +456,7 @@
       {
         "name": "HCI International Series",
         "publisher": "Taylor & Francis Group / Springer",
-        "tier": "Leading International Venue",
+        "tier": "Top-Tier HCI Venue",
         "issn": "Top Tier HCI",
         "url": "https://bit.ly/3Z53W6X"
       },
@@ -546,11 +552,11 @@
   },
   "academic_references": [
     {
-      "name": "Assoc. Prof. Dr. Nazlena Mohamad Ali",
+      "name": "Prof. Dr. Nazlena Mohamad Ali",
       "role": "Head of Research & Innovation",
       "institution": "Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM)",
-      "phone": "+603-8927 2413",
-      "email": "nazlena.ali@ukm.edu.my"
+      "email": "nazlena.ali@ukm.edu.my",
+      "phone": "+603-8927 2413"
     },
     {
       "name": "Dr. Rahma Santhi Zinaida",
