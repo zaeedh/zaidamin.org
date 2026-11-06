@@ -1,0 +1,44 @@
+{
+  "philosophy": "Academic instruction is most impactful when rigorous theoretical foundations (algorithms, human cognition, system architecture) are coupled with reflective ethical inquiry and project-driven real-world implementation. I mentor students to not merely write functional code, but to question the societal consequences of the systems they construct.",
+  "courses": [
+    {
+      "code": "DSC4101",
+      "title": "Human-Computer Interaction & User Experience Design",
+      "level": "Undergraduate / Honours",
+      "institution": "INTI International University",
+      "description": "Comprehensive grounding in cognitive ergonomics, interface affordances, attention-based interaction, heuristics evaluation, and dark pattern mitigation."
+    },
+    {
+      "code": "DSC4203",
+      "title": "Data Science Ethics, AI Governance & Legal Frameworks",
+      "level": "Undergraduate / Postgraduate",
+      "institution": "INTI International University",
+      "description": "Examining fairness, accountability, transparency, copyright, EU AI Act, and algorithmic bias in modern autonomous systems."
+    },
+    {
+      "code": "CSC5102",
+      "title": "Advanced Distributed Systems & Network Architecture",
+      "level": "Master in Informatics Engineering",
+      "institution": "Universitas Bina Darma (Previous Leadership)",
+      "description": "Architectural principles of multi-tier server clusters, secure IPsec tunneling, cloud orchestration, and high-availability enterprise networks."
+    },
+    {
+      "code": "CSC5204",
+      "title": "Research Methodology & Academic Writing in Computing",
+      "level": "Master in Informatics Engineering",
+      "institution": "Universitas Bina Darma (Previous Leadership)",
+      "description": "Training graduate students in thematic literature reviews, quantitative and qualitative research design, statistical hypothesis testing, and peer-reviewed manuscript submission."
+    }
+  ],
+  "academic_governance": [
+    {
+      "role": "Head of Master in Informatics Engineering Program",
+      "achievement": "Successfully led program accreditation with national accreditation board (BAN-PT), overhauled the graduate curriculum to incorporate Big Data and Artificial Intelligence modules, and established annual graduate symposiums."
+    },
+    {
+      "role": "Head of Information Systems Study Program",
+      "achievement": "Spearheaded industry-aligned syllabus reforms, integrated enterprise resource planning (ERP) practicums, and doubled student participation in national computing competitions."
+    }
+  ]
+}
+

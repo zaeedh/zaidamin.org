@@ -1,0 +1,30 @@
+[
+  {
+    "id": "das-sein-das-sollen-philosophy",
+    "title": "Das Sein, Das Sollen: Bridging What Is and What Ought to Be in Artificial Intelligence",
+    "date": "2026-09-15",
+    "summary": "Exploring the Humean 'is-ought problem' in the age of agentic autonomous algorithms: why observing empirical human training data ('Das Sein') can never automatically yield ethical normative governance ('Das Sollen').",
+    "tags": ["AI Ethics", "Philosophy of Computing", "Governance"],
+    "reading_time": "6 min read",
+    "content_preview": "In the Kantian and Humean traditions, the demarcation between 'Das Sein' (that which is) and 'Das Sollen' (that which ought to be) represents the fundamental frontier of moral philosophy. Modern deep learning architectures are triumphs of 'Das Sein'—they consume trillions of tokens describing human history as it was actually enacted. Yet, when we delegate executive autonomy to these systems, we falsely expect statistical averages to perform normative moral reasoning..."
+  },
+  {
+    "id": "the-proxy-trap-in-metrics",
+    "title": "When Metrics Cannibalize Wisdom: The Proxy Trap in Academic & Algorithmic Systems",
+    "date": "2026-04-20",
+    "summary": "An analysis of Goodhart's Law in machine learning alignment and higher education leadership: how proxy metrics divert attention from intrinsic intellectual purpose.",
+    "tags": ["Agentic AI", "Goodhart's Law", "Higher Education"],
+    "reading_time": "8 min read",
+    "content_preview": "When a measure becomes a target, it ceases to be a good measure. In our latest preprint, we formalize 'The Proxy Trap'—the structural failure mode where autonomous agents or human institutions over-optimize for measurable surrogates at the direct expense of underlying human intent..."
+  },
+  {
+    "id": "reclaiming-human-attention",
+    "title": "The Architecture of Intentionality: Beyond the Attention-Extraction Economy",
+    "date": "2025-11-10",
+    "summary": "How cybernetic feedback loops and friction-centric user interfaces can restore reflective agency to everyday digital interaction.",
+    "tags": ["HCI", "Cognitive Design", "Digital Well-Being"],
+    "reading_time": "5 min read",
+    "content_preview": "Every millisecond of digital engagement today has been weaponized by attention-monetization algorithms. Designing interfaces that honor human stillness requires reimagining friction not as an engineering defect, but as a sacred cognitive sanctuary..."
+  }
+]
+

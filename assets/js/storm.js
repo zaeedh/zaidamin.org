@@ -244,3 +244,4 @@
   resize();
   requestAnimationFrame(render);
 })();
+

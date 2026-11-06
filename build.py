@@ -889,7 +889,9 @@ def get_spotlight_card_html():
         author_name = "Dr. Zaid Amin"
         secondary_pill = f'<a href="{url}" target="_blank" rel="noopener" class="spotlight-doi-pill font-cinzel" title="Direct Digital Object Identifier (DOI)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> DOI: {doi} &nearr;</a>' if doi else ''
 
-    img_webp = img_src.replace(".jpg", ".webp") if img_src.endswith(".jpg") else img_src
+    webp_cand = img_src.rsplit('.', 1)[0] + '.webp'
+    has_webp = (BASE_DIR / webp_cand).exists() and webp_cand != img_src
+    source_webp_tag = f'<source srcset="{webp_cand}" type="image/webp">\n            ' if has_webp else ''
 
     clean_desc = re.sub(r'<[^>]+>', ' ', str(desc or ''))
     clean_desc = ' '.join(clean_desc.split())
@@ -903,8 +905,7 @@ def get_spotlight_card_html():
       <article class="ref-spotlight-card" aria-label="Featured Spotlight {kicker_badge}">
         <div class="ref-spotlight-visual-wrap">
           <picture>
-            <source srcset="{img_webp}" type="image/webp">
-            <img src="{img_src}" alt="{title}" class="ref-spotlight-visual-img" loading="lazy">
+            {source_webp_tag}<img src="{img_src}" alt="{title}" class="ref-spotlight-visual-img" loading="lazy" onerror="this.onerror=null;this.src='assets/images/spotlight-smart-cities.jpg'">
           </picture>
           <div class="ref-visual-overlay"></div>
           
@@ -1709,7 +1710,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
             <div class="bokify-card-3d-scene">
               <div class="bokify-card-book-3d">
                 <div class="bokify-card-cover">
-                  <img src="{img}" alt="{escaped_title}" class="bokify-card-cover-img" loading="lazy" />
+                  <img src="{img}" alt="{escaped_title}" class="bokify-card-cover-img" loading="lazy" onerror="this.onerror=null;this.src='assets/images/books/book_digital_loneliness.png'" />
                   <div class="bokify-cover-shine"></div>
                 </div>
                 <div class="bokify-card-spine">
@@ -1978,7 +1979,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
                 <div class="bokify-standing-book bokify-standing-front">
                   <div class="bokify-book-3d">
                     <div class="bokify-book-cover">
-                      <img src="{featured_img}" alt="{featured_title}" class="bokify-cover-img" loading="lazy">
+                      <img src="{featured_img}" alt="{featured_title}" class="bokify-cover-img" loading="lazy" onerror="this.onerror=null;this.src='assets/images/books/book_digital_loneliness.png'">
                       <div class="bokify-cover-glare"></div>
                     </div>
                     <div class="bokify-book-spine">
@@ -1994,7 +1995,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
                 {f'''<div class="bokify-standing-book bokify-standing-rear">
                   <div class="bokify-book-3d">
                     <div class="bokify-book-cover">
-                      <img src="{rear_img}" alt="{rear_title}" class="bokify-cover-img" loading="lazy">
+                      <img src="{rear_img}" alt="{rear_title}" class="bokify-cover-img" loading="lazy" onerror="this.onerror=null;this.src='assets/images/books/book_attention_covid.png'">
                       <div class="bokify-cover-glare"></div>
                     </div>
                     <div class="bokify-book-spine">
