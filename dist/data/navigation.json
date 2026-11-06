@@ -1,0 +1,105 @@
+{
+  "main_menu": [
+    {
+      "id": "home",
+      "label": "Home",
+      "short_label": "Home",
+      "url": "index.html",
+      "target": "_self",
+      "icon": "home",
+      "enabled": true,
+      "active_pages": [
+        "home"
+      ],
+      "has_dropdown": false,
+      "dropdown_items": []
+    },
+    {
+      "id": "publications",
+      "label": "Research & Pubs",
+      "short_label": "Research",
+      "url": "publications.html",
+      "target": "_self",
+      "icon": "none",
+      "enabled": true,
+      "active_pages": [
+        "publications",
+        "team"
+      ],
+      "has_dropdown": true,
+      "dropdown_items": [
+        {
+          "id": "team",
+          "label": "Research Team",
+          "url": "#",
+          "target": "_self",
+          "icon": "✦",
+          "enabled": true,
+          "active_pages": [
+            "team"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "research",
+      "label": "Activity & Project",
+      "short_label": "Activity",
+      "url": "research.html",
+      "target": "_self",
+      "icon": "none",
+      "enabled": true,
+      "active_pages": [
+        "research",
+        "articles"
+      ],
+      "has_dropdown": false,
+      "dropdown_items": []
+    },
+    {
+      "id": "talks",
+      "label": "Media & Talks",
+      "short_label": "Media",
+      "url": "talks.html",
+      "target": "_self",
+      "icon": "none",
+      "enabled": true,
+      "active_pages": [
+        "talks"
+      ],
+      "has_dropdown": false,
+      "dropdown_items": []
+    },
+    {
+      "id": "cv",
+      "label": "Achievement & CV",
+      "short_label": "CV",
+      "url": "cv.html",
+      "target": "_self",
+      "icon": "none",
+      "enabled": true,
+      "active_pages": [
+        "cv",
+        "achievements"
+      ],
+      "has_dropdown": false,
+      "dropdown_items": []
+    }
+  ],
+  "footer_links": [],
+  "page_shortcuts": [
+    {
+      "id": "pub_team_pill",
+      "page": "publications.html",
+      "page_label": "Research & Publications (publications.html)",
+      "label": "Research Team Shortcut Pill",
+      "display_text": "👥 Research Team ↗",
+      "title": "View Research Team & Supervision Roster",
+      "url": "research-team.html",
+      "target": "_self",
+      "icon": "👥",
+      "enabled": false,
+      "description": "Category navigation shortcut pill in the Publications page header"
+    }
+  ]
+}
