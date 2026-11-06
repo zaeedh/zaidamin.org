@@ -1,4 +1,18 @@
 {
+  "portals_header": {
+    "name": "Zaid Amin, Ph.D.",
+    "role_line": "Senior Lecturer • Faculty of Data Science & IT (FDSIT)",
+    "institution": "INTI International University, Malaysia",
+    "research_fields": "Digital Ethics • Behavior & Social Computing • HCI",
+    "photo_front": "assets/images/portraits/portrait-1.webp",
+    "photo_front_fallback": "assets/images/portraits/portrait-1.png",
+    "photo_front_alt": "Zaid Amin, Ph.D. — Academic Portrait",
+    "photo_back": "assets/images/portraits/portrait-2.webp",
+    "photo_back_fallback": "assets/images/portraits/portrait-2.png",
+    "photo_back_alt": "Zaid Amin, Ph.D. — Secondary Portrait",
+    "status_dot_enabled": true,
+    "status_text": "Active Senior Lecturer & Researcher"
+  },
   "name": "Dr. Zaid Amin",
   "degree": "Ph.D. in Computer Science / Information Technology",
   "title": "Senior Lecturer in Data Science & Information Technology",
@@ -9,7 +23,7 @@
     "website": "https://newinti.edu.my"
   },
   "tagline": "Bridging Empirical Computing, Human-Centered AI, and Digital Ethics",
-  "motto": "Das Sein, das Sollen (What is, what ought to be)",
+  "motto": "",
   "short_bio": "Senior Lecturer and computational researcher specializing in the intersection of Human-Computer Interaction (HCI), Behavior & Social Computing, Digital Ethics, and AI Governance. Ph.D. graduate from Universiti Kebangsaan Malaysia (UKM). Former Head of Master in Informatics Engineering and Information Systems programs, actively advancing research in agentic AI alignment, attention-based cognitive interventions, and civic technology.",
   "research_keywords": [
     "Digital Ethics",
@@ -24,7 +38,7 @@
     "scholar": "https://scholar.google.com/citations?user=AUZIYQH0i7NW5_OAHWRFjwbm9jc5D8ZE4ig6J0WXXDvzO7thbSV1pshX55bzL7MpzfQJ0JyWhdfnGAsh5AFloZ2BnDcomtFhgqELhjxd8XflIXz9yOgOxQuF1dQJvyaDaloG5B-VL9kf8-iQOVWlpyykpD2ClLA=",
     "sciprofiles": "https://sciprofiles.com/profile/zaidamin",
     "github": "https://github.com/zaeedh",
-    "linkedin": "https://www.linkedin.com/in/zaid-amin",
+    "linkedin": "#",
     "researchgate": "https://www.researchgate.net/profile/Zaid-Amin",
     "email": "zaid.amin@newinti.edu.my",
     "personal_email": "zaeedh@gmail.com"
@@ -92,5 +106,35 @@
       "period": "Previous",
       "description": "Managed academic operations, computing laboratories, and technical curriculum standards."
     }
-  ]
+  ],
+  "top_cluster": {
+    "scholar": {
+      "enabled": true,
+      "label": "Google Scholar"
+    },
+    "orcid": {
+      "enabled": true,
+      "label": "ORCID"
+    },
+    "github": {
+      "enabled": true,
+      "label": "GitHub"
+    },
+    "linkedin": {
+      "enabled": true,
+      "label": "LinkedIn"
+    },
+    "email": {
+      "enabled": true,
+      "label": "Institutional Email"
+    },
+    "sciprofiles": {
+      "enabled": false,
+      "label": "SciProfiles"
+    },
+    "researchgate": {
+      "enabled": false,
+      "label": "ResearchGate"
+    }
+  }
 }
