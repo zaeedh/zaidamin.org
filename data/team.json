@@ -1,0 +1,151 @@
+{
+  "heading": "Research Team & Academic Supervision",
+  "subheading": "Doctoral Candidates, Master's Researchers & International Scholarly Collaborators under Dr. Zaid Amin's Mentorship",
+  "statement": "Our laboratory fosters high-impact inquiry across Human-Computer Interaction, AI Governance, Cognitive Attention Systems, and Sociotechnical Engineering. We guide scholars to bridge rigorous computational modeling with empirical ethical inquiry and societal deployment.",
+  "phd_students": [
+    {
+      "name": "Zarina Onopriyenko",
+      "role": "Co-Supervisor",
+      "period": "2024-2028",
+      "thesis_title": "Influence of Unsaturated Soil Properties on Foundation Design with Dual-Porosity Soil",
+      "photo": "assets/images/team/zarina_onopriyenko.png",
+      "degree": "Ph.D. Candidate",
+      "badge": "Doctoral Research"
+    },
+    {
+      "name": "Zheniskan Abilev",
+      "role": "Supervisor",
+      "period": "2024-2028",
+      "thesis_title": "Influence of Hysteresis on Pile Behavior in Unsaturated Soil",
+      "photo": "assets/images/team/zheniskan_abilev.png",
+      "degree": "Ph.D. Candidate",
+      "badge": "Doctoral Research"
+    },
+    {
+      "name": "Rezat Abishev",
+      "role": "Supervisor",
+      "period": "2023-2027",
+      "thesis_title": "Dual Porosity for GeoBarrier System",
+      "photo": "assets/images/team/rezat_abishev.png",
+      "degree": "Ph.D. Candidate",
+      "badge": "Doctoral Research"
+    },
+    {
+      "name": "Nura Bello",
+      "role": "Co-Supervisor",
+      "period": "2022-2026",
+      "thesis_title": "Hysteresis of Soil Water Characteristics Curve for Soil with Bimodal Grain Size Distribution",
+      "photo": "assets/images/team/nura_bello.png",
+      "degree": "Ph.D. Candidate",
+      "badge": "Doctoral Research"
+    }
+  ],
+  "master_students": [
+    {
+      "name": "Akbilek Seitmukhanbet",
+      "role": "Supervisor",
+      "period": "2024-2026",
+      "thesis_title": "Regional Modeling for flood simulation",
+      "photo": "assets/images/team/akbilek_seitmukhanbet.png",
+      "degree": "Master's by Research",
+      "badge": "Postgraduate Scholar"
+    },
+    {
+      "name": "Akzhan Akhmedova",
+      "role": "Supervisor",
+      "period": "2024-2026",
+      "thesis_title": "Foundation Design in Unsaturated Frozen Soil",
+      "photo": "assets/images/team/akzhan_akhmedova.png",
+      "degree": "Master's by Research",
+      "badge": "Postgraduate Scholar"
+    },
+    {
+      "name": "Eriko Dewangga",
+      "role": "Supervisor",
+      "period": "2024-2026",
+      "thesis_title": "Slope Stabilization Technology Using Modified Geobarrier System",
+      "photo": "assets/images/team/eriko_dewangga.png",
+      "degree": "Master's by Research",
+      "badge": "Postgraduate Scholar"
+    },
+    {
+      "name": "Luiza Tanzhanova",
+      "role": "Co-Supervisor",
+      "period": "2024-2026",
+      "thesis_title": "Spatial Modeling for Debris Flow Analysis",
+      "photo": "assets/images/team/luiza_tanzhanova.png",
+      "degree": "Master's by Research",
+      "badge": "Postgraduate Scholar"
+    }
+  ],
+  "collaborators": [
+    {
+      "name": "Prof. Dr. Nazlena Mohamad Ali",
+      "role": "Head of Research & Innovation",
+      "period": "2021 – Present",
+      "institution": "Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM)",
+      "focus": "Visual Informatics, Multimodal AI Frameworks & HCI Modeling",
+      "photo": "assets/images/team/prof_nazlena_ali.png",
+      "badge": "Academic Collaborator"
+    },
+    {
+      "name": "Dr. Rahma Santhi Zinaida",
+      "role": "Senior Lecturer",
+      "period": "2022 – Present",
+      "institution": "School of Communication and Media Studies, Sunway University, Malaysia",
+      "focus": "Digital Communication, Virtual Reality & Srivijaya Heritage Informatics",
+      "photo": "assets/images/team/dr_rahma_zinaida.png",
+      "badge": "Academic Collaborator"
+    },
+    {
+      "name": "Dr. Mohamad Taha Ijab",
+      "role": "Head of Quality Assurance",
+      "period": "2020 – Present",
+      "institution": "Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM)",
+      "focus": "Sociotechnical Systems, Behavior Informatics & Information Sharing",
+      "photo": "assets/images/team/dr_taha_ijab.png",
+      "badge": "Academic Collaborator"
+    },
+    {
+      "name": "Dr. Hasmawaty Ahmad Rahman",
+      "role": "Lead Researcher & Co-Author",
+      "period": "2024 – Present",
+      "institution": "Faculty of Engineering & Computer Science, Universitas Baturaja (UNBARA)",
+      "focus": "Trustworthy Multi-Agent Compliance Systems & Sustainable Smart Cities",
+      "photo": "assets/images/team/dr_hasmawaty.png",
+      "badge": "Research Collaborator"
+    },
+    {
+      "name": "Prof. Hj. Isnawijayani, M.Si., Ph.D.",
+      "role": "Director of Postgraduate Program",
+      "period": "2018 – Present",
+      "institution": "Universitas Bina Darma, Indonesia",
+      "focus": "Digital Ethics, Media Systems & Postgraduate Mentorship",
+      "photo": "assets/images/team/prof_isnawijayani.png",
+      "badge": "Senior Research Advisor"
+    },
+    {
+      "name": "Dr. Muh. Shaleh, M.Pd",
+      "role": "Dean of Ushuluddin, Adab & Dakwah",
+      "period": "2023 – Present",
+      "institution": "State Islamic Institute of Kerinci (IAIN Kerinci), Indonesia",
+      "focus": "Persuasive Computing, Cognitive Attention & Algorithmic Ethics",
+      "photo": "assets/images/team/dr_muh_shaleh.jpg",
+      "badge": "Visiting Scholar Partner"
+    }
+  ],
+  "page_meta": {
+    "eyebrow": "✦ Academic Mentorship • Laboratory Scholars • Global Network",
+    "title": "Research Team",
+    "subtitle": "Doctoral candidates, Master's by Research scholars, and international research collaborators under the academic supervision and mentorship of Dr. Zaid Amin."
+  },
+  "cta_banner": {
+    "eyebrow": "✦ Postgraduate Admissions & Supervision",
+    "title": "Interested in Joining Our Research Lab?",
+    "description": "Dr. Zaid Amin is actively seeking self-driven Ph.D. and Master's candidates interested in Human-Computer Interaction, AI Governance, Multimodal Foundation Models, and Cognitive Attention Systems.",
+    "primary_btn_text": "View Open Topics & How to Apply →",
+    "primary_btn_url": "prospective-students.html",
+    "secondary_btn_text": "Submit Research Inquiry ↗",
+    "secondary_btn_url": "mailto:zaid.amin@newinti.edu.my"
+  }
+}
