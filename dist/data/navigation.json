@@ -34,7 +34,7 @@
           "url": "/team",
           "target": "_self",
           "icon": "✦",
-          "enabled": true,
+          "enabled": false,
           "active_pages": [
             "team"
           ]
