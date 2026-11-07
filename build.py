@@ -818,17 +818,25 @@ def get_spotlight_card_html():
         date_str = item.get("date", "2026")
         year_str = f"{date_str} &bull; {read_time}"
         url = f"article.html?id={item.get('id', '')}"
-        desc = item.get("excerpt", "")
+        raw_desc = item.get("excerpt", item.get("content", ""))
         img_src = item.get("image", "assets/images/spotlight-smart-cities.jpg")
         kicker_badge = "SPOTLIGHT ARTICLE"
         clean_cat = re.sub(r'^[✦✧★\s\u2726]+', '', str(cat_name)).strip()
-        top_kicker = f"{clean_cat.upper()} &bull; ESSAYS & PERSPECTIVES"
+        if clean_cat.upper() in ["ESSAYS & PERSPECTIVES", "ESSAYS &AMP; PERSPECTIVES"]:
+            top_kicker = "ESSAYS &amp; PERSPECTIVES &bull; SCHOLARLY WRITINGS"
+        else:
+            top_kicker = f"{clean_cat.upper()} &bull; ESSAYS & PERSPECTIVES"
         btn_text = "Read Full Essay &rarr;"
         target_blank = ""
-        meta_oa = f'<span class="spotlight-oa-pill font-cinzel"><span class="oa-check">&#10003;</span> Open Access Essay</span>'
         author_pre = "Author"
         author_name = "Dr. Zaid Amin"
-        secondary_pill = '<a href="research.html#articles" class="spotlight-doi-pill font-cinzel" title="Explore All Activity &amp; Articles"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> All Activity &nearr;</a>'
+        oa_badge_text = "Open Access Essay"
+        secondary_btn = '''<a href="research.html#articles" class="spotlight-btn-secondary font-cinzel" title="Explore All Activity &amp; Articles">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>All Activity &nearr;</span>
+        </a>'''
+        cap1_icon, cap1_title, cap1_sub = "💡", "THEORETICAL FRAMEWORK", "Cybernetics & AI Ethics"
+        cap2_icon, cap2_title, cap2_sub = "📚", "PUBLIC SCHOLARSHIP", "Peer-Reviewed Perspective"
 
     elif source == "talk":
         title = item.get("title", item.get("event", "Keynote Address"))
@@ -837,7 +845,7 @@ def get_spotlight_card_html():
         location = item.get("location", "Kuala Lumpur, Malaysia")
         year_str = f"{year_val} &bull; {location}"
         url = item.get("url") or "talks.html"
-        desc = item.get("description", item.get("details", ""))
+        raw_desc = item.get("description", item.get("details", ""))
         img_src = item.get("image", "assets/images/spotlight-smart-cities.jpg")
         role_str = item.get("role", "Keynote Speaker")
         type_str = item.get("type", "Keynote")
@@ -846,10 +854,15 @@ def get_spotlight_card_html():
         top_kicker = f"{clean_type.upper()} &bull; PUBLIC ENGAGEMENT"
         btn_text = "Watch Keynote / Recording &rarr;" if item.get("url") else "View Keynote &rarr;"
         target_blank = 'target="_blank" rel="noopener"' if item.get("url") else ''
-        meta_oa = f'<span class="spotlight-oa-pill font-cinzel" style="color:#d8b4fe; border-color:rgba(168,85,247,0.3);"><span class="oa-check">&#10003;</span> {role_str}</span>'
         author_pre = "Speaker"
         author_name = "Dr. Zaid Amin"
-        secondary_pill = '<a href="talks.html" class="spotlight-doi-pill font-cinzel" title="Media &amp; Talks Archive"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Media &amp; Talks &nearr;</a>'
+        oa_badge_text = role_str
+        secondary_btn = '''<a href="talks.html" class="spotlight-btn-secondary font-cinzel" title="Media &amp; Talks Archive">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>Media Archive &nearr;</span>
+        </a>'''
+        cap1_icon, cap1_title, cap1_sub = "🎙️", "KEYNOTE SPEAKER", "International Broadcast"
+        cap2_icon, cap2_title, cap2_sub = "📺", "ARCHIVE RECORDING", "Full Talk & Materials"
 
     elif source == "cv":
         title = item.get("title", "Provincial Honor & Innovator Award")
@@ -858,7 +871,7 @@ def get_spotlight_card_html():
         category_val = item.get("category", "Government Award")
         year_str = f"{year_val} &bull; {category_val}"
         url = item.get("url") or "cv.html#honors"
-        desc = item.get("details", "")
+        raw_desc = item.get("details", "")
         img_src = item.get("image", "assets/images/thumb-projects.jpg")
         badge_val = item.get("badge", "Provincial Honor")
         kicker_badge = "SPOTLIGHT DISTINCTION"
@@ -866,10 +879,15 @@ def get_spotlight_card_html():
         top_kicker = f"{clean_cat_val.upper()} &bull; RESEARCH EXCELLENCE"
         btn_text = "Inspect Distinction &rarr;"
         target_blank = 'target="_blank" rel="noopener"' if item.get("url") else ''
-        meta_oa = f'<span class="spotlight-oa-pill font-cinzel" style="color:#86efac; border-color:rgba(34,197,94,0.3);"><span class="oa-check">&#10003;</span> {badge_val}</span>'
-        author_pre = "Recipient / Lead PI"
+        author_pre = "Lead PI"
         author_name = "Dr. Zaid Amin"
-        secondary_pill = '<a href="cv.html#honors" class="spotlight-doi-pill font-cinzel" title="Honors &amp; Distinctions"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Honors &amp; CV &nearr;</a>'
+        oa_badge_text = badge_val
+        secondary_btn = '''<a href="cv.html#honors" class="spotlight-btn-secondary font-cinzel" title="Honors &amp; Distinctions">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>Honors &amp; CV &nearr;</span>
+        </a>'''
+        cap1_icon, cap1_title, cap1_sub = "🏆", "DISTINCTION HONOR", "Research Excellence Award"
+        cap2_icon, cap2_title, cap2_sub = "🌐", "CIVIC IMPACT", "Government Recognized PI"
 
     else: # default: publication
         title = item.get("title", "Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance")
@@ -878,30 +896,84 @@ def get_spotlight_card_html():
         year_str = f"Vol. 9 ({year_val})"
         doi = item.get("doi", "10.3390/smartcities9100174")
         url = item.get("url", f"https://doi.org/{doi}" if doi else "#")
-        desc = item.get("abstract", "")
-        img_src = item.get("image", "assets/images/spotlight-smart-cities.jpg")
+        raw_desc = item.get("abstract", "")
+        img_src = item.get("image", "assets/images/uploads/spotlight_mdpi.png")
         kicker_badge = "SPOTLIGHT ARTICLE"
         top_kicker = "Q1 SCOPUS INDEXED &bull; PEER-REVIEWED"
         btn_text = "Read Full Article &rarr;"
         target_blank = 'target="_blank" rel="noopener"'
-        meta_oa = f'<span class="spotlight-oa-pill font-cinzel"><span class="oa-check">&#10003;</span> Open Access</span>'
-        author_pre = "Lead Author"
+        author_pre = "Lead"
         author_name = "Dr. Zaid Amin"
-        secondary_pill = f'<a href="{url}" target="_blank" rel="noopener" class="spotlight-doi-pill font-cinzel" title="Direct Digital Object Identifier (DOI)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> DOI: {doi} &nearr;</a>' if doi else ''
+        oa_badge_text = "Open Access"
+        doi_display = f"DOI: {doi}" if doi else ""
+        secondary_btn = f'''<a href="{url}" target="_blank" rel="noopener" class="spotlight-btn-secondary font-cinzel" title="Direct Digital Object Identifier (DOI)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>{doi_display}</span>
+        </a>''' if doi else ''
+        cap1_icon, cap1_title, cap1_sub = "⚡", "FOUNDATION ARCHITECTURE", "Multimodal Agentic Orchestration"
+        cap2_icon, cap2_title, cap2_sub = "🛡️", "CITATION &amp; INDEXING", "Scopus Q1 Top Decile Journal"
+
+    # Harmonize descriptions: parse lead narrative and key empirical finding
+    finding_match = re.search(r'Key Finding:?\s*</strong>\s*(.*?)(?:</div>|$)', str(raw_desc), re.I)
+    key_finding = finding_match.group(1).strip() if finding_match else ''
+    lead_match = re.search(r'<p[^>]*class=["\']lead-para["\'][^>]*>(.*?)</p>', str(raw_desc), re.I)
+    lead_text = lead_match.group(1).strip() if lead_match else ''
+
+    if not lead_text:
+        clean = re.sub(r'<[^>]+>', ' ', str(raw_desc or '')).strip()
+        clean = ' '.join(clean.split())
+        if 'Key Finding:' in clean:
+            parts = clean.split('Key Finding:', 1)
+            lead_text = parts[0].strip()
+            if not key_finding:
+                key_finding = parts[1].strip()
+        else:
+            lead_text = clean
+
+    if len(lead_text) > 260:
+        lead_text = lead_text[:257].rstrip() + '...'
+
+    # Format finding callout card if present
+    finding_html = ""
+    if key_finding:
+        highlighted_finding = re.sub(r'(\d+(?:\.\d+)?%)', r'<strong class="ref-finding-stat">\1</strong>', key_finding)
+        finding_html = f'''
+          <div class="ref-spotlight-finding-card">
+            <div class="ref-finding-header font-cinzel">
+              <span class="ref-finding-star">✦</span> KEY EMPIRICAL FINDING
+            </div>
+            <div class="ref-finding-body">
+              {highlighted_finding}
+            </div>
+          </div>'''
+
+    capsules_html = f'''
+          <div class="ref-highlights-capsules">
+            <div class="ref-highlight-capsule">
+              <span class="ref-hl-icon">{cap1_icon}</span>
+              <div class="ref-hl-content">
+                <span class="ref-hl-label font-cinzel">{cap1_title}</span>
+                <span class="ref-hl-val">{cap1_sub}</span>
+              </div>
+            </div>
+            <div class="ref-highlight-capsule">
+              <span class="ref-hl-icon">{cap2_icon}</span>
+              <div class="ref-hl-content">
+                <span class="ref-hl-label font-cinzel">{cap2_title}</span>
+                <span class="ref-hl-val">{cap2_sub}</span>
+              </div>
+            </div>
+          </div>'''
 
     webp_cand = img_src.rsplit('.', 1)[0] + '.webp'
     has_webp = (BASE_DIR / webp_cand).exists() and webp_cand != img_src
     source_webp_tag = f'<source srcset="{webp_cand}" type="image/webp">\n            ' if has_webp else ''
 
-    clean_desc = re.sub(r'<[^>]+>', ' ', str(desc or ''))
-    clean_desc = ' '.join(clean_desc.split())
-    if len(clean_desc) > 360:
-        clean_desc = clean_desc[:357] + '...'
-
     clean_top_kicker = re.sub(r'^[✦✧★\s\u2726]+', '', str(top_kicker)).strip()
+    clean_top_kicker = re.sub(r'\bQI\b', 'Q1', clean_top_kicker)
 
     return f"""
-      <!-- LEFT CARD: Chosen Featured Spotlight Article (Clean Editorial Display) -->
+      <!-- LEFT CARD: Chosen Featured Spotlight Article (Golden Ratio Composition) -->
       <article class="ref-spotlight-card" aria-label="Featured Spotlight {kicker_badge}">
         <div class="ref-spotlight-visual-wrap">
           <picture>
@@ -913,7 +985,7 @@ def get_spotlight_card_html():
             <span class="ref-kicker-pill font-cinzel"><span class="pulse-dot"></span> {kicker_badge}</span>
             <div class="ref-top-right-group">
               <span class="ref-bookmark-icon" title="Featured Spotlight {kicker_badge}" aria-label="Featured Spotlight Bookmark">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
                 </svg>
               </span>
@@ -925,25 +997,29 @@ def get_spotlight_card_html():
           <div class="ref-scopus-kicker font-cinzel"><span class="kicker-gem">✦</span> {clean_top_kicker}</div>
           <h2 class="ref-spotlight-title">{title}</h2>
 
-          <div class="ref-spotlight-meta">
-            <div class="meta-row-pub">
-              <span class="spotlight-venue font-cinzel">{venue}</span>
-              <span class="spotlight-divider">&bull;</span>
-              <span class="spotlight-year">{year_str}</span>
-              {meta_oa}
-            </div>
-            <div class="meta-row-author">
-              <span class="author-pre">{author_pre}:</span> <strong class="author-name">{author_name}</strong>
-            </div>
+          <div class="ref-spotlight-meta-cluster">
+            <span class="spotlight-chip chip-venue font-cinzel">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              {venue} &bull; {year_str}
+            </span>
+            <span class="spotlight-chip chip-author">
+              <span class="chip-author-dot"></span>
+              {author_name} <span class="chip-author-role">({author_pre})</span>
+            </span>
+            <span class="spotlight-chip chip-oa font-cinzel">
+              <span class="chip-oa-check">&#10003;</span> {oa_badge_text}
+            </span>
           </div>
 
-          <div class="ref-spotlight-desc">{clean_desc}</div>
+          <p class="ref-spotlight-lead">{lead_text}</p>
+          {finding_html}
+          {capsules_html}
 
           <div class="ref-spotlight-actions">
-            <a href="{url}" {target_blank} class="spotlight-btn btn-gold font-cinzel">
-              {btn_text}
+            <a href="{url}" {target_blank} class="spotlight-btn-gold font-cinzel">
+              <span>{btn_text}</span>
             </a>
-            {secondary_pill}
+            {secondary_btn}
           </div>
         </div>
       </article>"""
