@@ -844,7 +844,7 @@ def get_spotlight_card_html():
         author_pre = "Author"
         author_name = "Dr. Zaid Amin"
         oa_badge_text = "Open Access Essay"
-        meta_characteristic = "✦ ESSAYS &amp; PERSPECTIVES"
+        meta_characteristic = '<span class="spotlight-gem">✦</span> ESSAYS &amp; PERSPECTIVES'
         meta_detail = "80+ Scholarly Articles Archive &nearr;"
         meta_tooltip = "Explore All Activity &amp; Articles Archive"
         secondary_btn = f'''<a href="research.html#articles" class="spotlight-btn-secondary spotlight-btn-meta" title="{meta_tooltip}">
@@ -875,7 +875,7 @@ def get_spotlight_card_html():
         author_pre = "Speaker"
         author_name = "Dr. Zaid Amin"
         oa_badge_text = role_str
-        meta_characteristic = "✦ BROADCAST &bull; KEYNOTE"
+        meta_characteristic = '<span class="spotlight-gem">✦</span> BROADCAST &bull; KEYNOTE'
         meta_detail = "TVRI &amp; Media Archive &nearr;"
         meta_tooltip = "Media &amp; Talks Archive"
         secondary_btn = f'''<a href="talks.html" class="spotlight-btn-secondary spotlight-btn-meta" title="{meta_tooltip}">
@@ -905,7 +905,7 @@ def get_spotlight_card_html():
         author_pre = "Lead PI"
         author_name = "Dr. Zaid Amin"
         oa_badge_text = badge_val
-        meta_characteristic = "✦ RESEARCH EXCELLENCE"
+        meta_characteristic = '<span class="spotlight-gem">✦</span> RESEARCH EXCELLENCE'
         meta_detail = "Official Curriculum Vitae &nearr;"
         meta_tooltip = "Honors &amp; Distinctions"
         secondary_btn = f'''<a href="cv.html#honors" class="spotlight-btn-secondary spotlight-btn-meta" title="{meta_tooltip}">
@@ -933,7 +933,7 @@ def get_spotlight_card_html():
         author_pre = "Lead"
         author_name = "Dr. Zaid Amin"
         oa_badge_text = "Open Access"
-        meta_characteristic = "✦ SCOPUS Q1 &bull; OPEN ACCESS"
+        meta_characteristic = '<span class="spotlight-gem">✦</span> SCOPUS Q1 &bull; OPEN ACCESS'
         meta_detail = f"doi: {doi} &nearr;" if doi else "Direct DOI &nearr;"
         meta_tooltip = f"Direct Digital Object Identifier (DOI): {doi}" if doi else "Publication Document"
         secondary_btn = f'''<a href="{url}" target="_blank" rel="noopener" class="spotlight-btn-secondary spotlight-btn-meta" title="{meta_tooltip}">

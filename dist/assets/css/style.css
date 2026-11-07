@@ -2491,16 +2491,17 @@ a {
 
 .spotlight-btn-secondary.spotlight-btn-meta {
   padding: 4px 16px;
-  background: rgba(3, 18, 32, 0.78);
-  border: 1px solid rgba(56, 189, 248, 0.32);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  background: rgba(3, 16, 28, 0.65);
+  border: 1px solid rgba(140, 180, 205, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: all 0.22s ease;
 }
 
 .spotlight-btn-secondary.spotlight-btn-meta:hover {
-  background: rgba(4, 26, 48, 0.92);
-  border-color: rgba(56, 189, 248, 0.65);
+  background: rgba(6, 24, 40, 0.90);
+  border-color: rgba(212, 175, 55, 0.35);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.22);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .spotlight-meta-block {
@@ -2517,8 +2518,8 @@ a {
 .spotlight-meta-kicker {
   font-size: 0.58rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  color: #38bdf8;
+  letter-spacing: 0.07em;
+  color: #94a3b8;
   text-transform: uppercase;
   white-space: nowrap;
   overflow: hidden;
@@ -2526,11 +2527,16 @@ a {
   max-width: 100%;
 }
 
+.spotlight-meta-kicker .spotlight-gem {
+  color: rgba(212, 175, 55, 0.70);
+  margin-right: 2px;
+}
+
 .spotlight-meta-val {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 0.65rem;
   font-weight: 500;
-  color: #cbd5e1;
+  color: #64748b;
   letter-spacing: 0.01em;
   white-space: nowrap;
   overflow: hidden;
@@ -2539,12 +2545,16 @@ a {
   margin-top: 1px;
 }
 
-.spotlight-btn-secondary.spotlight-btn-meta:hover .spotlight-meta-val {
-  color: #f8fafc;
+.spotlight-btn-secondary.spotlight-btn-meta:hover .spotlight-meta-kicker {
+  color: #cbd5e1;
 }
 
-.spotlight-btn-secondary.spotlight-btn-meta:hover .spotlight-meta-kicker {
-  color: #7dd3fc;
+.spotlight-btn-secondary.spotlight-btn-meta:hover .spotlight-meta-kicker .spotlight-gem {
+  color: #fce09b;
+}
+
+.spotlight-btn-secondary.spotlight-btn-meta:hover .spotlight-meta-val {
+  color: #94a3b8;
 }
 
 .spotlight-btn-secondary:hover {
