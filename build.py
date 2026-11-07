@@ -1806,7 +1806,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
         venue = pub.get("venue", "Academic Publication")
         series_text = get_series(venue)
         publisher = get_publisher(venue, doi)
-        excerpt = clean_excerpt_fn(pub.get("abstract", ""), max_len=140)
+        excerpt = clean_excerpt_fn(pub.get("abstract", "") or pub.get("excerpt", ""), max_len=150)
         escaped_title = _html_mod.escape(pub["title"])
         escaped_title_lower = _html_mod.escape(pub["title"].lower())
         escaped_venue = _html_mod.escape(venue)
@@ -1958,7 +1958,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
             p_year = _html_mod.escape(str(p_data.get("year", "2026/2027")))
             p_status = _html_mod.escape(p_data.get("status", "Manuscript in Editorial Preparation"))
             p_badge = _html_mod.escape(p_data.get("badge", "✦ Future Slot"))
-            p_abstract = _html_mod.escape(p_data.get("abstract", ""))
+            p_abstract = clean_excerpt_fn(p_data.get("abstract", ""), max_len=150)
             p_authors = _html_mod.escape(p_data.get("authors", "Dr. Zaid Amin et al."))
             p_img = p_data.get("image", "").strip() if p_data.get("image") else ""
             p_title_lower = p_title.lower()
