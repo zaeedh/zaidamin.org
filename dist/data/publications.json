@@ -6,14 +6,14 @@
     "venue": "On process",
     "year": 2027,
     "doi": "#",
+    "isbn": "On process",
+    "link_enabled": false,
     "citations": "",
     "authors": "Zaid Amin",
     "abstract": "Look at the horizon of the next decade. Do you see a world where you are a User being harvested, or a Citizen being empowered? The “bridge” is under construction, and the next brick is in your hands. What will you build today?",
     "image": "assets/images/uploads/Digital_Ethics.png",
     "featured": false,
-    "bibtex": "",
-    "isbn": "On process",
-    "link_enabled": false
+    "bibtex": ""
   },
   {
     "id": "amin2026trustworthy",
