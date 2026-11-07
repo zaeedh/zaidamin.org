@@ -3679,7 +3679,8 @@ def render_cv_strip_card(
     media_html="",
     extra_classes="",
     data_attrs="",
-    cat_theme="cyan"
+    cat_theme="cyan",
+    show_verification_btn=True
 ):
     # Determine verification link state
     ver_url_clean = (verification_url or "").strip()
@@ -3698,11 +3699,14 @@ def render_cv_strip_card(
         
     ext_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>'
 
-    # Primary Gold Button: Verification Link (ALWAYS VISIBLE & PROMINENT)
-    primary_btn = f'''<a {ver_href} {ver_onclick} class="pub-pill-btn pub-pill-primary {ver_cls}" title="{ver_title}">
+    # Primary Gold Button: Verification Link (ALWAYS VISIBLE & PROMINENT unless explicitly hidden)
+    if show_verification_btn:
+        primary_btn = f'''<a {ver_href} {ver_onclick} class="pub-pill-btn pub-pill-primary {ver_cls}" title="{ver_title}">
       {ext_svg}
       <span>VERIFICATION LINK</span>
     </a>'''
+    else:
+        primary_btn = ""
 
     # Secondary Cyan Button
     if secondary_btn_label and secondary_btn_url:
@@ -4490,12 +4494,13 @@ def generate_cv_page():
             venue_name=inst,
             sub_extra=ref['role'],
             excerpt=ref_excerpt,
-            verification_url=ref.get('url'),
+            verification_url="",
             secondary_btn_label="CONTACT REFEREE",
             secondary_btn_url=f"mailto:{ref_email}?subject=Academic%20Inquiry%20regarding%20Dr.%20Zaid%20Amin",
             featured_pill="",
             extra_classes="",
-            cat_theme="indigo"
+            cat_theme="indigo",
+            show_verification_btn=False
         )
 
     html += f"""

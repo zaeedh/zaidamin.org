@@ -302,6 +302,30 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794046503057",
+      "timestamp": "2026-11-07T10:15:03.057Z",
+      "path": "/cv",
+      "title": "Achievement & Curriculum Vitae",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1794046478357",
+      "timestamp": "2026-11-07T10:14:38.357Z",
+      "path": "/cv",
+      "title": "Achievement & Curriculum Vitae",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
       "id": "tr-1794045601091",
       "timestamp": "2026-11-07T10:00:01.091Z",
       "path": "/",
@@ -1476,35 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1793963836168",
-      "timestamp": "2026-11-06T11:17:16.168Z",
-      "path": "/talks",
-      "title": "Media & Talks | Dr. Zaid Amin | zaidamin.org",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1793963796912",
-      "timestamp": "2026-11-06T11:16:36.912Z",
-      "path": "/talks",
-      "title": "Media & Talks | Dr. Zaid Amin | zaidamin.org",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-07T18:00:01.103887",
+  "updated_at": "2026-11-07T18:15:03.070055",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
