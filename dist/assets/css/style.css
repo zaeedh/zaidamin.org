@@ -9968,29 +9968,17 @@ a {
   gap: 10px;
   max-height: 440px;
   overflow-y: auto;
-  padding-right: 6px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(212, 175, 55, 0.35) rgba(4, 14, 24, 0.4);
+  overflow-x: hidden;
+  padding: 4px 6px 4px 2px;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
   scroll-behavior: smooth;
 }
 
 .video-playlist-stack::-webkit-scrollbar {
-  width: 5px;
-}
-
-.video-playlist-stack::-webkit-scrollbar-track {
-  background: rgba(4, 14, 24, 0.4);
-  border-radius: 999px;
-}
-
-.video-playlist-stack::-webkit-scrollbar-thumb {
-  background: rgba(212, 175, 55, 0.35);
-  border-radius: 999px;
-  transition: background 0.25s ease;
-}
-
-.video-playlist-stack::-webkit-scrollbar-thumb:hover {
-  background: rgba(212, 175, 55, 0.75);
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 .video-playlist-item {
