@@ -302,6 +302,42 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794041980060",
+      "timestamp": "2026-11-07T08:59:40.060Z",
+      "path": "/cv",
+      "title": "Achievement & Curriculum Vitae | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Internal Navigation"
+    },
+    {
+      "id": "tr-1794041977719",
+      "timestamp": "2026-11-07T08:59:37.719Z",
+      "path": "/",
+      "title": "Dr. Zaid Amin | Das Sein, Das Sollen | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1794041915069",
+      "timestamp": "2026-11-07T08:58:35.069Z",
+      "path": "/cv",
+      "title": "Achievement & Curriculum Vitae | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
       "id": "tr-1794033580102",
       "timestamp": "2026-11-07T06:39:40.102Z",
       "path": "/",
@@ -1464,47 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Internal Navigation"
-    },
-    {
-      "id": "tr-1793958019631",
-      "timestamp": "2026-11-06T09:40:19.631Z",
-      "path": "/research-team",
-      "title": "Research Team & Supervision Roster | Dr. Zaid Amin",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Internal Navigation"
-    },
-    {
-      "id": "tr-1793958016655",
-      "timestamp": "2026-11-06T09:40:16.655Z",
-      "path": "/publications",
-      "title": "Research & Publication Gallery | Dr. Zaid Amin | zaidamin.org",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Internal Navigation"
-    },
-    {
-      "id": "tr-1793958014335",
-      "timestamp": "2026-11-06T09:40:14.335Z",
-      "path": "/research",
-      "title": "Activity & Project | Dr. Zaid Amin | zaidamin.org",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Internal Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-07T14:39:40.184613",
+  "updated_at": "2026-11-07T16:59:40.089006",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,

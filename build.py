@@ -3924,12 +3924,12 @@ def generate_cv_page():
         highlight_cls = "is-highlight is-spotlight" if is_spotlight else ("is-highlight" if item.get('highlight') else "")
         spotlight_badge = '<span class="cv-spotlight-pill">★ SPOTLIGHT</span>' if is_spotlight else ""
         
-        item_url = item.get('url')
+        item_url = (item.get('url') or '').strip()
         ext_icon = render_svg_icon("external")
         url_link = f'''<a href="{item_url}" target="_blank" rel="noopener" class="cv-verification-link" title="Verify Official Distinction Record">
           <span>Verification Link</span>
           {ext_icon}
-        </a>''' if item_url else ''
+        </a>''' if item_url and item_url not in ['#', '', 'disabled', 'none'] else ''
         
         img_src = item.get('image')
         img_title = item.get('title')
@@ -3976,6 +3976,8 @@ def generate_cv_page():
     """
 
     for idx, item in enumerate(cv['academic_leadership'], 1):
+        item_url = (item.get('url') or '').strip()
+        url_link = f'<a href="{item_url}" target="_blank" rel="noopener" class="cv-verification-link" title="Verify Official Leadership Record"><span>Verification Link</span> {render_svg_icon("external")}</a>' if item_url and item_url not in ['#', '', 'disabled', 'none'] else ''
         html += f"""
         <div class="cv-card is-highlight">
           <div class="cv-card-top">
@@ -3987,6 +3989,7 @@ def generate_cv_page():
               <span class="pub-strip-idx">#{idx:02d}</span>
               <span class="cv-type-pill">{item['scope']}</span>
               <span class="cv-year-pill">{item['period']}</span>
+              {url_link}
             </div>
           </div>
           <div class="cv-card-body">
@@ -4008,6 +4011,8 @@ def generate_cv_page():
     """
 
     for idx, item in enumerate(cv['work_experience'], 1):
+        item_url = (item.get('url') or '').strip()
+        url_link = f'<a href="{item_url}" target="_blank" rel="noopener" class="cv-verification-link" title="Verify Appointment Record"><span>Verification Link</span> {render_svg_icon("external")}</a>' if item_url and item_url not in ['#', '', 'disabled', 'none'] else ''
         html += f"""
         <div class="cv-card">
           <div class="cv-card-top">
@@ -4018,6 +4023,7 @@ def generate_cv_page():
             <div class="cv-card-badges">
               <span class="pub-strip-idx">#{idx:02d}</span>
               <span class="cv-year-pill">{item['period']}</span>
+              {url_link}
             </div>
           </div>
           <div class="cv-card-body">
@@ -4039,6 +4045,8 @@ def generate_cv_page():
     """
 
     for idx, item in enumerate(cv['education'], 1):
+        item_url = (item.get('url') or '').strip()
+        url_link = f'<a href="{item_url}" target="_blank" rel="noopener" class="cv-verification-link" title="Verify Academic Degree"><span>Verification Link</span> {render_svg_icon("external")}</a>' if item_url and item_url not in ['#', '', 'disabled', 'none'] else ''
         html += f"""
         <div class="cv-card">
           <div class="cv-card-top">
@@ -4050,6 +4058,7 @@ def generate_cv_page():
               <span class="pub-strip-idx">#{idx:02d}</span>
               <span class="cv-type-pill">{item['distinction']}</span>
               <span class="cv-year-pill">{item['period']}</span>
+              {url_link}
             </div>
           </div>
           <div class="cv-card-body">
@@ -4083,7 +4092,8 @@ def generate_cv_page():
         is_spotlight = item.get('featured')
         highlight_cls = "is-highlight is-spotlight" if is_spotlight else "is-highlight"
         spotlight_badge = '<span class="cv-spotlight-pill">★ SPOTLIGHT</span>' if is_spotlight else ""
-        url_link = f'<a href="{item["url"]}" target="_blank" rel="noopener" class="cv-verification-link" title="Verify Official Keynote Record"><span>Verification Link</span> {render_svg_icon("external")}</a>' if item.get('url') else ''
+        talk_url = (item.get('url') or '').strip()
+        url_link = f'<a href="{talk_url}" target="_blank" rel="noopener" class="cv-verification-link" title="Verify Official Keynote Record"><span>Verification Link</span> {render_svg_icon("external")}</a>' if talk_url and talk_url not in ['#', '', 'disabled', 'none'] else ''
         img_tag = f'<div style="margin:12px 0; border-radius:10px; overflow:hidden; max-height:160px; border:1px solid rgba(212,175,55,0.3);"><img src="{item["image"]}" alt="{item.get("title", item.get("event", ""))}" style="width:100%; height:100%; object-fit:cover;"></div>' if (is_spotlight and item.get('image')) else ""
         title_str = item.get('title') or item.get('event')
         sub_str = item.get('event') if item.get('title') else item.get('venue', '')
@@ -4183,11 +4193,16 @@ def generate_cv_page():
     """
 
     for cert in cv['professional_certifications']:
+        cert_url = (cert.get('url') or '').strip()
+        url_link = f'<a href="{cert_url}" target="_blank" rel="noopener" class="cv-verification-link" title="Verify Credential Record"><span>Verification Link</span> {render_svg_icon("external")}</a>' if cert_url and cert_url not in ['#', '', 'disabled', 'none'] else ''
         html += f"""
           <div class="cv-mini-card">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;">
               <strong style="color: #ffffff; font-size: 0.98rem; line-height: 1.35;">{cert['name']}</strong>
-              <span class="cv-year-pill">{cert['period']}</span>
+              <div style="display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;">
+                <span class="cv-year-pill">{cert['period']}</span>
+                {url_link}
+              </div>
             </div>
             <div style="font-size: 0.85rem; color: var(--brand-blue); margin-top: 4px; font-weight: 600;">{cert['issuer']}</div>
             <div style="font-size: 0.82rem; color: var(--text-body); margin-top: 8px; line-height: 1.55;">{cert['details']}</div>
@@ -4300,9 +4315,14 @@ def generate_cv_page():
     """
 
     for ref in cv['academic_references']:
+        ref_url = (ref.get('url') or '').strip()
+        url_link = f'<a href="{ref_url}" target="_blank" rel="noopener" class="cv-verification-link" title="Verify Faculty Profile"><span>Verification Link</span> {render_svg_icon("external")}</a>' if ref_url and ref_url not in ['#', '', 'disabled', 'none'] else ''
         html += f"""
           <div class="cv-mini-card">
-            <div class="cv-ref-name">{ref['name']}</div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;">
+              <div class="cv-ref-name">{ref['name']}</div>
+              {url_link}
+            </div>
             <div class="cv-ref-role">{ref['role']}</div>
             <div class="cv-ref-inst">{ref['institution']}</div>
             <div class="cv-ref-contact">

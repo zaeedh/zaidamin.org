@@ -271,38 +271,43 @@
   "academic_leadership": [
     {
       "role": "QS Deputy Director FDSIT",
-      "period": "2026 - Present",
       "institution": "Faculty of Data Science and Information Technology (FDSIT), INTI International University, Malaysia",
+      "period": "2026 - Present",
       "scope": "Strategic Global University Rankings & Research Citations",
-      "responsibilities": "Spearheaded faculty initiatives to align research outputs, citations, and academic reputations with global QS World University Ranking metrics. Cultivated a strategic international network of academic and employer contacts to optimize reputation surveys and institutional standing."
+      "responsibilities": "Spearheaded faculty initiatives to align research outputs, citations, and academic reputations with global QS World University Ranking metrics. Cultivated a strategic international network of academic and employer contacts to optimize reputation surveys and institutional standing.",
+      "url": "#"
     },
     {
       "role": "Head of Master Program in Informatics Engineering (M.Kom)",
       "period": "2023 - 2024",
       "institution": "Universitas Bina Darma, Indonesia",
       "scope": "Postgraduate Program Direction & Quality Governance",
-      "responsibilities": "Directed curriculum delivery, research initiatives, and community service programs to fulfill 'Tri Dharma Perguruan Tinggi' mandates for the Master of Informatics Engineering Program. Supervised master thesis progression and national accreditation compliance."
+      "responsibilities": "Directed curriculum delivery, research initiatives, and community service programs to fulfill 'Tri Dharma Perguruan Tinggi' mandates for the Master of Informatics Engineering Program. Supervised master thesis progression and national accreditation compliance.",
+      "url": "#"
     },
     {
       "role": "Head of Information Systems Study Program",
       "period": "2022 - 2023",
       "institution": "Universitas Bina Darma, Indonesia",
       "scope": "Undergraduate Departmental Governance",
-      "responsibilities": "Directed curriculum delivery, faculty instructional evaluation, student capstone research, and community service programs to fulfill accreditation and academic quality benchmarks."
+      "responsibilities": "Directed curriculum delivery, faculty instructional evaluation, student capstone research, and community service programs to fulfill accreditation and academic quality benchmarks.",
+      "url": "#"
     },
     {
       "role": "Head of Informatics Engineering Study Program",
       "period": "2013 - 2014",
       "institution": "PalComTech Institute of Technology and Business, Indonesia",
       "scope": "Departmental Administration & Laboratory Standards",
-      "responsibilities": "Managed departmental instruction, course development, faculty standards, and student research in software engineering and network computing."
+      "responsibilities": "Managed departmental instruction, course development, faculty standards, and student research in software engineering and network computing.",
+      "url": "#"
     },
     {
       "role": "Head of Graphic Design and Multimedia Editing",
       "period": "2006 - 2011",
       "institution": "Palembang Television (PALTV), Indonesia",
       "scope": "Broadcast Post-Production & TVC Creative Direction",
-      "responsibilities": "Directed end-to-end post-production phases, from conceptual proposals and creative development to the final broadcast application of Television Commercials (TVC) and network identity branding."
+      "responsibilities": "Directed end-to-end post-production phases, from conceptual proposals and creative development to the final broadcast application of Television Commercials (TVC) and network identity branding.",
+      "url": "#"
     }
   ],
   "work_experience": [
@@ -310,31 +315,36 @@
       "role": "Senior Lecturer",
       "period": "2025 - Present",
       "institution": "Faculty of Data Science and Information Technology (FDSIT), INTI International University, Malaysia",
-      "description": "Curriculum Design: Developed and delivered advanced undergraduate and postgraduate IT/Data Science curricula. Research Mentorship: Supervised and mentored postgraduate and undergraduate students through rigorous thesis methodologies and publication-ready research. Academic Quality Control: Spearheaded internal quality assurance and program compliance to align instructional design with MQA and international accreditation standards."
+      "description": "Curriculum Design: Developed and delivered advanced undergraduate and postgraduate IT/Data Science curricula. Research Mentorship: Supervised and mentored postgraduate and undergraduate students through rigorous thesis methodologies and publication-ready research. Academic Quality Control: Spearheaded internal quality assurance and program compliance to align instructional design with MQA and international accreditation standards.",
+      "url": "#"
     },
     {
       "role": "Lecturer in Faculty of Informatics Engineering",
       "period": "2014 - 2025",
       "institution": "Universitas Bina Darma, Indonesia",
-      "description": "Fulfilled 'Tri Dharma Perguruan Tinggi' mandates through active curriculum instruction, peer-reviewed research, institutional grant leadership, and community engagement programs within the Informatics Engineering Study Program."
+      "description": "Fulfilled 'Tri Dharma Perguruan Tinggi' mandates through active curriculum instruction, peer-reviewed research, institutional grant leadership, and community engagement programs within the Informatics Engineering Study Program.",
+      "url": "#"
     },
     {
       "role": "Lecturer in Faculty of Informatics Engineering",
       "period": "2012 - 2014",
       "institution": "PalComTech Institute of Technology and Business, Indonesia",
-      "description": "Delivered comprehensive undergraduate coursework in computer networks, systems analysis, and software development, actively mentoring student technical projects."
+      "description": "Delivered comprehensive undergraduate coursework in computer networks, systems analysis, and software development, actively mentoring student technical projects.",
+      "url": "#"
     },
     {
       "role": "Program Instructor, 1-Year Professional Certification Course",
       "period": "2005 - 2006",
       "institution": "PalComTech Institute of Technology and Business, Indonesia",
-      "description": "Delivered comprehensive professional training in Networking (LAN/WAN, Wireless systems, and Windows Server 2003 Administration), Graphic Design, Computer Hardware Engineering, and 3D Studio Max for the 1-Year Professional Certification Program."
+      "description": "Delivered comprehensive professional training in Networking (LAN/WAN, Wireless systems, and Windows Server 2003 Administration), Graphic Design, Computer Hardware Engineering, and 3D Studio Max for the 1-Year Professional Certification Program.",
+      "url": "#"
     },
     {
       "role": "Software Developer",
       "period": "2004 - 2005",
       "institution": "DEPKOMINFO (Dinas Komunikasi dan Informatika) Kota Palembang, South Sumatera",
-      "description": "Developed an interactive, modular multimedia application ('CD Interaktif') serving as the official digital tourist guide for the State Government of South Sumatra Province, Indonesia."
+      "description": "Developed an interactive, modular multimedia application ('CD Interaktif') serving as the official digital tourist guide for the State Government of South Sumatra Province, Indonesia.",
+      "url": "#"
     }
   ],
   "education": [
@@ -344,7 +354,8 @@
       "institution": "Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM)",
       "country": "Malaysia",
       "distinction": "Tesis Cemerlang (Excellent Thesis) & Graduate on Time (GOT)",
-      "focus": "Human-Computer Interaction (HCI), Attention-Based Design, Digital Ethics & Multimodal Cybernetic Interventions."
+      "focus": "Human-Computer Interaction (HCI), Attention-Based Design, Digital Ethics & Multimodal Cybernetic Interventions.",
+      "url": "#"
     },
     {
       "degree": "Master of Informatics Engineering (M.Kom)",
@@ -352,7 +363,8 @@
       "institution": "Universitas Bina Darma",
       "country": "Indonesia",
       "distinction": "Graduated with Honors",
-      "focus": "IT Infrastructure, Multi-Tier Server Clustering, Routing Protocols & Scalable Big Data Systems."
+      "focus": "IT Infrastructure, Multi-Tier Server Clustering, Routing Protocols & Scalable Big Data Systems.",
+      "url": "#"
     },
     {
       "degree": "Bachelor of Informatics Engineering (S.Kom)",
@@ -360,7 +372,8 @@
       "institution": "PalComTech Institute of Technology and Business",
       "country": "Indonesia",
       "distinction": "Graduate in Network Engineering",
-      "focus": "Network Engineering, Wireless Topologies, Systems Analysis & Infrastructure Security."
+      "focus": "Network Engineering, Wireless Topologies, Systems Analysis & Infrastructure Security.",
+      "url": "#"
     },
     {
       "degree": "1-Year Computer Professional Certification Program",
@@ -368,7 +381,8 @@
       "institution": "PalComTech Institute of Technology and Business",
       "country": "Indonesia",
       "distinction": "Professional Certification",
-      "focus": "Graphic Design, Multimedia Authoring, Computer Hardware & 3D Visual Modeling."
+      "focus": "Graphic Design, Multimedia Authoring, Computer Hardware & 3D Visual Modeling.",
+      "url": "#"
     },
     {
       "degree": "Sekolah Menengah Umum (SMU)",
@@ -376,7 +390,8 @@
       "institution": "SMU Negeri 5 Palembang",
       "country": "Indonesia",
       "distinction": "Secondary School Graduation",
-      "focus": "Social Science Stream Tracking, Humanities & Foundations of Inquiry."
+      "focus": "Social Science Stream Tracking, Humanities & Foundations of Inquiry.",
+      "url": "#"
     }
   ],
   "invited_talks_and_media": [
@@ -496,31 +511,36 @@
       "name": "Certified Computer Forensic (FCCF), Grade A",
       "issuer": "FORESEC Authorized Learning Partner",
       "period": "2016 - 2017",
-      "details": "Advanced digital forensics, chain of custody, evidence acquisition, cyber forensic investigation standards."
+      "details": "Advanced digital forensics, chain of custody, evidence acquisition, cyber forensic investigation standards.",
+      "url": "#"
     },
     {
       "name": "Microsoft Technology Associate (MTA): HTML5 Application Development Fundamentals",
       "issuer": "Microsoft / Multimatics",
       "period": "Certified",
-      "details": "Core web application architecture, client-side lifecycle, HTML5, CSS3, JavaScript state logic."
+      "details": "Core web application architecture, client-side lifecycle, HTML5, CSS3, JavaScript state logic.",
+      "url": "#"
     },
     {
       "name": "CCNA Exploration: LAN Switching and Wireless",
       "issuer": "Cisco Systems, Inc.",
       "period": "Executive Letter (CEO)",
-      "details": "Course Completion with Executive Letter signed by John T. Chambers (CEO, Cisco Systems, Inc.). Covers VLANs, VTP, STP, Inter-VLAN routing, wireless network design, and switch security configurations."
+      "details": "Course Completion with Executive Letter signed by John T. Chambers (CEO, Cisco Systems, Inc.). Covers VLANs, VTP, STP, Inter-VLAN routing, wireless network design, and switch security configurations.",
+      "url": "#"
     },
     {
       "name": "CCNA Exploration: Routing Protocols and Concepts",
       "issuer": "Cisco Networking Academy",
       "period": "Course Completion",
-      "details": "Cisco Networking Academy Course Completion Certificate. Covers static routing, dynamic routing protocols (RIP, EIGRP, OSPF), VLSM, CIDR, and packet forwarding mechanics."
+      "details": "Cisco Networking Academy Course Completion Certificate. Covers static routing, dynamic routing protocols (RIP, EIGRP, OSPF), VLSM, CIDR, and packet forwarding mechanics.",
+      "url": "#"
     },
     {
       "name": "CCNA Exploration: Network Fundamentals",
       "issuer": "Cisco Systems, Inc.",
       "period": "Executive Letter (CEO)",
-      "details": "Course Completion with Executive Letter signed by John T. Chambers (CEO, Cisco Systems, Inc.). Covers OSI and TCP/IP layered architecture, addressing schemes, network media, Ethernet framing, and protocols."
+      "details": "Course Completion with Executive Letter signed by John T. Chambers (CEO, Cisco Systems, Inc.). Covers OSI and TCP/IP layered architecture, addressing schemes, network media, Ethernet framing, and protocols.",
+      "url": "#"
     }
   ],
   "core_research_and_books": {
@@ -556,28 +576,32 @@
       "role": "Head of Research & Innovation",
       "institution": "Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM)",
       "email": "nazlena.ali@ukm.edu.my",
-      "phone": ""
+      "phone": "",
+      "url": "#"
     },
     {
       "name": "Dr. Rahma Santhi Zinaida",
       "role": "Senior Lecturer",
       "institution": "School of Communication and Media Studies, Sunway University, Malaysia",
       "email": "rahmaz@sunway.edu.my",
-      "phone": ""
+      "phone": "",
+      "url": "#"
     },
     {
       "name": "Dr. Mohamad Taha Ijab",
       "role": "Head of Quality Assurance",
       "institution": "Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM)",
       "email": "taha@ukm.edu.my",
-      "phone": ""
+      "phone": "",
+      "url": "#"
     },
     {
       "name": "Prof. Hj. Isnawijayani, M.Si., Ph.D.",
       "role": "Director of Postgraduate Program",
       "institution": "Universitas Bina Darma, Indonesia",
       "email": "isnawijayani@binadarma.ac.id",
-      "phone": ""
+      "phone": "",
+      "url": "#"
     }
   ],
   "personal_interests": [
