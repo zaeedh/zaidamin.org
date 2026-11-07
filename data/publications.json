@@ -25,7 +25,7 @@
     "abstract": "<p class=\"lead-para\">A multimodal orchestration framework utilizing agentic intelligence for autonomous urban governance and municipal compliance.</p><div class=\"callout-box\"><strong>Key Finding:</strong> Autonomous compliance verification yields 94.2% operational accuracy across distributed civic infrastructure.</div>",
     "bibtex": "@article{amin2026trustworthy,\n  author = {Zaid Amin and collaborators},\n  title = {{Trustworthy AI for Sustainable Cities}},\n  journal = {Smart Cities},\n  volume = {9},\n  number = {1},\n  pages = {174},\n  year = {2026}\n}",
     "image": "assets/images/uploads/spotlight_mdpi.png",
-    "featured": false
+    "featured": true
   },
   {
     "id": "amin2026srivijayapedia",
@@ -123,7 +123,7 @@
     "authors": "Dr. Zaid Amin et al.",
     "abstract": "Attention and awareness when receiving and sharing information on social media are essential. Users can effectively identify misinformation, so they are not affected by the latent misleading. Through the vast digital growing information in social media today, increasing behavioural problems stemming from our one-click habit of easy decisions are blatantly faster than bot machines propagating misinformation. This book contributes to the knowledge of information-sharing behaviour to the public. This book also contributes to the discussion of opportunities and challenges in information sharing and user attention in helping to reduce the problems of misinformation sharing. Several guidelines for stakeholders and policymakers related to social media are also highlighted.",
     "image": "assets/images/uploads/Information_Sharing_Behaviour_on_Social_Media_-_Zaid_Amin_et_al_removed-1.png",
-    "featured": true,
+    "featured": false,
     "bibtex": "@incollection{amin2021attentionbased,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Attention-Based Design and Selective Exposure Amid COVID-19 Misinformation Sharing}},\n  year      = {2021},\n  journal   = {Lecture Notes in Computer Science},\n  doi       = {10.1007/978-3-030-78468-3_34},\n  url       = {https://doi.org/10.1007/978-3-030-78468-3_34}\n}",
     "url": "https://doi.org/10.1007/978-3-030-78468-3_34"
   },
