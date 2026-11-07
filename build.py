@@ -844,9 +844,14 @@ def get_spotlight_card_html():
         author_pre = "Author"
         author_name = "Dr. Zaid Amin"
         oa_badge_text = "Open Access Essay"
-        secondary_btn = '''<a href="research.html#articles" class="spotlight-btn-secondary font-cinzel" title="Explore All Activity &amp; Articles">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            <span>All Activity &nearr;</span>
+        meta_characteristic = "✦ ESSAYS &amp; PERSPECTIVES"
+        meta_detail = "80+ Scholarly Articles Archive &nearr;"
+        meta_tooltip = "Explore All Activity &amp; Articles Archive"
+        secondary_btn = f'''<a href="research.html#articles" class="spotlight-btn-secondary spotlight-btn-meta" title="{meta_tooltip}">
+            <div class="spotlight-meta-block">
+                <span class="spotlight-meta-kicker font-cinzel">{meta_characteristic}</span>
+                <span class="spotlight-meta-val">{meta_detail}</span>
+            </div>
         </a>'''
         cap1_icon, cap1_title, cap1_sub = "💡", "THEORETICAL FRAMEWORK", "Cybernetics & AI Ethics"
         cap2_icon, cap2_title, cap2_sub = "📚", "PUBLIC SCHOLARSHIP", "Peer-Reviewed Perspective"
@@ -870,9 +875,14 @@ def get_spotlight_card_html():
         author_pre = "Speaker"
         author_name = "Dr. Zaid Amin"
         oa_badge_text = role_str
-        secondary_btn = '''<a href="talks.html" class="spotlight-btn-secondary font-cinzel" title="Media &amp; Talks Archive">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            <span>Media Archive &nearr;</span>
+        meta_characteristic = "✦ BROADCAST &bull; KEYNOTE"
+        meta_detail = "TVRI &amp; Media Archive &nearr;"
+        meta_tooltip = "Media &amp; Talks Archive"
+        secondary_btn = f'''<a href="talks.html" class="spotlight-btn-secondary spotlight-btn-meta" title="{meta_tooltip}">
+            <div class="spotlight-meta-block">
+                <span class="spotlight-meta-kicker font-cinzel">{meta_characteristic}</span>
+                <span class="spotlight-meta-val">{meta_detail}</span>
+            </div>
         </a>'''
         cap1_icon, cap1_title, cap1_sub = "🎙️", "KEYNOTE SPEAKER", "International Broadcast"
         cap2_icon, cap2_title, cap2_sub = "📺", "ARCHIVE RECORDING", "Full Talk & Materials"
@@ -895,9 +905,14 @@ def get_spotlight_card_html():
         author_pre = "Lead PI"
         author_name = "Dr. Zaid Amin"
         oa_badge_text = badge_val
-        secondary_btn = '''<a href="cv.html#honors" class="spotlight-btn-secondary font-cinzel" title="Honors &amp; Distinctions">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            <span>Honors &amp; CV &nearr;</span>
+        meta_characteristic = "✦ RESEARCH EXCELLENCE"
+        meta_detail = "Official Curriculum Vitae &nearr;"
+        meta_tooltip = "Honors &amp; Distinctions"
+        secondary_btn = f'''<a href="cv.html#honors" class="spotlight-btn-secondary spotlight-btn-meta" title="{meta_tooltip}">
+            <div class="spotlight-meta-block">
+                <span class="spotlight-meta-kicker font-cinzel">{meta_characteristic}</span>
+                <span class="spotlight-meta-val">{meta_detail}</span>
+            </div>
         </a>'''
         cap1_icon, cap1_title, cap1_sub = "🏆", "DISTINCTION HONOR", "Research Excellence Award"
         cap2_icon, cap2_title, cap2_sub = "🌐", "CIVIC IMPACT", "Government Recognized PI"
@@ -918,10 +933,14 @@ def get_spotlight_card_html():
         author_pre = "Lead"
         author_name = "Dr. Zaid Amin"
         oa_badge_text = "Open Access"
-        doi_display = f"Direct DOI &nearr;" if doi else ""
-        secondary_btn = f'''<a href="{url}" target="_blank" rel="noopener" class="spotlight-btn-secondary font-cinzel" title="Direct Digital Object Identifier (DOI): {doi}">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            <span>{doi_display}</span>
+        meta_characteristic = "✦ SCOPUS Q1 &bull; OPEN ACCESS"
+        meta_detail = f"doi: {doi} &nearr;" if doi else "Direct DOI &nearr;"
+        meta_tooltip = f"Direct Digital Object Identifier (DOI): {doi}" if doi else "Publication Document"
+        secondary_btn = f'''<a href="{url}" target="_blank" rel="noopener" class="spotlight-btn-secondary spotlight-btn-meta" title="{meta_tooltip}">
+            <div class="spotlight-meta-block">
+                <span class="spotlight-meta-kicker font-cinzel">{meta_characteristic}</span>
+                <span class="spotlight-meta-val">{meta_detail}</span>
+            </div>
         </a>''' if doi else ''
 
     # Clean, dignified scholarly narrative (Gestalt unified flow without box clutter)

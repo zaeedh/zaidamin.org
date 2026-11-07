@@ -2429,7 +2429,7 @@ a {
 .ref-spotlight-actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   margin-top: auto;
   padding-top: 16px;
   border-top: 1px solid rgba(140, 180, 205, 0.12);
@@ -2437,19 +2437,21 @@ a {
 }
 
 .spotlight-btn-gold {
-  flex: 1.618;
+  flex: 1.05;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  height: 42px;
-  padding: 0 22px;
+  height: 46px;
+  padding: 0 16px;
   border-radius: 999px;
   background: linear-gradient(135deg, #fce09b 0%, #d4af37 100%);
   color: #020c15;
-  font-size: 0.80rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.05em;
+  text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
@@ -2464,13 +2466,13 @@ a {
 }
 
 .spotlight-btn-secondary {
-  flex: 1.0;
+  flex: 1.25;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  height: 42px;
-  padding: 0 20px;
+  height: 46px;
+  padding: 0 16px;
   border-radius: 999px;
   background: rgba(2, 16, 28, 0.72);
   border: 1px solid rgba(140, 180, 205, 0.24);
@@ -2485,6 +2487,64 @@ a {
   box-sizing: border-box;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.spotlight-btn-secondary.spotlight-btn-meta {
+  padding: 4px 16px;
+  background: rgba(3, 18, 32, 0.78);
+  border: 1px solid rgba(56, 189, 248, 0.32);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.spotlight-btn-secondary.spotlight-btn-meta:hover {
+  background: rgba(4, 26, 48, 0.92);
+  border-color: rgba(56, 189, 248, 0.65);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.22);
+}
+
+.spotlight-meta-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.25;
+  width: 100%;
+  overflow: hidden;
+}
+
+.spotlight-meta-kicker {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #38bdf8;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.spotlight-meta-val {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: #cbd5e1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  margin-top: 1px;
+}
+
+.spotlight-btn-secondary.spotlight-btn-meta:hover .spotlight-meta-val {
+  color: #f8fafc;
+}
+
+.spotlight-btn-secondary.spotlight-btn-meta:hover .spotlight-meta-kicker {
+  color: #7dd3fc;
 }
 
 .spotlight-btn-secondary:hover {
