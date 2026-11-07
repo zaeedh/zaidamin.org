@@ -37,6 +37,18 @@ def render_svg_icon(name):
     }
     return icons.get(name, "")
 
+def get_page_browser_title(page_key, default_title=""):
+    try:
+        profile = load_json("profile.json")
+        pt = profile.get("page_titles", {})
+        if page_key in pt and str(pt[page_key]).strip():
+            return str(pt[page_key]).strip()
+        if page_key == "home" and profile.get("site_title", "").strip():
+            return str(profile.get("site_title")).strip()
+    except Exception:
+        pass
+    return default_title
+
 def get_html_head(title="Dr. Zaid Amin | Academic & Computational Researcher | zaidamin.org", description=""):
     profile = load_json("profile.json")
     ga_snippet = ""
@@ -1476,7 +1488,7 @@ def generate_golden_ratio_home():
     profile = load_json("profile.json")
     publications = load_json("publications.json")
 
-    site_browser_title = profile.get("site_title", f"Dr. Zaid Amin | {profile.get('epigraph', 'Das Sein, Das Sollen')} | zaidamin.org")
+    site_browser_title = get_page_browser_title("home", f"Dr. Zaid Amin | {profile.get('epigraph', 'Das Sein, Das Sollen')} | zaidamin.org")
     html = get_html_head(site_browser_title)
     html += get_page_header("home")
 
@@ -2090,7 +2102,7 @@ def generate_publications_page():
     publications = load_json("publications.json")
 
     page_head = get_html_head(
-        "Research & Publication Gallery | Dr. Zaid Amin | zaidamin.org",
+        get_page_browser_title("publications", "Research & Publication Gallery | Dr. Zaid Amin | zaidamin.org"),
         "A premium scholarly gallery of 24+ peer-reviewed works, books, journal articles, conference proceedings, and preprints across Human-Computer Interaction, AI Governance, and Behavioral Computing by Dr. Zaid Amin."
     )
     page_header = get_page_header("publications")
@@ -2353,7 +2365,7 @@ def generate_research_page():
     research = load_json("research.json")
     articles = load_json("articles.json") if (DATA_DIR / "articles.json").exists() else []
 
-    html = get_html_head("Activity & Project | Dr. Zaid Amin | zaidamin.org", "Scholarly activity, 80+ peer essays, research pillars, and funded grants authored and led by Dr. Zaid Amin.")
+    html = get_html_head(get_page_browser_title("research", "Activity & Project | Dr. Zaid Amin | zaidamin.org"), "Scholarly activity, 80+ peer essays, research pillars, and funded grants authored and led by Dr. Zaid Amin.")
     html += get_page_header("research")
 
     # Categories for articles
@@ -2670,7 +2682,7 @@ def generate_talks_page():
     opinions = media_data.get("opinions", [])
 
     page_head = get_html_head(
-        "Media & Talks | Dr. Zaid Amin | zaidamin.org",
+        get_page_browser_title("talks", "Media & Talks | Dr. Zaid Amin | zaidamin.org"),
         "Televised talkshows, international keynotes, visiting speaker discourses, and critical philosophical opinions by Dr. Zaid Amin."
     )
     page_header = get_page_header("talks")
@@ -3660,7 +3672,7 @@ def generate_cv_page():
     portfolio_url = portfolio_data.get('url', 'https://tinyurl.com/yjd89mcj') if isinstance(portfolio_data, dict) else str(portfolio_data)
 
     html = get_html_head(
-        "Achievement & Curriculum Vitae | Dr. Zaid Amin | zaidamin.org",
+        get_page_browser_title("cv", "Achievement & Curriculum Vitae | Dr. Zaid Amin | zaidamin.org"),
         "Official Curriculum Vitae and Achievements of Dr. Zaid Amin, Senior Lecturer & QS Deputy Director at INTI International University, Ph.D. from UKM (Tesis Cemerlang & GOT)."
     )
     html += get_page_header("cv")
@@ -4524,7 +4536,7 @@ def generate_article_reader_page():
 def generate_team_page():
     team_data = load_json("team.json")
     page_head = get_html_head(
-        "Research Team & Supervision Roster | Dr. Zaid Amin",
+        get_page_browser_title("team", "Research Team & Supervision Roster | Dr. Zaid Amin"),
         "Doctoral candidates, Master's by Research scholars, and international research collaborators under the academic supervision and mentorship of Dr. Zaid Amin."
     )
     page_header = get_page_header("team")
