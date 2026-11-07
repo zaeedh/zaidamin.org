@@ -8734,20 +8734,36 @@ a {
   flex: 1;
 }
 
+.bokify-card-meta-block {
+  margin-top: auto;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
 .bokify-card-doi {
   font-size: 0.74rem;
   color: #64748b;
-  margin-top: auto;
-  padding-top: 8px;
+  margin-top: 0;
+  padding-top: 0;
   margin-bottom: 2px;
   font-family: var(--font-mono, monospace);
   word-break: break-all;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.bokify-card-isbn {
+  margin-top: 1px;
 }
 
 .bokify-doi-lbl {
   color: #94a3b8;
   font-weight: 700;
-  margin-right: 4px;
+  letter-spacing: 0.02em;
 }
 
 .bokify-doi-val {
@@ -8764,6 +8780,55 @@ a {
 
 .bokify-doi-link:hover {
   text-decoration: underline;
+}
+
+/* ── Available on Request Capsule Button (Gestalt Proximity & Golden Ratio styling) ── */
+.pub-pill-btn.pub-pill-request {
+  background: linear-gradient(135deg, rgba(14, 28, 44, 0.92) 0%, rgba(6, 17, 30, 0.98) 100%) !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.50) !important;
+  color: #f1f5f9 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  letter-spacing: 0.04em !important;
+  font-weight: 800 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+}
+
+.pub-pill-btn.pub-pill-request:hover {
+  background: linear-gradient(135deg, rgba(22, 42, 66, 0.96) 0%, rgba(12, 26, 42, 0.98) 100%) !important;
+  border-color: rgba(56, 189, 248, 0.85) !important;
+  box-shadow: 0 6px 22px rgba(56, 189, 248, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  transform: translateY(-1px) !important;
+  color: #ffffff !important;
+}
+
+.pub-pill-lock-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(3, 14, 26, 0.95);
+  border: 1.2px solid rgba(56, 189, 248, 0.55);
+  color: #38bdf8;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(56, 189, 248, 0.25);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.pub-pill-btn.pub-pill-request:hover .pub-pill-lock-icon {
+  border-color: #38bdf8;
+  color: #7dd3fc;
+  transform: scale(1.08);
+}
+
+.pub-strip-actions .pub-pill-request {
+  min-width: 185px !important;
 }
 
 /* Card Actions (Gestalt Proximity) */

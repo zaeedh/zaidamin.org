@@ -1786,10 +1786,23 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
     # Render each book card in the Curated Shelf
     shelf_cards_html = ""
     for idx, pub in enumerate(cat_items, 1):
-        url = pub.get("url", "").strip()
-        doi = pub.get("doi", "").strip()
-        if not url and doi:
+        url = pub.get("url", "").strip() if pub.get("url") else ""
+        doi = pub.get("doi", "").strip() if pub.get("doi") else ""
+        isbn = pub.get("isbn", "").strip() if pub.get("isbn") else ""
+        link_enabled = pub.get("link_enabled", True)
+
+        # Check if direct link is active and valid (not disabled, not placeholder '#', not 'on process')
+        is_link_active = bool(
+            link_enabled is not False
+            and url != "#"
+            and doi != "#"
+            and "on process" not in doi.lower()
+            and "on process" not in url.lower()
+            and (url or doi)
+        )
+        if not url and doi and is_link_active:
             url = f"https://doi.org/{doi}"
+
         venue = pub.get("venue", "Academic Publication")
         series_text = get_series(venue)
         publisher = get_publisher(venue, doi)
@@ -1805,8 +1818,11 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
         is_featured = (pub.get("id") == featured_book.get("id"))
         primary_tag = '<span class="bokify-primary-chip">★ Primary Volume</span>' if is_featured else ""
 
-        # Download pill
-        if url:
+        title_enc = _html_mod.escape(pub.get("title", ""))
+        mailto = f"mailto:zaid.amin@newinti.edu.my?subject=Requesting%20Full-Text:%20{title_enc}"
+
+        # Action Button: Download/DOI when link is active, otherwise Available on Request (Lock icon capsule)
+        if is_link_active and url:
             label = "Download / DOI"
             if "arxiv.org" in url:
                 label = "Download (arXiv)"
@@ -1814,11 +1830,29 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
                 label = "Download (SSRN)"
             dl_btn = f'<a href="{url}" target="_blank" rel="noopener" class="pub-pill-btn pub-pill-primary">{render_svg_icon_fn("download")} <span>{label}</span></a>'
         else:
-            title_enc = _html_mod.escape(pub.get("title", ""))
-            mailto = f"mailto:zaid.amin@newinti.edu.my?subject=Requesting%20Full-Text:%20{title_enc}"
-            dl_btn = f'<a href="{mailto}" class="pub-pill-btn pub-pill-primary">{render_svg_icon_fn("email")} <span>Request Full-Text</span></a>'
+            lock_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>'
+            dl_btn = f'''<a href="{mailto}" class="pub-pill-btn pub-pill-primary pub-pill-request" title="Direct download unavailable. Available on request via institutional inquiry.">
+              <span class="pub-pill-lock-icon">{lock_svg}</span>
+              <span>Available on Request</span>
+            </a>'''
 
-        doi_html = f'<div class="bokify-card-doi"><span class="bokify-doi-lbl">DOI:</span> <span class="bokify-doi-val">{doi}</span></div>' if doi else ""
+        # DOI / ISBN / External Link row
+        doi_val = doi if doi else ("#" if not is_link_active else "")
+        if not doi_val and url:
+            doi_val = url
+
+        if is_link_active and doi_val and doi_val != "#":
+            if doi_val.startswith("http://") or doi_val.startswith("https://"):
+                doi_content = f'<a href="{doi_val}" target="_blank" rel="noopener" class="bokify-doi-link">{doi_val}</a>'
+            elif "/" in doi_val:
+                doi_content = f'<a href="https://doi.org/{doi_val}" target="_blank" rel="noopener" class="bokify-doi-link">{doi_val}</a>'
+            else:
+                doi_content = f'<span class="bokify-doi-val">{doi_val}</span>'
+        else:
+            doi_content = f'<span class="bokify-doi-val">{doi_val or "#"}</span>'
+
+        doi_html = f'<div class="bokify-card-doi"><span class="bokify-doi-lbl">DOI/ISBN/LINK:</span> {doi_content}</div>'
+        isbn_html = f'<div class="bokify-card-doi bokify-card-isbn"><span class="bokify-doi-lbl">ISBN:</span> <span class="bokify-doi-val">{isbn}</span></div>' if isbn else ""
 
         shelf_cards_html += f"""
         <article class="bokify-shelf-card pub-item" data-category="{cat["category_key"].lower()}" data-title="{escaped_title_lower}" data-venue="{escaped_venue_lower}" data-year="{year}">
@@ -1856,7 +1890,10 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
             <div class="bokify-card-series">{series_text}</div>
             <div class="bokify-card-divider"></div>
             {f'<p class="bokify-card-excerpt">{excerpt}</p>' if excerpt else ''}
-            {doi_html}
+            <div class="bokify-card-meta-block">
+              {doi_html}
+              {isbn_html}
+            </div>
           </div>
 
           <!-- Card Actions (Gestalt Proximity) -->
@@ -2237,12 +2274,22 @@ def generate_publications_page():
         return clean
 
     def render_download_pill(pub):
-        url = pub.get("url", "").strip()
-        doi = pub.get("doi", "").strip()
-        if not url and doi:
+        url = pub.get("url", "").strip() if pub.get("url") else ""
+        doi = pub.get("doi", "").strip() if pub.get("doi") else ""
+        link_enabled = pub.get("link_enabled", True)
+
+        is_link_active = bool(
+            link_enabled is not False
+            and url != "#"
+            and doi != "#"
+            and "on process" not in doi.lower()
+            and "on process" not in url.lower()
+            and (url or doi)
+        )
+        if not url and doi and is_link_active:
             url = f"https://doi.org/{doi}"
 
-        if url:
+        if is_link_active and url:
             label = "Download"
             if "arxiv.org" in url:
                 label = "Download (arXiv)"
@@ -2260,7 +2307,8 @@ def generate_publications_page():
         else:
             title_enc = html.escape(pub.get("title", ""))
             mailto = f"mailto:zaid.amin@newinti.edu.my?subject=Requesting%20Full-Text:%20{title_enc}"
-            return f'<a href="{mailto}" class="pub-pill-btn pub-pill-primary">{render_svg_icon("email")} <span>Request Full-Text</span></a>'
+            lock_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>'
+            return f'<a href="{mailto}" class="pub-pill-btn pub-pill-primary pub-pill-request" title="Direct download unavailable. Available on request via email."><span class="pub-pill-lock-icon">{lock_svg}</span> <span>Available on Request</span></a>'
 
     # Build category sections
     sections_html = ""
@@ -2282,11 +2330,12 @@ def generate_publications_page():
             if len(short_venue) > 42:
                 short_venue = short_venue[:40] + "..."
             excerpt = clean_excerpt(pub.get("abstract", ""), max_len=180)
-            doi = pub.get("doi", "").strip()
-            url = pub.get("url", "").strip()
-            if not url and doi:
-                url = f"https://doi.org/{doi}"
-            doi_html = f'<span class="pub-strip-doi-inline"><span class="pub-strip-doi-lbl">DOI:</span> <span class="pub-strip-doi-val">{doi}</span></span>' if doi else ""
+            doi = pub.get("doi", "").strip() if pub.get("doi") else ""
+            url = pub.get("url", "").strip() if pub.get("url") else ""
+            isbn = pub.get("isbn", "").strip() if pub.get("isbn") else ""
+            
+            doi_html = f'<span class="pub-strip-doi-inline"><span class="pub-strip-doi-lbl">DOI/ISBN/LINK:</span> <span class="pub-strip-doi-val">{doi}</span></span>' if doi else ""
+            isbn_html = f'<span class="pub-strip-doi-inline"><span class="pub-strip-doi-lbl">ISBN:</span> <span class="pub-strip-doi-val">{isbn}</span></span>' if isbn else ""
             year = pub.get("year", "")
             escaped_title = html.escape(pub["title"])
             escaped_title_lower = html.escape(pub["title"].lower())
@@ -2320,6 +2369,7 @@ def generate_publications_page():
                     <span class="pub-strip-dot">&bull;</span>
                     <span class="pub-strip-authors">Dr. Zaid Amin et al.</span>
                     {f'<span class="pub-strip-dot">&bull;</span> {doi_html}' if doi_html else ''}
+                    {f'<span class="pub-strip-dot">&bull;</span> {isbn_html}' if isbn_html else ''}
                   </div>
 
                   <!-- Row 4: Abstract Excerpt (Compact 1-2 lines) -->
