@@ -1563,10 +1563,9 @@ window.showCvNotice = showCvNotice;
    Provides clean, modern, immersive navigation with full accessibility & security.
    ============================================================================== */
 (function initStealthNavigationEngine() {
-  const STEALTH_SELECTOR = 'nav a, .top-epigraph-menu a, .ref-menu-tab, .pub-pill-btn, .top-link-pill, .cv-jump-link, .cv-sublayer-pill, .spotlight-btn-primary, .spotlight-btn-secondary, .spotlight-btn, .pub-btn, .article-back-link, [data-stealth]';
+  const STEALTH_SELECTOR = 'nav a, .top-epigraph-menu a, .ref-menu-tab, .pub-pill-btn, .top-link-pill, .cv-jump-link, .cv-sublayer-pill, .spotlight-btn-primary, .spotlight-btn-secondary, .spotlight-btn, .pub-btn, .article-back-link, .ref-item-btn, [data-stealth]';
 
-  // 1. Mouse enter: Temporarily decouple href so the browser displays NO bottom-left URL popup
-  document.addEventListener('pointerover', function(e) {
+  function cloakLink(e) {
     const link = e.target.closest(STEALTH_SELECTOR);
     if (!link) return;
 
@@ -1580,16 +1579,23 @@ window.showCvNotice = showCvNotice;
         if (!link.getAttribute('tabindex')) link.setAttribute('tabindex', '0');
       }
     }
-  }, { passive: true });
+  }
 
-  // 2. Mouse leave: Cleanly restore href
-  document.addEventListener('pointerout', function(e) {
+  function uncloakLink(e) {
     const link = e.target.closest(STEALTH_SELECTOR);
     if (link && link.hasAttribute('data-raw-href')) {
       link.setAttribute('href', link.getAttribute('data-raw-href'));
       link.removeAttribute('data-raw-href');
     }
-  }, { passive: true });
+  }
+
+  // 1. Mouse & pointer enter: Temporarily decouple href so the browser displays NO bottom-left URL popup
+  document.addEventListener('mouseover', cloakLink, { passive: true });
+  document.addEventListener('pointerover', cloakLink, { passive: true });
+
+  // 2. Mouse & pointer leave: Cleanly restore href
+  document.addEventListener('mouseout', uncloakLink, { passive: true });
+  document.addEventListener('pointerout', uncloakLink, { passive: true });
 
   // 3. Right-click: Context menu needs the href to offer "Open link in new tab" & "Copy link address"
   document.addEventListener('contextmenu', function(e) {
