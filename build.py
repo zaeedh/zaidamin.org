@@ -1913,21 +1913,27 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
         """
 
     # Dynamic Wireframe / Forthcoming Slots to complete the Golden Ratio 3-column grid
+    pipeline_file = BASE_DIR / "data" / "books_pipeline.json"
+    pipeline_items = []
+    if pipeline_file.exists():
+        try:
+            with open(pipeline_file, "r", encoding="utf-8") as pf:
+                loaded_pipe = json.load(pf)
+                if isinstance(loaded_pipe, list):
+                    pipeline_items = loaded_pipe
+        except Exception:
+            pass
+
     remainder = len(cat_items) % 3
     needed_slots = (3 - remainder) % 3 if remainder != 0 else 0
-    if needed_slots > 0:
-        pipeline_file = BASE_DIR / "data" / "books_pipeline.json"
-        pipeline_items = []
-        if pipeline_file.exists():
-            try:
-                with open(pipeline_file, "r", encoding="utf-8") as pf:
-                    loaded_pipe = json.load(pf)
-                    if isinstance(loaded_pipe, list):
-                        pipeline_items = loaded_pipe
-            except Exception:
-                pass
+    display_slots_count = max(needed_slots, len(pipeline_items))
+    if display_slots_count > 0:
+        # Round up to multiple of 3 if needed so the grid is always complete
+        total_items = len(cat_items) + display_slots_count
+        if total_items % 3 != 0:
+            display_slots_count += (3 - (total_items % 3))
 
-        for p_idx in range(needed_slots):
+        for p_idx in range(display_slots_count):
             total_card_idx = len(cat_items) + p_idx + 1
             p_data = pipeline_items[p_idx] if p_idx < len(pipeline_items) else {
                 "title": f"Forthcoming Monograph Vol. {total_card_idx:02d}",
