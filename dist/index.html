@@ -331,10 +331,21 @@
               <polyline points="9 22 9 12 15 12 15 22"/>
             </svg>
           </a>
-          <a href="/publications" class="ref-menu-tab" title="Research & Pubs">
-            <span class="tab-txt-full">Research & Pubs</span>
-            <span class="tab-txt-compact">Research</span>
-          </a>
+          <div class="ref-menu-dropdown-wrapper">
+            <a href="/publications" class="ref-menu-tab" title="Research & Pubs" aria-haspopup="true" aria-expanded="false">
+              <span class="tab-txt-full">Research & Pubs <span class="ref-chevron">▾</span></span>
+              <span class="tab-txt-compact">Research <span class="ref-chevron">▾</span></span>
+            </a>
+            <div class="ref-menu-dropdown-menu" role="menu">
+              <a href="#" class="ref-dropdown-team-link" role="menuitem" title="Research Team">
+                <div class="ref-team-label-wrap">
+                  <span class="ref-team-sparkle">✦</span>
+                  <span class="ref-team-label">Research Team</span>
+                </div>
+                <span class="ref-team-arrow">&nearr;</span>
+              </a>
+            </div>
+          </div>
           <a href="/research" class="ref-menu-tab" title="Activity & Project">
             <span class="tab-txt-full">Activity & Project</span>
             <span class="tab-txt-compact">Activity</span>

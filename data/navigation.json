@@ -31,10 +31,10 @@
         {
           "id": "team",
           "label": "Research Team",
-          "url": "/team",
+          "url": "#",
           "target": "_self",
           "icon": "✦",
-          "enabled": false,
+          "enabled": true,
           "active_pages": [
             "team"
           ]
