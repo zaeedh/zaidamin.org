@@ -2429,38 +2429,38 @@ a {
 .ref-spotlight-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   margin-top: auto;
-  padding-top: 14px;
-  border-top: 1px solid rgba(140, 180, 205, 0.14);
+  padding-top: 16px;
+  border-top: 1px solid rgba(140, 180, 205, 0.12);
   width: 100%;
 }
 
 .spotlight-btn-gold {
-  flex: 1.25;
+  flex: 1.618;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   height: 42px;
-  padding: 0 20px;
+  padding: 0 22px;
   border-radius: 999px;
   background: linear-gradient(135deg, #fce09b 0%, #d4af37 100%);
   color: #020c15;
   font-size: 0.80rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.32);
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.28);
   transition: all 0.25s ease;
   box-sizing: border-box;
 }
 
 .spotlight-btn-gold:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.48);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.44);
 }
 
 .spotlight-btn-secondary {
@@ -2468,14 +2468,15 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
+  gap: 8px;
   height: 42px;
-  padding: 0 14px;
+  padding: 0 20px;
   border-radius: 999px;
-  background: rgba(2, 16, 28, 0.65);
-  border: 1px solid rgba(140, 180, 205, 0.22);
+  background: rgba(2, 16, 28, 0.72);
+  border: 1px solid rgba(140, 180, 205, 0.24);
   color: #a8c2d2;
-  font-size: 0.73rem;
+  font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.04em;
   text-decoration: none;
   white-space: nowrap;
@@ -2483,13 +2484,14 @@ a {
   transition: all 0.25s ease;
   box-sizing: border-box;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .spotlight-btn-secondary:hover {
   color: #fce09b;
   border-color: rgba(212, 175, 55, 0.45);
   transform: translateY(-1px);
-  background: rgba(3, 22, 38, 0.85);
+  background: rgba(3, 22, 38, 0.88);
 }
 
 @media (max-width: 600px) {

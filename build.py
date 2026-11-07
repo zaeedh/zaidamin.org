@@ -905,8 +905,8 @@ def get_spotlight_card_html():
         author_pre = "Lead"
         author_name = "Dr. Zaid Amin"
         oa_badge_text = "Open Access"
-        doi_display = f"DOI: {doi}" if doi else ""
-        secondary_btn = f'''<a href="{url}" target="_blank" rel="noopener" class="spotlight-btn-secondary font-cinzel" title="Direct Digital Object Identifier (DOI)">
+        doi_display = f"Direct DOI &nearr;" if doi else ""
+        secondary_btn = f'''<a href="{url}" target="_blank" rel="noopener" class="spotlight-btn-secondary font-cinzel" title="Direct Digital Object Identifier (DOI): {doi}">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             <span>{doi_display}</span>
         </a>''' if doi else ''
