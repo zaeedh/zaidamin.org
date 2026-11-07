@@ -11396,17 +11396,19 @@ h1.cv-hero-name {
    Subordinate Quiet Intros, Zero Visual Noise, Seamless Audio & Grid Alignment
    ============================================================================== */
 
-/* 1. Universal Container & Audio Player Grid Alignment */
+/* 1. Universal Container & Audio Player Grid Alignment (100% Golden Ratio Alignment with Option 1 Storm) */
 .pub-gallery-container,
 .activity-page-container,
 .talks-page-container,
 .cv-page-container,
-.subpage-container {
+.subpage-container,
+.team-page-container,
+.article-reader-container {
   width: 100% !important;
-  max-width: 1280px !important;
+  max-width: 100% !important;
   margin: 0 auto !important;
-  padding-left: 24px !important;
-  padding-right: 24px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
   padding-top: 20px !important;
   padding-bottom: 8px !important;
   box-sizing: border-box !important;
@@ -11415,9 +11417,9 @@ h1.cv-hero-name {
 .royal-vanish-container {
   position: relative !important;
   width: 100% !important;
-  max-width: 1280px !important;
+  max-width: 100% !important;
   margin: 4px auto 10px auto !important;
-  padding: 0 24px !important;
+  padding: 0 !important;
   box-sizing: border-box !important;
   display: flex !important;
   align-items: center !important;
