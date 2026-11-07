@@ -3,6 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Force HTTPS Protocol & Auto-Upgrade Insecure Resources -->
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <script>
+    if (location.protocol === 'http:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+      location.replace('https://' + location.hostname + location.pathname + location.search + location.hash);
+    }
+  </script>
   <title>Dr. Zaid Amin | Das Sein, Das Sollen | zaidamin.org</title>
   <meta name="description" content="Senior Lecturer and computational researcher specializing in the intersection of Human-Computer Interaction (HCI), Behavior & Social Computing, Digital Ethics, and AI Governance. Ph.D. graduate from Universiti Kebangsaan Malaysia (UKM). Former Head of Master in Informatics Engineering and Information Systems programs, actively advancing research in agentic AI alignment, attention-based cognitive interventions, and civic technology.">
   <meta name="author" content="Dr. Zaid Amin">
@@ -2559,7 +2566,7 @@
             </div>
             <div class="ref-item-card">
               <div class="ref-item-thumb-box">
-                <img src="http://i134.photobucket.com/albums/q94/telekomu/ngn1.jpg" alt="Next Generation Network" class="ref-item-thumb" width="78" height="56" loading="lazy" onerror="this.onerror=null;this.src='assets/images/thumb-research.jpg';">
+                <img src="assets/images/thumb-research.jpg" alt="Next Generation Network" class="ref-item-thumb" width="78" height="56" loading="lazy" onerror="this.onerror=null;this.src='assets/images/thumb-research.jpg';">
               </div>
               <div class="ref-item-info">
                 <div class="ref-card-kicker-row">

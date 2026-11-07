@@ -103,6 +103,13 @@ def get_html_head(title="Dr. Zaid Amin | Academic & Computational Researcher | z
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Force HTTPS Protocol & Auto-Upgrade Insecure Resources -->
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <script>
+    if (location.protocol === 'http:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {{
+      location.replace('https://' + location.hostname + location.pathname + location.search + location.hash);
+    }}
+  </script>
   <title>{title}</title>
   <meta name="description" content="{description}">
   <meta name="author" content="Dr. Zaid Amin">
@@ -4807,6 +4814,13 @@ def generate_cms_portal_page():
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Force HTTPS Protocol & Auto-Upgrade Insecure Resources -->
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <script>
+    if (location.protocol === 'http:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {{
+      location.replace('https://' + location.hostname + location.pathname + location.search + location.hash);
+    }}
+  </script>
   <title>CMS Studio Portal • Dr. Zaid Amin</title>
   <link rel="icon" type="image/png" href="../favicon-32x32.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">

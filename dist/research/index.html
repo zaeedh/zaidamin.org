@@ -3,6 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Force HTTPS Protocol & Auto-Upgrade Insecure Resources -->
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <script>
+    if (location.protocol === 'http:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+      location.replace('https://' + location.hostname + location.pathname + location.search + location.hash);
+    }
+  </script>
   <title>Activity & Project | Dr. Zaid Amin | zaidamin.org</title>
   <meta name="description" content="Scholarly activity, 80+ peer essays, research pillars, and funded grants authored and led by Dr. Zaid Amin.">
   <meta name="author" content="Dr. Zaid Amin">
@@ -1205,7 +1212,7 @@
         <article class="article-card" data-category="AI & Cybernetics" data-title="next generation network" data-tags="ai & cybernetics">
           <!-- Small Thumbnail Frame (Golden Ratio Harmonic Proportion) -->
           <a href="article.html?id=next-generation-network" class="article-card-thumb-wrap" aria-label="Next Generation Network">
-            <img src="http://i134.photobucket.com/albums/q94/telekomu/ngn1.jpg" alt="Next Generation Network" class="article-card-thumb" loading="lazy" onerror="this.onerror=null; this.src='assets/images/thumb-research.jpg';">
+            <img src="assets/images/thumb-research.jpg" alt="Next Generation Network" class="article-card-thumb" loading="lazy" onerror="this.onerror=null; this.src='assets/images/thumb-research.jpg';">
             <div class="article-card-thumb-overlay"></div>
             <span class="article-card-cat-badge">AI & Cybernetics</span>
             
@@ -1953,7 +1960,7 @@
         <article class="article-card" data-category="Essays & Perspectives" data-title="b/a=1,618" data-tags="essays & perspectives">
           <!-- Small Thumbnail Frame (Golden Ratio Harmonic Proportion) -->
           <a href="article.html?id=ba1618" class="article-card-thumb-wrap" aria-label="b/a=1,618">
-            <img src="http://pranaindonesia.files.wordpress.com/2008/06/pembagian-agung.jpg?w=291&amp;h=115" alt="b/a=1,618" class="article-card-thumb" loading="lazy" onerror="this.onerror=null; this.src='assets/images/thumb-research.jpg';">
+            <img src="assets/images/thumb-attention.jpg" alt="b/a=1,618" class="article-card-thumb" loading="lazy" onerror="this.onerror=null; this.src='assets/images/thumb-research.jpg';">
             <div class="article-card-thumb-overlay"></div>
             <span class="article-card-cat-badge">Essays & Perspectives</span>
             

@@ -3,6 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Force HTTPS Protocol & Auto-Upgrade Insecure Resources -->
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <script>
+    if (location.protocol === 'http:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+      location.replace('https://' + location.hostname + location.pathname + location.search + location.hash);
+    }
+  </script>
   <title>Postgraduate Lab & Supervision | Dr. Zaid Amin | zaidamin.org</title>
   <meta name="description" content="I am actively seeking highly motivated, intellectually curious postgraduate scholars (Ph.D. candidates and Master's by Research students) who wish to solve profound problems at the intersection of Human-Computer Interaction (HCI), AI Governance, Cognitive Attention Systems, and Digital Society. If you want your research to move beyond incremental benchmarking and directly impact human well-being and technological policy, our group provides an intellectually rigorous and supportive home.">
   <meta name="author" content="Dr. Zaid Amin">
