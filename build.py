@@ -4315,14 +4315,23 @@ def generate_cv_page():
     html += f"""
         </div>
 
-        <div class="cv-mini-card" style="padding: 20px 24px;">
-          <div class="cv-section-tag" style="margin-bottom: 8px;">PERSONAL INTERESTS &amp; EXPLORATION</div>
-          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+        <div class="cv-interests-card">
+          <div class="cv-interests-header-row">
+            <div class="cv-interests-kicker">
+              <span class="gem">✦</span>
+              <span>Personal Interests &amp; Exploration</span>
+            </div>
+            <div class="cv-interests-subtext">Polymathic Pursuits &amp; Creative Horizons</div>
+          </div>
+          <div class="cv-interests-chips-grid">
     """
 
     for interest in cv['personal_interests']:
         html += f"""
-            <span class="cv-badge-cyan" style="font-size: 0.82rem; padding: 5px 14px;">{interest}</span>
+            <div class="cv-interest-chip">
+              <span class="chip-gem">✦</span>
+              <span>{interest}</span>
+            </div>
         """
 
     html += """

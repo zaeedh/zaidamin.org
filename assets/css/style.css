@@ -5733,6 +5733,113 @@ a {
   line-height: 1.6;
 }
 
+/* ==========================================================================
+   CV SECTION 10: PERSONAL INTERESTS & EXPLORATION (GOLDEN RATIO & GESTALT)
+   ========================================================================== */
+.cv-interests-card {
+  background: linear-gradient(135deg, rgba(4, 22, 38, 0.70) 0%, rgba(2, 14, 26, 0.85) 100%);
+  border: 1px solid rgba(140, 180, 205, 0.18);
+  border-radius: 14px;
+  padding: 22px 32px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 8px 24px rgba(0, 10, 20, 0.35);
+  transition: all 0.25s ease;
+  margin-top: 4px;
+  margin-bottom: 0 !important;
+}
+
+.cv-interests-card:hover {
+  border-color: rgba(212, 175, 55, 0.30);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 12px 32px rgba(0, 10, 20, 0.45);
+}
+
+.cv-interests-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(140, 180, 205, 0.10);
+}
+
+.cv-interests-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f1df9a;
+}
+
+.cv-interests-kicker .gem {
+  color: #d4af37;
+  font-size: 0.72rem;
+}
+
+.cv-interests-subtext {
+  font-size: 0.72rem;
+  color: #64748b;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  font-style: italic;
+}
+
+.cv-interests-chips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cv-interest-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(6, 26, 44, 0.65);
+  border: 1px solid rgba(140, 180, 205, 0.20);
+  color: #cbd5e1;
+  border-radius: 999px;
+  padding: 7px 18px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: all 0.22s ease;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  cursor: default;
+}
+
+.cv-interest-chip:hover {
+  background: rgba(10, 36, 62, 0.90);
+  border-color: rgba(212, 175, 55, 0.45);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.cv-interest-chip .chip-gem {
+  color: rgba(212, 175, 55, 0.75);
+  font-size: 0.65rem;
+  transition: transform 0.22s ease, color 0.22s ease;
+}
+
+.cv-interest-chip:hover .chip-gem {
+  color: #fce09b;
+  transform: scale(1.15);
+}
+
+@media (max-width: 600px) {
+  .cv-interests-card {
+    padding: 18px 20px;
+  }
+  .cv-interest-chip {
+    padding: 6px 14px;
+    font-size: 0.80rem;
+  }
+}
+
 /* Print Optimization */
 @media print {
   .subpage-nav, .cv-jump-bar, .subpage-footer, .theme-toggle-btn, .top-epigraph-menu {
