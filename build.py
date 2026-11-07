@@ -3663,6 +3663,119 @@ def get_distinction_emblem(theme):
     else:
         return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path><circle cx="12" cy="12" r="4"></circle></svg>'
 
+def render_cv_strip_card(
+    idx,
+    cat_pill,
+    year_pill,
+    venue_chip,
+    title,
+    venue_name,
+    sub_extra="",
+    excerpt="",
+    verification_url="",
+    secondary_btn_label="",
+    secondary_btn_url="",
+    featured_pill="",
+    media_html="",
+    extra_classes="",
+    data_attrs="",
+    cat_theme="cyan"
+):
+    # Determine verification link state
+    ver_url_clean = (verification_url or "").strip()
+    is_disabled = ver_url_clean in ["#", "", "disabled", "none", "javascript:void(0)"]
+    
+    if not is_disabled:
+        ver_href = f'href="{ver_url_clean}" target="_blank" rel="noopener"'
+        ver_onclick = ''
+        ver_title = 'Open Official Verification Document'
+        ver_cls = ''
+    else:
+        ver_href = 'href="#"'
+        ver_onclick = 'onclick="event.preventDefault(); showCvNotice(this);"'
+        ver_title = 'Official institutional verification record archived on file. Click to view status.'
+        ver_cls = 'cv-pill-disabled'
+        
+    ext_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>'
+
+    # Primary Gold Button: Verification Link (ALWAYS VISIBLE & PROMINENT)
+    primary_btn = f'''<a {ver_href} {ver_onclick} class="pub-pill-btn pub-pill-primary {ver_cls}" title="{ver_title}">
+      {ext_svg}
+      <span>VERIFICATION LINK</span>
+    </a>'''
+
+    # Secondary Cyan Button
+    if secondary_btn_label and secondary_btn_url:
+        is_mailto = secondary_btn_url.startswith("mailto:")
+        is_ext = secondary_btn_url.startswith("http")
+        sec_target = ' target="_blank" rel="noopener"' if is_ext else ''
+        
+        # Icon selection
+        if is_mailto:
+            sec_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>'
+        elif 'gallery' in secondary_btn_label.lower() or 'talks' in secondary_btn_url:
+            sec_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>'
+        else:
+            sec_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 10a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v11H9z"/></svg>'
+
+        secondary_btn = f'''<a href="{secondary_btn_url}"{sec_target} class="pub-pill-btn pub-pill-secondary" title="{secondary_btn_label}">
+          {sec_svg}
+          <span>{secondary_btn_label}</span>
+        </a>'''
+    else:
+        secondary_btn = ""
+
+    # Subtitle dot
+    dot_separator = '<span class="pub-strip-dot">&bull;</span>' if sub_extra else ''
+    sub_extra_html = f'<span class="pub-strip-authors">{sub_extra}</span>' if sub_extra else ''
+
+    card_cls = f"pub-strip-card cv-strip-card {extra_classes}".strip()
+    data_attr_str = f" {data_attrs}" if data_attrs else ""
+
+    return f"""
+        <article class="{card_cls}"{data_attr_str}>
+          <div class="pub-strip-main">
+            <!-- Left Scholarly Content (Golden Ratio) -->
+            <div class="pub-strip-content">
+              <!-- Row 1: Header / Badges / Tags -->
+              <div class="pub-strip-header">
+                <div class="pub-strip-tags">
+                  <span class="pub-strip-idx">#{idx:02d}</span>
+                  <span class="pub-strip-cat-pill cat-{cat_theme}">{cat_pill}</span>
+                  <span class="pub-strip-year-pill">{year_pill}</span>
+                  <span class="pub-strip-venue-chip" title="{venue_chip}">{venue_chip}</span>
+                </div>
+                {featured_pill}
+              </div>
+
+              <!-- Row 2: Title in Cinzel Roman Serif -->
+              <h3 class="pub-strip-title font-cinzel">{title}</h3>
+
+              <!-- Row 3: Subtitle / Institution / Scope -->
+              <div class="pub-strip-venue-line">
+                <span class="pub-strip-venue-name">{venue_name}</span>
+                {dot_separator}
+                {sub_extra_html}
+              </div>
+
+              <!-- Optional Media -->
+              {media_html}
+
+              <!-- Row 4: Narrative Description / Excerpt -->
+              <p class="pub-strip-excerpt">
+                {excerpt}
+              </p>
+            </div>
+
+            <!-- Right Action Dock (Solid Gold Verification Pill + Cyan Secondary Pill) -->
+            <div class="pub-strip-actions">
+              {primary_btn}
+              {secondary_btn}
+            </div>
+          </div>
+        </article>
+    """
+
 def generate_cv_page():
     cv = load_json("cv_data.json")
     exec_prof = cv["executive_profile"]
@@ -3918,50 +4031,43 @@ def generate_cv_page():
 
     for idx, item in enumerate(cv['achievements_and_grants'], 1):
         theme, cat_group, cat_label = get_distinction_meta(item)
-        emblem_svg = get_distinction_emblem(theme)
-
         is_spotlight = item.get('featured')
         highlight_cls = "is-highlight is-spotlight" if is_spotlight else ("is-highlight" if item.get('highlight') else "")
-        spotlight_badge = '<span class="cv-spotlight-pill">★ SPOTLIGHT</span>' if is_spotlight else ""
-        
-        item_url = (item.get('url') or '').strip()
-        ext_icon = render_svg_icon("external")
-        url_link = f'''<a href="{item_url}" target="_blank" rel="noopener" class="cv-verification-link" title="Verify Official Distinction Record">
-          <span>Verification Link</span>
-          {ext_icon}
-        </a>''' if item_url and item_url not in ['#', '', 'disabled', 'none'] else ''
+        spotlight_badge = '<span class="pub-strip-featured-pill">★ SPOTLIGHT</span>' if is_spotlight else ""
         
         img_src = item.get('image')
         img_title = item.get('title')
-        img_tag = f'<div class="cv-distinction-media"><img src="{img_src}" alt="{img_title}" loading="lazy"></div>' if (is_spotlight and img_src) else ""
+        img_tag = f'<div class="cv-distinction-media" style="margin:10px 0; border-radius:10px; overflow:hidden; max-height:160px; border:1px solid rgba(212,175,55,0.3);"><img src="{img_src}" alt="{img_title}" loading="lazy" style="width:100%; height:100%; object-fit:cover;"></div>' if (is_spotlight and img_src) else ""
 
-        html += f"""
-        <div class="cv-card cv-distinction-card {highlight_cls}" data-category="{cat_group}">
-          <!-- Metadata & Action Row (Gestalt Proximity: Index + Year + Tier on Left, CTA on Right) -->
-          <div class="cv-distinction-top">
-            <div class="cv-distinction-tags">
-              <span class="pub-strip-idx">#{idx:02d}</span>
-              <span class="cv-type-pill cv-tier-{theme}">{item['badge']}</span>
-              <span class="cv-year-pill">{item['year']}</span>
-              {spotlight_badge}
-            </div>
-            {url_link}
-          </div>
+        # Secondary button logic
+        if cat_group == "grants":
+            sec_label = "GRANT ARCHIVE"
+            sec_url = item.get('url') if item.get('url') and 'kemdikbud' in item.get('url', '') else "https://bima.kemdikbud.go.id"
+        elif cat_group == "governance":
+            sec_label = "GOVERNANCE PORTAL"
+            sec_url = item.get('url') or "https://binadarma.ac.id"
+        else:
+            sec_label = "AWARD ARCHIVE"
+            sec_url = item.get('url') or "https://newinti.edu.my"
 
-          <!-- Title & Institution Hierarchy (Pure Minimal Typography) -->
-          <div class="cv-distinction-header">
-            <h3 class="cv-card-title cv-distinction-title">{item['title']}</h3>
-            <div class="cv-card-sub cv-distinction-org">{item['organization']}</div>
-          </div>
-
-          {img_tag}
-
-          <!-- Soft Elegant Narrative Body -->
-          <div class="cv-card-body cv-distinction-body">
-            {item['details']}
-          </div>
-        </div>
-        """
+        html += render_cv_strip_card(
+            idx=idx,
+            cat_pill=item['badge'].upper(),
+            year_pill=item['year'],
+            venue_chip=item['organization'],
+            title=item['title'].upper(),
+            venue_name=item['organization'],
+            sub_extra=cat_label,
+            excerpt=item['details'],
+            verification_url=item.get('url'),
+            secondary_btn_label=sec_label,
+            secondary_btn_url=sec_url,
+            featured_pill=spotlight_badge,
+            media_html=img_tag,
+            extra_classes=f"cv-distinction-card {highlight_cls}",
+            data_attrs=f'data-category="{cat_group}"',
+            cat_theme=theme
+        )
 
     html += f"""
       </section>
@@ -3976,27 +4082,41 @@ def generate_cv_page():
     """
 
     for idx, item in enumerate(cv['academic_leadership'], 1):
-        item_url = (item.get('url') or '').strip()
-        url_link = f'<a href="{item_url}" target="_blank" rel="noopener" class="cv-verification-link" title="Verify Official Leadership Record"><span>Verification Link</span> {render_svg_icon("external")}</a>' if item_url and item_url not in ['#', '', 'disabled', 'none'] else ''
-        html += f"""
-        <div class="cv-card is-highlight">
-          <div class="cv-card-top">
-            <div class="cv-card-heading">
-              <h3 class="cv-card-title">{item['role']}</h3>
-              <div class="cv-card-sub">{item['institution']}</div>
-            </div>
-            <div class="cv-card-badges">
-              <span class="pub-strip-idx">#{idx:02d}</span>
-              <span class="cv-type-pill">{item['scope']}</span>
-              <span class="cv-year-pill">{item['period']}</span>
-              {url_link}
-            </div>
-          </div>
-          <div class="cv-card-body">
-            {item['responsibilities']}
-          </div>
-        </div>
-        """
+        inst = item['institution']
+        if 'inti' in inst.lower():
+            sec_url = 'https://newinti.edu.my'
+            sec_label = 'FACULTY PORTAL'
+        elif 'bina darma' in inst.lower():
+            sec_url = 'https://binadarma.ac.id'
+            sec_label = 'UNIVERSITY PORTAL'
+        elif 'palcomtech' in inst.lower():
+            sec_url = 'https://palcomtech.ac.id'
+            sec_label = 'INSTITUTE PORTAL'
+        elif 'paltv' in inst.lower():
+            sec_url = 'https://paltv.disway.id'
+            sec_label = 'MEDIA PORTAL'
+        else:
+            sec_url = 'https://newinti.edu.my'
+            sec_label = 'OFFICIAL PORTAL'
+
+        spotlight_badge = '<span class="pub-strip-featured-pill">★ QS DIRECTOR</span>' if idx == 1 else ""
+
+        html += render_cv_strip_card(
+            idx=idx,
+            cat_pill="GOVERNANCE",
+            year_pill=item['period'],
+            venue_chip=inst.split(',')[0],
+            title=item['role'].upper(),
+            venue_name=inst,
+            sub_extra=item.get('scope', 'Academic Administration'),
+            excerpt=item['responsibilities'],
+            verification_url=item.get('url'),
+            secondary_btn_label=sec_label,
+            secondary_btn_url=sec_url,
+            featured_pill=spotlight_badge,
+            extra_classes="is-highlight" if idx == 1 else "",
+            cat_theme="indigo"
+        )
 
     html += f"""
       </section>
@@ -4011,26 +4131,41 @@ def generate_cv_page():
     """
 
     for idx, item in enumerate(cv['work_experience'], 1):
-        item_url = (item.get('url') or '').strip()
-        url_link = f'<a href="{item_url}" target="_blank" rel="noopener" class="cv-verification-link" title="Verify Appointment Record"><span>Verification Link</span> {render_svg_icon("external")}</a>' if item_url and item_url not in ['#', '', 'disabled', 'none'] else ''
-        html += f"""
-        <div class="cv-card">
-          <div class="cv-card-top">
-            <div class="cv-card-heading">
-              <h3 class="cv-card-title">{item['role']}</h3>
-              <div class="cv-card-sub">{item['institution']}</div>
-            </div>
-            <div class="cv-card-badges">
-              <span class="pub-strip-idx">#{idx:02d}</span>
-              <span class="cv-year-pill">{item['period']}</span>
-              {url_link}
-            </div>
-          </div>
-          <div class="cv-card-body">
-            {item['description']}
-          </div>
-        </div>
-        """
+        inst = item['institution']
+        if 'inti' in inst.lower():
+            sec_url = 'https://newinti.edu.my'
+            sec_label = 'FACULTY PORTAL'
+        elif 'bina darma' in inst.lower():
+            sec_url = 'https://binadarma.ac.id'
+            sec_label = 'UNIVERSITY RECORD'
+        elif 'palcomtech' in inst.lower():
+            sec_url = 'https://palcomtech.ac.id'
+            sec_label = 'INSTITUTE RECORD'
+        elif 'depkominfo' in inst.lower() or 'palembang' in inst.lower():
+            sec_url = 'https://palembang.go.id'
+            sec_label = 'CIVIC RECORD'
+        else:
+            sec_url = 'https://newinti.edu.my'
+            sec_label = 'APPOINTMENT RECORD'
+
+        spotlight_badge = '<span class="pub-strip-featured-pill">★ SENIOR FACULTY</span>' if idx == 1 else ""
+
+        html += render_cv_strip_card(
+            idx=idx,
+            cat_pill="APPOINTMENT",
+            year_pill=item['period'],
+            venue_chip=inst.split(',')[0],
+            title=item['role'].upper(),
+            venue_name=inst,
+            sub_extra="Career Appointment & Professional Instruction",
+            excerpt=item['description'],
+            verification_url=item.get('url'),
+            secondary_btn_label=sec_label,
+            secondary_btn_url=sec_url,
+            featured_pill=spotlight_badge,
+            extra_classes="is-highlight" if idx == 1 else "",
+            cat_theme="cyan"
+        )
 
     html += f"""
       </section>
@@ -4045,27 +4180,40 @@ def generate_cv_page():
     """
 
     for idx, item in enumerate(cv['education'], 1):
-        item_url = (item.get('url') or '').strip()
-        url_link = f'<a href="{item_url}" target="_blank" rel="noopener" class="cv-verification-link" title="Verify Academic Degree"><span>Verification Link</span> {render_svg_icon("external")}</a>' if item_url and item_url not in ['#', '', 'disabled', 'none'] else ''
-        html += f"""
-        <div class="cv-card">
-          <div class="cv-card-top">
-            <div class="cv-card-heading">
-              <h3 class="cv-card-title">{item['degree']}</h3>
-              <div class="cv-card-sub">{item['institution']} &bull; {item['country']}</div>
-            </div>
-            <div class="cv-card-badges">
-              <span class="pub-strip-idx">#{idx:02d}</span>
-              <span class="cv-type-pill">{item['distinction']}</span>
-              <span class="cv-year-pill">{item['period']}</span>
-              {url_link}
-            </div>
-          </div>
-          <div class="cv-card-body">
-            <strong>Core Focus:</strong> {item['focus']}
-          </div>
-        </div>
-        """
+        deg = item['degree']
+        inst = item['institution']
+        is_phd = 'ph.d' in deg.lower() or 'doctor' in deg.lower()
+        if 'ukm' in inst.lower() or 'kebangsaan' in inst.lower():
+            sec_url = 'https://www.ukm.my'
+            sec_label = 'UKM ARCHIVE'
+        elif 'bina darma' in inst.lower():
+            sec_url = 'https://binadarma.ac.id'
+            sec_label = 'DEGREE ARCHIVE'
+        elif 'palcomtech' in inst.lower():
+            sec_url = 'https://palcomtech.ac.id'
+            sec_label = 'INSTITUTE ARCHIVE'
+        else:
+            sec_url = 'https://sman5palembang.sch.id'
+            sec_label = 'ALUMNI ARCHIVE'
+
+        spotlight_badge = '<span class="pub-strip-featured-pill">★ TESIS CEMERLANG &amp; GOT</span>' if is_phd else ""
+
+        html += render_cv_strip_card(
+            idx=idx,
+            cat_pill="DOCTORAL DEGREE" if is_phd else ("MASTER DEGREE" if 'master' in deg.lower() else "FORMAL DEGREE"),
+            year_pill=item['period'],
+            venue_chip=inst.split(',')[0],
+            title=deg.upper(),
+            venue_name=f"{inst} &bull; {item['country']}",
+            sub_extra=item.get('distinction', ''),
+            excerpt=f"<strong>Core Focus:</strong> {item['focus']}",
+            verification_url=item.get('url'),
+            secondary_btn_label=sec_label,
+            secondary_btn_url=sec_url,
+            featured_pill=spotlight_badge,
+            extra_classes="is-highlight is-spotlight" if is_phd else "",
+            cat_theme="gold" if is_phd else "cyan"
+        )
 
     html += f"""
       </section>
@@ -4090,38 +4238,33 @@ def generate_cv_page():
 
     for idx, item in enumerate(talks_items, 1):
         is_spotlight = item.get('featured')
-        highlight_cls = "is-highlight is-spotlight" if is_spotlight else "is-highlight"
-        spotlight_badge = '<span class="cv-spotlight-pill">★ SPOTLIGHT</span>' if is_spotlight else ""
-        talk_url = (item.get('url') or '').strip()
-        url_link = f'<a href="{talk_url}" target="_blank" rel="noopener" class="cv-verification-link" title="Verify Official Keynote Record"><span>Verification Link</span> {render_svg_icon("external")}</a>' if talk_url and talk_url not in ['#', '', 'disabled', 'none'] else ''
-        img_tag = f'<div style="margin:12px 0; border-radius:10px; overflow:hidden; max-height:160px; border:1px solid rgba(212,175,55,0.3);"><img src="{item["image"]}" alt="{item.get("title", item.get("event", ""))}" style="width:100%; height:100%; object-fit:cover;"></div>' if (is_spotlight and item.get('image')) else ""
+        spotlight_badge = '<span class="pub-strip-featured-pill">★ SPOTLIGHT TALK</span>' if is_spotlight else ""
+        img_src = item.get('image')
         title_str = item.get('title') or item.get('event')
         sub_str = item.get('event') if item.get('title') else item.get('venue', '')
         role_str = item.get('role', 'Keynote Speaker')
         year_str = item.get('year', '2026')
         desc_str = item.get('description') or item.get('details', '')
+        
+        img_tag = f'<div style="margin:10px 0; border-radius:10px; overflow:hidden; max-height:160px; border:1px solid rgba(212,175,55,0.3);"><img src="{img_src}" alt="{title_str}" style="width:100%; height:100%; object-fit:cover;" loading="lazy"></div>' if (is_spotlight and img_src) else ""
 
-        html += f"""
-        <div class="cv-card {highlight_cls}">
-          <div class="cv-card-top">
-            <div class="cv-card-heading">
-              <h3 class="cv-card-title">{title_str}</h3>
-              <div class="cv-card-sub">{sub_str}</div>
-            </div>
-            <div class="cv-card-badges">
-              <span class="pub-strip-idx">#{idx:02d}</span>
-              <span class="cv-type-pill">{role_str}</span>
-              <span class="cv-year-pill">{year_str}</span>
-              {spotlight_badge}
-              {url_link}
-            </div>
-          </div>
-          {img_tag}
-          <div class="cv-card-body">
-            {desc_str}
-          </div>
-        </div>
-        """
+        html += render_cv_strip_card(
+            idx=idx,
+            cat_pill=role_str.upper(),
+            year_pill=year_str,
+            venue_chip=(sub_str or 'Keynote Event')[:40],
+            title=title_str.upper(),
+            venue_name=sub_str,
+            sub_extra=role_str,
+            excerpt=desc_str,
+            verification_url=item.get('url'),
+            secondary_btn_label="TALKS GALLERY ↗",
+            secondary_btn_url="talks.html",
+            featured_pill=spotlight_badge,
+            media_html=img_tag,
+            extra_classes="is-highlight is-spotlight" if is_spotlight else "is-highlight",
+            cat_theme="gold" if is_spotlight else "cyan"
+        )
 
     html += f"""
       </section>
@@ -4189,25 +4332,42 @@ def generate_cv_page():
           <h2 class="cv-section-title">Professional Certifications &amp; Specialized Training</h2>
           <span class="cv-section-count">{len(cv['professional_certifications'])} Credentials</span>
         </div>
-        <div class="cv-grid-2col">
+        <div class="cv-strip-list">
     """
 
-    for cert in cv['professional_certifications']:
-        cert_url = (cert.get('url') or '').strip()
-        url_link = f'<a href="{cert_url}" target="_blank" rel="noopener" class="cv-verification-link" title="Verify Credential Record"><span>Verification Link</span> {render_svg_icon("external")}</a>' if cert_url and cert_url not in ['#', '', 'disabled', 'none'] else ''
-        html += f"""
-          <div class="cv-mini-card">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;">
-              <strong style="color: #ffffff; font-size: 0.98rem; line-height: 1.35;">{cert['name']}</strong>
-              <div style="display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;">
-                <span class="cv-year-pill">{cert['period']}</span>
-                {url_link}
-              </div>
-            </div>
-            <div style="font-size: 0.85rem; color: var(--brand-blue); margin-top: 4px; font-weight: 600;">{cert['issuer']}</div>
-            <div style="font-size: 0.82rem; color: var(--text-body); margin-top: 8px; line-height: 1.55;">{cert['details']}</div>
-          </div>
-        """
+    for idx, cert in enumerate(cv['professional_certifications'], 1):
+        issuer = cert['issuer']
+        if 'cisco' in issuer.lower():
+            sec_url = 'https://www.netacad.com'
+            sec_label = 'CISCO NETACAD'
+        elif 'microsoft' in issuer.lower():
+            sec_url = 'https://learn.microsoft.com'
+            sec_label = 'MICROSOFT LEARN'
+        elif 'foresec' in issuer.lower():
+            sec_url = 'https://www.eccouncil.org'
+            sec_label = 'FORENSICS AUTHORITY'
+        else:
+            sec_url = 'https://newinti.edu.my'
+            sec_label = 'CREDENTIAL RECORD'
+
+        spotlight_badge = '<span class="pub-strip-featured-pill">★ GRADE A FORENSIC</span>' if idx == 1 else ""
+
+        html += render_cv_strip_card(
+            idx=idx,
+            cat_pill="CERTIFICATION",
+            year_pill=cert['period'],
+            venue_chip=issuer.split('/')[0].strip(),
+            title=cert['name'].upper(),
+            venue_name=issuer,
+            sub_extra="Technical Mastery & Professional Accreditation",
+            excerpt=cert['details'],
+            verification_url=cert.get('url'),
+            secondary_btn_label=sec_label,
+            secondary_btn_url=sec_url,
+            featured_pill=spotlight_badge,
+            extra_classes="is-highlight" if idx == 1 else "",
+            cat_theme="cyan"
+        )
 
     html += f"""
         </div>
@@ -4311,30 +4471,35 @@ def generate_cv_page():
           <span class="cv-section-count">4 Referees</span>
         </div>
 
-        <div class="cv-grid-referees" style="margin-bottom: 28px;">
+        <div class="cv-strip-list" style="margin-bottom: 28px;">
     """
 
-    for ref in cv['academic_references']:
-        ref_url = (ref.get('url') or '').strip()
-        url_link = f'<a href="{ref_url}" target="_blank" rel="noopener" class="cv-verification-link" title="Verify Faculty Profile"><span>Verification Link</span> {render_svg_icon("external")}</a>' if ref_url and ref_url not in ['#', '', 'disabled', 'none'] else ''
-        html += f"""
-          <div class="cv-mini-card">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;">
-              <div class="cv-ref-name">{ref['name']}</div>
-              {url_link}
-            </div>
-            <div class="cv-ref-role">{ref['role']}</div>
-            <div class="cv-ref-inst">{ref['institution']}</div>
-            <div class="cv-ref-contact">
-              <div>Phone: <a href="tel:{ref['phone']}" style="color: var(--brand-blue);">{ref['phone']}</a></div>
-              <div>Email: <a href="mailto:{ref['email']}" style="color: var(--brand-blue);">{ref['email']}</a></div>
-            </div>
-          </div>
-        """
+    for idx, ref in enumerate(cv['academic_references'], 1):
+        inst = ref['institution']
+        ref_email = ref.get('email', 'zaid.amin@newinti.edu.my')
+        ref_phone = ref.get('phone', '')
+        contact_str = f"Email: <strong>{ref_email}</strong>" + (f" &bull; Tel: {ref_phone}" if ref_phone else "")
+        ref_excerpt = f"Senior Academic Referee & Research Collaborator. Institutional verification point for postgraduate dissertation supervision, research grants, and international appointments. Direct inquiry: {contact_str}"
+
+        html += render_cv_strip_card(
+            idx=idx,
+            cat_pill="ACADEMIC REFEREE",
+            year_pill="Official Referee",
+            venue_chip=inst.split(',')[0],
+            title=ref['name'].upper(),
+            venue_name=inst,
+            sub_extra=ref['role'],
+            excerpt=ref_excerpt,
+            verification_url=ref.get('url'),
+            secondary_btn_label="CONTACT REFEREE",
+            secondary_btn_url=f"mailto:{ref_email}?subject=Academic%20Inquiry%20regarding%20Dr.%20Zaid%20Amin",
+            featured_pill="",
+            extra_classes="",
+            cat_theme="indigo"
+        )
 
     html += f"""
         </div>
-
         <div class="cv-interests-card">
           <div class="cv-interests-header-row">
             <div class="cv-interests-kicker">

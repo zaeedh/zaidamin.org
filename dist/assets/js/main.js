@@ -1521,3 +1521,39 @@ function initCoinPortraitEngine() {
   window.flipPortraitCoin = flipCoin;
   console.log('[CoinPortraitEngine] Initialized with 4 strictly-centered Golden Ratio portraits. Slow 1.75s filmic flip active.');
 }
+
+/* ==============================================================================
+   CV VERIFICATION STATUS NOTIFICATION (High-Class Obsidian Toast)
+   ============================================================================== */
+function showCvNotice(triggerEl) {
+  let toast = document.getElementById('cv-toast-notice');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'cv-toast-notice';
+    toast.className = 'cv-toast-notice';
+    toast.setAttribute('role', 'alert');
+    toast.setAttribute('aria-live', 'polite');
+    toast.innerHTML = `
+      <span class="cv-toast-gem">✦</span>
+      <div class="cv-toast-content">
+        <div class="cv-toast-title">Official Verification Record</div>
+        <div class="cv-toast-msg">This credential document is securely archived on official institutional registry and available upon academic request (<a href="mailto:zaid.amin@newinti.edu.my" style="color:#7dd3fc; text-decoration:underline;">zaid.amin@newinti.edu.my</a>).</div>
+      </div>
+    `;
+    document.body.appendChild(toast);
+  }
+
+  if (triggerEl) {
+    triggerEl.style.transform = 'scale(0.96)';
+    setTimeout(() => { triggerEl.style.transform = ''; }, 180);
+  }
+
+  toast.classList.add('is-active');
+
+  if (window._cvToastTimer) clearTimeout(window._cvToastTimer);
+  window._cvToastTimer = setTimeout(() => {
+    toast.classList.remove('is-active');
+  }, 4200);
+}
+window.showCvNotice = showCvNotice;
+
