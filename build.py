@@ -3663,7 +3663,14 @@ def generate_cv_page():
 
     photo_src = exec_prof.get("photo") or "assets/images/portraits/portrait-1.webp"
     photo_kicker = exec_prof.get("kicker") or "Ph.D. • UKM 2024"
-    cv_pdf_url = exec_prof.get("cv_pdf_url") or "assets/docs/dr-zaid-amin-cv-july-2026.pdf"
+    raw_cv_url = exec_prof.get("cv_pdf_url", "")
+    if raw_cv_url is None:
+        raw_cv_url = ""
+    raw_cv_url_str = str(raw_cv_url).strip()
+
+    # Detect if download is explicitly disabled
+    is_cv_download_disabled = raw_cv_url_str in ["#", "", "disabled", "none", "javascript:void(0)"]
+    cv_pdf_url = raw_cv_url_str if not is_cv_download_disabled else "#"
     edition_label = exec_prof.get("edition_label") or "July 2026 Academic Edition • 1.1 MB"
 
     orcid_data = exec_prof.get('researcher_ids', {}).get('orcid', {})
@@ -3695,6 +3702,35 @@ def generate_cv_page():
         "Official Curriculum Vitae and Achievements of Dr. Zaid Amin, Senior Lecturer & QS Deputy Director at INTI International University, Ph.D. from UKM (Tesis Cemerlang & GOT)."
     )
     html += get_page_header("cv")
+
+    if is_cv_download_disabled:
+        contact_email = exec_prof.get("contact", {}).get("email", "zaid.amin@newinti.edu.my")
+        cv_download_btn_html = f'''<a href="mailto:{contact_email}?subject=Official%20CV%20Request%20-%20Dr.%20Zaid%20Amin" class="cv-round-btn-download cv-btn-disabled" title="Direct PDF download is currently disabled. Click to request verified CV via email.">
+                  <span class="cv-round-icon-wrap">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </span>
+                  <span class="cv-round-labels">
+                    <span class="cv-round-kicker">OFFICIAL VERIFIED CV</span>
+                    <span class="cv-round-title">Available on Request</span>
+                  </span>
+                </a>'''
+    else:
+        cv_download_btn_html = f'''<a href="{cv_pdf_url}" download="Dr_Zaid_Amin_Curriculum_Vitae_July_2026.pdf" target="_blank" rel="noopener" class="cv-round-btn-download" title="Download Verified Academic CV">
+                  <span class="cv-round-icon-wrap">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="7 10 12 15 17 10"></polyline>
+                      <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                  </span>
+                  <span class="cv-round-labels">
+                    <span class="cv-round-kicker">OFFICIAL VERIFIED CV</span>
+                    <span class="cv-round-title">Download CV (PDF)</span>
+                  </span>
+                </a>'''
 
     html += f"""
     <!-- Subpage Content: Achievement & Curriculum Vitae (July 2026 Official Resume) -->
@@ -3735,19 +3771,7 @@ def generate_cv_page():
               <!-- RIGHT: Rounded Rectangle ("round tangle") Download & Print Cluster -->
               <div class="cv-hero-cta-cluster">
                 <!-- Primary Download Button (Rounded Rectangle / Capsule) -->
-                <a href="{cv_pdf_url}" download="Dr_Zaid_Amin_Curriculum_Vitae_July_2026.pdf" target="_blank" rel="noopener" class="cv-round-btn-download" title="Download Verified Academic CV">
-                  <span class="cv-round-icon-wrap">
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                      <polyline points="7 10 12 15 17 10"></polyline>
-                      <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                  </span>
-                  <span class="cv-round-labels">
-                    <span class="cv-round-kicker">OFFICIAL VERIFIED CV</span>
-                    <span class="cv-round-title">Download CV (PDF)</span>
-                  </span>
-                </a>
+                {cv_download_btn_html}
 
                 <!-- Secondary Action: Print / Save as PDF (Golden Ratio 32px height) -->
                 <button type="button" onclick="window.print()" class="cv-round-btn-secondary" title="Print or save one-page verified academic portfolio">

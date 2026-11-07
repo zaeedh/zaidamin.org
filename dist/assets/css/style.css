@@ -11880,6 +11880,37 @@ h1.cv-hero-name,
   color: #ffffff !important;
 }
 
+/* Disabled / Request-Only State for CV Download Button */
+.cv-round-btn-download.cv-btn-disabled {
+  background: linear-gradient(135deg, rgba(14, 28, 44, 0.88) 0%, rgba(7, 18, 30, 0.95) 100%) !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.42) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  color: #cbd5e1 !important;
+  cursor: pointer !important;
+}
+
+.cv-round-btn-download.cv-btn-disabled:hover {
+  background: linear-gradient(135deg, rgba(22, 42, 66, 0.94) 0%, rgba(12, 26, 42, 0.98) 100%) !important;
+  border-color: rgba(56, 189, 248, 0.75) !important;
+  box-shadow: 0 6px 22px rgba(56, 189, 248, 0.28) !important;
+  transform: translateY(-1px) !important;
+  color: #f8fafc !important;
+}
+
+.cv-round-btn-download.cv-btn-disabled .cv-round-icon-wrap {
+  background: rgba(3, 14, 26, 0.9) !important;
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  color: #38bdf8 !important;
+}
+
+.cv-round-btn-download.cv-btn-disabled .cv-round-kicker {
+  color: #38bdf8 !important;
+}
+
+.cv-round-btn-download.cv-btn-disabled .cv-round-title {
+  color: #f1f5f9 !important;
+}
+
 .cv-round-icon-wrap {
   display: flex !important;
   align-items: center !important;

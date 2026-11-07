@@ -302,6 +302,18 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794031743912",
+      "timestamp": "2026-11-07T06:09:03.912Z",
+      "path": "/cv",
+      "title": "Achievement & Curriculum Vitae | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
       "id": "tr-1794030043368",
       "timestamp": "2026-11-07T05:40:43.368Z",
       "path": "/",
@@ -1488,23 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1793957804554",
-      "timestamp": "2026-11-06T09:36:44.554Z",
-      "path": "/publications",
-      "title": "Research & Publication Gallery | Dr. Zaid Amin | zaidamin.org",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-07T13:40:44.006645",
+  "updated_at": "2026-11-07T14:09:03.940454",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
