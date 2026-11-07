@@ -302,6 +302,18 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794024422044",
+      "timestamp": "2026-11-07T04:07:02.044Z",
+      "path": "/cv",
+      "title": "Achievement & Curriculum Vitae | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Internal Navigation"
+    },
+    {
       "id": "tr-1794024078806",
       "timestamp": "2026-11-07T04:01:18.806Z",
       "path": "https://doi.org/10.1007/978-3-030-78468-3_34",
@@ -1488,23 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Internal Navigation"
-    },
-    {
-      "id": "tr-1793956372233",
-      "timestamp": "2026-11-06T09:12:52.233Z",
-      "path": "https://doi.org/10.1007/978-3-030-78468-3_34",
-      "title": "Download Primary Volume (Academic)",
-      "action": "DOI_ACCESS",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Internal Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-07T12:01:18.822395",
+  "updated_at": "2026-11-07T12:07:02.094987",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
