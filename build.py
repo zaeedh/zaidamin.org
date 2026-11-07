@@ -2370,17 +2370,18 @@ def generate_publications_page():
     team_pill_cfg = shortcuts.get("pub_team_pill", {
         "enabled": True,
         "display_text": "👥 Research Team &nearr;",
-        "title": "View Research Team & Supervision Roster",
-        "url": "research-team.html",
+        "title": "Research Team",
+        "url": "#",
         "target": "_self"
     })
     team_pill_html = ""
     if team_pill_cfg.get("enabled", True):
         p_text = team_pill_cfg.get("display_text", "👥 Research Team &nearr;")
-        p_title = team_pill_cfg.get("title", "View Research Team & Supervision Roster")
-        p_url = team_pill_cfg.get("url", "research-team.html")
+        p_title = team_pill_cfg.get("title", "Research Team")
+        p_url = team_pill_cfg.get("url", "#")
         p_target = team_pill_cfg.get("target", "_self")
-        team_pill_html = f'<a href="{p_url}" target="{p_target}" class="pub-nav-pill team-shortcut-pill" title="{p_title}">{p_text}</a>'
+        onclick_attr = ' onclick="if(this.getAttribute(\'href\')===\'#\'){event.preventDefault();}"' if p_url == '#' else ''
+        team_pill_html = f'<a href="{p_url}" target="{p_target}" class="pub-nav-pill team-shortcut-pill" title="{p_title}"{onclick_attr}>{p_text}</a>'
 
     # Assemble complete page
     html_content = page_head + page_header + f"""

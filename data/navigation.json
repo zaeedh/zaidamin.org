@@ -94,11 +94,11 @@
       "page_label": "Research & Publications (publications.html)",
       "label": "Research Team Shortcut Pill",
       "display_text": "👥 Research Team ↗",
-      "title": "View Research Team & Supervision Roster",
-      "url": "research-team.html",
+      "title": "Research Team",
+      "url": "#",
       "target": "_self",
       "icon": "👥",
-      "enabled": false,
+      "enabled": true,
       "description": "Category navigation shortcut pill in the Publications page header"
     }
   ]
