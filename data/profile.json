@@ -23,14 +23,14 @@
     "website": "https://newinti.edu.my"
   },
   "epigraph": "Das Sein, Das Sollen.",
-  "site_title": "Dr. Zaid Amin | Das Sein, Das Sollen | zaidamin.org",
+  "site_title": "Dr. Zaid Amin | Das Sein, Das Sollen",
   "page_titles": {
-    "home": "Dr. Zaid Amin | Das Sein, Das Sollen | zaidamin.org",
-    "publications": "Research & Publication Gallery | Dr. Zaid Amin | zaidamin.org",
-    "research": "Activity & Project | Dr. Zaid Amin | zaidamin.org",
-    "talks": "Media & Talks | Dr. Zaid Amin | zaidamin.org",
-    "cv": "Achievement & Curriculum Vitae | Dr. Zaid Amin | zaidamin.org",
-    "team": "Research Team & Supervision Roster | Dr. Zaid Amin | zaidamin.org"
+    "home": "Dr. Zaid Amin | Das Sein, Das Sollen",
+    "publications": "Research & Publication Gallery",
+    "research": "Activity & Project",
+    "talks": "Media & Talks",
+    "cv": "Achievement & Curriculum Vitae",
+    "team": "Research Team & Supervision Roster"
   },
   "tagline": "Bridging Empirical Computing, Human-Centered AI, and Digital Ethics",
   "motto": "",
