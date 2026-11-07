@@ -1841,15 +1841,21 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
         if not doi_val and url:
             doi_val = url
 
+        display_doi = doi_val
+        if display_doi.startswith("http://") or display_doi.startswith("https://"):
+            display_doi = display_doi.replace("https://", "").replace("http://", "").replace("www.", "")
+            if len(display_doi) > 28:
+                display_doi = display_doi[:26] + "..."
+
         if is_link_active and doi_val and doi_val != "#":
             if doi_val.startswith("http://") or doi_val.startswith("https://"):
-                doi_content = f'<a href="{doi_val}" target="_blank" rel="noopener" class="bokify-doi-link">{doi_val}</a>'
+                doi_content = f'<a href="{doi_val}" target="_blank" rel="noopener" class="bokify-doi-link" title="{doi_val}">{display_doi}</a>'
             elif "/" in doi_val:
-                doi_content = f'<a href="https://doi.org/{doi_val}" target="_blank" rel="noopener" class="bokify-doi-link">{doi_val}</a>'
+                doi_content = f'<a href="https://doi.org/{doi_val}" target="_blank" rel="noopener" class="bokify-doi-link" title="DOI: {doi_val}">{doi_val}</a>'
             else:
                 doi_content = f'<span class="bokify-doi-val">{doi_val}</span>'
         else:
-            doi_content = f'<span class="bokify-doi-val">{doi_val or "#"}</span>'
+            doi_content = f'<span class="bokify-doi-val" title="{doi_val}">{display_doi or "#"}</span>'
 
         doi_html = f'<div class="bokify-card-doi"><span class="bokify-doi-lbl">DOI/ISBN/LINK:</span> {doi_content}</div>'
         isbn_html = f'<div class="bokify-card-doi bokify-card-isbn"><span class="bokify-doi-lbl">ISBN:</span> <span class="bokify-doi-val">{isbn}</span></div>' if isbn else ""
@@ -2048,7 +2054,9 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
             <div class="bokify-card-series" style="color: #7dd3fc; font-style: italic;">{p_series}</div>
             <div class="bokify-card-divider" style="border-bottom: 1px dashed rgba(212, 175, 55, 0.25);"></div>
             <p class="bokify-card-excerpt">{p_abstract}</p>
-            <div class="bokify-card-doi"><span class="bokify-doi-lbl">STATUS:</span> <span class="bokify-doi-val" style="color: #fef08a; font-weight: 600;">{p_status}</span></div>
+            <div class="bokify-card-meta-block">
+              <div class="bokify-card-doi"><span class="bokify-doi-lbl">STATUS:</span> <span class="bokify-doi-val" style="color: #fef08a; font-weight: 600;">{p_status}</span></div>
+            </div>
           </div>
 
           <!-- Card Actions (Gestalt Proximity) -->
@@ -2308,7 +2316,10 @@ def generate_publications_page():
         clean = re.sub(r'<[^>]+>', ' ', raw_text)
         clean = ' '.join(clean.split())
         if len(clean) > max_len:
-            clean = clean[:max_len].rstrip() + "..."
+            truncated = clean[:max_len]
+            if ' ' in truncated:
+                truncated = truncated.rsplit(' ', 1)[0]
+            clean = truncated.rstrip(' ,;:.') + "..."
         return clean
 
     def render_download_pill(pub):
@@ -2546,7 +2557,10 @@ def generate_research_page():
         clean = re.sub(r'<[^>]+>', ' ', raw_text)
         clean = ' '.join(clean.split())
         if len(clean) > max_len:
-            clean = clean[:max_len].rstrip() + "..."
+            truncated = clean[:max_len]
+            if ' ' in truncated:
+                truncated = truncated.rsplit(' ', 1)[0]
+            clean = truncated.rstrip(' ,;:.') + "..."
         return clean
 
     cards_html = ""
