@@ -854,7 +854,7 @@ def get_spotlight_card_html():
         meta_characteristic = '<span class="spotlight-gem">✦</span> ESSAYS &amp; PERSPECTIVES'
         meta_detail = "80+ Scholarly Articles Archive &nearr;"
         meta_tooltip = "Explore All Activity &amp; Articles Archive"
-        secondary_btn = f'''<a href="research.html#articles" class="spotlight-btn-secondary spotlight-btn-meta" title="{meta_tooltip}">
+        secondary_btn = f'''<a href="/research#articles" class="spotlight-btn-secondary spotlight-btn-meta" title="{meta_tooltip}">
             <div class="spotlight-meta-block">
                 <span class="spotlight-meta-kicker font-cinzel">{meta_characteristic}</span>
                 <span class="spotlight-meta-val">{meta_detail}</span>
@@ -885,7 +885,7 @@ def get_spotlight_card_html():
         meta_characteristic = '<span class="spotlight-gem">✦</span> BROADCAST &bull; KEYNOTE'
         meta_detail = "TVRI &amp; Media Archive &nearr;"
         meta_tooltip = "Media &amp; Talks Archive"
-        secondary_btn = f'''<a href="talks.html" class="spotlight-btn-secondary spotlight-btn-meta" title="{meta_tooltip}">
+        secondary_btn = f'''<a href="/talks" class="spotlight-btn-secondary spotlight-btn-meta" title="{meta_tooltip}">
             <div class="spotlight-meta-block">
                 <span class="spotlight-meta-kicker font-cinzel">{meta_characteristic}</span>
                 <span class="spotlight-meta-val">{meta_detail}</span>
@@ -900,7 +900,7 @@ def get_spotlight_card_html():
         year_val = item.get("year", "2025")
         category_val = item.get("category", "Government Award")
         year_str = f"{year_val} &bull; {category_val}"
-        url = item.get("url") or "cv.html#honors"
+        url = item.get("url") or "/cv#honors"
         raw_desc = item.get("details", "")
         img_src = item.get("image", "assets/images/thumb-projects.jpg")
         badge_val = item.get("badge", "Provincial Honor")
@@ -915,7 +915,7 @@ def get_spotlight_card_html():
         meta_characteristic = '<span class="spotlight-gem">✦</span> RESEARCH EXCELLENCE'
         meta_detail = "Official Curriculum Vitae &nearr;"
         meta_tooltip = "Honors &amp; Distinctions"
-        secondary_btn = f'''<a href="cv.html#honors" class="spotlight-btn-secondary spotlight-btn-meta" title="{meta_tooltip}">
+        secondary_btn = f'''<a href="/cv#honors" class="spotlight-btn-secondary spotlight-btn-meta" title="{meta_tooltip}">
             <div class="spotlight-meta-block">
                 <span class="spotlight-meta-kicker font-cinzel">{meta_characteristic}</span>
                 <span class="spotlight-meta-val">{meta_detail}</span>
@@ -1227,7 +1227,7 @@ def get_portals_tray_carousel_html():
             f"{clean_tray_snippet(org, 34)} ({year})",
             f"Distinction: {clean_tray_snippet(badge, 38)}"
         ]
-        url = a.get('url') or 'cv.html#honors'
+        url = a.get('url') or '/cv#honors'
         tag = 'Honor & Award'
         if 'grant' in cat.lower():
             tag = 'Research Grant'
@@ -1351,7 +1351,7 @@ def get_portals_tray_carousel_html():
             ],
             "tag": "UKM Ph.D.",
             "btn_text": "View",
-            "btn_url": "cv.html",
+            "btn_url": "/cv",
             "is_external": False
         },
         {
@@ -1364,7 +1364,7 @@ def get_portals_tray_carousel_html():
             ],
             "tag": "FRGS / AI",
             "btn_text": "Inspect",
-            "btn_url": "research.html",
+            "btn_url": "/research",
             "is_external": False
         },
         {
@@ -1377,7 +1377,7 @@ def get_portals_tray_carousel_html():
             ],
             "tag": "24 Works",
             "btn_text": "Explore",
-            "btn_url": "publications.html",
+            "btn_url": "/publications",
             "is_external": False
         },
         {
@@ -2432,7 +2432,7 @@ def generate_research_page():
         cards_html += f'''
         <article class="article-card{card_spotlight_class}" data-category="{cat}" data-title="{title.lower()}" data-tags="{tags_str}">
           <!-- Small Thumbnail Frame (Golden Ratio Harmonic Proportion) -->
-          <a href="article.html?id={slug}" class="article-card-thumb-wrap" aria-label="{escaped_title}">
+          <a href="/article?id={slug}" class="article-card-thumb-wrap" aria-label="{escaped_title}">
             <img src="{img_url}" alt="{escaped_title}" class="article-card-thumb" loading="lazy" onerror="this.onerror=null; this.src=\'assets/images/thumb-research.jpg\';">
             <div class="article-card-thumb-overlay"></div>
             <span class="article-card-cat-badge">{cat}</span>
@@ -2447,14 +2447,14 @@ def generate_research_page():
               <span class="article-card-read">{read_time}</span>
             </div>
             <h3 class="article-card-title font-cinzel">
-              <a href="article.html?id={slug}">{title}</a>
+              <a href="/article?id={slug}">{title}</a>
             </h3>
             <p class="article-card-excerpt">{excerpt}</p>
           </div>
 
           <!-- Elegant Read Essay Button (Golden Ratio Capsule Pill) -->
           <div class="article-card-action">
-            <a href="article.html?id={slug}" class="article-card-btn font-cinzel">
+            <a href="/article?id={slug}" class="article-card-btn font-cinzel">
               <span>Read Essay</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="article-btn-icon">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -3490,7 +3490,7 @@ def generate_talks_page():
               <span>Invite for Keynote</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
             </a>
-            <a href="cv.html" class="talks-invite-link-sec">
+            <a href="/cv" class="talks-invite-link-sec">
               <span>View Academic Curriculum Vitae &nearr;</span>
             </a>
           </div>
@@ -4223,7 +4223,7 @@ def generate_cv_page():
         <div class="cv-section-tag">05 / PUBLIC ENGAGEMENT</div>
         <div class="cv-section-title-wrap">
           <h2 class="cv-section-title">Keynotes, Media &amp; Invited Talks</h2>
-          <span class="cv-section-count">{len(cv['invited_talks_and_media'])} Keynotes</span> <a href="talks.html" class="pub-pill-btn primary" style="font-size:0.72rem; padding:4px 12px; margin-left:12px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">Full Interactive Gallery &nearr;</a>
+          <span class="cv-section-count">{len(cv['invited_talks_and_media'])} Keynotes</span> <a href="/talks" class="pub-pill-btn primary" style="font-size:0.72rem; padding:4px 12px; margin-left:12px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">Full Interactive Gallery &nearr;</a>
         </div>
     """
 
@@ -4259,7 +4259,7 @@ def generate_cv_page():
             excerpt=desc_str,
             verification_url=item.get('url'),
             secondary_btn_label="TALKS GALLERY ↗",
-            secondary_btn_url="talks.html",
+            secondary_btn_url="/talks",
             featured_pill=spotlight_badge,
             media_html=img_tag,
             extra_classes="is-highlight is-spotlight" if is_spotlight else "is-highlight",
@@ -4378,7 +4378,7 @@ def generate_cv_page():
         <div class="cv-section-tag">08 / SCHOLARLY AUTHORSHIP</div>
         <div class="cv-section-title-wrap">
           <h2 class="cv-section-title">Core Research Domains, Book &amp; Scholarly Output</h2>
-          <a href="publications.html" class="cv-section-count" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+          <a href="/publications" class="cv-section-count" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
             View All {len(publications)} Works &rarr;
           </a>
         </div>
@@ -4420,7 +4420,7 @@ def generate_cv_page():
             <div style="font-weight: 800; color: #ffffff; font-size: 1.05rem;">Complete 24-Work Peer-Reviewed Repository</div>
             <div style="font-size: 0.85rem; color: var(--text-body); margin-top: 2px;">Comprehensive catalog of Q1 IEEE Access, Springer LNCS, Scopus-indexed conference papers, and preprints.</div>
           </div>
-          <a href="publications.html" class="pub-btn" style="text-decoration:none; padding: 9px 18px; font-size: 0.82rem; font-weight: 800; background: var(--brand-blue); color: #021220; border-radius: 999px;">
+          <a href="/publications" class="pub-btn" style="text-decoration:none; padding: 9px 18px; font-size: 0.82rem; font-weight: 800; background: var(--brand-blue); color: #021220; border-radius: 999px;">
             Explore Publications &rarr;
           </a>
         </div>
@@ -4457,7 +4457,7 @@ def generate_cv_page():
             <div class="cv-ref-name" style="font-size: 0.95rem; margin-top: 4px;">Postgraduate Dissertation Supervision</div>
             <div style="font-size: 0.82rem; color: var(--text-body); margin-top: 6px; line-height: 1.5;">Appointed Master and Ph.D. dissertation supervisor at INTI International University and UKM.</div>
             <div style="margin-top: 10px;">
-              <a href="prospective-students.html" style="font-size: 0.78rem; color: var(--brand-blue); text-decoration: underline; font-weight: 700;">Supervision Lab &rarr;</a>
+              <a href="/prospective-students" style="font-size: 0.78rem; color: var(--brand-blue); text-decoration: underline; font-weight: 700;">Supervision Lab &rarr;</a>
             </div>
           </div>
         </div>
@@ -4566,7 +4566,7 @@ def generate_articles_hub_page():
   <script>window.location.replace("research.html#articles");</script>
 </head>
 <body style="background:#030a14;color:#bae6fd;font-family:sans-serif;padding:60px 20px;text-align:center;">
-  <p>Redirecting to <a href="research.html#articles" style="color:#d4af37;font-weight:bold;">Activity &amp; Project &rarr; Articles &amp; Essays</a>...</p>
+  <p>Redirecting to <a href="/research#articles" style="color:#d4af37;font-weight:bold;">Activity &amp; Project &rarr; Articles &amp; Essays</a>...</p>
 </body>
 </html>
 """
@@ -4668,11 +4668,11 @@ def generate_article_reader_page():
             if (shareX) shareX.href = 'https://twitter.com/intent/tweet?text=' + titleEnc + '&url=' + pageUrl;
           } else {
             document.getElementById('reader-title').textContent = 'Article Not Found';
-            document.getElementById('reader-body').innerHTML = '<p>The requested article could not be located. <a href="research.html#articles">Browse all articles &rarr;</a></p>';
+            document.getElementById('reader-body').innerHTML = '<p>The requested article could not be located. <a href="/research#articles">Browse all articles &rarr;</a></p>';
           }
         } catch (err) {
           console.error(err);
-          document.getElementById('reader-body').innerHTML = '<p>Error loading article. <a href="research.html#articles">Back to Activity &amp; Project &rarr;</a></p>';
+          document.getElementById('reader-body').innerHTML = '<p>Error loading article. <a href="/research#articles">Back to Activity &amp; Project &rarr;</a></p>';
         }
       })();
 
@@ -4697,7 +4697,7 @@ def generate_article_reader_page():
     <main class="article-reader-container" id="article-reader-root">
       <!-- Back Link -->
       <div class="article-back-bar">
-        <a href="research.html#articles" class="article-back-link font-cinzel">&larr; Back to Activity &amp; Project</a>
+        <a href="/research#articles" class="article-back-link font-cinzel">&larr; Back to Activity &amp; Project</a>
       </div>
 
       <!-- Article Header -->
@@ -4762,7 +4762,7 @@ def generate_article_reader_page():
 
       <!-- Navigation back to hub -->
       <div style="margin-top: 40px; text-align: center;">
-        <a href="research.html#articles" class="spotlight-btn btn-gold font-cinzel" style="text-decoration: none; display: inline-block;">
+        <a href="/research#articles" class="spotlight-btn btn-gold font-cinzel" style="text-decoration: none; display: inline-block;">
           &larr; Explore All Activity &amp; Articles
         </a>
       </div>

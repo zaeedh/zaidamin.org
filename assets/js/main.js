@@ -1557,3 +1557,88 @@ function showCvNotice(triggerEl) {
 }
 window.showCvNotice = showCvNotice;
 
+/* ==============================================================================
+   STEALTH POINTER NAVIGATION ENGINE (Status Bar Cloaking & Anti-Leakage Defense)
+   Suppresses the browser's bottom-left naked URL status bubble on hover.
+   Provides clean, modern, immersive navigation with full accessibility & security.
+   ============================================================================== */
+(function initStealthNavigationEngine() {
+  const STEALTH_SELECTOR = 'nav a, .top-epigraph-menu a, .ref-menu-tab, .pub-pill-btn, .top-link-pill, .cv-jump-link, .cv-sublayer-pill, .spotlight-btn-primary, .spotlight-btn-secondary, .spotlight-btn, .pub-btn, .article-back-link, [data-stealth]';
+
+  // 1. Mouse enter: Temporarily decouple href so the browser displays NO bottom-left URL popup
+  document.addEventListener('pointerover', function(e) {
+    const link = e.target.closest(STEALTH_SELECTOR);
+    if (!link) return;
+
+    if (link.hasAttribute('href') && !link.hasAttribute('data-raw-href')) {
+      const rawHref = link.getAttribute('href');
+      if (rawHref && rawHref !== '#' && !rawHref.startsWith('javascript:')) {
+        link.setAttribute('data-raw-href', rawHref);
+        link.removeAttribute('href');
+        link.style.cursor = 'pointer';
+        if (!link.getAttribute('role')) link.setAttribute('role', 'link');
+        if (!link.getAttribute('tabindex')) link.setAttribute('tabindex', '0');
+      }
+    }
+  }, { passive: true });
+
+  // 2. Mouse leave: Cleanly restore href
+  document.addEventListener('pointerout', function(e) {
+    const link = e.target.closest(STEALTH_SELECTOR);
+    if (link && link.hasAttribute('data-raw-href')) {
+      link.setAttribute('href', link.getAttribute('data-raw-href'));
+      link.removeAttribute('data-raw-href');
+    }
+  }, { passive: true });
+
+  // 3. Right-click: Context menu needs the href to offer "Open link in new tab" & "Copy link address"
+  document.addEventListener('contextmenu', function(e) {
+    const link = e.target.closest(STEALTH_SELECTOR);
+    if (link && link.hasAttribute('data-raw-href')) {
+      link.setAttribute('href', link.getAttribute('data-raw-href'));
+      link.removeAttribute('data-raw-href');
+    }
+  });
+
+  // 4. Click: Seamless and secure instant navigation
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest(STEALTH_SELECTOR);
+    if (!link) return;
+
+    // If it has inline onclick handler (e.g. toast or filter), let that handler execute
+    if (link.getAttribute('onclick')) return;
+
+    const targetUrl = link.getAttribute('data-raw-href') || link.getAttribute('href');
+    if (targetUrl && targetUrl !== '#' && !targetUrl.startsWith('javascript:')) {
+      e.preventDefault();
+      const openInNewTab = link.getAttribute('target') === '_blank' || e.ctrlKey || e.metaKey || e.button === 1;
+      if (openInNewTab) {
+        window.open(targetUrl, '_blank', 'noopener,noreferrer');
+      } else {
+        window.location.href = targetUrl;
+      }
+    }
+  });
+
+  // 5. Accessible Keyboard Navigation (Enter key)
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      const link = document.activeElement ? document.activeElement.closest(STEALTH_SELECTOR) : null;
+      if (link && !link.getAttribute('onclick')) {
+        const targetUrl = link.getAttribute('data-raw-href') || link.getAttribute('href');
+        if (targetUrl && targetUrl !== '#' && !targetUrl.startsWith('javascript:')) {
+          e.preventDefault();
+          const openInNewTab = link.getAttribute('target') === '_blank' || e.ctrlKey || e.metaKey;
+          if (openInNewTab) {
+            window.open(targetUrl, '_blank', 'noopener,noreferrer');
+          } else {
+            window.location.href = targetUrl;
+          }
+        }
+      }
+    }
+  });
+
+  console.log('[StealthNavigationEngine] Active: Status bar naked URL popups suppressed on hover.');
+})();
+

@@ -111,18 +111,18 @@
         
         <div class="epigraph-right-cluster">
           <nav class="top-epigraph-menu" id="top-main-nav" aria-label="Main Navigation">
-            <a href="index.html" class="main-menu-link " title="Home" aria-label="Home">
+            <a href="/" class="main-menu-link " title="Home" aria-label="Home">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;" aria-hidden="true">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                 <polyline points="9 22 9 12 15 12 15 22"/>
               </svg>
             </a>
             <div class="nav-dropdown-item">
-              <a href="publications.html" class="main-menu-link " aria-haspopup="true" aria-expanded="false" title="Research & Pubs">
+              <a href="/publications" class="main-menu-link " aria-haspopup="true" aria-expanded="false" title="Research & Pubs">
                 Research & Pubs <span class="nav-chevron">▾</span>
               </a>
               <div class="nav-dropdown-menu" role="menu">
-                <a href="#" class="nav-dropdown-team-link " role="menuitem" title="Research Team">
+                <a href="/team" class="nav-dropdown-team-link " role="menuitem" title="Research Team">
                   <div class="nav-team-label-wrap">
                     <span class="nav-team-sparkle">✦</span>
                     <span class="nav-team-label">Research Team</span>
@@ -131,9 +131,9 @@
                 </a>
               </div>
             </div>
-            <a href="research.html" class="main-menu-link active" title="Activity & Project">Activity & Project</a>
-            <a href="talks.html" class="main-menu-link " title="Media & Talks">Media & Talks</a>
-            <a href="cv.html" class="main-menu-link " title="Achievement & CV">Achievement & CV</a>
+            <a href="/research" class="main-menu-link active" title="Activity & Project">Activity & Project</a>
+            <a href="/talks" class="main-menu-link " title="Media & Talks">Media & Talks</a>
+            <a href="/cv" class="main-menu-link " title="Achievement & CV">Achievement & CV</a>
           </nav>
 
           <!-- Top-Right Star of David Button & Side-Expanding Scholarly Profiles -->
@@ -221,7 +221,7 @@
     <main class="article-reader-container" id="article-reader-root">
       <!-- Back Link -->
       <div class="article-back-bar">
-        <a href="research.html#articles" class="article-back-link font-cinzel">&larr; Back to Activity &amp; Project</a>
+        <a href="/research#articles" class="article-back-link font-cinzel">&larr; Back to Activity &amp; Project</a>
       </div>
 
       <!-- Article Header -->
@@ -286,7 +286,7 @@
 
       <!-- Navigation back to hub -->
       <div style="margin-top: 40px; text-align: center;">
-        <a href="research.html#articles" class="spotlight-btn btn-gold font-cinzel" style="text-decoration: none; display: inline-block;">
+        <a href="/research#articles" class="spotlight-btn btn-gold font-cinzel" style="text-decoration: none; display: inline-block;">
           &larr; Explore All Activity &amp; Articles
         </a>
       </div>
@@ -385,11 +385,11 @@
             if (shareX) shareX.href = 'https://twitter.com/intent/tweet?text=' + titleEnc + '&url=' + pageUrl;
           } else {
             document.getElementById('reader-title').textContent = 'Article Not Found';
-            document.getElementById('reader-body').innerHTML = '<p>The requested article could not be located. <a href="research.html#articles">Browse all articles &rarr;</a></p>';
+            document.getElementById('reader-body').innerHTML = '<p>The requested article could not be located. <a href="/research#articles">Browse all articles &rarr;</a></p>';
           }
         } catch (err) {
           console.error(err);
-          document.getElementById('reader-body').innerHTML = '<p>Error loading article. <a href="research.html#articles">Back to Activity &amp; Project &rarr;</a></p>';
+          document.getElementById('reader-body').innerHTML = '<p>Error loading article. <a href="/research#articles">Back to Activity &amp; Project &rarr;</a></p>';
         }
       })();
 
