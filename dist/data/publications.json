@@ -129,15 +129,15 @@
     "venue": "UKM Press",
     "year": 2023,
     "doi": "https://www.e-sentral.com/book/info/382134",
+    "isbn": "978-3-030-78468-3",
+    "link_enabled": true,
     "citations": "",
     "authors": "Dr. Zaid Amin et al.",
     "abstract": "Attention and awareness when receiving and sharing information on social media are essential. Users can effectively identify misinformation, so they are not affected by the latent misleading. Through the vast digital growing information in social media today, increasing behavioural problems stemming from our one-click habit of easy decisions are blatantly faster than bot machines propagating misinformation. This book contributes to the knowledge of information-sharing behaviour to the public. This book also contributes to the discussion of opportunities and challenges in information sharing and user attention in helping to reduce the problems of misinformation sharing. Several guidelines for stakeholders and policymakers related to social media are also highlighted.",
     "image": "assets/images/uploads/Information_Sharing_Behaviour_on_Social_Media_-_Zaid_Amin_et_al_removed-1.png",
     "featured": false,
     "bibtex": "@incollection{amin2021attentionbased,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Attention-Based Design and Selective Exposure Amid COVID-19 Misinformation Sharing}},\n  year      = {2021},\n  journal   = {Lecture Notes in Computer Science},\n  doi       = {10.1007/978-3-030-78468-3_34},\n  url       = {https://doi.org/10.1007/978-3-030-78468-3_34}\n}",
-    "url": "https://doi.org/10.1007/978-3-030-78468-3_34",
-    "isbn": "978-3-030-78468-3",
-    "link_enabled": true
+    "url": "https://doi.org/10.1007/978-3-030-78468-3_34"
   },
   {
     "id": "amin2025peerreview",
@@ -146,15 +146,15 @@
     "venue": "Foxx Publisher",
     "year": 2025,
     "doi": "10.2991/978-2-38476-466-2_1",
+    "isbn": "978-2-38476-466-2",
+    "link_enabled": true,
     "citations": "",
     "authors": "Dr. Zaid Amin et al.",
     "abstract": "Research addressing peer-review statements through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
     "image": "assets/images/uploads/BUKU_TEKNOLOGI_PERSUASIF_12_SEPTEMBER_2025_removed-1.png",
     "featured": false,
     "bibtex": "@incollection{amin2025peerreview,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Peer-Review Statements}},\n  year      = {2025},\n  journal   = {},\n  doi       = {10.2991/978-2-38476-466-2_1},\n  url       = {https://doi.org/10.2991/978-2-38476-466-2_1}\n}",
-    "url": "https://doi.org/10.2991/978-2-38476-466-2_1",
-    "isbn": "978-2-38476-466-2",
-    "link_enabled": true
+    "url": "https://doi.org/10.2991/978-2-38476-466-2_1"
   },
   {
     "id": "amin2024tuneattention",
