@@ -6,11 +6,11 @@
     "publisher": "Academic Press Pipeline",
     "year": "2026",
     "status": "Manuscript in Editorial Preparation",
-    "abstract": "Investigating foundational alignment dynamics, proxy reward vulnerabilities, and behavioral governance in agentic AI and multi-agent autonomous decision systems.",
+    "image": "assets/images/uploads/coming_soon_book.png",
+    "badge": "✦ Future Slot",
     "authors": "Dr. Zaid Amin et al.",
-    "is_pipeline": true,
-    "image": "",
-    "badge": "✦ Future Slot"
+    "abstract": "Investigating foundational alignment dynamics, proxy reward vulnerabilities, and behavioral governance in agentic AI and multi-agent autonomous decision systems.",
+    "is_pipeline": true
   },
   {
     "id": "forthcoming-monograph-02",
@@ -19,10 +19,10 @@
     "publisher": "LNCS / Atlantis Series",
     "year": "2027",
     "status": "Proposal in Editorial Pipeline",
-    "abstract": "Empirical formulations of algorithmic nudge mechanisms, human-computer behavioral dynamics, and ethical intervention architectures in digital information ecosystems.",
+    "image": "assets/images/uploads/coming_soon_book.png",
+    "badge": "✦ Future Slot",
     "authors": "Dr. Zaid Amin et al.",
-    "is_pipeline": true,
-    "image": "",
-    "badge": "✦ Future Slot"
+    "abstract": "Empirical formulations of algorithmic nudge mechanisms, human-computer behavioral dynamics, and ethical intervention architectures in digital information ecosystems.",
+    "is_pipeline": true
   }
 ]
