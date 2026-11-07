@@ -302,6 +302,42 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794091530336",
+      "timestamp": "2026-11-07T22:45:30.336Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1794091483007",
+      "timestamp": "2026-11-07T22:44:43.007Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1794091457366",
+      "timestamp": "2026-11-07T22:44:17.366Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
       "id": "tr-1794088673036",
       "timestamp": "2026-11-07T21:57:53.036Z",
       "path": "/publications",
@@ -1464,47 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Internal Navigation"
-    },
-    {
-      "id": "tr-1793969430725",
-      "timestamp": "2026-11-06T12:50:30.725Z",
-      "path": "/publications",
-      "title": "Research & Publication Gallery | Dr. Zaid Amin | zaidamin.org",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Internal Navigation"
-    },
-    {
-      "id": "tr-1793969429484",
-      "timestamp": "2026-11-06T12:50:29.484Z",
-      "path": "/research",
-      "title": "Activity & Project | Dr. Zaid Amin | zaidamin.org",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Internal Navigation"
-    },
-    {
-      "id": "tr-1793969197808",
-      "timestamp": "2026-11-06T12:46:37.808Z",
-      "path": "/publications",
-      "title": "Research & Publication Gallery | Dr. Zaid Amin | zaidamin.org",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-08T05:57:53.086225",
+  "updated_at": "2026-11-08T06:45:30.347843",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,

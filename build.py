@@ -1941,6 +1941,8 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
                 "publisher": "Academic Press Pipeline",
                 "year": "2026/2027",
                 "status": "Manuscript in Editorial Preparation",
+                "badge": "✦ Future Slot",
+                "image": "",
                 "abstract": "Upcoming peer-reviewed scholarly monograph currently in editorial pipeline and peer evaluation.",
                 "authors": "Dr. Zaid Amin et al."
             }
@@ -1948,18 +1950,40 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
             p_series = _html_mod.escape(p_data.get("series", "Academic Press Pipeline"))
             p_publisher = _html_mod.escape(p_data.get("publisher", "Academic Press Pipeline"))
             p_year = _html_mod.escape(str(p_data.get("year", "2026/2027")))
-            p_status = _html_mod.escape(p_data.get("status", "Manuscript in Preparation"))
+            p_status = _html_mod.escape(p_data.get("status", "Manuscript in Editorial Preparation"))
+            p_badge = _html_mod.escape(p_data.get("badge", "✦ Future Slot"))
             p_abstract = _html_mod.escape(p_data.get("abstract", ""))
             p_authors = _html_mod.escape(p_data.get("authors", "Dr. Zaid Amin et al."))
+            p_img = p_data.get("image", "").strip() if p_data.get("image") else ""
             p_title_lower = p_title.lower()
 
-            shelf_cards_html += f"""
-        <article class="bokify-shelf-card bokify-card-wireframe pub-item" data-category="{cat['category_key'].lower()}" data-title="{p_title_lower}" data-venue="pipeline" data-year="{p_year}">
-          <!-- Top 3D Book Wireframe Stage -->
-          <div class="bokify-card-stage">
-            <div class="bokify-card-3d-scene">
-              <div class="bokify-card-book-3d">
-                <div class="bokify-card-cover bokify-card-wireframe-cover">
+            # Short micro status for SVG blueprint (max 22 chars)
+            p_micro_status = p_status.upper()
+            if len(p_micro_status) > 20:
+                if "PREPARATION" in p_micro_status:
+                    p_micro_status = "IN PREPARATION"
+                elif "PIPELINE" in p_micro_status:
+                    p_micro_status = "IN PIPELINE"
+                elif "REVIEW" in p_micro_status:
+                    p_micro_status = "UNDER REVIEW"
+                elif "PRESS" in p_micro_status:
+                    p_micro_status = "IN PRESS"
+                else:
+                    p_micro_status = p_micro_status[:18] + "..."
+
+            # Cover HTML: 3D Image if image provided, else glowing wireframe blueprint SVG
+            if p_img:
+                cover_html = f"""<div class="bokify-card-cover">
+                  <img src="{p_img}" alt="{p_title}" class="bokify-card-cover-img" loading="lazy" onerror="this.onerror=null;this.src='assets/images/books/book_digital_loneliness.png'" />
+                  <div class="bokify-cover-shine"></div>
+                </div>
+                <div class="bokify-card-spine">
+                  <span class="bokify-spine-micro">{p_publisher.upper()[:14] if p_publisher else 'PIPELINE'}</span>
+                </div>
+                <div class="bokify-card-pages"></div>
+                <div class="bokify-card-shadow"></div>"""
+            else:
+                cover_html = f"""<div class="bokify-card-cover bokify-card-wireframe-cover">
                   <svg class="bokify-wireframe-blueprint-svg" viewBox="0 0 124 180" width="100%" height="100%" preserveAspectRatio="none">
                     <defs>
                       <pattern id="wf-grid-{total_card_idx}" width="12" height="12" patternUnits="userSpaceOnUse">
@@ -1985,8 +2009,8 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
                     <text x="62" y="32" text-anchor="middle" font-family="'Inter', sans-serif" font-size="5" font-weight="600" fill="rgba(56, 189, 248, 0.75)" letter-spacing="1">MONOGRAPH PIPELINE</text>
                     <text x="62" y="130" text-anchor="middle" font-family="'Cinzel', serif" font-size="7.5" font-weight="700" fill="#fef08a" letter-spacing="1">FORTHCOMING</text>
                     <text x="62" y="140" text-anchor="middle" font-family="'Cinzel', serif" font-size="6.5" font-weight="600" fill="#cbd5e1" letter-spacing="0.8">SCHOLARLY WORK</text>
-                    <rect x="22" y="150" width="80" height="15" rx="7.5" fill="rgba(8, 28, 50, 0.85)" stroke="rgba(212, 175, 55, 0.5)" stroke-width="0.8" />
-                    <text x="62" y="160.5" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="5.2" font-weight="700" fill="#fce09b" letter-spacing="0.8">IN PREPARATION</text>
+                    <rect x="16" y="150" width="92" height="15" rx="7.5" fill="rgba(8, 28, 50, 0.85)" stroke="rgba(212, 175, 55, 0.5)" stroke-width="0.8" />
+                    <text x="62" y="160.5" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="5.0" font-weight="700" fill="#fce09b" letter-spacing="0.8">{p_micro_status}</text>
                   </svg>
                   <div class="bokify-cover-shine"></div>
                 </div>
@@ -1994,13 +2018,21 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
                   <span class="bokify-spine-micro">PIPELINE</span>
                 </div>
                 <div class="bokify-card-pages"></div>
-                <div class="bokify-card-shadow"></div>
+                <div class="bokify-card-shadow"></div>"""
+
+            shelf_cards_html += f"""
+        <article class="bokify-shelf-card bokify-card-wireframe pub-item" data-category="{cat['category_key'].lower()}" data-title="{p_title_lower}" data-venue="pipeline" data-year="{p_year}">
+          <!-- Top 3D Book Wireframe / Cover Stage -->
+          <div class="bokify-card-stage">
+            <div class="bokify-card-3d-scene">
+              <div class="bokify-card-book-3d">
+                {cover_html}
               </div>
             </div>
             <div class="bokify-card-tags">
               <span class="bokify-publisher-chip" style="border-style: dashed; border-color: rgba(56, 189, 248, 0.4); color: #7dd3fc;">EDITORIAL PIPELINE</span>
               <span class="bokify-year-chip" style="border-style: dashed; color: #fef08a;">{p_year}</span>
-              <span class="bokify-primary-chip" style="background: rgba(212, 175, 55, 0.12); border: 1px dashed rgba(212, 175, 55, 0.45); color: #fef08a;">✦ Future Slot</span>
+              <span class="bokify-primary-chip" style="background: rgba(212, 175, 55, 0.12); border: 1px dashed rgba(212, 175, 55, 0.45); color: #fef08a;">{p_badge}</span>
             </div>
           </div>
 

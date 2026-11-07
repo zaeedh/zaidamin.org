@@ -8,7 +8,9 @@
     "status": "Manuscript in Editorial Preparation",
     "abstract": "Investigating foundational alignment dynamics, proxy reward vulnerabilities, and behavioral governance in agentic AI and multi-agent autonomous decision systems.",
     "authors": "Dr. Zaid Amin et al.",
-    "is_pipeline": true
+    "is_pipeline": true,
+    "image": "",
+    "badge": "✦ Future Slot"
   },
   {
     "id": "forthcoming-monograph-02",
@@ -19,6 +21,8 @@
     "status": "Proposal in Editorial Pipeline",
     "abstract": "Empirical formulations of algorithmic nudge mechanisms, human-computer behavioral dynamics, and ethical intervention architectures in digital information ecosystems.",
     "authors": "Dr. Zaid Amin et al.",
-    "is_pipeline": true
+    "is_pipeline": true,
+    "image": "",
+    "badge": "✦ Future Slot"
   }
 ]
