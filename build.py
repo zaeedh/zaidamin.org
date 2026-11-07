@@ -910,60 +910,24 @@ def get_spotlight_card_html():
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             <span>{doi_display}</span>
         </a>''' if doi else ''
-        cap1_icon, cap1_title, cap1_sub = "⚡", "FOUNDATION ARCHITECTURE", "Multimodal Agentic Orchestration"
-        cap2_icon, cap2_title, cap2_sub = "🛡️", "CITATION &amp; INDEXING", "Scopus Q1 Top Decile Journal"
 
-    # Harmonize descriptions: parse lead narrative and key empirical finding
+    # Clean, dignified scholarly narrative (Gestalt unified flow without box clutter)
     finding_match = re.search(r'Key Finding:?\s*</strong>\s*(.*?)(?:</div>|$)', str(raw_desc), re.I)
     key_finding = finding_match.group(1).strip() if finding_match else ''
     lead_match = re.search(r'<p[^>]*class=["\']lead-para["\'][^>]*>(.*?)</p>', str(raw_desc), re.I)
     lead_text = lead_match.group(1).strip() if lead_match else ''
 
-    if not lead_text:
+    if lead_text and key_finding:
+        kf_clean = key_finding.rstrip('.')
+        if kf_clean and kf_clean[0].isupper():
+            kf_clean = kf_clean[0].lower() + kf_clean[1:]
+        clean_desc = f"{lead_text} Empirical findings demonstrate that {kf_clean}, establishing verifiable auditability for municipal AI deployments."
+    else:
         clean = re.sub(r'<[^>]+>', ' ', str(raw_desc or '')).strip()
-        clean = ' '.join(clean.split())
-        if 'Key Finding:' in clean:
-            parts = clean.split('Key Finding:', 1)
-            lead_text = parts[0].strip()
-            if not key_finding:
-                key_finding = parts[1].strip()
-        else:
-            lead_text = clean
+        clean_desc = ' '.join(clean.split())
 
-    if len(lead_text) > 260:
-        lead_text = lead_text[:257].rstrip() + '...'
-
-    # Format finding callout card if present
-    finding_html = ""
-    if key_finding:
-        highlighted_finding = re.sub(r'(\d+(?:\.\d+)?%)', r'<strong class="ref-finding-stat">\1</strong>', key_finding)
-        finding_html = f'''
-          <div class="ref-spotlight-finding-card">
-            <div class="ref-finding-header font-cinzel">
-              <span class="ref-finding-star">✦</span> KEY EMPIRICAL FINDING
-            </div>
-            <div class="ref-finding-body">
-              {highlighted_finding}
-            </div>
-          </div>'''
-
-    capsules_html = f'''
-          <div class="ref-highlights-capsules">
-            <div class="ref-highlight-capsule">
-              <span class="ref-hl-icon">{cap1_icon}</span>
-              <div class="ref-hl-content">
-                <span class="ref-hl-label font-cinzel">{cap1_title}</span>
-                <span class="ref-hl-val">{cap1_sub}</span>
-              </div>
-            </div>
-            <div class="ref-highlight-capsule">
-              <span class="ref-hl-icon">{cap2_icon}</span>
-              <div class="ref-hl-content">
-                <span class="ref-hl-label font-cinzel">{cap2_title}</span>
-                <span class="ref-hl-val">{cap2_sub}</span>
-              </div>
-            </div>
-          </div>'''
+    if len(clean_desc) > 340:
+        clean_desc = clean_desc[:337].rstrip() + '...'
 
     webp_cand = img_src.rsplit('.', 1)[0] + '.webp'
     has_webp = (BASE_DIR / webp_cand).exists() and webp_cand != img_src
@@ -973,7 +937,7 @@ def get_spotlight_card_html():
     clean_top_kicker = re.sub(r'\bQI\b', 'Q1', clean_top_kicker)
 
     return f"""
-      <!-- LEFT CARD: Chosen Featured Spotlight Article (Golden Ratio Composition) -->
+      <!-- LEFT CARD: Clean Golden Ratio Academic Showcase (No Extra Boxes) -->
       <article class="ref-spotlight-card" aria-label="Featured Spotlight {kicker_badge}">
         <div class="ref-spotlight-visual-wrap">
           <picture>
@@ -1000,7 +964,7 @@ def get_spotlight_card_html():
           <div class="ref-spotlight-meta-cluster">
             <span class="spotlight-chip chip-venue font-cinzel">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-              {venue} &bull; {year_str}
+              {venue} &bull; {year_val}
             </span>
             <span class="spotlight-chip chip-author">
               <span class="chip-author-dot"></span>
@@ -1011,9 +975,7 @@ def get_spotlight_card_html():
             </span>
           </div>
 
-          <p class="ref-spotlight-lead">{lead_text}</p>
-          {finding_html}
-          {capsules_html}
+          <p class="ref-spotlight-desc">{clean_desc}</p>
 
           <div class="ref-spotlight-actions">
             <a href="{url}" {target_blank} class="spotlight-btn-gold font-cinzel">

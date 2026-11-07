@@ -2199,7 +2199,7 @@ a {
 .ref-spotlight-visual-wrap {
   position: relative;
   width: 100%;
-  height: 268px;
+  height: 348px;
   overflow: hidden;
   background: #020f1c;
   box-shadow: inset 0 0 32px rgba(2, 12, 22, 0.85);
@@ -2209,13 +2209,13 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 22%;
+  object-position: 8% 12%;
   display: block;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .ref-spotlight-card:hover .ref-spotlight-visual-img {
-  transform: scale(1.03);
+  transform: scale(1.025);
 }
 
 .ref-visual-overlay {
@@ -2223,12 +2223,12 @@ a {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(2, 12, 22, 0.75) 0%,
-    rgba(2, 12, 22, 0.25) 20%,
-    rgba(4, 24, 40, 0.0) 45%,
-    rgba(4, 24, 40, 0.50) 68%,
-    rgba(4, 24, 40, 0.88) 86%,
-    rgba(4, 24, 40, 0.99) 96%,
+    rgba(2, 12, 22, 0.72) 0%,
+    rgba(2, 12, 22, 0.20) 22%,
+    rgba(4, 24, 40, 0.0) 48%,
+    rgba(4, 24, 40, 0.45) 70%,
+    rgba(4, 24, 40, 0.85) 88%,
+    rgba(4, 24, 40, 0.98) 96%,
     #041828 100%
   );
   pointer-events: none;
@@ -2317,23 +2317,24 @@ a {
 }
 
 .ref-spotlight-body {
-  padding: 22px 24px 24px 24px;
+  padding: 26px 30px 26px 30px;
   display: flex;
   flex-direction: column;
   flex: 1;
   box-sizing: border-box;
+  justify-content: flex-start;
 }
 
 .ref-scopus-kicker {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.64rem;
+  font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   color: #d4af37;
   opacity: 0.95;
-  margin-bottom: 7px;
+  margin-bottom: 8px;
   line-height: 1;
 }
 
@@ -2344,11 +2345,11 @@ a {
 
 .ref-spotlight-title {
   font-family: var(--font-sans);
-  font-size: 1.24rem;
+  font-size: 1.26rem;
   font-weight: 700;
   color: #f8fafc;
   line-height: 1.36;
-  margin: 0 0 11px 0;
+  margin: 0 0 13px 0;
   letter-spacing: -0.015em;
 }
 
@@ -2357,15 +2358,15 @@ a {
   flex-wrap: wrap;
   align-items: center;
   gap: 6px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .spotlight-chip {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  font-size: 0.70rem;
-  padding: 4px 9px;
+  gap: 4px;
+  font-size: 0.67rem;
+  padding: 3.5px 8px;
   border-radius: 999px;
   line-height: 1.1;
   white-space: nowrap;
@@ -2417,118 +2418,20 @@ a {
   font-size: 0.70rem;
 }
 
-.ref-spotlight-lead {
-  font-size: 0.88rem;
-  color: #9bb6cc;
-  line-height: 1.55;
-  margin: 0 0 12px 0;
+.ref-spotlight-desc {
+  font-size: 0.92rem;
+  color: #a3c0d4;
+  line-height: 1.65;
+  margin: 0 0 20px 0;
   letter-spacing: 0.01em;
-}
-
-.ref-spotlight-finding-card {
-  background: linear-gradient(135deg, rgba(3, 20, 36, 0.85) 0%, rgba(2, 14, 26, 0.92) 100%);
-  border: 1px solid rgba(212, 175, 55, 0.28);
-  border-left: 3px solid #d4af37;
-  border-radius: 10px;
-  padding: 10px 14px;
-  margin-bottom: 13px;
-  box-shadow: 0 4px 16px rgba(0, 10, 24, 0.30);
-}
-
-.ref-finding-header {
-  font-size: 0.60rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: #fce09b;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-bottom: 4px;
-}
-
-.ref-finding-star {
-  color: #d4af37;
-  font-size: 0.65rem;
-}
-
-.ref-finding-body {
-  font-size: 0.80rem;
-  color: #c4dbe8;
-  line-height: 1.45;
-}
-
-.ref-finding-stat {
-  color: #38bdf8;
-  font-weight: 700;
-  text-shadow: 0 0 8px rgba(56, 189, 248, 0.35);
-}
-
-.ref-highlights-capsules {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-@media (max-width: 600px) {
-  .ref-highlights-capsules {
-    grid-template-columns: 1fr;
-  }
-}
-
-.ref-highlight-capsule {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  background: rgba(2, 16, 28, 0.60);
-  border: 1px solid rgba(140, 180, 205, 0.14);
-  border-radius: 9px;
-  padding: 7px 11px;
-  transition: border-color 0.2s ease, background 0.2s ease;
-}
-
-.ref-highlight-capsule:hover {
-  border-color: rgba(212, 175, 55, 0.35);
-  background: rgba(3, 22, 38, 0.75);
-}
-
-.ref-hl-icon {
-  font-size: 0.95rem;
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.ref-hl-content {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.ref-hl-label {
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.10em;
-  color: #d4af37;
-  opacity: 0.90;
-  line-height: 1.2;
-}
-
-.ref-hl-val {
-  font-size: 0.72rem;
-  color: #cad9e8;
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.3;
 }
 
 .ref-spotlight-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin-top: auto;
-  padding-top: 13px;
+  padding-top: 14px;
   border-top: 1px solid rgba(140, 180, 205, 0.14);
   width: 100%;
 }
