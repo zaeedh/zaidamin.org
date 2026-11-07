@@ -761,7 +761,7 @@ def get_page_footer(show_visitor_stats=False):
 
 
   <script src="assets/js/rain-lighting.js"></script>
-  <script src="assets/js/main.js?v=4.0"></script>
+  <script src="assets/js/main.js?v=4.1"></script>
 </body>
 </html>
 """
