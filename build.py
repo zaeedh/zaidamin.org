@@ -4341,7 +4341,6 @@ def generate_cv_page():
               <span class="gem">✦</span>
               <span>Personal Interests &amp; Exploration</span>
             </div>
-            <div class="cv-interests-subtext">Polymathic Pursuits &amp; Creative Horizons</div>
           </div>
           <div class="cv-interests-chips-grid">
     """

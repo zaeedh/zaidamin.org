@@ -302,6 +302,42 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794042664041",
+      "timestamp": "2026-11-07T09:11:04.041Z",
+      "path": "/cv",
+      "title": "Achievement & Curriculum Vitae | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1794042473946",
+      "timestamp": "2026-11-07T09:07:53.946Z",
+      "path": "/cv",
+      "title": "Achievement & Curriculum Vitae | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Internal Navigation"
+    },
+    {
+      "id": "tr-1794042472818",
+      "timestamp": "2026-11-07T09:07:52.818Z",
+      "path": "/talks",
+      "title": "Media & Talks | Dr. Zaid Amin | zaidamin.org",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Internal Navigation"
+    },
+    {
       "id": "tr-1794041980060",
       "timestamp": "2026-11-07T08:59:40.060Z",
       "path": "/cv",
@@ -1464,47 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Internal Navigation"
-    },
-    {
-      "id": "tr-1793961766589",
-      "timestamp": "2026-11-06T10:42:46.589Z",
-      "path": "/",
-      "title": "Dr. Zaid Amin | Das Sein, Das Sollen | zaidamin.org",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Internal Navigation"
-    },
-    {
-      "id": "tr-1793960817850",
-      "timestamp": "2026-11-06T10:26:57.850Z",
-      "path": "/talks",
-      "title": "Media & Talks | Dr. Zaid Amin | zaidamin.org",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Internal Navigation"
-    },
-    {
-      "id": "tr-1793960507560",
-      "timestamp": "2026-11-06T10:21:47.560Z",
-      "path": "/",
-      "title": "Dr. Zaid Amin | Das Sein, Das Sollen | zaidamin.org",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Internal Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-07T16:59:40.089006",
+  "updated_at": "2026-11-07T17:11:04.050040",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
