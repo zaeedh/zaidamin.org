@@ -339,6 +339,7 @@ def get_page_header(active_page="home"):
         pills_html.append(f'<a href="{href}"{target_str} class="top-link-pill" title="{label}">{render_svg_icon(icon)} <span>{label}</span></a>')
 
     scholarly_links_rendered = "\n              ".join(pills_html)
+    epigraph_title = profile.get("epigraph", "Das Sein, Das Sollen.")
     star_svg = '''<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" class="david-star-svg">
       <polygon points="12,2 20.66,17 3.34,17" />
       <polygon points="12,22 3.34,7 20.66,7" />
@@ -350,7 +351,7 @@ def get_page_header(active_page="home"):
     <header class="epigraph-header">
       <div class="epigraph-top-flex">
         <div class="epigraph-title-group">
-          <h1 class="epigraph-title">Das Sein, Das Sollen.</h1>
+          <h1 class="epigraph-title">{epigraph_title}</h1>
           <div class="epigraph-golden-line" aria-hidden="true"></div>
         </div>
         
@@ -1475,7 +1476,8 @@ def generate_golden_ratio_home():
     profile = load_json("profile.json")
     publications = load_json("publications.json")
 
-    html = get_html_head("Dr. Zaid Amin | Das Sein, Das Sollen | zaidamin.org")
+    site_browser_title = profile.get("site_title", f"Dr. Zaid Amin | {profile.get('epigraph', 'Das Sein, Das Sollen')} | zaidamin.org")
+    html = get_html_head(site_browser_title)
     html += get_page_header("home")
 
     # Dynamic Portals Header (Configurable via CMS)
