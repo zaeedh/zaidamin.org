@@ -1,0 +1,62 @@
+{
+  "section_label": "INDEXED JOURNALS",
+  "star_glyph": "✦",
+  "autoplay": true,
+  "interval_ms": 4800,
+  "items": [
+    {
+      "id": "ticker-smart-cities",
+      "tag": "Q1 SCOPUS",
+      "tag_class": "tag-q1",
+      "venue": "Smart Cities (MDPI) • 2026",
+      "title": "Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance",
+      "link": "https://doi.org/10.3390/smartcities9100174",
+      "enabled": true
+    },
+    {
+      "id": "ticker-ieee-access",
+      "tag": "Q1 SCOPUS",
+      "tag_class": "tag-q1",
+      "venue": "IEEE Access • 2021",
+      "title": "Attention-Based Design and User Decisions on Information Sharing: Cybernetics Intervention",
+      "link": "https://doi.org/10.1109/ACCESS.2021.3087740",
+      "enabled": true
+    },
+    {
+      "id": "ticker-ijacsa",
+      "tag": "SCOPUS INDEXED",
+      "tag_class": "tag-scopus",
+      "venue": "IJACSA • 2021",
+      "title": "Visual Selective Attention System to Intervene User Attention in Digital Environments",
+      "link": "https://doi.org/10.14569/IJACSA.2021.0121092",
+      "enabled": true
+    },
+    {
+      "id": "ticker-jistm",
+      "tag": "PEER-REVIEWED",
+      "tag_class": "tag-peer",
+      "venue": "JISTM • 2026",
+      "title": "Srivijayapedia: A Digital Platform for Cultural Heritage Preservation of the Srivijaya Civilization",
+      "link": "https://doi.org/10.35631/JISTM.1141001",
+      "enabled": true
+    },
+    {
+      "id": "ticker-springer",
+      "tag": "SPRINGER",
+      "tag_class": "tag-scopus",
+      "venue": "Contributions to Management Science • 2024",
+      "title": "Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World",
+      "link": "https://doi.org/10.1007/978-3-031-52280-2_14",
+      "enabled": true
+    },
+    {
+      "id": "ticker-ssrn",
+      "tag": "GOVERNANCE PREPRINT",
+      "tag_class": "tag-preprint",
+      "venue": "SSRN Series • 2026",
+      "title": "The Proxy Trap in Agentic AI: When Metrics Replace Judgment in Autonomous Systems",
+      "link": "https://doi.org/10.2139/ssrn.7670124",
+      "enabled": true
+    }
+  ]
+}

@@ -1510,6 +1510,121 @@ def get_portals_tray_carousel_html():
         </div>'''
 
 
+def get_journal_ticker_html():
+    ticker_file = DATA_DIR / "journal_ticker.json"
+    ticker_data = {}
+    if ticker_file.exists():
+        try:
+            ticker_data = load_json("journal_ticker.json")
+        except Exception:
+            ticker_data = {}
+    
+    if not isinstance(ticker_data, dict):
+        ticker_data = {}
+        
+    section_label = ticker_data.get("section_label", "INDEXED JOURNALS")
+    star_glyph = ticker_data.get("star_glyph", "✦")
+    items = ticker_data.get("items", [])
+    if not isinstance(items, list) or len(items) == 0:
+        items = [
+            {
+                "tag": "Q1 SCOPUS",
+                "tag_class": "tag-q1",
+                "venue": "Smart Cities (MDPI) • 2026",
+                "title": "Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance",
+                "link": "https://doi.org/10.3390/smartcities9100174",
+                "enabled": True
+            },
+            {
+                "tag": "Q1 SCOPUS",
+                "tag_class": "tag-q1",
+                "venue": "IEEE Access • 2021",
+                "title": "Attention-Based Design and User Decisions on Information Sharing: Cybernetics Intervention",
+                "link": "https://doi.org/10.1109/ACCESS.2021.3087740",
+                "enabled": True
+            },
+            {
+                "tag": "SCOPUS INDEXED",
+                "tag_class": "tag-scopus",
+                "venue": "IJACSA • 2021",
+                "title": "Visual Selective Attention System to Intervene User Attention in Digital Environments",
+                "link": "https://doi.org/10.14569/IJACSA.2021.0121092",
+                "enabled": True
+            },
+            {
+                "tag": "PEER-REVIEWED",
+                "tag_class": "tag-peer",
+                "venue": "JISTM • 2026",
+                "title": "Srivijayapedia: A Digital Platform for Cultural Heritage Preservation of the Srivijaya Civilization",
+                "link": "https://doi.org/10.35631/JISTM.1141001",
+                "enabled": True
+            },
+            {
+                "tag": "SPRINGER",
+                "tag_class": "tag-scopus",
+                "venue": "Contributions to Management Science • 2024",
+                "title": "Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World",
+                "link": "https://doi.org/10.1007/978-3-031-52280-2_14",
+                "enabled": True
+            },
+            {
+                "tag": "GOVERNANCE PREPRINT",
+                "tag_class": "tag-preprint",
+                "venue": "SSRN Series • 2026",
+                "title": "The Proxy Trap in Agentic AI: When Metrics Replace Judgment in Autonomous Systems",
+                "link": "https://doi.org/10.2139/ssrn.7670124",
+                "enabled": True
+            }
+        ]
+
+    active_items = [it for it in items if it.get("enabled", True)]
+    if not active_items:
+        active_items = items
+
+    slides_html = ""
+    for idx, it in enumerate(active_items):
+        active_cls = " active" if idx == 0 else ""
+        tag_text = it.get("tag", "JOURNAL")
+        tag_cls = it.get("tag_class", "tag-q1")
+        venue_text = it.get("venue", "").replace("•", "&bull;")
+        title_text = it.get("title", "")
+        link_url = it.get("link", "#")
+        slides_html += f"""
+          <!-- Slide {idx}: {venue_text} -->
+          <div class="ticker-slide-item{active_cls}" data-slide="{idx}">
+            <span class="ticker-tag {tag_cls} font-cinzel">{tag_text}</span>
+            <span class="ticker-venue-name font-cinzel">{venue_text}</span>
+            <a href="{link_url}" target="_blank" rel="noopener" class="ticker-title-link">
+              {title_text} &nearr;
+            </a>
+          </div>"""
+
+    return f"""
+    <!-- 6. LIST OF JOURNAL: ANIMATE FADE IN FADE OUT MOVE FROM TOP TO DOWN -->
+    <section class="journal-ticker-section">
+      <div class="journal-ticker-container">
+        
+        <div class="ticker-label-col font-cinzel">
+          <span class="ticker-star-glyph">{star_glyph}</span>
+          <span class="ticker-label-text">{section_label}</span>
+        </div>
+
+        <div class="ticker-viewport-col" id="journal-ticker-viewport" onmouseenter="pauseJournalTicker()" onmouseleave="resumeJournalTicker()">
+          {slides_html}
+        </div>
+
+        <div class="ticker-controls-col">
+          <div class="ticker-arrows-box">
+            <button class="ticker-arrow-btn" onclick="rotateJournalTicker(-1)" title="Previous Journal (Top)" aria-label="Previous Journal">&uarr;</button>
+            <button class="ticker-arrow-btn" onclick="rotateJournalTicker(1)" title="Next Journal (Down)" aria-label="Next Journal">&darr;</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+"""
+
+
 def generate_golden_ratio_home():
     profile = load_json("profile.json")
     publications = load_json("publications.json")
@@ -1537,84 +1652,8 @@ def generate_golden_ratio_home():
     ph_status_text = portals_hdr.get("status_text", "Active Senior Lecturer & Researcher")
     ph_status_html = f'<span class="ref-live-status" title="{ph_status_text}"></span>' if ph_status_enabled else ''
 
+    html += get_journal_ticker_html()
     html += f"""
-    <!-- 6. LIST OF JOURNAL: ANIMATE FADE IN FADE OUT MOVE FROM TOP TO DOWN -->
-    <section class="journal-ticker-section">
-      <div class="journal-ticker-container">
-        
-        <div class="ticker-label-col font-cinzel">
-          <span class="ticker-star-glyph">✦</span>
-          <span class="ticker-label-text">INDEXED JOURNALS</span>
-        </div>
-
-        <div class="ticker-viewport-col" id="journal-ticker-viewport" onmouseenter="pauseJournalTicker()" onmouseleave="resumeJournalTicker()">
-          
-          <!-- Slide 0: MDPI Smart Cities -->
-          <div class="ticker-slide-item active" data-slide="0">
-            <span class="ticker-tag tag-q1 font-cinzel">Q1 SCOPUS</span>
-            <span class="ticker-venue-name font-cinzel">Smart Cities (MDPI) &bull; 2026</span>
-            <a href="https://doi.org/10.3390/smartcities9100174" target="_blank" rel="noopener" class="ticker-title-link">
-              Trustworthy AI for Sustainable Cities: A Multimodal Orchestration Agent-Based Framework for Civic Compliance &nearr;
-            </a>
-          </div>
-
-          <!-- Slide 1: IEEE Access -->
-          <div class="ticker-slide-item" data-slide="1">
-            <span class="ticker-tag tag-q1 font-cinzel">Q1 SCOPUS</span>
-            <span class="ticker-venue-name font-cinzel">IEEE Access &bull; 2021</span>
-            <a href="https://doi.org/10.1109/ACCESS.2021.3087740" target="_blank" rel="noopener" class="ticker-title-link">
-              Attention-Based Design and User Decisions on Information Sharing: Cybernetics Intervention &nearr;
-            </a>
-          </div>
-
-          <!-- Slide 2: IJACSA -->
-          <div class="ticker-slide-item" data-slide="2">
-            <span class="ticker-tag tag-scopus font-cinzel">SCOPUS INDEXED</span>
-            <span class="ticker-venue-name font-cinzel">IJACSA &bull; 2021</span>
-            <a href="https://doi.org/10.14569/IJACSA.2021.0121092" target="_blank" rel="noopener" class="ticker-title-link">
-              Visual Selective Attention System to Intervene User Attention in Digital Environments &nearr;
-            </a>
-          </div>
-
-          <!-- Slide 3: JISTM -->
-          <div class="ticker-slide-item" data-slide="3">
-            <span class="ticker-tag tag-peer font-cinzel">PEER-REVIEWED</span>
-            <span class="ticker-venue-name font-cinzel">JISTM &bull; 2026</span>
-            <a href="https://doi.org/10.35631/JISTM.1141001" target="_blank" rel="noopener" class="ticker-title-link">
-              Srivijayapedia: A Digital Platform for Cultural Heritage Preservation of the Srivijaya Civilization &nearr;
-            </a>
-          </div>
-
-          <!-- Slide 4: Springer Contributions to Management Science -->
-          <div class="ticker-slide-item" data-slide="4">
-            <span class="ticker-tag tag-scopus font-cinzel">SPRINGER</span>
-            <span class="ticker-venue-name font-cinzel">Contributions to Management Science &bull; 2024</span>
-            <a href="https://doi.org/10.1007/978-3-031-52280-2_14" target="_blank" rel="noopener" class="ticker-title-link">
-              Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World &nearr;
-            </a>
-          </div>
-
-          <!-- Slide 5: SSRN AI Governance Series -->
-          <div class="ticker-slide-item" data-slide="5">
-            <span class="ticker-tag tag-preprint font-cinzel">GOVERNANCE PREPRINT</span>
-            <span class="ticker-venue-name font-cinzel">SSRN Series &bull; 2026</span>
-            <a href="https://doi.org/10.2139/ssrn.7670124" target="_blank" rel="noopener" class="ticker-title-link">
-              The Proxy Trap in Agentic AI: When Metrics Replace Judgment in Autonomous Systems &nearr;
-            </a>
-          </div>
-
-        </div>
-
-        <div class="ticker-controls-col">
-          <div class="ticker-arrows-box">
-            <button class="ticker-arrow-btn" onclick="rotateJournalTicker(-1)" title="Previous Journal (Top)" aria-label="Previous Journal">&uarr;</button>
-            <button class="ticker-arrow-btn" onclick="rotateJournalTicker(1)" title="Next Journal (Down)" aria-label="Next Journal">&darr;</button>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
     <!-- 5. FEATURED SPOTLIGHT & ACADEMIC PORTALS (REFERENCE SPLIT CARD LAYOUT) -->
     <section class="golden-split-section ref-split-layout">
       
