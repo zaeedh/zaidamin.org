@@ -2071,13 +2071,21 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
               {_html_mod.escape(hero_cfg.get("description", ""))}
             </p>
 
-            <!-- Call to Actions -->
+            <!-- Call to Actions (Harmonized with CV Available on Request Settings) -->
             <div class="bokify-hero-ctas">
-              <a href="{primary_url}" target="_blank" rel="noopener" class="bokify-btn-hero-primary">
-                {render_svg_icon_fn("download")}
-                <span>Download Primary Volume ({primary_pub_short})</span>
+              <a href="mailto:zaid.amin@newinti.edu.my?subject=Primary%20Volume%20Request%20-%20Dr.%20Zaid%20Amin" class="cv-round-btn-download cv-btn-disabled" title="Direct volume download is currently disabled. Click to request academic volume via email.">
+                <span class="cv-round-icon-wrap">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                </span>
+                <span class="cv-round-labels">
+                  <span class="cv-round-kicker">PRIMARY VOLUME (ACADEMIC)</span>
+                  <span class="cv-round-title">Available on Request</span>
+                </span>
               </a>
-              <a href="#bokify-volumes-shelf" class="bokify-btn-hero-secondary">
+              <a href="#bokify-volumes-shelf" class="bokify-btn-hero-secondary" style="height: 52px; box-sizing: border-box;">
                 <span>Browse All {len(cat_items)} Volumes</span>
                 <span class="bokify-arrow-down">&darr;</span>
               </a>
