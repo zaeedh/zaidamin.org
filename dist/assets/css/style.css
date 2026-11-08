@@ -12425,8 +12425,9 @@ h1.cv-hero-name,
 .cv-sublayer-kicker {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 6px !important;
-  width: 146px !important;
+  gap: 8px !important;
+  width: 195px !important;
+  min-width: 195px !important;
   flex-shrink: 0 !important;
   font-size: 0.65rem !important;
   font-weight: 800 !important;
@@ -12529,6 +12530,7 @@ h1.cv-hero-name,
   }
   .cv-sublayer-kicker {
     width: 100% !important;
+    min-width: 0 !important;
   }
 }
 
