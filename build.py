@@ -2995,7 +2995,7 @@ def generate_talks_page():
             <h3 class="service-card-title">{k_title}</h3>
             <p class="service-card-desc">{k_abstract}</p>
             <a href="{k_url}" {"target='_blank' rel='noopener'" if k_url.startswith("http") else ""} class="service-card-btn">
-              <span>Learn More</span>
+              <span>Read More</span>
               <span class="service-card-btn-disc">&nearr;</span>
             </a>
           </div>
