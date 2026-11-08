@@ -3839,35 +3839,12 @@ def render_cv_strip_card(
     extra_classes="",
     data_attrs="",
     cat_theme="cyan",
-    show_verification_btn=True
+    show_verification_btn=False
 ):
-    # Determine verification link state
-    ver_url_clean = (verification_url or "").strip()
-    is_disabled = ver_url_clean in ["#", "", "disabled", "none", "javascript:void(0)"]
-    
-    if not is_disabled:
-        ver_href = f'href="{ver_url_clean}" target="_blank" rel="noopener"'
-        ver_onclick = ''
-        ver_title = 'Open Official Verification Document'
-        ver_cls = ''
-    else:
-        ver_href = 'href="#"'
-        ver_onclick = 'onclick="event.preventDefault(); showCvNotice(this);"'
-        ver_title = 'Official institutional verification record archived on file. Click to view status.'
-        ver_cls = 'cv-pill-disabled'
-        
-    ext_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>'
+    # Verification Link Button removed per user design request across Achievement & CV pages
+    primary_btn = ""
 
-    # Primary Gold Button: Verification Link (ALWAYS VISIBLE & PROMINENT unless explicitly hidden)
-    if show_verification_btn:
-        primary_btn = f'''<a {ver_href} {ver_onclick} class="pub-pill-btn pub-pill-primary {ver_cls}" title="{ver_title}">
-      {ext_svg}
-      <span>VERIFICATION LINK</span>
-    </a>'''
-    else:
-        primary_btn = ""
-
-    # Secondary Cyan Button
+    # Secondary Action Pill
     if secondary_btn_label and secondary_btn_url:
         is_mailto = secondary_btn_url.startswith("mailto:")
         is_ext = secondary_btn_url.startswith("http")
@@ -3879,7 +3856,7 @@ def render_cv_strip_card(
         elif 'gallery' in secondary_btn_label.lower() or 'talks' in secondary_btn_url:
             sec_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>'
         else:
-            sec_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 10a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v11H9z"/></svg>'
+            sec_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>'
 
         secondary_btn = f'''<a href="{secondary_btn_url}"{sec_target} class="pub-pill-btn pub-pill-secondary" title="{secondary_btn_label}">
           {sec_svg}
@@ -3894,6 +3871,12 @@ def render_cv_strip_card(
 
     card_cls = f"pub-strip-card cv-strip-card {extra_classes}".strip()
     data_attr_str = f" {data_attrs}" if data_attrs else ""
+
+    actions_dock = f"""
+            <!-- Right Action Dock (Harmonized Action Pill) -->
+            <div class="pub-strip-actions">
+              {secondary_btn}
+            </div>""" if secondary_btn else ""
 
     return f"""
         <article class="{card_cls}"{data_attr_str}>
@@ -3930,11 +3913,7 @@ def render_cv_strip_card(
               </p>
             </div>
 
-            <!-- Right Action Dock (Solid Gold Verification Pill + Cyan Secondary Pill) -->
-            <div class="pub-strip-actions">
-              {primary_btn}
-              {secondary_btn}
-            </div>
+            {actions_dock}
           </div>
         </article>
     """
@@ -4125,7 +4104,7 @@ def generate_cv_page():
           <div class="cv-sublayer-row">
             <div class="cv-sublayer-kicker cv-sublayer-kicker-cyan">
               <span class="cv-sublayer-dot cv-sublayer-dot-cyan"></span>
-              <span>VERIFICATION</span>
+              <span>OFFICIAL ACCREDITATION</span>
             </div>
             <div class="cv-sublayer-pills">
               <a href="mailto:{exec_prof['contact']['email']}" class="cv-sublayer-pill" title="Official Institutional Academic Email">
@@ -4445,7 +4424,7 @@ def generate_cv_page():
           {cv['peer_review_and_editorial']['summary']}
         </p>
 
-        <h3 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 14px;">Verified High-Impact Q1 Journals</h3>
+        <h3 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 14px;">High-Impact Q1 Journals</h3>
         <div class="cv-journals-grid">
     """
 
@@ -4462,7 +4441,7 @@ def generate_cv_page():
             </div>
             <div class="cv-journal-footer">
               <a href="{jnl['url']}" target="_blank" rel="noopener" class="cv-journal-link">
-                <span>Verified Record</span>
+                <span>Journal Profile</span>
                 <span class="link-arrow">&rarr;</span>
               </a>
             </div>
@@ -4604,7 +4583,7 @@ def generate_cv_page():
             <div class="cv-ref-name" style="font-size: 0.95rem; margin-top: 4px;">Higher Education Teaching Permit</div>
             <div style="font-size: 0.82rem; color: var(--text-body); margin-top: 6px; line-height: 1.5;">Authorized for Doctoral, Master, and Bachelor Degree Programs.</div>
             <div style="margin-top: 10px;">
-              <a href="{exec_prof['official_docs']['teaching_permit']['url']}" target="_blank" rel="noopener" style="font-size: 0.78rem; color: var(--brand-blue); text-decoration: underline; font-weight: 700;">Verified Document &rarr;</a>
+              <a href="{exec_prof['official_docs']['teaching_permit']['url']}" target="_blank" rel="noopener" style="font-size: 0.78rem; color: var(--brand-blue); text-decoration: underline; font-weight: 700;">Official Document &rarr;</a>
             </div>
           </div>
           <div class="cv-mini-card">
@@ -4612,7 +4591,7 @@ def generate_cv_page():
             <div class="cv-ref-name" style="font-size: 0.95rem; margin-top: 4px;">MQA Official Higher Education CV</div>
             <div style="font-size: 0.82rem; color: var(--text-body); margin-top: 6px; line-height: 1.5;">Malaysian Qualifications Agency standard format for higher education accreditation.</div>
             <div style="margin-top: 10px;">
-              <a href="{exec_prof['official_docs']['mqa_cv']['url']}" target="_blank" rel="noopener" style="font-size: 0.78rem; color: var(--brand-blue); text-decoration: underline; font-weight: 700;">Verified Document &rarr;</a>
+              <a href="{exec_prof['official_docs']['mqa_cv']['url']}" target="_blank" rel="noopener" style="font-size: 0.78rem; color: var(--brand-blue); text-decoration: underline; font-weight: 700;">Official Document &rarr;</a>
             </div>
           </div>
           <div class="cv-mini-card">

@@ -9362,6 +9362,26 @@ a {
   transform: translateY(-1px);
 }
 
+/* Golden Ratio & Gestalt Harmony for CV Strip Single Action Dock */
+.cv-strip-card .pub-strip-actions {
+  min-width: 155px;
+}
+
+.cv-strip-card.is-spotlight .pub-strip-actions .pub-pill-secondary,
+.cv-strip-card.is-highlight .pub-strip-actions .pub-pill-secondary {
+  border-color: rgba(212, 175, 55, 0.45);
+  color: #fef08a;
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.cv-strip-card.is-spotlight .pub-strip-actions .pub-pill-secondary:hover,
+.cv-strip-card.is-highlight .pub-strip-actions .pub-pill-secondary:hover {
+  background: rgba(212, 175, 55, 0.22);
+  color: #ffffff;
+  border-color: #fef08a;
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
+}
+
 /* Collapsible BibTeX Drawer */
 .bibtex-box {
   display: none;
