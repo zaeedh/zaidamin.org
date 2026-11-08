@@ -4177,6 +4177,19 @@ def generate_cv_page():
         highlight_cls = "is-highlight is-spotlight" if is_spotlight else ("is-highlight" if item.get('highlight') else "")
         spotlight_badge = '<span class="pub-strip-featured-pill">★ SPOTLIGHT</span>' if is_spotlight else ""
         
+        org_name = item['organization']
+        venue_short = org_name.split(',')[0].strip()
+        if 'kemendikbudristek' in org_name.lower():
+            venue_short = 'Kemendikbudristek'
+        elif 'kemristekdikti' in org_name.lower():
+            venue_short = 'Kemenristekdikti'
+        elif 'visual informatics' in org_name.lower():
+            venue_short = 'Institute of Visual Informatics (IVI)'
+        elif 'palcomtech' in org_name.lower():
+            venue_short = 'PalComTech Institute'
+        elif 'cisco learning' in org_name.lower():
+            venue_short = 'Cisco Learning Institute'
+
         img_src = item.get('image')
         img_title = item.get('title')
         img_tag = f'<div class="cv-distinction-media" style="margin:10px 0; border-radius:10px; overflow:hidden; max-height:160px; border:1px solid rgba(212,175,55,0.3);"><img src="{img_src}" alt="{img_title}" loading="lazy" style="width:100%; height:100%; object-fit:cover;"></div>' if (is_spotlight and img_src) else ""
@@ -4185,7 +4198,7 @@ def generate_cv_page():
             idx=idx,
             cat_pill=item['badge'].upper(),
             year_pill=item['year'],
-            venue_chip=item['organization'],
+            venue_chip=venue_short,
             title=item['title'].upper(),
             venue_name=item['organization'],
             sub_extra=cat_label,
@@ -4309,7 +4322,10 @@ def generate_cv_page():
         <div class="cv-section-tag">05 / PUBLIC ENGAGEMENT</div>
         <div class="cv-section-title-wrap">
           <h2 class="cv-section-title">Keynotes, Media &amp; Invited Talks</h2>
-          <span class="cv-section-count">{len(cv['invited_talks_and_media'])} Keynotes</span> <a href="/talks" class="pub-pill-btn primary" style="font-size:0.72rem; padding:4px 12px; margin-left:12px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">Full Interactive Gallery &nearr;</a>
+          <div style="display:inline-flex; align-items:center; gap:10px;">
+            <span class="cv-section-count">{len(cv['invited_talks_and_media'])} Keynotes</span>
+            <a href="/talks" class="pub-pill-btn primary" style="font-size:0.72rem; padding:4px 12px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">Full Interactive Gallery &nearr;</a>
+          </div>
         </div>
     """
 
@@ -4334,11 +4350,21 @@ def generate_cv_page():
         
         img_tag = f'<div style="margin:10px 0; border-radius:10px; overflow:hidden; max-height:160px; border:1px solid rgba(212,175,55,0.3);"><img src="{img_src}" alt="{title_str}" style="width:100%; height:100%; object-fit:cover;" loading="lazy"></div>' if (is_spotlight and img_src) else ""
 
+        event_raw = sub_str or 'Keynote Event'
+        if 'matcom' in event_raw.lower():
+            chip_label = 'MatCom-2026 Conference'
+        elif 'ice3is' in event_raw.lower():
+            chip_label = 'ICE3IS Conference'
+        elif ':' in event_raw:
+            chip_label = event_raw.split(':')[0].strip()
+        else:
+            chip_label = event_raw
+
         html += render_cv_strip_card(
             idx=idx,
             cat_pill=role_str.upper(),
             year_pill=year_str,
-            venue_chip=(sub_str or 'Keynote Event')[:40],
+            venue_chip=chip_label,
             title=title_str.upper(),
             venue_name=sub_str,
             sub_extra=role_str,
@@ -4490,7 +4516,7 @@ def generate_cv_page():
 
         <div style="background: rgba(3, 18, 32, 0.75); border: 1px solid rgba(34, 166, 200, 0.25); border-radius: 14px; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
           <div>
-            <div style="font-weight: 800; color: #ffffff; font-size: 1.05rem;">Complete 24-Work Peer-Reviewed Repository</div>
+            <div style="font-weight: 800; color: #ffffff; font-size: 1.05rem;">Complete {len(publications)}-Work Peer-Reviewed Repository</div>
             <div style="font-size: 0.85rem; color: var(--text-body); margin-top: 2px;">Comprehensive catalog of Q1 IEEE Access, Springer LNCS, Scopus-indexed conference papers, and preprints.</div>
           </div>
           <a href="/publications" class="pub-btn" style="text-decoration:none; padding: 9px 18px; font-size: 0.82rem; font-weight: 800; background: var(--brand-blue); color: #021220; border-radius: 999px;">
@@ -4513,24 +4539,33 @@ def generate_cv_page():
             <div class="cv-ref-role" style="color: var(--brand-gold);">Official Government Permit</div>
             <div class="cv-ref-name" style="font-size: 0.95rem; margin-top: 4px;">Higher Education Teaching Permit</div>
             <div style="font-size: 0.82rem; color: var(--text-body); margin-top: 6px; line-height: 1.5;">Authorized for Doctoral, Master, and Bachelor Degree Programs.</div>
-            <div style="margin-top: 10px;">
-              <a href="{exec_prof['official_docs']['teaching_permit']['url']}" target="_blank" rel="noopener" style="font-size: 0.78rem; color: var(--brand-blue); text-decoration: underline; font-weight: 700;">Official Document &rarr;</a>
+            <div style="margin-top: 12px;">
+              <a href="{exec_prof['official_docs']['teaching_permit']['url']}" target="_blank" rel="noopener" style="font-size: 0.80rem; color: #38bdf8; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
+                <span>Official Document</span>
+                <span>&rarr;</span>
+              </a>
             </div>
           </div>
           <div class="cv-mini-card">
             <div class="cv-ref-role" style="color: #38b6d0;">Institutional Accreditation</div>
             <div class="cv-ref-name" style="font-size: 0.95rem; margin-top: 4px;">MQA Official Higher Education CV</div>
             <div style="font-size: 0.82rem; color: var(--text-body); margin-top: 6px; line-height: 1.5;">Malaysian Qualifications Agency standard format for higher education accreditation.</div>
-            <div style="margin-top: 10px;">
-              <a href="{exec_prof['official_docs']['mqa_cv']['url']}" target="_blank" rel="noopener" style="font-size: 0.78rem; color: var(--brand-blue); text-decoration: underline; font-weight: 700;">Official Document &rarr;</a>
+            <div style="margin-top: 12px;">
+              <a href="{exec_prof['official_docs']['mqa_cv']['url']}" target="_blank" rel="noopener" style="font-size: 0.80rem; color: #38bdf8; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
+                <span>Official Document</span>
+                <span>&rarr;</span>
+              </a>
             </div>
           </div>
           <div class="cv-mini-card">
             <div class="cv-ref-role" style="color: #6ee7b7;">Supervisory Roles</div>
             <div class="cv-ref-name" style="font-size: 0.95rem; margin-top: 4px;">Postgraduate Dissertation Supervision</div>
             <div style="font-size: 0.82rem; color: var(--text-body); margin-top: 6px; line-height: 1.5;">Appointed Master and Ph.D. dissertation supervisor at INTI International University and UKM.</div>
-            <div style="margin-top: 10px;">
-              <a href="/prospective-students" style="font-size: 0.78rem; color: var(--brand-blue); text-decoration: underline; font-weight: 700;">Supervision Lab &rarr;</a>
+            <div style="margin-top: 12px;">
+              <a href="/prospective-students" style="font-size: 0.80rem; color: #38bdf8; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
+                <span>Supervision Lab</span>
+                <span>&rarr;</span>
+              </a>
             </div>
           </div>
         </div>

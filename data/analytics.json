@@ -302,6 +302,30 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794112084706",
+      "timestamp": "2026-11-08T04:28:04.707Z",
+      "path": "/cv",
+      "title": "Achievement & Curriculum Vitae",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1794111621858",
+      "timestamp": "2026-11-08T04:20:21.858Z",
+      "path": "/cv",
+      "title": "Achievement & Curriculum Vitae",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
       "id": "tr-1794106079041",
       "timestamp": "2026-11-08T02:47:59.041Z",
       "path": "/cv",
@@ -1476,35 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794003940733",
-      "timestamp": "2026-11-06T22:25:40.733Z",
-      "path": "/",
-      "title": "Dr. Zaid Amin | Das Sein, Das Sollen | zaidamin.org",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794003139774",
-      "timestamp": "2026-11-06T22:12:19.774Z",
-      "path": "/",
-      "title": "Dr. Zaid Amin | Das Sein, Das Sollen | zaidamin.org",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Internal Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-08T10:47:59.063742",
+  "updated_at": "2026-11-08T12:28:04.714858",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
