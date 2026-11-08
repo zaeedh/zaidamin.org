@@ -302,6 +302,42 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794106079041",
+      "timestamp": "2026-11-08T02:47:59.041Z",
+      "path": "/cv",
+      "title": "Achievement & Curriculum Vitae",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1794106042347",
+      "timestamp": "2026-11-08T02:47:22.347Z",
+      "path": "/cv",
+      "title": "Achievement & Curriculum Vitae",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1794105984523",
+      "timestamp": "2026-11-08T02:46:24.523Z",
+      "path": "/cv",
+      "title": "Achievement & Curriculum Vitae",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
       "id": "tr-1794104922422",
       "timestamp": "2026-11-08T02:28:42.422Z",
       "path": "/cv",
@@ -1464,47 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Internal Navigation"
-    },
-    {
-      "id": "tr-1793973136470",
-      "timestamp": "2026-11-06T13:52:16.470Z",
-      "path": "/publications",
-      "title": "Research & Publication Gallery | Dr. Zaid Amin | zaidamin.org",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Internal Navigation"
-    },
-    {
-      "id": "tr-1793973112504",
-      "timestamp": "2026-11-06T13:51:52.504Z",
-      "path": "/",
-      "title": "Dr. Zaid Amin | Das Sein, Das Sollen | zaidamin.org",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Internal Navigation"
-    },
-    {
-      "id": "tr-1793971278236",
-      "timestamp": "2026-11-06T13:21:18.236Z",
-      "path": "/cv",
-      "title": "Achievement & Curriculum Vitae | Dr. Zaid Amin | zaidamin.org",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Internal Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-08T10:28:42.449136",
+  "updated_at": "2026-11-08T10:47:59.063742",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,

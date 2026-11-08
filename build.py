@@ -4181,17 +4181,6 @@ def generate_cv_page():
         img_title = item.get('title')
         img_tag = f'<div class="cv-distinction-media" style="margin:10px 0; border-radius:10px; overflow:hidden; max-height:160px; border:1px solid rgba(212,175,55,0.3);"><img src="{img_src}" alt="{img_title}" loading="lazy" style="width:100%; height:100%; object-fit:cover;"></div>' if (is_spotlight and img_src) else ""
 
-        # Secondary button logic
-        if cat_group == "grants":
-            sec_label = "GRANT ARCHIVE"
-            sec_url = item.get('url') if item.get('url') and 'kemdikbud' in item.get('url', '') else "https://bima.kemdikbud.go.id"
-        elif cat_group == "governance":
-            sec_label = "GOVERNANCE PORTAL"
-            sec_url = item.get('url') or "https://binadarma.ac.id"
-        else:
-            sec_label = "AWARD ARCHIVE"
-            sec_url = item.get('url') or "https://newinti.edu.my"
-
         html += render_cv_strip_card(
             idx=idx,
             cat_pill=item['badge'].upper(),
@@ -4201,9 +4190,9 @@ def generate_cv_page():
             venue_name=item['organization'],
             sub_extra=cat_label,
             excerpt=item['details'],
-            verification_url=item.get('url'),
-            secondary_btn_label=sec_label,
-            secondary_btn_url=sec_url,
+            verification_url="",
+            secondary_btn_label="",
+            secondary_btn_url="",
             featured_pill=spotlight_badge,
             media_html=img_tag,
             extra_classes=f"cv-distinction-card {highlight_cls}",
@@ -4225,22 +4214,6 @@ def generate_cv_page():
 
     for idx, item in enumerate(cv['academic_leadership'], 1):
         inst = item['institution']
-        if 'inti' in inst.lower():
-            sec_url = 'https://newinti.edu.my'
-            sec_label = 'FACULTY PORTAL'
-        elif 'bina darma' in inst.lower():
-            sec_url = 'https://binadarma.ac.id'
-            sec_label = 'UNIVERSITY PORTAL'
-        elif 'palcomtech' in inst.lower():
-            sec_url = 'https://palcomtech.ac.id'
-            sec_label = 'INSTITUTE PORTAL'
-        elif 'paltv' in inst.lower():
-            sec_url = 'https://paltv.disway.id'
-            sec_label = 'MEDIA PORTAL'
-        else:
-            sec_url = 'https://newinti.edu.my'
-            sec_label = 'OFFICIAL PORTAL'
-
         spotlight_badge = '<span class="pub-strip-featured-pill">★ QS DIRECTOR</span>' if idx == 1 else ""
 
         html += render_cv_strip_card(
@@ -4252,9 +4225,9 @@ def generate_cv_page():
             venue_name=inst,
             sub_extra=item.get('scope', 'Academic Administration'),
             excerpt=item['responsibilities'],
-            verification_url=item.get('url'),
-            secondary_btn_label=sec_label,
-            secondary_btn_url=sec_url,
+            verification_url="",
+            secondary_btn_label="",
+            secondary_btn_url="",
             featured_pill=spotlight_badge,
             extra_classes="is-highlight" if idx == 1 else "",
             cat_theme="indigo"
@@ -4274,22 +4247,6 @@ def generate_cv_page():
 
     for idx, item in enumerate(cv['work_experience'], 1):
         inst = item['institution']
-        if 'inti' in inst.lower():
-            sec_url = 'https://newinti.edu.my'
-            sec_label = 'FACULTY PORTAL'
-        elif 'bina darma' in inst.lower():
-            sec_url = 'https://binadarma.ac.id'
-            sec_label = 'UNIVERSITY RECORD'
-        elif 'palcomtech' in inst.lower():
-            sec_url = 'https://palcomtech.ac.id'
-            sec_label = 'INSTITUTE RECORD'
-        elif 'depkominfo' in inst.lower() or 'palembang' in inst.lower():
-            sec_url = 'https://palembang.go.id'
-            sec_label = 'CIVIC RECORD'
-        else:
-            sec_url = 'https://newinti.edu.my'
-            sec_label = 'APPOINTMENT RECORD'
-
         spotlight_badge = '<span class="pub-strip-featured-pill">★ SENIOR FACULTY</span>' if idx == 1 else ""
 
         html += render_cv_strip_card(
@@ -4301,9 +4258,9 @@ def generate_cv_page():
             venue_name=inst,
             sub_extra="Career Appointment & Professional Instruction",
             excerpt=item['description'],
-            verification_url=item.get('url'),
-            secondary_btn_label=sec_label,
-            secondary_btn_url=sec_url,
+            verification_url="",
+            secondary_btn_label="",
+            secondary_btn_url="",
             featured_pill=spotlight_badge,
             extra_classes="is-highlight" if idx == 1 else "",
             cat_theme="cyan"
@@ -4325,19 +4282,6 @@ def generate_cv_page():
         deg = item['degree']
         inst = item['institution']
         is_phd = 'ph.d' in deg.lower() or 'doctor' in deg.lower()
-        if 'ukm' in inst.lower() or 'kebangsaan' in inst.lower():
-            sec_url = 'https://www.ukm.my'
-            sec_label = 'UKM ARCHIVE'
-        elif 'bina darma' in inst.lower():
-            sec_url = 'https://binadarma.ac.id'
-            sec_label = 'DEGREE ARCHIVE'
-        elif 'palcomtech' in inst.lower():
-            sec_url = 'https://palcomtech.ac.id'
-            sec_label = 'INSTITUTE ARCHIVE'
-        else:
-            sec_url = 'https://sman5palembang.sch.id'
-            sec_label = 'ALUMNI ARCHIVE'
-
         spotlight_badge = '<span class="pub-strip-featured-pill">★ TESIS CEMERLANG &amp; GOT</span>' if is_phd else ""
 
         html += render_cv_strip_card(
@@ -4349,9 +4293,9 @@ def generate_cv_page():
             venue_name=f"{inst} &bull; {item['country']}",
             sub_extra=item.get('distinction', ''),
             excerpt=f"<strong>Core Focus:</strong> {item['focus']}",
-            verification_url=item.get('url'),
-            secondary_btn_label=sec_label,
-            secondary_btn_url=sec_url,
+            verification_url="",
+            secondary_btn_label="",
+            secondary_btn_url="",
             featured_pill=spotlight_badge,
             extra_classes="is-highlight is-spotlight" if is_phd else "",
             cat_theme="gold" if is_phd else "cyan"
@@ -4399,9 +4343,9 @@ def generate_cv_page():
             venue_name=sub_str,
             sub_extra=role_str,
             excerpt=desc_str,
-            verification_url=item.get('url'),
-            secondary_btn_label="TALKS GALLERY ↗",
-            secondary_btn_url="/talks",
+            verification_url="",
+            secondary_btn_label="",
+            secondary_btn_url="",
             featured_pill=spotlight_badge,
             media_html=img_tag,
             extra_classes="is-highlight is-spotlight" if is_spotlight else "is-highlight",
@@ -4479,19 +4423,6 @@ def generate_cv_page():
 
     for idx, cert in enumerate(cv['professional_certifications'], 1):
         issuer = cert['issuer']
-        if 'cisco' in issuer.lower():
-            sec_url = 'https://www.netacad.com'
-            sec_label = 'CISCO NETACAD'
-        elif 'microsoft' in issuer.lower():
-            sec_url = 'https://learn.microsoft.com'
-            sec_label = 'MICROSOFT LEARN'
-        elif 'foresec' in issuer.lower():
-            sec_url = 'https://www.eccouncil.org'
-            sec_label = 'FORENSICS AUTHORITY'
-        else:
-            sec_url = 'https://newinti.edu.my'
-            sec_label = 'CREDENTIAL RECORD'
-
         spotlight_badge = '<span class="pub-strip-featured-pill">★ GRADE A FORENSIC</span>' if idx == 1 else ""
 
         html += render_cv_strip_card(
@@ -4503,9 +4434,9 @@ def generate_cv_page():
             venue_name=issuer,
             sub_extra="Technical Mastery & Professional Accreditation",
             excerpt=cert['details'],
-            verification_url=cert.get('url'),
-            secondary_btn_label=sec_label,
-            secondary_btn_url=sec_url,
+            verification_url="",
+            secondary_btn_label="",
+            secondary_btn_url="",
             featured_pill=spotlight_badge,
             extra_classes="is-highlight" if idx == 1 else "",
             cat_theme="cyan"
