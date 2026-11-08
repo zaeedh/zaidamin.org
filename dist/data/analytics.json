@@ -302,6 +302,18 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794103862817",
+      "timestamp": "2026-11-08T02:11:02.817Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
       "id": "tr-1794102464365",
       "timestamp": "2026-11-08T01:47:44.365Z",
       "path": "/publications",
@@ -1488,23 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Internal Navigation"
-    },
-    {
-      "id": "tr-1793969815858",
-      "timestamp": "2026-11-06T12:56:55.858Z",
-      "path": "/article#spotlight",
-      "title": "Homepage Spotlight Feature",
-      "action": "SPOTLIGHT_CLICK",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Internal Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-08T09:47:44.383974",
+  "updated_at": "2026-11-08T10:11:02.826490",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,

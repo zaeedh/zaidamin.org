@@ -1826,7 +1826,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
         bibtex_id = pub.get("id", f"book{idx}")
         bibtex_raw = pub.get("bibtex", "")
         is_featured = (pub.get("id") == featured_book.get("id"))
-        primary_tag = '<span class="bokify-primary-chip">★ Primary Volume</span>' if is_featured else ""
+        primary_tag = ""  # Removed per user design request
 
         title_enc = _html_mod.escape(pub.get("title", ""))
         mailto = f"mailto:zaid.amin@newinti.edu.my?subject=Requesting%20Full-Text:%20{title_enc}"
@@ -1890,7 +1890,6 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
             <div class="bokify-card-tags">
               <span class="bokify-publisher-chip">{publisher}</span>
               <span class="bokify-year-chip">{year}</span>
-              {primary_tag}
             </div>
           </div>
 
