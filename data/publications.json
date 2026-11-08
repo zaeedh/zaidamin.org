@@ -112,15 +112,15 @@
     "venue": "Indonesian Publisher",
     "year": 2025,
     "doi": "https://www.cvnoerfikrioffset.com/product/digital-loneliness-in-social-media/",
-    "isbn": "978-3-031-48770-5",
+    "isbn": "978-6231-783264",
+    "url": "https://www.cvnoerfikrioffset.com/product/digital-loneliness-in-social-media/",
     "link_enabled": true,
     "citations": "",
     "authors": "Dr. Zaid Amin et al.",
     "abstract": "Research addressing digital loneliness in social media: the epoch of our connected and distraction world through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
     "image": "assets/images/uploads/Digital-Loneliness.png",
     "featured": false,
-    "bibtex": "@incollection{amin2024digital,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Digital Loneliness in Social Media: The Epoch of our Connected and Distraction World}},\n  year      = {2024},\n  journal   = {Contributions to Management Science},\n  doi       = {10.1007/978-3-031-48770-5_65},\n  url       = {https://doi.org/10.1007/978-3-031-48770-5_65}\n}",
-    "url": "https://doi.org/10.1007/978-3-031-48770-5_65"
+    "bibtex": "@incollection{amin2024digital,\n  author    = {Dr. Zaid Amin et al.},\n  title     = {Digital Loneliness in Social Media},\n  booktitle = {Indonesian Publisher},\n  year      = {2025}\n  doi       = {https://www.cvnoerfikrioffset.com/product/digital-loneliness-in-social-media/}\n  isbn      = {978-6231-783264}\n}"
   },
   {
     "id": "amin2021attentionbased",
@@ -129,15 +129,15 @@
     "venue": "UKM Press",
     "year": 2023,
     "doi": "https://www.e-sentral.com/book/info/382134",
-    "isbn": "978-3-030-78468-3",
+    "isbn": "978-967-412",
+    "url": "https://www.e-sentral.com/book/info/382134",
     "link_enabled": true,
     "citations": "",
     "authors": "Dr. Zaid Amin et al.",
     "abstract": "Attention and awareness when receiving and sharing information on social media are essential. Users can effectively identify misinformation, so they are not affected by the latent misleading. Through the vast digital growing information in social media today, increasing behavioural problems stemming from our one-click habit of easy decisions are blatantly faster than bot machines propagating misinformation. This book contributes to the knowledge of information-sharing behaviour to the public. This book also contributes to the discussion of opportunities and challenges in information sharing and user attention in helping to reduce the problems of misinformation sharing. Several guidelines for stakeholders and policymakers related to social media are also highlighted.",
     "image": "assets/images/uploads/Information_Sharing_Behaviour_on_Social_Media_-_Zaid_Amin_et_al_removed-1.png",
     "featured": false,
-    "bibtex": "@incollection{amin2021attentionbased,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Attention-Based Design and Selective Exposure Amid COVID-19 Misinformation Sharing}},\n  year      = {2021},\n  journal   = {Lecture Notes in Computer Science},\n  doi       = {10.1007/978-3-030-78468-3_34},\n  url       = {https://doi.org/10.1007/978-3-030-78468-3_34}\n}",
-    "url": "https://doi.org/10.1007/978-3-030-78468-3_34"
+    "bibtex": "@incollection{amin2021attentionbased,\n  author    = {Dr. Zaid Amin et al.},\n  title     = {Information Sharing Behaviour on Social Media},\n  booktitle = {UKM Press},\n  year      = {2023}\n  doi       = {https://www.e-sentral.com/book/info/382134}\n  isbn      = {978-967-412}\n}"
   },
   {
     "id": "amin2025peerreview",
