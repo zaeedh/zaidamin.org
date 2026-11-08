@@ -13,7 +13,7 @@
     "abstract": "Look at the horizon of the next decade. Do you see a world where you are a User being harvested, or a Citizen being empowered? The “bridge” is under construction, and the next brick is in your hands. What will you build today?",
     "image": "assets/images/uploads/Digital_Ethics.png",
     "featured": false,
-    "bibtex": ""
+    "bibtex": "@incollection{amin2026pub,\n  author    = {Zaid Amin},\n  title     = {Digital Ethics: Bridging Wisdom of The Pacing Problem},\n  booktitle = {Curated Scholarly Monographs & Volumes in Sociotechnical Systems},\n  publisher = {Academic Press},\n  year      = {2027},\n  note      = {Available on Request}\n}"
   },
   {
     "id": "amin2026trustworthy",
