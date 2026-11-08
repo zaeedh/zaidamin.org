@@ -144,19 +144,19 @@
     "title": "Persuasive Technology",
     "category": "Book Chapter",
     "venue": "Foxx Publisher",
-    "year": 2025,
-    "publisher": "Atlantis Press",
+    "publisher": "Foxx Publisher (Indonesian Press)",
     "series": "Foxx Publisher",
+    "year": 2025,
     "doi": "10.2991/978-2-38476-466-2_1",
     "isbn": "978-2-38476-466-2",
+    "url": "https://doi.org/10.2991/978-2-38476-466-2_1",
     "link_enabled": false,
     "citations": "",
     "authors": "Dr. Zaid Amin et al.",
     "abstract": "Research addressing peer-review statements through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
     "image": "assets/images/uploads/BUKU_TEKNOLOGI_PERSUASIF_12_SEPTEMBER_2025_removed-1.png",
     "featured": false,
-    "bibtex": "@incollection{amin2025peerreview,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Peer-Review Statements}},\n  year      = {2025},\n  publisher = {Atlantis Press},\n  doi       = {10.2991/978-2-38476-466-2_1},\n  url       = {https://doi.org/10.2991/978-2-38476-466-2_1}\n}",
-    "url": "https://doi.org/10.2991/978-2-38476-466-2_1"
+    "bibtex": "@incollection{amin2025peerreview,\n  author    = {Zaid Amin and collaborators},\n  title     = {{Peer-Review Statements}},\n  year      = {2025},\n  publisher = {Atlantis Press},\n  doi       = {10.2991/978-2-38476-466-2_1},\n  url       = {https://doi.org/10.2991/978-2-38476-466-2_1}\n}"
   },
   {
     "id": "amin2024tuneattention",
