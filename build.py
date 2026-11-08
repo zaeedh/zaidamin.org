@@ -1735,16 +1735,26 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
     chips_html = "".join([f'<span class="pub-stat-chip">{c}</span>' for c in cat["chips"]])
 
-    def get_publisher(venue, doi):
+    def get_publisher(venue, doi, explicit_pub=None):
+        if explicit_pub and str(explicit_pub).strip():
+            return str(explicit_pub).strip()
         v = venue or ""
         d = doi or ""
         if "Springer" in v or "LNCS" in v or "Computer Science" in v or "Contributions" in v:
             return "Springer Nature"
-        if "Atlantis" in v or "2991" in d:
+        if "Atlantis" in v:
             return "Atlantis Press"
+        if v and any(kw in v for kw in ("Press", "Publisher", "Publishing")):
+            return v
+        if "2991" in d:
+            return "Atlantis Press"
+        if v and len(v) <= 30 and v.lower() not in ("on process", "in preparation", "#"):
+            return v
         return "Academic Press"
 
-    def get_series(venue):
+    def get_series(venue, explicit_series=None):
+        if explicit_series and str(explicit_series).strip():
+            return str(explicit_series).strip()
         v = venue or ""
         if "Contributions to Management" in v:
             return "Contributions to Management Science"
@@ -1768,7 +1778,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
     featured_title = _html_mod.escape(featured_book.get("title", "Primary Monograph"))
     featured_year = featured_book.get("year", 2024)
     featured_venue = featured_book.get("venue", "Academic Publication")
-    featured_pub = get_publisher(featured_venue, featured_book.get("doi"))
+    featured_pub = get_publisher(featured_venue, featured_book.get("doi"), featured_book.get("publisher"))
     primary_url = featured_book.get("url", "").strip() or (f"https://doi.org/{featured_book.get('doi', '').strip()}" if featured_book.get("doi") else "#bokify-volumes-shelf")
     primary_pub_short = featured_pub.split()[0] if featured_pub else "Volume"
 
@@ -1781,7 +1791,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
     rear_title = _html_mod.escape(rear_book.get("title", "Scholarly Volume")) if rear_book else ""
     rear_year = rear_book.get("year", 2021) if rear_book else ""
     rear_venue = rear_book.get("venue", "Academic Publication") if rear_book else ""
-    rear_pub = get_publisher(rear_venue, rear_book.get("doi")) if rear_book else ""
+    rear_pub = get_publisher(rear_venue, rear_book.get("doi"), rear_book.get("publisher")) if rear_book else ""
 
     # Render each book card in the Curated Shelf
     shelf_cards_html = ""
@@ -1804,8 +1814,8 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
             url = f"https://doi.org/{doi}"
 
         venue = pub.get("venue", "Academic Publication")
-        series_text = get_series(venue)
-        publisher = get_publisher(venue, doi)
+        series_text = get_series(venue, pub.get("series"))
+        publisher = get_publisher(venue, doi, pub.get("publisher"))
         excerpt = clean_excerpt_fn(pub.get("abstract", "") or pub.get("excerpt", ""), max_len=150)
         escaped_title = _html_mod.escape(pub["title"])
         escaped_title_lower = _html_mod.escape(pub["title"].lower())
