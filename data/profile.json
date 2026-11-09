@@ -11,7 +11,8 @@
     "photo_back_fallback": "assets/images/portraits/portrait-2.png",
     "photo_back_alt": "Zaid Amin, Ph.D. — Secondary Portrait",
     "status_dot_enabled": true,
-    "status_text": "Active Senior Lecturer & Researcher"
+    "status_text": "Active Senior Lecturer & Researcher",
+    "show_photo": true
   },
   "name": "Dr. Zaid Amin",
   "degree": "Ph.D. in Computer Science / Information Technology",

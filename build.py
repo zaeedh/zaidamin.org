@@ -1635,6 +1635,7 @@ def generate_golden_ratio_home():
 
     # Dynamic Portals Header (Configurable via CMS)
     portals_hdr = profile.get("portals_header", {})
+    ph_show_photo = portals_hdr.get("show_photo", True)
     ph_name = portals_hdr.get("name", "Dr. Zaid Amin")
     ph_role = portals_hdr.get("role_line", "Senior Lecturer &bull; Faculty of Data Science &amp; IT (FDSIT)").replace("•", "&bull;")
     ph_inst = portals_hdr.get("institution", "INTI International University, Malaysia")
@@ -1643,14 +1644,47 @@ def generate_golden_ratio_home():
     _flist = [f.strip() for f in _re_bld.split(r'•|&bull;|,', ph_fields_raw) if f.strip()]
     ph_fields_html = ' <span class="ref-gold-dot">&bull;</span> '.join(_flist) if _flist else ph_fields_raw
     ph_front_webp = portals_hdr.get("photo_front", "assets/images/portraits/portrait-1.webp")
-    ph_front_png = portals_hdr.get("photo_front_fallback", ph_front_webp.replace(".webp", ".png"))
+    ph_front_png = portals_hdr.get("photo_front_fallback", ph_front_webp.replace(".webp", ".png") if ph_front_webp.endswith(".webp") else ph_front_webp)
     ph_front_alt = portals_hdr.get("photo_front_alt", f"{ph_name} — Academic Portrait")
     ph_back_webp = portals_hdr.get("photo_back", "assets/images/portraits/portrait-2.webp")
-    ph_back_png = portals_hdr.get("photo_back_fallback", ph_back_webp.replace(".webp", ".png"))
+    ph_back_png = portals_hdr.get("photo_back_fallback", ph_back_webp.replace(".webp", ".png") if ph_back_webp.endswith(".webp") else ph_back_webp)
     ph_back_alt = portals_hdr.get("photo_back_alt", f"{ph_name} — Secondary Portrait")
     ph_status_enabled = portals_hdr.get("status_dot_enabled", True)
     ph_status_text = portals_hdr.get("status_text", "Active Senior Lecturer & Researcher")
     ph_status_html = f'<span class="ref-live-status" title="{ph_status_text}"></span>' if ph_status_enabled else ''
+
+    coin_portrait_html = ""
+    if ph_show_photo and (ph_front_webp or ph_front_png):
+        if ph_front_webp.endswith(".webp"):
+            front_media_html = f"""<picture>
+                  <source srcset="{ph_front_webp}" type="image/webp">
+                  <img src="{ph_front_png}" alt="{ph_front_alt}" class="ref-photo-img" width="114" height="114">
+                </picture>"""
+        else:
+            front_media_html = f"""<img src="{ph_front_webp}" alt="{ph_front_alt}" class="ref-photo-img" width="114" height="114">"""
+
+        if ph_back_webp.endswith(".webp"):
+            back_media_html = f"""<picture>
+                  <source srcset="{ph_back_webp}" type="image/webp">
+                  <img src="{ph_back_png}" alt="{ph_back_alt}" class="ref-photo-img" width="114" height="114">
+                </picture>"""
+        else:
+            back_media_html = f"""<img src="{ph_back_webp}" alt="{ph_back_alt}" class="ref-photo-img" width="114" height="114">"""
+
+        coin_portrait_html = f"""<div class="ref-photo-ring coin-flip-stage" id="dr-zaid-coin" role="button" tabindex="0" title="{ph_name} • Click to rotate portrait coin">
+            <div class="coin-disc" id="coin-disc" aria-label="Interactive Portrait Coin">
+              <div class="coin-face coin-face-front" id="coin-face-front">
+                {front_media_html}
+                <div class="coin-specular-gleam"></div>
+              </div>
+              <div class="coin-face coin-face-back" id="coin-face-back">
+                {back_media_html}
+                <div class="coin-specular-gleam"></div>
+              </div>
+              <div class="coin-rim-highlight"></div>
+            </div>
+            {ph_status_html}
+          </div>"""
 
     html += get_journal_ticker_html()
     html += f"""
@@ -1679,26 +1713,7 @@ def generate_golden_ratio_home():
               {ph_fields_html}
             </div>
           </div>
-          <div class="ref-photo-ring coin-flip-stage" id="dr-zaid-coin" role="button" tabindex="0" title="{ph_name} • Click to rotate portrait coin">
-            <div class="coin-disc" id="coin-disc" aria-label="Interactive Portrait Coin">
-              <div class="coin-face coin-face-front" id="coin-face-front">
-                <picture>
-                  <source srcset="{ph_front_webp}" type="image/webp">
-                  <img src="{ph_front_png}" alt="{ph_front_alt}" class="ref-photo-img" width="114" height="114">
-                </picture>
-                <div class="coin-specular-gleam"></div>
-              </div>
-              <div class="coin-face coin-face-back" id="coin-face-back">
-                <picture>
-                  <source srcset="{ph_back_webp}" type="image/webp">
-                  <img src="{ph_back_png}" alt="{ph_back_alt}" class="ref-photo-img" width="114" height="114">
-                </picture>
-                <div class="coin-specular-gleam"></div>
-              </div>
-              <div class="coin-rim-highlight"></div>
-            </div>
-            {ph_status_html}
-          </div>
+          {coin_portrait_html}
         </div>
 
         {get_activity_search_bar_html()}
