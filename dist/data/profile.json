@@ -128,7 +128,7 @@
       "label": "ORCID"
     },
     "github": {
-      "enabled": true,
+      "enabled": false,
       "label": "GitHub"
     },
     "linkedin": {
@@ -144,7 +144,7 @@
       "label": "SciProfiles"
     },
     "researchgate": {
-      "enabled": false,
+      "enabled": true,
       "label": "ResearchGate"
     }
   }
