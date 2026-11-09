@@ -354,6 +354,8 @@ def get_page_header(active_page="home"):
             target_str = ""
         else:
             href = val
+            if not href.startswith("http://") and not href.startswith("https://") and not href.startswith("//"):
+                href = f"https://{href}"
             target_str = ' target="_blank" rel="noopener"'
         pills_html.append(f'<a href="{href}"{target_str} class="top-link-pill" title="{label}">{render_svg_icon(icon)} <span>{label}</span></a>')
 
