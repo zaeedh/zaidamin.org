@@ -1397,7 +1397,7 @@ function initCoinPortraitEngine() {
 
   if (!coinStage || !coinDisc || !faceFront || !faceBack) return;
 
-  const PORTRAITS = [
+  const DEFAULT_PORTRAITS = [
     {
       webp: 'assets/images/portraits/portrait-1.webp',
       png: 'assets/images/portraits/portrait-1.png',
@@ -1420,6 +1420,14 @@ function initCoinPortraitEngine() {
     }
   ];
 
+  const PORTRAITS = (window.PORTALS_COIN_PORTRAITS && Array.isArray(window.PORTALS_COIN_PORTRAITS) && window.PORTALS_COIN_PORTRAITS.length > 0)
+    ? window.PORTALS_COIN_PORTRAITS.map(p => ({
+        webp: p.webp || p.url || p.png || '',
+        png: p.fallback || p.png || p.url || '',
+        alt: p.alt || p.title || 'Dr. Zaid Amin, Ph.D.'
+      }))
+    : DEFAULT_PORTRAITS;
+
   // Preload all portrait images into memory for instant, buttery flips
   PORTRAITS.forEach(p => {
     const img = new Image();
@@ -1434,20 +1442,25 @@ function initCoinPortraitEngine() {
   let autoFlipInterval = null;
 
   function updateFaceImage(faceEl, portrait) {
+    const webpSrc = portrait.webp || portrait.png;
+    const pngSrc = portrait.png || portrait.webp;
+    const altText = portrait.alt || 'Dr. Zaid Amin, Ph.D.';
     const picture = faceEl.querySelector('picture');
     if (picture) {
       const source = picture.querySelector('source');
       const img = picture.querySelector('img');
-      if (source) source.srcset = portrait.webp;
+      if (source && webpSrc.endsWith('.webp')) {
+        source.srcset = webpSrc;
+      }
       if (img) {
-        img.src = portrait.png;
-        img.alt = portrait.alt;
+        img.src = pngSrc;
+        img.alt = altText;
       }
     } else {
       const img = faceEl.querySelector('img');
       if (img) {
-        img.src = portrait.png;
-        img.alt = portrait.alt;
+        img.src = pngSrc;
+        img.alt = altText;
       }
     }
   }

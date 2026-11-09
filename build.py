@@ -1686,6 +1686,10 @@ def generate_golden_ratio_home():
             {ph_status_html}
           </div>"""
 
+    ph_portraits_list = portals_hdr.get("portraits_list", [])
+    import json as _json_bld
+    coin_portraits_script = f"<script>window.PORTALS_COIN_PORTRAITS = {_json_bld.dumps(ph_portraits_list)};</script>" if ph_portraits_list else ""
+
     html += get_journal_ticker_html()
     html += f"""
     <!-- 5. FEATURED SPOTLIGHT & ACADEMIC PORTALS (REFERENCE SPLIT CARD LAYOUT) -->
@@ -1714,6 +1718,7 @@ def generate_golden_ratio_home():
             </div>
           </div>
           {coin_portrait_html}
+          {coin_portraits_script}
         </div>
 
         {get_activity_search_bar_html()}
