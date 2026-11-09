@@ -45,6 +45,14 @@
         "url": "assets/images/portraits/portrait-4.webp",
         "fallback": "assets/images/portraits/portrait-4.png",
         "alt": "Dr. Zaid Amin, Ph.D. — Dataran Merdeka KL"
+      },
+      {
+        "id": "portrait-1794243529996",
+        "title": "Portrait 5",
+        "subtitle": "Library Portrait",
+        "url": "assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
+        "fallback": "assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
+        "alt": "Dr. Zaid Amin, Ph.D. — Portrait 5"
       }
     ]
   },
