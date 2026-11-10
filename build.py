@@ -283,9 +283,10 @@ def render_subpage_nav(active_page="home"):
         
         is_active = (active_page in active_pages) or (active_page == item_id)
         
+        short_label = item.get("short_label") or label
         if icon == "home" or item_id == "home":
             active_class = "active" if is_active else ""
-            html_items.append(f'''<a href="{url}" class="main-menu-link {active_class}" title="{label}" aria-label="{label}"{target_attr}>
+            html_items.append(f'''<a href="{url}" class="main-menu-link tab-link-home {active_class}" title="{label}" aria-label="{label}"{target_attr}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;" aria-hidden="true">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                 <polyline points="9 22 9 12 15 12 15 22"/>
@@ -318,7 +319,8 @@ def render_subpage_nav(active_page="home"):
             rendered_sub = "\n                ".join(sub_links)
             html_items.append(f'''<div class="nav-dropdown-item">
               <a href="{url}" class="main-menu-link {active_class}" aria-haspopup="true" aria-expanded="false" title="{label}"{target_attr}>
-                {label} <span class="nav-chevron">▾</span>
+                <span class="tab-txt-full">{label} <span class="nav-chevron">▾</span></span>
+                <span class="tab-txt-compact">{short_label} <span class="nav-chevron">▾</span></span>
               </a>
               <div class="nav-dropdown-menu" role="menu">
                 {rendered_sub}
@@ -326,7 +328,10 @@ def render_subpage_nav(active_page="home"):
             </div>''')
         else:
             active_class = "active" if is_active else ""
-            html_items.append(f'''<a href="{url}" class="main-menu-link {active_class}" title="{label}"{target_attr}>{label}</a>''')
+            html_items.append(f'''<a href="{url}" class="main-menu-link {active_class}" title="{label}"{target_attr}>
+              <span class="tab-txt-full">{label}</span>
+              <span class="tab-txt-compact">{short_label}</span>
+            </a>''')
             
     rendered_menu = "\n            ".join(html_items)
     return f'''<nav class="top-epigraph-menu" id="top-main-nav" aria-label="Main Navigation">
@@ -2671,7 +2676,10 @@ def generate_publications_page():
         p_url = team_pill_cfg.get("url", "#")
         p_target = team_pill_cfg.get("target", "_self")
         onclick_attr = ' onclick="if(this.getAttribute(\'href\')===\'#\'){event.preventDefault();}"' if p_url == '#' else ''
-        team_pill_html = f'<a href="{p_url}" target="{p_target}" class="pub-nav-pill team-shortcut-pill" title="{p_title}"{onclick_attr}>{p_text}</a>'
+        team_pill_html = f'''<a href="{p_url}" target="{p_target}" class="pub-nav-pill team-shortcut-pill" title="{p_title}"{onclick_attr}>
+            <span class="pub-pill-txt-full">{p_text}</span>
+            <span class="pub-pill-txt-compact">👥 Team &nearr;</span>
+          </a>'''
 
     # Assemble complete page
     html_content = page_head + page_header + f"""
@@ -2694,10 +2702,22 @@ def generate_publications_page():
 
         <nav class="pub-nav-pills" aria-label="Publication Categories">
           <button class="pub-nav-pill filter-btn active" data-filter="all">✦ All ({len(publications)})</button>
-          <button class="pub-nav-pill filter-btn" data-filter="book chapter" data-target-section="section-books">01. Book &amp; Chapters (3)</button>
-          <button class="pub-nav-pill filter-btn" data-filter="journal" data-target-section="section-journals">02. Journals (10)</button>
-          <button class="pub-nav-pill filter-btn" data-filter="conference" data-target-section="section-conferences">03. Conferences (6)</button>
-          <button class="pub-nav-pill filter-btn" data-filter="preprint" data-target-section="section-preprints">04. Preprints (5)</button>
+          <button class="pub-nav-pill filter-btn" data-filter="book chapter" data-target-section="section-books">
+            <span class="pub-pill-txt-full">01. Book &amp; Chapters (3)</span>
+            <span class="pub-pill-txt-compact">01. Books (3)</span>
+          </button>
+          <button class="pub-nav-pill filter-btn" data-filter="journal" data-target-section="section-journals">
+            <span class="pub-pill-txt-full">02. Journals (10)</span>
+            <span class="pub-pill-txt-compact">02. Journals (10)</span>
+          </button>
+          <button class="pub-nav-pill filter-btn" data-filter="conference" data-target-section="section-conferences">
+            <span class="pub-pill-txt-full">03. Conferences (6)</span>
+            <span class="pub-pill-txt-compact">03. Conf (6)</span>
+          </button>
+          <button class="pub-nav-pill filter-btn" data-filter="preprint" data-target-section="section-preprints">
+            <span class="pub-pill-txt-full">04. Preprints (5)</span>
+            <span class="pub-pill-txt-compact">04. Preprints (5)</span>
+          </button>
           {team_pill_html}
         </nav>
       </div>

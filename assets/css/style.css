@@ -3869,6 +3869,15 @@ a {
   display: inline-block;
 }
 
+.top-epigraph-menu .tab-txt-compact {
+  display: none;
+}
+
+.top-epigraph-menu .tab-txt-full {
+  display: inline-flex;
+  align-items: center;
+}
+
 .top-epigraph-menu .main-menu-link::after {
   content: "";
   position: absolute;
@@ -3937,50 +3946,112 @@ a {
   .top-epigraph-menu {
     order: 3 !important;
     width: 100% !important;
-    margin-top: 12px !important;
+    margin-top: 10px !important;
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: none !important;
-    justify-content: flex-start !important;
+    justify-content: space-between !important;
     align-items: center !important;
-    gap: 8px !important;
-    padding: 6px 2px !important;
+    gap: 4px !important;
+    padding: 3px !important;
+    background: rgba(2, 12, 22, 0.75) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 999px !important;
+    box-shadow: 0 4px 14px rgba(0, 10, 24, 0.35) !important;
+    box-sizing: border-box !important;
+    overflow-x: visible !important;
   }
   .top-epigraph-menu::-webkit-scrollbar {
     display: none !important;
   }
-  .top-epigraph-menu .main-menu-link {
-    background: rgba(4, 24, 42, 0.65) !important;
-    border: 1px solid rgba(34, 166, 200, 0.24) !important;
-    border-radius: 999px !important;
-    padding: 6px 14px !important;
-    font-size: 0.78rem !important;
-    font-weight: 700 !important;
-    white-space: nowrap !important;
-    flex-shrink: 0 !important;
+  .top-epigraph-menu .tab-txt-full {
+    display: none !important;
+  }
+  .top-epigraph-menu .tab-txt-compact {
     display: inline-flex !important;
     align-items: center !important;
-    gap: 6px !important;
-    color: #9cb4c4 !important;
+  }
+  .top-epigraph-menu .main-menu-link {
+    flex: 1 1 auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 6px 8px !important;
+    border-radius: 999px !important;
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em !important;
+    white-space: nowrap !important;
+    border: 1px solid transparent !important;
+    background: transparent !important;
+    color: #a4b8c7 !important;
+    min-width: 0 !important;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  .top-epigraph-menu .main-menu-link.tab-link-home {
+    flex: 0 0 36px !important;
+    width: 36px !important;
+    padding: 6px 0 !important;
+    justify-content: center !important;
   }
   .top-epigraph-menu .main-menu-link:hover {
-    background: rgba(34, 166, 200, 0.16) !important;
-    border-color: rgba(212, 175, 55, 0.45) !important;
-    color: #ffffff !important;
-    transform: translateY(-1.5px) !important;
+    background: rgba(212, 175, 55, 0.12) !important;
+    border-color: rgba(212, 175, 55, 0.40) !important;
+    color: #fce09b !important;
+    transform: none !important;
   }
   .top-epigraph-menu .main-menu-link.active {
-    background: rgba(34, 166, 200, 0.22) !important;
-    border-color: rgba(212, 175, 55, 0.60) !important;
+    background: rgba(212, 175, 55, 0.16) !important;
+    border-color: rgba(212, 175, 55, 0.55) !important;
     color: #fce09b !important;
-    box-shadow: 0 0 12px rgba(212, 175, 55, 0.25) !important;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.22) !important;
   }
   .top-epigraph-menu .main-menu-link::after {
     display: none !important;
   }
+  .top-epigraph-menu .nav-dropdown-item {
+    flex: 1 1 auto !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+  }
+  .top-epigraph-menu .nav-dropdown-item .main-menu-link {
+    width: 100% !important;
+  }
+
+@media (min-width: 769px) and (max-width: 900px) {
+  .top-epigraph-menu .tab-txt-full {
+    display: inline-flex !important;
+  }
+  .top-epigraph-menu .tab-txt-compact {
+    display: none !important;
+  }
+  .top-epigraph-menu .main-menu-link {
+    padding: 6px 14px !important;
+    font-size: 0.78rem !important;
+  }
+  .top-epigraph-menu .main-menu-link.tab-link-home {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    padding: 6px 14px !important;
+  }
+}
+
+@media (max-width: 350px) {
+  .top-epigraph-menu {
+    gap: 2px !important;
+    padding: 2px !important;
+  }
+  .top-epigraph-menu .main-menu-link {
+    padding: 5px 3px !important;
+    font-size: 0.67rem !important;
+  }
+  .top-epigraph-menu .main-menu-link.tab-link-home {
+    flex: 0 0 28px !important;
+    width: 28px !important;
+  }
+}
 
   /* Mobile Star Flyout Dropdown Modal */
   .top-scholarly-links {
@@ -10172,18 +10243,57 @@ a {
     gap: 14px;
   }
   .pub-strip-actions {
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
     width: 100%;
-    gap: 10px;
+    gap: 8px;
   }
   .pub-strip-actions .pub-pill-btn {
-    flex: 1;
-    min-width: 0;
+    width: 100% !important;
+    min-width: 100% !important;
+    height: 38px !important;
+    padding: 0 16px !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.03em !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 9999px !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+  }
+  .pub-strip-actions .pub-pill-request .pub-pill-lock-icon {
+    flex-shrink: 0 !important;
+    margin-right: 6px !important;
   }
   .pub-strip-title {
     font-size: 1.05rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 900px) {
+  .pub-strip-actions {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+  .pub-strip-actions .pub-pill-btn {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 160px !important;
+    height: 36px !important;
+    padding: 0 16px !important;
+    font-size: 0.74rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .pub-strip-card {
+    padding: 14px 14px !important;
   }
 }
 
@@ -12300,6 +12410,14 @@ h1.cv-hero-name,
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
+.pub-nav-pill .pub-pill-txt-compact {
+  display: none;
+}
+
+.pub-nav-pill .pub-pill-txt-full {
+  display: inline;
+}
+
 .pub-nav-pill:hover {
   color: #ffffff !important;
   border-color: rgba(186, 230, 253, 0.30) !important;
@@ -12343,13 +12461,43 @@ h1.cv-hero-name,
   }
   .pub-nav-pills {
     width: 100% !important;
-    overflow-x: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
     justify-content: flex-start !important;
-    padding-bottom: 2px !important;
-    scrollbar-width: none !important;
-    -ms-overflow-style: none !important;
+    gap: 6px !important;
+    padding-bottom: 0 !important;
+    overflow-x: visible !important;
   }
-  .pub-nav-pills::-webkit-scrollbar {
+  .pub-nav-pill {
+    height: 30px !important;
+    padding: 4px 10px !important;
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    white-space: nowrap !important;
+    flex: 0 0 auto !important;
+  }
+  .team-shortcut-pill {
+    margin-left: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .pub-nav-pill .pub-pill-txt-full {
+    display: none !important;
+  }
+  .pub-nav-pill .pub-pill-txt-compact {
+    display: inline !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .pub-nav-pill .pub-pill-txt-full {
+    display: inline !important;
+  }
+  .pub-nav-pill .pub-pill-txt-compact {
     display: none !important;
   }
 }

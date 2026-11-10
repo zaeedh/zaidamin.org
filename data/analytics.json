@@ -302,6 +302,54 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794299602302",
+      "timestamp": "2026-11-10T08:33:22.302Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1794299562688",
+      "timestamp": "2026-11-10T08:32:42.688Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1794299534224",
+      "timestamp": "2026-11-10T08:32:14.224Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1794299472947",
+      "timestamp": "2026-11-10T08:31:12.947Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
       "id": "tr-1794297547137",
       "timestamp": "2026-11-10T07:59:07.137Z",
       "path": "/publications",
@@ -1452,59 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794051084209",
-      "timestamp": "2026-11-07T11:31:24.209Z",
-      "path": "/cv",
-      "title": "Achievement & Curriculum Vitae",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794051079849",
-      "timestamp": "2026-11-07T11:31:19.849Z",
-      "path": "/talks",
-      "title": "Media & Talks",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794051075663",
-      "timestamp": "2026-11-07T11:31:15.663Z",
-      "path": "/research",
-      "title": "Activity & Project",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794051071522",
-      "timestamp": "2026-11-07T11:31:11.522Z",
-      "path": "/publications",
-      "title": "Research & Publication Gallery",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-10T15:59:07.156139",
+  "updated_at": "2026-11-10T16:33:22.328260",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
