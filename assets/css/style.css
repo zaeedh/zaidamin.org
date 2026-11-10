@@ -1948,8 +1948,8 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 46px;
+  height: 40px;
   background: transparent !important;
   border: none !important;
   outline: none !important;
@@ -1969,8 +1969,8 @@ a {
 .lotus-hybrid-svg,
 .lotus-rainbow-svg {
   display: block;
-  width: 32px;
-  height: 28px;
+  width: 44px;
+  height: 38px;
   overflow: visible;
   filter: none;
   transition: filter 0.5s ease, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
@@ -1989,8 +1989,8 @@ a {
 .gold-petal {
   transform-origin: 0px 0px;
   fill: url(#lotusGoldLuxeGrad);
-  stroke: rgba(254, 240, 138, 0.50);
-  stroke-width: 0.5;
+  stroke: rgba(254, 240, 138, 0.45);
+  stroke-width: 0.55;
   stroke-linejoin: round;
   transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease;
 }
@@ -2176,7 +2176,7 @@ a {
 /* Side-Expanding Links Container (Anchored to left of Lotus with Golden Ratio clearance) */
 .top-scholarly-links {
   position: absolute;
-  right: 50px; /* Ideal Gestalt & Golden Ratio proximity: exact 16px (10px x 1.618) clearance to 34px Lotus button */
+  right: 62px; /* Ideal Gestalt & Golden Ratio proximity: exact 16px (10px x 1.618) clearance to 46px Lotus button */
   top: 50%;
   display: inline-flex;
   align-items: center;
@@ -2268,6 +2268,17 @@ a {
 }
 
 @media (max-width: 860px) {
+  .lotus-palace-btn,
+  .david-star-pure-btn {
+    width: 38px;
+    height: 34px;
+  }
+  .lotus-svg,
+  .lotus-hybrid-svg,
+  .lotus-rainbow-svg {
+    width: 36px;
+    height: 31px;
+  }
   .top-scholarly-links {
     right: 0;
     top: 100%;
