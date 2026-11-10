@@ -70,7 +70,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=4.1">
+  <link rel="stylesheet" href="/assets/css/style.css?v=4.1">
   <!-- High-Definition Monogram Favicon Suite (Dr. Zaid Amin) -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -86,7 +86,7 @@
   <meta name="theme-color" content="#020b14">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="manifest" href="site.webmanifest">
+  <link rel="manifest" href="/site.webmanifest">
   
   <!-- Google tag (gtag.js) GA4 Real-Time Analytics (Option 2) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZAIDAMIN01"></script>
@@ -304,8 +304,8 @@
         <div class="article-reader-meta-row">
           <div class="article-author-cluster">
             <picture>
-              <source srcset="assets/images/dr-zaid.webp" type="image/webp">
-              <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="article-author-avatar">
+              <source srcset="/assets/images/dr-zaid.webp" type="image/webp">
+              <img src="/assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="article-author-avatar">
             </picture>
             <div>
               <div class="article-author-name">Dr. Zaid Amin</div>
@@ -374,7 +374,13 @@
         });
 
         try {
-          const res = await fetch('data/articles.json');
+          let res;
+          try {
+            res = await fetch('/data/articles.json');
+            if (!res.ok) throw new Error('Not found at root');
+          } catch (e) {
+            res = await fetch('data/articles.json');
+          }
           const articles = await res.json();
 
           let article = null;
@@ -392,7 +398,17 @@
             document.getElementById('reader-time').textContent = article.reading_time || '3 min read';
             document.getElementById('reader-date').textContent = 'Published • ' + article.date;
             const bodyElem = document.getElementById('reader-body');
-            bodyElem.innerHTML = article.content_html || ('<p>' + article.excerpt + '</p>');
+            var rawHtml = article.content_html || ('<p>' + article.excerpt + '</p>');
+            rawHtml = rawHtml.replace(/src=["']assets\//g, 'src="/assets/');
+            bodyElem.innerHTML = rawHtml;
+
+            // 0. Ensure image paths resolve correctly regardless of directory level
+            bodyElem.querySelectorAll('img').forEach(function(img) {
+              var s = img.getAttribute('src');
+              if (s && s.startsWith('assets/')) {
+                img.setAttribute('src', '/' + s);
+              }
+            });
 
             // 1. Clean up any missing, corrupt, or 404 images dynamically
             bodyElem.querySelectorAll('img').forEach(function(img) {
@@ -408,13 +424,20 @@
             });
 
             // 2. Client-side deduplication against Hero image
+            var hasHeroInBody = false;
             if (article.image) {
               var heroFileName = article.image.split('/').pop().split('?')[0];
               bodyElem.querySelectorAll('img').forEach(function(img) {
                 var src = img.getAttribute('src') || '';
                 if (src === article.image || (heroFileName && heroFileName.length > 5 && src.includes(heroFileName))) {
+                  var captionContainer = img.closest('.tr-caption-container') || img.closest('figure');
+                  if (captionContainer) {
+                    // Content figure with caption: KEEP in body! Do not delete!
+                    hasHeroInBody = true;
+                    return;
+                  }
                   var parentA = img.closest('a');
-                  var parentBox = img.closest('.separator') || img.closest('.tr-caption-container') || img.parentElement;
+                  var parentBox = img.closest('.separator') || img.parentElement;
                   if (parentA) parentA.remove();
                   else img.remove();
                   if (parentBox && !parentBox.textContent.trim() && parentBox.querySelectorAll('img').length === 0) {
@@ -434,10 +457,15 @@
               }
             });
 
-            if (article.image) {
+            // 4. Hero Banner Display
+            if (article.image && !hasHeroInBody) {
               const imgWrap = document.getElementById('reader-hero-img-wrap');
               const img = document.getElementById('reader-hero-img');
-              img.src = article.image;
+              var heroSrc = article.image;
+              if (heroSrc.startsWith('assets/')) {
+                heroSrc = '/' + heroSrc;
+              }
+              img.src = heroSrc;
               img.alt = article.title;
               img.onerror = function() {
                 imgWrap.style.display = 'none';
@@ -496,7 +524,7 @@
   </div>
 
 
-  <script src="assets/js/rain-lighting.js"></script>
-  <script src="assets/js/main.js?v=4.1"></script>
+  <script src="/assets/js/rain-lighting.js"></script>
+  <script src="/assets/js/main.js?v=4.1"></script>
 </body>
 </html>
