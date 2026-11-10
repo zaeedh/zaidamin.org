@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ['ThemeToggle', typeof initThemeToggle === 'function' ? initThemeToggle : null],
     ['CustomSoundtrackPlayer', typeof initCustomSoundtrackPlayer === 'function' ? initCustomSoundtrackPlayer : null],
     ['ScholarlyDrawer', typeof initScholarlyDrawer === 'function' ? initScholarlyDrawer : null],
+    ['LotusLandingBloom', typeof initLotusLandingBloom === 'function' ? initLotusLandingBloom : null],
     ['JournalTicker', typeof initJournalTicker === 'function' ? initJournalTicker : null],
     ['PortalsTrayCarousel', typeof initPortalsTrayCarousel === 'function' ? initPortalsTrayCarousel : null],
     ['AdvancedActivitySearch', typeof initAdvancedActivitySearch === 'function' ? initAdvancedActivitySearch : null],
@@ -295,6 +296,7 @@ function initScholarlyDrawer() {
 
   function openLinks() {
     clearTimeout(closeTimeout);
+    trigger.classList.remove('lotus-landing-bloom');
     if (mainNav) mainNav.classList.add('nav-hidden');
     linksContainer.classList.add('is-open');
     linksContainer.setAttribute('aria-hidden', 'false');
@@ -319,6 +321,7 @@ function initScholarlyDrawer() {
   trigger.addEventListener('click', (e) => {
     e.stopPropagation();
     e.preventDefault();
+    trigger.classList.remove('lotus-landing-bloom');
     if (linksContainer.classList.contains('is-open') && isPinned) {
       closeLinks(true);
     } else {
@@ -348,6 +351,83 @@ function initScholarlyDrawer() {
     if (e.key === 'Escape') {
       closeLinks(true);
     }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Sacred Blooming Lotus Landing & Return Hook
+   Triggers a majestic 2.618s "berkembang" blossoming from gold default to rainbow restart
+   -------------------------------------------------------------------------- */
+function initLotusLandingBloom() {
+  const trigger = document.getElementById('lotus-toggle-btn') || document.getElementById('star-toggle-btn');
+  if (!trigger) return;
+
+  let bloomTimer = null;
+  let hasUserInteracted = false;
+
+  function triggerBloom() {
+    if (hasUserInteracted) return;
+    clearTimeout(bloomTimer);
+    trigger.classList.remove('lotus-landing-bloom');
+    // Force DOM reflow to restart CSS keyframe animation smoothly
+    void trigger.offsetWidth;
+    trigger.classList.add('lotus-landing-bloom');
+
+    bloomTimer = setTimeout(() => {
+      trigger.classList.remove('lotus-landing-bloom');
+    }, 2750);
+  }
+
+  function stopBloomOnInteraction() {
+    hasUserInteracted = true;
+    clearTimeout(bloomTimer);
+    trigger.classList.remove('lotus-landing-bloom');
+  }
+
+  trigger.addEventListener('mouseenter', stopBloomOnInteraction, { passive: true });
+  trigger.addEventListener('click', stopBloomOnInteraction, { passive: true });
+  trigger.addEventListener('touchstart', stopBloomOnInteraction, { passive: true });
+
+  const isHome = () => {
+    const p = window.location.pathname.toLowerCase();
+    return (
+      p === '' ||
+      p === '/' ||
+      p.endsWith('/index.html') ||
+      p.endsWith('\\index.html') ||
+      (!document.querySelector('.subpage-container') &&
+       !document.querySelector('.article-reader-container') &&
+       (document.querySelector('.ref-storm-hero') ||
+        document.querySelector('.ref-menu-tab.tab-home') ||
+        document.querySelector('.journal-ticker-section')))
+    );
+  };
+
+  // Initial landing hook on homepage: 382ms golden ratio calibrated pause
+  if (isHome()) {
+    setTimeout(() => {
+      triggerBloom();
+    }, 382);
+  }
+
+  // Back/Forward cache navigation (pageshow)
+  window.addEventListener('pageshow', (e) => {
+    if (isHome()) {
+      hasUserInteracted = false;
+      setTimeout(() => {
+        triggerBloom();
+      }, 260);
+    }
+  });
+
+  // Re-trigger restart bloom when clicking Home tabs or Epigraph Title while on homepage
+  document.querySelectorAll('.tab-home, .tab-link-home, .epigraph-title, .epigraph-title-group').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (isHome()) {
+        hasUserInteracted = false;
+        triggerBloom();
+      }
+    });
   });
 }
 

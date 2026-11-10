@@ -141,14 +141,31 @@
       <stop offset="100%" stop-color="#a855f7" stop-opacity="0" />
     </radialGradient>
 
+    <!-- Ethereal Smooth Flash Light Gradient for Landing / Restart Awakening -->
+    <radialGradient id="lotusFlashLightRadial" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="20%" stop-color="#fef08a" stop-opacity="0.92" />
+      <stop offset="45%" stop-color="#38bdf8" stop-opacity="0.65" />
+      <stop offset="75%" stop-color="#c084fc" stop-opacity="0.30" />
+      <stop offset="100%" stop-color="#a855f7" stop-opacity="0" />
+    </radialGradient>
+
     <filter id="lotusGlowFilter" x="-40%" y="-40%" width="180%" height="180%">
       <feGaussianBlur stdDeviation="3.2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="lotusFlashGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="5.5" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
   </defs>
 
   <!-- Ambient Living Core Halo -->
   <circle cx="50" cy="70" r="14" fill="url(#lotusStamenRadial)" class="lotus-halo" filter="url(#lotusGlowFilter)" />
+
+  <!-- Ethereal Smooth Flash Light Burst -->
+  <circle cx="50" cy="70" r="28" fill="url(#lotusFlashLightRadial)" class="lotus-flash-flare" filter="url(#lotusFlashGlow)" />
 
   <g transform="translate(50, 70)">
     <!-- LAYER 1: Default 9-Petal Multi-Tiered Translucent Golden Lotus (Resting State with Breathing Shimmer) -->
