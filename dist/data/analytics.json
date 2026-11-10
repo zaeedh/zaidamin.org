@@ -302,6 +302,30 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794322151271",
+      "timestamp": "2026-11-10T14:49:11.271Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1794322107556",
+      "timestamp": "2026-11-10T14:48:27.556Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
       "id": "tr-1794320030617",
       "timestamp": "2026-11-10T14:13:50.617Z",
       "path": "/",
@@ -1476,35 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Internal Navigation"
-    },
-    {
-      "id": "tr-1794277580980",
-      "timestamp": "2026-11-10T02:26:20.980Z",
-      "path": "/talks",
-      "title": "Media & Talks",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Internal Navigation"
-    },
-    {
-      "id": "tr-1794277571144",
-      "timestamp": "2026-11-10T02:26:11.144Z",
-      "path": "/research",
-      "title": "Activity & Project",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Internal Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-10T22:13:50.640969",
+  "updated_at": "2026-11-10T22:49:11.286381",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
