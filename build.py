@@ -2821,21 +2821,23 @@ def generate_research_page():
     # Research Pillars HTML
     pillars_html = ""
     for pillar in research["pillars"]:
-        topics = " ".join([f'<span style="font-size:0.775rem; font-weight:600; padding:4px 10px; background:rgba(4, 32, 54, 0.85); border:1px solid rgba(34, 166, 200, 0.25); color:#c8e0ec; border-radius:4px; margin-right:6px; margin-bottom:6px; display:inline-block;">{t}</span>' for t in pillar["key_topics"]])
+        topics = " ".join([f'<span class="pillar-topic-chip">{t}</span>' for t in pillar["key_topics"]])
         pillars_html += f"""
-        <div style="background:rgba(4, 28, 48, 0.75); border:1px solid rgba(34, 166, 200, 0.22); border-radius:18px; padding:36px; box-shadow:0 12px 35px rgba(0,10,24,0.40); backdrop-filter:blur(8px);">
-          <div style="font-size:0.75rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--brand-blue); margin-bottom:6px;">RESEARCH DOMAIN</div>
-          <h2 class="activity-section-title">{pillar['title']}</h2>
-          <p style="font-size: 1rem; color: var(--text-body); line-height: 1.7; margin-bottom: 20px;">
+        <div class="pillar-card">
+          <div class="pillar-eyebrow">RESEARCH DOMAIN</div>
+          <h2 class="pillar-title">{pillar['title']}</h2>
+          <p class="pillar-desc">
             {pillar['full_desc']}
           </p>
 
-          <div style="margin-bottom: 20px;">
-            <div style="font-size: 0.85rem; font-weight: 800; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; color:#ffffff;">Key Technical Frontiers:</div>
-            {topics}
+          <div class="pillar-topics-section">
+            <div class="pillar-topics-heading">Key Technical Frontiers:</div>
+            <div class="pillar-topics-wrap">
+              {topics}
+            </div>
           </div>
 
-          <div style="background: rgba(245, 158, 11, 0.12); color: var(--brand-gold); padding: 12px 18px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; border-left: 4px solid var(--brand-gold);">
+          <div class="pillar-grant-box">
             Grant Alignment: {pillar['grant_alignment']}
           </div>
         </div>
@@ -2845,13 +2847,13 @@ def generate_research_page():
     grants_html = ""
     for grant in research.get("active_grant_themes", []):
         grants_html += f"""
-        <div style="background:rgba(10, 24, 42, 0.65); border:1px solid rgba(186, 230, 253, 0.15); border-radius:14px; padding:24px 28px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
-            <h3 style="font-size:1.15rem; font-weight:700; color:#ffffff; margin:0;">{grant['title']}</h3>
-            <span style="font-size:0.75rem; font-weight:700; color:#38bdf8; background:rgba(56,189,248,0.12); border:1px solid rgba(56,189,248,0.3); padding:3px 9px; border-radius:999px;">{grant['period']}</span>
+        <div class="grant-theme-card">
+          <div class="grant-card-header">
+            <h3 class="grant-card-title">{grant['title']}</h3>
+            <span class="grant-card-period">{grant['period']}</span>
           </div>
-          <div style="font-size:0.85rem; color:#bae6fd; margin-bottom:8px; font-weight:600;">{grant['role']} &bull; {grant['agency']}</div>
-          <p style="font-size:0.92rem; color:#94a3b8; line-height:1.6; margin:0;">{grant['objective']}</p>
+          <div class="grant-card-meta">{grant['role']} &bull; {grant['agency']}</div>
+          <p class="grant-card-objective">{grant['objective']}</p>
         </div>
         """
 
