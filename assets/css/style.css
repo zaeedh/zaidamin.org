@@ -1948,13 +1948,15 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 34px;
+  height: 34px;
   background: transparent !important;
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
   filter: none !important;
   cursor: pointer;
-  padding: 1px;
+  padding: 0;
   position: relative;
   flex-shrink: 0;
   user-select: none;
@@ -1967,8 +1969,8 @@ a {
 .lotus-hybrid-svg,
 .lotus-rainbow-svg {
   display: block;
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 28px;
   overflow: visible;
   filter: none;
   transition: filter 0.5s ease, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
@@ -2174,7 +2176,7 @@ a {
 /* Side-Expanding Links Container (Anchored to left of Lotus with Golden Ratio clearance) */
 .top-scholarly-links {
   position: absolute;
-  right: 44px; /* Ideal Gestalt & Golden Ratio proximity: exact 16px (10px x 1.618) clearance to Lotus button */
+  right: 50px; /* Ideal Gestalt & Golden Ratio proximity: exact 16px (10px x 1.618) clearance to 34px Lotus button */
   top: 50%;
   display: inline-flex;
   align-items: center;

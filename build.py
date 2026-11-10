@@ -22,7 +22,7 @@ def load_json(filename):
         return json.load(f)
 
 def render_lotus_symbol_svg():
-    return '''<svg class="lotus-svg lotus-hybrid-svg" width="26" height="26" viewBox="0 0 100 86" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    return '''<svg class="lotus-svg lotus-hybrid-svg" width="32" height="28" viewBox="0 0 100 86" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
     <!-- Premium Multi-Tiered Golden Lotus Gradient matching user reference -->
     <linearGradient id="lotusGoldLuxeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
