@@ -124,41 +124,58 @@
 
             <!-- Sacred Multi-Tiered Glowing Lotus Aerial Palace Button -->
             <button class="lotus-palace-btn david-star-pure-btn" id="lotus-toggle-btn" aria-label="Toggle Scholarly Profiles & Direct Identifiers" title="Scholarly Profiles & Direct Identifiers (Sacred Lotus)" aria-expanded="false">
-              <svg class="lotus-svg lotus-rainbow-svg" width="28" height="28" viewBox="0 0 100 86" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <svg class="lotus-svg lotus-hybrid-svg" width="24" height="24" viewBox="0 0 100 86" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
-    <!-- Soft Volumetric Stamen Glow Filter -->
-    <filter id="lotusStamenGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="3.5" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
+    <!-- Premium Metallic Gold Luxury Gradient -->
+    <linearGradient id="lotusGoldLuxeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="25%" stop-color="#fef08a" stop-opacity="0.95" />
+      <stop offset="60%" stop-color="#d4af37" stop-opacity="0.90" />
+      <stop offset="100%" stop-color="#b45309" stop-opacity="0.80" />
+    </linearGradient>
+
+    <!-- Warm Volumetric Stamen Halo Gradient -->
     <radialGradient id="lotusStamenRadial" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#fef08a" stop-opacity="0.95" />
-      <stop offset="45%" stop-color="#fb923c" stop-opacity="0.45" />
+      <stop offset="45%" stop-color="#fb923c" stop-opacity="0.50" />
       <stop offset="100%" stop-color="#a855f7" stop-opacity="0" />
     </radialGradient>
+
+    <filter id="lotusGlowFilter" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3.2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
   </defs>
 
-  <!-- Ambient Living Golden Core Halo -->
-  <circle cx="50" cy="72" r="15" fill="url(#lotusStamenRadial)" class="lotus-halo" filter="url(#lotusStamenGlow)" />
+  <!-- Ambient Living Core Halo -->
+  <circle cx="50" cy="70" r="14" fill="url(#lotusStamenRadial)" class="lotus-halo" filter="url(#lotusGlowFilter)" />
 
-  <!-- Breathing Wrapper for Idle Bud State -->
-  <g class="lotus-breathe-wrap">
-    <!-- Sacred Lotus Petal Cluster (Origin Pivot at 50, 72) -->
-    <g class="lotus-stage" transform="translate(50, 72)">
+  <g transform="translate(50, 70)">
+    <!-- LAYER 1: Default 5-Petal Premium Golden Lotus Emblem (Resting State with Breathing Shimmer) -->
+    <g class="lotus-gold-layer">
+      <path class="gold-petal gp-out-left"  d="M 0 0 C -4 -16, -7.5 -32, 0 -54 C 7.5 -32, 4 -16, 0 0 Z" />
+      <path class="gold-petal gp-out-right" d="M 0 0 C -4 -16, -7.5 -32, 0 -54 C 7.5 -32, 4 -16, 0 0 Z" />
+      <path class="gold-petal gp-in-left"   d="M 0 0 C -4 -16, -7.5 -32, 0 -54 C 7.5 -32, 4 -16, 0 0 Z" />
+      <path class="gold-petal gp-in-right"  d="M 0 0 C -4 -16, -7.5 -32, 0 -54 C 7.5 -32, 4 -16, 0 0 Z" />
+      <path class="gold-petal gp-center"    d="M 0 0 C -4 -16, -7.5 -32, 0 -54 C 7.5 -32, 4 -16, 0 0 Z" />
+    </g>
+
+    <!-- LAYER 2: Sacred 7-Petal Rainbow Chakra Blossom (Awakens upon Hover/Click from Bud to Full Bloom) -->
+    <g class="lotus-rainbow-layer">
       <!-- Outer Left: Sunbeam Golden Yellow -->
-      <path class="lotus-petal p-yellow" fill="#FACC15" d="M 0 0 C -12.5 -13, -13.5 -35, 0 -48 C 13.5 -35, 12.5 -13, 0 0 Z" />
+      <path class="rainbow-petal p-yellow" fill="#FACC15" d="M 0 0 C -12.5 -13, -13.5 -35, 0 -48 C 13.5 -35, 12.5 -13, 0 0 Z" />
       <!-- Outer Right: Fresh Spring Green -->
-      <path class="lotus-petal p-green"  fill="#4ADE80" d="M 0 0 C -12.5 -13, -13.5 -35, 0 -48 C 13.5 -35, 12.5 -13, 0 0 Z" />
+      <path class="rainbow-petal p-green"  fill="#4ADE80" d="M 0 0 C -12.5 -13, -13.5 -35, 0 -48 C 13.5 -35, 12.5 -13, 0 0 Z" />
       <!-- Mid Left: Warm Sunset Orange -->
-      <path class="lotus-petal p-orange" fill="#FB923C" d="M 0 0 C -14 -14, -14.5 -38, 0 -52 C 14.5 -38, 14 -14, 0 0 Z" />
+      <path class="rainbow-petal p-orange" fill="#FB923C" d="M 0 0 C -14 -14, -14.5 -38, 0 -52 C 14.5 -38, 14 -14, 0 0 Z" />
       <!-- Mid Right: Turquoise Aqua Cyan -->
-      <path class="lotus-petal p-cyan"   fill="#38BDF8" d="M 0 0 C -14 -14, -14.5 -38, 0 -52 C 14.5 -38, 14 -14, 0 0 Z" />
+      <path class="rainbow-petal p-cyan"   fill="#38BDF8" d="M 0 0 C -14 -14, -14.5 -38, 0 -52 C 14.5 -38, 14 -14, 0 0 Z" />
       <!-- Inner Left: Radiant Rose Pink -->
-      <path class="lotus-petal p-pink"   fill="#F472B6" d="M 0 0 C -14.5 -15, -15 -41, 0 -56 C 15 -41, 14.5 -15, 0 0 Z" />
+      <path class="rainbow-petal p-pink"   fill="#F472B6" d="M 0 0 C -14.5 -15, -15 -41, 0 -56 C 15 -41, 14.5 -15, 0 0 Z" />
       <!-- Inner Right: Sky Cerulean Blue -->
-      <path class="lotus-petal p-blue"   fill="#60A5FA" d="M 0 0 C -14.5 -15, -15 -41, 0 -56 C 15 -41, 14.5 -15, 0 0 Z" />
+      <path class="rainbow-petal p-blue"   fill="#60A5FA" d="M 0 0 C -14.5 -15, -15 -41, 0 -56 C 15 -41, 14.5 -15, 0 0 Z" />
       <!-- Center Crown: Sacred Royal Violet -->
-      <path class="lotus-petal p-violet" fill="#A855F7" d="M 0 0 C -15 -16, -15.5 -44, 0 -60 C 15.5 -44, 15 -16, 0 0 Z" />
+      <path class="rainbow-petal p-violet" fill="#A855F7" d="M 0 0 C -15 -16, -15.5 -44, 0 -60 C 15.5 -44, 15 -16, 0 0 Z" />
     </g>
   </g>
 </svg>

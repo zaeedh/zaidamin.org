@@ -1938,7 +1938,10 @@ a {
 
 /* Button Container (Replaces Star of David button) */
 /* ==========================================================================
-   SACRED CHAKRA RAINBOW LOTUS (BUD TO FULL BLOOM UNFURLING SYSTEM)
+   SACRED CHAKRA LOTUS (PREMIUM GOLD EMBLEM TO RAINBOW CHAKRA BLOOM)
+   - Default: 5-Petal Golden Luxury Emblem with smooth breathing luster ("terang redup")
+   - Hover / Click: Contraction into Bud ("menguncup lagi") then Blossoming into full 7-Petal Rainbow Glory
+   - Golden Ratio Spacing (16px clearance to ResearchGate pill)
    ========================================================================== */
 .lotus-palace-btn,
 .david-star-pure-btn {
@@ -1950,145 +1953,188 @@ a {
   outline: none !important;
   box-shadow: none !important;
   cursor: pointer;
-  padding: 2px 4px;
+  padding: 2px;
   position: relative;
   flex-shrink: 0;
   user-select: none;
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.6s ease;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s ease;
   z-index: 60;
   transform-origin: center center;
 }
 
 .lotus-svg,
+.lotus-hybrid-svg,
 .lotus-rainbow-svg {
   display: block;
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   overflow: visible;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
-  transition: filter 0.6s ease, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: filter 0.5s ease, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Subtle Living Gentle Breathing in Bud State */
-@keyframes lotusBudBreathe {
+/* --------------------------------------------------------------------------
+   LAYER 1: DEFAULT GOLDEN 5-PETAL EMBLEM (RESTING & INVITING "TERANG REDUP")
+   -------------------------------------------------------------------------- */
+@keyframes lotusGoldLuster {
   0%, 100% {
-    transform: translateY(0px) scale(1);
+    filter: drop-shadow(0 0 3px rgba(212, 175, 55, 0.5)) drop-shadow(0 0 6px rgba(254, 240, 138, 0.3));
+    opacity: 0.85;
+    transform: scale(1);
   }
   50% {
-    transform: translateY(-2px) scale(1.02);
+    filter: drop-shadow(0 0 8px rgba(254, 240, 138, 0.95)) drop-shadow(0 0 14px rgba(212, 175, 55, 0.75));
+    opacity: 1;
+    transform: scale(1.04);
   }
 }
 
-.lotus-breathe-wrap {
-  animation: lotusBudBreathe 4s ease-in-out infinite;
-  transform-origin: 50px 72px;
+.lotus-gold-layer {
+  transform-origin: 0px 0px;
+  animation: lotusGoldLuster 3.6s ease-in-out infinite;
+  transition: opacity 0.35s ease;
 }
 
-.top-scholarly-cluster:hover .lotus-breathe-wrap,
-.top-scholarly-cluster:has(.top-scholarly-links:hover) .lotus-breathe-wrap,
-.top-scholarly-cluster:has(.top-scholarly-links.is-open) .lotus-breathe-wrap,
-.lotus-palace-btn:hover .lotus-breathe-wrap,
-.lotus-palace-btn.is-active .lotus-breathe-wrap {
+.gold-petal {
+  transform-origin: 0px 0px;
+  fill: url(#lotusGoldLuxeGrad);
+  stroke: #fef08a;
+  stroke-width: 0.6;
+  stroke-linejoin: round;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease;
+}
+
+/* Resting angles for the 5-petal golden emblem */
+.gold-petal.gp-out-left  { transform: rotate(-60deg); }
+.gold-petal.gp-in-left   { transform: rotate(-30deg); }
+.gold-petal.gp-center    { transform: rotate(0deg);   }
+.gold-petal.gp-in-right  { transform: rotate(30deg);  }
+.gold-petal.gp-out-right { transform: rotate(60deg);  }
+
+/* PHASE 1 ON HOVER/CLICK: Golden Petals contract inward into tight bud ("menguncup lagi") */
+.top-scholarly-cluster:hover .gold-petal,
+.top-scholarly-cluster:has(.top-scholarly-links:hover) .gold-petal,
+.top-scholarly-cluster:has(.top-scholarly-links.is-open) .gold-petal,
+.lotus-palace-btn:hover .gold-petal,
+.lotus-palace-btn.is-active .gold-petal {
+  transform: rotate(0deg) scale(0.62, 0.90);
+  opacity: 0;
+}
+
+.top-scholarly-cluster:hover .lotus-gold-layer,
+.top-scholarly-cluster:has(.top-scholarly-links:hover) .lotus-gold-layer,
+.top-scholarly-cluster:has(.top-scholarly-links.is-open) .lotus-gold-layer,
+.lotus-palace-btn:hover .lotus-gold-layer,
+.lotus-palace-btn.is-active .lotus-gold-layer {
   animation: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* Base Petal Configuration - Pivot point (0, 0) at bottom base center */
-.lotus-petal {
+/* --------------------------------------------------------------------------
+   LAYER 2: SACRED 7-PETAL RAINBOW CHAKRA BLOSSOM (AWAKENS & BLOOMS ON HOVER)
+   -------------------------------------------------------------------------- */
+.lotus-rainbow-layer {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.top-scholarly-cluster:hover .lotus-rainbow-layer,
+.top-scholarly-cluster:has(.top-scholarly-links:hover) .lotus-rainbow-layer,
+.top-scholarly-cluster:has(.top-scholarly-links.is-open) .lotus-rainbow-layer,
+.lotus-palace-btn:hover .lotus-rainbow-layer,
+.lotus-palace-btn.is-active .lotus-rainbow-layer {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.rainbow-petal {
   transform-origin: 0px 0px;
   mix-blend-mode: screen;
-  transition: transform 0.85s cubic-bezier(0.34, 1.25, 0.64, 1),
-              opacity 0.6s ease,
-              filter 0.6s ease;
-  stroke: rgba(255, 255, 255, 0.18);
+  stroke: rgba(255, 255, 255, 0.2);
   stroke-width: 0.5;
+  /* Resting inside the energized bud */
+  transform: rotate(0deg) scale(0.62, 0.90);
+  opacity: 0;
+  transition: transform 0.85s cubic-bezier(0.34, 1.25, 0.64, 1),
+              opacity 0.5s ease;
 }
 
-/* 1. DEFAULT RESTING STATE: KUNCUP (Closed Lotus Bud) */
-/* All petals gracefully fold upwards together into a tight, serene bud */
-.lotus-petal.p-yellow { transform: rotate(-10deg) scale(0.68, 0.88); opacity: 0.60; }
-.lotus-petal.p-orange { transform: rotate(-6deg)  scale(0.76, 0.92); opacity: 0.72; }
-.lotus-petal.p-pink   { transform: rotate(-3deg)  scale(0.85, 0.96); opacity: 0.85; }
-.lotus-petal.p-violet { transform: rotate(0deg)   scale(0.92, 1.00); opacity: 0.98; }
-.lotus-petal.p-blue   { transform: rotate(3deg)   scale(0.85, 0.96); opacity: 0.85; }
-.lotus-petal.p-cyan   { transform: rotate(6deg)   scale(0.76, 0.92); opacity: 0.72; }
-.lotus-petal.p-green  { transform: rotate(10deg)  scale(0.68, 0.88); opacity: 0.60; }
-
-/* 2. HOVER & ACTIVE STATE: MEKAR / TERBUKA (Slow, Soft & Elegant Blooming) */
-/* Each petal gracefully sweeps outwards with harmonic progressive delays */
-.top-scholarly-cluster:hover .lotus-petal.p-yellow,
-.top-scholarly-cluster:has(.top-scholarly-links:hover) .lotus-petal.p-yellow,
-.top-scholarly-cluster:has(.top-scholarly-links.is-open) .lotus-petal.p-yellow,
-.lotus-palace-btn:hover .lotus-petal.p-yellow,
-.lotus-palace-btn.is-active .lotus-petal.p-yellow {
+/* PHASE 2: Blossoming outward into full 7-petal rainbow glory */
+.top-scholarly-cluster:hover .rainbow-petal.p-yellow,
+.top-scholarly-cluster:has(.top-scholarly-links:hover) .rainbow-petal.p-yellow,
+.top-scholarly-cluster:has(.top-scholarly-links.is-open) .rainbow-petal.p-yellow,
+.lotus-palace-btn:hover .rainbow-petal.p-yellow,
+.lotus-palace-btn.is-active .rainbow-petal.p-yellow {
   transform: rotate(-78deg) scale(1, 1);
   opacity: 0.90;
-  transition-delay: 0.00s;
-}
-
-.top-scholarly-cluster:hover .lotus-petal.p-orange,
-.top-scholarly-cluster:has(.top-scholarly-links:hover) .lotus-petal.p-orange,
-.top-scholarly-cluster:has(.top-scholarly-links.is-open) .lotus-petal.p-orange,
-.lotus-palace-btn:hover .lotus-petal.p-orange,
-.lotus-palace-btn.is-active .lotus-petal.p-orange {
-  transform: rotate(-53deg) scale(1, 1);
-  opacity: 0.90;
-  transition-delay: 0.03s;
-}
-
-.top-scholarly-cluster:hover .lotus-petal.p-pink,
-.top-scholarly-cluster:has(.top-scholarly-links:hover) .lotus-petal.p-pink,
-.top-scholarly-cluster:has(.top-scholarly-links.is-open) .lotus-petal.p-pink,
-.lotus-palace-btn:hover .lotus-petal.p-pink,
-.lotus-palace-btn.is-active .lotus-petal.p-pink {
-  transform: rotate(-26deg) scale(1, 1);
-  opacity: 0.94;
-  transition-delay: 0.06s;
-}
-
-.top-scholarly-cluster:hover .lotus-petal.p-violet,
-.top-scholarly-cluster:has(.top-scholarly-links:hover) .lotus-petal.p-violet,
-.top-scholarly-cluster:has(.top-scholarly-links.is-open) .lotus-petal.p-violet,
-.lotus-palace-btn:hover .lotus-petal.p-violet,
-.lotus-palace-btn.is-active .lotus-petal.p-violet {
-  transform: rotate(0deg) scale(1.06, 1.06);
-  opacity: 1;
   transition-delay: 0.10s;
 }
 
-.top-scholarly-cluster:hover .lotus-petal.p-blue,
-.top-scholarly-cluster:has(.top-scholarly-links:hover) .lotus-petal.p-blue,
-.top-scholarly-cluster:has(.top-scholarly-links.is-open) .lotus-petal.p-blue,
-.lotus-palace-btn:hover .lotus-petal.p-blue,
-.lotus-palace-btn.is-active .lotus-petal.p-blue {
+.top-scholarly-cluster:hover .rainbow-petal.p-orange,
+.top-scholarly-cluster:has(.top-scholarly-links:hover) .rainbow-petal.p-orange,
+.top-scholarly-cluster:has(.top-scholarly-links.is-open) .rainbow-petal.p-orange,
+.lotus-palace-btn:hover .rainbow-petal.p-orange,
+.lotus-palace-btn.is-active .rainbow-petal.p-orange {
+  transform: rotate(-53deg) scale(1, 1);
+  opacity: 0.90;
+  transition-delay: 0.14s;
+}
+
+.top-scholarly-cluster:hover .rainbow-petal.p-pink,
+.top-scholarly-cluster:has(.top-scholarly-links:hover) .rainbow-petal.p-pink,
+.top-scholarly-cluster:has(.top-scholarly-links.is-open) .rainbow-petal.p-pink,
+.lotus-palace-btn:hover .rainbow-petal.p-pink,
+.lotus-palace-btn.is-active .rainbow-petal.p-pink {
+  transform: rotate(-26deg) scale(1, 1);
+  opacity: 0.94;
+  transition-delay: 0.18s;
+}
+
+.top-scholarly-cluster:hover .rainbow-petal.p-violet,
+.top-scholarly-cluster:has(.top-scholarly-links:hover) .rainbow-petal.p-violet,
+.top-scholarly-cluster:has(.top-scholarly-links.is-open) .rainbow-petal.p-violet,
+.lotus-palace-btn:hover .rainbow-petal.p-violet,
+.lotus-palace-btn.is-active .rainbow-petal.p-violet {
+  transform: rotate(0deg) scale(1.06, 1.06);
+  opacity: 1;
+  transition-delay: 0.22s;
+}
+
+.top-scholarly-cluster:hover .rainbow-petal.p-blue,
+.top-scholarly-cluster:has(.top-scholarly-links:hover) .rainbow-petal.p-blue,
+.top-scholarly-cluster:has(.top-scholarly-links.is-open) .rainbow-petal.p-blue,
+.lotus-palace-btn:hover .rainbow-petal.p-blue,
+.lotus-palace-btn.is-active .rainbow-petal.p-blue {
   transform: rotate(26deg) scale(1, 1);
   opacity: 0.94;
-  transition-delay: 0.06s;
+  transition-delay: 0.18s;
 }
 
-.top-scholarly-cluster:hover .lotus-petal.p-cyan,
-.top-scholarly-cluster:has(.top-scholarly-links:hover) .lotus-petal.p-cyan,
-.top-scholarly-cluster:has(.top-scholarly-links.is-open) .lotus-petal.p-cyan,
-.lotus-palace-btn:hover .lotus-petal.p-cyan,
-.lotus-palace-btn.is-active .lotus-petal.p-cyan {
+.top-scholarly-cluster:hover .rainbow-petal.p-cyan,
+.top-scholarly-cluster:has(.top-scholarly-links:hover) .rainbow-petal.p-cyan,
+.top-scholarly-cluster:has(.top-scholarly-links.is-open) .rainbow-petal.p-cyan,
+.lotus-palace-btn:hover .rainbow-petal.p-cyan,
+.lotus-palace-btn.is-active .rainbow-petal.p-cyan {
   transform: rotate(53deg) scale(1, 1);
   opacity: 0.90;
-  transition-delay: 0.03s;
+  transition-delay: 0.14s;
 }
 
-.top-scholarly-cluster:hover .lotus-petal.p-green,
-.top-scholarly-cluster:has(.top-scholarly-links:hover) .lotus-petal.p-green,
-.top-scholarly-cluster:has(.top-scholarly-links.is-open) .lotus-petal.p-green,
-.lotus-palace-btn:hover .lotus-petal.p-green,
-.lotus-palace-btn.is-active .lotus-petal.p-green {
+.top-scholarly-cluster:hover .rainbow-petal.p-green,
+.top-scholarly-cluster:has(.top-scholarly-links:hover) .rainbow-petal.p-green,
+.top-scholarly-cluster:has(.top-scholarly-links.is-open) .rainbow-petal.p-green,
+.lotus-palace-btn:hover .rainbow-petal.p-green,
+.lotus-palace-btn.is-active .rainbow-petal.p-green {
   transform: rotate(78deg) scale(1, 1);
   opacity: 0.90;
-  transition-delay: 0.00s;
+  transition-delay: 0.10s;
 }
 
-/* Base Halo Volumetric Glow */
+/* Stamen Volumetric Core Halo */
 .lotus-halo {
   opacity: 0.50;
-  transform-origin: 50px 72px;
+  transform-origin: 50px 70px;
   transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -2106,8 +2152,8 @@ a {
 .top-scholarly-cluster:has(.top-scholarly-links.is-open) .lotus-svg,
 .lotus-palace-btn:hover .lotus-svg,
 .lotus-palace-btn.is-active .lotus-svg {
-  filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.6)) drop-shadow(0 0 16px rgba(254, 240, 138, 0.45));
-  transform: scale(1.08);
+  filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.6)) drop-shadow(0 0 16px rgba(254, 240, 138, 0.5));
+  transform: scale(1.06);
 }
 
 /* Fallback Star of David styling for legacy selectors */
@@ -2130,10 +2176,10 @@ a {
   100% { transform: rotate(360deg); opacity: 0.65; }
 }
 
-/* Side-Expanding Links Container (Anchored to left of Lotus, Non-Displacing) */
+/* Side-Expanding Links Container (Anchored to left of Lotus with Golden Ratio clearance) */
 .top-scholarly-links {
   position: absolute;
-  right: 32px;
+  right: 44px; /* Ideal Gestalt & Golden Ratio proximity: exact 16px (10px x 1.618) clearance to Lotus button */
   top: 50%;
   display: inline-flex;
   align-items: center;
