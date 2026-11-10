@@ -22,73 +22,42 @@ def load_json(filename):
         return json.load(f)
 
 def render_lotus_symbol_svg():
-    cx, cy = 32, 32
-    r1, r2, r3, r4 = 27.0, 16.7, 10.3, 6.4
-
-    def petal_path(r, width_factor=0.38):
-        w = r * width_factor
-        tip_y = cy - r
-        cp1_x, cp1_y = cx - w, cy - r * 0.45
-        cp2_x, cp2_y = cx - w * 0.7, tip_y + r * 0.15
-        cp3_x, cp3_y = cx + w * 0.7, tip_y + r * 0.15
-        cp4_x, cp4_y = cx + w, cy - r * 0.45
-        return f"M {cx} {cy} C {cp1_x:.2f} {cp1_y:.2f}, {cp2_x:.2f} {cp2_y:.2f}, {cx} {tip_y:.2f} C {cp3_x:.2f} {cp3_y:.2f}, {cp4_x:.2f} {cp4_y:.2f}, {cx} {cy} Z"
-
-    def render_tier(r, width_factor, count, offset_deg, tier_class):
-        base_d = petal_path(r, width_factor)
-        petals = []
-        for i in range(count):
-            angle = offset_deg + (360.0 / count) * i
-            petals.append(f'<path d="{base_d}" transform="rotate({angle:.1f} {cx} {cy})" class="lotus-petal" />')
-        petals_str = "".join(petals)
-        return f'<g class="lotus-tier {tier_class}">{petals_str}</g>'
-
-    outer_tier = render_tier(r1, 0.36, 8, 0, "lotus-tier-outer")
-    mid_tier = render_tier(r2, 0.40, 8, 22.5, "lotus-tier-mid")
-    inner_tier = render_tier(r3, 0.44, 8, 0, "lotus-tier-inner")
-
-    stamens = []
-    stamen_r = 7.6
-    for i in range(8):
-        a = math.radians(22.5 + i * 45)
-        sx = cx + stamen_r * math.cos(a)
-        sy = cy + stamen_r * math.sin(a)
-        stamens.append(f'<circle cx="{sx:.2f}" cy="{sy:.2f}" r="0.85" class="lotus-stamen" />')
-    stamens_str = "".join(stamens)
-
-    return f'''<svg class="lotus-svg" width="22" height="22" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    return '''<svg class="lotus-svg lotus-rainbow-svg" width="28" height="28" viewBox="0 0 100 86" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
-    <linearGradient id="lotusGoldPetalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fffbeb" stop-opacity="0.95" />
-      <stop offset="35%" stop-color="#fde047" stop-opacity="0.80" />
-      <stop offset="70%" stop-color="#d4af37" stop-opacity="0.60" />
-      <stop offset="100%" stop-color="#b45309" stop-opacity="0.35" />
-    </linearGradient>
-    <radialGradient id="lotusCoreGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
-      <stop offset="30%" stop-color="#fef08a" stop-opacity="0.95" />
-      <stop offset="65%" stop-color="#d4af37" stop-opacity="0.85" />
-      <stop offset="100%" stop-color="#b45309" stop-opacity="0.60" />
-    </radialGradient>
-    <radialGradient id="lotusVolumetricHalo" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="rgba(254, 240, 138, 0.65)" />
-      <stop offset="45%" stop-color="rgba(212, 175, 55, 0.35)" />
-      <stop offset="80%" stop-color="rgba(245, 158, 11, 0.12)" />
-      <stop offset="100%" stop-color="rgba(212, 175, 55, 0)" />
-    </radialGradient>
-    <filter id="lotusGlowFilter" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="1.8" result="blur" />
+    <!-- Soft Volumetric Stamen Glow Filter -->
+    <filter id="lotusStamenGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.5" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
+    <radialGradient id="lotusStamenRadial" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fef08a" stop-opacity="0.95" />
+      <stop offset="45%" stop-color="#fb923c" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#a855f7" stop-opacity="0" />
+    </radialGradient>
   </defs>
-  <circle cx="{cx}" cy="{cy}" r="28" fill="url(#lotusVolumetricHalo)" class="lotus-volumetric-halo" />
-  {outer_tier}
-  {mid_tier}
-  {inner_tier}
-  <g class="lotus-core">
-    <circle cx="{cx}" cy="{cy}" r="{r4:.1f}" fill="url(#lotusCoreGrad)" stroke="#fef08a" stroke-width="0.9" />
-    {stamens_str}
-    <circle cx="{cx}" cy="{cy}" r="1.8" fill="#ffffff" filter="url(#lotusGlowFilter)" />
+
+  <!-- Ambient Living Golden Core Halo -->
+  <circle cx="50" cy="72" r="15" fill="url(#lotusStamenRadial)" class="lotus-halo" filter="url(#lotusStamenGlow)" />
+
+  <!-- Breathing Wrapper for Idle Bud State -->
+  <g class="lotus-breathe-wrap">
+    <!-- Sacred Lotus Petal Cluster (Origin Pivot at 50, 72) -->
+    <g class="lotus-stage" transform="translate(50, 72)">
+      <!-- Outer Left: Sunbeam Golden Yellow -->
+      <path class="lotus-petal p-yellow" fill="#FACC15" d="M 0 0 C -12.5 -13, -13.5 -35, 0 -48 C 13.5 -35, 12.5 -13, 0 0 Z" />
+      <!-- Outer Right: Fresh Spring Green -->
+      <path class="lotus-petal p-green"  fill="#4ADE80" d="M 0 0 C -12.5 -13, -13.5 -35, 0 -48 C 13.5 -35, 12.5 -13, 0 0 Z" />
+      <!-- Mid Left: Warm Sunset Orange -->
+      <path class="lotus-petal p-orange" fill="#FB923C" d="M 0 0 C -14 -14, -14.5 -38, 0 -52 C 14.5 -38, 14 -14, 0 0 Z" />
+      <!-- Mid Right: Turquoise Aqua Cyan -->
+      <path class="lotus-petal p-cyan"   fill="#38BDF8" d="M 0 0 C -14 -14, -14.5 -38, 0 -52 C 14.5 -38, 14 -14, 0 0 Z" />
+      <!-- Inner Left: Radiant Rose Pink -->
+      <path class="lotus-petal p-pink"   fill="#F472B6" d="M 0 0 C -14.5 -15, -15 -41, 0 -56 C 15 -41, 14.5 -15, 0 0 Z" />
+      <!-- Inner Right: Sky Cerulean Blue -->
+      <path class="lotus-petal p-blue"   fill="#60A5FA" d="M 0 0 C -14.5 -15, -15 -41, 0 -56 C 15 -41, 14.5 -15, 0 0 Z" />
+      <!-- Center Crown: Sacred Royal Violet -->
+      <path class="lotus-petal p-violet" fill="#A855F7" d="M 0 0 C -15 -16, -15.5 -44, 0 -60 C 15.5 -44, 15 -16, 0 0 Z" />
+    </g>
   </g>
 </svg>'''
 

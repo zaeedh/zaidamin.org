@@ -148,39 +148,42 @@
 
             <!-- Sacred Multi-Tiered Glowing Lotus Aerial Palace Button -->
             <button class="lotus-palace-btn david-star-pure-btn" id="lotus-toggle-btn" aria-label="Toggle Scholarly Profiles & Direct Identifiers" title="Scholarly Profiles & Direct Identifiers (Sacred Lotus)" aria-expanded="false">
-              <svg class="lotus-svg" width="22" height="22" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <svg class="lotus-svg lotus-rainbow-svg" width="28" height="28" viewBox="0 0 100 86" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
-    <linearGradient id="lotusGoldPetalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fffbeb" stop-opacity="0.95" />
-      <stop offset="35%" stop-color="#fde047" stop-opacity="0.80" />
-      <stop offset="70%" stop-color="#d4af37" stop-opacity="0.60" />
-      <stop offset="100%" stop-color="#b45309" stop-opacity="0.35" />
-    </linearGradient>
-    <radialGradient id="lotusCoreGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
-      <stop offset="30%" stop-color="#fef08a" stop-opacity="0.95" />
-      <stop offset="65%" stop-color="#d4af37" stop-opacity="0.85" />
-      <stop offset="100%" stop-color="#b45309" stop-opacity="0.60" />
-    </radialGradient>
-    <radialGradient id="lotusVolumetricHalo" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="rgba(254, 240, 138, 0.65)" />
-      <stop offset="45%" stop-color="rgba(212, 175, 55, 0.35)" />
-      <stop offset="80%" stop-color="rgba(245, 158, 11, 0.12)" />
-      <stop offset="100%" stop-color="rgba(212, 175, 55, 0)" />
-    </radialGradient>
-    <filter id="lotusGlowFilter" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="1.8" result="blur" />
+    <!-- Soft Volumetric Stamen Glow Filter -->
+    <filter id="lotusStamenGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.5" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
+    <radialGradient id="lotusStamenRadial" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fef08a" stop-opacity="0.95" />
+      <stop offset="45%" stop-color="#fb923c" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#a855f7" stop-opacity="0" />
+    </radialGradient>
   </defs>
-  <circle cx="32" cy="32" r="28" fill="url(#lotusVolumetricHalo)" class="lotus-volumetric-halo" />
-  <g class="lotus-tier lotus-tier-outer"><path d="M 32 32 C 22.28 19.85, 25.20 9.05, 32 5.00 C 38.80 9.05, 41.72 19.85, 32 32 Z" transform="rotate(0.0 32 32)" class="lotus-petal" /><path d="M 32 32 C 22.28 19.85, 25.20 9.05, 32 5.00 C 38.80 9.05, 41.72 19.85, 32 32 Z" transform="rotate(45.0 32 32)" class="lotus-petal" /><path d="M 32 32 C 22.28 19.85, 25.20 9.05, 32 5.00 C 38.80 9.05, 41.72 19.85, 32 32 Z" transform="rotate(90.0 32 32)" class="lotus-petal" /><path d="M 32 32 C 22.28 19.85, 25.20 9.05, 32 5.00 C 38.80 9.05, 41.72 19.85, 32 32 Z" transform="rotate(135.0 32 32)" class="lotus-petal" /><path d="M 32 32 C 22.28 19.85, 25.20 9.05, 32 5.00 C 38.80 9.05, 41.72 19.85, 32 32 Z" transform="rotate(180.0 32 32)" class="lotus-petal" /><path d="M 32 32 C 22.28 19.85, 25.20 9.05, 32 5.00 C 38.80 9.05, 41.72 19.85, 32 32 Z" transform="rotate(225.0 32 32)" class="lotus-petal" /><path d="M 32 32 C 22.28 19.85, 25.20 9.05, 32 5.00 C 38.80 9.05, 41.72 19.85, 32 32 Z" transform="rotate(270.0 32 32)" class="lotus-petal" /><path d="M 32 32 C 22.28 19.85, 25.20 9.05, 32 5.00 C 38.80 9.05, 41.72 19.85, 32 32 Z" transform="rotate(315.0 32 32)" class="lotus-petal" /></g>
-  <g class="lotus-tier lotus-tier-mid"><path d="M 32 32 C 25.32 24.48, 27.32 17.80, 32 15.30 C 36.68 17.80, 38.68 24.48, 32 32 Z" transform="rotate(22.5 32 32)" class="lotus-petal" /><path d="M 32 32 C 25.32 24.48, 27.32 17.80, 32 15.30 C 36.68 17.80, 38.68 24.48, 32 32 Z" transform="rotate(67.5 32 32)" class="lotus-petal" /><path d="M 32 32 C 25.32 24.48, 27.32 17.80, 32 15.30 C 36.68 17.80, 38.68 24.48, 32 32 Z" transform="rotate(112.5 32 32)" class="lotus-petal" /><path d="M 32 32 C 25.32 24.48, 27.32 17.80, 32 15.30 C 36.68 17.80, 38.68 24.48, 32 32 Z" transform="rotate(157.5 32 32)" class="lotus-petal" /><path d="M 32 32 C 25.32 24.48, 27.32 17.80, 32 15.30 C 36.68 17.80, 38.68 24.48, 32 32 Z" transform="rotate(202.5 32 32)" class="lotus-petal" /><path d="M 32 32 C 25.32 24.48, 27.32 17.80, 32 15.30 C 36.68 17.80, 38.68 24.48, 32 32 Z" transform="rotate(247.5 32 32)" class="lotus-petal" /><path d="M 32 32 C 25.32 24.48, 27.32 17.80, 32 15.30 C 36.68 17.80, 38.68 24.48, 32 32 Z" transform="rotate(292.5 32 32)" class="lotus-petal" /><path d="M 32 32 C 25.32 24.48, 27.32 17.80, 32 15.30 C 36.68 17.80, 38.68 24.48, 32 32 Z" transform="rotate(337.5 32 32)" class="lotus-petal" /></g>
-  <g class="lotus-tier lotus-tier-inner"><path d="M 32 32 C 27.47 27.36, 28.83 23.25, 32 21.70 C 35.17 23.25, 36.53 27.36, 32 32 Z" transform="rotate(0.0 32 32)" class="lotus-petal" /><path d="M 32 32 C 27.47 27.36, 28.83 23.25, 32 21.70 C 35.17 23.25, 36.53 27.36, 32 32 Z" transform="rotate(45.0 32 32)" class="lotus-petal" /><path d="M 32 32 C 27.47 27.36, 28.83 23.25, 32 21.70 C 35.17 23.25, 36.53 27.36, 32 32 Z" transform="rotate(90.0 32 32)" class="lotus-petal" /><path d="M 32 32 C 27.47 27.36, 28.83 23.25, 32 21.70 C 35.17 23.25, 36.53 27.36, 32 32 Z" transform="rotate(135.0 32 32)" class="lotus-petal" /><path d="M 32 32 C 27.47 27.36, 28.83 23.25, 32 21.70 C 35.17 23.25, 36.53 27.36, 32 32 Z" transform="rotate(180.0 32 32)" class="lotus-petal" /><path d="M 32 32 C 27.47 27.36, 28.83 23.25, 32 21.70 C 35.17 23.25, 36.53 27.36, 32 32 Z" transform="rotate(225.0 32 32)" class="lotus-petal" /><path d="M 32 32 C 27.47 27.36, 28.83 23.25, 32 21.70 C 35.17 23.25, 36.53 27.36, 32 32 Z" transform="rotate(270.0 32 32)" class="lotus-petal" /><path d="M 32 32 C 27.47 27.36, 28.83 23.25, 32 21.70 C 35.17 23.25, 36.53 27.36, 32 32 Z" transform="rotate(315.0 32 32)" class="lotus-petal" /></g>
-  <g class="lotus-core">
-    <circle cx="32" cy="32" r="6.4" fill="url(#lotusCoreGrad)" stroke="#fef08a" stroke-width="0.9" />
-    <circle cx="39.02" cy="34.91" r="0.85" class="lotus-stamen" /><circle cx="34.91" cy="39.02" r="0.85" class="lotus-stamen" /><circle cx="29.09" cy="39.02" r="0.85" class="lotus-stamen" /><circle cx="24.98" cy="34.91" r="0.85" class="lotus-stamen" /><circle cx="24.98" cy="29.09" r="0.85" class="lotus-stamen" /><circle cx="29.09" cy="24.98" r="0.85" class="lotus-stamen" /><circle cx="34.91" cy="24.98" r="0.85" class="lotus-stamen" /><circle cx="39.02" cy="29.09" r="0.85" class="lotus-stamen" />
-    <circle cx="32" cy="32" r="1.8" fill="#ffffff" filter="url(#lotusGlowFilter)" />
+
+  <!-- Ambient Living Golden Core Halo -->
+  <circle cx="50" cy="72" r="15" fill="url(#lotusStamenRadial)" class="lotus-halo" filter="url(#lotusStamenGlow)" />
+
+  <!-- Breathing Wrapper for Idle Bud State -->
+  <g class="lotus-breathe-wrap">
+    <!-- Sacred Lotus Petal Cluster (Origin Pivot at 50, 72) -->
+    <g class="lotus-stage" transform="translate(50, 72)">
+      <!-- Outer Left: Sunbeam Golden Yellow -->
+      <path class="lotus-petal p-yellow" fill="#FACC15" d="M 0 0 C -12.5 -13, -13.5 -35, 0 -48 C 13.5 -35, 12.5 -13, 0 0 Z" />
+      <!-- Outer Right: Fresh Spring Green -->
+      <path class="lotus-petal p-green"  fill="#4ADE80" d="M 0 0 C -12.5 -13, -13.5 -35, 0 -48 C 13.5 -35, 12.5 -13, 0 0 Z" />
+      <!-- Mid Left: Warm Sunset Orange -->
+      <path class="lotus-petal p-orange" fill="#FB923C" d="M 0 0 C -14 -14, -14.5 -38, 0 -52 C 14.5 -38, 14 -14, 0 0 Z" />
+      <!-- Mid Right: Turquoise Aqua Cyan -->
+      <path class="lotus-petal p-cyan"   fill="#38BDF8" d="M 0 0 C -14 -14, -14.5 -38, 0 -52 C 14.5 -38, 14 -14, 0 0 Z" />
+      <!-- Inner Left: Radiant Rose Pink -->
+      <path class="lotus-petal p-pink"   fill="#F472B6" d="M 0 0 C -14.5 -15, -15 -41, 0 -56 C 15 -41, 14.5 -15, 0 0 Z" />
+      <!-- Inner Right: Sky Cerulean Blue -->
+      <path class="lotus-petal p-blue"   fill="#60A5FA" d="M 0 0 C -14.5 -15, -15 -41, 0 -56 C 15 -41, 14.5 -15, 0 0 Z" />
+      <!-- Center Crown: Sacred Royal Violet -->
+      <path class="lotus-petal p-violet" fill="#A855F7" d="M 0 0 C -15 -16, -15.5 -44, 0 -60 C 15.5 -44, 15 -16, 0 0 Z" />
+    </g>
   </g>
 </svg>
             </button>
