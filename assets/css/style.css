@@ -1997,18 +1997,23 @@ a {
 .gold-petal {
   transform-origin: 0px 0px;
   fill: url(#lotusGoldLuxeGrad);
-  stroke: #fef08a;
-  stroke-width: 0.6;
+  stroke: rgba(254, 240, 138, 0.45);
+  stroke-width: 0.45;
   stroke-linejoin: round;
+  mix-blend-mode: screen;
   transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease;
 }
 
-/* Resting angles for the 5-petal golden emblem */
-.gold-petal.gp-out-left  { transform: rotate(-60deg); }
-.gold-petal.gp-in-left   { transform: rotate(-30deg); }
-.gold-petal.gp-center    { transform: rotate(0deg);   }
-.gold-petal.gp-in-right  { transform: rotate(30deg);  }
-.gold-petal.gp-out-right { transform: rotate(60deg);  }
+/* Resting angles for the 9-petal multi-tiered golden lotus matching media_1794280147820_7bd1df67 */
+.gold-petal.gp-wing-left  { transform: rotate(-78deg); opacity: 0.68; }
+.gold-petal.gp-wing-right { transform: rotate(78deg);  opacity: 0.68; }
+.gold-petal.gp-out-left   { transform: rotate(-58deg); opacity: 0.74; }
+.gold-petal.gp-out-right  { transform: rotate(58deg);  opacity: 0.74; }
+.gold-petal.gp-mid-left   { transform: rotate(-38deg); opacity: 0.80; }
+.gold-petal.gp-mid-right  { transform: rotate(38deg);  opacity: 0.80; }
+.gold-petal.gp-in-left    { transform: rotate(-19deg); opacity: 0.86; }
+.gold-petal.gp-in-right   { transform: rotate(19deg);  opacity: 0.86; }
+.gold-petal.gp-center     { transform: rotate(0deg);   opacity: 0.92; }
 
 /* PHASE 1 ON HOVER/CLICK: Golden Petals contract inward into tight bud ("menguncup lagi") */
 .top-scholarly-cluster:hover .gold-petal,
@@ -2016,7 +2021,7 @@ a {
 .top-scholarly-cluster:has(.top-scholarly-links.is-open) .gold-petal,
 .lotus-palace-btn:hover .gold-petal,
 .lotus-palace-btn.is-active .gold-petal {
-  transform: rotate(0deg) scale(0.62, 0.90);
+  transform: rotate(0deg) scale(0.55, 0.88);
   opacity: 0;
 }
 

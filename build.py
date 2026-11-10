@@ -24,12 +24,12 @@ def load_json(filename):
 def render_lotus_symbol_svg():
     return '''<svg class="lotus-svg lotus-hybrid-svg" width="24" height="24" viewBox="0 0 100 86" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
-    <!-- Premium Metallic Gold Luxury Gradient -->
-    <linearGradient id="lotusGoldLuxeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
-      <stop offset="25%" stop-color="#fef08a" stop-opacity="0.95" />
-      <stop offset="60%" stop-color="#d4af37" stop-opacity="0.90" />
-      <stop offset="100%" stop-color="#b45309" stop-opacity="0.80" />
+    <!-- Premium Multi-Tiered Golden Lotus Gradient matching user reference -->
+    <linearGradient id="lotusGoldLuxeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fffceb" stop-opacity="0.95" />
+      <stop offset="25%" stop-color="#fae6a0" stop-opacity="0.88" />
+      <stop offset="65%" stop-color="#d4af37" stop-opacity="0.78" />
+      <stop offset="100%" stop-color="#854d0e" stop-opacity="0.92" />
     </linearGradient>
 
     <!-- Warm Volumetric Stamen Halo Gradient -->
@@ -49,13 +49,22 @@ def render_lotus_symbol_svg():
   <circle cx="50" cy="70" r="14" fill="url(#lotusStamenRadial)" class="lotus-halo" filter="url(#lotusGlowFilter)" />
 
   <g transform="translate(50, 70)">
-    <!-- LAYER 1: Default 5-Petal Premium Golden Lotus Emblem (Resting State with Breathing Shimmer) -->
+    <!-- LAYER 1: Default 9-Petal Multi-Tiered Translucent Golden Lotus (Resting State with Breathing Shimmer) -->
     <g class="lotus-gold-layer">
-      <path class="gold-petal gp-out-left"  d="M 0 0 C -4 -16, -7.5 -32, 0 -54 C 7.5 -32, 4 -16, 0 0 Z" />
-      <path class="gold-petal gp-out-right" d="M 0 0 C -4 -16, -7.5 -32, 0 -54 C 7.5 -32, 4 -16, 0 0 Z" />
-      <path class="gold-petal gp-in-left"   d="M 0 0 C -4 -16, -7.5 -32, 0 -54 C 7.5 -32, 4 -16, 0 0 Z" />
-      <path class="gold-petal gp-in-right"  d="M 0 0 C -4 -16, -7.5 -32, 0 -54 C 7.5 -32, 4 -16, 0 0 Z" />
-      <path class="gold-petal gp-center"    d="M 0 0 C -4 -16, -7.5 -32, 0 -54 C 7.5 -32, 4 -16, 0 0 Z" />
+      <!-- Far Outer Horizontal Bottom Wings (Cradle) -->
+      <path class="gold-petal gp-wing-left"  d="M 0 0 C -9 -14, -13 -32, 0 -48 C 13 -32, 9 -14, 0 0 Z" />
+      <path class="gold-petal gp-wing-right" d="M 0 0 C -9 -14, -13 -32, 0 -48 C 13 -32, 9 -14, 0 0 Z" />
+      <!-- Outer Mid Tier -->
+      <path class="gold-petal gp-out-left"   d="M 0 0 C -10 -15, -14 -35, 0 -51 C 14 -35, 10 -15, 0 0 Z" />
+      <path class="gold-petal gp-out-right"  d="M 0 0 C -10 -15, -14 -35, 0 -51 C 14 -35, 10 -15, 0 0 Z" />
+      <!-- Mid Tier -->
+      <path class="gold-petal gp-mid-left"   d="M 0 0 C -11 -16, -14.5 -38, 0 -54 C 14.5 -38, 11 -16, 0 0 Z" />
+      <path class="gold-petal gp-mid-right"  d="M 0 0 C -11 -16, -14.5 -38, 0 -54 C 14.5 -38, 11 -16, 0 0 Z" />
+      <!-- Inner Pair -->
+      <path class="gold-petal gp-in-left"    d="M 0 0 C -10.5 -16, -13.5 -38, 0 -53 C 13.5 -38, 10.5 -16, 0 0 Z" />
+      <path class="gold-petal gp-in-right"   d="M 0 0 C -10.5 -16, -13.5 -38, 0 -53 C 13.5 -38, 10.5 -16, 0 0 Z" />
+      <!-- Center Apex Petal (Tallest) -->
+      <path class="gold-petal gp-center"     d="M 0 0 C -10.5 -17, -13.5 -40, 0 -56 C 13.5 -40, 10.5 -17, 0 0 Z" />
     </g>
 
     <!-- LAYER 2: Sacred 7-Petal Rainbow Chakra Blossom (Awakens upon Hover/Click from Bud to Full Bloom) -->

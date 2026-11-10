@@ -302,6 +302,18 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794280619997",
+      "timestamp": "2026-11-10T03:16:59.997Z",
+      "path": "/",
+      "title": "Zaid Amin, Ph.D.",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
       "id": "tr-1794280033714",
       "timestamp": "2026-11-10T03:07:13.714Z",
       "path": "/",
@@ -1488,23 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Internal Navigation"
-    },
-    {
-      "id": "tr-1794041977719",
-      "timestamp": "2026-11-07T08:59:37.719Z",
-      "path": "/",
-      "title": "Dr. Zaid Amin | Das Sein, Das Sollen | zaidamin.org",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-10T11:07:16.444964",
+  "updated_at": "2026-11-10T11:17:00.141539",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
