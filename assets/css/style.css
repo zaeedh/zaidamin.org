@@ -167,7 +167,7 @@ a {
 
 
 /* ==========================================================================
-   2. CLEAN UNOBSTRUCTED LIGHTHOUSE STORM BANNER
+   2. CLEAN UNOBSTRUCTED LIGHTHOUSE STORM BANNER & RESPONSIVE DEVICE VISIBILITY
    ========================================================================== */
 .lighthouse-banner-frame {
   position: relative;
@@ -186,8 +186,36 @@ a {
   transform: translateZ(0);
 }
 
+/* Master disable */
+.lighthouse-banner-frame.storm-banner-disabled {
+  display: none !important;
+}
+
+/* Hidden for Mobile and Tablet view (Requested: Desktop only visible) */
+@media (max-width: 1024px) {
+  .lighthouse-banner-frame.storm-banner-hide-mobile-tablet,
+  .lighthouse-banner-frame[data-visibility="desktop_only"] {
+    display: none !important;
+  }
+}
+
+/* Hidden for Mobile only */
+@media (max-width: 768px) {
+  .lighthouse-banner-frame.storm-banner-hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Hidden for Desktop only */
+@media (min-width: 1025px) {
+  .lighthouse-banner-frame.storm-banner-hide-desktop {
+    display: none !important;
+  }
+}
+
 .lighthouse-banner-frame picture,
-.lighthouse-banner-frame #rain-canvas {
+.lighthouse-banner-frame #rain-canvas,
+.lighthouse-banner-frame .lighthouse-bg-video {
   border-radius: 16px;
 }
 
@@ -205,6 +233,19 @@ a {
   border: none !important;
   outline: none !important;
   filter: saturate(1.38) contrast(1.08) brightness(1.02);
+}
+
+.lighthouse-bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  border: none !important;
+  outline: none !important;
+  z-index: 1;
 }
 
 #rain-canvas {

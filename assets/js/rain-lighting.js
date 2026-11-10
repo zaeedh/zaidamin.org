@@ -855,9 +855,12 @@
 
   function resize() {
     const parent = canvas.parentElement;
-    width = canvas.width = parent.clientWidth;
-    height = canvas.height = parent.clientHeight;
-    initStormAtmosphere();
+    if (!parent) return;
+    width = canvas.width = parent.clientWidth || 0;
+    height = canvas.height = parent.clientHeight || 0;
+    if (width > 0 && height > 0) {
+      initStormAtmosphere();
+    }
   }
 
   window.addEventListener('resize', resize);
@@ -866,6 +869,12 @@
   // 10. MAIN ANIMATION & RENDERING LOOP
   // ==========================================================================
   function render() {
+    // Gracefully skip rendering when canvas or parent is hidden (e.g. on mobile/tablet or disabled)
+    if (width === 0 || height === 0 || canvas.offsetParent === null) {
+      requestAnimationFrame(render);
+      return;
+    }
+
     ctx.clearRect(0, 0, width, height);
     simTime += 0.020;
 

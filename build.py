@@ -365,6 +365,72 @@ def get_page_header(active_page="home"):
       <polygon points="12,2 20.66,17 3.34,17" />
       <polygon points="12,22 3.34,7 20.66,7" />
     </svg>'''
+
+    # Option 1 Storm Banner Configuration (CMS Managed & Device Responsive)
+    storm_cfg = profile.get("storm_banner", {})
+    storm_enabled = storm_cfg.get("enabled", True)
+    vis_mode = storm_cfg.get("visibility_mode", "desktop_only")
+    hide_mobile = storm_cfg.get("hide_on_mobile", True)
+    hide_tablet = storm_cfg.get("hide_on_tablet", True)
+    hide_desktop = storm_cfg.get("hide_on_desktop", False)
+
+    vis_classes = []
+    if not storm_enabled or vis_mode == "hidden":
+        vis_classes.append("storm-banner-disabled")
+    elif vis_mode == "desktop_only" or (hide_mobile and hide_tablet and not hide_desktop):
+        vis_classes.append("storm-banner-hide-mobile-tablet")
+    elif hide_mobile and not hide_tablet and not hide_desktop:
+        vis_classes.append("storm-banner-hide-mobile")
+    elif hide_desktop and not hide_mobile and not hide_tablet:
+        vis_classes.append("storm-banner-hide-desktop")
+
+    media_type = storm_cfg.get("media_type", "image")
+    img_url = storm_cfg.get("image_url", "assets/images/lighthouse-banner.webp")
+    img_fallback = storm_cfg.get("image_fallback", "assets/images/lighthouse-banner.jpg")
+    img_alt = storm_cfg.get("image_alt", "Lighthouse Storm over Ocean")
+    vid_url = storm_cfg.get("video_url", "")
+    vid_poster = storm_cfg.get("video_fallback_poster") or img_url
+    vid_auto = "autoplay" if storm_cfg.get("video_autoplay", True) else ""
+    vid_loop = "loop" if storm_cfg.get("video_loop", True) else ""
+    vid_muted = "muted" if storm_cfg.get("video_muted", True) else ""
+
+    if media_type == "video" and vid_url:
+        media_html = f'''<video class="lighthouse-bg-video" {vid_auto} {vid_loop} {vid_muted} playsinline poster="{vid_poster}">
+        <source src="{vid_url}" type="video/mp4">
+        <picture>
+          <source srcset="{img_url}" type="image/webp">
+          <img src="{img_fallback}" class="lighthouse-bg-img" alt="{img_alt}" width="2048" height="790">
+        </picture>
+      </video>'''
+    else:
+        media_html = f'''<picture>
+        <source srcset="{img_url}" type="image/webp">
+        <img src="{img_fallback}" class="lighthouse-bg-img" alt="{img_alt}" width="2048" height="790">
+      </picture>'''
+
+    rain_canvas_html = '<canvas id="rain-canvas"></canvas>' if storm_cfg.get("enable_rain_effect", True) else ''
+
+    quote_html = ''
+    if storm_cfg.get("show_quote", True):
+        q_text = storm_cfg.get("quote_text", "If all the trees on earth were pens and the ocean were ink, refilled by seven other oceans, the Words of Allah would not be exhausted. Surely Allah is Almighty, All-Wise.")
+        q_cite = storm_cfg.get("quote_cite", "Qur’an 31:27")
+        quote_html = f'''<div class="storm-quote-overlay">
+        <p class="storm-quote-text font-serif">
+          &ldquo;{q_text}&rdquo;
+        </p>
+        <cite class="storm-quote-cite font-cinzel">
+          <span class="storm-cite-line"></span>
+          <span class="storm-cite-label">{q_cite}</span>
+        </cite>
+      </div>'''
+
+    storm_banner_rendered = f'''<!-- 2. Clean, Unobstructed Lighthouse Storm Banner (Option 1 Storm - CMS Managed) -->
+    <section class="lighthouse-banner-frame {' '.join(vis_classes)}" data-visibility="{vis_mode}">
+      {media_html}
+      {rain_canvas_html}
+      {quote_html}
+    </section>'''
+
     return f"""
   <div class="site-wrapper">
     
@@ -398,25 +464,7 @@ def get_page_header(active_page="home"):
       </div>
     </header>
 
-<!-- 2. Clean, Unobstructed Lighthouse Storm Banner (Option 1 Storm - Active on Every Page) -->
-    <section class="lighthouse-banner-frame">
-      <picture>
-        <source srcset="assets/images/lighthouse-banner.webp" type="image/webp">
-        <img src="assets/images/lighthouse-banner.jpg" class="lighthouse-bg-img" alt="Lighthouse Storm over Ocean" width="2048" height="790">
-      </picture>
-      <canvas id="rain-canvas"></canvas>
-
-      <!-- Qur'an Quotation Overlay (Followed Red Arrow: Blended, Soft, Elegant & Premium over the Ocean) -->
-      <div class="storm-quote-overlay">
-        <p class="storm-quote-text font-serif">
-          &ldquo;If all the trees on earth were pens and the ocean were ink, refilled by seven other oceans, the Words of Allah would not be exhausted. Surely Allah is Almighty, All-Wise.&rdquo;
-        </p>
-        <cite class="storm-quote-cite font-cinzel">
-          <span class="storm-cite-line"></span>
-          <span class="storm-cite-label">Qur&rsquo;an 31:27</span>
-        </cite>
-      </div>
-    </section>
+    {storm_banner_rendered}
 
     <!-- Featured Content Player Audio (Atmospheric Soundtrack - Soft Transparent Second-Gaze) -->
     <div class="royal-vanish-container" id="royal-audio-container">

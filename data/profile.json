@@ -4,8 +4,8 @@
     "role_line": "Senior Lecturer • Faculty of Data Science & IT (FDSIT)",
     "institution": "INTI International University, Malaysia",
     "research_fields": "Digital Ethics • Behavior & Social Computing • HCI",
-    "photo_front": "assets/images/portraits/portrait-1.webp",
-    "photo_front_fallback": "assets/images/portraits/portrait-1.png",
+    "photo_front": "assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
+    "photo_front_fallback": "assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
     "photo_front_alt": "Zaid Amin, Ph.D. — Academic Portrait",
     "photo_back": "assets/images/portraits/portrait-2.webp",
     "photo_back_fallback": "assets/images/portraits/portrait-2.png",
@@ -53,6 +53,55 @@
         "url": "assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
         "fallback": "assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
         "alt": "Dr. Zaid Amin, Ph.D. — Portrait 5"
+      }
+    ]
+  },
+  "storm_banner": {
+    "enabled": true,
+    "visibility_mode": "desktop_only",
+    "hide_on_mobile": true,
+    "hide_on_tablet": true,
+    "hide_on_desktop": false,
+    "media_type": "image",
+    "image_url": "assets/images/lighthouse-banner.webp",
+    "image_fallback": "assets/images/lighthouse-banner.jpg",
+    "image_alt": "Lighthouse Storm over Ocean",
+    "video_url": "",
+    "video_fallback_poster": "assets/images/lighthouse-banner.webp",
+    "video_autoplay": true,
+    "video_loop": true,
+    "video_muted": true,
+    "enable_rain_effect": true,
+    "show_quote": true,
+    "quote_text": "If all the trees on earth were pens and the ocean were ink, refilled by seven other oceans, the Words of Allah would not be exhausted. Surely Allah is Almighty, All-Wise.",
+    "quote_cite": "Qur’an 31:27",
+    "media_library": [
+      {
+        "id": "banner-lighthouse-storm-webp",
+        "type": "image",
+        "title": "Lighthouse Oceanic Storm (WebP)",
+        "subtitle": "Default Cinematic Living Storm (Optimized)",
+        "url": "assets/images/lighthouse-banner.webp",
+        "fallback": "assets/images/lighthouse-banner.jpg",
+        "poster": "assets/images/lighthouse-banner.webp"
+      },
+      {
+        "id": "banner-lighthouse-storm-enhanced",
+        "type": "image",
+        "title": "Lighthouse Enhanced Deep Storm",
+        "subtitle": "High Atmospheric Contrast & Sharpness",
+        "url": "assets/images/lighthouse-banner-enhanced.webp",
+        "fallback": "assets/images/lighthouse-banner-enhanced.jpg",
+        "poster": "assets/images/lighthouse-banner-enhanced.webp"
+      },
+      {
+        "id": "banner-lighthouse-storm-jpg",
+        "type": "image",
+        "title": "Lighthouse Classic Master (JPG)",
+        "subtitle": "Direct True Color Hi-Res Ocean Storm",
+        "url": "assets/images/lighthouse-banner.jpg",
+        "fallback": "assets/images/lighthouse-banner.jpg",
+        "poster": "assets/images/lighthouse-banner.jpg"
       }
     ]
   },
