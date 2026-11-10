@@ -21,6 +21,9 @@ def load_json(filename):
     with open(DATA_DIR / filename, "r", encoding="utf-8") as f:
         return json.load(f)
 
+# ==============================================================================
+# SACRED LOTUS SYMBOL SVG (PRISTINE GOLDEN LOTUS EMBLEM)
+# ==============================================================================
 def render_lotus_symbol_svg():
     return '''<svg class="lotus-svg lotus-hybrid-svg" width="44" height="38" viewBox="0 0 100 86" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
