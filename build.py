@@ -9,6 +9,7 @@ import os
 import re
 import shutil
 import html
+import math
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -19,6 +20,77 @@ ASSETS_DIR = BASE_DIR / "assets"
 def load_json(filename):
     with open(DATA_DIR / filename, "r", encoding="utf-8") as f:
         return json.load(f)
+
+def render_lotus_symbol_svg():
+    cx, cy = 32, 32
+    r1, r2, r3, r4 = 27.0, 16.7, 10.3, 6.4
+
+    def petal_path(r, width_factor=0.38):
+        w = r * width_factor
+        tip_y = cy - r
+        cp1_x, cp1_y = cx - w, cy - r * 0.45
+        cp2_x, cp2_y = cx - w * 0.7, tip_y + r * 0.15
+        cp3_x, cp3_y = cx + w * 0.7, tip_y + r * 0.15
+        cp4_x, cp4_y = cx + w, cy - r * 0.45
+        return f"M {cx} {cy} C {cp1_x:.2f} {cp1_y:.2f}, {cp2_x:.2f} {cp2_y:.2f}, {cx} {tip_y:.2f} C {cp3_x:.2f} {cp3_y:.2f}, {cp4_x:.2f} {cp4_y:.2f}, {cx} {cy} Z"
+
+    def render_tier(r, width_factor, count, offset_deg, tier_class):
+        base_d = petal_path(r, width_factor)
+        petals = []
+        for i in range(count):
+            angle = offset_deg + (360.0 / count) * i
+            petals.append(f'<path d="{base_d}" transform="rotate({angle:.1f} {cx} {cy})" class="lotus-petal" />')
+        petals_str = "".join(petals)
+        return f'<g class="lotus-tier {tier_class}">{petals_str}</g>'
+
+    outer_tier = render_tier(r1, 0.36, 8, 0, "lotus-tier-outer")
+    mid_tier = render_tier(r2, 0.40, 8, 22.5, "lotus-tier-mid")
+    inner_tier = render_tier(r3, 0.44, 8, 0, "lotus-tier-inner")
+
+    stamens = []
+    stamen_r = 7.6
+    for i in range(8):
+        a = math.radians(22.5 + i * 45)
+        sx = cx + stamen_r * math.cos(a)
+        sy = cy + stamen_r * math.sin(a)
+        stamens.append(f'<circle cx="{sx:.2f}" cy="{sy:.2f}" r="0.85" class="lotus-stamen" />')
+    stamens_str = "".join(stamens)
+
+    return f'''<svg class="lotus-svg" width="22" height="22" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="lotusGoldPetalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffbeb" stop-opacity="0.95" />
+      <stop offset="35%" stop-color="#fde047" stop-opacity="0.80" />
+      <stop offset="70%" stop-color="#d4af37" stop-opacity="0.60" />
+      <stop offset="100%" stop-color="#b45309" stop-opacity="0.35" />
+    </linearGradient>
+    <radialGradient id="lotusCoreGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="30%" stop-color="#fef08a" stop-opacity="0.95" />
+      <stop offset="65%" stop-color="#d4af37" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#b45309" stop-opacity="0.60" />
+    </radialGradient>
+    <radialGradient id="lotusVolumetricHalo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(254, 240, 138, 0.65)" />
+      <stop offset="45%" stop-color="rgba(212, 175, 55, 0.35)" />
+      <stop offset="80%" stop-color="rgba(245, 158, 11, 0.12)" />
+      <stop offset="100%" stop-color="rgba(212, 175, 55, 0)" />
+    </radialGradient>
+    <filter id="lotusGlowFilter" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="1.8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <circle cx="{cx}" cy="{cy}" r="28" fill="url(#lotusVolumetricHalo)" class="lotus-volumetric-halo" />
+  {outer_tier}
+  {mid_tier}
+  {inner_tier}
+  <g class="lotus-core">
+    <circle cx="{cx}" cy="{cy}" r="{r4:.1f}" fill="url(#lotusCoreGrad)" stroke="#fef08a" stroke-width="0.9" />
+    {stamens_str}
+    <circle cx="{cx}" cy="{cy}" r="1.8" fill="#ffffff" filter="url(#lotusGlowFilter)" />
+  </g>
+</svg>'''
 
 def render_svg_icon(name):
     icons = {
@@ -445,18 +517,15 @@ def get_page_header(active_page="home"):
         <div class="epigraph-right-cluster">
           {render_subpage_nav(active_page) if active_page != 'home' else ''}
 
-          <!-- Top-Right Star of David Button & Side-Expanding Scholarly Profiles -->
-          <div class="top-scholarly-cluster">
+          <!-- Top-Right Sacred Blooming Lotus Aerial Palace Button & Side-Expanding Scholarly Profiles -->
+          <div class="top-scholarly-cluster" id="top-scholarly-cluster">
             <div class="top-scholarly-links" id="top-scholarly-links" aria-hidden="true">
               {scholarly_links_rendered}
             </div>
 
-            <!-- Pure Rotating Star of David Button (No circle boundary!) -->
-            <button class="david-star-pure-btn" id="star-toggle-btn" aria-label="Toggle Scholarly Profiles" title="Scholarly Profiles & Direct Identifiers" aria-expanded="false">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" class="david-star-svg">
-                <polygon points="12,2 20.66,17 3.34,17" />
-                <polygon points="12,22 3.34,7 20.66,7" />
-              </svg>
+            <!-- Sacred Multi-Tiered Glowing Lotus Aerial Palace Button -->
+            <button class="lotus-palace-btn david-star-pure-btn" id="lotus-toggle-btn" aria-label="Toggle Scholarly Profiles & Direct Identifiers" title="Scholarly Profiles & Direct Identifiers (Sacred Lotus)" aria-expanded="false">
+              {render_lotus_symbol_svg()}
             </button>
           </div>
         </div>
@@ -4393,8 +4462,7 @@ def generate_cv_page():
         <div class="cv-section-title-wrap">
           <h2 class="cv-section-title">Keynotes, Media &amp; Invited Talks</h2>
           <div style="display:inline-flex; align-items:center; gap:10px;">
-            <span class="cv-section-count">{len(cv['invited_talks_and_media'])} Keynotes</span>
-            <a href="/talks" class="pub-pill-btn primary" style="font-size:0.72rem; padding:4px 12px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">Full Interactive Gallery &nearr;</a>
+            <span class="cv-section-count">{len(cv['invited_talks_and_media'])} Keynotes &amp; Invited Talks</span>
           </div>
         </div>
     """
@@ -4456,9 +4524,7 @@ def generate_cv_page():
         <div class="cv-section-tag">06 / SCHOLARLY RIGOR</div>
         <div class="cv-section-title-wrap">
           <h2 class="cv-section-title">Peer Review &amp; Editorial Board Contributions</h2>
-          <a href="{cv['peer_review_and_editorial']['comprehensive_link']}" target="_blank" rel="noopener" class="cv-section-count" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
-            {render_svg_icon('external')} Publons / WoS Record
-          </a>
+          <span class="cv-section-count">Verified Reviewer &amp; Editorial Board</span>
         </div>
         <p style="font-size: 0.92rem; color: var(--text-body); margin-bottom: 18px; line-height: 1.6;">
           {cv['peer_review_and_editorial']['summary']}
@@ -4547,9 +4613,7 @@ def generate_cv_page():
         <div class="cv-section-tag">08 / SCHOLARLY AUTHORSHIP</div>
         <div class="cv-section-title-wrap">
           <h2 class="cv-section-title">Core Research Domains, Book &amp; Scholarly Output</h2>
-          <a href="/publications" class="cv-section-count" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
-            View All {len(publications)} Works &rarr;
-          </a>
+          <span class="cv-section-count">{len(publications)} Scholarly Works</span>
         </div>
 
         <!-- Book Card -->
@@ -4589,9 +4653,7 @@ def generate_cv_page():
             <div style="font-weight: 800; color: #ffffff; font-size: 1.05rem;">Complete {len(publications)}-Work Peer-Reviewed Repository</div>
             <div style="font-size: 0.85rem; color: var(--text-body); margin-top: 2px;">Comprehensive catalog of Q1 IEEE Access, Springer LNCS, Scopus-indexed conference papers, and preprints.</div>
           </div>
-          <a href="/publications" class="pub-btn" style="text-decoration:none; padding: 9px 18px; font-size: 0.82rem; font-weight: 800; background: var(--brand-blue); color: #021220; border-radius: 999px;">
-            Explore Publications &rarr;
-          </a>
+          <span class="cv-badge-gold" style="font-size: 0.82rem; padding: 6px 14px; font-weight: 700;">Peer-Reviewed Repository</span>
         </div>
       </section>
 

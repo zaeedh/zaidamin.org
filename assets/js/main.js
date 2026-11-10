@@ -282,10 +282,10 @@ function filterHomePackages(query) {
 }
 
 /* --------------------------------------------------------------------------
-   Scholarly Profiles Side Expansion (Star of David Button Interaction)
+   Scholarly Profiles Side Expansion (Sacred Blooming Lotus Button Interaction)
    -------------------------------------------------------------------------- */
 function initScholarlyDrawer() {
-  const trigger = document.getElementById('star-toggle-btn');
+  const trigger = document.getElementById('lotus-toggle-btn') || document.getElementById('star-toggle-btn');
   const linksContainer = document.getElementById('top-scholarly-links');
   const mainNav = document.getElementById('top-main-nav');
   if (!trigger || !linksContainer) return;

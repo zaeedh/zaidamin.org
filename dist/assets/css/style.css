@@ -1929,7 +1929,15 @@ a {
   overflow: visible;
 }
 
-/* Pure Rotating Star of David Button - NO circle boundary! */
+/* ==========================================================================
+   SACRED MULTI-TIERED GLOWING LOTUS AERIAL PALACE
+   - Mythical aerial palace with rotating, unfurling multi-tiered petals
+   - Warm volumetric lighting & golden radiance
+   - Butter-smooth hover interaction: petals unfurl and scholarly links open
+   ========================================================================== */
+
+/* Button Container (Replaces Star of David button) */
+.lotus-palace-btn,
 .david-star-pure-btn {
   display: inline-flex;
   align-items: center;
@@ -1938,20 +1946,169 @@ a {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
-  color: #d4af37; /* Premium Imperial Gold */
+  color: #d4af37;
   cursor: pointer;
-  padding: 3px;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+  padding: 4px;
+  position: relative;
   flex-shrink: 0;
   user-select: none;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  z-index: 60;
+  transform-origin: center center;
 }
 
-.david-star-pure-btn:hover,
-.david-star-pure-btn.is-active {
-  transform: scale(1.12);
-  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.85));
+.lotus-svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+  overflow: visible;
+  transform-origin: 32px 32px;
+  filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.45));
+  transition: filter 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Petals styling */
+.lotus-petal {
+  fill: url(#lotusGoldPetalGrad);
+  stroke: #fef08a;
+  stroke-width: 0.65;
+  stroke-linejoin: round;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, stroke-width 0.4s ease;
+}
+
+.lotus-stamen {
+  fill: #fffbeb;
+  stroke: #d4af37;
+  stroke-width: 0.4;
+}
+
+/* Volumetric Golden Halo Backdrop */
+.lotus-volumetric-halo {
+  opacity: 0.45;
+  transform-origin: 32px 32px;
+  animation: lotusHaloBreathe 6s ease-in-out infinite alternate;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+@keyframes lotusHaloBreathe {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 0.70;
+  }
+}
+
+/* Multi-Tiered Aerial Palace Rotations */
+/* Tier 1 (Outer Petals): Majestic clockwise rotation */
+.lotus-tier-outer {
+  transform-origin: 32px 32px;
+  animation: lotusRotateClockwise 48s linear infinite;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Tier 2 (Middle Petals): Celestial counter-rotation */
+.lotus-tier-mid {
+  transform-origin: 32px 32px;
+  animation: lotusRotateCounter 32s linear infinite;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Tier 3 (Inner Coronet): Concentric clockwise rotation */
+.lotus-tier-inner {
+  transform-origin: 32px 32px;
+  animation: lotusRotateClockwise 24s linear infinite;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Tier 4 (Core Heart): Subtle radiant solar pulsation */
+.lotus-core {
+  transform-origin: 32px 32px;
+  animation: lotusCorePulse 4s ease-in-out infinite alternate;
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+@keyframes lotusRotateClockwise {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes lotusRotateCounter {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes lotusCorePulse {
+  0% {
+    transform: scale(0.94);
+    filter: drop-shadow(0 0 2px rgba(254, 240, 138, 0.6));
+  }
+  100% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 8px rgba(254, 240, 138, 0.95)) drop-shadow(0 0 14px rgba(212, 175, 55, 0.8));
+  }
+}
+
+/* ==========================================================================
+   HOVER & ACTIVE BLOOMING INTERACTION (UNFURLING LIKE A SACRED AERIAL PALACE)
+   ========================================================================== */
+.lotus-palace-btn:hover,
+.lotus-palace-btn.is-active,
+.top-scholarly-cluster:hover .lotus-palace-btn,
+.top-scholarly-cluster:has(.top-scholarly-links:hover) .lotus-palace-btn,
+.top-scholarly-cluster:has(.top-scholarly-links.is-open) .lotus-palace-btn {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 12px rgba(254, 240, 138, 0.95)) drop-shadow(0 0 22px rgba(212, 175, 55, 0.75));
+}
+
+/* Volumetric halo blooms on hover */
+.lotus-palace-btn:hover .lotus-volumetric-halo,
+.lotus-palace-btn.is-active .lotus-volumetric-halo,
+.top-scholarly-cluster:hover .lotus-volumetric-halo {
+  opacity: 1;
+  transform: scale(1.35);
+}
+
+/* Petals unfurl / bloom open outward smoothly on hover! */
+.lotus-palace-btn:hover .lotus-tier-outer,
+.lotus-palace-btn.is-active .lotus-tier-outer,
+.top-scholarly-cluster:hover .lotus-tier-outer {
+  animation-duration: 16s;
+  transform: scale(1.08);
+}
+
+.lotus-palace-btn:hover .lotus-tier-mid,
+.lotus-palace-btn.is-active .lotus-tier-mid,
+.top-scholarly-cluster:hover .lotus-tier-mid {
+  animation-duration: 12s;
+  transform: scale(1.14);
+}
+
+.lotus-palace-btn:hover .lotus-tier-inner,
+.lotus-palace-btn.is-active .lotus-tier-inner,
+.top-scholarly-cluster:hover .lotus-tier-inner {
+  animation-duration: 9s;
+  transform: scale(1.22);
+}
+
+.lotus-palace-btn:hover .lotus-petal,
+.lotus-palace-btn.is-active .lotus-petal,
+.top-scholarly-cluster:hover .lotus-petal {
+  stroke-width: 0.85;
+  stroke: #ffffff;
+  filter: drop-shadow(0 0 4px rgba(254, 240, 138, 0.8));
+}
+
+.lotus-palace-btn:hover .lotus-core,
+.lotus-palace-btn.is-active .lotus-core,
+.top-scholarly-cluster:hover .lotus-core {
+  transform: scale(1.20);
+  filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 16px rgba(254, 240, 138, 1));
+}
+
+/* Fallback Star of David styling for legacy selectors */
 .david-star-svg {
   display: block;
   width: 19px;
@@ -1962,27 +2119,16 @@ a {
 }
 
 .david-star-pure-btn:hover .david-star-svg {
-  animation-duration: 6s; /* Gently accelerates on hover */
+  animation-duration: 6s;
 }
 
 @keyframes starRotateBreathe {
-  0% {
-    transform: rotate(0deg);
-    opacity: 0.65;
-    filter: drop-shadow(0 0 3px rgba(212, 175, 55, 0.25));
-  }
-  50% {
-    opacity: 1;
-    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.80)) drop-shadow(0 0 14px rgba(34, 166, 200, 0.40));
-  }
-  100% {
-    transform: rotate(360deg);
-    opacity: 0.65;
-    filter: drop-shadow(0 0 3px rgba(212, 175, 55, 0.25));
-  }
+  0% { transform: rotate(0deg); opacity: 0.65; }
+  50% { transform: rotate(180deg); opacity: 1; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.80)); }
+  100% { transform: rotate(360deg); opacity: 0.65; }
 }
 
-/* Side-Expanding Links Container (Anchored to left of Star, Non-Displacing) */
+/* Side-Expanding Links Container (Anchored to left of Lotus, Non-Displacing) */
 .top-scholarly-links {
   position: absolute;
   right: 32px;
@@ -2002,13 +2148,17 @@ a {
   overflow: hidden;
   white-space: nowrap;
   pointer-events: none;
-  transition: max-width 0.38s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.26s ease,
-              transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 0.38s;
+  transition: max-width 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.28s ease,
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.42s;
   z-index: 50;
 }
 
+/* HOVER TRIGGERS ALL LINKS TO OPEN SMOOTHLY AND MAJESTICALLY */
+.top-scholarly-cluster:hover .top-scholarly-links,
+.top-scholarly-cluster:has(.lotus-palace-btn:hover) .top-scholarly-links,
+.top-scholarly-links:hover,
 .top-scholarly-links.is-open {
   max-width: 850px;
   opacity: 1;
