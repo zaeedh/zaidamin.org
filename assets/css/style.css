@@ -4430,12 +4430,7 @@ a {
    ========================================================================== */
 
 .top-scholarly-cluster {
-  perspective: 700px;
-}
-
-.lotus-palace-btn {
-  transform-style: preserve-3d;
-  backface-visibility: visible;
+  position: relative;
 }
 
 /* Base state for the soft transparent flash light */
@@ -4447,10 +4442,9 @@ a {
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-/* 3D Horizontal Spin on Button */
+/* Systematic Lotus Landing & Restart Bloom (Poised Planar Elegance - No 3D 360 Spin) */
 .lotus-palace-btn.lotus-landing-bloom {
-  animation: lotus3DHorizontalSpin 2.618s cubic-bezier(0.25, 1, 0.45, 1) forwards !important;
-  will-change: transform;
+  transform: none !important;
 }
 
 /* Soft Smooth Transparent Flash Light */
@@ -4546,23 +4540,7 @@ a {
    KEYFRAME DEFINITIONS (3D HORIZONTAL 360° SPIN & SYSTEMATIC BLOOM / BUD)
    ========================================================================== */
 
-@keyframes lotus3DHorizontalSpin {
-  0% {
-    transform: perspective(700px) rotateX(12deg) rotateY(0deg) scale(1);
-  }
-  25% {
-    transform: perspective(700px) rotateX(12deg) rotateY(90deg) scale(0.98);
-  }
-  50% {
-    transform: perspective(700px) rotateX(12deg) rotateY(180deg) scale(1.06);
-  }
-  75% {
-    transform: perspective(700px) rotateX(12deg) rotateY(270deg) scale(0.98);
-  }
-  100% {
-    transform: perspective(700px) rotateX(0deg) rotateY(360deg) scale(1);
-  }
-}
+/* 3D spin removed for serene planar poise */
 
 @keyframes lotusSoftFlashLight {
   0% {
@@ -5045,9 +5023,8 @@ a {
 
   .david-star-pure-btn {
 
-    width: 34px;
-
-    height: 31px;
+    width: 34.7px;
+    height: 31.6px;
 
   }
 
@@ -5057,9 +5034,8 @@ a {
 
   .lotus-rainbow-svg {
 
-    width: 32px;
-
-    height: 28px;
+    width: 32.6px;
+    height: 28.6px;
 
   }
 
