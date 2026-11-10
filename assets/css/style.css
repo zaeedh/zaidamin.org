@@ -1952,8 +1952,9 @@ a {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
+  filter: none !important;
   cursor: pointer;
-  padding: 2px;
+  padding: 1px;
   position: relative;
   flex-shrink: 0;
   user-select: none;
@@ -1966,54 +1967,42 @@ a {
 .lotus-hybrid-svg,
 .lotus-rainbow-svg {
   display: block;
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   overflow: visible;
+  filter: none;
   transition: filter 0.5s ease, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* --------------------------------------------------------------------------
-   LAYER 1: DEFAULT GOLDEN 5-PETAL EMBLEM (RESTING & INVITING "TERANG REDUP")
+   LAYER 1: DEFAULT 9-PETAL GOLDEN LOTUS (PURE CRISP VECTOR - NO BLURRY NOISE)
    -------------------------------------------------------------------------- */
-@keyframes lotusGoldLuster {
-  0%, 100% {
-    filter: drop-shadow(0 0 3px rgba(212, 175, 55, 0.5)) drop-shadow(0 0 6px rgba(254, 240, 138, 0.3));
-    opacity: 0.85;
-    transform: scale(1);
-  }
-  50% {
-    filter: drop-shadow(0 0 8px rgba(254, 240, 138, 0.95)) drop-shadow(0 0 14px rgba(212, 175, 55, 0.75));
-    opacity: 1;
-    transform: scale(1.04);
-  }
-}
-
 .lotus-gold-layer {
   transform-origin: 0px 0px;
-  animation: lotusGoldLuster 3.6s ease-in-out infinite;
+  opacity: 1;
+  filter: none !important;
   transition: opacity 0.35s ease;
 }
 
 .gold-petal {
   transform-origin: 0px 0px;
   fill: url(#lotusGoldLuxeGrad);
-  stroke: rgba(254, 240, 138, 0.45);
-  stroke-width: 0.45;
+  stroke: rgba(254, 240, 138, 0.50);
+  stroke-width: 0.5;
   stroke-linejoin: round;
-  mix-blend-mode: screen;
   transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease;
 }
 
-/* Resting angles for the 9-petal multi-tiered golden lotus matching media_1794280147820_7bd1df67 */
-.gold-petal.gp-wing-left  { transform: rotate(-78deg); opacity: 0.68; }
-.gold-petal.gp-wing-right { transform: rotate(78deg);  opacity: 0.68; }
-.gold-petal.gp-out-left   { transform: rotate(-58deg); opacity: 0.74; }
-.gold-petal.gp-out-right  { transform: rotate(58deg);  opacity: 0.74; }
-.gold-petal.gp-mid-left   { transform: rotate(-38deg); opacity: 0.80; }
-.gold-petal.gp-mid-right  { transform: rotate(38deg);  opacity: 0.80; }
-.gold-petal.gp-in-left    { transform: rotate(-19deg); opacity: 0.86; }
-.gold-petal.gp-in-right   { transform: rotate(19deg);  opacity: 0.86; }
-.gold-petal.gp-center     { transform: rotate(0deg);   opacity: 0.92; }
+/* Resting angles for the 9-petal multi-tiered golden lotus matching user reference */
+.gold-petal.gp-wing-left  { transform: rotate(-78deg); opacity: 0.75; }
+.gold-petal.gp-wing-right { transform: rotate(78deg);  opacity: 0.75; }
+.gold-petal.gp-out-left   { transform: rotate(-58deg); opacity: 0.82; }
+.gold-petal.gp-out-right  { transform: rotate(58deg);  opacity: 0.82; }
+.gold-petal.gp-mid-left   { transform: rotate(-38deg); opacity: 0.88; }
+.gold-petal.gp-mid-right  { transform: rotate(38deg);  opacity: 0.88; }
+.gold-petal.gp-in-left    { transform: rotate(-19deg); opacity: 0.94; }
+.gold-petal.gp-in-right   { transform: rotate(19deg);  opacity: 0.94; }
+.gold-petal.gp-center     { transform: rotate(0deg);   opacity: 1;    }
 
 /* PHASE 1 ON HOVER/CLICK: Golden Petals contract inward into tight bud ("menguncup lagi") */
 .top-scholarly-cluster:hover .gold-petal,
@@ -2136,11 +2125,12 @@ a {
   transition-delay: 0.10s;
 }
 
-/* Stamen Volumetric Core Halo */
+/* Stamen Volumetric Core Halo - zero at default for clean crisp vector, illuminates on hover/bloom */
 .lotus-halo {
-  opacity: 0.50;
+  opacity: 0;
+  pointer-events: none;
   transform-origin: 50px 70px;
-  transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .top-scholarly-cluster:hover .lotus-halo,
