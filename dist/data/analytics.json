@@ -302,6 +302,30 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794290702403",
+      "timestamp": "2026-11-10T06:05:02.403Z",
+      "path": "/",
+      "title": "Zaid Amin, Ph.D.",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1794290652694",
+      "timestamp": "2026-11-10T06:04:12.694Z",
+      "path": "/",
+      "title": "Zaid Amin, Ph.D.",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
       "id": "tr-1794288693164",
       "timestamp": "2026-11-10T05:31:33.164Z",
       "path": "/",
@@ -1476,35 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794050331864",
-      "timestamp": "2026-11-07T11:18:51.864Z",
-      "path": "/",
-      "title": "Dr. Zaid Amin",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794050328288",
-      "timestamp": "2026-11-07T11:18:48.288Z",
-      "path": "/cv",
-      "title": "Achievement & Curriculum Vitae",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-10T13:31:33.199714",
+  "updated_at": "2026-11-10T14:05:02.428134",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,

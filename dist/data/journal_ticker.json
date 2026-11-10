@@ -3,6 +3,11 @@
   "star_glyph": "✦",
   "autoplay": true,
   "interval_ms": 4800,
+  "enabled": true,
+  "visibility_mode": "desktop_only",
+  "hide_on_mobile": true,
+  "hide_on_tablet": true,
+  "hide_on_desktop": false,
   "items": [
     {
       "id": "ticker-smart-cities",

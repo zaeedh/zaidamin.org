@@ -213,6 +213,61 @@ a {
   }
 }
 
+/* ==========================================================================
+   RESPONSIVE DEVICE VISIBILITY: AUDIO PLAYER & JOURNAL TICKER
+   Default: Desktop Only (Hidden on Mobile & Tablet view)
+   ========================================================================== */
+
+/* 1. Atmospheric Audio Player Responsive Visibility */
+.royal-vanish-container.royal-audio-disabled,
+.royal-vanish-container[data-visibility="hidden"] {
+  display: none !important;
+}
+
+@media (max-width: 1024px) {
+  .royal-vanish-container.royal-audio-hide-mobile-tablet,
+  .royal-vanish-container[data-visibility="desktop_only"] {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .royal-vanish-container.royal-audio-hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .royal-vanish-container.royal-audio-hide-desktop {
+    display: none !important;
+  }
+}
+
+/* 2. Indexed Journals & Preprints Ticker Responsive Visibility */
+.journal-ticker-section.ticker-disabled,
+.journal-ticker-section[data-visibility="hidden"] {
+  display: none !important;
+}
+
+@media (max-width: 1024px) {
+  .journal-ticker-section.ticker-hide-mobile-tablet,
+  .journal-ticker-section[data-visibility="desktop_only"] {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .journal-ticker-section.ticker-hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .journal-ticker-section.ticker-hide-desktop {
+    display: none !important;
+  }
+}
+
 .lighthouse-banner-frame picture,
 .lighthouse-banner-frame #rain-canvas,
 .lighthouse-banner-frame .lighthouse-bg-video {
@@ -11810,6 +11865,19 @@ h1.cv-hero-name {
   align-items: center !important;
   justify-content: center !important;
   z-index: 15 !important;
+}
+
+@media (max-width: 1024px) {
+  .royal-vanish-container.royal-audio-hide-mobile-tablet,
+  .royal-vanish-container[data-visibility="desktop_only"] {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .royal-vanish-container.royal-audio-hide-mobile {
+    display: none !important;
+  }
 }
 
 /* 2. Unified Eyebrows (Minimalist Quiet Orientation) */

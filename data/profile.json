@@ -56,6 +56,17 @@
       }
     ]
   },
+  "audio_player": {
+    "enabled": true,
+    "visibility_mode": "desktop_only",
+    "hide_on_mobile": true,
+    "hide_on_tablet": true,
+    "hide_on_desktop": false,
+    "track_title": "Test Driving Toothless",
+    "track_artist": "John Powell",
+    "audio_url": "https://zaeedh.github.io/blog-zaidamin/Test%20Driving%20Toothless%20(from%20How%20to%20Train%20Your%20Dragon).mp3",
+    "preload": "none"
+  },
   "storm_banner": {
     "enabled": true,
     "visibility_mode": "desktop_only",
