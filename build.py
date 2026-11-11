@@ -9962,11 +9962,11 @@ def generate_article_reader_page():
               if (el.tagName === 'MARK' || el.classList.contains('callout-box') || el.classList.contains('art-highlight')) {
                 return;
               }
-              var bg = (el.style.backgroundColor || '').toLowerCase().replace(/\s+/g, '');
+              var bg = (el.style.backgroundColor || '').toLowerCase().replace(/\\s+/g, '');
               if (bg === '#fff' || bg === '#ffffff' || bg === 'white' || bg === 'rgb(255,255,255)' || bg === 'rgba(255,255,255,1)') {
                 el.style.backgroundColor = 'transparent';
               }
-              var bgGen = (el.style.background || '').toLowerCase().replace(/\s+/g, '');
+              var bgGen = (el.style.background || '').toLowerCase().replace(/\\s+/g, '');
               if (bgGen === '#fff' || bgGen === '#ffffff' || bgGen === 'white' || bgGen === 'rgb(255,255,255)' || bgGen === 'rgba(255,255,255,1)') {
                 el.style.background = 'transparent';
               }
