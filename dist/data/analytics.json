@@ -302,6 +302,42 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794356561344",
+      "timestamp": "2026-11-11T00:22:41.344Z",
+      "path": "/article",
+      "title": "The Polite City: Why the Future of Smart Cities Needs Courteous AI, Not Digital Wardens | Dr. Zaid Amin",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1794356557324",
+      "timestamp": "2026-11-11T00:22:37.324Z",
+      "path": "/",
+      "title": "Zaid Amin, Ph.D.",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Internal Navigation"
+    },
+    {
+      "id": "tr-1794356550057",
+      "timestamp": "2026-11-11T00:22:30.057Z",
+      "path": "/publications",
+      "title": "Research & Publication Gallery",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Internal Navigation"
+    },
+    {
       "id": "tr-1794356418590",
       "timestamp": "2026-11-11T00:20:18.590Z",
       "path": "/article",
@@ -1464,47 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794282105693",
-      "timestamp": "2026-11-10T03:41:45.693Z",
-      "path": "/",
-      "title": "Zaid Amin, Ph.D.",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794281458581",
-      "timestamp": "2026-11-10T03:30:58.581Z",
-      "path": "/",
-      "title": "Zaid Amin, Ph.D.",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794280619997",
-      "timestamp": "2026-11-10T03:16:59.997Z",
-      "path": "/",
-      "title": "Zaid Amin, Ph.D.",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-11T08:20:18.596592",
+  "updated_at": "2026-11-11T08:22:41.363885",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
