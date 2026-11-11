@@ -55,6 +55,13 @@ def minify_css(css: str) -> str:
     # Restore necessary space in media queries around 'and'
     css = re.sub(r'\band\(', 'and (', css)
     css = re.sub(r'\)\band', ') and', css)
+    # Restore strictly required spaces around + and - inside calc() per CSS specification
+    def restore_calc_spaces(match):
+        expr = match.group(0)
+        expr = re.sub(r'(?<=[0-9%a-zA-Z\)])\+(?=[0-9])', ' + ', expr)
+        expr = re.sub(r'(?<=[0-9%a-zA-Z\)])-(?=[0-9])', ' - ', expr)
+        return expr
+    css = re.sub(r'calc\([^)]+\)', restore_calc_spaces, css)
     # Remove trailing semicolons before closing brace
     css = re.sub(r';\}', '}', css)
     return css.strip()
