@@ -662,17 +662,20 @@ function setArticleEditorMode(mode) {
 
     function insertFigureHTMLIntoEditor(url, caption, size = 'standard', align = 'center') {
       let sizeClass = 'fig-standard';
-      let maxWidth = '82%';
+      let imgStyle = 'max-width: 82%; width: auto; height: auto; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65); border: 1px solid rgba(212, 175, 55, 0.25);';
+      let figStyle = `margin: 1.618rem auto; text-align: ${align}; display: block;`;
+
       if (size === 'compact') {
         sizeClass = 'fig-compact';
-        maxWidth = '60%';
+        imgStyle = 'max-width: 52%; width: auto; height: auto; border-radius: 8px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); border: 1px solid rgba(212, 175, 55, 0.25);';
       } else if (size === 'full') {
         sizeClass = 'fig-full';
-        maxWidth = '100%';
+        figStyle = `margin: 2rem auto; text-align: ${align}; display: block; width: 100%; max-width: 100%;`;
+        imgStyle = 'width: 100%; max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 16px 44px rgba(0, 0, 0, 0.75), 0 0 24px rgba(212, 175, 55, 0.2); border: 1px solid rgba(212, 175, 55, 0.35); display: block;';
       }
 
       const capHTML = caption ? `<figcaption style="font-size: 0.85rem; color: #94a3b8; margin-top: 10px; font-style: italic; text-align: ${align}; line-height: 1.4;">${escapeHTML(caption)}</figcaption>` : '';
-      const figureHTML = `<figure class="${sizeClass}" style="margin: 1.618rem auto; text-align: ${align}; display: block;"><img src="${url}" alt="${escapeHTML(caption || 'Figure Diagram')}" loading="lazy" style="max-width: ${maxWidth}; width: auto; height: auto; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65); border: 1px solid rgba(212, 175, 55, 0.25);">${capHTML}</figure><p>&nbsp;</p>`;
+      const figureHTML = `<figure class="${sizeClass}" style="${figStyle}"><img src="${url}" alt="${escapeHTML(caption || 'Figure Diagram')}" loading="lazy" style="${imgStyle}" class="${sizeClass}">${capHTML}</figure><p>&nbsp;</p>`;
 
       if (currentArticleEditorMode === 'code') {
         const ta = document.getElementById('art-form-code-editor');
@@ -907,13 +910,29 @@ function setArticleEditorMode(mode) {
         fig.classList.add('fig-standard');
         img.classList.remove('fig-compact', 'fig-full');
         img.classList.add('fig-standard');
+        img.style.maxWidth = '82%';
+        img.style.width = 'auto';
+        img.style.maxHeight = '440px';
+        if (fig.tagName === 'FIGURE') {
+          fig.style.maxWidth = '82%';
+          fig.style.width = 'auto';
+        }
         showToast('Figure formatted to 82% Standard measure.');
       } else if (action === 'full') {
         fig.classList.remove('fig-compact', 'fig-standard');
         fig.classList.add('fig-full');
         img.classList.remove('fig-compact', 'fig-standard');
         img.classList.add('fig-full');
-        showToast('Figure formatted to 100% Full Column width.');
+        img.style.maxWidth = '100%';
+        img.style.width = '100%';
+        img.style.maxHeight = 'none';
+        img.style.height = 'auto';
+        img.style.display = 'block';
+        if (fig.tagName === 'FIGURE') {
+          fig.style.maxWidth = '100%';
+          fig.style.width = '100%';
+        }
+        showToast('Figure formatted to 100% Full Width Screen measure.');
       } else if (action === 'center') {
         fig.classList.remove('fig-left', 'fig-right');
         img.classList.remove('fig-left', 'fig-right');

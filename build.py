@@ -9975,33 +9975,40 @@ def generate_article_reader_page():
 
 
             // 4. Hero Banner Display
-
             if (article.image && !hasHeroInBody) {
-
               const imgWrap = document.getElementById('reader-hero-img-wrap');
-
               const img = document.getElementById('reader-hero-img');
-
               var heroSrc = article.image;
-
               if (heroSrc.startsWith('assets/')) {
-
                 heroSrc = '/' + heroSrc;
-
               }
-
               img.src = heroSrc;
-
               img.alt = article.title;
-
               img.onerror = function() {
-
                 imgWrap.style.display = 'none';
-
               };
-
               imgWrap.style.display = 'block';
+            }
 
+            // 5. Interactive Fullscreen Lightbox & Image Expansion
+            bodyElem.querySelectorAll('img').forEach(function(img) {
+              if (img.classList.contains('article-bio-avatar')) return;
+              img.style.cursor = 'zoom-in';
+              img.title = 'Click to expand Full Screen';
+              img.addEventListener('click', function(e) {
+                e.preventDefault();
+                openArticleLightbox(this.src, this.alt || this.getAttribute('alt') || '');
+              });
+            });
+
+            var heroImgEl = document.getElementById('reader-hero-img');
+            if (heroImgEl) {
+              heroImgEl.style.cursor = 'zoom-in';
+              heroImgEl.title = 'Click to expand Full Screen';
+              heroImgEl.addEventListener('click', function(e) {
+                e.preventDefault();
+                openArticleLightbox(this.src, this.alt || this.getAttribute('alt') || '');
+              });
             }
 
 
@@ -10039,27 +10046,56 @@ def generate_article_reader_page():
 
 
       function copyArticleLink() {
-
         navigator.clipboard.writeText(window.location.href).then(() => {
-
           const btn = document.getElementById('copy-btn-text');
-
           if (btn) {
-
             btn.textContent = 'Copied!';
-
             setTimeout(() => { btn.textContent = 'Copy Link'; }, 2500);
-
           }
-
         }).catch(() => {
-
           prompt('Copy article link:', window.location.href);
-
         });
-
       }
 
+      function openArticleLightbox(src, alt) {
+        const lb = document.getElementById('article-image-lightbox');
+        const img = document.getElementById('article-lightbox-img');
+        const cap = document.getElementById('article-lightbox-caption');
+        const dl = document.getElementById('article-lightbox-download');
+        if (!lb || !img) return;
+
+        img.src = src;
+        img.alt = alt || 'Fullscreen Image View';
+        if (cap) cap.textContent = (alt && !alt.startsWith('http') && !alt.startsWith('Figure: undefined')) ? alt : '';
+        if (dl) dl.href = src;
+
+        lb.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeArticleLightbox() {
+        const lb = document.getElementById('article-image-lightbox');
+        if (!lb) return;
+        lb.classList.remove('active');
+        document.body.style.overflow = '';
+        if (document.fullscreenElement) {
+          document.exitFullscreen().catch(() => {});
+        }
+      }
+
+      function toggleNativeFullscreen() {
+        const lb = document.getElementById('article-image-lightbox');
+        if (!document.fullscreenElement) {
+          if (lb.requestFullscreen) lb.requestFullscreen();
+          else if (lb.webkitRequestFullscreen) lb.webkitRequestFullscreen();
+        } else {
+          if (document.exitFullscreen) document.exitFullscreen();
+        }
+      }
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeArticleLightbox();
+      });
     </script>
 
 """
@@ -10198,18 +10234,28 @@ def generate_article_reader_page():
 
 
       <!-- Navigation back to hub -->
-
       <div style="margin-top: 40px; text-align: center;">
-
         <a href="/research#articles" class="spotlight-btn btn-gold font-cinzel" style="text-decoration: none; display: inline-block;">
-
           &larr; Explore All Activity &amp; Articles
-
         </a>
-
       </div>
-
     </main>
+
+    <!-- High-Definition Fullscreen Image Lightbox Modal -->
+    <div id="article-image-lightbox" class="article-lightbox" role="dialog" aria-modal="true" aria-label="Fullscreen Image Viewer">
+      <div class="article-lightbox-backdrop" onclick="closeArticleLightbox()"></div>
+      <div class="article-lightbox-content">
+        <button type="button" class="article-lightbox-close" onclick="closeArticleLightbox()" title="Close (Esc)">✕</button>
+        <div class="article-lightbox-img-wrap">
+          <img id="article-lightbox-img" src="" alt="Fullscreen Image View">
+        </div>
+        <div id="article-lightbox-caption" class="article-lightbox-caption"></div>
+        <div class="article-lightbox-actions">
+          <button type="button" class="article-lightbox-btn" onclick="toggleNativeFullscreen()" title="Toggle Browser Fullscreen">⛶ Full Screen Mode</button>
+          <a id="article-lightbox-download" href="" target="_blank" class="article-lightbox-btn" download title="Open Original High-Res">↗ Open Original</a>
+        </div>
+      </div>
+    </div>
 
     {reader_script}
 
