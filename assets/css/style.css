@@ -30706,7 +30706,8 @@ h1.cv-hero-name,
   font-size: 0.84rem;
   line-height: 1.52;
   color: #cbd5e1;
-  flex: 1 1 420px;
+  flex: 1 1 auto;
+  min-width: 260px;
   letter-spacing: 0.01em;
 }
 
@@ -30776,29 +30777,105 @@ h1.cv-hero-name,
 .footer-cookie-pref-link {
   color: #94a3b8;
   text-decoration: underline;
+  text-decoration-color: rgba(148, 163, 184, 0.35);
   text-underline-offset: 3px;
   margin-left: 4px;
   font-size: 0.76rem;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
 .footer-cookie-pref-link:hover {
   color: #fce09b;
+  text-decoration-color: #fce09b;
 }
 
+/* Tablet & Intermediate Viewports */
+@media (max-width: 860px) {
+  .cookie-consent-bar {
+    bottom: 16px;
+    width: calc(100% - 32px);
+    max-width: 680px;
+    padding: 12px 18px;
+  }
+  .cookie-consent-inner {
+    gap: 12px;
+  }
+  .cookie-consent-text {
+    font-size: 0.82rem;
+    line-height: 1.48;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .cookie-btn {
+    font-size: 0.76rem;
+    padding: 5px 15px;
+  }
+}
+
+/* Mobile Viewports (Ultra-Compact, Gestalt & Golden Ratio Proportions) */
 @media (max-width: 640px) {
   .cookie-consent-bar {
     bottom: 12px;
-    padding: 12px 14px;
     width: calc(100% - 20px);
+    max-width: 440px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.94), 0 0 0 1px rgba(254, 240, 138, 0.1) inset;
   }
   .cookie-consent-inner {
     flex-direction: column;
     align-items: stretch;
-    gap: 12px;
+    gap: 8px;
+  }
+  .cookie-consent-text {
+    flex: 0 1 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    font-size: 0.77rem;
+    line-height: 1.42;
+    color: #cbd5e1;
+    text-align: left;
+  }
+  .cookie-policy-link {
+    font-size: 0.77rem;
+    margin-left: 4px;
   }
   .cookie-consent-actions {
+    display: flex;
     justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+  .cookie-btn {
+    font-size: 0.73rem;
+    padding: 5px 13px;
+    border-radius: 999px;
+    line-height: 1.35;
+  }
+  .cookie-btn-secondary {
+    padding: 5px 11px;
   }
 }
 
+/* Small Smartphone Adaptation (e.g. 320px - 360px) */
+@media (max-width: 380px) {
+  .cookie-consent-bar {
+    bottom: 8px;
+    padding: 8px 11px;
+    width: calc(100% - 14px);
+  }
+  .cookie-consent-text {
+    font-size: 0.73rem;
+    line-height: 1.38;
+  }
+  .cookie-consent-actions {
+    gap: 6px;
+  }
+  .cookie-btn {
+    font-size: 0.70rem;
+    padding: 4px 10px;
+  }
+}
