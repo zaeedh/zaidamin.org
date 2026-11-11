@@ -11707,30 +11707,6 @@ a {
 
   }
 
-}
-
-
-
-@media (max-width: 380px) {
-
-  .ref-search-input-box {
-
-    padding: 0 10px;
-
-    gap: 7px;
-
-  }
-
-  .ref-search-input::placeholder {
-
-    font-size: 0.58rem;
-
-    letter-spacing: 0.01em;
-
-  }
-
-}
-
   .ref-inset-tray {
 
     height: 442px;
@@ -11740,6 +11716,28 @@ a {
     max-height: 442px;
 
     padding: 8px 10px;
+
+  }
+
+  .tray-slides-wrap {
+
+    height: 384px;
+
+    min-height: 384px;
+
+    max-height: 384px;
+
+    flex: 0 0 384px;
+
+  }
+
+  .tray-slide {
+
+    height: 384px;
+
+    min-height: 384px;
+
+    max-height: 384px;
 
   }
 
@@ -11775,57 +11773,39 @@ a {
 
   }
 
-  
+  .tray-controls-bar {
 
-.tray-nav-arrows {
+    padding: 0 2px;
 
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 6px;
-
-  flex-shrink: 0;
-
-}
-
-
-
-.tray-status-pill {
-
-  display: none !important;
-
-}
-
-
-
-.tray-controls-bar {
-
-    padding: 4px 0 0 0;
-
-    gap: 5px;
-
-  }
-
-  .tray-status-pill {
-
-    padding: 2px 8px;
-
-    font-size: 0.62rem;
-
-    gap: 4px;
-
-  }
-
-  .tray-shuffle-label {
-
-    display: none;
+    gap: 6px;
 
   }
 
   .tray-shuffle-btn {
 
-    padding: 3px 6px;
+    padding: 4px 10px;
+
+  }
+
+}
+
+
+
+@media (max-width: 380px) {
+
+  .ref-search-input-box {
+
+    padding: 0 10px;
+
+    gap: 7px;
+
+  }
+
+  .ref-search-input::placeholder {
+
+    font-size: 0.58rem;
+
+    letter-spacing: 0.01em;
 
   }
 

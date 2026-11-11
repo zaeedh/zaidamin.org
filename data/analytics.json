@@ -302,6 +302,42 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794412555607",
+      "timestamp": "2026-11-11T15:55:55.607Z",
+      "path": "/",
+      "title": "Zaid Amin, Ph.D.",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1794412492986",
+      "timestamp": "2026-11-11T15:54:52.986Z",
+      "path": "/",
+      "title": "Zaid Amin, Ph.D.",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1794412427979",
+      "timestamp": "2026-11-11T15:53:47.979Z",
+      "path": "/",
+      "title": "Zaid Amin, Ph.D.",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
       "id": "tr-1794408345785",
       "timestamp": "2026-11-11T14:45:45.785Z",
       "path": "/",
@@ -1464,47 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794361311838",
-      "timestamp": "2026-11-11T01:41:51.838Z",
-      "path": "/article",
-      "title": "The Polite City: Why the Future of Smart Cities Needs Courteous AI, Not Digital Wardens | Dr. Zaid Amin",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794361204816",
-      "timestamp": "2026-11-11T01:40:04.816Z",
-      "path": "/article",
-      "title": "The Polite City: Why the Future of Smart Cities Needs Courteous AI, Not Digital Wardens | Dr. Zaid Amin",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794361191356",
-      "timestamp": "2026-11-11T01:39:51.356Z",
-      "path": "/article",
-      "title": "The Polite City: Why the Future of Smart Cities Needs Courteous AI, Not Digital Wardens | Dr. Zaid Amin",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-11T22:45:45.816511",
+  "updated_at": "2026-11-11T23:55:55.625020",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
