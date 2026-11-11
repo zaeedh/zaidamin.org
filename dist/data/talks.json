@@ -64,7 +64,7 @@
       "location": "Jakarta / Online",
       "type": "Plenary",
       "url": "https://tinyurl.com/37j76mxz",
-      "image": "assets/images/thumb-attention.jpg",
+      "image": "/assets/images/thumb-attention.jpg",
       "featured": false,
       "description": "Invited plenary discourse on epistemic attention design, cybernetic feedback loops, and empirical interface nudges against automated viral algorithmic distortion."
     },
@@ -76,7 +76,7 @@
       "location": "Yogyakarta, Indonesia",
       "type": "Conference",
       "url": "https://doi.org/10.1109/ACCESS.2021.3087740",
-      "image": "assets/images/thumb-governance.jpg",
+      "image": "/assets/images/thumb-governance.jpg",
       "featured": false,
       "description": "Presented empirical research on the Tune-Attention model for curbing unreflective digital information spreading; chaired conference technical tracks."
     },
@@ -88,7 +88,7 @@
       "location": "Palembang, Indonesia",
       "type": "Panel",
       "url": "https://srivijayapedia.org",
-      "image": "assets/images/thumb-projects.jpg",
+      "image": "/assets/images/thumb-projects.jpg",
       "featured": false,
       "description": "Expert panelist and project lead demonstrating immersive 3D/VR reconstructions and digital heritage archives for the maritime kingdom of Srivijaya."
     }

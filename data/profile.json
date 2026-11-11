@@ -4,11 +4,11 @@
     "role_line": "Senior Lecturer • Faculty of Data Science & IT (FDSIT)",
     "institution": "INTI International University, Malaysia",
     "research_fields": "Digital Ethics • Behavior & Social Computing • HCI",
-    "photo_front": "assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
-    "photo_front_fallback": "assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
+    "photo_front": "/assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
+    "photo_front_fallback": "/assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
     "photo_front_alt": "Zaid Amin, Ph.D. — Academic Portrait",
-    "photo_back": "assets/images/portraits/portrait-2.webp",
-    "photo_back_fallback": "assets/images/portraits/portrait-2.png",
+    "photo_back": "/assets/images/portraits/portrait-2.webp",
+    "photo_back_fallback": "/assets/images/portraits/portrait-2.png",
     "photo_back_alt": "Zaid Amin, Ph.D. — Secondary Portrait",
     "status_dot_enabled": true,
     "status_text": "Active Senior Lecturer & Researcher",
@@ -18,40 +18,40 @@
         "id": "portrait-1",
         "title": "Portrait 1",
         "subtitle": "Academic Portrait",
-        "url": "assets/images/portraits/portrait-1.webp",
-        "fallback": "assets/images/portraits/portrait-1.png",
+        "url": "/assets/images/portraits/portrait-1.webp",
+        "fallback": "/assets/images/portraits/portrait-1.png",
         "alt": "Dr. Zaid Amin, Ph.D. — Academic Portrait"
       },
       {
         "id": "portrait-2",
         "title": "Portrait 2",
         "subtitle": "Singapore",
-        "url": "assets/images/portraits/portrait-2.webp",
-        "fallback": "assets/images/portraits/portrait-2.png",
+        "url": "/assets/images/portraits/portrait-2.webp",
+        "fallback": "/assets/images/portraits/portrait-2.png",
         "alt": "Dr. Zaid Amin, Ph.D. — Singapore"
       },
       {
         "id": "portrait-3",
         "title": "Portrait 3",
         "subtitle": "Barelang Scenic",
-        "url": "assets/images/portraits/portrait-3.webp",
-        "fallback": "assets/images/portraits/portrait-3.png",
+        "url": "/assets/images/portraits/portrait-3.webp",
+        "fallback": "/assets/images/portraits/portrait-3.png",
         "alt": "Dr. Zaid Amin, Ph.D. — Barelang Scenic"
       },
       {
         "id": "portrait-4",
         "title": "Portrait 4",
         "subtitle": "Dataran Merdeka KL",
-        "url": "assets/images/portraits/portrait-4.webp",
-        "fallback": "assets/images/portraits/portrait-4.png",
+        "url": "/assets/images/portraits/portrait-4.webp",
+        "fallback": "/assets/images/portraits/portrait-4.png",
         "alt": "Dr. Zaid Amin, Ph.D. — Dataran Merdeka KL"
       },
       {
         "id": "portrait-1794243529996",
         "title": "Portrait 5",
         "subtitle": "Library Portrait",
-        "url": "assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
-        "fallback": "assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
+        "url": "/assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
+        "fallback": "/assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
         "alt": "Dr. Zaid Amin, Ph.D. — Portrait 5"
       }
     ]
@@ -74,11 +74,11 @@
     "hide_on_tablet": true,
     "hide_on_desktop": false,
     "media_type": "image",
-    "image_url": "assets/images/lighthouse-banner.webp",
-    "image_fallback": "assets/images/lighthouse-banner.jpg",
+    "image_url": "/assets/images/lighthouse-banner.webp",
+    "image_fallback": "/assets/images/lighthouse-banner.jpg",
     "image_alt": "Lighthouse Storm over Ocean",
     "video_url": "",
-    "video_fallback_poster": "assets/images/lighthouse-banner.webp",
+    "video_fallback_poster": "/assets/images/lighthouse-banner.webp",
     "video_autoplay": true,
     "video_loop": true,
     "video_muted": true,
@@ -92,27 +92,27 @@
         "type": "image",
         "title": "Lighthouse Oceanic Storm (WebP)",
         "subtitle": "Default Cinematic Living Storm (Optimized)",
-        "url": "assets/images/lighthouse-banner.webp",
-        "fallback": "assets/images/lighthouse-banner.jpg",
-        "poster": "assets/images/lighthouse-banner.webp"
+        "url": "/assets/images/lighthouse-banner.webp",
+        "fallback": "/assets/images/lighthouse-banner.jpg",
+        "poster": "/assets/images/lighthouse-banner.webp"
       },
       {
         "id": "banner-lighthouse-storm-enhanced",
         "type": "image",
         "title": "Lighthouse Enhanced Deep Storm",
         "subtitle": "High Atmospheric Contrast & Sharpness",
-        "url": "assets/images/lighthouse-banner-enhanced.webp",
-        "fallback": "assets/images/lighthouse-banner-enhanced.jpg",
-        "poster": "assets/images/lighthouse-banner-enhanced.webp"
+        "url": "/assets/images/lighthouse-banner-enhanced.webp",
+        "fallback": "/assets/images/lighthouse-banner-enhanced.jpg",
+        "poster": "/assets/images/lighthouse-banner-enhanced.webp"
       },
       {
         "id": "banner-lighthouse-storm-jpg",
         "type": "image",
         "title": "Lighthouse Classic Master (JPG)",
         "subtitle": "Direct True Color Hi-Res Ocean Storm",
-        "url": "assets/images/lighthouse-banner.jpg",
-        "fallback": "assets/images/lighthouse-banner.jpg",
-        "poster": "assets/images/lighthouse-banner.jpg"
+        "url": "/assets/images/lighthouse-banner.jpg",
+        "fallback": "/assets/images/lighthouse-banner.jpg",
+        "poster": "/assets/images/lighthouse-banner.jpg"
       }
     ]
   },

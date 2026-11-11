@@ -9,12 +9,12 @@
       "date": "May 2015",
       "duration": "24:30",
       "description": "Live TVRI South Sumatra broadcast in the Information Technology segment featuring Dr. Zaid Amin, discussing virtual machine architecture, server computing efficiency, and the early foundations of cloud virtualization.",
-      "poster": "assets/images/talks/tvri-virtual-machine.jpg",
+      "poster": "/assets/images/talks/tvri-virtual-machine.jpg",
       "video_url": "https://www.youtube.com/watch?v=POOKQFpBWVE",
       "embed_url": "https://www.youtube-nocookie.com/embed/POOKQFpBWVE?autoplay=1&rel=0&modestbranding=1&enablejsapi=1",
       "drive_id": "1wwR4DKr2JZfh2tpEKIl1xeESSqtyNf2k",
       "author_name": "Dr. Zaid Amin",
-      "author_avatar": "assets/images/portraits/portrait-1.webp",
+      "author_avatar": "/assets/images/portraits/portrait-1.webp",
       "drive_backup_url": "https://drive.google.com/file/d/1wwR4DKr2JZfh2tpEKIl1xeESSqtyNf2k/view?usp=sharing",
       "youtube_id": "POOKQFpBWVE",
       "youtube_url": "https://www.youtube.com/watch?v=POOKQFpBWVE"
@@ -28,12 +28,12 @@
       "date": "May 2015",
       "duration": "23:45",
       "description": "Interactive live TVRI broadcast exploring logical network segmentation (VLAN), broadcast domain management, and performance engineering in enterprise-scale computer networks.",
-      "poster": "assets/images/talks/tvri-virtual-lan.jpg",
+      "poster": "/assets/images/talks/tvri-virtual-lan.jpg",
       "video_url": "https://www.youtube.com/watch?v=3_Q2vHCrX7s",
       "embed_url": "https://www.youtube-nocookie.com/embed/3_Q2vHCrX7s?autoplay=1&rel=0&modestbranding=1&enablejsapi=1",
       "drive_id": "1ko5ot7ALjfFQfnkQbG6ZpHBHmWbJmKB9",
       "author_name": "Dr. Zaid Amin",
-      "author_avatar": "assets/images/portraits/portrait-1.webp",
+      "author_avatar": "/assets/images/portraits/portrait-1.webp",
       "drive_backup_url": "https://drive.google.com/file/d/1ko5ot7ALjfFQfnkQbG6ZpHBHmWbJmKB9/view?usp=sharing",
       "youtube_id": "3_Q2vHCrX7s",
       "youtube_url": "https://www.youtube.com/watch?v=3_Q2vHCrX7s"
@@ -47,12 +47,12 @@
       "date": "June 2015",
       "duration": "25:10",
       "description": "In-depth exploration of dynamic routing protocols (OSPF, BGP), hierarchical routing tables, and intelligent packet forwarding mechanisms across internet infrastructure backbones.",
-      "poster": "assets/images/talks/tvri-network-routing.jpg",
+      "poster": "/assets/images/talks/tvri-network-routing.jpg",
       "video_url": "https://www.youtube.com/watch?v=NY_1yYn7wnw",
       "embed_url": "https://www.youtube-nocookie.com/embed/NY_1yYn7wnw?autoplay=1&rel=0&modestbranding=1&enablejsapi=1",
       "drive_id": "1N_cIRKImjXMDbHPwAydI10zM_CQfGqsM",
       "author_name": "Dr. Zaid Amin",
-      "author_avatar": "assets/images/portraits/portrait-1.webp",
+      "author_avatar": "/assets/images/portraits/portrait-1.webp",
       "drive_backup_url": "https://drive.google.com/file/d/1N_cIRKImjXMDbHPwAydI10zM_CQfGqsM/view?usp=sharing",
       "youtube_id": "NY_1yYn7wnw",
       "youtube_url": "https://www.youtube.com/watch?v=NY_1yYn7wnw"
@@ -66,12 +66,12 @@
       "date": "June 2015",
       "duration": "18:20",
       "description": "Comprehensive breakdown of planning methodologies for physical and logical network topologies, data path redundancy, and single point of failure (SPOF) mitigation strategies.",
-      "poster": "assets/images/talks/tvri-network-topology.jpg",
+      "poster": "/assets/images/talks/tvri-network-topology.jpg",
       "video_url": "https://www.youtube.com/watch?v=eUSfe6PWBz8",
       "embed_url": "https://www.youtube-nocookie.com/embed/eUSfe6PWBz8?autoplay=1&rel=0&modestbranding=1&enablejsapi=1",
       "drive_id": "1r7Tf7cJhF0g83tg6KVy8jbWRzXiZ6Ebs",
       "author_name": "Dr. Zaid Amin",
-      "author_avatar": "assets/images/portraits/portrait-1.webp",
+      "author_avatar": "/assets/images/portraits/portrait-1.webp",
       "drive_backup_url": "https://drive.google.com/file/d/1r7Tf7cJhF0g83tg6KVy8jbWRzXiZ6Ebs/view?usp=sharing",
       "youtube_id": "eUSfe6PWBz8",
       "youtube_url": "https://www.youtube.com/watch?v=eUSfe6PWBz8"
@@ -85,12 +85,12 @@
       "date": "July 2015",
       "duration": "24:50",
       "description": "Live broadcast dialogue addressing massive data volume transmission challenges (Big Data), high throughput, low latency, and modern data center network architecture design.",
-      "poster": "assets/images/talks/tvri-network-bigdata.jpg",
+      "poster": "/assets/images/talks/tvri-network-bigdata.jpg",
       "video_url": "https://www.youtube.com/watch?v=yigNkjAnYxg",
       "embed_url": "https://www.youtube-nocookie.com/embed/yigNkjAnYxg?autoplay=1&rel=0&modestbranding=1&enablejsapi=1",
       "drive_id": "1EzYtSRmgv_NWWpRY9x3KQDvhP3EWkG8F",
       "author_name": "Dr. Zaid Amin",
-      "author_avatar": "assets/images/portraits/portrait-1.webp",
+      "author_avatar": "/assets/images/portraits/portrait-1.webp",
       "drive_backup_url": "https://drive.google.com/file/d/1EzYtSRmgv_NWWpRY9x3KQDvhP3EWkG8F/view?usp=sharing",
       "youtube_id": "yigNkjAnYxg",
       "youtube_url": "https://www.youtube.com/watch?v=yigNkjAnYxg"
@@ -104,12 +104,12 @@
       "date": "August 2015",
       "duration": "35:10",
       "description": "Conceptual and practical guide to network simulation using event-driven simulators (Cisco Packet Tracer / NS-2 / NS-3) prior to full-scale industrial deployment.",
-      "poster": "assets/images/talks/tvri-network-simulation.jpg",
+      "poster": "/assets/images/talks/tvri-network-simulation.jpg",
       "video_url": "https://www.youtube.com/watch?v=-MH_i6rdLYI",
       "embed_url": "https://www.youtube-nocookie.com/embed/-MH_i6rdLYI?autoplay=1&rel=0&modestbranding=1&enablejsapi=1",
       "drive_id": "1enQ_jbhkV6MEd3LKnNlSGVeqdC01JKAP",
       "author_name": "Dr. Zaid Amin",
-      "author_avatar": "assets/images/portraits/portrait-1.webp",
+      "author_avatar": "/assets/images/portraits/portrait-1.webp",
       "drive_backup_url": "https://drive.google.com/file/d/1enQ_jbhkV6MEd3LKnNlSGVeqdC01JKAP/view?usp=sharing",
       "youtube_id": "-MH_i6rdLYI",
       "youtube_url": "https://www.youtube.com/watch?v=-MH_i6rdLYI"
@@ -123,12 +123,12 @@
       "date": "September 2015",
       "duration": "31:40",
       "description": "Strategic outlook on global connectivity architecture, Software-Defined Networking (SDN), distributed computing, and intelligent internet ecosystems in the era of Big Data.",
-      "poster": "assets/images/talks/tvri-future-network.jpg",
+      "poster": "/assets/images/talks/tvri-future-network.jpg",
       "video_url": "https://www.youtube.com/watch?v=jd4CV21ul24",
       "embed_url": "https://www.youtube-nocookie.com/embed/jd4CV21ul24?autoplay=1&rel=0&modestbranding=1&enablejsapi=1",
       "drive_id": "1FFemA7CgnyF0r8w9w7Yg5WMAKb1q6LWw",
       "author_name": "Dr. Zaid Amin",
-      "author_avatar": "assets/images/portraits/portrait-1.webp",
+      "author_avatar": "/assets/images/portraits/portrait-1.webp",
       "drive_backup_url": "https://drive.google.com/file/d/1FFemA7CgnyF0r8w9w7Yg5WMAKb1q6LWw/view?usp=sharing",
       "youtube_id": "jd4CV21ul24",
       "youtube_url": "https://www.youtube.com/watch?v=jd4CV21ul24"
@@ -148,7 +148,7 @@
       "url": "https://drive.google.com/file/d/1MEJWn1XI03aQ4LvBTYqnFaF4YKHcLdae/view?usp=sharing",
       "palette": "ivory",
       "arch_style": "arch-cathedral",
-      "image": "assets/images/uploads/IVI.png"
+      "image": "/assets/images/uploads/IVI.png"
     },
     {
       "id": "keynote-1793869451640",
@@ -163,7 +163,7 @@
       "url": "https://tinyurl.com/4jzbhpc9",
       "palette": "ivory",
       "arch_style": "arch-cathedral",
-      "image": "assets/images/uploads/dehasen.png"
+      "image": "/assets/images/uploads/dehasen.png"
     },
     {
       "id": "keynote-matcom-2026",
@@ -178,7 +178,7 @@
       "url": "https://tinyurl.com/y54buapz",
       "palette": "ivory",
       "arch_style": "arch-cathedral",
-      "image": "assets/images/uploads/Dr._Zaid_Amin_flyer.jpg"
+      "image": "/assets/images/uploads/Dr._Zaid_Amin_flyer.jpg"
     },
     {
       "id": "keynote-ukm-trustworthy-ai",
@@ -193,7 +193,7 @@
       "url": "https://tinyurl.com/37j76mxz",
       "palette": "gold",
       "arch_style": "arch-starburst",
-      "image": "assets/images/uploads/WhatsApp_Image_2026-07-18_at_17.45.26.jpeg"
+      "image": "/assets/images/uploads/WhatsApp_Image_2026-07-18_at_17.45.26.jpeg"
     },
     {
       "id": "keynote-autonomous-systems-2026",
@@ -208,7 +208,7 @@
       "url": "https://tinyurl.com/y54buapz",
       "palette": "noir",
       "arch_style": "arch-scoop",
-      "image": "assets/images/uploads/489425378_1409742420348925_4390671906595567802_n.jpg"
+      "image": "/assets/images/uploads/489425378_1409742420348925_4390671906595567802_n.jpg"
     }
   ],
   "opinions": [
@@ -224,7 +224,7 @@
       "url": "https://sumeks.disway.id/opini/read/749470/dekadensi-moral-dan-kesehatan-mental-di-era-masyarakat-50",
       "palette": "ivory",
       "arch_style": "arch-cathedral",
-      "image": "assets/images/uploads/SUMEKS.png"
+      "image": "/assets/images/uploads/SUMEKS.png"
     },
     {
       "id": "opinion-the-proxy-trap",
@@ -238,7 +238,7 @@
       "url": "https://sumeks.disway.id/opini/read/763397/ketimpangan-sosial-flexing-pejabat-dan-luka-perbandingan-diri-di-media-sosial",
       "palette": "gold",
       "arch_style": "arch-starburst",
-      "image": "assets/images/uploads/SUMEKS2.png"
+      "image": "/assets/images/uploads/SUMEKS2.png"
     },
     {
       "id": "opinion-reclaiming-attention",
@@ -252,7 +252,7 @@
       "url": "https://seputarsumatera.com/polarisasi-di-era-digital-ancaman-diam-diam-bagi-persatuan-dan-demokrasi/",
       "palette": "noir",
       "arch_style": "arch-scoop",
-      "image": "assets/images/uploads/seputar1.png"
+      "image": "/assets/images/uploads/seputar1.png"
     }
   ]
 }

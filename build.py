@@ -567,7 +567,7 @@ def get_navigation_data():
 
             {"id": "home", "label": "Home", "short_label": "Home", "url": "index.html", "target": "_self", "icon": "home", "enabled": True, "active_pages": ["home"], "has_dropdown": False, "dropdown_items": []},
 
-            {"id": "publications", "label": "Research & Pubs", "short_label": "Research", "url": "publications.html", "target": "_self", "icon": "none", "enabled": True, "active_pages": ["publications", "team"], "has_dropdown": True, "dropdown_items": [
+            {"id": "publications", "label": "Research & Publications", "short_label": "Research", "url": "publications.html", "target": "_self", "icon": "none", "enabled": True, "active_pages": ["publications", "team"], "has_dropdown": True, "dropdown_items": [
 
                 {"id": "team", "label": "Research Team", "url": "research-team.html", "target": "_self", "icon": "✦", "enabled": True, "active_pages": ["team"]}
 
@@ -3659,15 +3659,19 @@ def generate_golden_ratio_home():
 
     ph_fields_html = ' <span class="ref-gold-dot">&bull;</span> '.join(_flist) if _flist else ph_fields_raw
 
-    ph_front_webp = portals_hdr.get("photo_front", "assets/images/portraits/portrait-1.webp")
+    ph_front_webp = portals_hdr.get("photo_front", "/assets/images/portraits/portrait-1.webp")
+    if ph_front_webp.startswith("assets/"): ph_front_webp = "/" + ph_front_webp
 
     ph_front_png = portals_hdr.get("photo_front_fallback", ph_front_webp.replace(".webp", ".png") if ph_front_webp.endswith(".webp") else ph_front_webp)
+    if ph_front_png.startswith("assets/"): ph_front_png = "/" + ph_front_png
 
     ph_front_alt = portals_hdr.get("photo_front_alt", f"{ph_name} — Academic Portrait")
 
-    ph_back_webp = portals_hdr.get("photo_back", "assets/images/portraits/portrait-2.webp")
+    ph_back_webp = portals_hdr.get("photo_back", "/assets/images/portraits/portrait-2.webp")
+    if ph_back_webp.startswith("assets/"): ph_back_webp = "/" + ph_back_webp
 
     ph_back_png = portals_hdr.get("photo_back_fallback", ph_back_webp.replace(".webp", ".png") if ph_back_webp.endswith(".webp") else ph_back_webp)
+    if ph_back_png.startswith("assets/"): ph_back_png = "/" + ph_back_png
 
     ph_back_alt = portals_hdr.get("photo_back_alt", f"{ph_name} — Secondary Portrait")
 
@@ -4697,9 +4701,9 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
                 <picture>
 
-                  <source srcset="assets/images/portraits/portrait-1.webp" type="image/webp">
+                  <source srcset="/assets/images/portraits/portrait-1.webp?v=5.1" type="image/webp">
 
-                  <img src="assets/images/portraits/portrait-1.png" alt="Dr. Zaid Amin" class="bokify-author-avatar" loading="lazy">
+                  <img src="/assets/images/portraits/portrait-1.png?v=5.1" alt="Dr. Zaid Amin" class="bokify-author-avatar" loading="lazy" onerror="this.onerror=null; this.src='/assets/images/portraits/portrait-1.png?v=5.1';">
 
                 </picture>
 
@@ -4969,9 +4973,9 @@ def generate_publications_page():
 
             "badge": "01 / 04 • MONOGRAPHS & CHAPTERS",
 
-            "photo_webp": "assets/images/portraits/portrait-1.webp",
+            "photo_webp": "/assets/images/portraits/portrait-1.webp?v=5.1",
 
-            "photo_png": "assets/images/portraits/portrait-1.png",
+            "photo_png": "/assets/images/portraits/portrait-1.png?v=5.1",
 
             "photo_alt": "Dr. Zaid Amin - Books & Chapters",
 
@@ -7589,7 +7593,7 @@ def generate_talks_page():
 
             <div class="video-stage-top-meta">
 
-              <img src="assets/images/portraits/portrait-1.webp" alt="Dr. Zaid Amin" class="video-stage-avatar">
+              <img src="/assets/images/portraits/portrait-1.webp?v=5.1" alt="Dr. Zaid Amin" class="video-stage-avatar" onerror="this.onerror=null; this.src='/assets/images/portraits/portrait-1.png?v=5.1';">
 
               <div>
 
@@ -7709,7 +7713,7 @@ def generate_talks_page():
 
           <div class="talks-invite-img-frame">
 
-            <img src="assets/images/portraits/portrait-1.webp" alt="Dr. Zaid Amin" loading="lazy">
+            <img src="/assets/images/portraits/portrait-1.webp?v=5.1" alt="Dr. Zaid Amin" loading="lazy" onerror="this.onerror=null; this.src='/assets/images/portraits/portrait-1.png?v=5.1';">
 
           </div>
 
@@ -8459,9 +8463,9 @@ def generate_cv_page():
 
               <picture>
 
-                <source srcset="{photo_src}" type="image/webp">
+                <source srcset="{photo_src}?v=5.1" type="image/webp">
 
-                <img src="{photo_src.replace('.webp', '.png')}" alt="{exec_prof['name']}" class="cv-portrait-img" width="144" height="174" loading="eager" fetchpriority="high" decoding="sync" onerror="this.onerror=null; this.src='/assets/images/portraits/portrait-1.png';">
+                <img src="{photo_src.replace('.webp', '.png')}?v=5.1" alt="{exec_prof['name']}" class="cv-portrait-img" width="144" height="174" loading="eager" fetchpriority="high" decoding="sync" onerror="this.onerror=null; this.src='/assets/images/portraits/portrait-1.png?v=5.1';">
 
               </picture>
 

@@ -8,7 +8,7 @@
       "role": "Co-Supervisor",
       "period": "2024-2028",
       "thesis_title": "Influence of Unsaturated Soil Properties on Foundation Design with Dual-Porosity Soil",
-      "photo": "assets/images/team/zarina_onopriyenko.png",
+      "photo": "/assets/images/team/zarina_onopriyenko.png",
       "degree": "Ph.D. Candidate",
       "badge": "Doctoral Research"
     },
@@ -17,7 +17,7 @@
       "role": "Supervisor",
       "period": "2024-2028",
       "thesis_title": "Influence of Hysteresis on Pile Behavior in Unsaturated Soil",
-      "photo": "assets/images/team/zheniskan_abilev.png",
+      "photo": "/assets/images/team/zheniskan_abilev.png",
       "degree": "Ph.D. Candidate",
       "badge": "Doctoral Research"
     },
@@ -26,7 +26,7 @@
       "role": "Supervisor",
       "period": "2023-2027",
       "thesis_title": "Dual Porosity for GeoBarrier System",
-      "photo": "assets/images/team/rezat_abishev.png",
+      "photo": "/assets/images/team/rezat_abishev.png",
       "degree": "Ph.D. Candidate",
       "badge": "Doctoral Research"
     },
@@ -35,7 +35,7 @@
       "role": "Co-Supervisor",
       "period": "2022-2026",
       "thesis_title": "Hysteresis of Soil Water Characteristics Curve for Soil with Bimodal Grain Size Distribution",
-      "photo": "assets/images/team/nura_bello.png",
+      "photo": "/assets/images/team/nura_bello.png",
       "degree": "Ph.D. Candidate",
       "badge": "Doctoral Research"
     }
@@ -46,7 +46,7 @@
       "role": "Supervisor",
       "period": "2024-2026",
       "thesis_title": "Regional Modeling for flood simulation",
-      "photo": "assets/images/team/akbilek_seitmukhanbet.png",
+      "photo": "/assets/images/team/akbilek_seitmukhanbet.png",
       "degree": "Master's by Research",
       "badge": "Postgraduate Scholar"
     },
@@ -55,7 +55,7 @@
       "role": "Supervisor",
       "period": "2024-2026",
       "thesis_title": "Foundation Design in Unsaturated Frozen Soil",
-      "photo": "assets/images/team/akzhan_akhmedova.png",
+      "photo": "/assets/images/team/akzhan_akhmedova.png",
       "degree": "Master's by Research",
       "badge": "Postgraduate Scholar"
     },
@@ -64,7 +64,7 @@
       "role": "Supervisor",
       "period": "2024-2026",
       "thesis_title": "Slope Stabilization Technology Using Modified Geobarrier System",
-      "photo": "assets/images/team/eriko_dewangga.png",
+      "photo": "/assets/images/team/eriko_dewangga.png",
       "degree": "Master's by Research",
       "badge": "Postgraduate Scholar"
     },
@@ -73,7 +73,7 @@
       "role": "Co-Supervisor",
       "period": "2024-2026",
       "thesis_title": "Spatial Modeling for Debris Flow Analysis",
-      "photo": "assets/images/team/luiza_tanzhanova.png",
+      "photo": "/assets/images/team/luiza_tanzhanova.png",
       "degree": "Master's by Research",
       "badge": "Postgraduate Scholar"
     }
@@ -85,7 +85,7 @@
       "period": "2021 – Present",
       "institution": "Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM)",
       "focus": "Visual Informatics, Multimodal AI Frameworks & HCI Modeling",
-      "photo": "assets/images/team/prof_nazlena_ali.png",
+      "photo": "/assets/images/team/prof_nazlena_ali.png",
       "badge": "Academic Collaborator"
     },
     {
@@ -94,7 +94,7 @@
       "period": "2022 – Present",
       "institution": "School of Communication and Media Studies, Sunway University, Malaysia",
       "focus": "Digital Communication, Virtual Reality & Srivijaya Heritage Informatics",
-      "photo": "assets/images/team/dr_rahma_zinaida.png",
+      "photo": "/assets/images/team/dr_rahma_zinaida.png",
       "badge": "Academic Collaborator"
     },
     {
@@ -103,7 +103,7 @@
       "period": "2020 – Present",
       "institution": "Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM)",
       "focus": "Sociotechnical Systems, Behavior Informatics & Information Sharing",
-      "photo": "assets/images/team/dr_taha_ijab.png",
+      "photo": "/assets/images/team/dr_taha_ijab.png",
       "badge": "Academic Collaborator"
     },
     {
@@ -112,7 +112,7 @@
       "period": "2024 – Present",
       "institution": "Faculty of Engineering & Computer Science, Universitas Baturaja (UNBARA)",
       "focus": "Trustworthy Multi-Agent Compliance Systems & Sustainable Smart Cities",
-      "photo": "assets/images/team/dr_hasmawaty.png",
+      "photo": "/assets/images/team/dr_hasmawaty.png",
       "badge": "Research Collaborator"
     },
     {
@@ -121,7 +121,7 @@
       "period": "2018 – Present",
       "institution": "Universitas Bina Darma, Indonesia",
       "focus": "Digital Ethics, Media Systems & Postgraduate Mentorship",
-      "photo": "assets/images/team/prof_isnawijayani.png",
+      "photo": "/assets/images/team/prof_isnawijayani.png",
       "badge": "Senior Research Advisor"
     },
     {
@@ -130,7 +130,7 @@
       "period": "2023 – Present",
       "institution": "State Islamic Institute of Kerinci (IAIN Kerinci), Indonesia",
       "focus": "Persuasive Computing, Cognitive Attention & Algorithmic Ethics",
-      "photo": "assets/images/team/dr_muh_shaleh.jpg",
+      "photo": "/assets/images/team/dr_muh_shaleh.jpg",
       "badge": "Visiting Scholar Partner"
     }
   ],

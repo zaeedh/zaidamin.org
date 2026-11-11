@@ -16,7 +16,7 @@
     },
     {
       "id": "publications",
-      "label": "Research & Pubs",
+      "label": "Research & Publications",
       "short_label": "Research",
       "url": "/publications",
       "target": "_self",
@@ -31,7 +31,7 @@
         {
           "id": "team",
           "label": "Research Team",
-          "url": "#",
+          "url": "/research-team",
           "target": "_self",
           "icon": "✦",
           "enabled": true,
@@ -95,7 +95,7 @@
       "label": "Research Team Shortcut Pill",
       "display_text": "👥 Research Team ↗",
       "title": "Research Team",
-      "url": "#",
+      "url": "/research-team",
       "target": "_self",
       "icon": "👥",
       "enabled": true,

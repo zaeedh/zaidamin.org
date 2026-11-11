@@ -2967,80 +2967,58 @@ function initCoinPortraitEngine() {
 
 
 
-  const DEFAULT_PORTRAITS = [
-
-    {
-
-      webp: 'assets/images/portraits/portrait-1.webp',
-
-      png: 'assets/images/portraits/portrait-1.png',
-
-      alt: 'Dr. Zaid Amin, Ph.D. — Academic Portrait'
-
-    },
-
-    {
-
-      webp: 'assets/images/portraits/portrait-2.webp',
-
-      png: 'assets/images/portraits/portrait-2.png',
-
-      alt: 'Dr. Zaid Amin, Ph.D. — Singapore'
-
-    },
-
-    {
-
-      webp: 'assets/images/portraits/portrait-3.webp',
-
-      png: 'assets/images/portraits/portrait-3.png',
-
-      alt: 'Dr. Zaid Amin, Ph.D. — Barelang Scenic'
-
-    },
-
-    {
-
-      webp: 'assets/images/portraits/portrait-4.webp',
-
-      png: 'assets/images/portraits/portrait-4.png',
-
-      alt: 'Dr. Zaid Amin, Ph.D. — Dataran Merdeka KL'
-
+  const normalizeAsset = (u) => {
+    if (!u) return '';
+    let res = u.startsWith('assets/') ? '/' + u : u;
+    if (res.includes('/assets/images/portraits/') && !res.includes('?v=')) {
+      res += '?v=5.1';
     }
+    return res;
+  };
 
+  const DEFAULT_PORTRAITS = [
+    {
+      webp: '/assets/images/portraits/portrait-1.webp?v=5.1',
+      png: '/assets/images/portraits/portrait-1.png?v=5.1',
+      alt: 'Dr. Zaid Amin, Ph.D. — Academic Portrait'
+    },
+    {
+      webp: '/assets/images/portraits/portrait-2.webp?v=5.1',
+      png: '/assets/images/portraits/portrait-2.png?v=5.1',
+      alt: 'Dr. Zaid Amin, Ph.D. — Singapore'
+    },
+    {
+      webp: '/assets/images/portraits/portrait-3.webp?v=5.1',
+      png: '/assets/images/portraits/portrait-3.png?v=5.1',
+      alt: 'Dr. Zaid Amin, Ph.D. — Barelang Scenic'
+    },
+    {
+      webp: '/assets/images/portraits/portrait-4.webp?v=5.1',
+      png: '/assets/images/portraits/portrait-4.png?v=5.1',
+      alt: 'Dr. Zaid Amin, Ph.D. — Dataran Merdeka KL'
+    }
   ];
 
 
 
   const PORTRAITS = (window.PORTALS_COIN_PORTRAITS && Array.isArray(window.PORTALS_COIN_PORTRAITS) && window.PORTALS_COIN_PORTRAITS.length > 0)
-
     ? window.PORTALS_COIN_PORTRAITS.map(p => ({
-
-        webp: p.webp || p.url || p.png || '',
-
-        png: p.fallback || p.png || p.url || '',
-
+        webp: normalizeAsset(p.webp || p.url || p.png || ''),
+        png: normalizeAsset(p.fallback || p.png || p.url || ''),
         alt: p.alt || p.title || 'Dr. Zaid Amin, Ph.D.'
-
       }))
-
     : DEFAULT_PORTRAITS;
 
-
-
   // Preload all portrait images into memory for instant, buttery flips
-
   PORTRAITS.forEach(p => {
-
-    const img = new Image();
-
-    img.src = p.png;
-
-    const imgWebp = new Image();
-
-    imgWebp.src = p.webp;
-
+    if (p.png) {
+      const img = new Image();
+      img.src = normalizeAsset(p.png);
+    }
+    if (p.webp) {
+      const imgWebp = new Image();
+      imgWebp.src = normalizeAsset(p.webp);
+    }
   });
 
 
@@ -3056,26 +3034,36 @@ function initCoinPortraitEngine() {
 
 
   function updateFaceImage(faceEl, portrait) {
-
-    const webpSrc = portrait.webp || portrait.png;
-
-    const pngSrc = portrait.png || portrait.webp;
-
+    const webpSrc = normalizeAsset(portrait.webp || portrait.png);
+    const pngSrc = normalizeAsset(portrait.png || portrait.webp);
     const altText = portrait.alt || 'Dr. Zaid Amin, Ph.D.';
-
     const picture = faceEl.querySelector('picture');
-
     if (picture) {
-
       const source = picture.querySelector('source');
-
       const img = picture.querySelector('img');
-
-      if (source && webpSrc.endsWith('.webp')) {
-
+      if (source && webpSrc.includes('.webp')) {
         source.srcset = webpSrc;
-
       }
+      if (img) {
+        img.src = pngSrc;
+        img.alt = altText;
+        img.onerror = function() {
+          this.onerror = null;
+          this.src = '/assets/images/portraits/portrait-1.png?v=5.1';
+        };
+      }
+    } else {
+      const img = faceEl.querySelector('img');
+      if (img) {
+        img.src = webpSrc;
+        img.alt = altText;
+        img.onerror = function() {
+          this.onerror = null;
+          this.src = '/assets/images/portraits/portrait-1.png?v=5.1';
+        };
+      }
+    }
+  }
 
       if (img) {
 
