@@ -98,7 +98,11 @@
 
 
 
-  <!-- Typography & Styling -->
+  <!-- High-Speed Resource Preconnection & DNS Prefetching -->
+
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -106,7 +110,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/assets/css/style.css?v=4.2">
+  <link rel="stylesheet" href="/assets/css/style.min.css?v=5.0">
 
   <!-- High-Definition Monogram Favicon Suite (Dr. Zaid Amin) -->
 
@@ -369,7 +373,7 @@
 
         <source srcset="assets/images/lighthouse-banner.webp" type="image/webp">
 
-        <img src="assets/images/lighthouse-banner.jpg" class="lighthouse-bg-img" alt="Lighthouse Storm over Ocean" width="2048" height="790">
+        <img src="assets/images/lighthouse-banner.jpg" class="lighthouse-bg-img" alt="Lighthouse Storm over Ocean" width="2048" height="790" fetchpriority="high" decoding="async">
 
       </picture>
 
@@ -837,7 +841,7 @@
 
               <div class="coin-face coin-face-front" id="coin-face-front">
 
-                <img src="assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg" alt="Zaid Amin, Ph.D. — Academic Portrait" class="ref-photo-img" width="114" height="114">
+                <img src="assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg" alt="Zaid Amin, Ph.D. — Academic Portrait" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="sync">
 
                 <div class="coin-specular-gleam"></div>
 
@@ -849,7 +853,7 @@
 
                   <source srcset="assets/images/portraits/portrait-2.webp" type="image/webp">
 
-                  <img src="assets/images/portraits/portrait-2.png" alt="Zaid Amin, Ph.D. — Secondary Portrait" class="ref-photo-img" width="114" height="114">
+                  <img src="assets/images/portraits/portrait-2.png" alt="Zaid Amin, Ph.D. — Secondary Portrait" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="sync">
 
                 </picture>
 

@@ -98,7 +98,11 @@
 
 
 
-  <!-- Typography & Styling -->
+  <!-- High-Speed Resource Preconnection & DNS Prefetching -->
+
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -106,7 +110,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/assets/css/style.css?v=4.2">
+  <link rel="stylesheet" href="/assets/css/style.min.css?v=5.0">
 
   <!-- High-Definition Monogram Favicon Suite (Dr. Zaid Amin) -->
 
@@ -433,7 +437,7 @@
 
         <source srcset="assets/images/lighthouse-banner.webp" type="image/webp">
 
-        <img src="assets/images/lighthouse-banner.jpg" class="lighthouse-bg-img" alt="Lighthouse Storm over Ocean" width="2048" height="790">
+        <img src="assets/images/lighthouse-banner.jpg" class="lighthouse-bg-img" alt="Lighthouse Storm over Ocean" width="2048" height="790" fetchpriority="high" decoding="async">
 
       </picture>
 
@@ -614,7 +618,7 @@
 
         <div id="reader-hero-img-wrap" style="display: none;">
 
-          <img src="" alt="Hero Image" id="reader-hero-img" class="article-hero-banner">
+          <img src="" alt="Hero Image" id="reader-hero-img" class="article-hero-banner" fetchpriority="high" decoding="async">
 
         </div>
 
@@ -681,7 +685,7 @@
         <div id="article-lightbox-caption" class="article-lightbox-caption"></div>
         <div class="article-lightbox-actions">
           <button type="button" class="article-lightbox-btn" onclick="toggleNativeFullscreen()" title="Toggle Browser Fullscreen">⛶ Full Screen Mode</button>
-          <a id="article-lightbox-download" href="" target="_blank" class="article-lightbox-btn" download title="Open Original High-Res">↗ Open Original</a>
+          <a id="article-lightbox-download" href="" target="_blank" rel="noopener noreferrer" class="article-lightbox-btn" download title="Open Original High-Res">↗ Open Original</a>
         </div>
       </div>
     </div>
@@ -787,7 +791,13 @@
 
             });
 
-            // 0B. Wrap standalone images in Golden Ratio Scholarly Figure plaques
+            // 0B. Modern Performance & Asynchronous Lazy-Loading for Article Figures
+            bodyElem.querySelectorAll('img').forEach(function(img) {
+              if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+              if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+            });
+
+            // 0C. Wrap standalone images in Golden Ratio Scholarly Figure plaques
             bodyElem.querySelectorAll('img').forEach(function(img) {
               if (img.closest('figure') || img.closest('.article-hero-banner') || img.classList.contains('article-bio-avatar')) return;
               var parentA = img.closest('a');

@@ -44,6 +44,23 @@ def load_json(filename):
 
 
 
+def minify_css(css: str) -> str:
+    """Enterprise-grade CSS minifier preserving calc, media queries, and animations."""
+    # Strip multiline comments
+    css = re.sub(r'/\*.*?\*/', '', css, flags=re.DOTALL)
+    # Collapse multiple whitespaces
+    css = re.sub(r'\s+', ' ', css)
+    # Remove space around delimiters safely
+    css = re.sub(r'\s*([\{\}:;,>+~])\s*', r'\1', css)
+    # Restore necessary space in media queries around 'and'
+    css = re.sub(r'\band\(', 'and (', css)
+    css = re.sub(r'\)\band', ') and', css)
+    # Remove trailing semicolons before closing brace
+    css = re.sub(r';\}', '}', css)
+    return css.strip()
+
+
+
 # ==============================================================================
 # SACRED LOTUS SYMBOL SVG (PRISTINE GOLDEN LOTUS EMBLEM)
 # ==============================================================================
@@ -408,7 +425,11 @@ def get_html_head(title="Dr. Zaid Amin | Academic & Computational Researcher | z
 
 
 
-  <!-- Typography & Styling -->
+  <!-- High-Speed Resource Preconnection & DNS Prefetching -->
+
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -416,7 +437,7 @@ def get_html_head(title="Dr. Zaid Amin | Academic & Computational Researcher | z
 
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/assets/css/style.css?v=4.2">
+  <link rel="stylesheet" href="/assets/css/style.min.css?v=5.0">
 
   <!-- High-Definition Monogram Favicon Suite (Dr. Zaid Amin) -->
 
@@ -956,7 +977,7 @@ def get_page_header(active_page="home"):
 
           <source srcset="{img_url}" type="image/webp">
 
-          <img src="{img_fallback}" class="lighthouse-bg-img" alt="{img_alt}" width="2048" height="790">
+          <img src="{img_fallback}" class="lighthouse-bg-img" alt="{img_alt}" width="2048" height="790" fetchpriority="high" decoding="async">
 
         </picture>
 
@@ -968,7 +989,7 @@ def get_page_header(active_page="home"):
 
         <source srcset="{img_url}" type="image/webp">
 
-        <img src="{img_fallback}" class="lighthouse-bg-img" alt="{img_alt}" width="2048" height="790">
+        <img src="{img_fallback}" class="lighthouse-bg-img" alt="{img_alt}" width="2048" height="790" fetchpriority="high" decoding="async">
 
       </picture>'''
 
@@ -3650,13 +3671,13 @@ def generate_golden_ratio_home():
 
                   <source srcset="{ph_front_webp}" type="image/webp">
 
-                  <img src="{ph_front_png}" alt="{ph_front_alt}" class="ref-photo-img" width="114" height="114">
+                  <img src="{ph_front_png}" alt="{ph_front_alt}" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="sync">
 
                 </picture>"""
 
         else:
 
-            front_media_html = f"""<img src="{ph_front_webp}" alt="{ph_front_alt}" class="ref-photo-img" width="114" height="114">"""
+            front_media_html = f"""<img src="{ph_front_webp}" alt="{ph_front_alt}" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="sync">"""
 
 
 
@@ -3666,13 +3687,13 @@ def generate_golden_ratio_home():
 
                   <source srcset="{ph_back_webp}" type="image/webp">
 
-                  <img src="{ph_back_png}" alt="{ph_back_alt}" class="ref-photo-img" width="114" height="114">
+                  <img src="{ph_back_png}" alt="{ph_back_alt}" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="sync">
 
                 </picture>"""
 
         else:
 
-            back_media_html = f"""<img src="{ph_back_webp}" alt="{ph_back_alt}" class="ref-photo-img" width="114" height="114">"""
+            back_media_html = f"""<img src="{ph_back_webp}" alt="{ph_back_alt}" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="sync">"""
 
 
 
@@ -9861,7 +9882,13 @@ def generate_article_reader_page():
 
             });
 
-            // 0B. Wrap standalone images in Golden Ratio Scholarly Figure plaques
+            // 0B. Modern Performance & Asynchronous Lazy-Loading for Article Figures
+            bodyElem.querySelectorAll('img').forEach(function(img) {
+              if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+              if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+            });
+
+            // 0C. Wrap standalone images in Golden Ratio Scholarly Figure plaques
             bodyElem.querySelectorAll('img').forEach(function(img) {
               if (img.closest('figure') || img.closest('.article-hero-banner') || img.classList.contains('article-bio-avatar')) return;
               var parentA = img.closest('a');
@@ -10185,7 +10212,7 @@ def generate_article_reader_page():
 
         <div id="reader-hero-img-wrap" style="display: none;">
 
-          <img src="" alt="Hero Image" id="reader-hero-img" class="article-hero-banner">
+          <img src="" alt="Hero Image" id="reader-hero-img" class="article-hero-banner" fetchpriority="high" decoding="async">
 
         </div>
 
@@ -10252,7 +10279,7 @@ def generate_article_reader_page():
         <div id="article-lightbox-caption" class="article-lightbox-caption"></div>
         <div class="article-lightbox-actions">
           <button type="button" class="article-lightbox-btn" onclick="toggleNativeFullscreen()" title="Toggle Browser Fullscreen">⛶ Full Screen Mode</button>
-          <a id="article-lightbox-download" href="" target="_blank" class="article-lightbox-btn" download title="Open Original High-Res">↗ Open Original</a>
+          <a id="article-lightbox-download" href="" target="_blank" rel="noopener noreferrer" class="article-lightbox-btn" download title="Open Original High-Res">↗ Open Original</a>
         </div>
       </div>
     </div>
@@ -11248,6 +11275,16 @@ def build_all():
         print(f"  Compiled: {filename} ({len(content)} chars)")
 
 
+
+    # Minify CSS for ultra-fast global delivery
+    css_src = ASSETS_DIR / "css" / "style.css"
+    if css_src.exists():
+        with open(css_src, "r", encoding="utf-8") as f:
+            raw_css = f.read()
+        min_css = minify_css(raw_css)
+        with open(ASSETS_DIR / "css" / "style.min.css", "w", encoding="utf-8") as f:
+            f.write(min_css)
+        print(f"  Minified CSS: {len(raw_css)/1024:.1f} KB -> {len(min_css)/1024:.1f} KB ({((len(raw_css)-len(min_css))/len(raw_css))*100:.1f}% reduction)")
 
     # Copy assets
 
