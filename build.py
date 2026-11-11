@@ -10114,12 +10114,12 @@ def generate_article_reader_page():
 
       <!-- Article Header (Harmonized Gestalt Kicker & Golden Ratio Alignment) -->
       <header class="article-reader-hero">
-        <div class="article-hero-kicker-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-          <div class="article-kicker-left" style="display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0;">
+        <div class="article-hero-kicker-row">
+          <div class="article-kicker-left">
             <span class="article-badge-cat" id="reader-cat">&#10022; Article</span>
             <span class="article-time-badge" id="reader-time">5 min read</span>
           </div>
-          <a href="/research#articles" class="article-back-link font-cinzel" style="margin-left: auto;" title="Return to Activity &amp; Project Hub">
+          <a href="/research#articles" class="article-back-link font-cinzel" title="Return to Activity &amp; Project Hub">
             <svg class="back-arrow-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
             <span>Back to Activity &amp; Project</span>
           </a>
