@@ -314,7 +314,7 @@ function setArticleEditorMode(mode) {
       if (currentArticleEditorMode === 'code') {
         insertArticleFormat('para', level);
         const headSel = document.getElementById('art-tool-heading');
-        if (headSel) headSel.value = 'p';
+        if (headSel) headSel.value = '';
         return;
       }
       const visualElem = document.getElementById('art-form-visual-editor');
@@ -326,32 +326,273 @@ function setArticleEditorMode(mode) {
         }
       }
 
+      const sel = window.getSelection();
+      const selText = sel ? sel.toString().trim() : '';
+      let node = sel && sel.anchorNode ? (sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode) : null;
+      let block = node ? node.closest('p, div, h1, h2, h3, h4, h5, h6, blockquote, figcaption, figure, pre, table, caption') : null;
+
+      // 1. Normal text (for read)
       if (level === 'p') {
-        document.execCommand('formatBlock', false, '<p>');
+        if (block && visualElem.contains(block) && (block.tagName !== 'P' || block.className || block.getAttribute('style'))) {
+          const cleaned = cleanBlockElementToDefault(block, visualElem);
+          if (cleaned) {
+            cleaned.style.fontSize = '1.05rem';
+            cleaned.style.lineHeight = '1.82';
+            cleaned.style.color = '#e2e8f0';
+            cleaned.style.fontStyle = 'normal';
+            cleaned.style.fontWeight = '400';
+            cleaned.style.margin = '1.618rem 0';
+            cleaned.style.textAlign = 'left';
+          }
+        } else {
+          document.execCommand('formatBlock', false, '<p>');
+        }
+        showToast('Normal text formatted (1.05rem academic reading body)');
+
+      // 2. Figure and table caption
+      } else if (level === 'caption' || level === 'fig_caption') {
+        if (selText) {
+          if (block && block.tagName === 'FIGCAPTION') {
+            block.className = 'figure-caption';
+            block.style.fontSize = '0.85rem';
+            block.style.color = '#94a3b8';
+            block.style.fontStyle = 'italic';
+            block.style.textAlign = 'center';
+            block.style.margin = '8px auto 16px auto';
+            block.style.lineHeight = '1.5';
+            block.style.letterSpacing = '0.02em';
+            block.style.display = 'block';
+          } else if (block && block.closest('figure')) {
+            const parentFig = block.closest('figure');
+            let fc = parentFig.querySelector('figcaption');
+            if (!fc) {
+              fc = document.createElement('figcaption');
+              parentFig.appendChild(fc);
+            }
+            fc.className = 'figure-caption';
+            fc.style.fontSize = '0.85rem';
+            fc.style.color = '#94a3b8';
+            fc.style.fontStyle = 'italic';
+            fc.style.textAlign = 'center';
+            fc.style.margin = '8px auto 16px auto';
+            fc.style.lineHeight = '1.5';
+            fc.style.letterSpacing = '0.02em';
+            fc.style.display = 'block';
+            fc.textContent = selText;
+            if (block !== parentFig && block !== fc) block.remove();
+          } else {
+            const prevImg = block && block.previousElementSibling && block.previousElementSibling.tagName === 'IMG' ? block.previousElementSibling : null;
+            const nextImg = block && block.nextElementSibling && block.nextElementSibling.tagName === 'IMG' ? block.nextElementSibling : null;
+            const adjImg = prevImg || nextImg;
+            if (adjImg) {
+              const newFig = document.createElement('figure');
+              newFig.className = 'fig-standard';
+              newFig.style.margin = '24px auto';
+              newFig.style.textAlign = 'center';
+              newFig.style.maxWidth = '82%';
+              adjImg.parentNode.insertBefore(newFig, adjImg);
+              newFig.appendChild(adjImg);
+              const fc = document.createElement('figcaption');
+              fc.className = 'figure-caption';
+              fc.style.fontSize = '0.85rem';
+              fc.style.color = '#94a3b8';
+              fc.style.fontStyle = 'italic';
+              fc.style.textAlign = 'center';
+              fc.style.margin = '8px auto 16px auto';
+              fc.style.lineHeight = '1.5';
+              fc.style.letterSpacing = '0.02em';
+              fc.style.display = 'block';
+              fc.textContent = selText;
+              newFig.appendChild(fc);
+              if (block) block.remove();
+            } else if (block && block.textContent.trim() === selText && block.tagName === 'P') {
+              block.className = 'figure-caption';
+              block.style.fontSize = '0.85rem';
+              block.style.color = '#94a3b8';
+              block.style.fontStyle = 'italic';
+              block.style.textAlign = 'center';
+              block.style.margin = '8px auto 16px auto';
+              block.style.lineHeight = '1.5';
+              block.style.letterSpacing = '0.02em';
+              block.style.display = 'block';
+            } else {
+              document.execCommand('insertHTML', false, `<p class="figure-caption" style="font-size: 0.85rem; color: #94a3b8; font-style: italic; text-align: center; margin: 8px auto 16px auto; line-height: 1.5; letter-spacing: 0.02em; display: block;">${escapeHTML(selText)}</p>`);
+            }
+          }
+        } else {
+          // No text selected: check if an image is selected
+          if (selectedArticleImage) {
+            formatSelectedArticleImage('caption');
+            return;
+          }
+          const curFig = block ? (block.tagName === 'FIGURE' ? block : block.closest('figure')) : null;
+          if (curFig) {
+            let fc = curFig.querySelector('figcaption');
+            if (!fc) {
+              fc = document.createElement('figcaption');
+              curFig.appendChild(fc);
+            }
+            fc.className = 'figure-caption';
+            fc.style.fontSize = '0.85rem';
+            fc.style.color = '#94a3b8';
+            fc.style.fontStyle = 'italic';
+            fc.style.textAlign = 'center';
+            fc.style.margin = '8px auto 16px auto';
+            fc.style.lineHeight = '1.5';
+            fc.style.letterSpacing = '0.02em';
+            fc.style.display = 'block';
+            fc.textContent = 'Figure: Description of visual evidence...';
+          } else {
+            document.execCommand('insertHTML', false, `<p class="figure-caption" style="font-size: 0.85rem; color: #94a3b8; font-style: italic; text-align: center; margin: 8px auto 16px auto; line-height: 1.5; letter-spacing: 0.02em; display: block;">Figure 1: Schematic caption description...</p><p>&nbsp;</p>`);
+          }
+        }
+        showToast('Figure / Table Caption formatted (0.85rem Italic Slate)');
+
+      // 3. Header Title (H2 Major Section)
       } else if (level === 'h2') {
         document.execCommand('formatBlock', false, '<h2>');
+        const h2 = visualElem.querySelector('h2:focus-within') || (sel && sel.anchorNode ? (sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode).closest('h2') : null);
+        if (h2) {
+          h2.style.fontFamily = "'Cinzel', Georgia, serif";
+          h2.style.fontSize = "1.75rem";
+          h2.style.color = "#fce09b";
+          h2.style.letterSpacing = "0.04em";
+          h2.style.fontWeight = "700";
+          h2.style.margin = "2.2rem 0 1rem 0";
+        }
+        showToast('Header Title formatted (H2 Major Section - Cinzel Gold)');
+
+      // 4. Sub header title (H3 Subsection & H4 Minor)
       } else if (level === 'h3') {
         document.execCommand('formatBlock', false, '<h3>');
+        const h3 = visualElem.querySelector('h3:focus-within') || (sel && sel.anchorNode ? (sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode).closest('h3') : null);
+        if (h3) {
+          h3.style.fontFamily = "'Cinzel', Georgia, serif";
+          h3.style.fontSize = "1.35rem";
+          h3.style.color = "#fef08a";
+          h3.style.letterSpacing = "0.03em";
+          h3.style.fontWeight = "600";
+          h3.style.margin = "1.8rem 0 0.8rem 0";
+        }
+        showToast('Sub Header Title formatted (H3 Subsection - Soft Gold)');
+
       } else if (level === 'h4') {
         document.execCommand('formatBlock', false, '<h4>');
+        const h4 = visualElem.querySelector('h4:focus-within') || (sel && sel.anchorNode ? (sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode).closest('h4') : null);
+        if (h4) {
+          h4.style.fontFamily = "'Inter', sans-serif";
+          h4.style.fontSize = "1.15rem";
+          h4.style.color = "#38bdf8";
+          h4.style.letterSpacing = "0.02em";
+          h4.style.fontWeight = "600";
+          h4.style.margin = "1.4rem 0 0.6rem 0";
+        }
+        showToast('Minor Heading formatted (H4 Inter Cyan)');
+
+      // 5. Image/object around the text
+      } else if (level === 'wrap_left' || level === 'fig_left') {
+        if (selectedArticleImage || (block && (block.tagName === 'FIGURE' || block.querySelector('img')))) {
+          formatSelectedArticleImage('left');
+        } else if (block) {
+          block.style.float = 'left';
+          block.style.maxWidth = '46%';
+          block.style.margin = '12px 24px 20px 0';
+          block.style.clear = 'left';
+          showToast('Object floated Left (Text wraps right)');
+        }
+
+      } else if (level === 'wrap_right' || level === 'fig_right') {
+        if (selectedArticleImage || (block && (block.tagName === 'FIGURE' || block.querySelector('img')))) {
+          formatSelectedArticleImage('right');
+        } else if (block) {
+          block.style.float = 'right';
+          block.style.maxWidth = '46%';
+          block.style.margin = '12px 0 20px 24px';
+          block.style.clear = 'right';
+          showToast('Object floated Right (Text wraps left)');
+        }
+
+      } else if (level === 'wrap_center' || level === 'fig_center') {
+        if (selectedArticleImage || (block && (block.tagName === 'FIGURE' || block.querySelector('img')))) {
+          formatSelectedArticleImage('center');
+        } else if (block) {
+          block.style.float = 'none';
+          block.style.margin = '1.8rem auto';
+          block.style.textAlign = 'center';
+          block.style.clear = 'both';
+          showToast('Object Centered (Clear floats)');
+        }
+
+      } else if (level === 'wrap_full' || level === 'fig_full') {
+        if (selectedArticleImage || (block && (block.tagName === 'FIGURE' || block.querySelector('img')))) {
+          formatSelectedArticleImage('full');
+        } else if (block) {
+          block.style.float = 'none';
+          block.style.width = '100%';
+          block.style.margin = '2rem 0';
+          block.style.clear = 'both';
+          showToast('Object 100% Full Column Width');
+        }
+
+      // 6. Code style (Block & Inline)
+      } else if (level === 'code_block') {
+        const codeText = selText ? escapeHTML(selText) : '// Theoretical Algorithm / Implementation\nfunction harmonyEngine(vector) {\n  return vector.reduce((acc, v) => acc + v, 0);\n}';
+        document.execCommand('insertHTML', false, `\n<pre class="code-block" style="background: #020810; border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 8px; padding: 14px 18px; font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; color: #bae6fd; overflow-x: auto; margin: 1.6rem 0; line-height: 1.6;"><code>${codeText}</code></pre><p>&nbsp;</p>\n`);
+        showToast('Code Block inserted (JetBrains Mono)');
+
+      } else if (level === 'code_inline' || level === 'code') {
+        const token = selText ? escapeHTML(selText) : 'code_identifier';
+        document.execCommand('insertHTML', false, `<code style="font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: rgba(56, 189, 248, 0.12); color: #bae6fd; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.2);">${token}</code>`);
+        showToast('Inline Code Token formatted');
+
+      // 7. Equation (LaTeX) style
+      } else if (level === 'math_block' || level === 'latex_block') {
+        const mathContent = selText || '\\mathcal{H}(P, Q) = \\sum_{x \\in \\mathcal{X}} P(x) \\log \\frac{P(x)}{Q(x)}';
+        document.execCommand('insertHTML', false, `\n<div class="latex-math-block" style="background: #030d1a; border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 16px 22px; margin: 1.8em 0; font-family: 'JetBrains Mono', monospace; color: #fef08a; text-align: center; font-size: 1.05rem; box-shadow: 0 4px 16px rgba(0,0,0,0.3);">$$ ${mathContent} $$</div><p>&nbsp;</p>\n`);
+        showToast('LaTeX Display Math Block inserted');
+
+      } else if (level === 'math_inline' || level === 'latex_inline') {
+        const inlineFormula = selText || 'E = mc^2';
+        document.execCommand('insertHTML', false, `<span class="inline-latex" style="font-family: 'JetBrains Mono', monospace; color: #fef08a; background: rgba(212, 175, 55, 0.12); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(212, 175, 55, 0.25);">\\( ${inlineFormula} \\)</span>`);
+        showToast('Inline LaTeX Equation formatted');
+
+      // 8. Quote (Scholarly Epigraph / Axiom)
       } else if (level === 'quote') {
-        document.execCommand('formatBlock', false, '<blockquote>');
+        const quoteText = selText || 'A society that prioritizes courtesy over coercion builds durable civic infrastructure.';
+        document.execCommand('insertHTML', false, `\n<blockquote style="border-left: 3px solid #d4af37; padding: 0.8rem 1.6rem; margin: 1.8rem 1.5rem; background: rgba(212, 175, 55, 0.04); font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.22rem; font-style: italic; color: #fce09b; line-height: 1.68;">${quoteText}</blockquote><p>&nbsp;</p>\n`);
+        showToast('Scholarly Epigraph / Quote formatted');
+
+      // 9. Premium Editing Presets
       } else if (level === 'lead') {
-        const sel = window.getSelection().toString();
-        document.execCommand('insertHTML', false, `<p class="lead-para">${sel || 'Editorial lead introduction paragraph text...'}</p>`);
+        const leadText = selText || 'Editorial lead introductory paragraph that establishes the conceptual premise...';
+        document.execCommand('insertHTML', false, `\n<p class="lead-para" style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.25rem; line-height: 1.85; color: #f8fafc; margin: 1.8rem 0; font-style: normal;">${leadText}</p>\n`);
+        showToast('Lead Intro Paragraph formatted (Editorial Serif 1.25rem)');
+
       } else if (level === 'callout') {
-        const sel = window.getSelection().toString();
-        document.execCommand('insertHTML', false, `<div class="callout-box"><strong>💡 Key Finding:</strong> ${sel || 'Synthesized key takeaway finding...'}</div>`);
+        const calloutText = selText || 'Synthesized empirical conclusion or primary outcome finding...';
+        document.execCommand('insertHTML', false, `\n<div class="callout-box" style="background: rgba(8, 28, 50, 0.6); border: 1px solid rgba(212, 175, 55, 0.4); border-left: 4px solid #d4af37; border-radius: 8px; padding: 16px 20px; margin: 1.8rem 0; color: #e2e8f0; font-size: 0.98rem; line-height: 1.65;"><strong style="color: #fce09b; display: block; margin-bottom: 6px; font-family: 'Cinzel', serif; letter-spacing: 0.03em;">💡 Key Finding:</strong> ${calloutText}</div><p>&nbsp;</p>\n`);
+        showToast('Key Finding Callout Box formatted');
+
       } else if (level === 'warning') {
-        const sel = window.getSelection().toString();
-        document.execCommand('insertHTML', false, `<div class="callout-box callout-warning"><strong>⚠️ Policy Note:</strong> ${sel || 'Critical operational or governance note...'}</div>`);
+        const warnText = selText || 'Critical operational boundary, privacy requirement, or governance directive...';
+        document.execCommand('insertHTML', false, `\n<div class="callout-box callout-warning" style="background: rgba(40, 20, 10, 0.6); border: 1px solid rgba(245, 158, 11, 0.5); border-left: 4px solid #f59e0b; border-radius: 8px; padding: 16px 20px; margin: 1.8rem 0; color: #fed7aa; font-size: 0.98rem; line-height: 1.65;"><strong style="color: #fbbf24; display: block; margin-bottom: 6px; font-family: 'Cinzel', serif; letter-spacing: 0.03em;">⚠️ Policy Note:</strong> ${warnText}</div><p>&nbsp;</p>\n`);
+        showToast('Policy Alert Box formatted');
+
       } else if (level === 'detail') {
-        const sel = window.getSelection().toString();
-        document.execCommand('insertHTML', false, `<p class="detail-para" style="font-size: 0.88rem; color: #94a3b8; font-style: italic;">${sel || 'Scholarly observation footnote...'}</p>`);
+        const detailText = selText || '1. Methodological note or scholarly citation reference...';
+        document.execCommand('insertHTML', false, `\n<p class="detail-para" style="font-size: 0.82rem; color: #94a3b8; font-style: italic; margin: 0.8rem 0; line-height: 1.5; border-top: 1px solid rgba(148, 163, 184, 0.2); padding-top: 6px;">${detailText}</p>\n`);
+        showToast('Footnote / Annotation formatted');
+
+      } else if (level === 'table') {
+        applyArticleVisualFormat('table');
+
+      } else if (level === 'divider' || level === 'hr') {
+        applyArticleVisualFormat('hr');
       }
+
       onVisualArticleInput();
       const headSel = document.getElementById('art-tool-heading');
-      if (headSel) headSel.value = 'p';
+      if (headSel) headSel.value = '';
     }
 
     function applyArticleFontSize(sizeVal) {
@@ -1387,14 +1628,41 @@ function setArticleEditorMode(mode) {
       let rep = '';
 
       if (type === 'para') {
-        if (value === 'lead') rep = `\n<p class="lead-para">${sel || 'Lead introductory paragraph with emphasized prominence...'}</p>\n`;
-        else if (value === 'detail') rep = `\n<p class="detail-para">${sel || 'Detailed academic context or footnote annotation...'}</p>\n`;
-        else if (value === 'callout') rep = `\n<div class="callout-box"><strong>Key Finding:</strong> ${sel || 'Synthesized empirical conclusion or core discovery...'}</div>\n`;
-        else if (value === 'h2') rep = `\n<h2>${sel || 'Section Heading'}</h2>\n`;
-        else if (value === 'h3') rep = `\n<h3>${sel || 'Subheading'}</h3>\n`;
-        else if (value === 'h4') rep = `\n<h4>${sel || 'Minor Subsection Heading'}</h4>\n`;
-        else if (value === 'quote') rep = `\n<blockquote>${sel || 'Academic quotation or theoretical axiom...'}</blockquote>\n`;
-        else if (value === 'p') rep = `\n<p>${sel || 'Paragraph text...'}</p>\n`;
+        if (value === 'lead') rep = `\n<p class="lead-para" style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.25rem; line-height: 1.85; color: #f8fafc; margin: 1.8rem 0;">${sel || 'Lead introductory paragraph with emphasized prominence...'}</p>\n`;
+        else if (value === 'caption' || value === 'fig_caption') rep = `\n<figcaption class="figure-caption" style="font-size: 0.85rem; color: #94a3b8; font-style: italic; text-align: center; margin: 8px auto 16px auto; line-height: 1.5; letter-spacing: 0.02em; display: block;">${sel || 'Figure 1: Schematic diagram of experimental architecture...'}</figcaption>\n`;
+        else if (value === 'detail') rep = `\n<p class="detail-para" style="font-size: 0.82rem; color: #94a3b8; font-style: italic; margin: 0.8rem 0; line-height: 1.5; border-top: 1px solid rgba(148, 163, 184, 0.2); padding-top: 6px;">${sel || '1. Methodological note or scholarly citation reference...'}</p>\n`;
+        else if (value === 'callout') rep = `\n<div class="callout-box" style="background: rgba(8, 28, 50, 0.6); border: 1px solid rgba(212, 175, 55, 0.4); border-left: 4px solid #d4af37; border-radius: 8px; padding: 16px 20px; margin: 1.8rem 0; color: #e2e8f0; font-size: 0.98rem; line-height: 1.65;"><strong style="color: #fce09b; display: block; margin-bottom: 6px; font-family: 'Cinzel', serif; letter-spacing: 0.03em;">💡 Key Finding:</strong> ${sel || 'Synthesized empirical conclusion or primary outcome...'}</div>\n`;
+        else if (value === 'warning') rep = `\n<div class="callout-box callout-warning" style="background: rgba(40, 20, 10, 0.6); border: 1px solid rgba(245, 158, 11, 0.5); border-left: 4px solid #f59e0b; border-radius: 8px; padding: 16px 20px; margin: 1.8rem 0; color: #fed7aa; font-size: 0.98rem; line-height: 1.65;"><strong style="color: #fbbf24; display: block; margin-bottom: 6px; font-family: 'Cinzel', serif; letter-spacing: 0.03em;">⚠️ Policy Note:</strong> ${sel || 'Critical operational boundary, privacy requirement, or governance directive...'}</div>\n`;
+        else if (value === 'h2') rep = `\n<h2 style="font-family: 'Cinzel', serif; font-size: 1.75rem; color: #fce09b; letter-spacing: 0.04em; margin: 2.2rem 0 1rem 0; font-weight: 700;">${sel || 'Section Heading'}</h2>\n`;
+        else if (value === 'h3') rep = `\n<h3 style="font-family: 'Cinzel', serif; font-size: 1.35rem; color: #fef08a; letter-spacing: 0.03em; margin: 1.8rem 0 0.8rem 0; font-weight: 600;">${sel || 'Subheading'}</h3>\n`;
+        else if (value === 'h4') rep = `\n<h4 style="font-family: 'Inter', sans-serif; font-size: 1.15rem; color: #38bdf8; letter-spacing: 0.02em; margin: 1.4rem 0 0.6rem 0; font-weight: 600;">${sel || 'Minor Subsection Heading'}</h4>\n`;
+        else if (value === 'quote') rep = `\n<blockquote style="border-left: 3px solid #d4af37; padding: 0.8rem 1.6rem; margin: 1.8rem 1.5rem; background: rgba(212, 175, 55, 0.04); font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.22rem; font-style: italic; color: #fce09b; line-height: 1.68;">${sel || 'A society that prioritizes courtesy over coercion builds durable civic infrastructure.'}</blockquote>\n`;
+        else if (value === 'code_block') rep = `\n<pre class="code-block" style="background: #020810; border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 8px; padding: 14px 18px; font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; color: #bae6fd; overflow-x: auto; margin: 1.6rem 0; line-height: 1.6;"><code>${sel || '// Theoretical Algorithm / Implementation\nfunction harmonyEngine(vector) {\n  return vector.reduce((acc, v) => acc + v, 0);\n}'}</code></pre>\n`;
+        else if (value === 'code_inline') rep = `<code style="font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: rgba(56, 189, 248, 0.12); color: #bae6fd; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.2);">${sel || 'code_identifier'}</code>`;
+        else if (value === 'math_block') rep = `\n<div class="latex-math-block" style="background: #030d1a; border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 16px 22px; margin: 1.8em 0; font-family: 'JetBrains Mono', monospace; color: #fef08a; text-align: center; font-size: 1.05rem; box-shadow: 0 4px 16px rgba(0,0,0,0.3);">$$ ${sel || '\\mathcal{H}(P, Q) = \\sum_{x \\in \\mathcal{X}} P(x) \\log \\frac{P(x)}{Q(x)}'} $$</div>\n`;
+        else if (value === 'math_inline') rep = `<span class="inline-latex" style="font-family: 'JetBrains Mono', monospace; color: #fef08a; background: rgba(212, 175, 55, 0.12); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(212, 175, 55, 0.25);">\\( ${sel || 'E = mc^2'} \\)</span>`;
+        else if (value === 'wrap_left') rep = `\n<figure class="fig-left" style="float: left; max-width: 46%; margin: 12px 24px 20px 0; clear: left;">${sel || '<img src="..." alt="Figure" style="width: 100%; border-radius: 8px;">\n<figcaption class="figure-caption" style="font-size: 0.85rem; color: #94a3b8; font-style: italic; text-align: center; margin-top: 8px;">Figure caption...</figcaption>'}</figure>\n`;
+        else if (value === 'wrap_right') rep = `\n<figure class="fig-right" style="float: right; max-width: 46%; margin: 12px 0 20px 24px; clear: right;">${sel || '<img src="..." alt="Figure" style="width: 100%; border-radius: 8px;">\n<figcaption class="figure-caption" style="font-size: 0.85rem; color: #94a3b8; font-style: italic; text-align: center; margin-top: 8px;">Figure caption...</figcaption>'}</figure>\n`;
+        else if (value === 'wrap_center') rep = `\n<figure class="fig-center" style="margin: 1.8rem auto; text-align: center; clear: both; max-width: 82%;">${sel || '<img src="..." alt="Figure" style="width: 100%; border-radius: 8px;">\n<figcaption class="figure-caption" style="font-size: 0.85rem; color: #94a3b8; font-style: italic; text-align: center; margin-top: 8px;">Figure caption...</figcaption>'}</figure>\n`;
+        else if (value === 'wrap_full') rep = `\n<figure class="fig-full" style="width: 100%; margin: 2rem 0; clear: both;">${sel || '<img src="..." alt="Figure" style="width: 100%; border-radius: 8px;">\n<figcaption class="figure-caption" style="font-size: 0.85rem; color: #94a3b8; font-style: italic; text-align: center; margin-top: 8px;">Figure caption...</figcaption>'}</figure>\n`;
+        else if (value === 'table') rep = `\n<table class="scholar-table" style="width: 100%; border-collapse: collapse; margin: 1.8em 0; font-size: 0.92rem; border: 1px solid rgba(56, 189, 248, 0.25);">
+  <thead>
+    <tr style="background: rgba(8, 28, 50, 0.9); color: #fce09b; font-family: 'Cinzel', serif;">
+      <th style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25); text-align: left;">Metric / Dimension</th>
+      <th style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25); text-align: left;">Baseline Model</th>
+      <th style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25); text-align: left;">HARMONY Framework</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25);">Prosocial Alignment</td>
+      <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25);">42.3%</td>
+      <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25); color: #34d399; font-weight: bold;">87.9%</td>
+    </tr>
+  </tbody>
+</table>\n`;
+        else if (value === 'divider') rep = `\n<hr class="section-divider" style="border: none; height: 1px; background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.6) 50%, transparent); margin: 2.4em 0;">\n`;
+        else if (value === 'p') rep = `\n<p style="font-size: 1.05rem; line-height: 1.82; color: #e2e8f0; margin: 1.618rem 0;">${sel || 'Paragraph text...'}</p>\n`;
       } else if (type === 'font' || type === 'font_family') {
         if (value === 'garamond') rep = `<span style="font-family: 'Cormorant Garamond', serif;">${sel || 'Editorial Serif Text'}</span>`;
         else if (value === 'cinzel') rep = `<span style="font-family: 'Cinzel', serif; letter-spacing: 0.05em;">${sel || 'Classical Display Text'}</span>`;

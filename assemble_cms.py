@@ -1656,15 +1656,18 @@ def run():
       clear: both !important;
     }
 
-    .art-visual-canvas figcaption {
+    .art-visual-canvas figcaption,
+    .art-visual-canvas .figure-caption,
+    .art-visual-canvas p.figure-caption {
       font-family: 'Cormorant Garamond', Georgia, serif !important;
-      font-size: 0.92rem !important;
+      font-size: 0.88rem !important;
       font-style: italic !important;
       color: #94a3b8 !important;
-      margin-top: 10px !important;
-      line-height: 1.55 !important;
+      margin: 8px auto 16px auto !important;
+      line-height: 1.5 !important;
       display: block !important;
-      letter-spacing: 0.01em !important;
+      letter-spacing: 0.02em !important;
+      text-align: center !important;
     }
 
     /* Figure size presets */
@@ -1969,6 +1972,28 @@ def run():
       color: #fef08a;
       text-align: center;
       font-size: 1.05rem;
+    }
+
+    .art-visual-canvas .inline-latex {
+      font-family: 'JetBrains Mono', monospace;
+      color: #fef08a;
+      background: rgba(212, 175, 55, 0.12);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(212, 175, 55, 0.25);
+    }
+
+    .art-visual-canvas pre.code-block {
+      background: #020810 !important;
+      border: 1px solid rgba(56, 189, 248, 0.25) !important;
+      border-radius: 8px !important;
+      padding: 14px 18px !important;
+      font-family: 'JetBrains Mono', monospace !important;
+      font-size: 0.88rem !important;
+      color: #bae6fd !important;
+      overflow-x: auto !important;
+      margin: 1.6rem 0 !important;
+      line-height: 1.6 !important;
     }
 
     /* Raw HTML Canvas */
@@ -2547,19 +2572,41 @@ def run():
                 </select>
               </div>
 
-              <!-- Hierarchy / Block Level Group -->
+              <!-- Hierarchy / Scholarly Presets Group -->
               <div class="art-toolbar-group">
                 <span class="art-toolbar-group-label">FORMAT</span>
-                <select id="art-tool-heading" class="art-tool-select" onchange="applyArticleHeading(this.value)" title="Choose Block Format / Heading Level">
-                  <option value="p">¶ Normal Body Paragraph</option>
-                  <option value="lead">★ Lead Intro Paragraph (Editorial Serif)</option>
-                  <option value="h2">H2 Major Section Heading (Cinzel Gold)</option>
-                  <option value="h3">H3 Subsection Heading (Cinzel Soft Gold)</option>
-                  <option value="h4">H4 Minor Heading (Inter Bold Cyan)</option>
-                  <option value="quote">❝ Scholarly Epigraph / Blockquote</option>
-                  <option value="callout">💡 Key Finding / Takeaway Box</option>
-                  <option value="warning">⚠️ Policy Note / Alert Box</option>
-                  <option value="detail">💬 Caption / Footnote Text</option>
+                <select id="art-tool-heading" class="art-tool-select" onchange="applyArticleHeading(this.value)" title="Scholarly Format Preset &amp; Typography Hierarchy">
+                  <option value="" disabled selected>✦ Format Preset...</option>
+                  <optgroup label="── 1. Reading &amp; Captions ──">
+                    <option value="p">1. ¶ Normal Text (Standard Body)</option>
+                    <option value="caption">2. 💬 Figure &amp; Table Caption (Italic Slate 0.85rem)</option>
+                    <option value="lead">★ Lead Intro Paragraph (Editorial Serif 1.25rem)</option>
+                    <option value="detail">📌 Footnote / Scholarly Observation (0.82rem)</option>
+                  </optgroup>
+                  <optgroup label="── 2. Headings &amp; Hierarchy ──">
+                    <option value="h2">3. H2 Header Title (Section - Cinzel Gold 1.75rem)</option>
+                    <option value="h3">4. H3 Sub Header Title (Subsection - Soft Gold 1.35rem)</option>
+                    <option value="h4">H4 Minor Heading (Inter Bold Cyan 1.15rem)</option>
+                  </optgroup>
+                  <optgroup label="── 3. Image &amp; Media Wrapping ──">
+                    <option value="wrap_left">5. ⫷ Image Float Left (Text Wraps Right)</option>
+                    <option value="wrap_right">5. ⫸ Image Float Right (Text Wraps Left)</option>
+                    <option value="wrap_center">5. ≡ Image Centered (Clear Float)</option>
+                    <option value="wrap_full">5. ⬛ Image Full Column Width (100%)</option>
+                  </optgroup>
+                  <optgroup label="── 4. Formulas, Code &amp; Data ──">
+                    <option value="code_block">6. ⌨️ Code Block (JetBrains Mono)</option>
+                    <option value="code_inline">6. &lt;/&gt; Inline Code Token</option>
+                    <option value="math_block">7. ∑ Equation Style (LaTeX Display Block)</option>
+                    <option value="math_inline">7. √ Inline Math Equation</option>
+                    <option value="table">📊 Scholarly Matrix Table</option>
+                  </optgroup>
+                  <optgroup label="── 5. Scholarly Quotes &amp; Callouts ──">
+                    <option value="quote">8. ❝ Quote (Scholarly Epigraph / Axiom)</option>
+                    <option value="callout">9. 💡 Key Finding Callout Box</option>
+                    <option value="warning">9. ⚠️ Policy &amp; Operational Alert Box</option>
+                    <option value="divider">― Golden Ratio Section Divider</option>
+                  </optgroup>
                 </select>
               </div>
 
@@ -2686,10 +2733,13 @@ def run():
                 <label class="art-tool-btn" title="Quick Upload Image File from Computer" style="cursor: pointer; display: inline-flex; align-items: center; margin: 0; font-weight: 600;">
                   📁 Upload <input type="file" id="art-figure-quick-file" accept="image/*" style="display: none;" onchange="handleDirectArticleImageUpload(event)">
                 </label>
+                <button type="button" class="art-tool-btn art-tool-btn-highlight" onclick="applyArticleHeading('caption')" title="Format Selected Text as Figure/Table Caption (0.85rem Italic Slate) or Add Caption to Image">💬 Caption</button>
                 <button type="button" class="art-tool-btn" onclick="formatSelectedArticleImage('compact')" title="Resize Figure: 60% Compact">60%</button>
                 <button type="button" class="art-tool-btn" onclick="formatSelectedArticleImage('standard')" title="Resize Figure: 82% Standard">82%</button>
                 <button type="button" class="art-tool-btn" onclick="formatSelectedArticleImage('full')" title="Resize Figure: 100% Full Column">100%</button>
-                <button type="button" class="art-tool-btn" onclick="formatSelectedArticleImage('center')" title="Center Figure">⏺️ Center</button>
+                <button type="button" class="art-tool-btn" onclick="formatSelectedArticleImage('center')" title="Center Figure (Clear Floats)">⏺️ Center</button>
+                <button type="button" class="art-tool-btn" onclick="formatSelectedArticleImage('left')" title="Float Figure Left (Text Wraps Right)">⫷ Wrap L</button>
+                <button type="button" class="art-tool-btn" onclick="formatSelectedArticleImage('right')" title="Float Figure Right (Text Wraps Left)">Wrap R ⫸</button>
                 <button type="button" class="art-tool-btn" onclick="applyArticleVisualFormat('link')" title="Insert Hyperlink">🔗 Link</button>
                 <button type="button" class="art-tool-btn" onclick="applyArticleVisualFormat('unlink')" title="Remove Hyperlink">Unlink</button>
                 <button type="button" class="art-tool-btn" onclick="applyArticleVisualFormat('video')" title="Embed YouTube Video">▶️ Video</button>

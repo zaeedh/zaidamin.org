@@ -14696,6 +14696,28 @@ a {
   margin-right: auto !important;
 }
 
+.article-reader-body pre.code-block {
+  background: #020810 !important;
+  border: 1px solid rgba(56, 189, 248, 0.25) !important;
+  border-radius: 8px !important;
+  padding: 14px 18px !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.88rem !important;
+  color: #bae6fd !important;
+  overflow-x: auto !important;
+  margin: 1.6rem 0 !important;
+  line-height: 1.6 !important;
+}
+
+.article-reader-body .inline-latex {
+  font-family: 'JetBrains Mono', monospace !important;
+  color: #fef08a !important;
+  background: rgba(212, 175, 55, 0.12) !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  border: 1px solid rgba(212, 175, 55, 0.25) !important;
+}
+
 .article-reader-body .latex-math-block {
   background: #030d1a !important;
   border: 1px solid rgba(212, 175, 55, 0.35) !important;
@@ -14910,17 +14932,21 @@ a {
   color: #ffffff;
 }
 
-.article-reader-body figure figcaption {
+.article-reader-body figure figcaption,
+.article-reader-body figcaption,
+.article-reader-body .figure-caption,
+.article-reader-body p.figure-caption {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 0.96rem;
+  font-size: 0.95rem;
   font-style: italic;
-  color: #cbd5e1;
-  margin-top: 12px;
+  color: #94a3b8;
+  margin: 10px auto 16px auto;
   line-height: 1.55;
   letter-spacing: 0.015em;
   border-top: 1px solid rgba(212, 175, 55, 0.16);
   padding-top: 8px;
   display: block;
+  text-align: center;
 }
 
 /* White technical diagrams dark contrast smoothing */
