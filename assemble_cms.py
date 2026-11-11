@@ -2665,9 +2665,9 @@ def run():
               <!-- Scholarly Elements Group -->
               <div class="art-toolbar-group">
                 <span class="art-toolbar-group-label">BLOCKS</span>
-                <button type="button" class="art-tool-btn" onclick="insertArticleFormat('latex')" title="LaTeX / Math Formula Block">∑ Math</button>
-                <button type="button" class="art-tool-btn" onclick="insertArticleFormat('table')" title="Scholarly Table Generator">📊 Table</button>
-                <button type="button" class="art-tool-btn" onclick="insertArticleFormat('hr')" title="Section Divider (Golden Ratio Line)">― Divider</button>
+                <button type="button" class="art-tool-btn" onclick="applyArticleVisualFormat('math')" title="LaTeX / Math Formula Block">∑ Math</button>
+                <button type="button" class="art-tool-btn" onclick="applyArticleVisualFormat('table')" title="Scholarly Table Generator">📊 Table</button>
+                <button type="button" class="art-tool-btn" onclick="applyArticleVisualFormat('hr')" title="Section Divider (Golden Ratio Line)">― Divider</button>
               </div>
 
               <!-- Lists & Indent Group -->
@@ -2690,9 +2690,9 @@ def run():
                 <button type="button" class="art-tool-btn" onclick="formatSelectedArticleImage('standard')" title="Resize Figure: 82% Standard">82%</button>
                 <button type="button" class="art-tool-btn" onclick="formatSelectedArticleImage('full')" title="Resize Figure: 100% Full Column">100%</button>
                 <button type="button" class="art-tool-btn" onclick="formatSelectedArticleImage('center')" title="Center Figure">⏺️ Center</button>
-                <button type="button" class="art-tool-btn" onclick="insertArticleFormat('link')" title="Insert Hyperlink">🔗 Link</button>
+                <button type="button" class="art-tool-btn" onclick="applyArticleVisualFormat('link')" title="Insert Hyperlink">🔗 Link</button>
                 <button type="button" class="art-tool-btn" onclick="applyArticleVisualFormat('unlink')" title="Remove Hyperlink">Unlink</button>
-                <button type="button" class="art-tool-btn" onclick="insertArticleFormat('youtube')" title="Embed YouTube Video">▶️ Video</button>
+                <button type="button" class="art-tool-btn" onclick="applyArticleVisualFormat('video')" title="Embed YouTube Video">▶️ Video</button>
               </div>
 
               <!-- History & Mode Toggle -->

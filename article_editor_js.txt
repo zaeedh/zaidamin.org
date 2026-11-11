@@ -263,6 +263,12 @@ function setArticleEditorMode(mode) {
 
     function applyArticleFontFamily(fontFamily) {
       if (!fontFamily) return;
+      if (currentArticleEditorMode === 'code') {
+        insertArticleFormat('font_family', fontFamily);
+        const fontSel = document.getElementById('art-tool-font');
+        if (fontSel) fontSel.value = '';
+        return;
+      }
       const visualElem = document.getElementById('art-form-visual-editor');
       visualElem.focus();
       try { document.execCommand('styleWithCSS', false, true); } catch(e) {}
@@ -293,6 +299,12 @@ function setArticleEditorMode(mode) {
 
     function applyArticleHeading(level) {
       if (!level) return;
+      if (currentArticleEditorMode === 'code') {
+        insertArticleFormat('para', level);
+        const headSel = document.getElementById('art-tool-heading');
+        if (headSel) headSel.value = 'p';
+        return;
+      }
       const visualElem = document.getElementById('art-form-visual-editor');
       visualElem.focus();
 
@@ -326,6 +338,12 @@ function setArticleEditorMode(mode) {
 
     function applyArticleFontSize(sizeVal) {
       if (!sizeVal) return;
+      if (currentArticleEditorMode === 'code') {
+        insertArticleFormat('size', sizeVal);
+        const sizeSel = document.getElementById('art-tool-size');
+        if (sizeSel) sizeSel.value = '';
+        return;
+      }
       const visualElem = document.getElementById('art-form-visual-editor');
       visualElem.focus();
       const sel = window.getSelection();
@@ -1106,57 +1124,175 @@ function setArticleEditorMode(mode) {
       } else if (type === 'margin') {
         applyArticleMargin(value || '1.618rem 0');
         return;
-      } else if (type === 'removeFormat_old') {
-        document.execCommand('removeFormat', false, null);
-        const sel = window.getSelection();
-        if (sel && sel.anchorNode) {
-          let node = sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode;
-          const mark = node ? node.closest('mark') : null;
-          if (mark) {
-            const parent = mark.parentNode;
-            while (mark.firstChild) parent.insertBefore(mark.firstChild, mark);
-            parent.removeChild(mark);
-          }
-        }
-        showToast('Formatting cleared');
-        onVisualArticleInput();
-        return;
       } else if (type === 'bold') {
         document.execCommand('bold', false, null);
       } else if (type === 'italic') {
         document.execCommand('italic', false, null);
       } else if (type === 'underline') {
         document.execCommand('underline', false, null);
+      } else if (type === 'strikethrough' || type === 'strike') {
+        document.execCommand('strikeThrough', false, null);
+      } else if (type === 'code') {
+        const sel = window.getSelection();
+        if (sel && !sel.isCollapsed && sel.rangeCount > 0) {
+          const text = sel.toString();
+          document.execCommand('insertHTML', false, `<code style="font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: rgba(186, 230, 253, 0.1); padding: 2px 6px; border-radius: 4px; color: #bae6fd;">${escapeHTML(text)}</code>`);
+        } else {
+          document.execCommand('insertHTML', false, `<code style="font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: rgba(186, 230, 253, 0.1); padding: 2px 6px; border-radius: 4px; color: #bae6fd;">code_token</code>`);
+        }
+      } else if (type === 'align') {
+        const alignVal = (value || 'left').toLowerCase();
+        const sel = window.getSelection();
+
+        // 1. Check if an image or figure element is active or selected
+        let targetFigure = null;
+        if (selectedArticleImage) {
+          targetFigure = selectedArticleImage.closest('figure') || selectedArticleImage;
+        } else if (sel && sel.anchorNode) {
+          const node = sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode;
+          if (node) {
+            targetFigure = node.closest('figure') || (node.tagName === 'IMG' ? node : null);
+          }
+        }
+
+        if (targetFigure && visualElem.contains(targetFigure)) {
+          targetFigure.classList.remove('fig-left', 'fig-right', 'fig-center');
+          if (alignVal === 'center' || alignVal === 'justify') {
+            targetFigure.style.textAlign = 'center';
+            targetFigure.style.margin = '1.618rem auto';
+            targetFigure.classList.add('fig-center');
+            const img = targetFigure.tagName === 'IMG' ? targetFigure : targetFigure.querySelector('img');
+            if (img) {
+              img.style.margin = '0 auto';
+              img.style.display = 'block';
+            }
+            showToast('Figure aligned Center (≡)');
+          } else if (alignVal === 'left') {
+            targetFigure.style.textAlign = 'left';
+            targetFigure.style.margin = '1.2rem auto 1.2rem 0';
+            targetFigure.classList.add('fig-left');
+            const img = targetFigure.tagName === 'IMG' ? targetFigure : targetFigure.querySelector('img');
+            if (img) {
+              img.style.margin = '0 auto 0 0';
+              img.style.display = 'block';
+            }
+            showToast('Figure aligned Left (⫷)');
+          } else if (alignVal === 'right') {
+            targetFigure.style.textAlign = 'right';
+            targetFigure.style.margin = '1.2rem 0 1.2rem auto';
+            targetFigure.classList.add('fig-right');
+            const img = targetFigure.tagName === 'IMG' ? targetFigure : targetFigure.querySelector('img');
+            if (img) {
+              img.style.margin = '0 0 0 auto';
+              img.style.display = 'block';
+            }
+            showToast('Figure aligned Right (⫸)');
+          }
+        } else {
+          // 2. Align Text and Block Elements (p, h1-h6, blockquote, callout, table, li, div)
+          const cmdMap = {
+            'left': 'justifyLeft',
+            'center': 'justifyCenter',
+            'right': 'justifyRight',
+            'justify': 'justifyFull'
+          };
+          try {
+            document.execCommand('styleWithCSS', false, true);
+            document.execCommand(cmdMap[alignVal] || 'justifyLeft', false, null);
+          } catch(e) {}
+
+          if (sel && sel.anchorNode) {
+            let node = sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode;
+            const block = node ? node.closest('p, h1, h2, h3, h4, h5, h6, blockquote, .callout-box, div, li, td, th') : null;
+            if (block && visualElem.contains(block)) {
+              block.style.textAlign = alignVal === 'justify' ? 'justify' : alignVal;
+            }
+          }
+          showToast(`Text aligned: ${alignVal.charAt(0).toUpperCase() + alignVal.slice(1)}`);
+        }
       } else if (type === 'ul') {
         document.execCommand('insertUnorderedList', false, null);
       } else if (type === 'ol') {
         document.execCommand('insertOrderedList', false, null);
+      } else if (type === 'indent') {
+        document.execCommand('indent', false, null);
+      } else if (type === 'outdent') {
+        document.execCommand('outdent', false, null);
       } else if (type === 'hr') {
-        document.execCommand('insertHorizontalRule', false, null);
+        const hrHtml = `\n<hr class="section-divider" style="border: none; height: 1px; background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.6) 50%, transparent); margin: 2.4em 0;"><p>&nbsp;</p>\n`;
+        document.execCommand('insertHTML', false, hrHtml);
+        showToast('Golden Ratio Divider inserted');
       } else if (type === 'link') {
-        const url = prompt('Enter link URL (e.g. https://...):', 'https://');
-        if (url) {
-          document.execCommand('createLink', false, url);
+        const sel = window.getSelection();
+        const selectedText = sel ? sel.toString().trim() : '';
+        const url = prompt('Enter Destination URL (e.g. https://...):', 'https://');
+        if (url && url.trim() && url !== 'https://') {
+          const cleanUrl = url.trim();
+          if (selectedText) {
+            document.execCommand('insertHTML', false, `<a href="${cleanUrl}" target="_blank" rel="noopener" style="color: #38bdf8; text-decoration: underline;">${escapeHTML(selectedText)}</a>`);
+          } else {
+            const linkText = prompt('Enter link display text:', cleanUrl) || cleanUrl;
+            document.execCommand('insertHTML', false, `<a href="${cleanUrl}" target="_blank" rel="noopener" style="color: #38bdf8; text-decoration: underline;">${escapeHTML(linkText)}</a>`);
+          }
+          showToast('Hyperlink inserted');
         }
-      } else if (type === 'img' || type === 'image') {
-        const url = prompt('Enter image URL or asset path:', 'assets/images/spotlight-smart-cities.jpg');
-        if (url) {
-          const cap = prompt('Enter figure caption (optional):', 'Figure: Conceptual diagram');
-          const capHtml = cap ? `<figcaption>${escapeHTML(cap)}</figcaption>` : '';
-          document.execCommand('insertHTML', false, `<figure class="fig-standard"><img src="${url}" alt="${escapeHTML(cap || 'Figure')}" loading="lazy">${capHtml}</figure>`);
-          setTimeout(function() {
-            const vis = document.getElementById('art-form-visual-editor');
-            if (vis) {
-              const imgs = vis.querySelectorAll('img');
-              if (imgs.length) positionImageFloatingToolbar(imgs[imgs.length - 1]);
-            }
-          }, 50);
+      } else if (type === 'unlink') {
+        document.execCommand('unlink', false, null);
+        showToast('Hyperlink removed');
+      } else if (type === 'math' || type === 'latex') {
+        const latexSample = `\\mathcal{H}(P, Q) = \\sum_{x \\in \\mathcal{X}} P(x) \\log \\frac{P(x)}{Q(x)}`;
+        const mathHtml = `\n<div class="latex-math-block" style="background: #030d1a; border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 16px 22px; margin: 1.8em 0; font-family: 'JetBrains Mono', monospace; color: #fef08a; text-align: center; font-size: 1.05rem;">$$ ${latexSample} $$</div><p>&nbsp;</p>\n`;
+        document.execCommand('insertHTML', false, mathHtml);
+        showToast('LaTeX Math Block inserted');
+      } else if (type === 'table') {
+        const tableHtml = `\n<table class="scholar-table" style="width: 100%; border-collapse: collapse; margin: 1.8em 0; font-size: 0.92rem; border: 1px solid rgba(56, 189, 248, 0.25);">
+  <thead>
+    <tr style="background: rgba(8, 28, 50, 0.9); color: #fce09b; font-family: 'Cinzel', serif;">
+      <th style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25); text-align: left;">Metric / Dimension</th>
+      <th style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25); text-align: left;">Baseline Model</th>
+      <th style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25); text-align: left;">HARMONY Framework</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25);">Prosocial Alignment</td>
+      <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25);">42.3%</td>
+      <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25); color: #34d399; font-weight: bold;">87.9%</td>
+    </tr>
+    <tr style="background: rgba(4, 16, 30, 0.4);">
+      <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25);">Cognitive Friction (ms)</td>
+      <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25);">640 ms</td>
+      <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25); color: #38bdf8; font-weight: bold;">180 ms</td>
+    </tr>
+  </tbody>
+</table><p>&nbsp;</p>\n`;
+        document.execCommand('insertHTML', false, tableHtml);
+        showToast('Scholarly Matrix Table inserted');
+      } else if (type === 'video' || type === 'youtube') {
+        const videoUrl = prompt('Enter YouTube Video URL or Video ID (e.g., https://www.youtube.com/watch?v=...):', '');
+        if (videoUrl && videoUrl.trim()) {
+          let vidId = videoUrl.trim();
+          const m = vidId.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+          if (m && m[1]) vidId = m[1];
+          const videoHtml = `\n<div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 2rem auto; border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 12px 36px rgba(0,0,0,0.7); background: #000;">
+  <iframe src="https://www.youtube.com/embed/${vidId}" style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+</div><p>&nbsp;</p>\n`;
+          document.execCommand('insertHTML', false, videoHtml);
+          showToast('YouTube Video embedded');
         }
+      } else if (type === 'undo') {
+        document.execCommand('undo', false, null);
+        showToast('Undo');
+      } else if (type === 'redo') {
+        document.execCommand('redo', false, null);
+        showToast('Redo');
       } else if (type === 'para') {
         if (value === 'h2') {
           document.execCommand('formatBlock', false, '<h2>');
         } else if (value === 'h3') {
           document.execCommand('formatBlock', false, '<h3>');
+        } else if (value === 'h4') {
+          document.execCommand('formatBlock', false, '<h4>');
         } else if (value === 'quote') {
           document.execCommand('formatBlock', false, '<blockquote>');
         } else if (value === 'p') {
@@ -1197,6 +1333,7 @@ function setArticleEditorMode(mode) {
 
     function insertArticleFormat(type, value) {
       const ta = document.getElementById('art-form-code-editor');
+      if (!ta) return;
       const s = ta.selectionStart, e = ta.selectionEnd;
       const sel = ta.value.substring(s, e);
       let rep = '';
@@ -1207,43 +1344,94 @@ function setArticleEditorMode(mode) {
         else if (value === 'callout') rep = `\n<div class="callout-box"><strong>Key Finding:</strong> ${sel || 'Synthesized empirical conclusion or core discovery...'}</div>\n`;
         else if (value === 'h2') rep = `\n<h2>${sel || 'Section Heading'}</h2>\n`;
         else if (value === 'h3') rep = `\n<h3>${sel || 'Subheading'}</h3>\n`;
+        else if (value === 'h4') rep = `\n<h4>${sel || 'Minor Subsection Heading'}</h4>\n`;
         else if (value === 'quote') rep = `\n<blockquote>${sel || 'Academic quotation or theoretical axiom...'}</blockquote>\n`;
-      } else if (type === 'font') {
+        else if (value === 'p') rep = `\n<p>${sel || 'Paragraph text...'}</p>\n`;
+      } else if (type === 'font' || type === 'font_family') {
         if (value === 'garamond') rep = `<span style="font-family: 'Cormorant Garamond', serif;">${sel || 'Editorial Serif Text'}</span>`;
         else if (value === 'cinzel') rep = `<span style="font-family: 'Cinzel', serif; letter-spacing: 0.05em;">${sel || 'Classical Display Text'}</span>`;
         else if (value === 'inter') rep = `<span style="font-family: 'Inter', sans-serif;">${sel || 'Clean Sans Text'}</span>`;
         else if (value === 'mono') rep = `<code style="font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: rgba(186, 230, 253, 0.1); padding: 2px 6px; border-radius: 4px;">${sel || 'code/symbol'}</code>`;
+        else if (value) rep = `<span style="font-family: ${value};">${sel || 'Styled Text'}</span>`;
       } else if (type === 'size') {
         if (value === 'sm') rep = `<span style="font-size: 0.85rem;">${sel || 'Small text'}</span>`;
         else if (value === 'reg') rep = `<span style="font-size: 0.95rem;">${sel || 'Regular text'}</span>`;
         else if (value === 'md') rep = `<span style="font-size: 1.125rem;">${sel || 'Medium text'}</span>`;
         else if (value === 'lg') rep = `<span style="font-size: 1.375rem;">${sel || 'Large text'}</span>`;
         else if (value === 'golden') rep = `<span style="font-size: 1.618rem; line-height: 1.5;">${sel || 'Golden Ratio scale text'}</span>`;
-            } else if (type === 'align') {
-        if (value === 'left') document.execCommand('justifyLeft', false, null);
-        else if (value === 'center') document.execCommand('justifyCenter', false, null);
-        else if (value === 'right') document.execCommand('justifyRight', false, null);
-        else if (value === 'justify') document.execCommand('justifyFull', false, null);
+        else if (value) rep = `<span style="font-size: ${value};">${sel || 'Scaled Text'}</span>`;
+      } else if (type === 'align') {
+        const alignVal = (value || 'left').toLowerCase();
+        rep = `\n<div style="text-align: ${alignVal};">\n  ${sel || 'Aligned text content...'}\n</div>\n`;
       } else if (type === 'bold') {
         rep = `<strong>${sel || 'Bold Text'}</strong>`;
       } else if (type === 'italic') {
         rep = `<em>${sel || 'Italic Text'}</em>`;
       } else if (type === 'underline') {
         rep = `<u>${sel || 'Underlined Text'}</u>`;
+      } else if (type === 'strikethrough' || type === 'strike') {
+        rep = `<s>${sel || 'Strikethrough Text'}</s>`;
+      } else if (type === 'code') {
+        rep = `<code>${sel || 'code_token'}</code>`;
       } else if (type === 'gold') {
         rep = `<span class="text-gold">${sel || 'Golden Highlight'}</span>`;
       } else if (type === 'cyan') {
         rep = `<span class="text-cyan">${sel || 'Cyan Highlight'}</span>`;
       } else if (type === 'ul') {
         rep = `\n<ul>\n  <li>${sel || 'First Item'}</li>\n  <li>Second Item</li>\n</ul>\n`;
+      } else if (type === 'ol') {
+        rep = `\n<ol>\n  <li>${sel || 'First Item'}</li>\n  <li>Second Item</li>\n</ol>\n`;
+      } else if (type === 'indent') {
+        rep = `\n<blockquote style="margin-left: 2rem;">\n  ${sel || 'Indented text...'}\n</blockquote>\n`;
+      } else if (type === 'outdent') {
+        rep = sel;
       } else if (type === 'link') {
-        const url = prompt('Enter Destination URL:', 'https://');
-        if (url) rep = `<a href="${url}" target="_blank" rel="noopener">${sel || 'Link Text'}</a>`;
+        const url = prompt('Enter Destination URL (e.g. https://...):', 'https://');
+        if (url && url.trim() && url !== 'https://') rep = `<a href="${url.trim()}" target="_blank" rel="noopener">${sel || 'Link Text'}</a>`;
         else rep = sel;
+      } else if (type === 'unlink') {
+        rep = sel.replace(/<\/?a[^>]*>/gi, '');
+      } else if (type === 'math' || type === 'latex') {
+        rep = `\n<div class="latex-math-block">\n  $$ \\mathcal{H}(P, Q) = \\sum_{x \\in \\mathcal{X}} P(x) \\log \\frac{P(x)}{Q(x)} $$\n</div>\n`;
+      } else if (type === 'table') {
+        rep = `\n<table class="scholar-table">
+  <thead>
+    <tr>
+      <th>Metric / Dimension</th>
+      <th>Baseline Model</th>
+      <th>HARMONY Framework</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Prosocial Alignment</td>
+      <td>42.3%</td>
+      <td style="color: #34d399; font-weight: bold;">87.9%</td>
+    </tr>
+    <tr>
+      <td>Cognitive Friction (ms)</td>
+      <td>640 ms</td>
+      <td style="color: #38bdf8; font-weight: bold;">180 ms</td>
+    </tr>
+  </tbody>
+</table>\n`;
+      } else if (type === 'video' || type === 'youtube') {
+        const videoUrl = prompt('Enter YouTube Video URL or Video ID:', '');
+        if (videoUrl && videoUrl.trim()) {
+          let vidId = videoUrl.trim();
+          const m = vidId.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+          if (m && m[1]) vidId = m[1];
+          rep = `\n<div class="video-container">\n  <iframe src="https://www.youtube.com/embed/${vidId}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>\n</div>\n`;
+        } else {
+          rep = sel;
+        }
       } else if (type === 'img') {
-        rep = `\n<figure style="margin: 20px 0; text-align: center;"><img src="assets/images/spotlight-smart-cities.jpg" alt="Figure Caption" style="max-width: 100%; border-radius: 8px;"><figcaption style="font-size: 0.85rem; color: #94a3b8; margin-top: 8px; font-style: italic;">Figure: Architectural diagram description</figcaption></figure>\n`;
+        rep = `\n<figure class="fig-standard">\n  <img src="assets/images/spotlight-smart-cities.jpg" alt="Figure Caption" loading="lazy">\n  <figcaption>Figure: Architectural diagram description</figcaption>\n</figure>\n`;
       } else if (type === 'hr') {
         rep = `\n<hr class="golden-divider">\n`;
+      } else if (type === 'undo' || type === 'redo') {
+        try { document.execCommand(type, false, null); } catch(e) {}
+        return;
       }
 
       ta.setRangeText(rep, s, e, 'end');
