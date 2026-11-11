@@ -1844,10 +1844,9 @@ def render_cookie_consent_banner():
 
     return f'''
     <!-- Academic Cookie & Privacy Consent Banner (Managed via CMS Studio) -->
-    <div id="cookie-consent-banner" class="cookie-consent-bar" role="region" aria-label="Cookie Consent">
+    <div id="cookie-consent-banner" class="cookie-consent-bar" role="region" aria-label="Privacy & Cookie Preferences">
       <div class="cookie-consent-inner">
         <div class="cookie-consent-text">
-          <span class="cookie-icon">🍪</span>
           <span>
             {msg}
             <a href="{learn_url}" class="cookie-policy-link">{learn_text}</a>

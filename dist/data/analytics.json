@@ -302,6 +302,18 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794402551013",
+      "timestamp": "2026-11-11T13:09:11.013Z",
+      "path": "/",
+      "title": "Zaid Amin, Ph.D.",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
       "id": "tr-1794401915960",
       "timestamp": "2026-11-11T12:58:35.960Z",
       "path": "/article",
@@ -1488,23 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794324265710",
-      "timestamp": "2026-11-10T15:24:25.710Z",
-      "path": "/",
-      "title": "Zaid Amin, Ph.D.",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-11T20:58:35.978388",
+  "updated_at": "2026-11-11T21:09:11.026442",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,

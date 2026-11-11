@@ -30667,22 +30667,21 @@ h1.cv-hero-name,
    ============================================================================== */
 .cookie-consent-bar {
   position: fixed;
-  bottom: 24px;
+  bottom: 26px;
   left: 50%;
-  transform: translateX(-50%) translateY(120%);
+  transform: translateX(-50%) translateY(130%);
   width: calc(100% - 32px);
-  max-width: 860px;
-  background: rgba(6, 11, 23, 0.95);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(212, 175, 55, 0.36);
-  border-top: 2px solid #d4af37;
-  border-radius: 14px;
-  padding: 14px 20px;
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.92), 0 0 24px rgba(56, 189, 248, 0.14);
+  max-width: 820px;
+  background: rgba(4, 9, 20, 0.94);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 12px;
+  padding: 12px 22px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.88), 0 0 0 1px rgba(254, 240, 138, 0.08) inset, 0 0 24px rgba(56, 189, 248, 0.10);
   z-index: 999999;
   opacity: 0;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.38s ease, box-shadow 0.38s ease;
   pointer-events: none;
 }
 
@@ -30696,37 +30695,35 @@ h1.cv-hero-name,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
 .cookie-consent-text {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto);
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif);
   font-size: 0.84rem;
-  line-height: 1.5;
+  line-height: 1.52;
   color: #cbd5e1;
   flex: 1 1 420px;
-}
-
-.cookie-icon {
-  font-size: 1.3rem;
-  flex-shrink: 0;
+  letter-spacing: 0.01em;
 }
 
 .cookie-policy-link {
   color: #7dd3fc;
   text-decoration: underline;
+  text-decoration-color: rgba(125, 211, 252, 0.45);
   text-underline-offset: 3px;
-  font-weight: 600;
-  margin-left: 4px;
-  transition: color 0.2s ease;
+  font-weight: 500;
+  margin-left: 6px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  white-space: nowrap;
 }
 
 .cookie-policy-link:hover {
   color: #fce09b;
+  text-decoration-color: #fce09b;
 }
 
 .cookie-consent-actions {
@@ -30737,41 +30734,43 @@ h1.cv-hero-name,
 }
 
 .cookie-btn {
-  font-family: var(--font-sans);
-  font-size: 0.80rem;
-  font-weight: 600;
-  padding: 7px 18px;
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Inter", sans-serif);
+  font-size: 0.78rem;
+  padding: 6px 18px;
   border-radius: 999px;
   cursor: pointer;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
+  line-height: 1.4;
 }
 
 .cookie-btn-secondary {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.03);
   color: #94a3b8;
-  border: 1px solid rgba(148, 163, 184, 0.35);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  font-weight: 500;
 }
 
 .cookie-btn-secondary:hover {
   color: #ffffff;
-  border-color: rgba(212, 175, 55, 0.55);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(212, 175, 55, 0.45);
+  background: rgba(255, 255, 255, 0.07);
   transform: translateY(-1px);
 }
 
 .cookie-btn-primary {
-  background: linear-gradient(135deg, #d4af37 0%, #b88d28 100%);
-  color: #030a14 !important;
-  border: 1px solid rgba(254, 240, 138, 0.50);
+  background: linear-gradient(135deg, #d4af37 0%, #aa8420 100%);
+  color: #020610 !important;
+  border: 1px solid rgba(254, 240, 138, 0.45);
   font-weight: 700;
-  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.28);
+  letter-spacing: 0.015em;
+  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.24);
 }
 
 .cookie-btn-primary:hover {
   background: linear-gradient(135deg, #fce09b 0%, #d4af37 100%);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.45);
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.45);
 }
 
 .footer-cookie-pref-link {
