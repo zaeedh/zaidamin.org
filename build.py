@@ -49,7 +49,7 @@ def load_json(filename):
 # ==============================================================================
 def render_lotus_symbol_svg():
 
-    return '''<svg class="lotus-svg lotus-hybrid-svg" width="40.75" height="34.93" viewBox="0 0 100 86" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    return '''<svg class="lotus-svg lotus-hybrid-svg" width="40.34" height="34.58" viewBox="0 0 100 86" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 
   <defs>
 
