@@ -302,6 +302,18 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794356929028",
+      "timestamp": "2026-11-11T00:28:49.028Z",
+      "path": "/article",
+      "title": "The Polite City: Why the Future of Smart Cities Needs Courteous AI, Not Digital Wardens | Dr. Zaid Amin",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Internal Navigation"
+    },
+    {
       "id": "tr-1794356561344",
       "timestamp": "2026-11-11T00:22:41.344Z",
       "path": "/article",
@@ -1488,23 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794286844588",
-      "timestamp": "2026-11-10T05:00:44.588Z",
-      "path": "/",
-      "title": "Zaid Amin, Ph.D.",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-11T08:22:41.363885",
+  "updated_at": "2026-11-11T08:28:49.039397",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
