@@ -16,7 +16,7 @@
     },
     {
       "id": "publications",
-      "label": "Research & Publications",
+      "label": "Research & Pubs",
       "short_label": "Research",
       "url": "/publications",
       "target": "_self",
