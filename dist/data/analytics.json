@@ -302,6 +302,30 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794401397195",
+      "timestamp": "2026-11-11T12:49:57.195Z",
+      "path": "/article",
+      "title": "The Polite City: Why the Future of Smart Cities Needs Courteous AI, Not Digital Wardens | Dr. Zaid Amin",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
+      "id": "tr-1794401361830",
+      "timestamp": "2026-11-11T12:49:21.830Z",
+      "path": "/article",
+      "title": "The Polite City: Why the Future of Smart Cities Needs Courteous AI, Not Digital Wardens | Dr. Zaid Amin",
+      "action": "PAGE_VIEW",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "referrer": "Direct Navigation"
+    },
+    {
       "id": "tr-1794400476939",
       "timestamp": "2026-11-11T12:34:36.939Z",
       "path": "/",
@@ -1476,35 +1500,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794322107556",
-      "timestamp": "2026-11-10T14:48:27.556Z",
-      "path": "/publications",
-      "title": "Research & Publication Gallery",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794320030617",
-      "timestamp": "2026-11-10T14:13:50.617Z",
-      "path": "/",
-      "title": "Zaid Amin, Ph.D.",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-11T20:34:36.961127",
+  "updated_at": "2026-11-11T20:49:57.218836",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
