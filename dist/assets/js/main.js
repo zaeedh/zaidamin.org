@@ -2782,7 +2782,15 @@ function initTelemetryAccessTraceLogger() {
 
     const path = loc.pathname || '/';
 
-    const cleanPath = path.replace(/index\.html$/, '') || '/';
+    const basePath = path.replace(/index\.html$/, '') || '/';
+
+    const traceParams = new URLSearchParams(loc.search || '');
+
+    traceParams.delete('cachebust');
+
+    const cleanSearch = traceParams.toString();
+
+    const cleanPath = cleanSearch ? `${basePath}?${cleanSearch}` : basePath;
 
     
 
