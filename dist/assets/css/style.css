@@ -10851,172 +10851,192 @@ a {
 
    ========================================================================== */
 
-.ref-portals-header {
+/* 1. Desktop Standard (> 1024px): Classical Asymmetric Right-Aligned Layout (Strictly Preserved) */
+@media (min-width: 1025px) {
+  .ref-portals-header {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 24px !important;
+    margin-bottom: 7px !important;
+    padding: 4px 0 !important;
+  }
 
-  display: flex;
+  .ref-profile-info-col {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    text-align: right !important;
+    min-width: 0 !important;
+    flex: 1 !important;
+    justify-content: center !important;
+    gap: 7px !important;
+  }
 
-  align-items: center;
+  .ref-profile-name {
+    font-family: var(--font-cinzel), serif;
+    font-size: 1.55rem;
+    font-weight: 600;
+    color: #f8fafc;
+    margin: 0;
+    line-height: 1.15;
+    letter-spacing: 0.045em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    text-align: right !important;
+    text-shadow: 0 2px 10px rgba(0, 10, 24, 0.40);
+  }
 
-  justify-content: space-between;
+  .ref-profile-role {
+    font-size: 0.76rem;
+    font-weight: 500;
+    color: #cad9e8;
+    line-height: 1.52;
+    letter-spacing: 0.015em;
+    margin: 0;
+    white-space: normal;
+    width: 100%;
+    text-align: right !important;
+  }
 
-  gap: 24px;
+  .ref-profile-inst {
+    color: #9cb3c6;
+    font-weight: 400;
+    font-size: 0.74rem;
+  }
 
-  margin-bottom: 7px;
+  .ref-profile-fields {
+    font-size: 0.70rem;
+    font-weight: 400;
+    color: #8da4b8;
+    line-height: 1.45;
+    letter-spacing: 0.025em;
+    margin: 0;
+    white-space: normal;
+    width: 100%;
+    text-align: right !important;
+  }
 
-  padding: 4px 0;
-
+  .ref-photo-ring {
+    position: relative;
+    width: 114px;
+    height: 114px;
+    border-radius: 50%;
+    padding: 1.5px;
+    background: linear-gradient(135deg, rgba(254, 243, 199, 0.85) 0%, rgba(212, 175, 55, 0.50) 45%, rgba(140, 180, 205, 0.30) 80%, rgba(212, 175, 55, 0.45) 100%);
+    box-shadow: 0 4px 18px -2px rgba(0, 10, 24, 0.60), 0 0 14px rgba(212, 175, 55, 0.18);
+    flex-shrink: 0;
+    margin: 0 !important;
+    align-self: auto !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, padding 0.3s ease;
+  }
 }
 
+/* 2. Mobile & Tablet Responsive View (<= 1024px): Balanced Golden Ratio Harmonized Center Alignment */
+@media (max-width: 1024px) {
+  .ref-portals-header {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 12px !important;
+    margin-bottom: 12px !important;
+    padding: 4px 0 0 0 !important;
+    width: 100% !important;
+  }
 
+  .ref-profile-info-col {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 6px !important;
+    margin: 0 auto !important;
+  }
 
-.ref-profile-info-col {
+  .ref-profile-name {
+    font-family: var(--font-cinzel), serif;
+    font-size: 1.48rem !important;
+    font-weight: 700 !important;
+    color: #f8fafc !important;
+    text-align: center !important;
+    width: 100% !important;
+    white-space: normal !important;
+    margin: 0 auto 2px auto !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0.04em !important;
+    text-shadow: 0 2px 10px rgba(0, 10, 24, 0.50);
+  }
 
-  display: flex;
+  .ref-profile-role {
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    color: #cad9e8 !important;
+    line-height: 1.48 !important;
+    letter-spacing: 0.015em !important;
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 540px !important;
+    margin: 0 auto !important;
+    white-space: normal !important;
+  }
 
-  flex-direction: column;
+  .ref-profile-inst {
+    color: #9cb3c6 !important;
+    font-weight: 400 !important;
+    font-size: 0.73rem !important;
+    text-align: center !important;
+    display: inline-block !important;
+  }
 
-  align-items: flex-end;
+  .ref-profile-fields {
+    font-size: 0.70rem !important;
+    font-weight: 400 !important;
+    color: #8da4b8 !important;
+    line-height: 1.42 !important;
+    letter-spacing: 0.025em !important;
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 500px !important;
+    margin: 0 auto !important;
+    white-space: normal !important;
+  }
 
-  text-align: right;
-
-  min-width: 0;
-
-  flex: 1;
-
-  justify-content: center;
-
-  gap: 7px;
-
+  .ref-photo-ring {
+    position: relative;
+    width: 104px !important;
+    height: 104px !important;
+    border-radius: 50%;
+    padding: 1.5px;
+    background: linear-gradient(135deg, rgba(254, 243, 199, 0.85) 0%, rgba(212, 175, 55, 0.50) 45%, rgba(140, 180, 205, 0.30) 80%, rgba(212, 175, 55, 0.45) 100%);
+    box-shadow: 0 4px 18px -2px rgba(0, 10, 24, 0.60), 0 0 14px rgba(212, 175, 55, 0.18);
+    flex-shrink: 0;
+    margin: 0 auto !important;
+    align-self: center !important;
+  }
 }
 
-
-
-.ref-profile-name {
-
-  font-family: var(--font-cinzel), serif;
-
-  font-size: 1.55rem;
-
-  font-weight: 600;
-
-  color: #f8fafc;
-
-  margin: 0;
-
-  line-height: 1.15;
-
-  letter-spacing: 0.045em;
-
-  white-space: nowrap;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
-
-  width: 100%;
-
-  text-align: right;
-
-  text-shadow: 0 2px 10px rgba(0, 10, 24, 0.40);
-
-}
-
-
-
-.ref-profile-role {
-
-  font-size: 0.76rem;
-
-  font-weight: 500;
-
-  color: #cad9e8;
-
-  line-height: 1.52;
-
-  letter-spacing: 0.015em;
-
-  margin: 0;
-
-  white-space: normal;
-
-  width: 100%;
-
-  text-align: right;
-
-}
-
-
-
-.ref-profile-inst {
-
-  color: #9cb3c6;
-
-  font-weight: 400;
-
-  font-size: 0.74rem;
-
-}
-
-
-
-.ref-profile-fields {
-
-  font-size: 0.70rem;
-
-  font-weight: 400;
-
-  color: #8da4b8;
-
-  line-height: 1.45;
-
-  letter-spacing: 0.025em;
-
-  margin: 0;
-
-  white-space: normal;
-
-  width: 100%;
-
-  text-align: right;
-
-}
-
-
-
-.ref-gold-dot {
-
-  color: #d4af37;
-
-  opacity: 0.75;
-
-  margin: 0 3px;
-
-  display: inline-block;
-
-}
-
-
-
-.ref-photo-ring {
-
-  position: relative;
-
-  width: 114px;
-
-  height: 114px;
-
-  border-radius: 50%;
-
-  padding: 1.5px;
-
-  background: linear-gradient(135deg, rgba(254, 243, 199, 0.85) 0%, rgba(212, 175, 55, 0.50) 45%, rgba(140, 180, 205, 0.30) 80%, rgba(212, 175, 55, 0.45) 100%);
-
-  box-shadow: 0 4px 18px -2px rgba(0, 10, 24, 0.60), 0 0 14px rgba(212, 175, 55, 0.18);
-
-  flex-shrink: 0;
-
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, padding 0.3s ease;
-
+@media (max-width: 480px) {
+  .ref-profile-name {
+    font-size: 1.34rem !important;
+  }
+  .ref-photo-ring {
+    width: 96px !important;
+    height: 96px !important;
+  }
+  .ref-profile-role {
+    font-size: 0.71rem !important;
+  }
+  .ref-profile-fields {
+    font-size: 0.67rem !important;
+  }
 }
 
 
