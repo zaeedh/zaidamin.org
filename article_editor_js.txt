@@ -1,0 +1,1390 @@
+    let currentArticleEditorMode = 'visual';
+    let editingArticleSlug = null;
+    let articlePreviewMode = 'spotlight';
+
+    
+    function toggleArticleMetadataDrawer() {
+      const drawer = document.getElementById('art-studio-meta-drawer');
+      if (!drawer) return;
+      const isHidden = drawer.style.display === 'none';
+      drawer.style.display = isHidden ? 'flex' : 'none';
+      const btn = document.getElementById('btn-toggle-art-meta');
+      if (btn) btn.textContent = isHidden ? '⚙️ Metadata ▲' : '⚙️ Metadata ▼';
+    }
+
+    function toggleArticleFullscreen() {
+      const editor = document.getElementById('articles-editor-view');
+      if (!editor) return;
+      const isFull = editor.classList.toggle('is-fullscreen');
+      const label = document.getElementById('article-fullscreen-label');
+      const icon = document.getElementById('article-fullscreen-icon');
+      if (label) label.textContent = isFull ? 'Exit Fullscreen' : 'Fullscreen';
+      if (icon) icon.textContent = isFull ? '✕' : '⛶';
+      if (isFull) {
+        document.body.style.overflow = 'hidden';
+        window.addEventListener('keydown', onArticleFullscreenEsc);
+      } else {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', onArticleFullscreenEsc);
+      }
+    }
+
+    function onArticleFullscreenEsc(e) {
+      if (e.key === 'Escape') {
+        const editor = document.getElementById('articles-editor-view');
+        if (editor && editor.classList.contains('is-fullscreen')) {
+          toggleArticleFullscreen();
+        }
+      }
+    }
+
+    function autoUpdateArticleTitle() {
+      const titleInput = document.getElementById('art-form-title');
+      const title = titleInput ? titleInput.value.trim() : '';
+      const headerTitle = document.getElementById('art-studio-header-title');
+      if (headerTitle) {
+        headerTitle.textContent = title || (editingArticleSlug ? 'Editing Article' : 'New Scholarly Essay');
+      }
+    }
+
+    function openNewArticleEditor() {
+      editingArticleSlug = null;
+      document.getElementById('art-form-title').value = '';
+      document.getElementById('art-form-slug').value = '';
+      document.getElementById('art-form-cat').value = 'AI & Cybernetics';
+      document.getElementById('art-form-date').value = new Date().toISOString().split('T')[0];
+      document.getElementById('art-form-readtime').value = '3 min read';
+      document.getElementById('art-form-excerpt').value = '';
+      const tagsInput = document.getElementById('art-form-tags');
+      if (tagsInput) tagsInput.value = '';
+      const imgInput = document.getElementById('art-form-image');
+      if (imgInput) imgInput.value = 'assets/images/spotlight-smart-cities.jpg';
+      document.getElementById('art-form-code-editor').value = '';
+      const vis = document.getElementById('art-form-visual-editor');
+      if (vis) vis.innerHTML = '';
+      const feat = document.getElementById('art-form-featured');
+      if (feat) feat.checked = false;
+
+      document.getElementById('articles-list-view').style.display = 'none';
+      document.getElementById('articles-editor-view').style.display = 'block';
+      const headerTitle = document.getElementById('art-studio-header-title');
+      if (headerTitle) headerTitle.textContent = art.title || 'Edit Article';
+      const modeIndicator = document.getElementById('art-studio-mode-indicator');
+      if (modeIndicator) modeIndicator.textContent = '✏️ Editing Article';
+      updateEditorMetrics();
+      autoUpdateArticlePreview();
+      initArticleImageListeners();
+      hideImageFloatingToolbar();
+    }
+
+    function closeArticleEditor() {
+      document.getElementById('articles-editor-view').style.display = 'none';
+      document.getElementById('articles-list-view').style.display = 'block';
+    }
+
+    function editArticle(slug) {
+      const art = articlesData.find(a => a.id === slug);
+      if (!art) {
+        showToast('Article not found: ' + slug, true);
+        return;
+      }
+      editingArticleSlug = slug;
+      document.getElementById('art-form-title').value = art.title || '';
+      document.getElementById('art-form-slug').value = art.id || '';
+      document.getElementById('art-form-cat').value = art.category || 'AI & Cybernetics';
+      document.getElementById('art-form-date').value = art.date || '';
+      document.getElementById('art-form-readtime').value = art.readTime || '3 min read';
+      document.getElementById('art-form-excerpt').value = art.excerpt || '';
+      const tagsInput = document.getElementById('art-form-tags');
+      if (tagsInput) tagsInput.value = Array.isArray(art.tags) ? art.tags.join(', ') : (art.tags || '');
+      const imgInput = document.getElementById('art-form-image');
+      if (imgInput) imgInput.value = art.image || 'assets/images/spotlight-smart-cities.jpg';
+      
+      const rawContent = art.content_html || art.content || '';
+      document.getElementById('art-form-code-editor').value = rawContent;
+      const vis = document.getElementById('art-form-visual-editor');
+      if (vis) {
+        vis.innerHTML = rawContent;
+        wrapBareImagesInFigures(vis);
+      }
+
+      const feat = document.getElementById('art-form-featured');
+      if (feat) feat.checked = !!(art.spotlight || art.featured);
+
+      document.getElementById('articles-list-view').style.display = 'none';
+      document.getElementById('articles-editor-view').style.display = 'block';
+      const headerTitle = document.getElementById('art-studio-header-title');
+      if (headerTitle) headerTitle.textContent = art.title || 'Edit Article';
+      const modeIndicator = document.getElementById('art-studio-mode-indicator');
+      if (modeIndicator) modeIndicator.textContent = '✏️ Editing Article';
+      updateEditorMetrics();
+      autoUpdateArticlePreview();
+      initArticleImageListeners();
+      hideImageFloatingToolbar();
+    }
+
+    function switchArticlePreviewMode(mode) {
+      articlePreviewMode = mode;
+      const spotTab = document.getElementById('tab-art-spotlight-preview');
+      const readTab = document.getElementById('tab-art-reader-preview');
+      if (spotTab) spotTab.classList.toggle('active', mode === 'spotlight');
+      if (readTab) readTab.classList.toggle('active', mode === 'reader');
+      autoUpdateArticlePreview();
+      initArticleImageListeners();
+      hideImageFloatingToolbar();
+    }
+
+    function autoUpdateArticlePreview() {
+      const titleInput = document.getElementById('art-form-title');
+      const title = titleInput ? titleInput.value : '';
+      const slugInput = document.getElementById('art-form-slug');
+      if (!editingArticleSlug && title && slugInput) {
+        slugInput.value = title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/[-\s]+/g, '-').slice(0, 60);
+      }
+      const cat = (document.getElementById('art-form-cat') || {}).value || 'AI & Cybernetics';
+      const date = (document.getElementById('art-form-date') || {}).value || '2026-02-02';
+      let content = '';
+      if (currentArticleEditorMode === 'visual') {
+        const vis = document.getElementById('art-form-visual-editor');
+        content = vis ? vis.innerHTML : '';
+      } else {
+        const ta = document.getElementById('art-form-code-editor');
+        content = ta ? ta.value : '';
+      }
+      const excerpt = (document.getElementById('art-form-excerpt') || {}).value || '';
+      const words = content.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean).length;
+      const calcReadTime = Math.max(1, Math.round(words / 200)) + ' min read';
+      const readTimeInput = document.getElementById('art-form-readtime');
+      const readTime = (readTimeInput && readTimeInput.value) ? readTimeInput.value : calcReadTime;
+
+      const previewBox = document.getElementById('art-preview-content');
+      if (!previewBox) return;
+
+      if (articlePreviewMode === 'spotlight') {
+        previewBox.innerHTML = `
+          <div style="background: rgba(10, 24, 42, 0.85); border: 1px solid rgba(186, 230, 253, 0.2); border-radius: 12px; overflow: hidden; padding: 20px;">
+            <div style="display: flex; gap: 8px; margin-bottom: 12px; align-items: center; flex-wrap: wrap;">
+              <span style="background: rgba(250, 204, 21, 0.15); color: #facc15; font-size: 0.70rem; font-weight: 700; padding: 3px 8px; border-radius: 999px;">★ SPOTLIGHT ESSAY</span>
+              <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 0.70rem; font-weight: 700; padding: 3px 8px; border-radius: 999px;">${escapeHTML(cat)}</span>
+              <span style="font-size: 0.75rem; color: #94a3b8; margin-left: auto;">${escapeHTML(date)} &bull; ${escapeHTML(readTime)}</span>
+            </div>
+            <h3 style="font-family: var(--font-cinzel); font-size: 1.15rem; color: #ffffff; margin: 0 0 10px 0; line-height: 1.4;">${escapeHTML(title || 'Untitled Article')}</h3>
+            <p style="font-size: 0.86rem; color: #bae6fd; line-height: 1.6; margin: 0 0 14px 0;">${escapeHTML(excerpt || 'Brief abstract or introductory excerpt...')}</p>
+            <div style="font-size: 0.75rem; color: #64748b; font-family: monospace;">Slug: ${escapeHTML(slugInput ? slugInput.value : 'slug-auto')}</div>
+          </div>
+        `;
+      } else {
+        previewBox.innerHTML = `
+          <div style="background: #020b14; border: 1px solid rgba(186, 230, 253, 0.12); border-radius: 12px; padding: 24px;">
+            <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 999px;">${escapeHTML(cat)}</span>
+            <h1 style="font-family: var(--font-cinzel); font-size: 1.4rem; color: #ffffff; margin: 14px 0 8px 0; line-height: 1.3;">${escapeHTML(title || 'Untitled Article')}</h1>
+            <div style="font-size: 0.80rem; color: #94a3b8; margin-bottom: 16px;">Published on ${escapeHTML(date)} &bull; ${escapeHTML(readTime)}</div>
+            <div style="border-top: 1px solid rgba(186, 230, 253, 0.1); padding-top: 16px; font-size: 0.92rem; color: #cbd5e1; line-height: 1.7;">
+              ${content || '<p style="color: #64748b; font-style: italic;">Start typing article content in the editor...</p>'}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+function setArticleEditorMode(mode) {
+      currentArticleEditorMode = mode;
+      const visualElem = document.getElementById('art-form-visual-editor');
+      const codeElem = document.getElementById('art-form-code-editor');
+      const btnVisual = document.getElementById('btn-art-mode-visual');
+      const btnCode = document.getElementById('btn-art-mode-code');
+
+      if (mode === 'visual') {
+        visualElem.innerHTML = codeElem.value;
+        visualElem.style.display = 'block';
+        codeElem.style.display = 'none';
+        btnVisual.classList.add('active');
+        btnCode.classList.remove('active');
+      } else {
+        codeElem.value = visualElem.innerHTML;
+        codeElem.style.display = 'block';
+        visualElem.style.display = 'none';
+        btnCode.classList.add('active');
+        btnVisual.classList.remove('active');
+      }
+    }
+
+    
+    function updateEditorMetrics() {
+      let content = '';
+      if (currentArticleEditorMode === 'visual') {
+        const vis = document.getElementById('art-form-visual-editor');
+        content = vis ? vis.innerHTML : '';
+      } else {
+        const ta = document.getElementById('art-form-code-editor');
+        content = ta ? ta.value : '';
+      }
+      const plain = content.replace(/<[^>]+>/g, ' ').trim();
+      const words = plain ? plain.split(/\s+/).filter(Boolean).length : 0;
+      const chars = plain.length;
+      const paras = (content.match(/<p[^>]*>/gi) || []).length || (plain ? 1 : 0);
+      const readTimeMin = Math.max(1, Math.round(words / 200));
+
+      const wEl = document.getElementById('art-stat-words');
+      if (wEl) wEl.innerHTML = `<strong>${words}</strong> words`;
+      const cEl = document.getElementById('art-stat-chars');
+      if (cEl) cEl.innerHTML = `<strong>${chars}</strong> characters`;
+      const rEl = document.getElementById('art-stat-readtime');
+      if (rEl) rEl.innerHTML = `<strong>${readTimeMin} min</strong> estimated read`;
+      const pEl = document.getElementById('art-stat-paragraphs');
+      if (pEl) pEl.innerHTML = `<strong>${paras}</strong> paragraphs`;
+    }
+
+    function onVisualArticleInput() {
+      const visualElem = document.getElementById('art-form-visual-editor');
+      const codeElem = document.getElementById('art-form-code-editor');
+      codeElem.value = visualElem.innerHTML;
+      updateEditorMetrics();
+      autoUpdateArticlePreview();
+      initArticleImageListeners();
+      hideImageFloatingToolbar();
+    }
+
+    function onCodeArticleInput() {
+      const visualElem = document.getElementById('art-form-visual-editor');
+      const codeElem = document.getElementById('art-form-code-editor');
+      visualElem.innerHTML = codeElem.value;
+      updateEditorMetrics();
+      autoUpdateArticlePreview();
+      initArticleImageListeners();
+      hideImageFloatingToolbar();
+    }
+
+    
+    // -------------------------------------------------------------
+    // Golden Ratio & Gestalt Visual Editor Formatting Handlers
+    // -------------------------------------------------------------
+    let selectedArticleImage = null;
+
+    function applyArticleFontFamily(fontFamily) {
+      if (!fontFamily) return;
+      const visualElem = document.getElementById('art-form-visual-editor');
+      visualElem.focus();
+      try { document.execCommand('styleWithCSS', false, true); } catch(e) {}
+      const sel = window.getSelection();
+      if (sel && !sel.isCollapsed && sel.rangeCount > 0) {
+        const range = sel.getRangeAt(0);
+        const span = document.createElement('span');
+        span.style.fontFamily = fontFamily;
+        try {
+          range.surroundContents(span);
+        } catch (e) {
+          document.execCommand('insertHTML', false, `<span style="font-family: ${fontFamily};">${sel.toString()}</span>`);
+        }
+        showToast('Typography updated: ' + fontFamily.split(',')[0].replace(/['"]/g, ''));
+      } else if (sel && sel.anchorNode) {
+        let node = sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode;
+        const block = node ? node.closest('p, h1, h2, h3, h4, blockquote, div, li') : null;
+        if (block && visualElem.contains(block)) {
+          block.style.fontFamily = fontFamily;
+          showToast('Paragraph font set: ' + fontFamily.split(',')[0].replace(/['"]/g, ''));
+        }
+      }
+      onVisualArticleInput();
+      const fontSel = document.getElementById('art-tool-font');
+      if (fontSel) fontSel.value = '';
+      
+    }
+
+    function applyArticleHeading(level) {
+      if (!level) return;
+      const visualElem = document.getElementById('art-form-visual-editor');
+      visualElem.focus();
+
+      if (level === 'p') {
+        document.execCommand('formatBlock', false, '<p>');
+      } else if (level === 'h2') {
+        document.execCommand('formatBlock', false, '<h2>');
+      } else if (level === 'h3') {
+        document.execCommand('formatBlock', false, '<h3>');
+      } else if (level === 'h4') {
+        document.execCommand('formatBlock', false, '<h4>');
+      } else if (level === 'quote') {
+        document.execCommand('formatBlock', false, '<blockquote>');
+      } else if (level === 'lead') {
+        const sel = window.getSelection().toString();
+        document.execCommand('insertHTML', false, `<p class="lead-para">${sel || 'Editorial lead introduction paragraph text...'}</p>`);
+      } else if (level === 'callout') {
+        const sel = window.getSelection().toString();
+        document.execCommand('insertHTML', false, `<div class="callout-box"><strong>💡 Key Finding:</strong> ${sel || 'Synthesized key takeaway finding...'}</div>`);
+      } else if (level === 'warning') {
+        const sel = window.getSelection().toString();
+        document.execCommand('insertHTML', false, `<div class="callout-box callout-warning"><strong>⚠️ Policy Note:</strong> ${sel || 'Critical operational or governance note...'}</div>`);
+      } else if (level === 'detail') {
+        const sel = window.getSelection().toString();
+        document.execCommand('insertHTML', false, `<p class="detail-para" style="font-size: 0.88rem; color: #94a3b8; font-style: italic;">${sel || 'Scholarly observation footnote...'}</p>`);
+      }
+      onVisualArticleInput();
+      const headSel = document.getElementById('art-tool-heading');
+      if (headSel) headSel.value = 'p';
+    }
+
+    function applyArticleFontSize(sizeVal) {
+      if (!sizeVal) return;
+      const visualElem = document.getElementById('art-form-visual-editor');
+      visualElem.focus();
+      const sel = window.getSelection();
+      if (!sel.isCollapsed && sel.rangeCount > 0) {
+        const text = sel.toString();
+        document.execCommand('insertHTML', false, `<span style="font-size: ${sizeVal}; line-height: 1.6;">${text}</span>`);
+      } else {
+        document.execCommand('insertHTML', false, `<span style="font-size: ${sizeVal};">&nbsp;</span>`);
+      }
+      onVisualArticleInput();
+      const sizeSel = document.getElementById('art-tool-size');
+      if (sizeSel) sizeSel.value = '';
+    }
+
+    // Gestalt & Golden Ratio Color, Highlight & Margin Handlers
+    // -------------------------------------------------------------
+    function applyArticleFontColor(colorVal) {
+      if (!colorVal) return;
+      const visualElem = document.getElementById('art-form-visual-editor');
+      const swatch = document.getElementById('art-color-swatch-indicator');
+      if (swatch && colorVal !== 'inherit') swatch.style.backgroundColor = colorVal;
+      
+      if (currentArticleEditorMode === 'code') {
+        const ta = document.getElementById('art-form-code-editor');
+        const s = ta.selectionStart, e = ta.selectionEnd;
+        const sel = ta.value.substring(s, e);
+        const rep = colorVal === 'inherit' ? sel : `<span style="color: ${colorVal};">${sel || 'Colored text'}</span>`;
+        ta.value = ta.value.substring(0, s) + rep + ta.value.substring(e);
+        ta.selectionStart = ta.selectionEnd = s + rep.length;
+        ta.focus();
+        onCodeArticleInput();
+        return;
+      }
+
+      visualElem.focus();
+      try { document.execCommand('styleWithCSS', false, true); } catch(e) {}
+      const sel = window.getSelection();
+
+      if (sel && !sel.isCollapsed && sel.rangeCount > 0) {
+        if (colorVal === 'inherit') {
+          document.execCommand('removeFormat', false, null);
+        } else {
+          document.execCommand('foreColor', false, colorVal);
+        }
+        showToast('Text color set: ' + colorVal);
+      } else if (sel && sel.anchorNode) {
+        let node = sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode;
+        const block = node ? node.closest('p, h1, h2, h3, h4, blockquote, div, li, span') : null;
+        if (block && visualElem.contains(block)) {
+          if (colorVal === 'inherit') {
+            block.style.color = '';
+            showToast('Paragraph color reset to default');
+          } else {
+            block.style.color = colorVal;
+            showToast('Block color updated: ' + colorVal);
+          }
+        }
+      }
+      onVisualArticleInput();
+      const colSel = document.getElementById('art-tool-color');
+      if (colSel) colSel.value = '';
+    }
+
+    function applyArticleHighlight(colorVal) {
+      if (!colorVal) return;
+      const visualElem = document.getElementById('art-form-visual-editor');
+      const swatch = document.getElementById('art-highlight-swatch-indicator');
+      if (swatch && colorVal !== 'transparent') swatch.style.backgroundColor = colorVal;
+
+      if (currentArticleEditorMode === 'code') {
+        const ta = document.getElementById('art-form-code-editor');
+        const s = ta.selectionStart, e = ta.selectionEnd;
+        const sel = ta.value.substring(s, e);
+        const rep = colorVal === 'transparent' ? sel : `<mark style="background-color: ${colorVal}; color: inherit; padding: 2px 6px; border-radius: 4px;">${sel || 'Highlighted text'}</mark>`;
+        ta.value = ta.value.substring(0, s) + rep + ta.value.substring(e);
+        ta.selectionStart = ta.selectionEnd = s + rep.length;
+        ta.focus();
+        onCodeArticleInput();
+        return;
+      }
+
+      visualElem.focus();
+      try { document.execCommand('styleWithCSS', false, true); } catch(e) {}
+      const sel = window.getSelection();
+
+      if (sel && !sel.isCollapsed && sel.rangeCount > 0) {
+        if (colorVal === 'transparent') {
+          document.execCommand('removeFormat', false, null);
+          showToast('Highlight removed');
+        } else {
+          const range = sel.getRangeAt(0);
+          const mark = document.createElement('mark');
+          mark.style.backgroundColor = colorVal;
+          mark.style.color = 'inherit';
+          mark.style.padding = '2px 6px';
+          mark.style.borderRadius = '4px';
+          mark.style.boxDecorationBreak = 'clone';
+          mark.style.webkitBoxDecorationBreak = 'clone';
+          try {
+            range.surroundContents(mark);
+          } catch(e) {
+            document.execCommand('insertHTML', false, `<mark style="background-color: ${colorVal}; color: inherit; padding: 2px 6px; border-radius: 4px;">${sel.toString()}</mark>`);
+          }
+          showToast('Highlight marker applied');
+        }
+      } else if (sel && sel.anchorNode) {
+        let node = sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode;
+        const block = node ? node.closest('p, h1, h2, h3, h4, blockquote, .callout-box, div') : null;
+        if (block && visualElem.contains(block)) {
+          if (colorVal === 'transparent') {
+            block.style.backgroundColor = '';
+            block.style.padding = '';
+            block.style.borderRadius = '';
+            showToast('Block highlight cleared');
+          } else {
+            block.style.backgroundColor = colorVal;
+            block.style.padding = '14px 20px';
+            block.style.borderRadius = '8px';
+            showToast('Block card highlighted');
+          }
+        }
+      }
+      onVisualArticleInput();
+      const hlSel = document.getElementById('art-tool-highlight');
+      if (hlSel) hlSel.value = '';
+    }
+
+    function applyArticleMargin(marginVal) {
+      if (!marginVal) return;
+      const visualElem = document.getElementById('art-form-visual-editor');
+      
+      if (currentArticleEditorMode === 'code') {
+        const ta = document.getElementById('art-form-code-editor');
+        const s = ta.selectionStart, e = ta.selectionEnd;
+        const sel = ta.value.substring(s, e);
+        const rep = marginVal === 'reset' ? `<p>${sel || 'Paragraph text...'}</p>` : `<div style="margin: ${marginVal};">${sel || 'Block with custom margin...'}</div>`;
+        ta.value = ta.value.substring(0, s) + rep + ta.value.substring(e);
+        ta.selectionStart = ta.selectionEnd = s + rep.length;
+        ta.focus();
+        onCodeArticleInput();
+        return;
+      }
+
+      visualElem.focus();
+      const sel = window.getSelection();
+      let node = sel && sel.anchorNode ? (sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode) : null;
+      const block = node ? node.closest('p, h1, h2, h3, h4, blockquote, .callout-box, figure, table, div, ul, ol') : null;
+
+      if (block && visualElem.contains(block)) {
+        if (marginVal === 'reset') {
+          block.style.margin = '';
+          showToast('Block margin reset to default');
+        } else {
+          block.style.margin = marginVal;
+          showToast('Margin set: ' + marginVal);
+        }
+      } else {
+        if (sel && !sel.isCollapsed && sel.rangeCount > 0) {
+          const text = sel.toString();
+          document.execCommand('insertHTML', false, `<div style="margin: ${marginVal};">${text}</div>`);
+          showToast('Created block with margin: ' + marginVal);
+        } else {
+          showToast('Place cursor in a paragraph or block to set margin');
+        }
+      }
+      onVisualArticleInput();
+      const mSel = document.getElementById('art-tool-margin');
+      if (mSel) mSel.value = '';
+    }
+
+    function adjustBlockMargin(dir) {
+      const visualElem = document.getElementById('art-form-visual-editor');
+      visualElem.focus();
+      const sel = window.getSelection();
+      let node = sel && sel.anchorNode ? (sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode) : null;
+      const block = node ? node.closest('p, h1, h2, h3, h4, blockquote, .callout-box, figure, div, ul, ol') : null;
+
+      if (block && visualElem.contains(block)) {
+        const computed = window.getComputedStyle(block);
+        const currentLeft = parseFloat(computed.marginLeft) || 0;
+        const currentRight = parseFloat(computed.marginRight) || 0;
+        const step = 16.18; // Golden Ratio step increment (~16px)
+        const newLeft = dir === 'increase' ? currentLeft + step : Math.max(0, currentLeft - step);
+        const newRight = dir === 'increase' ? currentRight + step : Math.max(0, currentRight - step);
+        block.style.marginLeft = newLeft + 'px';
+        block.style.marginRight = newRight + 'px';
+        showToast((dir === 'increase' ? 'Indented margin: +' : 'Outdented margin: -') + Math.round(newLeft) + 'px');
+        onVisualArticleInput();
+      } else {
+        showToast('Place cursor in a paragraph to adjust indent');
+      }
+    }
+
+
+        
+    // -------------------------------------------------------------
+    // Comprehensive Figure Upload, Insertion & Clear Formatting Engine
+    // -------------------------------------------------------------
+    let savedArticleRange = null;
+
+    function saveArticleSelection() {
+      const sel = window.getSelection();
+      if (sel && sel.rangeCount > 0) {
+        savedArticleRange = sel.getRangeAt(0).cloneRange();
+      } else {
+        savedArticleRange = null;
+      }
+    }
+
+    function restoreArticleSelection() {
+      if (savedArticleRange) {
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(savedArticleRange);
+      }
+    }
+
+    function openArticleFigureModal() {
+      saveArticleSelection();
+      const urlInp = document.getElementById('modal-fig-url');
+      const capInp = document.getElementById('modal-fig-caption');
+      const prevBox = document.getElementById('modal-fig-preview-box');
+      const prevImg = document.getElementById('modal-fig-preview-img');
+      if (urlInp) urlInp.value = '';
+      if (capInp) capInp.value = '';
+      if (prevImg) prevImg.src = '';
+      if (prevBox) prevBox.style.display = 'none';
+
+      openModal('modal-figure-insert');
+    }
+
+    async function uploadImageToServer(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = async () => {
+          try {
+            const passkey = typeof MASTER_PASSKEY !== 'undefined' ? MASTER_PASSKEY : 'zaidamin_editorial_auth';
+            const res = await fetch('/api/upload-image', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'X-Admin-Key': passkey },
+              body: JSON.stringify({ filename: file.name, data: reader.result })
+            });
+            const json = await res.json();
+            if (json.url) {
+              resolve(json.url);
+            } else {
+              resolve(reader.result);
+            }
+          } catch (err) {
+            console.warn('Server upload failed, using data URL fallback', err);
+            resolve(reader.result);
+          }
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleModalFigureUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      showToast('Uploading ' + file.name + '...');
+
+      try {
+        const url = await uploadImageToServer(file);
+        const urlInp = document.getElementById('modal-fig-url');
+        const capInp = document.getElementById('modal-fig-caption');
+        const prevBox = document.getElementById('modal-fig-preview-box');
+        const prevImg = document.getElementById('modal-fig-preview-img');
+
+        if (urlInp) urlInp.value = url;
+        if (prevImg) prevImg.src = url;
+        if (prevBox) prevBox.style.display = 'block';
+
+        if (capInp && !capInp.value) {
+          const cleanName = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+          const titleCase = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
+          capInp.value = 'Figure: ' + titleCase;
+        }
+        showToast('Image uploaded: ' + file.name);
+      } catch(err) {
+        showToast('Failed to upload image: ' + err, true);
+      }
+    }
+
+    async function handleDirectArticleImageUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      showToast('Uploading and inserting ' + file.name + '...');
+
+      try {
+        const url = await uploadImageToServer(file);
+        const cleanName = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+        const caption = 'Figure: ' + cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
+
+        insertFigureHTMLIntoEditor(url, caption, 'standard', 'center');
+        showToast('Figure inserted successfully!');
+      } catch(err) {
+        showToast('Upload failed: ' + err, true);
+      }
+    }
+
+    function updateModalFigPreview(url) {
+      const prevBox = document.getElementById('modal-fig-preview-box');
+      const prevImg = document.getElementById('modal-fig-preview-img');
+      if (url && url.trim()) {
+        if (prevImg) prevImg.src = url.trim();
+        if (prevBox) prevBox.style.display = 'block';
+      } else {
+        if (prevBox) prevBox.style.display = 'none';
+      }
+    }
+
+    function confirmInsertArticleFigure() {
+      const urlInp = document.getElementById('modal-fig-url');
+      const capInp = document.getElementById('modal-fig-caption');
+      const sizeSel = document.getElementById('modal-fig-size');
+      const alignSel = document.getElementById('modal-fig-align');
+
+      const url = urlInp ? urlInp.value.trim() : '';
+      if (!url) {
+        showToast('Please upload an image or provide an image URL!', true);
+        return;
+      }
+
+      const caption = capInp ? capInp.value.trim() : '';
+      const size = sizeSel ? sizeSel.value : 'standard';
+      const align = alignSel ? alignSel.value : 'center';
+
+      insertFigureHTMLIntoEditor(url, caption, size, align);
+      closeModal('modal-figure-insert');
+      showToast('Academic Figure inserted successfully!');
+    }
+
+    function insertFigureHTMLIntoEditor(url, caption, size = 'standard', align = 'center') {
+      let sizeClass = 'fig-standard';
+      let maxWidth = '82%';
+      if (size === 'compact') {
+        sizeClass = 'fig-compact';
+        maxWidth = '60%';
+      } else if (size === 'full') {
+        sizeClass = 'fig-full';
+        maxWidth = '100%';
+      }
+
+      const capHTML = caption ? `<figcaption style="font-size: 0.85rem; color: #94a3b8; margin-top: 10px; font-style: italic; text-align: ${align}; line-height: 1.4;">${escapeHTML(caption)}</figcaption>` : '';
+      const figureHTML = `<figure class="${sizeClass}" style="margin: 1.618rem auto; text-align: ${align}; display: block;"><img src="${url}" alt="${escapeHTML(caption || 'Figure Diagram')}" loading="lazy" style="max-width: ${maxWidth}; width: auto; height: auto; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65); border: 1px solid rgba(212, 175, 55, 0.25);">${capHTML}</figure><p>&nbsp;</p>`;
+
+      if (currentArticleEditorMode === 'code') {
+        const ta = document.getElementById('art-form-code-editor');
+        const s = ta.selectionStart, e = ta.selectionEnd;
+        ta.setRangeText('\n' + figureHTML + '\n', s, e, 'end');
+        ta.focus();
+        onCodeArticleInput();
+        return;
+      }
+
+      const visualElem = document.getElementById('art-form-visual-editor');
+      visualElem.focus();
+
+      restoreArticleSelection();
+      const sel = window.getSelection();
+
+      if (sel && sel.rangeCount > 0 && visualElem.contains(sel.anchorNode)) {
+        const range = sel.getRangeAt(0);
+        range.deleteContents();
+
+        const div = document.createElement('div');
+        div.innerHTML = figureHTML;
+        const frag = document.createDocumentFragment();
+        let node, lastNode;
+        while ((node = div.firstChild)) {
+          lastNode = frag.appendChild(node);
+        }
+        range.insertNode(frag);
+
+        if (lastNode) {
+          range.setStartAfter(lastNode);
+          range.collapse(true);
+          sel.removeAllRanges();
+          sel.addRange(range);
+        }
+      } else {
+        visualElem.insertAdjacentHTML('beforeend', figureHTML);
+      }
+
+      onVisualArticleInput();
+      initArticleImageListeners();
+
+      setTimeout(() => {
+        const imgs = visualElem.querySelectorAll('img');
+        if (imgs.length) {
+          const latestImg = imgs[imgs.length - 1];
+          selectArticleImage(latestImg);
+        }
+      }, 100);
+    }
+
+    function cleanBlockElementToDefault(block, visualElem) {
+      if (!block || !visualElem || !visualElem.contains(block)) return block;
+
+      if (block.tagName === 'FIGURE') {
+        block.removeAttribute('style');
+        block.className = 'fig-standard';
+        const img = block.querySelector('img');
+        if (img) {
+          img.removeAttribute('style');
+          img.removeAttribute('class');
+        }
+        return block;
+      }
+
+      if (['DIV', 'BLOCKQUOTE', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'PRE'].includes(block.tagName)) {
+        const newP = document.createElement('p');
+        newP.innerHTML = block.innerHTML
+          .replace(/<strong>Key Finding:<\/strong>\s*/gi, '')
+          .replace(/<strong>💡\s*Key Finding:<\/strong>\s*/gi, '')
+          .replace(/<strong>⚠️\s*Policy Note:<\/strong>\s*/gi, '');
+
+        newP.querySelectorAll('span, mark, font').forEach(el => {
+          const parent = el.parentNode;
+          if (parent) {
+            while (el.firstChild) parent.insertBefore(el.firstChild, el);
+            parent.removeChild(el);
+          }
+        });
+
+        newP.querySelectorAll('*').forEach(el => {
+          el.removeAttribute('style');
+          el.removeAttribute('class');
+          el.removeAttribute('color');
+          el.removeAttribute('face');
+          el.removeAttribute('size');
+          el.removeAttribute('align');
+        });
+
+        newP.removeAttribute('style');
+        newP.removeAttribute('class');
+
+        if (block.parentNode) {
+          block.parentNode.replaceChild(newP, block);
+        }
+        return newP;
+      } else {
+        block.removeAttribute('style');
+        block.removeAttribute('class');
+        block.removeAttribute('color');
+        block.removeAttribute('align');
+
+        block.querySelectorAll('span, mark, font').forEach(el => {
+          const parent = el.parentNode;
+          if (parent) {
+            while (el.firstChild) parent.insertBefore(el.firstChild, el);
+            parent.removeChild(el);
+          }
+        });
+
+        block.querySelectorAll('*').forEach(el => {
+          el.removeAttribute('style');
+          el.removeAttribute('class');
+          el.removeAttribute('color');
+          el.removeAttribute('face');
+          el.removeAttribute('size');
+          el.removeAttribute('align');
+        });
+        return block;
+      }
+    }
+
+    function clearArticleElementFormat() {
+      if (currentArticleEditorMode === 'code') {
+        const ta = document.getElementById('art-form-code-editor');
+        const s = ta.selectionStart, e = ta.selectionEnd;
+        const sel = ta.value.substring(s, e);
+        if (sel) {
+          const clean = sel.replace(/<[^>]+>/g, '').trim();
+          ta.setRangeText(clean, s, e, 'end');
+          showToast('HTML tags stripped to plain text');
+        } else {
+          showToast('Select code to clear formatting');
+        }
+        onCodeArticleInput();
+        return;
+      }
+
+      const visualElem = document.getElementById('art-form-visual-editor');
+      visualElem.focus();
+      const sel = window.getSelection();
+
+      if (sel && !sel.isCollapsed && sel.rangeCount > 0) {
+        try {
+          document.execCommand('styleWithCSS', false, false);
+          document.execCommand('removeFormat', false, null);
+        } catch(e) {}
+
+        const range = sel.getRangeAt(0);
+        let container = range.commonAncestorContainer;
+        if (container.nodeType === 3) container = container.parentElement;
+
+        let block = container ? container.closest('p, h1, h2, h3, h4, h5, h6, blockquote, div, li, .callout-box, figure') : null;
+
+        if (block && visualElem.contains(block) && (block.classList.contains('callout-box') || ['DIV', 'BLOCKQUOTE', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(block.tagName) || block.getAttribute('style'))) {
+          cleanBlockElementToDefault(block, visualElem);
+        } else if (container && visualElem.contains(container)) {
+          const subBlocks = container.querySelectorAll('.callout-box, blockquote, h1, h2, h3, h4, h5, h6, div');
+          subBlocks.forEach(sb => {
+            if (sel.containsNode(sb, true)) {
+              cleanBlockElementToDefault(sb, visualElem);
+            }
+          });
+
+          const inlineElements = container.querySelectorAll('span, mark, font, b, strong, i, em, u, s, code');
+          inlineElements.forEach(el => {
+            if (sel.containsNode(el, true)) {
+              el.removeAttribute('style');
+              el.removeAttribute('class');
+              el.removeAttribute('color');
+              const p = el.parentNode;
+              if (p && ['span', 'mark', 'font'].includes(el.tagName.toLowerCase())) {
+                while (el.firstChild) p.insertBefore(el.firstChild, el);
+                p.removeChild(el);
+              }
+            }
+          });
+        }
+
+        showToast('Formatting cleared to default clean paragraph (¶)');
+      } else if (sel && sel.anchorNode) {
+        let node = sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode;
+        const block = node ? node.closest('p, h1, h2, h3, h4, h5, h6, blockquote, div, li, .callout-box, figure') : null;
+
+        if (block && visualElem.contains(block)) {
+          cleanBlockElementToDefault(block, visualElem);
+          showToast('Element reset to clean normal paragraph (¶)');
+        } else {
+          showToast('Place cursor in an element or select text to clear format');
+        }
+      }
+
+      onVisualArticleInput();
+    }
+
+    function formatSelectedArticleImage(action) {
+      let img = selectedArticleImage;
+      if (!img) {
+        const visualElem = document.getElementById('art-form-visual-editor');
+        // Check if cursor/selection is on an image or inside a figure
+        const sel = window.getSelection();
+        if (sel && sel.anchorNode) {
+          const node = sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentNode : sel.anchorNode;
+          if (node) {
+            img = node.tagName === 'IMG' ? node : node.querySelector('img') || (node.closest('figure') ? node.closest('figure').querySelector('img') : null);
+          }
+        }
+        if (!img && visualElem) {
+          // Fallback to first image in editor
+          const imgs = visualElem.querySelectorAll('img');
+          if (imgs.length === 1) img = imgs[0];
+        }
+      }
+
+      if (!img) {
+        showToast('Please click on an image in the editor first to format it.', true);
+        return;
+      }
+
+      selectedArticleImage = img;
+      img.classList.add('art-img-selected');
+      const fig = img.closest('figure') || img;
+
+      if (action === 'compact') {
+        fig.classList.remove('fig-standard', 'fig-full');
+        fig.classList.add('fig-compact');
+        img.classList.remove('fig-standard', 'fig-full');
+        img.classList.add('fig-compact');
+        showToast('Figure formatted to 60% Compact measure.');
+      } else if (action === 'standard') {
+        fig.classList.remove('fig-compact', 'fig-full');
+        fig.classList.add('fig-standard');
+        img.classList.remove('fig-compact', 'fig-full');
+        img.classList.add('fig-standard');
+        showToast('Figure formatted to 82% Standard measure.');
+      } else if (action === 'full') {
+        fig.classList.remove('fig-compact', 'fig-standard');
+        fig.classList.add('fig-full');
+        img.classList.remove('fig-compact', 'fig-standard');
+        img.classList.add('fig-full');
+        showToast('Figure formatted to 100% Full Column width.');
+      } else if (action === 'center') {
+        fig.classList.remove('fig-left', 'fig-right');
+        img.classList.remove('fig-left', 'fig-right');
+        if (fig.tagName === 'FIGURE') fig.style.textAlign = 'center';
+        showToast('Figure centered.');
+      } else if (action === 'left') {
+        fig.classList.remove('fig-right');
+        fig.classList.add('fig-left');
+        img.classList.remove('fig-right');
+        img.classList.add('fig-left');
+        showToast('Figure floated Left (editorial text wrapping).');
+      } else if (action === 'right') {
+        fig.classList.remove('fig-left');
+        fig.classList.add('fig-right');
+        img.classList.remove('fig-left');
+        img.classList.add('fig-right');
+        showToast('Figure floated Right (editorial text wrapping).');
+      } else if (action === 'caption') {
+        let parentFig = img.closest('figure');
+        let captionElem = parentFig ? parentFig.querySelector('figcaption') : null;
+        const currentCaption = captionElem ? captionElem.textContent : (img.alt || '');
+        const newCaption = prompt('Enter Figure Caption description:', currentCaption);
+        if (newCaption !== null) {
+          if (!parentFig) {
+            parentFig = document.createElement('figure');
+            parentFig.className = 'fig-standard';
+            parentFig.style.margin = '28px auto';
+            parentFig.style.textAlign = 'center';
+            img.parentNode.insertBefore(parentFig, img);
+            parentFig.appendChild(img);
+          }
+          if (!captionElem) {
+            captionElem = document.createElement('figcaption');
+            parentFig.appendChild(captionElem);
+          }
+          captionElem.textContent = newCaption;
+          img.alt = newCaption;
+          showToast('Caption updated.');
+        }
+      } else if (action === 'matting') {
+        fig.classList.toggle('dark-matting');
+        img.classList.toggle('dark-matting');
+        const isMatted = fig.classList.contains('dark-matting') || img.classList.contains('dark-matting');
+        showToast(isMatted ? 'Dark contrast matting enabled for figure.' : 'Dark contrast matting disabled.');
+      } else if (action === 'delete') {
+        if (confirm('Delete this figure from the article?')) {
+          const toRemove = img.closest('figure') || img;
+          toRemove.remove();
+          hideImageFloatingToolbar();
+          onVisualArticleInput();
+          showToast('Figure deleted.');
+          return;
+        }
+      }
+
+      onVisualArticleInput();
+      positionImageFloatingToolbar(img);
+    }
+
+    function positionImageFloatingToolbar(img) {
+      const bar = document.getElementById('art-img-floating-toolbar');
+      if (!bar || !img) return;
+
+      const imgRect = img.getBoundingClientRect();
+      const topPos = Math.max(75, imgRect.top - 46);
+      const leftPos = imgRect.left + (imgRect.width / 2);
+
+      bar.style.position = 'fixed';
+      bar.style.top = topPos + 'px';
+      bar.style.left = leftPos + 'px';
+      bar.style.transform = 'translateX(-50%)';
+      bar.style.zIndex = '99999';
+      bar.classList.add('active');
+    }
+
+    function hideImageFloatingToolbar() {
+      const bar = document.getElementById('art-img-floating-toolbar');
+      if (bar) bar.classList.remove('active');
+      if (selectedArticleImage) {
+        selectedArticleImage.classList.remove('art-img-selected');
+        selectedArticleImage = null;
+      }
+    }
+
+        
+    function wrapBareImagesInFigures(container) {
+      if (!container) return;
+      const imgs = container.querySelectorAll('img');
+      imgs.forEach(function(img) {
+        if (img.closest('figure')) return;
+        const parentA = img.closest('a');
+        const targetNode = parentA || img;
+        const fig = document.createElement('figure');
+        fig.className = 'fig-standard';
+        const alt = img.getAttribute('alt') || '';
+        if (targetNode.parentNode) {
+          targetNode.parentNode.insertBefore(fig, targetNode);
+          fig.appendChild(targetNode);
+          if (alt && alt.trim() && !alt.startsWith('http')) {
+            const cap = document.createElement('figcaption');
+            cap.textContent = alt.trim();
+            fig.appendChild(cap);
+          }
+        }
+      });
+    }
+
+    
+
+    function initArticleImageListeners() {
+      const visualElem = document.getElementById('art-form-visual-editor');
+      if (!visualElem) return;
+
+      if (!visualElem._imgListenerAttached) {
+        visualElem._imgListenerAttached = true;
+        
+        const handleImgClick = function(e) {
+          if (e.target.tagName === 'IMG') {
+            if (selectedArticleImage) selectedArticleImage.classList.remove('art-img-selected');
+            selectedArticleImage = e.target;
+            selectedArticleImage.classList.add('art-img-selected');
+            positionImageFloatingToolbar(selectedArticleImage);
+          } else {
+            if (!e.target.closest('#art-img-floating-toolbar') && !e.target.closest('.art-tool-btn')) {
+              hideImageFloatingToolbar();
+            }
+          }
+        };
+
+        visualElem.addEventListener('click', handleImgClick);
+        visualElem.addEventListener('pointerdown', handleImgClick);
+
+        visualElem.addEventListener('mouseup', function() {
+          setTimeout(positionTextFloatingBubble, 15);
+        });
+        visualElem.addEventListener('keyup', function(e) {
+          if (e.key && (e.key.startsWith('Arrow') || e.key === 'Shift')) {
+            setTimeout(positionTextFloatingBubble, 15);
+          }
+        });
+        document.addEventListener('selectionchange', function() {
+          const sel = window.getSelection();
+          if (!sel || sel.isCollapsed) {
+            
+          }
+        });
+      }
+    }
+
+    function applyArticleVisualFormat(type, value) {
+      if (currentArticleEditorMode === 'code') {
+        insertArticleFormat(type, value);
+        return;
+      }
+
+      const visualElem = document.getElementById('art-form-visual-editor');
+      visualElem.focus();
+
+      if (type === 'img' || type === 'image') {
+        openArticleFigureModal();
+        return;
+      } else if (type === 'clear' || type === 'removeFormat') {
+        clearArticleElementFormat();
+        return;
+      } else if (type === 'highlight') {
+        applyArticleHighlight(value || 'rgba(212, 175, 55, 0.35)');
+        return;
+      } else if (type === 'color' || type === 'fontColor') {
+        applyArticleFontColor(value || '#fce09b');
+        return;
+      } else if (type === 'margin') {
+        applyArticleMargin(value || '1.618rem 0');
+        return;
+      } else if (type === 'removeFormat_old') {
+        document.execCommand('removeFormat', false, null);
+        const sel = window.getSelection();
+        if (sel && sel.anchorNode) {
+          let node = sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode;
+          const mark = node ? node.closest('mark') : null;
+          if (mark) {
+            const parent = mark.parentNode;
+            while (mark.firstChild) parent.insertBefore(mark.firstChild, mark);
+            parent.removeChild(mark);
+          }
+        }
+        showToast('Formatting cleared');
+        onVisualArticleInput();
+        return;
+      } else if (type === 'bold') {
+        document.execCommand('bold', false, null);
+      } else if (type === 'italic') {
+        document.execCommand('italic', false, null);
+      } else if (type === 'underline') {
+        document.execCommand('underline', false, null);
+      } else if (type === 'ul') {
+        document.execCommand('insertUnorderedList', false, null);
+      } else if (type === 'ol') {
+        document.execCommand('insertOrderedList', false, null);
+      } else if (type === 'hr') {
+        document.execCommand('insertHorizontalRule', false, null);
+      } else if (type === 'link') {
+        const url = prompt('Enter link URL (e.g. https://...):', 'https://');
+        if (url) {
+          document.execCommand('createLink', false, url);
+        }
+      } else if (type === 'img' || type === 'image') {
+        const url = prompt('Enter image URL or asset path:', 'assets/images/spotlight-smart-cities.jpg');
+        if (url) {
+          const cap = prompt('Enter figure caption (optional):', 'Figure: Conceptual diagram');
+          const capHtml = cap ? `<figcaption>${escapeHTML(cap)}</figcaption>` : '';
+          document.execCommand('insertHTML', false, `<figure class="fig-standard"><img src="${url}" alt="${escapeHTML(cap || 'Figure')}" loading="lazy">${capHtml}</figure>`);
+          setTimeout(function() {
+            const vis = document.getElementById('art-form-visual-editor');
+            if (vis) {
+              const imgs = vis.querySelectorAll('img');
+              if (imgs.length) positionImageFloatingToolbar(imgs[imgs.length - 1]);
+            }
+          }, 50);
+        }
+      } else if (type === 'para') {
+        if (value === 'h2') {
+          document.execCommand('formatBlock', false, '<h2>');
+        } else if (value === 'h3') {
+          document.execCommand('formatBlock', false, '<h3>');
+        } else if (value === 'quote') {
+          document.execCommand('formatBlock', false, '<blockquote>');
+        } else if (value === 'p') {
+          document.execCommand('formatBlock', false, '<p>');
+        } else if (value === 'lead') {
+          const sel = window.getSelection().toString();
+          document.execCommand('insertHTML', false, `<p class="lead-para">${sel || 'Lead intro paragraph text...'}</p>`);
+        } else if (value === 'detail') {
+          const sel = window.getSelection().toString();
+          document.execCommand('insertHTML', false, `<p class="detail-para">${sel || 'Detailed footnote or observation...'}</p>`);
+        } else if (value === 'callout') {
+          const sel = window.getSelection().toString();
+          document.execCommand('insertHTML', false, `<div class="callout-box"><strong>Key Finding:</strong> ${sel || 'Synthesized key finding...'}</div>`);
+        }
+      } else if (type === 'font') {
+        const sel = window.getSelection().toString();
+        if (value === 'garamond') document.execCommand('insertHTML', false, `<span style="font-family: 'Cormorant Garamond', serif;">${sel || 'Editorial Serif Text'}</span>`);
+        else if (value === 'cinzel') document.execCommand('insertHTML', false, `<span style="font-family: 'Cinzel', serif; letter-spacing: 0.05em;">${sel || 'Classical Display Text'}</span>`);
+        else if (value === 'inter') document.execCommand('insertHTML', false, `<span style="font-family: 'Inter', sans-serif;">${sel || 'Clean Sans Text'}</span>`);
+        else if (value === 'mono') document.execCommand('insertHTML', false, `<code style="font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: rgba(186, 230, 253, 0.1); padding: 2px 6px; border-radius: 4px;">${sel || 'code/symbol'}</code>`);
+      } else if (type === 'size') {
+        const sel = window.getSelection().toString();
+        if (value === 'sm') document.execCommand('insertHTML', false, `<span style="font-size: 0.85rem;">${sel || 'Small text'}</span>`);
+        else if (value === 'reg') document.execCommand('insertHTML', false, `<span style="font-size: 0.95rem;">${sel || 'Regular text'}</span>`);
+        else if (value === 'md') document.execCommand('insertHTML', false, `<span style="font-size: 1.125rem;">${sel || 'Medium text'}</span>`);
+        else if (value === 'lg') document.execCommand('insertHTML', false, `<span style="font-size: 1.375rem;">${sel || 'Large text'}</span>`);
+        else if (value === 'golden') document.execCommand('insertHTML', false, `<span style="font-size: 1.618rem; line-height: 1.5;">${sel || 'Golden Ratio scale text'}</span>`);
+      } else if (type === 'gold') {
+        const sel = window.getSelection().toString();
+        document.execCommand('insertHTML', false, `<span class="text-gold">${sel || 'Golden Highlight'}</span>`);
+      } else if (type === 'cyan') {
+        const sel = window.getSelection().toString();
+        document.execCommand('insertHTML', false, `<span class="text-cyan">${sel || 'Cyan Highlight'}</span>`);
+      }
+
+      onVisualArticleInput();
+    }
+
+    function insertArticleFormat(type, value) {
+      const ta = document.getElementById('art-form-code-editor');
+      const s = ta.selectionStart, e = ta.selectionEnd;
+      const sel = ta.value.substring(s, e);
+      let rep = '';
+
+      if (type === 'para') {
+        if (value === 'lead') rep = `\n<p class="lead-para">${sel || 'Lead introductory paragraph with emphasized prominence...'}</p>\n`;
+        else if (value === 'detail') rep = `\n<p class="detail-para">${sel || 'Detailed academic context or footnote annotation...'}</p>\n`;
+        else if (value === 'callout') rep = `\n<div class="callout-box"><strong>Key Finding:</strong> ${sel || 'Synthesized empirical conclusion or core discovery...'}</div>\n`;
+        else if (value === 'h2') rep = `\n<h2>${sel || 'Section Heading'}</h2>\n`;
+        else if (value === 'h3') rep = `\n<h3>${sel || 'Subheading'}</h3>\n`;
+        else if (value === 'quote') rep = `\n<blockquote>${sel || 'Academic quotation or theoretical axiom...'}</blockquote>\n`;
+      } else if (type === 'font') {
+        if (value === 'garamond') rep = `<span style="font-family: 'Cormorant Garamond', serif;">${sel || 'Editorial Serif Text'}</span>`;
+        else if (value === 'cinzel') rep = `<span style="font-family: 'Cinzel', serif; letter-spacing: 0.05em;">${sel || 'Classical Display Text'}</span>`;
+        else if (value === 'inter') rep = `<span style="font-family: 'Inter', sans-serif;">${sel || 'Clean Sans Text'}</span>`;
+        else if (value === 'mono') rep = `<code style="font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: rgba(186, 230, 253, 0.1); padding: 2px 6px; border-radius: 4px;">${sel || 'code/symbol'}</code>`;
+      } else if (type === 'size') {
+        if (value === 'sm') rep = `<span style="font-size: 0.85rem;">${sel || 'Small text'}</span>`;
+        else if (value === 'reg') rep = `<span style="font-size: 0.95rem;">${sel || 'Regular text'}</span>`;
+        else if (value === 'md') rep = `<span style="font-size: 1.125rem;">${sel || 'Medium text'}</span>`;
+        else if (value === 'lg') rep = `<span style="font-size: 1.375rem;">${sel || 'Large text'}</span>`;
+        else if (value === 'golden') rep = `<span style="font-size: 1.618rem; line-height: 1.5;">${sel || 'Golden Ratio scale text'}</span>`;
+            } else if (type === 'align') {
+        if (value === 'left') document.execCommand('justifyLeft', false, null);
+        else if (value === 'center') document.execCommand('justifyCenter', false, null);
+        else if (value === 'right') document.execCommand('justifyRight', false, null);
+        else if (value === 'justify') document.execCommand('justifyFull', false, null);
+      } else if (type === 'bold') {
+        rep = `<strong>${sel || 'Bold Text'}</strong>`;
+      } else if (type === 'italic') {
+        rep = `<em>${sel || 'Italic Text'}</em>`;
+      } else if (type === 'underline') {
+        rep = `<u>${sel || 'Underlined Text'}</u>`;
+      } else if (type === 'gold') {
+        rep = `<span class="text-gold">${sel || 'Golden Highlight'}</span>`;
+      } else if (type === 'cyan') {
+        rep = `<span class="text-cyan">${sel || 'Cyan Highlight'}</span>`;
+      } else if (type === 'ul') {
+        rep = `\n<ul>\n  <li>${sel || 'First Item'}</li>\n  <li>Second Item</li>\n</ul>\n`;
+      } else if (type === 'link') {
+        const url = prompt('Enter Destination URL:', 'https://');
+        if (url) rep = `<a href="${url}" target="_blank" rel="noopener">${sel || 'Link Text'}</a>`;
+        else rep = sel;
+      } else if (type === 'img') {
+        rep = `\n<figure style="margin: 20px 0; text-align: center;"><img src="assets/images/spotlight-smart-cities.jpg" alt="Figure Caption" style="max-width: 100%; border-radius: 8px;"><figcaption style="font-size: 0.85rem; color: #94a3b8; margin-top: 8px; font-style: italic;">Figure: Architectural diagram description</figcaption></figure>\n`;
+      } else if (type === 'hr') {
+        rep = `\n<hr class="golden-divider">\n`;
+      }
+
+      ta.setRangeText(rep, s, e, 'end');
+      ta.focus();
+      autoUpdateArticlePreview();
+      initArticleImageListeners();
+      hideImageFloatingToolbar();
+    }
+
+    async function saveArticleAction(options = {}) {
+      // options can be a boolean (andDeploy) or an object { deploy: true/false, close: true/false }
+      let andDeploy = true;
+      let shouldClose = false;
+
+      if (typeof options === 'boolean') {
+        andDeploy = options;
+        shouldClose = false; // NEVER suddenly close the editor on standard save!
+      } else if (typeof options === 'object' && options !== null) {
+        if ('deploy' in options) andDeploy = !!options.deploy;
+        if ('close' in options) shouldClose = !!options.close;
+      }
+
+      const title = document.getElementById('art-form-title').value.trim();
+      const slug = document.getElementById('art-form-slug').value.trim();
+      const visualElem = document.getElementById('art-form-visual-editor');
+      const codeElem = document.getElementById('art-form-code-editor');
+      const content = (currentArticleEditorMode === 'visual' ? (visualElem ? visualElem.innerHTML : '') : codeElem.value).trim();
+      if (!title || !slug || !content) {
+        showToast('Title, slug, and content are required!', true);
+        return;
+      }
+
+      const cat = document.getElementById('art-form-cat').value;
+      const tags = document.getElementById('art-form-tags').value.split(',').map(t => t.trim()).filter(Boolean);
+      const date = document.getElementById('art-form-date').value || new Date().toISOString().slice(0, 10);
+      const words = content.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean).length;
+      const readTime = Math.max(1, Math.round(words / 200)) + ' min read';
+      const excerpt = document.getElementById('art-form-excerpt').value.trim() || content.replace(/<[^>]+>/g, ' ').slice(0, 220) + '...';
+      const isFeatured = document.getElementById('art-form-featured').checked;
+
+      const artImg = (document.getElementById('art-form-image') ? document.getElementById('art-form-image').value.trim() : '') || 'assets/images/spotlight-smart-cities.jpg';
+      const payload = {
+        id: slug,
+        title: title,
+        date: date,
+        year: date.slice(0, 4),
+        category: cat,
+        tags: tags.length ? tags : [cat],
+        reading_time: readTime,
+        excerpt: excerpt,
+        image: artImg,
+        content_html: content,
+        author: "Dr. Zaid Amin",
+        featured: isFeatured
+      };
+
+      const oldSlug = editingArticleSlug || slug;
+
+      // Loading UI State on Action Buttons
+      const saveDeployBtn = document.getElementById('btn-art-save-deploy');
+      const saveLocalBtn = document.getElementById('btn-art-save-local');
+      const saveStatusBadge = document.getElementById('art-studio-save-status');
+      const originalDeployText = saveDeployBtn ? saveDeployBtn.innerHTML : '🚀 Save &amp; Publish Live';
+      const originalLocalText = saveLocalBtn ? saveLocalBtn.innerHTML : '💾 Save Locally';
+
+      if (saveDeployBtn) {
+        saveDeployBtn.disabled = true;
+        saveDeployBtn.innerHTML = andDeploy ? '⏳ Saving &amp; Deploying Live...' : '⏳ Saving Locally...';
+      }
+      if (saveLocalBtn) saveLocalBtn.disabled = true;
+
+      // Update in-memory dataset
+      const existingIdx = articlesData.findIndex(a => a.id === oldSlug);
+      if (existingIdx !== -1) articlesData[existingIdx] = payload;
+      else articlesData.unshift(payload);
+
+      // Lock current slug so continuous editing targets the same article cleanly
+      editingArticleSlug = slug;
+
+      const passkey = typeof MASTER_PASSKEY !== 'undefined' ? MASTER_PASSKEY : (window.currentAdminKey || "ZaidAmin@Academic2026!");
+
+      try {
+        const res = await fetch('/api/save-article', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-Admin-Key': passkey },
+          body: JSON.stringify({ article: payload, old_id: oldSlug, deploy: andDeploy })
+        });
+
+        if (res.ok) {
+          const nowStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+          if (saveStatusBadge) {
+            saveStatusBadge.style.display = 'inline-block';
+            saveStatusBadge.innerHTML = andDeploy
+              ? `✓ Saved &amp; Live (${nowStr})`
+              : `✓ Saved Locally (${nowStr})`;
+            saveStatusBadge.style.color = andDeploy ? '#38bdf8' : '#fce09b';
+            saveStatusBadge.style.borderColor = andDeploy ? 'rgba(56, 189, 248, 0.4)' : 'rgba(252, 224, 155, 0.4)';
+            saveStatusBadge.style.background = andDeploy ? 'rgba(56, 189, 248, 0.12)' : 'rgba(252, 224, 155, 0.12)';
+          }
+
+          if (saveDeployBtn) {
+            saveDeployBtn.innerHTML = andDeploy ? '✓ Saved &amp; Live Deployed!' : '✓ Saved Locally!';
+            saveDeployBtn.style.borderColor = '#4ade80';
+            setTimeout(() => {
+              saveDeployBtn.innerHTML = originalDeployText;
+              saveDeployBtn.disabled = false;
+              saveDeployBtn.style.borderColor = '';
+            }, 3000);
+          }
+          if (saveLocalBtn) {
+            setTimeout(() => {
+              saveLocalBtn.innerHTML = originalLocalText;
+              saveLocalBtn.disabled = false;
+            }, 3000);
+          }
+
+          showToast(andDeploy ? '✓ Article saved & deployed live to zaidamin.org! Editor session kept open.' : '✓ Article saved locally and website recompiled!');
+
+          // Refresh background data and table without closing current open editor session
+          await loadSpotlightData();
+          renderArticlesTable(articlesData);
+          updateAllCounts();
+
+          if (shouldClose) {
+            closeArticleEditor();
+          }
+          return;
+        } else {
+          const errData = await res.json().catch(() => ({}));
+          showToast('Save failed: ' + (errData.error || res.statusText), true);
+        }
+      } catch (err) {
+        showToast('Network error while saving: ' + err.message, true);
+      } finally {
+        if (saveDeployBtn) saveDeployBtn.disabled = false;
+        if (saveLocalBtn) saveLocalBtn.disabled = false;
+      }
+
+      if (shouldClose) {
+        closeArticleEditor();
+        renderArticlesTable(articlesData);
+      }
+    }
+
+    async function deleteArticle(slug) {
+      if (!confirm(`Delete article: "${slug}"?`)) return;
+      articlesData = articlesData.filter(a => a.id !== slug);
+      renderArticlesTable(articlesData);
+      document.getElementById('count-articles').textContent = articlesData.length;
+      const passkey = typeof MASTER_PASSKEY !== 'undefined' ? MASTER_PASSKEY : (window.currentAdminKey || "ZaidAmin@Academic2026!");
+      try {
+        await fetch('/api/delete-article?id=' + encodeURIComponent(slug), {
+          method: 'POST',
+          headers: { 'X-Admin-Key': passkey }
+        });
+        showToast('Article deleted.');
+      } catch (e) {}
+    }
+
+    // -------------------------------------------------------------
+    // MODULE 2: PUBLICATIONS LOGIC
+    // -------------------------------------------------------------
