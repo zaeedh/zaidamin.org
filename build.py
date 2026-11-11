@@ -67,6 +67,17 @@ def minify_css(css: str) -> str:
     return css.strip()
 
 
+def normalize_asset_paths(html: str) -> str:
+    """Ensure all local asset and image paths start with a leading slash to prevent 404s on subpage routes."""
+    # 1. Any HTML attribute, JSON key, JS string, or CSS url referencing assets/(images|css|js|docs|icons|fonts|media)/
+    html = re.sub(r'(?<=["\'\(])assets/(?=(?:images|css|js|docs|icons|fonts|media)/)', r'/assets/', html)
+    # 2. Also cover any remaining standard attributes just in case
+    html = re.sub(r'(\b(?:src|srcset|href|poster|data-[a-zA-Z0-9_-]+)=["\'])assets/', r'\1/assets/', html)
+    # 3. JS / DOM forms: this.src='assets/...', .src = 'assets/...'
+    html = re.sub(r'(\b(?:this\.)?src\s*=\s*["\'])assets/', r'\1/assets/', html)
+    return html
+
+
 
 # ==============================================================================
 # SACRED LOTUS SYMBOL SVG (PRISTINE GOLDEN LOTUS EMBLEM)
@@ -660,7 +671,7 @@ def render_subpage_nav(active_page="home"):
 
                 sparkle = f'<span class="nav-team-sparkle">{d.get("icon", "✦")}</span>' if d.get("icon") else ''
 
-                sub_links.append(f'''<a href="{d_url}" class="nav-dropdown-team-link {d_active}" role="menuitem" title="{d_label}"{d_target_attr}>
+                sub_links.append(f'''<a href="{d_url}" class="nav-dropdown-team-link {d_active}" role="menuitem"{d_target_attr}>
 
                   <div class="nav-team-label-wrap">
 
@@ -678,7 +689,7 @@ def render_subpage_nav(active_page="home"):
 
             html_items.append(f'''<div class="nav-dropdown-item">
 
-              <a href="{url}" class="main-menu-link {active_class}" aria-haspopup="true" aria-expanded="false" title="{label}"{target_attr}>
+              <a href="{url}" class="main-menu-link {active_class}" aria-haspopup="true" aria-expanded="false"{target_attr}>
 
                 <span class="tab-txt-full">{label} <span class="nav-chevron">▾</span></span>
 
@@ -698,7 +709,7 @@ def render_subpage_nav(active_page="home"):
 
             active_class = "active" if is_active else ""
 
-            html_items.append(f'''<a href="{url}" class="main-menu-link {active_class}" title="{label}"{target_attr}>
+            html_items.append(f'''<a href="{url}" class="main-menu-link {active_class}"{target_attr}>
 
               <span class="tab-txt-full">{label}</span>
 
@@ -8282,7 +8293,9 @@ def generate_cv_page():
 
 
 
-    photo_src = exec_prof.get("photo") or "assets/images/portraits/portrait-1.webp"
+    photo_src = exec_prof.get("photo") or "/assets/images/portraits/portrait-1.webp"
+    if photo_src.startswith("assets/"):
+        photo_src = "/" + photo_src
 
     photo_kicker = exec_prof.get("kicker") or "Ph.D. • UKM 2024"
 
@@ -8448,7 +8461,7 @@ def generate_cv_page():
 
                 <source srcset="{photo_src}" type="image/webp">
 
-                <img src="{photo_src.replace('.webp', '.png')}" alt="{exec_prof['name']}" class="cv-portrait-img" width="144" height="174" loading="eager">
+                <img src="{photo_src.replace('.webp', '.png')}" alt="{exec_prof['name']}" class="cv-portrait-img" width="144" height="174" loading="eager" fetchpriority="high" decoding="sync" onerror="this.onerror=null; this.src='/assets/images/portraits/portrait-1.png';">
 
               </picture>
 
@@ -11268,6 +11281,8 @@ def build_all():
 
 
     for filename, content in pages.items():
+        content = normalize_asset_paths(content)
+        pages[filename] = content
 
         with open(DIST_DIR / filename, "w", encoding="utf-8") as f:
 
@@ -11321,7 +11336,7 @@ def build_all():
 
     # We generate a secure CMS Portal bridge for /cms and dist/cms.html
 
-    cms_portal_html = generate_cms_portal_page()
+    cms_portal_html = normalize_asset_paths(generate_cms_portal_page())
 
     with open(DIST_DIR / "cms.html", "w", encoding="utf-8") as f:
 
@@ -11356,6 +11371,7 @@ def build_all():
     }
 
     for route_name, page_content in clean_routes.items():
+        page_content = normalize_asset_paths(page_content)
 
         route_dist = DIST_DIR / route_name
 
