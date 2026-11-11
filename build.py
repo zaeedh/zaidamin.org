@@ -1974,6 +1974,8 @@ def get_spotlight_card_html():
 
         date_str = item.get("date", "2026")
 
+        year_val = str(item.get("year", date_str[:4] if date_str else "2026"))
+
         year_str = f"{date_str} &bull; {read_time}"
 
         url = f"article.html?id={item.get('id', '')}"
@@ -9789,16 +9791,17 @@ def generate_article_reader_page():
         try {
 
           let res;
+          const cacheBuster = '?v=' + Date.now();
 
           try {
 
-            res = await fetch('/data/articles.json');
+            res = await fetch('/data/articles.json' + cacheBuster);
 
             if (!res.ok) throw new Error('Not found at root');
 
           } catch (e) {
 
-            res = await fetch('data/articles.json');
+            res = await fetch('data/articles.json' + cacheBuster);
 
           }
 
@@ -9856,6 +9859,25 @@ def generate_article_reader_page():
 
               }
 
+            });
+
+            // 0B. Wrap standalone images in Golden Ratio Scholarly Figure plaques
+            bodyElem.querySelectorAll('img').forEach(function(img) {
+              if (img.closest('figure') || img.closest('.article-hero-banner') || img.classList.contains('article-bio-avatar')) return;
+              var parentA = img.closest('a');
+              var targetNode = parentA || img;
+              var fig = document.createElement('figure');
+              fig.className = 'fig-standard';
+              var alt = img.getAttribute('alt') || '';
+              if (targetNode.parentNode) {
+                targetNode.parentNode.insertBefore(fig, targetNode);
+                fig.appendChild(targetNode);
+                if (alt && alt.trim() && !alt.startsWith('http')) {
+                  var cap = document.createElement('figcaption');
+                  cap.textContent = alt.trim();
+                  fig.appendChild(cap);
+                }
+              }
             });
 
 
