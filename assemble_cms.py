@@ -1658,16 +1658,42 @@ def run():
 
     .art-visual-canvas figcaption,
     .art-visual-canvas .figure-caption,
-    .art-visual-canvas p.figure-caption {
-      font-family: 'Cormorant Garamond', Georgia, serif !important;
+    .art-visual-canvas p.figure-caption,
+    .art-visual-canvas .tr-caption,
+    .art-visual-canvas .table-caption {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
       font-size: 0.88rem !important;
-      font-style: italic !important;
+      font-style: normal !important;
       color: #94a3b8 !important;
-      margin: 8px auto 16px auto !important;
-      line-height: 1.5 !important;
+      margin: 10px 0 16px 0 !important;
+      line-height: 1.58 !important;
       display: block !important;
-      letter-spacing: 0.02em !important;
-      text-align: center !important;
+      letter-spacing: 0.01em !important;
+      text-align: left !important;
+      padding: 0 4px !important;
+    }
+
+    .art-visual-canvas .table-caption {
+      margin: 16px 0 8px 0 !important;
+    }
+
+    .art-visual-canvas figcaption strong,
+    .art-visual-canvas .figure-caption strong,
+    .art-visual-canvas p.figure-caption strong,
+    .art-visual-canvas .tr-caption strong,
+    .art-visual-canvas .table-caption strong {
+      color: #7dd3fc !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.015em !important;
+    }
+
+    .art-visual-canvas figcaption em,
+    .art-visual-canvas .figure-caption em,
+    .art-visual-canvas p.figure-caption em,
+    .art-visual-canvas .tr-caption em,
+    .art-visual-canvas .table-caption em {
+      color: #f1f5f9 !important;
+      font-style: italic !important;
     }
 
     /* Figure size presets */
@@ -2579,7 +2605,9 @@ def run():
                   <option value="" disabled selected>✦ Format Preset...</option>
                   <optgroup label="── 1. Reading &amp; Captions ──">
                     <option value="p">1. ¶ Normal Text (Standard Body)</option>
-                    <option value="caption">2. 💬 Figure &amp; Table Caption (Italic Slate 0.85rem)</option>
+                    <option value="fig_caption">🖼️ 2. Figure Caption (Bold Cyan Label + Slate Text)</option>
+                    <option value="table_caption">📊 3. Table Caption (Bold Cyan Label + Slate Text)</option>
+                    <option value="caption">💬 Unified Caption Preset</option>
                     <option value="lead">★ Lead Intro Paragraph (Editorial Serif 1.25rem)</option>
                     <option value="detail">📌 Footnote / Scholarly Observation (0.82rem)</option>
                   </optgroup>
@@ -2733,7 +2761,8 @@ def run():
                 <label class="art-tool-btn" title="Quick Upload Image File from Computer" style="cursor: pointer; display: inline-flex; align-items: center; margin: 0; font-weight: 600;">
                   📁 Upload <input type="file" id="art-figure-quick-file" accept="image/*" style="display: none;" onchange="handleDirectArticleImageUpload(event)">
                 </label>
-                <button type="button" class="art-tool-btn art-tool-btn-highlight" onclick="applyArticleHeading('caption')" title="Format Selected Text as Figure/Table Caption (0.85rem Italic Slate) or Add Caption to Image">💬 Caption</button>
+                <button type="button" class="art-tool-btn art-tool-btn-highlight" onclick="applyArticleHeading('fig_caption')" title="Format Selected Text or Insert Academic Figure Caption (Bold Cyan Label + Slate Text)">🖼️ Fig Caption</button>
+                <button type="button" class="art-tool-btn art-tool-btn-highlight" onclick="applyArticleHeading('table_caption')" title="Format Selected Text or Insert Academic Table Caption (Bold Cyan Label + Slate Text)">📊 Tab Caption</button>
                 <button type="button" class="art-tool-btn" onclick="formatSelectedArticleImage('compact')" title="Resize Figure: 60% Compact">60%</button>
                 <button type="button" class="art-tool-btn" onclick="formatSelectedArticleImage('standard')" title="Resize Figure: 82% Standard">82%</button>
                 <button type="button" class="art-tool-btn" onclick="formatSelectedArticleImage('full')" title="Resize Figure: 100% Full Column">100%</button>

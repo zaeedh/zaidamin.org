@@ -14976,18 +14976,41 @@ a {
   max-width: 100%;
 }
 
-.article-reader-body .tr-caption {
+.article-reader-body .tr-caption,
+.article-reader-body .figure-caption,
+.article-reader-body .table-caption,
+.article-reader-body figcaption {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 0.88rem;
   color: #94a3b8;
   line-height: 1.58;
   margin-top: 10px;
   text-align: left;
   padding: 0 4px;
+  font-style: normal;
+  letter-spacing: 0.01em;
+  display: block;
 }
 
-.article-reader-body .tr-caption strong {
+.article-reader-body .table-caption {
+  margin: 16px 0 8px 0;
+}
+
+.article-reader-body .tr-caption strong,
+.article-reader-body .figure-caption strong,
+.article-reader-body .table-caption strong,
+.article-reader-body figcaption strong {
   color: #7dd3fc;
   font-weight: 700;
+  letter-spacing: 0.015em;
+}
+
+.article-reader-body .tr-caption em,
+.article-reader-body .figure-caption em,
+.article-reader-body .table-caption em,
+.article-reader-body figcaption em {
+  color: #f1f5f9;
+  font-style: italic;
 }
 
 @media (max-width: 768px) {

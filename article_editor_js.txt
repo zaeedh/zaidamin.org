@@ -309,6 +309,55 @@ function setArticleEditorMode(mode) {
       
     }
 
+    // -------------------------------------------------------------
+    // Academic Caption Formatter (Figure & Table Presets)
+    // -------------------------------------------------------------
+    function formatAcademicCaptionHTML(rawText, defaultPrefix) {
+      rawText = (rawText || '').trim();
+      defaultPrefix = defaultPrefix || 'Figure 1: Comparison of municipal governance paradigms.';
+      const isTable = (defaultPrefix || '').toLowerCase().includes('table');
+
+      if (!rawText) {
+        if (isTable) {
+          return '<strong style="color: #7dd3fc; font-weight: 700;">Table 1: Empirical Evaluation Matrix.</strong> Baseline comparison across metrics, parameters, and governance paradigms.';
+        }
+        return '<strong style="color: #7dd3fc; font-weight: 700;">Figure 1: Comparison of municipal governance paradigms.</strong> (a) Proposed nudge-based <em>Trusted HARMONY AI</em> system cultivating long-term habit internalization with positive reinforcement vs. (b) Conventional enforcement-based <em>Coercive AI</em> triggering severe psychological reactance.';
+      }
+
+      // If text already carries a <strong> tag, keep as formatted HTML
+      if (rawText.includes('<strong') || rawText.includes('<strong>')) {
+        return rawText;
+      }
+
+      // Check if text starts with "Figure X: ...", "Table X: ...", "Fig. X: ..."
+      const match = rawText.match(/^((?:Figure|Table|Fig\.|Chart|Diagram)\s*\d+[^.:]*[:.][^.]*\.?)\s*(.*)$/is);
+      if (match) {
+        const titlePart = match[1].trim();
+        const bodyPart = match[2].trim();
+        return `<strong style="color: #7dd3fc; font-weight: 700;">${titlePart}</strong> ${bodyPart}`;
+      }
+
+      // If no label prefix but has a colon: e.g. "Comparison of municipal governance paradigms: (a)..."
+      const colonIdx = rawText.indexOf(':');
+      if (colonIdx > 0 && colonIdx < 80) {
+        const titlePart = rawText.substring(0, colonIdx + 1).trim();
+        const bodyPart = rawText.substring(colonIdx + 1).trim();
+        const autoPrefix = isTable && !titlePart.toLowerCase().startsWith('tab') ? 'Table 1: ' : (!titlePart.toLowerCase().startsWith('fig') ? 'Figure 1: ' : '');
+        return `<strong style="color: #7dd3fc; font-weight: 700;">${autoPrefix}${titlePart}</strong> ${bodyPart}`;
+      }
+
+      // If sentence with period, treat first sentence up to period as title if short
+      const periodIdx = rawText.indexOf('.');
+      if (periodIdx > 5 && periodIdx < 70) {
+        const titlePart = rawText.substring(0, periodIdx + 1).trim();
+        const bodyPart = rawText.substring(periodIdx + 1).trim();
+        const autoPrefix = isTable && !titlePart.toLowerCase().startsWith('tab') ? 'Table 1: ' : (!titlePart.toLowerCase().startsWith('fig') ? 'Figure 1: ' : '');
+        return `<strong style="color: #7dd3fc; font-weight: 700;">${autoPrefix}${titlePart}</strong> ${bodyPart}`;
+      }
+
+      return `<strong style="color: #7dd3fc; font-weight: 700;">${defaultPrefix}</strong> ${rawText}`;
+    }
+
     function applyArticleHeading(level) {
       if (!level) return;
       if (currentArticleEditorMode === 'code') {
@@ -349,19 +398,25 @@ function setArticleEditorMode(mode) {
         }
         showToast('Normal text formatted (1.05rem academic reading body)');
 
-      // 2. Figure and table caption
-      } else if (level === 'caption' || level === 'fig_caption') {
+      // 2. Figure & Table Academic Caption Presets (Cyan Bold Label + Slate Text)
+      } else if (level === 'caption' || level === 'fig_caption' || level === 'table_caption') {
+        const isTable = level === 'table_caption';
+        const defaultPrefix = isTable ? 'Table 1: Empirical Evaluation Matrix.' : 'Figure 1: Comparison of municipal governance paradigms.';
+        const toastLabel = isTable ? 'Table Caption' : 'Figure Caption';
+
         if (selText) {
-          if (block && block.tagName === 'FIGCAPTION') {
-            block.className = 'figure-caption';
-            block.style.fontSize = '0.85rem';
+          const formattedHTML = formatAcademicCaptionHTML(selText, defaultPrefix);
+          if (block && (block.tagName === 'FIGCAPTION' || block.classList.contains('tr-caption') || block.classList.contains('figure-caption') || block.classList.contains('table-caption'))) {
+            block.className = isTable ? 'tr-caption table-caption' : 'tr-caption figure-caption';
+            block.style.fontSize = '0.88rem';
             block.style.color = '#94a3b8';
-            block.style.fontStyle = 'italic';
-            block.style.textAlign = 'center';
-            block.style.margin = '8px auto 16px auto';
-            block.style.lineHeight = '1.5';
-            block.style.letterSpacing = '0.02em';
+            block.style.fontStyle = 'normal';
+            block.style.textAlign = 'left';
+            block.style.margin = isTable ? '14px 0 8px 0' : '10px 0 16px 0';
+            block.style.lineHeight = '1.58';
+            block.style.letterSpacing = '0.01em';
             block.style.display = 'block';
+            block.innerHTML = formattedHTML;
           } else if (block && block.closest('figure')) {
             const parentFig = block.closest('figure');
             let fc = parentFig.querySelector('figcaption');
@@ -369,84 +424,83 @@ function setArticleEditorMode(mode) {
               fc = document.createElement('figcaption');
               parentFig.appendChild(fc);
             }
-            fc.className = 'figure-caption';
-            fc.style.fontSize = '0.85rem';
+            fc.className = 'figure-caption tr-caption';
+            fc.style.fontSize = '0.88rem';
             fc.style.color = '#94a3b8';
-            fc.style.fontStyle = 'italic';
-            fc.style.textAlign = 'center';
-            fc.style.margin = '8px auto 16px auto';
-            fc.style.lineHeight = '1.5';
-            fc.style.letterSpacing = '0.02em';
+            fc.style.fontStyle = 'normal';
+            fc.style.textAlign = 'left';
+            fc.style.margin = '10px 0 16px 0';
+            fc.style.lineHeight = '1.58';
+            fc.style.letterSpacing = '0.01em';
             fc.style.display = 'block';
-            fc.textContent = selText;
+            fc.innerHTML = formattedHTML;
             if (block !== parentFig && block !== fc) block.remove();
           } else {
             const prevImg = block && block.previousElementSibling && block.previousElementSibling.tagName === 'IMG' ? block.previousElementSibling : null;
             const nextImg = block && block.nextElementSibling && block.nextElementSibling.tagName === 'IMG' ? block.nextElementSibling : null;
             const adjImg = prevImg || nextImg;
-            if (adjImg) {
+            if (adjImg && !isTable) {
               const newFig = document.createElement('figure');
               newFig.className = 'fig-standard';
-              newFig.style.margin = '24px auto';
+              newFig.style.margin = '28px auto';
               newFig.style.textAlign = 'center';
               newFig.style.maxWidth = '82%';
               adjImg.parentNode.insertBefore(newFig, adjImg);
               newFig.appendChild(adjImg);
               const fc = document.createElement('figcaption');
-              fc.className = 'figure-caption';
-              fc.style.fontSize = '0.85rem';
+              fc.className = 'figure-caption tr-caption';
+              fc.style.fontSize = '0.88rem';
               fc.style.color = '#94a3b8';
-              fc.style.fontStyle = 'italic';
-              fc.style.textAlign = 'center';
-              fc.style.margin = '8px auto 16px auto';
-              fc.style.lineHeight = '1.5';
-              fc.style.letterSpacing = '0.02em';
+              fc.style.fontStyle = 'normal';
+              fc.style.textAlign = 'left';
+              fc.style.margin = '10px 0 16px 0';
+              fc.style.lineHeight = '1.58';
               fc.style.display = 'block';
-              fc.textContent = selText;
+              fc.innerHTML = formattedHTML;
               newFig.appendChild(fc);
               if (block) block.remove();
-            } else if (block && block.textContent.trim() === selText && block.tagName === 'P') {
-              block.className = 'figure-caption';
-              block.style.fontSize = '0.85rem';
+            } else if (block && block.textContent.trim() === selText && (block.tagName === 'P' || block.tagName === 'DIV')) {
+              block.className = isTable ? 'tr-caption table-caption' : 'tr-caption figure-caption';
+              block.style.fontSize = '0.88rem';
               block.style.color = '#94a3b8';
-              block.style.fontStyle = 'italic';
-              block.style.textAlign = 'center';
-              block.style.margin = '8px auto 16px auto';
-              block.style.lineHeight = '1.5';
-              block.style.letterSpacing = '0.02em';
+              block.style.fontStyle = 'normal';
+              block.style.textAlign = 'left';
+              block.style.margin = isTable ? '14px 0 8px 0' : '10px 0 16px 0';
+              block.style.lineHeight = '1.58';
               block.style.display = 'block';
+              block.innerHTML = formattedHTML;
             } else {
-              document.execCommand('insertHTML', false, `<p class="figure-caption" style="font-size: 0.85rem; color: #94a3b8; font-style: italic; text-align: center; margin: 8px auto 16px auto; line-height: 1.5; letter-spacing: 0.02em; display: block;">${escapeHTML(selText)}</p>`);
+              document.execCommand('insertHTML', false, `<div class="${isTable ? 'tr-caption table-caption' : 'tr-caption figure-caption'}" style="font-size: 0.88rem; color: #94a3b8; font-style: normal; text-align: left; margin: ${isTable ? '14px 0 8px 0' : '10px 0 16px 0'}; line-height: 1.58; display: block;">${formattedHTML}</div><p>&nbsp;</p>`);
             }
           }
         } else {
           // No text selected: check if an image is selected
-          if (selectedArticleImage) {
+          if (selectedArticleImage && !isTable) {
             formatSelectedArticleImage('caption');
             return;
           }
           const curFig = block ? (block.tagName === 'FIGURE' ? block : block.closest('figure')) : null;
-          if (curFig) {
+          if (curFig && !isTable) {
             let fc = curFig.querySelector('figcaption');
             if (!fc) {
               fc = document.createElement('figcaption');
               curFig.appendChild(fc);
             }
-            fc.className = 'figure-caption';
-            fc.style.fontSize = '0.85rem';
+            fc.className = 'figure-caption tr-caption';
+            fc.style.fontSize = '0.88rem';
             fc.style.color = '#94a3b8';
-            fc.style.fontStyle = 'italic';
-            fc.style.textAlign = 'center';
-            fc.style.margin = '8px auto 16px auto';
-            fc.style.lineHeight = '1.5';
-            fc.style.letterSpacing = '0.02em';
+            fc.style.fontStyle = 'normal';
+            fc.style.textAlign = 'left';
+            fc.style.margin = '10px 0 16px 0';
+            fc.style.lineHeight = '1.58';
             fc.style.display = 'block';
-            fc.textContent = 'Figure: Description of visual evidence...';
+            fc.innerHTML = formatAcademicCaptionHTML('', defaultPrefix);
           } else {
-            document.execCommand('insertHTML', false, `<p class="figure-caption" style="font-size: 0.85rem; color: #94a3b8; font-style: italic; text-align: center; margin: 8px auto 16px auto; line-height: 1.5; letter-spacing: 0.02em; display: block;">Figure 1: Schematic caption description...</p><p>&nbsp;</p>`);
+            const defaultHTML = formatAcademicCaptionHTML('', defaultPrefix);
+            document.execCommand('insertHTML', false, `<div class="${isTable ? 'tr-caption table-caption' : 'tr-caption figure-caption'}" style="font-size: 0.88rem; color: #94a3b8; font-style: normal; text-align: left; margin: ${isTable ? '14px 0 8px 0' : '10px 0 16px 0'}; line-height: 1.58; display: block;">${defaultHTML}</div><p>&nbsp;</p>`);
           }
         }
-        showToast('Figure / Table Caption formatted (0.85rem Italic Slate)');
+        showToast(`${toastLabel} formatted (Bold Cyan Label + Slate Text)`);
 
       // 3. Header Title (H2 Major Section)
       } else if (level === 'h2') {
@@ -963,7 +1017,7 @@ function setArticleEditorMode(mode) {
         imgStyle = 'width: 100%; max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 16px 44px rgba(0, 0, 0, 0.75), 0 0 24px rgba(212, 175, 55, 0.2); border: 1px solid rgba(212, 175, 55, 0.35); display: block;';
       }
 
-      const capHTML = caption ? `<figcaption style="font-size: 0.85rem; color: #94a3b8; margin-top: 10px; font-style: italic; text-align: ${align}; line-height: 1.4;">${escapeHTML(caption)}</figcaption>` : '';
+      const capHTML = caption ? `<figcaption class="figure-caption tr-caption" style="font-size: 0.88rem; color: #94a3b8; margin: 10px 0 16px 0; font-style: normal; text-align: left; line-height: 1.58; display: block;">${formatAcademicCaptionHTML(caption, 'Figure 1: Title of Figure.')}</figcaption>` : '';
       const figureHTML = `<figure class="${sizeClass}" style="${figStyle}"><img src="${url}" alt="${escapeHTML(caption || 'Figure Diagram')}" loading="lazy" style="${imgStyle}" class="${sizeClass}">${capHTML}</figure><p>&nbsp;</p>`;
 
       if (currentArticleEditorMode === 'code') {
@@ -1253,9 +1307,9 @@ function setArticleEditorMode(mode) {
         showToast('Figure floated Right (editorial text wrapping).');
       } else if (action === 'caption') {
         let parentFig = img.closest('figure');
-        let captionElem = parentFig ? parentFig.querySelector('figcaption') : null;
-        const currentCaption = captionElem ? captionElem.textContent : (img.alt || '');
-        const newCaption = prompt('Enter Figure Caption description:', currentCaption);
+        let captionElem = parentFig ? (parentFig.querySelector('figcaption') || parentFig.querySelector('.tr-caption')) : null;
+        const currentCaption = captionElem ? captionElem.textContent.trim() : (img.alt || '');
+        const newCaption = prompt('Enter Academic Figure Caption description:\n(e.g. Figure 1: Title. Description...)', currentCaption || 'Figure 1: Comparison of municipal governance paradigms. (a) Proposed nudge-based Trusted HARMONY AI system vs. (b) Conventional baseline.');
         if (newCaption !== null) {
           if (!parentFig) {
             parentFig = document.createElement('figure');
@@ -1269,9 +1323,18 @@ function setArticleEditorMode(mode) {
             captionElem = document.createElement('figcaption');
             parentFig.appendChild(captionElem);
           }
-          captionElem.textContent = newCaption;
-          img.alt = newCaption;
-          showToast('Caption updated.');
+          captionElem.className = 'figure-caption tr-caption';
+          captionElem.style.fontSize = '0.88rem';
+          captionElem.style.color = '#94a3b8';
+          captionElem.style.fontStyle = 'normal';
+          captionElem.style.textAlign = 'left';
+          captionElem.style.margin = '10px 0 16px 0';
+          captionElem.style.lineHeight = '1.58';
+          captionElem.style.letterSpacing = '0.01em';
+          captionElem.style.display = 'block';
+          captionElem.innerHTML = formatAcademicCaptionHTML(newCaption.trim(), 'Figure 1: Title of Figure.');
+          img.alt = newCaption.trim();
+          showToast('Academic Figure caption updated.');
         }
       } else if (action === 'matting') {
         fig.classList.toggle('dark-matting');
@@ -1534,7 +1597,8 @@ function setArticleEditorMode(mode) {
         document.execCommand('insertHTML', false, mathHtml);
         showToast('LaTeX Math Block inserted');
       } else if (type === 'table') {
-        const tableHtml = `\n<table class="scholar-table" style="width: 100%; border-collapse: collapse; margin: 1.8em 0; font-size: 0.92rem; border: 1px solid rgba(56, 189, 248, 0.25);">
+        const tableHtml = `\n<div class="tr-caption table-caption" style="font-size: 0.88rem; color: #94a3b8; font-style: normal; text-align: left; margin: 16px 0 8px 0; line-height: 1.58; display: block;"><strong style="color: #7dd3fc; font-weight: 700;">Table 1: Empirical Evaluation Matrix.</strong> Baseline comparison across metrics, parameters, and governance paradigms.</div>
+<table class="scholar-table" style="width: 100%; border-collapse: collapse; margin: 0 0 1.8em 0; font-size: 0.92rem; border: 1px solid rgba(56, 189, 248, 0.25);">
   <thead>
     <tr style="background: rgba(8, 28, 50, 0.9); color: #fce09b; font-family: 'Cinzel', serif;">
       <th style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25); text-align: left;">Metric / Dimension</th>
@@ -1629,7 +1693,8 @@ function setArticleEditorMode(mode) {
 
       if (type === 'para') {
         if (value === 'lead') rep = `\n<p class="lead-para" style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.25rem; line-height: 1.85; color: #f8fafc; margin: 1.8rem 0;">${sel || 'Lead introductory paragraph with emphasized prominence...'}</p>\n`;
-        else if (value === 'caption' || value === 'fig_caption') rep = `\n<figcaption class="figure-caption" style="font-size: 0.85rem; color: #94a3b8; font-style: italic; text-align: center; margin: 8px auto 16px auto; line-height: 1.5; letter-spacing: 0.02em; display: block;">${sel || 'Figure 1: Schematic diagram of experimental architecture...'}</figcaption>\n`;
+        else if (value === 'caption' || value === 'fig_caption') rep = `\n<div class="tr-caption">\n  <strong>Figure 1: Comparison of municipal governance paradigms.</strong> ${sel || '(a) Proposed nudge-based <em>Trusted HARMONY AI</em> system cultivating long-term habit internalization with positive reinforcement vs. (b) Conventional enforcement-based <em>Coercive AI</em> triggering severe psychological reactance.'}\n</div>\n`;
+        else if (value === 'table_caption') rep = `\n<div class="tr-caption table-caption">\n  <strong>Table 1: Empirical Evaluation Matrix.</strong> ${sel || 'Baseline comparison across metrics, experimental parameters, and governance paradigms.'}\n</div>\n`;
         else if (value === 'detail') rep = `\n<p class="detail-para" style="font-size: 0.82rem; color: #94a3b8; font-style: italic; margin: 0.8rem 0; line-height: 1.5; border-top: 1px solid rgba(148, 163, 184, 0.2); padding-top: 6px;">${sel || '1. Methodological note or scholarly citation reference...'}</p>\n`;
         else if (value === 'callout') rep = `\n<div class="callout-box" style="background: rgba(8, 28, 50, 0.6); border: 1px solid rgba(212, 175, 55, 0.4); border-left: 4px solid #d4af37; border-radius: 8px; padding: 16px 20px; margin: 1.8rem 0; color: #e2e8f0; font-size: 0.98rem; line-height: 1.65;"><strong style="color: #fce09b; display: block; margin-bottom: 6px; font-family: 'Cinzel', serif; letter-spacing: 0.03em;">💡 Key Finding:</strong> ${sel || 'Synthesized empirical conclusion or primary outcome...'}</div>\n`;
         else if (value === 'warning') rep = `\n<div class="callout-box callout-warning" style="background: rgba(40, 20, 10, 0.6); border: 1px solid rgba(245, 158, 11, 0.5); border-left: 4px solid #f59e0b; border-radius: 8px; padding: 16px 20px; margin: 1.8rem 0; color: #fed7aa; font-size: 0.98rem; line-height: 1.65;"><strong style="color: #fbbf24; display: block; margin-bottom: 6px; font-family: 'Cinzel', serif; letter-spacing: 0.03em;">⚠️ Policy Note:</strong> ${sel || 'Critical operational boundary, privacy requirement, or governance directive...'}</div>\n`;
@@ -1645,7 +1710,7 @@ function setArticleEditorMode(mode) {
         else if (value === 'wrap_right') rep = `\n<figure class="fig-right" style="float: right; max-width: 46%; margin: 12px 0 20px 24px; clear: right;">${sel || '<img src="..." alt="Figure" style="width: 100%; border-radius: 8px;">\n<figcaption class="figure-caption" style="font-size: 0.85rem; color: #94a3b8; font-style: italic; text-align: center; margin-top: 8px;">Figure caption...</figcaption>'}</figure>\n`;
         else if (value === 'wrap_center') rep = `\n<figure class="fig-center" style="margin: 1.8rem auto; text-align: center; clear: both; max-width: 82%;">${sel || '<img src="..." alt="Figure" style="width: 100%; border-radius: 8px;">\n<figcaption class="figure-caption" style="font-size: 0.85rem; color: #94a3b8; font-style: italic; text-align: center; margin-top: 8px;">Figure caption...</figcaption>'}</figure>\n`;
         else if (value === 'wrap_full') rep = `\n<figure class="fig-full" style="width: 100%; margin: 2rem 0; clear: both;">${sel || '<img src="..." alt="Figure" style="width: 100%; border-radius: 8px;">\n<figcaption class="figure-caption" style="font-size: 0.85rem; color: #94a3b8; font-style: italic; text-align: center; margin-top: 8px;">Figure caption...</figcaption>'}</figure>\n`;
-        else if (value === 'table') rep = `\n<table class="scholar-table" style="width: 100%; border-collapse: collapse; margin: 1.8em 0; font-size: 0.92rem; border: 1px solid rgba(56, 189, 248, 0.25);">
+        else if (value === 'table') rep = `\n<div class="tr-caption table-caption">\n  <strong>Table 1: Empirical Evaluation Matrix.</strong> Baseline comparison across metrics, experimental parameters, and governance paradigms.\n</div>\n<table class="scholar-table" style="width: 100%; border-collapse: collapse; margin: 0 0 1.8em 0; font-size: 0.92rem; border: 1px solid rgba(56, 189, 248, 0.25);">
   <thead>
     <tr style="background: rgba(8, 28, 50, 0.9); color: #fce09b; font-family: 'Cinzel', serif;">
       <th style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25); text-align: left;">Metric / Dimension</th>
@@ -1658,6 +1723,16 @@ function setArticleEditorMode(mode) {
       <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25);">Prosocial Alignment</td>
       <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25);">42.3%</td>
       <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25); color: #34d399; font-weight: bold;">87.9%</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25);">Cognitive Friction (ms)</td>
+      <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25);">640 ms</td>
+      <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25); color: #38bdf8; font-weight: bold;">180 ms</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25);">Civic Habit Retention (30-day)</td>
+      <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25);">18.2%</td>
+      <td style="padding: 10px 14px; border: 1px solid rgba(56, 189, 248, 0.25); color: #34d399; font-weight: bold;">76.4%</td>
     </tr>
   </tbody>
 </table>\n`;
