@@ -1813,9 +1813,59 @@ def get_telemetry_audit_modal_html(ga_id="G-ZAIDAMIN01"):
 
 
 
+def render_cookie_consent_banner():
+    try:
+        cfg = load_json("cookie_settings.json")
+    except Exception:
+        cfg = None
+    if not cfg:
+        cfg = {
+            "enabled": True,
+            "banner_style": "minimal_floating",
+            "message": "This website uses essential cookies and local telemetry to optimize site performance, enhance navigation, and analyze academic readership.",
+            "learn_more_text": "Learn More",
+            "learn_more_url": "/research#privacy",
+            "accept_text": "Ok, Got It",
+            "reject_text": "Reject Non-Essential",
+            "show_reject_button": True
+        }
+
+    if not cfg.get("enabled", True):
+        return ""
+
+    msg = cfg.get("message", "This website uses essential cookies and local telemetry to optimize site performance, enhance navigation, and analyze academic readership.")
+    learn_text = cfg.get("learn_more_text", "Learn More")
+    learn_url = cfg.get("learn_more_url", "/research#privacy")
+    accept_text = cfg.get("accept_text", "Ok, Got It")
+    reject_text = cfg.get("reject_text", "Reject Non-Essential")
+    show_reject = cfg.get("show_reject_button", True)
+
+    reject_btn_html = f'<button id="cookie-reject-btn" class="cookie-btn cookie-btn-secondary" type="button">{reject_text}</button>' if show_reject else ''
+
+    return f'''
+    <!-- Academic Cookie & Privacy Consent Banner (Managed via CMS Studio) -->
+    <div id="cookie-consent-banner" class="cookie-consent-bar" role="region" aria-label="Cookie Consent">
+      <div class="cookie-consent-inner">
+        <div class="cookie-consent-text">
+          <span class="cookie-icon">🍪</span>
+          <span>
+            {msg}
+            <a href="{learn_url}" class="cookie-policy-link">{learn_text}</a>
+          </span>
+        </div>
+        <div class="cookie-consent-actions">
+          {reject_btn_html}
+          <button id="cookie-accept-btn" class="cookie-btn cookie-btn-primary" type="button">{accept_text}</button>
+        </div>
+      </div>
+    </div>
+    '''
+
+
 def get_page_footer(show_visitor_stats=False):
 
     stats_html = get_visitor_stats_html() if show_visitor_stats else ""
+    cookie_banner_html = render_cookie_consent_banner()
 
     return f"""
 
@@ -1835,7 +1885,7 @@ def get_page_footer(show_visitor_stats=False):
 
     <footer class="golden-footer">
 
-      Copyright &copy; 2008 - 2026 Zaid Amin. All Rights Reserved.
+      Copyright &copy; 2008 - 2026 Zaid Amin. All Rights Reserved. &bull; <a href="javascript:void(0)" onclick="window.reopenCookieConsent &amp;&amp; window.reopenCookieConsent()" class="footer-cookie-pref-link" title="Manage Cookie Preferences">Cookie Preferences</a>
 
     </footer>
 
@@ -1852,6 +1902,10 @@ def get_page_footer(show_visitor_stats=False):
       </svg>
 
     </button>
+
+
+
+    {cookie_banner_html}
 
 
 

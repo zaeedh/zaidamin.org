@@ -3856,6 +3856,80 @@ def run():
 
       </div>
 
+      <!-- =============================================================
+           Cookie & Privacy Consent Management Card
+           ============================================================= -->
+      <div class="cms-feature-card" style="margin-top: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div>
+            <h3 style="font-family: var(--font-cinzel); font-size: 1.15rem; color: #ffffff; margin: 0 0 4px 0;">🍪 Cookie &amp; Privacy Consent Banner</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Configure, customize, or toggle the floating cookie consent banner across all pages (GDPR / PDPA compliant).</p>
+          </div>
+          <button class="cms-btn cms-btn-cyan" onclick="saveCookieSettings()">💾 Save Cookie Settings</button>
+        </div>
+
+        <div style="background: rgba(3, 14, 26, 0.7); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 18px; margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: 0.95rem; font-weight: 700; color: #ffffff; margin-bottom: 4px;">Banner Status &amp; Visibility</div>
+              <div style="font-size: 0.80rem; color: var(--text-muted);">When turned ON, visitors will see the floating luxury obsidian banner at the bottom of the screen.</div>
+            </div>
+            <label style="position: relative; display: inline-flex; align-items: center; cursor: pointer; gap: 10px;">
+              <input type="checkbox" id="cookie-cfg-enabled" style="width: 20px; height: 20px; accent-color: #d4af37; cursor: pointer;" onchange="updateCookiePreview()">
+              <span id="cookie-status-label" style="font-weight: 700; color: #d4af37; font-size: 0.90rem;">ENABLED</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label class="form-label">Banner Notice Message</label>
+          <textarea id="cookie-cfg-msg" class="cms-textarea" rows="2" oninput="updateCookiePreview()" placeholder="This website uses essential cookies and local telemetry to optimize site performance, enhance navigation, and analyze academic readership."></textarea>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">&quot;Learn More&quot; Link Text</label>
+            <input type="text" id="cookie-cfg-learn-text" class="cms-input" value="Learn More" oninput="updateCookiePreview()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">&quot;Learn More&quot; Destination URL</label>
+            <input type="text" id="cookie-cfg-learn-url" class="cms-input" value="/research#privacy" oninput="updateCookiePreview()">
+          </div>
+        </div>
+
+        <div class="form-row-3">
+          <div class="form-group">
+            <label class="form-label">Primary &quot;Accept&quot; Button Text</label>
+            <input type="text" id="cookie-cfg-accept" class="cms-input" value="Ok, Got It" oninput="updateCookiePreview()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Secondary &quot;Reject&quot; Button Text</label>
+            <input type="text" id="cookie-cfg-reject" class="cms-input" value="Reject Non-Essential" oninput="updateCookiePreview()">
+          </div>
+          <div class="form-group" style="display: flex; flex-direction: column; justify-content: flex-end;">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-bottom: 10px; font-size: 0.82rem; color: #cbd5e1;">
+              <input type="checkbox" id="cookie-cfg-show-reject" checked style="width: 17px; height: 17px; accent-color: #d4af37;" onchange="updateCookiePreview()">
+              Show Reject Button
+            </label>
+          </div>
+        </div>
+
+        <!-- Live Banner Visual Preview Box -->
+        <div style="margin-top: 20px;">
+          <div style="font-size: 0.76rem; color: var(--cyan-accent); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">Real-Time Visual Preview (Live Render)</div>
+          <div id="cookie-cms-preview-box" style="background: rgba(1, 16, 29, 0.95); border: 1px solid rgba(212, 175, 55, 0.35); border-top: 2px solid #d4af37; border-radius: 12px; padding: 14px 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.82rem; color: #cbd5e1; flex: 1 1 350px;">
+              <span style="font-size: 1.25rem;">🍪</span>
+              <span id="preview-cookie-msg">This website uses essential cookies and local telemetry to optimize site performance, enhance navigation, and analyze academic readership. <a href="#" id="preview-cookie-link" style="color: #7dd3fc; text-decoration: underline; margin-left: 4px;">Learn More</a></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <button type="button" id="preview-reject-btn" style="background: transparent; color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.35); padding: 5px 14px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; cursor: default;">Reject Non-Essential</button>
+              <button type="button" id="preview-accept-btn" style="background: linear-gradient(135deg, #d4af37 0%, #b88d28 100%); color: #030a14; border: 1px solid rgba(254, 240, 138, 0.50); padding: 5px 16px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; cursor: default;">Ok, Got It</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </section>
 
     <!-- =============================================================
@@ -4996,6 +5070,10 @@ def run():
 
         loadTelemetryData();
 
+      } else if (mod === 'profile') {
+
+        loadCookieSettings();
+
       }
 
     }
@@ -5106,7 +5184,9 @@ def run():
 
           loadSupervisionData(),
 
-          loadProfileData()
+          loadProfileData(),
+
+          loadCookieSettings()
 
         ]);
 
@@ -7625,6 +7705,116 @@ def run():
 
       } catch (e) { showToast('Error: ' + e, true); }
 
+    }
+
+    // -------------------------------------------------------------
+    // COOKIE & PRIVACY CONSENT BANNER MANAGEMENT
+    // -------------------------------------------------------------
+    async function loadCookieSettings() {
+      try {
+        const res = await fetch('/api/cookie-settings');
+        if (res.ok) {
+          const cfg = await res.json();
+          const enabledInput = document.getElementById('cookie-cfg-enabled');
+          if (enabledInput) enabledInput.checked = cfg.enabled !== false;
+
+          const msgInput = document.getElementById('cookie-cfg-msg');
+          if (msgInput) msgInput.value = cfg.message || '';
+
+          const learnTextInput = document.getElementById('cookie-cfg-learn-text');
+          if (learnTextInput) learnTextInput.value = cfg.learn_more_text || 'Learn More';
+
+          const learnUrlInput = document.getElementById('cookie-cfg-learn-url');
+          if (learnUrlInput) learnUrlInput.value = cfg.learn_more_url || '/research#privacy';
+
+          const acceptInput = document.getElementById('cookie-cfg-accept');
+          if (acceptInput) acceptInput.value = cfg.accept_text || 'Ok, Got It';
+
+          const rejectInput = document.getElementById('cookie-cfg-reject');
+          if (rejectInput) rejectInput.value = cfg.reject_text || 'Reject Non-Essential';
+
+          const showRejectInput = document.getElementById('cookie-cfg-show-reject');
+          if (showRejectInput) showRejectInput.checked = cfg.show_reject_button !== false;
+
+          updateCookiePreview();
+        }
+      } catch (e) {
+        console.warn('Could not load cookie settings:', e);
+      }
+    }
+
+    function updateCookiePreview() {
+      const enabledEl = document.getElementById('cookie-cfg-enabled');
+      const enabled = enabledEl ? enabledEl.checked : true;
+      const lbl = document.getElementById('cookie-status-label');
+      if (lbl) {
+        lbl.innerText = enabled ? 'ENABLED' : 'DISABLED';
+        lbl.style.color = enabled ? '#d4af37' : '#94a3b8';
+      }
+      const previewBox = document.getElementById('cookie-cms-preview-box');
+      if (previewBox) {
+        previewBox.style.opacity = enabled ? '1' : '0.4';
+      }
+      const msgEl = document.getElementById('cookie-cfg-msg');
+      const msg = (msgEl && msgEl.value.trim()) ? msgEl.value.trim() : 'This website uses essential cookies and local telemetry to optimize site performance, enhance navigation, and analyze academic readership.';
+      const learnTextEl = document.getElementById('cookie-cfg-learn-text');
+      const learnText = (learnTextEl && learnTextEl.value.trim()) ? learnTextEl.value.trim() : 'Learn More';
+      const learnUrlEl = document.getElementById('cookie-cfg-learn-url');
+      const learnUrl = (learnUrlEl && learnUrlEl.value.trim()) ? learnUrlEl.value.trim() : '#';
+      const acceptEl = document.getElementById('cookie-cfg-accept');
+      const acceptText = (acceptEl && acceptEl.value.trim()) ? acceptEl.value.trim() : 'Ok, Got It';
+      const rejectEl = document.getElementById('cookie-cfg-reject');
+      const rejectText = (rejectEl && rejectEl.value.trim()) ? rejectEl.value.trim() : 'Reject Non-Essential';
+      const showRejectEl = document.getElementById('cookie-cfg-show-reject');
+      const showReject = showRejectEl ? showRejectEl.checked : true;
+
+      const pMsg = document.getElementById('preview-cookie-msg');
+      if (pMsg) {
+        pMsg.innerHTML = `${escapeHTML(msg)} <a href="${escapeHTML(learnUrl)}" target="_blank" style="color: #7dd3fc; text-decoration: underline; margin-left: 4px;">${escapeHTML(learnText)}</a>`;
+      }
+      const pAccept = document.getElementById('preview-accept-btn');
+      if (pAccept) pAccept.innerText = acceptText;
+      const pReject = document.getElementById('preview-reject-btn');
+      if (pReject) {
+        pReject.innerText = rejectText;
+        pReject.style.display = showReject ? 'inline-block' : 'none';
+      }
+    }
+
+    async function saveCookieSettings() {
+      const enabledEl = document.getElementById('cookie-cfg-enabled');
+      const msgEl = document.getElementById('cookie-cfg-msg');
+      const learnTextEl = document.getElementById('cookie-cfg-learn-text');
+      const learnUrlEl = document.getElementById('cookie-cfg-learn-url');
+      const acceptEl = document.getElementById('cookie-cfg-accept');
+      const rejectEl = document.getElementById('cookie-cfg-reject');
+      const showRejectEl = document.getElementById('cookie-cfg-show-reject');
+
+      const payload = {
+        enabled: enabledEl ? enabledEl.checked : true,
+        banner_style: 'minimal_floating',
+        message: msgEl ? msgEl.value.trim() : '',
+        learn_more_text: learnTextEl ? learnTextEl.value.trim() : 'Learn More',
+        learn_more_url: learnUrlEl ? learnUrlEl.value.trim() : '/research#privacy',
+        accept_text: acceptEl ? acceptEl.value.trim() : 'Ok, Got It',
+        reject_text: rejectEl ? rejectEl.value.trim() : 'Reject Non-Essential',
+        show_reject_button: showRejectEl ? showRejectEl.checked : true
+      };
+
+      try {
+        const res = await fetch('/api/save-cookie-settings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-Admin-Key': MASTER_PASSKEY },
+          body: JSON.stringify({ cookie_settings: payload, deploy: false })
+        });
+        if (res.ok) {
+          showToast('Cookie settings saved & site rebuilt successfully!');
+        } else {
+          showToast('Failed to save cookie settings.', true);
+        }
+      } catch (e) {
+        showToast('Error saving cookies: ' + e, true);
+      }
     }
 
     // -------------------------------------------------------------

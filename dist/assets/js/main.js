@@ -3065,32 +3065,6 @@ function initCoinPortraitEngine() {
     }
   }
 
-      if (img) {
-
-        img.src = pngSrc;
-
-        img.alt = altText;
-
-      }
-
-    } else {
-
-      const img = faceEl.querySelector('img');
-
-      if (img) {
-
-        img.src = pngSrc;
-
-        img.alt = altText;
-
-      }
-
-    }
-
-  }
-
-
-
   function flipCoin() {
 
     if (isFlipping) return;
@@ -3480,6 +3454,57 @@ window.showCvNotice = showCvNotice;
   console.log('[StealthNavigationEngine] Active: Status bar naked URL popups suppressed on hover.');
 
 })();
+
+// ==============================================================================
+// Academic Cookie & Privacy Consent Engine
+// ==============================================================================
+function initCookieConsent() {
+  const CONSENT_KEY = 'zaidamin_cookie_consent';
+  const banner = document.getElementById('cookie-consent-banner');
+  const acceptBtn = document.getElementById('cookie-accept-btn');
+  const rejectBtn = document.getElementById('cookie-reject-btn');
+
+  if (!banner || !acceptBtn) return;
+
+  let savedConsent = null;
+  try {
+    savedConsent = localStorage.getItem(CONSENT_KEY);
+  } catch (e) {}
+
+  // If visitor hasn't made a choice, display the banner smoothly after 1.2s
+  if (!savedConsent) {
+    setTimeout(() => {
+      banner.classList.add('is-visible');
+    }, 1200);
+  }
+
+  function dismissBanner(choice) {
+    try {
+      localStorage.setItem(CONSENT_KEY, JSON.stringify({
+        status: choice,
+        timestamp: new Date().toISOString()
+      }));
+    } catch (e) {}
+    banner.classList.remove('is-visible');
+  }
+
+  acceptBtn.addEventListener('click', () => dismissBanner('accepted'));
+  if (rejectBtn) {
+    rejectBtn.addEventListener('click', () => dismissBanner('rejected_non_essential'));
+  }
+
+  // Re-open consent banner anytime (e.g. from footer link)
+  window.reopenCookieConsent = function() {
+    banner.classList.add('is-visible');
+  };
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCookieConsent);
+} else {
+  initCookieConsent();
+}
+
 
 
 

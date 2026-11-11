@@ -1,0 +1,10 @@
+{
+  "enabled": true,
+  "banner_style": "minimal_floating",
+  "message": "This site uses cookies to deliver optimal performance and analyze academic research traffic.",
+  "learn_more_text": "Learn More",
+  "learn_more_url": "/research#privacy",
+  "accept_text": "Ok, Got It",
+  "reject_text": "Reject Non-Essential",
+  "show_reject_button": true
+}
