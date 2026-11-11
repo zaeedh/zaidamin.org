@@ -14665,6 +14665,89 @@ a {
   clear: right;
 }
 
+.article-reader-body figure.fig-center {
+  margin: 1.8rem auto !important;
+  text-align: center !important;
+  clear: both !important;
+}
+
+.article-reader-body figure.fig-center img {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.article-reader-body .latex-math-block {
+  background: #030d1a !important;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  border-radius: 8px !important;
+  padding: 16px 22px !important;
+  margin: 1.8em 0 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  color: #fef08a !important;
+  text-align: center !important;
+  font-size: 1.05rem !important;
+  overflow-x: auto !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
+}
+
+.article-reader-body table.scholar-table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 1.8em 0 !important;
+  font-size: 0.92rem !important;
+  border: 1px solid rgba(56, 189, 248, 0.25) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+.article-reader-body table.scholar-table th,
+.article-reader-body table.scholar-table td {
+  border: 1px solid rgba(56, 189, 248, 0.25) !important;
+  padding: 12px 16px !important;
+  text-align: left !important;
+}
+
+.article-reader-body table.scholar-table th {
+  background: rgba(8, 28, 50, 0.9) !important;
+  color: #fce09b !important;
+  font-family: var(--font-cinzel), serif !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+}
+
+.article-reader-body table.scholar-table tr:nth-child(even) td {
+  background: rgba(4, 16, 30, 0.4) !important;
+}
+
+.article-reader-body .video-container {
+  position: relative !important;
+  padding-bottom: 56.25% !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  max-width: 100% !important;
+  margin: 2.2rem auto !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.75) !important;
+  background: #000 !important;
+}
+
+.article-reader-body .video-container iframe {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+}
+
+.article-reader-body hr.section-divider {
+  border: none !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.6) 50%, transparent) !important;
+  margin: 2.4em 0 !important;
+}
+
 .article-reader-body img {
   display: block;
   max-width: 100%;

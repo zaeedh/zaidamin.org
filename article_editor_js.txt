@@ -242,7 +242,6 @@ function setArticleEditorMode(mode) {
       updateEditorMetrics();
       autoUpdateArticlePreview();
       initArticleImageListeners();
-      hideImageFloatingToolbar();
     }
 
     function onCodeArticleInput() {
@@ -252,7 +251,6 @@ function setArticleEditorMode(mode) {
       updateEditorMetrics();
       autoUpdateArticlePreview();
       initArticleImageListeners();
-      hideImageFloatingToolbar();
     }
 
     
@@ -260,6 +258,14 @@ function setArticleEditorMode(mode) {
     // Golden Ratio & Gestalt Visual Editor Formatting Handlers
     // -------------------------------------------------------------
     let selectedArticleImage = null;
+
+    function selectArticleImage(img) {
+      if (!img) return;
+      if (selectedArticleImage) selectedArticleImage.classList.remove('art-img-selected');
+      selectedArticleImage = img;
+      selectedArticleImage.classList.add('art-img-selected');
+      positionImageFloatingToolbar(selectedArticleImage);
+    }
 
     function applyArticleFontFamily(fontFamily) {
       if (!fontFamily) return;
@@ -270,7 +276,13 @@ function setArticleEditorMode(mode) {
         return;
       }
       const visualElem = document.getElementById('art-form-visual-editor');
-      visualElem.focus();
+      if (document.activeElement !== visualElem && !visualElem.contains(document.activeElement)) {
+        const sel = window.getSelection();
+        const hasSelectionInside = sel && sel.anchorNode && visualElem.contains(sel.anchorNode);
+        if (!hasSelectionInside) {
+          visualElem.focus();
+        }
+      }
       try { document.execCommand('styleWithCSS', false, true); } catch(e) {}
       const sel = window.getSelection();
       if (sel && !sel.isCollapsed && sel.rangeCount > 0) {
@@ -306,7 +318,13 @@ function setArticleEditorMode(mode) {
         return;
       }
       const visualElem = document.getElementById('art-form-visual-editor');
-      visualElem.focus();
+      if (document.activeElement !== visualElem && !visualElem.contains(document.activeElement)) {
+        const sel = window.getSelection();
+        const hasSelectionInside = sel && sel.anchorNode && visualElem.contains(sel.anchorNode);
+        if (!hasSelectionInside) {
+          visualElem.focus();
+        }
+      }
 
       if (level === 'p') {
         document.execCommand('formatBlock', false, '<p>');
@@ -345,7 +363,13 @@ function setArticleEditorMode(mode) {
         return;
       }
       const visualElem = document.getElementById('art-form-visual-editor');
-      visualElem.focus();
+      if (document.activeElement !== visualElem && !visualElem.contains(document.activeElement)) {
+        const sel = window.getSelection();
+        const hasSelectionInside = sel && sel.anchorNode && visualElem.contains(sel.anchorNode);
+        if (!hasSelectionInside) {
+          visualElem.focus();
+        }
+      }
       const sel = window.getSelection();
       if (!sel.isCollapsed && sel.rangeCount > 0) {
         const text = sel.toString();
@@ -516,7 +540,13 @@ function setArticleEditorMode(mode) {
 
     function adjustBlockMargin(dir) {
       const visualElem = document.getElementById('art-form-visual-editor');
-      visualElem.focus();
+      if (document.activeElement !== visualElem && !visualElem.contains(document.activeElement)) {
+        const sel = window.getSelection();
+        const hasSelectionInside = sel && sel.anchorNode && visualElem.contains(sel.anchorNode);
+        if (!hasSelectionInside) {
+          visualElem.focus();
+        }
+      }
       const sel = window.getSelection();
       let node = sel && sel.anchorNode ? (sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode) : null;
       const block = node ? node.closest('p, h1, h2, h3, h4, blockquote, .callout-box, figure, div, ul, ol') : null;
@@ -705,7 +735,13 @@ function setArticleEditorMode(mode) {
       }
 
       const visualElem = document.getElementById('art-form-visual-editor');
-      visualElem.focus();
+      if (document.activeElement !== visualElem && !visualElem.contains(document.activeElement)) {
+        const sel = window.getSelection();
+        const hasSelectionInside = sel && sel.anchorNode && visualElem.contains(sel.anchorNode);
+        if (!hasSelectionInside) {
+          visualElem.focus();
+        }
+      }
 
       restoreArticleSelection();
       const sel = window.getSelection();
@@ -833,7 +869,13 @@ function setArticleEditorMode(mode) {
       }
 
       const visualElem = document.getElementById('art-form-visual-editor');
-      visualElem.focus();
+      if (document.activeElement !== visualElem && !visualElem.contains(document.activeElement)) {
+        const sel = window.getSelection();
+        const hasSelectionInside = sel && sel.anchorNode && visualElem.contains(sel.anchorNode);
+        if (!hasSelectionInside) {
+          visualElem.focus();
+        }
+      }
       const sel = window.getSelection();
 
       if (sel && !sel.isCollapsed && sel.rangeCount > 0) {
@@ -1107,7 +1149,13 @@ function setArticleEditorMode(mode) {
       }
 
       const visualElem = document.getElementById('art-form-visual-editor');
-      visualElem.focus();
+      if (document.activeElement !== visualElem && !visualElem.contains(document.activeElement)) {
+        const sel = window.getSelection();
+        const hasSelectionInside = sel && sel.anchorNode && visualElem.contains(sel.anchorNode);
+        if (!hasSelectionInside) {
+          visualElem.focus();
+        }
+      }
 
       if (type === 'img' || type === 'image') {
         openArticleFigureModal();
