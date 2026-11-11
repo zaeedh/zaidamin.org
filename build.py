@@ -2468,7 +2468,7 @@ def get_activity_search_bar_html():
 
             </span>
 
-            <input type="text" id="activity-search-input" class="ref-search-input font-cinzel" placeholder="Search activities, articles, grants &amp; topics..." autocomplete="off" spellcheck="false" aria-label="Search activities, articles, grants and topics">
+            <input type="text" id="activity-search-input" class="ref-search-input font-cinzel" placeholder="Search activities, articles &amp; topics..." autocomplete="off" spellcheck="false" aria-label="Search activities, articles, grants and topics" data-placeholder-desktop="Search activities, articles, grants &amp; topics..." data-placeholder-mobile="Search activities, articles &amp; topics...">
 
             <button type="button" id="activity-search-clear" class="ref-search-clear" title="Clear search" aria-label="Clear search" style="display: none;">
 

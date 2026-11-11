@@ -1805,7 +1805,18 @@ function initAdvancedActivitySearch() {
 
   if (!wrap || !input || !panel || !listEl) return;
 
-
+  // Responsive search placeholder synchronization (desktop vs tablet/mobile)
+  function syncSearchPlaceholder() {
+    if (!input) return;
+    const w = window.innerWidth;
+    if (w <= 640) {
+      input.placeholder = "Search activities, articles & topics...";
+    } else {
+      input.placeholder = "Search activities, articles, grants & topics...";
+    }
+  }
+  syncSearchPlaceholder();
+  window.addEventListener('resize', syncSearchPlaceholder, { passive: true });
 
   let activeResultIndex = -1;
 

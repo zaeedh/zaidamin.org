@@ -11143,6 +11143,8 @@ a {
 
   flex: 1;
 
+  min-width: 0;
+
   background: transparent;
 
   border: none;
@@ -11153,7 +11155,13 @@ a {
 
   font-size: 0.74rem;
 
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
+
+  text-overflow: ellipsis;
+
+  overflow: hidden;
+
+  white-space: nowrap;
 
 }
 
@@ -11165,11 +11173,19 @@ a {
 
   font-family: var(--font-cinzel), serif;
 
-  font-size: 0.70rem;
+  font-size: 0.68rem;
 
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
 
   opacity: 0.85;
+
+  text-overflow: ellipsis;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  transition: opacity 0.25s ease, font-size 0.25s ease;
 
 }
 
@@ -11236,6 +11252,18 @@ a {
   border-radius: 4px;
 
   font-family: monospace;
+
+}
+
+
+
+@media (max-width: 768px) {
+
+  .ref-search-shortcut {
+
+    display: none !important;
+
+  }
 
 }
 
@@ -11647,7 +11675,7 @@ a {
 
   .ref-search-input-box {
 
-    height: 34px;
+    height: 36px;
 
     padding: 0 12px;
 
@@ -11657,15 +11685,51 @@ a {
 
   .ref-search-input {
 
-    font-size: 0.70rem;
+    font-size: 0.68rem;
+
+    letter-spacing: 0.015em;
 
   }
 
   .ref-search-input::placeholder {
 
-    font-size: 0.65rem;
+    font-size: 0.62rem;
+
+    letter-spacing: 0.015em;
+
+    opacity: 0.88;
 
   }
+
+  .ref-search-shortcut {
+
+    display: none !important;
+
+  }
+
+}
+
+
+
+@media (max-width: 380px) {
+
+  .ref-search-input-box {
+
+    padding: 0 10px;
+
+    gap: 7px;
+
+  }
+
+  .ref-search-input::placeholder {
+
+    font-size: 0.58rem;
+
+    letter-spacing: 0.01em;
+
+  }
+
+}
 
   .ref-inset-tray {
 
