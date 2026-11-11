@@ -408,9 +408,11 @@ function setArticleEditorMode(mode) {
           const formattedHTML = formatAcademicCaptionHTML(selText, defaultPrefix);
           if (block && (block.tagName === 'FIGCAPTION' || block.classList.contains('tr-caption') || block.classList.contains('figure-caption') || block.classList.contains('table-caption'))) {
             block.className = isTable ? 'tr-caption table-caption' : 'tr-caption figure-caption';
+            block.style.fontFamily = "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
             block.style.fontSize = '0.88rem';
             block.style.color = '#94a3b8';
             block.style.fontStyle = 'normal';
+            block.style.fontVariantNumeric = 'lining-nums proportional-nums';
             block.style.textAlign = 'left';
             block.style.margin = isTable ? '14px 0 8px 0' : '10px 0 16px 0';
             block.style.lineHeight = '1.58';
@@ -425,9 +427,11 @@ function setArticleEditorMode(mode) {
               parentFig.appendChild(fc);
             }
             fc.className = 'figure-caption tr-caption';
+            fc.style.fontFamily = "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
             fc.style.fontSize = '0.88rem';
             fc.style.color = '#94a3b8';
             fc.style.fontStyle = 'normal';
+            fc.style.fontVariantNumeric = 'lining-nums proportional-nums';
             fc.style.textAlign = 'left';
             fc.style.margin = '10px 0 16px 0';
             fc.style.lineHeight = '1.58';
@@ -449,9 +453,11 @@ function setArticleEditorMode(mode) {
               newFig.appendChild(adjImg);
               const fc = document.createElement('figcaption');
               fc.className = 'figure-caption tr-caption';
+              fc.style.fontFamily = "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
               fc.style.fontSize = '0.88rem';
               fc.style.color = '#94a3b8';
               fc.style.fontStyle = 'normal';
+              fc.style.fontVariantNumeric = 'lining-nums proportional-nums';
               fc.style.textAlign = 'left';
               fc.style.margin = '10px 0 16px 0';
               fc.style.lineHeight = '1.58';
@@ -461,16 +467,18 @@ function setArticleEditorMode(mode) {
               if (block) block.remove();
             } else if (block && block.textContent.trim() === selText && (block.tagName === 'P' || block.tagName === 'DIV')) {
               block.className = isTable ? 'tr-caption table-caption' : 'tr-caption figure-caption';
+              block.style.fontFamily = "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
               block.style.fontSize = '0.88rem';
               block.style.color = '#94a3b8';
               block.style.fontStyle = 'normal';
+              block.style.fontVariantNumeric = 'lining-nums proportional-nums';
               block.style.textAlign = 'left';
               block.style.margin = isTable ? '14px 0 8px 0' : '10px 0 16px 0';
               block.style.lineHeight = '1.58';
               block.style.display = 'block';
               block.innerHTML = formattedHTML;
             } else {
-              document.execCommand('insertHTML', false, `<div class="${isTable ? 'tr-caption table-caption' : 'tr-caption figure-caption'}" style="font-size: 0.88rem; color: #94a3b8; font-style: normal; text-align: left; margin: ${isTable ? '14px 0 8px 0' : '10px 0 16px 0'}; line-height: 1.58; display: block;">${formattedHTML}</div><p>&nbsp;</p>`);
+              document.execCommand('insertHTML', false, `<div class="${isTable ? 'tr-caption table-caption' : 'tr-caption figure-caption'}" style="font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 0.88rem; color: #94a3b8; font-style: normal; font-variant-numeric: lining-nums proportional-nums; text-align: left; margin: ${isTable ? '14px 0 8px 0' : '10px 0 16px 0'}; line-height: 1.58; display: block;">${formattedHTML}</div><p>&nbsp;</p>`);
             }
           }
         } else {
@@ -487,9 +495,11 @@ function setArticleEditorMode(mode) {
               curFig.appendChild(fc);
             }
             fc.className = 'figure-caption tr-caption';
+            fc.style.fontFamily = "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
             fc.style.fontSize = '0.88rem';
             fc.style.color = '#94a3b8';
             fc.style.fontStyle = 'normal';
+            fc.style.fontVariantNumeric = 'lining-nums proportional-nums';
             fc.style.textAlign = 'left';
             fc.style.margin = '10px 0 16px 0';
             fc.style.lineHeight = '1.58';
@@ -497,7 +507,7 @@ function setArticleEditorMode(mode) {
             fc.innerHTML = formatAcademicCaptionHTML('', defaultPrefix);
           } else {
             const defaultHTML = formatAcademicCaptionHTML('', defaultPrefix);
-            document.execCommand('insertHTML', false, `<div class="${isTable ? 'tr-caption table-caption' : 'tr-caption figure-caption'}" style="font-size: 0.88rem; color: #94a3b8; font-style: normal; text-align: left; margin: ${isTable ? '14px 0 8px 0' : '10px 0 16px 0'}; line-height: 1.58; display: block;">${defaultHTML}</div><p>&nbsp;</p>`);
+            document.execCommand('insertHTML', false, `<div class="${isTable ? 'tr-caption table-caption' : 'tr-caption figure-caption'}" style="font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 0.88rem; color: #94a3b8; font-style: normal; font-variant-numeric: lining-nums proportional-nums; text-align: left; margin: ${isTable ? '14px 0 8px 0' : '10px 0 16px 0'}; line-height: 1.58; display: block;">${defaultHTML}</div><p>&nbsp;</p>`);
           }
         }
         showToast(`${toastLabel} formatted (Bold Cyan Label + Slate Text)`);

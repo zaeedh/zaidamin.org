@@ -14909,12 +14909,21 @@ a {
 .article-lightbox-caption {
   margin-top: 12px;
   color: #cbd5e1;
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.05rem;
-  font-style: italic;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 0.92rem;
+  font-style: normal !important;
+  font-variant-numeric: lining-nums proportional-nums !important;
   text-align: center;
   max-width: 800px;
-  line-height: 1.4;
+  line-height: 1.55;
+}
+
+.article-lightbox-caption strong {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
+  color: #7dd3fc !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  font-variant-numeric: lining-nums proportional-nums !important;
 }
 
 .article-lightbox-actions {
@@ -14944,23 +14953,6 @@ a {
   color: #ffffff;
 }
 
-.article-reader-body figure figcaption,
-.article-reader-body figcaption,
-.article-reader-body .figure-caption,
-.article-reader-body p.figure-caption {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 0.95rem;
-  font-style: italic;
-  color: #94a3b8;
-  margin: 10px auto 16px auto;
-  line-height: 1.55;
-  letter-spacing: 0.015em;
-  border-top: 1px solid rgba(212, 175, 55, 0.16);
-  padding-top: 8px;
-  display: block;
-  text-align: center;
-}
-
 /* White technical diagrams dark contrast smoothing */
 .article-reader-body figure.dark-matting img,
 .article-reader-body img.dark-matting {
@@ -14982,41 +14974,76 @@ a {
   max-width: 100%;
 }
 
+/* Scholarly Figure & Table Captions (Strict Golden Ratio Preset Matching CMS Editor) */
+.article-reader-body figure figcaption,
+.article-reader-body figcaption,
 .article-reader-body .tr-caption,
 .article-reader-body .figure-caption,
+.article-reader-body p.figure-caption,
+.article-reader-body div.figure-caption,
+.article-reader-body p.tr-caption,
+.article-reader-body div.tr-caption,
 .article-reader-body .table-caption,
-.article-reader-body figcaption {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 0.88rem;
-  color: #94a3b8;
-  line-height: 1.58;
-  margin-top: 10px;
-  text-align: left;
-  padding: 0 4px;
-  font-style: normal;
-  letter-spacing: 0.01em;
-  display: block;
+.article-reader-body p.table-caption,
+.article-reader-body div.table-caption,
+.article-reader-body .tr-caption-container figcaption,
+.article-reader-body .tr-caption-container .tr-caption,
+.article-reader-body .tr-caption-container .figure-caption,
+.article-reader-body .tr-caption-container p.figure-caption,
+.article-reader-body .tr-caption-container p.tr-caption {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-size: 0.88rem !important;
+  color: #94a3b8 !important;
+  line-height: 1.58 !important;
+  margin: 10px 0 16px 0 !important;
+  text-align: left !important;
+  padding: 0 4px !important;
+  font-style: normal !important;
+  font-variant-numeric: lining-nums proportional-nums !important;
+  -webkit-font-feature-settings: "lnum" 1, "pnum" 1 !important;
+  font-feature-settings: "lnum" 1, "pnum" 1 !important;
+  letter-spacing: 0.01em !important;
+  display: block !important;
+  border-top: none !important;
 }
 
-.article-reader-body .table-caption {
-  margin: 16px 0 8px 0;
+.article-reader-body .table-caption,
+.article-reader-body p.table-caption,
+.article-reader-body div.table-caption {
+  margin: 16px 0 8px 0 !important;
 }
 
 .article-reader-body .tr-caption strong,
 .article-reader-body .figure-caption strong,
+.article-reader-body p.figure-caption strong,
+.article-reader-body div.figure-caption strong,
+.article-reader-body p.tr-caption strong,
+.article-reader-body div.tr-caption strong,
 .article-reader-body .table-caption strong,
-.article-reader-body figcaption strong {
-  color: #7dd3fc;
-  font-weight: 700;
-  letter-spacing: 0.015em;
+.article-reader-body figcaption strong,
+.article-reader-body .tr-caption-container strong {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  color: #7dd3fc !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  letter-spacing: 0.015em !important;
+  font-variant-numeric: lining-nums proportional-nums !important;
+  -webkit-font-feature-settings: "lnum" 1, "pnum" 1 !important;
+  font-feature-settings: "lnum" 1, "pnum" 1 !important;
 }
 
 .article-reader-body .tr-caption em,
 .article-reader-body .figure-caption em,
+.article-reader-body p.figure-caption em,
+.article-reader-body div.figure-caption em,
+.article-reader-body p.tr-caption em,
+.article-reader-body div.tr-caption em,
 .article-reader-body .table-caption em,
-.article-reader-body figcaption em {
-  color: #f1f5f9;
-  font-style: italic;
+.article-reader-body figcaption em,
+.article-reader-body .tr-caption-container em {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  color: #f1f5f9 !important;
+  font-style: italic !important;
 }
 
 @media (max-width: 768px) {

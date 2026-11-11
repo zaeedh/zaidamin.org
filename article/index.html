@@ -775,7 +775,30 @@
 
             bodyElem.innerHTML = rawHtml;
 
-
+            // 0A. Harmonize all scholarly captions to Inter typography standard
+            bodyElem.querySelectorAll('.figure-caption, .tr-caption, .table-caption, figcaption').forEach(function(cap) {
+              cap.style.setProperty('font-family', "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif", 'important');
+              cap.style.setProperty('font-size', '0.88rem', 'important');
+              cap.style.setProperty('font-style', 'normal', 'important');
+              cap.style.setProperty('text-align', 'left', 'important');
+              cap.style.setProperty('font-variant-numeric', 'lining-nums proportional-nums', 'important');
+              cap.style.setProperty('color', '#94a3b8', 'important');
+              cap.style.setProperty('line-height', '1.58', 'important');
+              cap.style.setProperty('letter-spacing', '0.01em', 'important');
+              cap.style.setProperty('border-top', 'none', 'important');
+              cap.querySelectorAll('strong').forEach(function(st) {
+                st.style.setProperty('font-family', "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif", 'important');
+                st.style.setProperty('color', '#7dd3fc', 'important');
+                st.style.setProperty('font-weight', '700', 'important');
+                st.style.setProperty('font-style', 'normal', 'important');
+                st.style.setProperty('font-variant-numeric', 'lining-nums proportional-nums', 'important');
+              });
+              cap.querySelectorAll('em').forEach(function(em) {
+                em.style.setProperty('font-family', "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif", 'important');
+                em.style.setProperty('color', '#f1f5f9', 'important');
+                em.style.setProperty('font-style', 'italic', 'important');
+              });
+            });
 
             // 0. Ensure image paths resolve correctly regardless of directory level
 
@@ -810,6 +833,7 @@
                 fig.appendChild(targetNode);
                 if (alt && alt.trim() && !alt.startsWith('http')) {
                   var cap = document.createElement('figcaption');
+                  cap.className = 'figure-caption tr-caption';
                   cap.textContent = alt.trim();
                   fig.appendChild(cap);
                 }
