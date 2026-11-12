@@ -3565,6 +3565,27 @@ if (document.readyState === 'loading') {
   initCookieConsent();
 }
 
+// ==============================================================================
+// Unified Page Pill Sub-Menu Toggle (Touch & Keyboard Accessibility)
+// ==============================================================================
+document.addEventListener('click', (e) => {
+  const caret = e.target.closest('.site-pill-caret');
+  if (caret) {
+    e.preventDefault();
+    e.stopPropagation();
+    const wrap = caret.closest('.site-pill-dropdown-wrap');
+    if (wrap) {
+      const wasOpen = wrap.classList.contains('is-open');
+      document.querySelectorAll('.site-pill-dropdown-wrap.is-open').forEach((w) => w.classList.remove('is-open'));
+      if (!wasOpen) wrap.classList.add('is-open');
+    }
+    return;
+  }
+  if (!e.target.closest('.site-pill-dropdown-wrap')) {
+    document.querySelectorAll('.site-pill-dropdown-wrap.is-open').forEach((w) => w.classList.remove('is-open'));
+  }
+}, true);
+
 
 
 

@@ -20,7 +20,15 @@ import shutil
 
 import html
 
+import html as _html_mod
+
 import math
+
+
+
+def escape_html(val):
+
+    return _html_mod.escape(str(val or ''), quote=True)
 
 from pathlib import Path
 
@@ -1861,10 +1869,220 @@ def render_cookie_consent_banner():
     '''
 
 
+def _render_menu_icon_html(icon_val):
+    if not icon_val or icon_val == "none":
+        return ""
+    if icon_val == "book":
+        return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -1px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>'
+    if icon_val == "layers":
+        return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -1px;"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>'
+    return f'<span class="menu-item-icon-txt">{escape_html(icon_val)}</span> '
+
+
+def render_page_dropdown_menu(item, upwards=False):
+    sub_items = [d for d in (item.get("dropdown_items") or []) if d.get("enabled", True)]
+    if not sub_items:
+        return ""
+    links_html = []
+    for sub in sub_items:
+        s_url = escape_html(sub.get("url") or "#")
+        s_target = sub.get("target") or "_self"
+        s_rel = ' rel="noopener noreferrer"' if s_target == "_blank" else ""
+        s_icon = sub.get("icon") or ""
+        s_icon_html = (
+            f'<span class="site-pill-dropdown-icon">{escape_html(s_icon)}</span>'
+            if s_icon and s_icon != "none"
+            else '<span class="site-pill-dropdown-icon">&#8627;</span>'
+        )
+        s_label = escape_html(sub.get("label") or "Sub-Link")
+        links_html.append(
+            f'<a href="{s_url}" target="{escape_html(s_target)}"{s_rel} class="site-pill-dropdown-link" role="menuitem">{s_icon_html}<span>{s_label}</span></a>'
+        )
+    up_cls = " upwards" if upwards else ""
+    return f'<div class="site-pill-dropdown-menu{up_cls}" role="menu">{"".join(links_html)}</div>'
+
+
+def render_page_menu_bar(page_key, counts=None):
+    nav_data = get_navigation_data()
+    page_menus = nav_data.get("page_menus") or {}
+    items = [it for it in (page_menus.get(page_key) or []) if it.get("enabled", True)]
+    if page_key == "publications":
+        sc_map = {sc.get("id"): sc for sc in (nav_data.get("page_shortcuts") or []) if sc.get("id")}
+        items = [
+            it for it in items
+            if not (it.get("id") in sc_map and not sc_map[it.get("id")].get("enabled", True))
+        ]
+    if not items:
+        return ""
+
+    counts = counts or {}
+
+    def _suffix(it):
+        ck = it.get("count_key") or ""
+        if it.get("show_count") and ck in counts:
+            return f" ({counts[ck]})"
+        return ""
+
+    if page_key == "publications":
+        parts = []
+        for it in items:
+            act = it.get("action_type") or "filter"
+            sfx = _suffix(it)
+            icon_val = it.get("icon") or ""
+            raw_lbl = str(it.get("label", ""))
+            icon_pref = f"{escape_html(icon_val)} " if (icon_val and icon_val != "none" and not raw_lbl.startswith(str(icon_val))) else ""
+            full_txt = f"{icon_pref}{escape_html(raw_lbl)}{sfx}"
+            comp_raw = str(it.get("short_label") or raw_lbl)
+            comp_pref = f"{escape_html(icon_val)} " if (icon_val and icon_val != "none" and not comp_raw.startswith(str(icon_val))) else ""
+            comp_txt = f"{comp_pref}{escape_html(comp_raw)}{sfx}"
+            extra = f" {escape_html(it.get('extra_class', ''))}".rstrip() if it.get("extra_class") else ""
+            sub_html = render_page_dropdown_menu(it, upwards=False)
+            caret = '<span class="site-pill-caret" aria-hidden="true">&#9662;</span>' if sub_html else ""
+            if act == "link":
+                href = escape_html(it.get("url") or "#")
+                tgt = it.get("target") or "_self"
+                rel = ' rel="noopener noreferrer"' if tgt == "_blank" else ""
+                el = (
+                    f'<a href="{href}" target="{escape_html(tgt)}"{rel} class="pub-nav-pill{extra}" title="{escape_html(raw_lbl)}">'
+                    f'<span class="pub-pill-txt-full">{full_txt}</span>'
+                    f'<span class="pub-pill-txt-compact">{comp_txt}</span>{caret}</a>'
+                )
+            else:
+                fkey = escape_html(it.get("filter_key") or "all")
+                is_active = " active" if fkey == "all" else ""
+                tsec = it.get("target_section") or ""
+                sec_attr = f' data-target-section="{escape_html(tsec)}"' if tsec else ""
+                if fkey == "all" and comp_txt == full_txt:
+                    inner = f"{full_txt}{caret}"
+                else:
+                    inner = (
+                        f'<span class="pub-pill-txt-full">{full_txt}</span>'
+                        f'<span class="pub-pill-txt-compact">{comp_txt}</span>{caret}'
+                    )
+                el = f'<button class="pub-nav-pill filter-btn{is_active}{extra}" data-filter="{fkey}"{sec_attr}>{inner}</button>'
+            parts.append(f'<div class="site-pill-dropdown-wrap">{el}{sub_html}</div>' if sub_html else el)
+        return '<nav class="pub-nav-pills" aria-label="Publication Categories">\n          ' + "\n          ".join(parts) + "\n        </nav>"
+
+    if page_key == "activity":
+        parts = []
+        has_articles = any(x.get("tab_key") == "articles" for x in items)
+        for idx, it in enumerate(items):
+            act = it.get("action_type") or "tab"
+            sfx = _suffix(it)
+            lbl = f"{escape_html(it.get('label', ''))}{sfx}"
+            ico = _render_menu_icon_html(it.get("icon"))
+            sub_html = render_page_dropdown_menu(it, upwards=False)
+            caret = '<span class="site-pill-caret" aria-hidden="true">&#9662;</span>' if sub_html else ""
+            if act == "link":
+                href = escape_html(it.get("url") or "#")
+                tgt = it.get("target") or "_self"
+                rel = ' rel="noopener noreferrer"' if tgt == "_blank" else ""
+                el = f'<a href="{href}" target="{escape_html(tgt)}"{rel} class="activity-tab-btn">{ico}<span>{lbl}</span>{caret}</a>'
+            else:
+                tkey = escape_html(it.get("tab_key") or "articles")
+                active_cls = " active" if (tkey == "articles" or (idx == 0 and not has_articles)) else ""
+                el = (
+                    f'<button class="activity-tab-btn{active_cls}" id="tab-btn-{tkey}" onclick="switchActivityTab(' + f"'{tkey}'" + ')">'
+                    f'{ico} <span>{lbl}</span>{caret}</button>'
+                )
+            parts.append(f'<div class="site-pill-dropdown-wrap">{el}{sub_html}</div>' if sub_html else el)
+        return '<div class="activity-tabs-bar">\n          ' + "\n          ".join(parts) + "\n        </div>"
+
+    if page_key == "talks":
+        parts = []
+        for idx, it in enumerate(items):
+            href = escape_html(it.get("url") or "#")
+            tgt = it.get("target") or "_self"
+            rel = ' rel="noopener noreferrer"' if tgt == "_blank" else ""
+            ico = _render_menu_icon_html(it.get("icon"))
+            lbl = escape_html(it.get("label") or "")
+            sub_html = render_page_dropdown_menu(it, upwards=False)
+            caret = '<span class="site-pill-caret" aria-hidden="true">&#9662;</span>' if sub_html else ""
+            active_cls = " active" if idx == 0 else ""
+            el = f'<a href="{href}" target="{escape_html(tgt)}"{rel} class="talks-nav-pill{active_cls}">{ico}{lbl}{caret}</a>'
+            parts.append(f'<div class="site-pill-dropdown-wrap">{el}{sub_html}</div>' if sub_html else el)
+        return '<div class="talks-nav-bar" aria-label="Media &amp; Talks Navigation">\n          ' + "\n          ".join(parts) + "\n        </div>"
+
+    if page_key == "cv":
+        parts = []
+        for it in items:
+            href = escape_html(it.get("url") or "#")
+            tgt = it.get("target") or "_self"
+            rel = ' rel="noopener noreferrer"' if tgt == "_blank" else ""
+            ico = _render_menu_icon_html(it.get("icon"))
+            lbl = escape_html(it.get("label") or "")
+            sub_html = render_page_dropdown_menu(it, upwards=False)
+            caret = '<span class="site-pill-caret" aria-hidden="true">&#9662;</span>' if sub_html else ""
+            el = f'<a href="{href}" target="{escape_html(tgt)}"{rel} class="cv-jump-link">{ico}{lbl}{caret}</a>'
+            parts.append(f'<div class="site-pill-dropdown-wrap">{el}{sub_html}</div>' if sub_html else el)
+        return '<nav class="cv-jump-bar" aria-label="CV Sections Navigation">\n        ' + "\n        ".join(parts) + "\n      </nav>"
+
+    if page_key == "team":
+        parts = []
+        has_all = any(x.get("filter_key") == "all" for x in items)
+        for idx, it in enumerate(items):
+            act = it.get("action_type") or "filter"
+            sfx = _suffix(it)
+            ico = _render_menu_icon_html(it.get("icon"))
+            lbl = f"{escape_html(it.get('label', ''))}{sfx}"
+            sub_html = render_page_dropdown_menu(it, upwards=False)
+            caret = '<span class="site-pill-caret" aria-hidden="true">&#9662;</span>' if sub_html else ""
+            if act == "link":
+                href = escape_html(it.get("url") or "#")
+                tgt = it.get("target") or "_self"
+                rel = ' rel="noopener noreferrer"' if tgt == "_blank" else ""
+                el = f'<a href="{href}" target="{escape_html(tgt)}"{rel} class="team-filter-pill">{ico}{lbl}{caret}</a>'
+            else:
+                fkey = escape_html(it.get("filter_key") or "all")
+                is_first = (fkey == "all") or (idx == 0 and not has_all)
+                active_cls = " active" if is_first else ""
+                sel_attr = "true" if is_first else "false"
+                el = f'<button class="team-filter-pill{active_cls}" onclick="filterTeam(' + f"'{fkey}'" + f', this)" role="tab" aria-selected="{sel_attr}">{ico}{lbl}{caret}</button>'
+            parts.append(f'<div class="site-pill-dropdown-wrap">{el}{sub_html}</div>' if sub_html else el)
+        return '<div class="team-nav-pills" role="tablist" aria-label="Team Categories">\n        ' + "\n        ".join(parts) + "\n      </div>"
+
+    if page_key == "supervision":
+        parts = []
+        for idx, it in enumerate(items):
+            href = escape_html(it.get("url") or "#")
+            tgt = it.get("target") or "_self"
+            rel = ' rel="noopener noreferrer"' if tgt == "_blank" else ""
+            ico = _render_menu_icon_html(it.get("icon"))
+            lbl = escape_html(it.get("label") or "")
+            sub_html = render_page_dropdown_menu(it, upwards=False)
+            caret = '<span class="site-pill-caret" aria-hidden="true">&#9662;</span>' if sub_html else ""
+            active_cls = " active" if idx == 0 else ""
+            el = f'<a href="{href}" target="{escape_html(tgt)}"{rel} class="sup-nav-pill{active_cls}">{ico}{lbl}{caret}</a>'
+            parts.append(f'<div class="site-pill-dropdown-wrap">{el}{sub_html}</div>' if sub_html else el)
+        return '<nav class="sup-nav-pills" aria-label="Supervision Sections">\n        ' + "\n        ".join(parts) + "\n      </nav>"
+
+    return ""
+
+
+def get_footer_links_html():
+    nav_data = get_navigation_data()
+    links = [f for f in (nav_data.get("footer_links") or []) if f.get("enabled", True)]
+    if not links:
+        return ""
+    parts = []
+    for fitem in links:
+        href = escape_html(fitem.get("url") or "#")
+        tgt = fitem.get("target") or "_self"
+        rel = ' rel="noopener noreferrer"' if tgt == "_blank" else ""
+        ico = _render_menu_icon_html(fitem.get("icon"))
+        lbl = escape_html(fitem.get("label") or "Link")
+        sub_html = render_page_dropdown_menu(fitem, upwards=True)
+        caret = '<span class="site-pill-caret" aria-hidden="true">&#9652;</span>' if sub_html else ""
+        el = f'<a href="{href}" target="{escape_html(tgt)}"{rel} class="golden-footer-link">{ico}{lbl}{caret}</a>'
+        parts.append(f'<div class="site-pill-dropdown-wrap">{el}{sub_html}</div>' if sub_html else el)
+    return '\n      <nav class="golden-footer-links" aria-label="Footer Navigation">' + "".join(parts) + "</nav>"
+
+
 def get_page_footer(show_visitor_stats=False):
 
     stats_html = get_visitor_stats_html() if show_visitor_stats else ""
     cookie_banner_html = render_cookie_consent_banner()
+    footer_links_html = get_footer_links_html()
 
     return f"""
 
@@ -1882,10 +2100,8 @@ def get_page_footer(show_visitor_stats=False):
 
     <!-- Site Footer (Restored Clean Center Alignment) -->
 
-    <footer class="golden-footer">
-
-      Copyright &copy; 2008 - 2026 Zaid Amin. All Rights Reserved. &bull; <a href="javascript:void(0)" onclick="window.reopenCookieConsent &amp;&amp; window.reopenCookieConsent()" class="footer-cookie-pref-link" title="Manage Cookie Preferences">Cookie Preferences</a>
-
+    <footer class="golden-footer">{footer_links_html}
+      <div>Copyright &copy; 2008 - 2026 Zaid Amin. All Rights Reserved. &bull; <a href="javascript:void(0)" onclick="window.reopenCookieConsent &amp;&amp; window.reopenCookieConsent()" class="footer-cookie-pref-link" title="Manage Cookie Preferences">Cookie Preferences</a></div>
     </footer>
 
 
@@ -5430,49 +5646,14 @@ def generate_publications_page():
 
 
 
-    # Check in-page shortcut pills from navigation.json
-
-    nav_data = get_navigation_data()
-
-    shortcuts = {s.get("id"): s for s in nav_data.get("page_shortcuts", [])}
-
-    team_pill_cfg = shortcuts.get("pub_team_pill", {
-
-        "enabled": True,
-
-        "display_text": "👥 Research Team &nearr;",
-
-        "title": "Research Team",
-
-        "url": "#",
-
-        "target": "_self"
-
-    })
-
-    team_pill_html = ""
-
-    if team_pill_cfg.get("enabled", True):
-
-        p_text = team_pill_cfg.get("display_text", "👥 Research Team &nearr;")
-
-        p_title = team_pill_cfg.get("title", "Research Team")
-
-        p_url = team_pill_cfg.get("url", "#")
-
-        p_target = team_pill_cfg.get("target", "_self")
-
-        onclick_attr = ' onclick="if(this.getAttribute(\'href\')===\'#\'){event.preventDefault();}"' if p_url == '#' else ''
-
-        team_pill_html = f'''<a href="{p_url}" target="{p_target}" class="pub-nav-pill team-shortcut-pill" title="{p_title}"{onclick_attr}>
-
-            <span class="pub-pill-txt-full">{p_text}</span>
-
-            <span class="pub-pill-txt-compact">👥 Team &nearr;</span>
-
-          </a>'''
-
-
+    pub_counts = {
+        "all": len(publications),
+        "book chapter": sum(1 for p in publications if "book" in str(p.get("category", "")).lower()),
+        "journal": sum(1 for p in publications if "journal" in str(p.get("category", "")).lower()),
+        "conference": sum(1 for p in publications if "conference" in str(p.get("category", "")).lower()),
+        "preprint": sum(1 for p in publications if "preprint" in str(p.get("category", "")).lower()),
+    }
+    pub_nav_bar_html = render_page_menu_bar("publications", counts=pub_counts)
 
     # Assemble complete page
 
@@ -5512,45 +5693,7 @@ def generate_publications_page():
 
 
 
-        <nav class="pub-nav-pills" aria-label="Publication Categories">
-
-          <button class="pub-nav-pill filter-btn active" data-filter="all">✦ All ({len(publications)})</button>
-
-          <button class="pub-nav-pill filter-btn" data-filter="book chapter" data-target-section="section-books">
-
-            <span class="pub-pill-txt-full">01. Book &amp; Chapters (3)</span>
-
-            <span class="pub-pill-txt-compact">01. Books (3)</span>
-
-          </button>
-
-          <button class="pub-nav-pill filter-btn" data-filter="journal" data-target-section="section-journals">
-
-            <span class="pub-pill-txt-full">02. Journals (10)</span>
-
-            <span class="pub-pill-txt-compact">02. Journals (10)</span>
-
-          </button>
-
-          <button class="pub-nav-pill filter-btn" data-filter="conference" data-target-section="section-conferences">
-
-            <span class="pub-pill-txt-full">03. Conferences (6)</span>
-
-            <span class="pub-pill-txt-compact">03. Conf (6)</span>
-
-          </button>
-
-          <button class="pub-nav-pill filter-btn" data-filter="preprint" data-target-section="section-preprints">
-
-            <span class="pub-pill-txt-full">04. Preprints (5)</span>
-
-            <span class="pub-pill-txt-compact">04. Preprints (5)</span>
-
-          </button>
-
-          {team_pill_html}
-
-        </nav>
+        {pub_nav_bar_html}
 
       </div>
 
@@ -5974,6 +6117,7 @@ def generate_research_page():
 
 
 
+    act_nav_bar_html = render_page_menu_bar("activity", counts={"articles": len(articles)})
     html += f"""
 
     <!-- Subpage Content: Activity & Project -->
@@ -5998,25 +6142,7 @@ def generate_research_page():
 
         </div>
 
-        <div class="activity-tabs-bar">
-
-          <button class="activity-tab-btn active" id="tab-btn-articles" onclick="switchActivityTab('articles')">
-
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -1px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-
-            <span>Scholarly Articles &amp; Essays ({len(articles)})</span>
-
-          </button>
-
-          <button class="activity-tab-btn" id="tab-btn-pillars" onclick="switchActivityTab('pillars')">
-
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -1px;"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-
-            <span>Research Pillars &amp; Grants</span>
-
-          </button>
-
-        </div>
+        {act_nav_bar_html}
 
       </section>
 
@@ -7520,6 +7646,7 @@ def generate_talks_page():
 
 
 
+    talks_nav_bar_html = render_page_menu_bar("talks")
     body_html = f"""
 
     <main class="talks-page-container" id="main-content">
@@ -7544,15 +7671,7 @@ def generate_talks_page():
 
         </div>
 
-        <div class="talks-nav-bar" aria-label="Media &amp; Talks Navigation">
-
-          <a href="#category-talkshow" class="talks-nav-pill active">01. Talk Show</a>
-
-          <a href="#category-keynotes" class="talks-nav-pill">02. Keynote, Guest &amp; Visiting Speaker</a>
-
-          <a href="#category-opinion" class="talks-nav-pill">03. Opinion</a>
-
-        </div>
+        {talks_nav_bar_html}
 
       </section>
 
@@ -7968,6 +8087,7 @@ def generate_supervision_page():
 
 
 
+    sup_nav_bar_html = render_page_menu_bar("supervision")
     html += f"""
 
     <!-- Subpage Content: Mentorship & Supervision -->
@@ -7990,7 +8110,8 @@ def generate_supervision_page():
 
 
 
-      <div style="margin-bottom: 40px;">
+      {sup_nav_bar_html}
+      <div id="open-directions" style="margin-bottom: 40px;">
 
         <h2 class="font-cinzel" style="font-size: 1.52rem; font-weight: 700; letter-spacing: 0.025em; margin-bottom: 20px; color: #ffffff;">Open Supervised Research Directions</h2>
 
@@ -8026,7 +8147,7 @@ def generate_supervision_page():
 
 
 
-      <div style="background: linear-gradient(135deg, rgba(4, 28, 48, 0.95), rgba(6, 40, 68, 0.98)); border: 2px solid var(--brand-blue); border-radius: 18px; padding: 32px; box-shadow: 0 12px 35px rgba(0, 10, 24, 0.50);">
+      <div id="inquiry-form" style="background: linear-gradient(135deg, rgba(4, 28, 48, 0.95), rgba(6, 40, 68, 0.98)); border: 2px solid var(--brand-blue); border-radius: 18px; padding: 32px; box-shadow: 0 12px 35px rgba(0, 10, 24, 0.50);">
 
         <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; color: #ffffff;">How to Submit an Inquiry for Supervision</h2>
 
@@ -8756,29 +8877,7 @@ def generate_cv_page():
 
       <!-- Golden Ratio Quick-Jump Navigation Bar (TOC) -->
 
-      <nav class="cv-jump-bar" aria-label="CV Sections Navigation">
-
-        <a href="#honors" class="cv-jump-link">Honors &amp; Grants</a>
-
-        <a href="#leadership" class="cv-jump-link">Leadership</a>
-
-        <a href="#experience" class="cv-jump-link">Appointments</a>
-
-        <a href="#education" class="cv-jump-link">Education</a>
-
-        <a href="#talks" class="cv-jump-link">Media &amp; Talks</a>
-
-        <a href="#peer-review" class="cv-jump-link">Peer Review</a>
-
-        <a href="#certifications" class="cv-jump-link">Certifications</a>
-
-        <a href="#research-monograph" class="cv-jump-link">Book &amp; Research</a>
-
-        <a href="#teaching" class="cv-jump-link">Teaching &amp; Supervision</a>
-
-        <a href="#references" class="cv-jump-link">References</a>
-
-      </nav>
+      {render_page_menu_bar("cv")}
 
 
 
@@ -10693,6 +10792,7 @@ def generate_team_page():
 
 
 
+    team_nav_bar_html = render_page_menu_bar("team", counts={"all": total_count, "phd": phd_count, "master": master_count, "collaborator": collab_count})
     body_html = f"""
 
     <!-- Subpage Content: Research Team & Supervision Roster -->
@@ -10721,17 +10821,7 @@ def generate_team_page():
 
       <!-- Category Filter Controls -->
 
-      <div class="team-nav-pills" role="tablist" aria-label="Team Categories">
-
-        <button class="team-filter-pill active" onclick="filterTeam('all', this)" role="tab" aria-selected="true">✦ All Members ({total_count})</button>
-
-        <button class="team-filter-pill" onclick="filterTeam('phd', this)" role="tab" aria-selected="false">01. PhD Students ({phd_count})</button>
-
-        <button class="team-filter-pill" onclick="filterTeam('master', this)" role="tab" aria-selected="false">02. Master Students ({master_count})</button>
-
-        <button class="team-filter-pill" onclick="filterTeam('collaborator', this)" role="tab" aria-selected="false">03. Collaborators ({collab_count})</button>
-
-      </div>
+      {team_nav_bar_html}
 
 
 
