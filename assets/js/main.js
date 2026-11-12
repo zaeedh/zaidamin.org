@@ -2794,38 +2794,79 @@ function initTelemetryAccessTraceLogger() {
 
     
 
+    const currentPostId = traceParams.get('id') || traceParams.get('slug') || '';
+
+    function getAnonymousReaderId() {
+      try {
+        let rid = localStorage.getItem('zaidamin_reader_id');
+        if (rid) return rid;
+        let hex = '';
+        if (window.crypto && crypto.getRandomValues) {
+          const arr = new Uint8Array(3);
+          crypto.getRandomValues(arr);
+          hex = Array.from(arr, b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+        } else {
+          hex = Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0').toUpperCase();
+        }
+        rid = 'Reader-' + hex;
+        localStorage.setItem('zaidamin_reader_id', rid);
+        return rid;
+      } catch (e) {
+        return 'Reader-Anon';
+      }
+    }
+
+    function parseClientEnvironment() {
+      const ua = navigator.userAgent || '';
+      let browser = 'Browser';
+      if (/Edg\//i.test(ua)) browser = 'Microsoft Edge';
+      else if (/OPR\//i.test(ua) || /Opera/i.test(ua)) browser = 'Opera';
+      else if (/Chrome\//i.test(ua) && !/Chromium/i.test(ua)) browser = 'Google Chrome';
+      else if (/Firefox\//i.test(ua)) browser = 'Mozilla Firefox';
+      else if (/Safari\//i.test(ua) && !/Chrome\//i.test(ua)) browser = 'Apple Safari';
+
+      let os = 'Desktop OS';
+      if (/Windows NT/i.test(ua)) os = 'Windows';
+      else if (/Android/i.test(ua)) os = 'Android';
+      else if (/iPhone|iPad|iPod/i.test(ua)) os = 'iOS';
+      else if (/Mac OS X|Macintosh/i.test(ua)) os = 'macOS';
+      else if (/Linux/i.test(ua)) os = 'Linux';
+
+      let tz = '';
+      try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+      return {
+        browser,
+        os,
+        timezone: tz,
+        language: navigator.language || '',
+        screen: (window.screen && window.screen.width) ? `${window.screen.width}x${window.screen.height}` : ''
+      };
+    }
+
     // Helper to log a trace item
-
     function recordTrace(action, targetPath, targetTitle, meta = {}) {
-
       const country = sessionStorage.getItem('zaidamin_visitor_country') || 'MY';
-
       const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-
+      const env = parseClientEnvironment();
       const trace = {
-
         id: 'tr-' + Date.now(),
-
         timestamp: new Date().toISOString(),
-
         path: targetPath || cleanPath,
-
         title: targetTitle || document.title || 'Academic Portal',
-
         action: action || 'PAGE_VIEW',
-
+        post_id: meta.post_id || currentPostId || '',
+        visitor_id: getAnonymousReaderId(),
         country: country,
-
         country_name: country === 'MY' ? 'Malaysia' : (country === 'US' ? 'United States' : (country === 'GB' ? 'United Kingdom' : (country === 'SG' ? 'Singapore' : (country === 'AU' ? 'Australia' : (country === 'DE' ? 'Germany' : 'Global Visitor'))))),
-
         colo: 'KUL',
-
         device: isMobile ? 'Mobile' : 'Desktop',
-
+        browser: env.browser,
+        os: env.os,
+        timezone: env.timezone,
+        language: env.language,
+        screen: env.screen,
         referrer: document.referrer ? (document.referrer.includes(loc.hostname) ? 'Internal Navigation' : document.referrer) : 'Direct Navigation',
-
         ...meta
-
       };
 
 
