@@ -24,6 +24,8 @@ import html as _html_mod
 
 import math
 
+import urllib.parse
+
 
 
 def escape_html(val):
@@ -289,7 +291,34 @@ def get_page_browser_title(page_key, default_title=""):
 
 
 
-def get_html_head(title="Dr. Zaid Amin | Academic & Computational Researcher | zaidamin.org", description=""):
+def resolve_absolute_og_url(img_path: str) -> str:
+    """Resolve any image path to an absolute https://zaidamin.org non-WebP URL when possible."""
+    default_abs = "https://zaidamin.org/assets/images/og/default-og.jpg"
+    raw = (img_path or "").strip()
+    if not raw:
+        return default_abs
+    if raw.startswith("http://") or raw.startswith("https://"):
+        return default_abs
+    rel = raw.lstrip("/")
+    if rel.lower().endswith(".webp"):
+        stem = rel[:-5]
+        for ext in (".png", ".jpg", ".jpeg"):
+            if (BASE_DIR / (stem + ext)).exists():
+                rel = stem + ext
+                break
+    return f"https://zaidamin.org/{rel}"
+
+
+def get_html_head(
+    title="Dr. Zaid Amin | Academic & Computational Researcher | zaidamin.org",
+    description="",
+    canonical_url="https://zaidamin.org/",
+    og_type="website",
+    og_image="/assets/images/og/default-og.jpg",
+    og_image_width=1200,
+    og_image_height=630,
+    published_time="",
+):
 
     profile = load_json("profile.json")
 
@@ -334,6 +363,17 @@ def get_html_head(title="Dr. Zaid Amin | Academic & Computational Researcher | z
     if not description:
 
         description = profile["short_bio"]
+
+    esc_title = escape_html(title)
+    esc_desc = escape_html(description)
+    esc_canonical = escape_html(canonical_url or "https://zaidamin.org/")
+    abs_og_img = og_image if str(og_image).startswith("http") else resolve_absolute_og_url(og_image)
+    esc_og_img = escape_html(abs_og_img)
+    article_meta_tags = ""
+    if og_type == "article":
+        if published_time:
+            article_meta_tags += f'\n  <meta property="article:published_time" content="{escape_html(published_time)}">'
+        article_meta_tags += f'\n  <meta property="article:author" content="{escape_html(profile["social_links"]["linkedin"])}">'
 
 
 
@@ -411,25 +451,43 @@ def get_html_head(title="Dr. Zaid Amin | Academic & Computational Researcher | z
 
   </script>
 
-  <title>{title}</title>
+  <title>{esc_title}</title>
 
-  <meta name="description" content="{description}">
+  <meta name="description" content="{esc_desc}">
 
   <meta name="author" content="Dr. Zaid Amin">
 
-  <link rel="canonical" href="https://zaidamin.org/">
+  <link rel="canonical" href="{esc_canonical}">
 
 
 
-  <!-- Open Graph -->
+  <!-- Open Graph & LinkedIn / Twitter Social Card -->
 
-  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dr. Zaid Amin | zaidamin.org">
 
-  <meta property="og:url" content="https://zaidamin.org/">
+  <meta property="og:type" content="{escape_html(og_type)}">
 
-  <meta property="og:title" content="{title}">
+  <meta property="og:url" content="{esc_canonical}">
 
-  <meta property="og:description" content="{description}">
+  <meta property="og:title" content="{esc_title}">
+
+  <meta property="og:description" content="{esc_desc}">
+
+  <meta property="og:image" content="{esc_og_img}">
+
+  <meta property="og:image:secure_url" content="{esc_og_img}">
+
+  <meta property="og:image:width" content="{int(og_image_width)}">
+
+  <meta property="og:image:height" content="{int(og_image_height)}">{article_meta_tags}
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="twitter:title" content="{esc_title}">
+
+  <meta name="twitter:description" content="{esc_desc}">
+
+  <meta name="twitter:image" content="{esc_og_img}">
 
 
 
@@ -2286,7 +2344,7 @@ def get_spotlight_card_html():
 
         year_str = f"{date_str} &bull; {read_time}"
 
-        url = f"article.html?id={item.get('id', '')}"
+        url = f"/article/{item.get('id', '')}"
 
         raw_desc = item.get("excerpt", item.get("content", ""))
 
@@ -2796,7 +2854,7 @@ def get_portals_tray_carousel_html():
 
             'btn_text': 'Read',
 
-            'btn_url': f"article.html?id={a.get('id', '')}",
+            'btn_url': f"/article/{a.get('id', '')}",
 
             'is_external': False
 
@@ -5825,7 +5883,7 @@ def generate_research_page():
 
           <!-- Small Thumbnail Frame (Golden Ratio Harmonic Proportion) -->
 
-          <a href="/article?id={slug}" class="article-card-thumb-wrap" aria-label="{escaped_title}">
+          <a href="/article/{slug}" class="article-card-thumb-wrap" aria-label="{escaped_title}">
 
             <img src="{img_url}" alt="{escaped_title}" class="article-card-thumb" loading="lazy" onerror="this.onerror=null; this.src=\'assets/images/thumb-research.jpg\';">
 
@@ -5855,7 +5913,7 @@ def generate_research_page():
 
             <h3 class="article-card-title font-cinzel">
 
-              <a href="/article?id={slug}">{title}</a>
+              <a href="/article/{slug}">{title}</a>
 
             </h3>
 
@@ -5869,7 +5927,7 @@ def generate_research_page():
 
           <div class="article-card-action">
 
-            <a href="/article?id={slug}" class="article-card-btn font-cinzel">
+            <a href="/article/{slug}" class="article-card-btn font-cinzel">
 
               <span>Read Essay</span>
 
@@ -9949,9 +10007,143 @@ def generate_articles_hub_page():
 
 """
 
-def generate_article_reader_page():
+def _find_local_article_source_image(img_path: str):
+    """Locate a crisp local non-WebP raster image path on disk for an article."""
+    raw = (img_path or "").strip()
+    if not raw or raw.startswith("http://") or raw.startswith("https://"):
+        return None
+    rel = raw.lstrip("/")
+    p = BASE_DIR / rel
+    if p.suffix.lower() == ".webp":
+        stem = p.with_suffix("")
+        for ext in (".png", ".jpg", ".jpeg"):
+            cand = Path(str(stem) + ext)
+            if cand.exists():
+                return cand
+    if p.exists() and p.suffix.lower() in (".png", ".jpg", ".jpeg", ".webp"):
+        return p
+    return None
 
-    html = get_html_head("Article Reader | Dr. Zaid Amin | zaidamin.org", "Read scholarly essays, research commentaries, and educational discourse by Dr. Zaid Amin.")
+
+def _compose_og_jpeg(src_path: Path, out_path: Path):
+    """Render a 1200x630 Open Graph JPEG card (dark obsidian matte for light diagrams, full-bleed for photos)."""
+    try:
+        from PIL import Image, ImageDraw, ImageOps
+    except ImportError:
+        return False
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    if out_path.exists() and out_path.stat().st_mtime >= src_path.stat().st_mtime:
+        return True
+
+    with Image.open(src_path) as im:
+        rgb = im.convert("RGB")
+        w, h = rgb.size
+        corners = [
+            rgb.getpixel((2, 2)),
+            rgb.getpixel((max(0, w - 3), 2)),
+            rgb.getpixel((2, max(0, h - 3))),
+            rgb.getpixel((max(0, w - 3), max(0, h - 3))),
+        ]
+        avg_brightness = sum(sum(c) / 3.0 for c in corners) / len(corners)
+        ratio = w / max(1, h)
+        is_diagram_or_tall = avg_brightness >= 205 or ratio < 1.35 or ratio > 2.4
+
+        if is_diagram_or_tall:
+            canvas = Image.new("RGB", (1200, 630), (4, 13, 26))
+            fitted = ImageOps.contain(rgb, (1120, 566), method=Image.Resampling.LANCZOS)
+            fx, fy = fitted.size
+            ox = (1200 - fx) // 2
+            oy = (630 - fy) // 2
+            canvas.paste(fitted, (ox, oy))
+            draw = ImageDraw.Draw(canvas)
+            draw.rectangle([18, 18, 1181, 611], outline=(212, 175, 55), width=2)
+            draw.rectangle([ox - 1, oy - 1, ox + fx, oy + fy], outline=(56, 189, 248), width=1)
+        else:
+            canvas = ImageOps.fit(rgb, (1200, 630), method=Image.Resampling.LANCZOS)
+
+        canvas.save(out_path, format="JPEG", quality=90, optimize=True)
+    return True
+
+
+def ensure_og_social_cards(articles_list):
+    """Build cached 1200x630 Open Graph cards in assets/images/og/ when Pillow is available locally."""
+    og_dir = ASSETS_DIR / "images" / "og"
+    default_src = BASE_DIR / "assets" / "images" / "spotlight-smart-cities.jpg"
+    if default_src.exists():
+        _compose_og_jpeg(default_src, og_dir / "default-og.jpg")
+
+    for art in (articles_list or []):
+        slug = (art.get("id") or "").strip()
+        if not slug:
+            continue
+        src = _find_local_article_source_image(art.get("image", ""))
+        if src is not None:
+            _compose_og_jpeg(src, og_dir / f"{slug}.jpg")
+
+
+def resolve_article_og_image(article) -> str:
+    """Pick the best absolute HTTPS 1200x630 Open Graph image URL for a given article."""
+    slug = (article.get("id") or "").strip() if isinstance(article, dict) else ""
+    if slug and (ASSETS_DIR / "images" / "og" / f"{slug}.jpg").exists():
+        return f"https://zaidamin.org/assets/images/og/{slug}.jpg"
+    if isinstance(article, dict):
+        src = _find_local_article_source_image(article.get("image", ""))
+        if src is not None and src.suffix.lower() in (".png", ".jpg", ".jpeg"):
+            rel = src.relative_to(BASE_DIR).as_posix()
+            return f"https://zaidamin.org/{rel}"
+    if (ASSETS_DIR / "images" / "og" / "default-og.jpg").exists():
+        return "https://zaidamin.org/assets/images/og/default-og.jpg"
+    return "https://zaidamin.org/assets/images/spotlight-smart-cities.jpg"
+
+
+def generate_article_reader_page(preloaded_article=None):
+
+    if isinstance(preloaded_article, dict) and preloaded_article.get("id"):
+        slug = str(preloaded_article["id"]).strip()
+        raw_title = str(preloaded_article.get("title") or "Scholarly Article").strip()
+        raw_desc = str(preloaded_article.get("excerpt") or "Read scholarly essays, research commentaries, and educational discourse by Dr. Zaid Amin.").strip()
+        raw_desc = re.sub(r"\s+", " ", raw_desc)[:260]
+        raw_cat = str(preloaded_article.get("category") or "Article").strip()
+        raw_time = str(preloaded_article.get("reading_time") or "5 min read").strip()
+        raw_date = str(preloaded_article.get("date") or "2026").strip()
+        page_title = f"{raw_title} | Dr. Zaid Amin"
+        canonical_url = f"https://zaidamin.org/article/{slug}"
+        og_img = resolve_article_og_image(preloaded_article)
+        html = get_html_head(
+            title=page_title,
+            description=raw_desc,
+            canonical_url=canonical_url,
+            og_type="article",
+            og_image=og_img,
+            og_image_width=1200,
+            og_image_height=630,
+            published_time=raw_date,
+        )
+        ssr_title = escape_html(raw_title)
+        ssr_cat = "&#10022; " + escape_html(raw_cat)
+        ssr_time = escape_html(raw_time)
+        ssr_date = "Published &bull; " + escape_html(raw_date)
+        preloaded_id_json = json.dumps(slug)
+        ssr_li_href = f"https://www.linkedin.com/sharing/share-offsite/?url={urllib.parse.quote(canonical_url, safe='')}"
+        ssr_x_href = f"https://twitter.com/intent/tweet?text={urllib.parse.quote(raw_title, safe='')}&url={urllib.parse.quote(canonical_url, safe='')}"
+    else:
+        html = get_html_head(
+            "Article Reader | Dr. Zaid Amin | zaidamin.org",
+            "Read scholarly essays, research commentaries, and educational discourse by Dr. Zaid Amin.",
+            canonical_url="https://zaidamin.org/article",
+            og_type="article",
+            og_image="https://zaidamin.org/assets/images/og/default-og.jpg",
+            og_image_width=1200,
+            og_image_height=630,
+        )
+        ssr_title = "Loading Article..."
+        ssr_cat = "&#10022; Article"
+        ssr_time = "5 min read"
+        ssr_date = "Published &bull; 2026"
+        preloaded_id_json = "null"
+        ssr_li_href = "#"
+        ssr_x_href = "#"
 
     html += get_page_header("articles")
 
@@ -9963,9 +10155,15 @@ def generate_article_reader_page():
 
       (async function() {
 
+        const PRELOADED_ARTICLE_ID = __PRELOADED_ARTICLE_ID__;
+
         const params = new URLSearchParams(window.location.search);
 
-        const articleId = params.get('id');
+        const cleanPath = window.location.pathname.replace(/\\/+$/, '');
+
+        const pathSlug = cleanPath.startsWith('/article/') ? decodeURIComponent(cleanPath.slice('/article/'.length).split('/')[0]) : '';
+
+        const articleId = params.get('id') || pathSlug || PRELOADED_ARTICLE_ID;
 
 
 
@@ -10273,7 +10471,12 @@ def generate_article_reader_page():
 
 
 
-            const pageUrl = encodeURIComponent(window.location.href);
+            const shareOrigin = (window.location.hostname === 'zaidamin.org') ? window.location.origin : 'https://zaidamin.org';
+            const canonicalUrl = shareOrigin + '/article/' + encodeURIComponent(article.id);
+            window.__canonicalArticleUrl = canonicalUrl;
+            window.__currentArticleObj = article;
+
+            const pageUrl = encodeURIComponent(canonicalUrl);
 
             const titleEnc = encodeURIComponent(article.title);
 
@@ -10306,14 +10509,49 @@ def generate_article_reader_page():
 
 
       function copyArticleLink() {
-        navigator.clipboard.writeText(window.location.href).then(() => {
+        const targetUrl = window.__canonicalArticleUrl || window.location.href;
+        navigator.clipboard.writeText(targetUrl).then(() => {
           const btn = document.getElementById('copy-btn-text');
           if (btn) {
             btn.textContent = 'Copied!';
             setTimeout(() => { btn.textContent = 'Copy Link'; }, 2500);
           }
         }).catch(() => {
-          prompt('Copy article link:', window.location.href);
+          prompt('Copy article link:', targetUrl);
+        });
+      }
+
+      function copyLinkedInPost() {
+        const art = window.__currentArticleObj || {};
+        const url = window.__canonicalArticleUrl || window.location.href;
+        const title = art.title || (document.getElementById('reader-title') ? document.getElementById('reader-title').textContent : 'New Research Essay');
+        const excerpt = (art.excerpt || '').trim();
+        const readTime = art.reading_time || '5 min read';
+        const rawTags = Array.isArray(art.tags) ? art.tags : [];
+        const hashtags = rawTags
+          .map(t => '#' + String(t).replace(/[^a-zA-Z0-9]+/g, ''))
+          .filter(t => t.length > 2)
+          .slice(0, 5);
+        if (!hashtags.includes('#AcademicResearch')) hashtags.push('#AcademicResearch');
+        const postLines = [
+          title,
+          '',
+          excerpt ? excerpt : 'Reflections and empirical findings from our latest research.',
+          '',
+          'Read the full essay (' + readTime + '):',
+          url,
+          '',
+          hashtags.join(' ')
+        ];
+        const postText = postLines.join('\\n');
+        navigator.clipboard.writeText(postText).then(() => {
+          const btn = document.getElementById('copy-li-post-text');
+          if (btn) {
+            btn.textContent = 'Post Copied!';
+            setTimeout(() => { btn.textContent = 'Copy LinkedIn Post'; }, 2600);
+          }
+        }).catch(() => {
+          prompt('Copy ready-to-post LinkedIn text:', postText);
         });
       }
 
@@ -10358,7 +10596,7 @@ def generate_article_reader_page():
       });
     </script>
 
-"""
+""".replace("__PRELOADED_ARTICLE_ID__", preloaded_id_json)
 
 
 
@@ -10376,8 +10614,8 @@ def generate_article_reader_page():
       <header class="article-reader-hero">
         <div class="article-hero-kicker-row">
           <div class="article-kicker-left">
-            <span class="article-badge-cat" id="reader-cat">&#10022; Article</span>
-            <span class="article-time-badge" id="reader-time">5 min read</span>
+            <span class="article-badge-cat" id="reader-cat">{ssr_cat}</span>
+            <span class="article-time-badge" id="reader-time">{ssr_time}</span>
           </div>
           <a href="/research#articles" class="article-back-link font-cinzel" title="Return to Activity &amp; Project Hub">
             <svg class="back-arrow-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
@@ -10387,7 +10625,7 @@ def generate_article_reader_page():
 
 
 
-        <h1 class="article-reader-title" id="reader-title">Loading Article...</h1>
+        <h1 class="article-reader-title" id="reader-title">{ssr_title}</h1>
 
 
 
@@ -10407,7 +10645,7 @@ def generate_article_reader_page():
 
               <div class="article-author-name">Dr. Zaid Amin</div>
 
-              <div class="article-pub-date" id="reader-date">Published &bull; 2026</div>
+              <div class="article-pub-date" id="reader-date">{ssr_date}</div>
 
             </div>
 
@@ -10417,7 +10655,7 @@ def generate_article_reader_page():
 
           <div class="article-share-group">
 
-            <button class="article-share-btn" onclick="copyArticleLink()" title="Copy Link to Clipboard">
+            <button class="article-share-btn" onclick="copyArticleLink()" title="Copy Canonical Share Link to Clipboard">
 
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
 
@@ -10425,13 +10663,19 @@ def generate_article_reader_page():
 
             </button>
 
-            <a href="#" id="share-linkedin" target="_blank" rel="noopener" class="article-share-btn" title="Share on LinkedIn">
+            <button class="article-share-btn" onclick="copyLinkedInPost()" title="Copy Formatted LinkedIn Post + Link">
+
+              <span id="copy-li-post-text">Copy LinkedIn Post</span>
+
+            </button>
+
+            <a href="{ssr_li_href}" id="share-linkedin" target="_blank" rel="noopener" class="article-share-btn" title="Share on LinkedIn">
 
               <span>LinkedIn &nearr;</span>
 
             </a>
 
-            <a href="#" id="share-x" target="_blank" rel="noopener" class="article-share-btn" title="Share on X (Twitter)">
+            <a href="{ssr_x_href}" id="share-x" target="_blank" rel="noopener" class="article-share-btn" title="Share on X (Twitter)">
 
               <span>X &nearr;</span>
 
@@ -11456,6 +11700,9 @@ def build_all():
 
     DIST_DIR.mkdir(parents=True, exist_ok=True)
 
+    articles_data = load_json("articles.json") if (DATA_DIR / "articles.json").exists() else []
+    ensure_og_social_cards(articles_data)
+
 
 
     pages = {
@@ -11594,6 +11841,20 @@ def build_all():
             f.write(page_content)
 
 
+
+    # Generate Static Per-Article Clean Routes with Dedicated Open Graph Tags (/article/<slug>/)
+    article_routes_count = 0
+    for art in articles_data:
+        slug = str(art.get("id") or "").strip()
+        if not slug or "/" in slug or "\\" in slug:
+            continue
+        art_html = normalize_asset_paths(generate_article_reader_page(preloaded_article=art))
+        art_route_dir = DIST_DIR / "article" / slug
+        art_route_dir.mkdir(parents=True, exist_ok=True)
+        with open(art_route_dir / "index.html", "w", encoding="utf-8") as f:
+            f.write(art_html)
+        article_routes_count += 1
+    print(f"  Compiled: {article_routes_count} per-article OpenGraph routes (/article/<slug>/)")
 
     # Copy CNAME, favicon, BibTeX, site.webmanifest
 
