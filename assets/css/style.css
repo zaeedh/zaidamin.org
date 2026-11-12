@@ -14501,9 +14501,17 @@ a {
 
 .article-reader-body p {
 
-  margin: 0 0 1.55em 0;
+  margin: 0 0 1.25em 0;
 
   color: #e2e8f0;
+
+}
+
+.article-reader-body p:empty {
+
+  display: none;
+
+  margin: 0;
 
 }
 
@@ -14563,7 +14571,7 @@ a {
 
   color: #ffffff;
 
-  margin: 2.2em 0 0.8em 0;
+  margin: 1.75em 0 0.65em 0;
 
   padding-bottom: 8px;
 
@@ -14572,6 +14580,13 @@ a {
   letter-spacing: 0.01em;
 
   line-height: 1.35;
+
+}
+
+.article-reader-body ul + h2,
+.article-reader-body ol + h2 {
+
+  margin-top: 1.45em;
 
 }
 
@@ -14587,7 +14602,7 @@ a {
 
   color: #fef08a;
 
-  margin: 1.7em 0 0.55em 0;
+  margin: 1.45em 0 0.5em 0;
 
   line-height: 1.4;
 
@@ -15241,7 +15256,7 @@ a {
 
 .article-reader-body ol {
 
-  margin: 0 0 1.55em 1.55em;
+  margin: 0.25em 0 1.25em 1.55em;
 
   padding: 0;
 
@@ -15251,11 +15266,23 @@ a {
 
 .article-reader-body li {
 
-  margin-bottom: 0.55em;
+  margin-bottom: 0.45em;
 
   color: #e2e8f0;
 
   line-height: 1.75;
+
+}
+
+.article-reader-body li:last-child {
+
+  margin-bottom: 0;
+
+}
+
+.article-reader-body li > br:last-child {
+
+  display: none;
 
 }
 

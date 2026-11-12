@@ -775,6 +775,39 @@
 
             bodyElem.innerHTML = rawHtml;
 
+            // 0-Pre. Normalize legacy trailing <br> in list items and empty spacer <p><br></p>
+            (function normalizeReaderSpacing(root) {
+              if (!root) return;
+              root.querySelectorAll('span > p').forEach(function(innerP) {
+                var span = innerP.parentElement;
+                if (span && span.tagName === 'SPAN' && span.parentNode) {
+                  span.parentNode.insertBefore(innerP, span);
+                  if (!span.innerHTML.trim()) span.remove();
+                }
+              });
+              root.querySelectorAll('li, h1, h2, h3, h4, blockquote, p').forEach(function(el) {
+                while (el.lastChild && (
+                  (el.lastChild.nodeType === 3 && !el.lastChild.nodeValue.split(String.fromCharCode(160)).join('').trim()) ||
+                  (el.lastChild.nodeType === 1 && el.lastChild.tagName === 'BR')
+                )) {
+                  el.lastChild.remove();
+                }
+              });
+              var blockTags = { UL:1, OL:1, H1:1, H2:1, H3:1, H4:1, H5:1, H6:1, FIGURE:1, BLOCKQUOTE:1, HR:1, TABLE:1, P:1 };
+              root.querySelectorAll('p').forEach(function(p) {
+                if (p.querySelector('img, figure, iframe, svg, video, canvas, table, hr')) return;
+                var txt = (p.textContent || '').split(String.fromCharCode(160)).join('').trim();
+                if (txt.length > 0) return;
+                var prev = p.previousElementSibling;
+                var next = p.nextElementSibling;
+                var nearBlock = (prev && (blockTags[prev.tagName] || prev.classList.contains('tr-caption-container') || prev.classList.contains('callout-box'))) ||
+                                (next && (blockTags[next.tagName] || next.classList.contains('tr-caption-container') || next.classList.contains('callout-box')));
+                if (nearBlock || !prev || !next) {
+                  p.remove();
+                }
+              });
+            })(bodyElem);
+
             // 0A. Harmonize all scholarly captions to Inter typography standard
             bodyElem.querySelectorAll('.figure-caption, .tr-caption, .table-caption, figcaption').forEach(function(cap) {
               cap.style.setProperty('font-family', "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif", 'important');
