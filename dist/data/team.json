@@ -132,18 +132,18 @@
   ],
   "master_students": [
     {
-      "no": 1,
       "name": "Rashmi Dilshani Jayasekara",
-      "student_id": "I26042160",
-      "program": "Master in Information System",
       "role": "Main Supervisor",
       "period": "2026-2028",
-      "thesis_title": "A Governance Framework for Privacy-Preserving Federated Biometric Authentication in Regulated Environments: Addressing Identical-Twin Differentiation.",
-      "status": "Prepare for Proposal Defense",
-      "photo": "/assets/images/team/student_10.svg",
-      "photo_num": 10,
+      "badge": "Postgraduate Scholar",
+      "photo": "assets/images/uploads/team_rashm.png",
+      "student_id": "I26042160",
       "degree": "Master in Information System",
-      "badge": "Postgraduate Scholar"
+      "program": "Master in Information System",
+      "status": "Prepare for Proposal Defense",
+      "thesis_title": "A Governance Framework for Privacy-Preserving Federated Biometric Authentication in Regulated Environments: Addressing Identical-Twin Differentiation.",
+      "photo_num": 10,
+      "no": 1
     },
     {
       "no": 2,
