@@ -216,18 +216,18 @@
       "badge": "Postgraduate Scholar"
     },
     {
-      "no": 7,
       "name": "Khin Myat Noe",
-      "student_id": "I25037705",
-      "program": "Master in Data Science",
       "role": "Main Supervisor",
       "period": "2025-2027",
-      "thesis_title": "Evaluating Small Language Models for Safe and Feasible Transation of Tuberculosis Guidelines in Low-Resource Settings",
-      "status": "Prepare for Proposal Defense",
-      "photo": "/assets/images/team/student_16.svg",
-      "photo_num": 16,
+      "badge": "Postgraduate Scholar",
+      "photo": "assets/images/uploads/team_khin.png",
+      "student_id": "I25037705",
       "degree": "Master in Data Science",
-      "badge": "Postgraduate Scholar"
+      "program": "Master in Data Science",
+      "status": "Prepare for Proposal Defense",
+      "thesis_title": "Evaluating Small Language Models for Safe and Feasible Transation of Tuberculosis Guidelines in Low-Resource Settings",
+      "photo_num": 16,
+      "no": 7
     },
     {
       "no": 8,
