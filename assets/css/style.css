@@ -20775,14 +20775,13 @@ mark {
 }
 
 .pub-pure-title {
-  font-family: var(--font-serif, 'Newsreader', Georgia, serif);
-  font-size: 1.85rem;
-  font-weight: 600;
-  color: #f8fafc;
-  letter-spacing: normal;
-  margin: 0 0 8px;
-  line-height: 1.3;
-  text-transform: none;
+  font-family: 'Cinzel', Georgia, serif !important;
+  font-size: 1.68rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  letter-spacing: 0.025em !important;
+  margin: 0 0 8px !important;
+  line-height: 1.32 !important;
 }
 
 .pub-pure-gold-line {
@@ -20966,21 +20965,20 @@ mark {
   white-space: nowrap;
 }
 
-/* Scholarly Publication Title (Serif, Title Case, High Legibility) */
+/* Scholarly Publication Title: Consistent Classical Roman Cinzel (Matching Explore Research Monographs & Chapters) */
 .pub-strip-title {
-  font-family: var(--font-serif, 'Newsreader', Georgia, serif) !important;
-  font-size: 1.25rem !important;
-  font-weight: 600 !important;
-  color: #f8fafc !important;
-  line-height: 1.4 !important;
-  margin: 0 !important;
-  letter-spacing: normal !important;
-  text-transform: none !important;
+  font-family: 'Cinzel', Georgia, serif !important;
+  font-size: 1.16rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  line-height: 1.42 !important;
+  margin: 0 0 6px 0 !important;
+  letter-spacing: 0.025em !important;
   transition: color 0.2s ease;
 }
 
 .pub-strip-card:hover .pub-strip-title {
-  color: #e2e8f0 !important;
+  color: #fef08a !important;
 }
 
 /* CV & Distinction Card Titles: Consistent Classical Roman Cinzel (Matching Section Headings) */
@@ -21172,14 +21170,24 @@ mark {
   line-height: 1;
 }
 
-/* Book cards title typography */
+/* Book cards title typography: Consistent with Explore Research Monographs & Chapters */
 .bokify-card-title {
-  font-family: var(--font-serif, 'Newsreader', Georgia, serif) !important;
-  font-size: 1.18rem !important;
-  font-weight: 600 !important;
-  text-transform: none !important;
-  letter-spacing: normal !important;
-  line-height: 1.35 !important;
+  font-family: 'Cinzel', Georgia, serif !important;
+  font-size: 1.12rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  letter-spacing: 0.025em !important;
+  line-height: 1.38 !important;
+  margin: 0 0 8px 0 !important;
+  transition: color 0.2s ease;
+}
+
+.bokify-shelf-card:hover .bokify-card-title {
+  color: #fef08a !important;
+}
+
+.bokify-card-divider {
+  display: none !important;
 }
 
 

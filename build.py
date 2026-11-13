@@ -4397,6 +4397,15 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
         publisher = get_publisher(venue, doi, pub.get("publisher"))
 
+        clean_series_label = ""
+        if series_text:
+            st_clean = str(series_text).strip()
+            st_lower = st_clean.lower()
+            if st_lower in ("on process", "in preparation"):
+                clean_series_label = '<div class="bokify-card-series" style="color: var(--brand-gold); font-size: 0.82rem; font-style: italic; margin-bottom: 8px;">Monograph in Preparation</div>'
+            elif st_lower != str(publisher).strip().lower() and st_lower not in ("#", "none", "academic publication", ""):
+                clean_series_label = f'<div class="bokify-card-series" style="font-size: 0.82rem; color: #94a3b8; font-style: italic; margin-bottom: 8px;">{st_clean}</div>'
+
         excerpt = clean_excerpt_fn(pub.get("abstract", "") or pub.get("excerpt", ""), max_len=150)
 
         escaped_title = _html_mod.escape(pub["title"])
@@ -4510,7 +4519,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
         else:
             doi_html = ""
 
-        isbn_html = f'<div class="bokify-card-doi bokify-card-isbn"><span class="bokify-doi-val">ISBN: {isbn}</span></div>' if isbn else ""
+        isbn_html = f'<div class="bokify-card-doi bokify-card-isbn"><span class="bokify-doi-val">ISBN: {isbn}</span></div>' if (isbn and "on process" not in str(isbn).lower() and str(isbn).strip() != "#") else ""
 
 
 
@@ -4576,11 +4585,8 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
 
 
-            <h4 class="bokify-card-title">{clean_academic_title(pub["title"])}</h4>
-
-            <div class="bokify-card-series">{series_text}</div>
-
-            <div class="bokify-card-divider"></div>
+            <h4 class="bokify-card-title font-cinzel">{clean_academic_title(pub["title"])}</h4>
+            {clean_series_label}
 
             {f'<p class="bokify-card-excerpt">{excerpt}</p>' if excerpt else ''}
 
@@ -5542,8 +5548,8 @@ def generate_publications_page():
                     {featured_pill}
                   </div>
 
-                  <!-- Row 2: Publication Title in Scholar Serif -->
-                  <h3 class="pub-strip-title">{escaped_title}</h3>
+                  <!-- Row 2: Publication Title in Consistent Cinzel Roman Serif -->
+                  <h3 class="pub-strip-title font-cinzel">{escaped_title}</h3>
                   
                   <!-- Row 3: Citation Authors & DOI -->
                   <div class="pub-strip-citation-line">
@@ -5590,7 +5596,7 @@ def generate_publications_page():
                 <span class="pub-section-kicker-dot">&bull;</span>
                 <span class="pub-section-kicker-meta">{metrics_str}</span>
               </div>
-              <h2 class="pub-pure-title">{cat['title']}</h2>
+              <h2 class="pub-pure-title font-cinzel">{cat['title']}</h2>
               <p class="pub-pure-desc">{cat['description']}</p>
             </div>
           </header>
