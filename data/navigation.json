@@ -30,7 +30,7 @@
       "dropdown_items": [
         {
           "id": "team",
-          "label": "Research Team",
+          "label": "Research Team & Supervision",
           "url": "research-team.html",
           "target": "_self",
           "icon": "",
