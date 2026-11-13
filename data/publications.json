@@ -31,17 +31,18 @@
   },
   {
     "id": "amin2026srivijayapedia",
-    "title": "SRIVIJAYAPEDIA: A DIGITAL PLATFORM FOR CULTURAL HERITAGE PRESERVATION OF THE SRIVIJAYA CIVILIZATION",
+    "title": "Srivijayapedia: A Digital Platform for Cultural Heritage Preservation of the Srivijaya Civilization",
     "category": "Journal",
     "venue": "Journal of Information System and Technology Management",
     "year": 2026,
-    "doi": "https://doi.org/10.35631/JISTM.1142003",
+    "doi": "10.35631/JISTM.1142003",
     "citations": "",
     "authors": "Dr. Zaid Amin et al.",
     "abstract": "Research addressing srivijayapedia: a digital platform for cultural heritage preservation of the srivijaya civilization through empirical computational methodologies, behavioral analytics, and human-centered design frameworks.",
     "image": "/assets/images/uploads/srivijayapedia.png",
     "featured": false,
-    "bibtex": "@article{amin2026srivijayapedia,\n  author    = {Zaid Amin and collaborators},\n  title     = {{SRIVIJAYAPEDIA: A DIGITAL PLATFORM FOR CULTURAL HERITAGE PRESERVATION OF THE SRIVIJAYA CIVILIZATION}},\n  year      = {2026},\n  journal   = {Journal of Information System and Technology Management},\n  doi       = {10.35631/JISTM.1142003},\n  url       = {https://doi.org/10.35631/JISTM.1142003}\n}"
+    "bibtex": "@article{amin2026srivijayapedia,\n  author    = {Zaid Amin and collaborators},\n  title     = {{SRIVIJAYAPEDIA: A DIGITAL PLATFORM FOR CULTURAL HERITAGE PRESERVATION OF THE SRIVIJAYA CIVILIZATION}},\n  year      = {2026},\n  journal   = {Journal of Information System and Technology Management},\n  doi       = {10.35631/JISTM.1142003},\n  url       = {https://doi.org/10.35631/JISTM.1142003}\n}",
+    "url": "https://doi.org/10.35631/JISTM.1142003"
   },
   {
     "id": "amin2026the",
@@ -264,7 +265,7 @@
   },
   {
     "id": "amin2017pengembangan",
-    "title": "PENGEMBANGAN APLIKASI SISTEM MANAJEMEN DOKUMEN ELEKTRONIK BERORIENTASI STANDAR BORANG AKREDITASI BAN PT",
+    "title": "Pengembangan Aplikasi Sistem Manajemen Dokumen Elektronik Berorientasi Standar Borang Akreditasi BAN-PT",
     "authors": "Dr. Zaid Amin et al.",
     "year": 2017,
     "category": "Conference",
@@ -348,7 +349,7 @@
   },
   {
     "id": "amin2014simulasi",
-    "title": "SIMULASI DAN PERANCANGAN KEAMANAN AUTENTIKASI JARINGAN HIRARKI LINK AGGREGATION CONTROL PROTOCOL (LACP) BERBASIS ROUTER CISCO",
+    "title": "Simulasi dan Perancangan Keamanan Autentikasi Jaringan Hirarki Link Aggregation Control Protocol (LACP) Berbasis Router Cisco",
     "authors": "Dr. Zaid Amin et al.",
     "year": 2014,
     "category": "Conference",

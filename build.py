@@ -4174,6 +4174,40 @@ import html as _html_mod
 
 
 
+
+def clean_academic_title(title_str):
+    """Convert shouting uppercase titles into standard scholarly Title Case, preserving acronyms"""
+    if not title_str:
+        return ""
+    if title_str.isupper() or (len(title_str) > 20 and sum(1 for c in title_str if c.isupper()) / len(title_str) > 0.5):
+        acronyms = {'AI', 'HCI', 'IEEE', 'MDPI', 'JISTM', 'LNCS', 'SSRN', 'COVID-19', 'DOI', 'ISBN', 'UI', 'ML', 'API', 'IT', 'PI', 'Q1', 'BAN-PT', 'BAN', 'PT', 'LACP', 'CISCO', 'VR', 'AR'}
+        lowercase_words = {'a', 'an', 'the', 'and', 'but', 'or', 'for', 'nor', 'on', 'at', 'to', 'from', 'by', 'of', 'in', 'et', 'al', 'dan', 'di', 'ke', 'dari', 'yang', 'untuk', 'pada', 'berbasis'}
+        words = title_str.split()
+        capitalized = []
+        for i, orig_w in enumerate(words):
+            prefix = ""
+            suffix = ""
+            w = orig_w
+            m_pre = re.match(r'^([^a-zA-Z0-9]+)', w)
+            if m_pre:
+                prefix = m_pre.group(1)
+                w = w[len(prefix):]
+            m_suf = re.search(r'([^a-zA-Z0-9]+)$', w)
+            if m_suf:
+                suffix = m_suf.group(1)
+                w = w[:-len(suffix)]
+            w_upper = w.upper()
+            w_lower = w.lower()
+            if w_upper in acronyms:
+                cw = w_upper
+            elif i > 0 and w_lower in lowercase_words and not (capitalized and capitalized[-1].endswith(':')):
+                cw = w_lower
+            else:
+                cw = w.capitalize()
+            capitalized.append(f"{prefix}{cw}{suffix}")
+        return ' '.join(capitalized)
+    return title_str
+
 def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_download_pill_fn, clean_excerpt_fn, html_mod):
 
     """
@@ -4350,7 +4384,10 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
         if not url and doi and is_link_active:
 
-            url = f"https://doi.org/{doi}"
+            if doi.startswith("http://") or doi.startswith("https://"):
+                url = doi
+            else:
+                url = f"https://doi.org/{doi}"
 
 
 
@@ -4462,9 +4499,18 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
 
 
-        doi_html = f'<div class="bokify-card-doi"><span class="bokify-doi-lbl">DOI/ISBN/LINK:</span> {doi_content}</div>'
+        if doi_val and "on process" not in doi_val.lower() and doi_val != "#":
+            if doi_val.startswith("http"):
+                clean_d = doi_val.replace("https://doi.org/", "").replace("http://doi.org/", "")
+                doi_html = f'<div class="bokify-card-doi"><a href="{doi_val}" target="_blank" rel="noopener" class="bokify-doi-link">doi:{clean_d} &nearr;</a></div>'
+            elif "/" in doi_val:
+                doi_html = f'<div class="bokify-card-doi"><a href="https://doi.org/{doi_val}" target="_blank" rel="noopener" class="bokify-doi-link">doi:{doi_val} &nearr;</a></div>'
+            else:
+                doi_html = f'<div class="bokify-card-doi"><span class="bokify-doi-val">doi:{doi_val}</span></div>'
+        else:
+            doi_html = ""
 
-        isbn_html = f'<div class="bokify-card-doi bokify-card-isbn"><span class="bokify-doi-lbl">ISBN:</span> <span class="bokify-doi-val">{isbn}</span></div>' if isbn else ""
+        isbn_html = f'<div class="bokify-card-doi bokify-card-isbn"><span class="bokify-doi-val">ISBN: {isbn}</span></div>' if isbn else ""
 
 
 
@@ -4530,7 +4576,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
 
 
-            <h4 class="bokify-card-title font-cinzel">{pub["title"]}</h4>
+            <h4 class="bokify-card-title">{clean_academic_title(pub["title"])}</h4>
 
             <div class="bokify-card-series">{series_text}</div>
 
@@ -4846,7 +4892,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
 
 
-            <h4 class="bokify-card-title font-cinzel bokify-wireframe-title">{p_title}</h4>
+            <h4 class="bokify-card-title bokify-wireframe-title">{p_title}</h4>
 
             <div class="bokify-card-series" style="color: #7dd3fc; font-style: italic;">{p_series}</div>
 
@@ -5280,9 +5326,9 @@ def generate_publications_page():
 
             "category_key": "Book Chapter",
 
-            "title": "Book & Chapters",
+            "title": "Books & Book Chapters",
 
-            "badge": "01 / 04 • MONOGRAPHS & CHAPTERS",
+            "badge": "Monographs & Chapters",
 
             "photo_webp": "/assets/images/portraits/portrait-1.webp?v=5.1",
 
@@ -5302,9 +5348,9 @@ def generate_publications_page():
 
             "category_key": "Journal",
 
-            "title": "Journal Papers",
+            "title": "Refereed Journal Articles",
 
-            "badge": "02 / 04 • REFEREED JOURNALS",
+            "badge": "Refereed Journals",
 
             "photo_webp": "assets/images/portraits/portrait-2.webp",
 
@@ -5324,9 +5370,9 @@ def generate_publications_page():
 
             "category_key": "Conference",
 
-            "title": "Conference Papers",
+            "title": "Conference Proceedings",
 
-            "badge": "03 / 04 • PROCEEDINGS & SYMPOSIUMS",
+            "badge": "Proceedings & Symposia",
 
             "photo_webp": "assets/images/portraits/portrait-4.webp",
 
@@ -5346,9 +5392,9 @@ def generate_publications_page():
 
             "category_key": "Preprint",
 
-            "title": "Preprint Papers",
+            "title": "Open Science Preprints",
 
-            "badge": "04 / 04 • OPEN SCIENCE & PREPRINTS",
+            "badge": "Open Science & Preprints",
 
             "photo_webp": "assets/images/portraits/portrait-3.webp",
 
@@ -5391,76 +5437,43 @@ def generate_publications_page():
 
 
     def render_download_pill(pub):
-
         url = pub.get("url", "").strip() if pub.get("url") else ""
-
         doi = pub.get("doi", "").strip() if pub.get("doi") else ""
-
         link_enabled = pub.get("link_enabled", True)
 
-
-
         is_link_active = bool(
-
             link_enabled is not False
-
             and url != "#"
-
             and doi != "#"
-
             and "on process" not in doi.lower()
-
             and "on process" not in url.lower()
-
             and (url or doi)
-
         )
-
         if not url and doi and is_link_active:
-
-            url = f"https://doi.org/{doi}"
-
-
+            if doi.startswith("http://") or doi.startswith("https://"):
+                url = doi
+            else:
+                url = f"https://doi.org/{doi}"
 
         if is_link_active and url:
-
-            label = "Download"
-
+            label = "Access Article"
             if "arxiv.org" in url:
-
-                label = "Download (arXiv)"
-
+                label = "Access (arXiv)"
             elif "ssrn" in url or "2139/ssrn" in url:
-
-                label = "Download (SSRN)"
-
+                label = "Access (SSRN)"
             elif "doi.org" in url:
-
-                label = "Download / DOI"
-
+                label = "Publisher DOI"
             elif "scopus.com" in url:
-
                 label = "Scopus Record"
-
             elif "eprints" in url:
-
-                label = "Download / ePrints"
-
+                label = "ePrints Record"
             else:
-
-                label = "Download / Access"
-
-            return f'<a href="{url}" target="_blank" rel="noopener" class="pub-pill-btn pub-pill-primary">{render_svg_icon("download")} <span>{label}</span></a>'
-
+                label = "Access Publication"
+            return f'<a href="{url}" target="_blank" rel="noopener" class="pub-academic-btn pub-btn-access"><span>{label}</span> <span class="pub-btn-arrow">&nearr;</span></a>'
         else:
-
             title_enc = html.escape(pub.get("title", ""))
-
             mailto = f"mailto:zaid.amin@newinti.edu.my?subject=Requesting%20Full-Text:%20{title_enc}"
-
-            lock_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>'
-
-            return f'<a href="{mailto}" class="pub-pill-btn pub-pill-primary pub-pill-request" title="Direct download unavailable. Available on request via email."><span class="pub-pill-lock-icon">{lock_svg}</span> <span>Available on Request</span></a>'
+            return f'<a href="{mailto}" class="pub-academic-btn pub-btn-access pub-btn-request" title="Direct download unavailable. Available on request via email."><span>Request Full-Text</span></a>' 
 
 
 
@@ -5489,187 +5502,97 @@ def generate_publications_page():
         
 
         cards_html = ""
-
         for item_idx, pub in enumerate(cat_items, 1):
-
-            download_pill = render_download_pill(pub)
-
-            featured_pill = '<span class="pub-strip-featured-pill">★ Featured Work</span>' if pub.get("featured") else ""
-
-            short_venue = pub.get("venue", "")
-
-            if len(short_venue) > 42:
-
-                short_venue = short_venue[:40] + "..."
-
-            excerpt = clean_excerpt(pub.get("abstract", ""), max_len=180)
-
-            doi = pub.get("doi", "").strip() if pub.get("doi") else ""
-
-            url = pub.get("url", "").strip() if pub.get("url") else ""
-
-            isbn = pub.get("isbn", "").strip() if pub.get("isbn") else ""
-
-            
-
-            doi_html = f'<span class="pub-strip-doi-inline"><span class="pub-strip-doi-lbl">DOI/ISBN/LINK:</span> <span class="pub-strip-doi-val">{doi}</span></span>' if doi else ""
-
-            isbn_html = f'<span class="pub-strip-doi-inline"><span class="pub-strip-doi-lbl">ISBN:</span> <span class="pub-strip-doi-val">{isbn}</span></span>' if isbn else ""
-
-            year = pub.get("year", "")
-
-            escaped_title = html.escape(pub["title"])
-
-            escaped_title_lower = html.escape(pub["title"].lower())
-
+            download_btn = render_download_pill(pub)
+            featured_pill = '<span class="pub-kicker-sep">&bull;</span> <span class="pub-kicker-featured">★ Featured Work</span>' if pub.get("featured") else ""
+            cleaned_title = clean_academic_title(pub.get("title", ""))
+            escaped_title = html.escape(cleaned_title)
+            escaped_title_lower = html.escape(cleaned_title.lower())
             escaped_venue = html.escape(pub.get("venue", ""))
-
             escaped_venue_lower = html.escape(pub.get("venue", "").lower())
-
+            excerpt = clean_excerpt(pub.get("abstract", ""), max_len=180)
+            doi = pub.get("doi", "").strip() if pub.get("doi") else ""
+            url = pub.get("url", "").strip() if pub.get("url") else ""
+            isbn = pub.get("isbn", "").strip() if pub.get("isbn") else ""
+            year = pub.get("year", "")
             bibtex_id = pub.get("id", f"pub_{cat_idx}_{item_idx}")
 
-            cat_badge_label = cat["title"].replace(" Papers", "").upper()
+            # Clean scholarly citation line
+            doi_link_html = ""
+            if doi and "on process" not in doi.lower() and doi != "#":
+                clean_doi = doi.replace("https://doi.org/", "").replace("http://doi.org/", "").strip()
+                doi_url = url if (url and url != "#" and "on process" not in url.lower()) else f"https://doi.org/{clean_doi}"
+                doi_link_html = f'<span class="pub-citation-sep">&bull;</span> <a href="{doi_url}" target="_blank" rel="noopener" class="pub-citation-doi" title="Digital Object Identifier">doi:{clean_doi} <span class="pub-external-arr">&nearr;</span></a>'
 
-
+            isbn_tag_html = ""
+            if isbn and "on process" not in isbn.lower() and isbn != "#":
+                clean_isbn = isbn.strip()
+                isbn_tag_html = f'<span class="pub-citation-sep">&bull;</span> <span class="pub-citation-isbn">ISBN: {clean_isbn}</span>'
 
             cards_html += f"""
-
             <article class="pub-strip-card pub-item" data-category="{cat['category_key'].lower()}" data-title="{escaped_title_lower}" data-venue="{escaped_venue_lower}" data-year="{year}">
-
               <div class="pub-strip-main">
-
-                <!-- Left Scholarly Content (Golden Ratio ~75%) -->
-
+                <!-- Scholarly Citation & Narrative Content -->
                 <div class="pub-strip-content">
-
-                  <!-- Row 1: Badges, Index, Year & Venue (Gestalt Proximity) -->
-
-                  <div class="pub-strip-header">
-
-                    <div class="pub-strip-tags">
-
-                      <span class="pub-strip-idx">#{item_idx:02d}</span>
-
-                      <span class="pub-strip-cat-pill">{cat_badge_label}</span>
-
-                      <span class="pub-strip-year-pill">{year}</span>
-
-                      <span class="pub-strip-venue-chip" title="{escaped_venue}">{short_venue}</span>
-
-                    </div>
-
+                  <!-- Row 1: Quiet Academic Meta Kicker -->
+                  <div class="pub-card-meta-kicker">
+                    <span class="pub-kicker-year">{year}</span>
+                    <span class="pub-kicker-sep">&bull;</span>
+                    <span class="pub-kicker-venue">{escaped_venue}</span>
                     {featured_pill}
-
                   </div>
 
-
-
-                  <!-- Row 2: Article / Paper Title -->
-
-                  <h3 class="pub-strip-title font-cinzel">{pub['title']}</h3>
-
+                  <!-- Row 2: Publication Title in Scholar Serif -->
+                  <h3 class="pub-strip-title">{escaped_title}</h3>
                   
-
-                  <!-- Row 3: Full Venue, Authors & DOI Line -->
-
-                  <div class="pub-strip-venue-line">
-
-                    <span class="pub-strip-venue-name">{pub.get('venue', '')}</span>
-
-                    <span class="pub-strip-dot">&bull;</span>
-
-                    <span class="pub-strip-authors">Dr. Zaid Amin et al.</span>
-
-                    {f'<span class="pub-strip-dot">&bull;</span> {doi_html}' if doi_html else ''}
-
-                    {f'<span class="pub-strip-dot">&bull;</span> {isbn_html}' if isbn_html else ''}
-
+                  <!-- Row 3: Citation Authors & DOI -->
+                  <div class="pub-strip-citation-line">
+                    <span class="pub-citation-authors"><strong>Dr. Zaid Amin</strong> et al.</span>
+                    {doi_link_html}
+                    {isbn_tag_html}
                   </div>
 
-
-
-                  <!-- Row 4: Abstract Excerpt (Compact 1-2 lines) -->
-
+                  <!-- Row 4: Abstract Excerpt -->
                   {f'<p class="pub-strip-excerpt">{excerpt}</p>' if excerpt else ''}
-
                 </div>
 
-
-
-                <!-- Right Action Pills Dock (Golden Ratio ~25%, Tight & Neat) -->
-
+                <!-- Right Refined Academic Actions -->
                 <div class="pub-strip-actions">
-
-                  {download_pill}
-
-                  <button class="pub-pill-btn pub-pill-secondary btn-bibtex-toggle" data-target="bib-{bibtex_id}">
-
+                  {download_btn}
+                  <button type="button" class="pub-academic-btn pub-btn-cite btn-bibtex-toggle" data-target="bib-{bibtex_id}">
                     Cite / BibTeX
-
                   </button>
-
                 </div>
-
               </div>
-
-
 
               <!-- Collapsible BibTeX Drawer -->
-
               <div class="bibtex-box" id="bib-{bibtex_id}">
-
                 <div class="bibtex-box-header">
-
                   <span class="bibtex-box-label">BibTeX Citation Entry</span>
-
-                  <button class="bibtex-copy-btn" data-target="code-{bibtex_id}">Copy BibTeX</button>
-
+                  <button type="button" class="bibtex-copy-btn" data-target="code-{bibtex_id}">Copy BibTeX</button>
                 </div>
-
                 <code id="code-{bibtex_id}">{pub['bibtex']}</code>
-
               </div>
-
             </article>
-
             """
 
 
 
-        chips_html = "".join([f'<span class="pub-stat-chip">{c}</span>' for c in cat["chips"]])
-
-
+        metrics_str = " &bull; ".join(cat["chips"])
 
         sections_html += f"""
-
         <section class="pub-gallery-section pub-pure-strip-section" id="{cat['id']}" data-category-section="{cat['category_key'].lower()}">
-
-          <!-- Full-Width Pure Strip Header (No Portrait Anchor - Clean & Elegant) -->
-
+          <!-- Full-Width Pure Strip Header (Clean Institutional Academic Standard) -->
           <header class="pub-pure-section-header">
-
             <div class="pub-pure-header-info">
-
-              <div class="pub-pure-badge-row">
-
-                <span class="pub-pure-badge">{cat['badge']}</span>
-
+              <div class="pub-section-kicker-row">
+                <span class="pub-section-kicker">{cat['badge']}</span>
+                <span class="pub-section-kicker-dot">&bull;</span>
+                <span class="pub-section-kicker-meta">{metrics_str}</span>
               </div>
-
-              <h2 class="pub-pure-title font-cinzel">{cat['title']}</h2>
-
-              <div class="pub-pure-gold-line"></div>
-
+              <h2 class="pub-pure-title">{cat['title']}</h2>
               <p class="pub-pure-desc">{cat['description']}</p>
-
             </div>
-
-            <div class="pub-pure-chips-wrapper">
-
-              {chips_html}
-
-            </div>
-
           </header>
 
 

@@ -20708,696 +20708,456 @@ mark {
 
 
 
-/* Full-Width Section Header (Golden Ratio 62% Info : 38% Chips) */
+/* ==========================================================================
+   PUBLICATIONS: REFINED INSTITUTIONAL SCHOLAR GALLERY
+   De-slopped: Clean editorial serif typography, quiet academic kickers,
+   1px hairline borders, muted gold accents, and elegant action buttons.
+   ========================================================================== */
 
+/* Full-Width Section Header (Clean Institutional Academic Standard) */
 .pub-pure-section-header {
-
   display: flex;
-
   justify-content: space-between;
-
-  align-items: flex-end;
-
+  align-items: flex-start;
   gap: 24px;
-
-  margin-bottom: 14px;
-
-  padding-bottom: 10px;
-
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
 }
-
-
 
 .pub-pure-header-info {
-
   flex: 1;
-
-  max-width: 860px;
-
+  max-width: 900px;
 }
 
+.pub-section-kicker-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
 
+.pub-section-kicker {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c59b27;
+}
+
+.pub-section-kicker-dot {
+  color: #475569;
+  font-size: 0.7rem;
+}
+
+.pub-section-kicker-meta {
+  font-size: 0.76rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
 
 .pub-pure-badge-row {
-
-  margin-bottom: 10px;
-
+  margin-bottom: 8px;
 }
-
-
 
 .pub-pure-badge {
-
   display: inline-block;
-
   font-size: 0.74rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.12em;
-
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-
-  color: #d4af37;
-
-  background: rgba(212, 175, 55, 0.12);
-
-  border: 1px solid rgba(212, 175, 55, 0.35);
-
-  padding: 4px 14px;
-
-  border-radius: 9999px;
-
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-
+  color: #c59b27;
+  background: rgba(197, 155, 39, 0.08);
+  border: 1px solid rgba(197, 155, 39, 0.25);
+  padding: 3px 12px;
+  border-radius: 6px;
 }
-
-
 
 .pub-pure-title {
-
-  font-family: var(--font-cinzel, 'Cinzel', serif);
-
-  font-size: 2.1rem;
-
-  font-weight: 700;
-
-  color: #ffffff;
-
-  letter-spacing: -0.01em;
-
-  margin: 0 0 10px;
-
-  line-height: 1.25;
-
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-
+  font-family: var(--font-serif, 'Newsreader', Georgia, serif);
+  font-size: 1.85rem;
+  font-weight: 600;
+  color: #f8fafc;
+  letter-spacing: normal;
+  margin: 0 0 8px;
+  line-height: 1.3;
+  text-transform: none;
 }
-
-
 
 .pub-pure-gold-line {
-
-  width: 56px;
-
-  height: 3px;
-
-  background: linear-gradient(90deg, #d4af37 0%, #22a6c8 70%, transparent 100%);
-
-  border-radius: 2px;
-
-  margin-bottom: 12px;
-
+  display: none !important;
 }
-
-
 
 .pub-pure-desc {
-
   font-size: 0.94rem;
-
   color: #94a3b8;
-
-  line-height: 1.68;
-
+  line-height: 1.62;
   margin: 0;
-
 }
-
-
 
 .pub-pure-chips-wrapper {
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: flex-end;
-
-  gap: 8px;
-
-  flex-shrink: 0;
-
+  display: none !important;
 }
 
-
-
-.pub-pure-chips-wrapper .pub-stat-chip {
-
-  background: rgba(3, 14, 26, 0.85);
-
-  border: 1px solid rgba(34, 166, 200, 0.3);
-
-  color: #7dd3fc;
-
-  font-size: 0.76rem;
-
-  font-weight: 700;
-
-  padding: 6px 14px;
-
-  border-radius: 9999px;
-
-  white-space: nowrap;
-
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-
-}
-
-
-
-/* Pure Horizontal Strip Cards Stack */
-
-.pub-pure-strip-list {
-
+/* Horizontal Strip Cards Stack */
+.pub-pure-strip-list,
+.pub-strip-cards {
   display: flex;
-
   flex-direction: column;
-
-  gap: 10px;
-
+  gap: 12px;
   width: 100%;
-
 }
 
-
-
-/* Individual Full-Width Strip Card - Tight & Neat Fit */
-
+/* Individual Full-Width Strip Card - Clean Hairline Institutional Elevation */
 .pub-strip-card {
-
   display: flex;
-
   flex-direction: column;
-
-  background: linear-gradient(135deg, rgba(8, 26, 48, 0.88) 0%, rgba(3, 12, 24, 0.96) 100%);
-
-  border: 1px solid rgba(34, 166, 200, 0.22);
-
-  border-left: 4px solid rgba(34, 166, 200, 0.55);
-
-  border-radius: 14px;
-
-  padding: 14px 20px;
-
-  box-shadow: 0 6px 20px rgba(0, 8, 20, 0.45);
-
-  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.25s ease, box-shadow 0.25s ease;
-
+  background: #0f1422 !important;
+  border: 1px solid rgba(148, 163, 184, 0.12) !important;
+  border-left: 1px solid rgba(148, 163, 184, 0.12) !important;
+  border-radius: 12px;
+  padding: 18px 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.2s ease, box-shadow 0.2s ease;
   position: relative;
-
   overflow: hidden;
-
-  backdrop-filter: blur(8px);
-
-  -webkit-backdrop-filter: blur(8px);
-
 }
-
-
 
 .pub-strip-card:hover {
-
-  transform: translateX(6px);
-
-  border-color: rgba(212, 175, 55, 0.5);
-
-  border-left-color: #d4af37;
-
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55);
-
+  transform: translateY(-2px) !important;
+  border-color: rgba(197, 155, 39, 0.35) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
-
-
 
 /* Strip Main: Left Content + Right Actions Dock */
-
 .pub-strip-main {
-
   display: flex;
-
   justify-content: space-between;
-
   align-items: center;
-
   gap: 28px;
-
   width: 100%;
-
 }
-
-
 
 .pub-strip-content {
-
   flex: 1;
-
   min-width: 0;
-
   display: flex;
-
   flex-direction: column;
-
-  gap: 5px;
-
+  gap: 6px;
 }
 
-
-
-/* Top Meta Row */
-
-.pub-strip-header {
-
+/* Quiet Academic Meta Kicker Row */
+.pub-card-meta-kicker {
   display: flex;
-
   flex-wrap: wrap;
-
   align-items: center;
-
-  justify-content: space-between;
-
-  gap: 10px;
-
+  gap: 8px;
+  font-size: 0.78rem;
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, sans-serif);
   margin-bottom: 2px;
-
 }
 
+.pub-kicker-year {
+  font-weight: 700;
+  color: #c59b27;
+  letter-spacing: 0.04em;
+}
 
+.pub-kicker-sep {
+  color: #475569;
+  font-size: 0.7rem;
+}
+
+.pub-kicker-venue {
+  color: #94a3b8;
+  font-weight: 500;
+  font-style: italic;
+  font-family: var(--font-serif, Georgia, serif);
+}
+
+.pub-kicker-featured {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 8px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #e2b740;
+  background: rgba(197, 155, 39, 0.12);
+  border: 1px solid rgba(197, 155, 39, 0.3);
+  border-radius: 4px;
+}
+
+/* Legacy Header / Tags Fallback */
+.pub-strip-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 2px;
+}
 
 .pub-strip-tags {
-
   display: flex;
-
   flex-wrap: wrap;
-
   align-items: center;
-
   gap: 8px;
-
 }
-
-
 
 .pub-strip-idx {
-
   font-family: var(--font-mono, monospace);
-
-  font-size: 0.78rem;
-
-  font-weight: 800;
-
-  color: #22a6c8;
-
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #64748b;
 }
-
-
 
 .pub-strip-cat-pill {
-
-  font-size: 0.66rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.08em;
-
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-
-  color: #7dd3fc;
-
-  background: rgba(34, 166, 200, 0.14);
-
-  border: 1px solid rgba(34, 166, 200, 0.35);
-
-  padding: 2px 9px;
-
-  border-radius: 9999px;
-
+  color: #94a3b8;
+  background: rgba(148, 163, 184, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  padding: 2px 8px;
+  border-radius: 4px;
 }
-
-
 
 .pub-strip-year-pill {
-
-  font-size: 0.66rem;
-
-  font-weight: 800;
-
-  color: #fef08a;
-
-  background: rgba(212, 175, 55, 0.18);
-
-  border: 1px solid rgba(212, 175, 55, 0.45);
-
-  padding: 2px 9px;
-
-  border-radius: 9999px;
-
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #c59b27;
+  background: rgba(197, 155, 39, 0.1);
+  border: 1px solid rgba(197, 155, 39, 0.25);
+  padding: 2px 8px;
+  border-radius: 4px;
 }
-
-
 
 .pub-strip-venue-chip {
-
-  font-size: 0.68rem;
-
-  font-weight: 700;
-
+  font-size: 0.72rem;
+  font-weight: 500;
   color: #94a3b8;
-
-  background: rgba(3, 12, 24, 0.8);
-
-  border: 1px solid rgba(255, 255, 255, 0.1);
-
-  padding: 2px 10px;
-
-  border-radius: 9999px;
-
+  font-style: italic;
+  font-family: var(--font-serif, Georgia, serif);
+  background: transparent;
+  border: none;
+  padding: 0;
   max-width: 580px;
-
   text-overflow: ellipsis;
-
   overflow: hidden;
-
   white-space: nowrap;
-
 }
-
-
 
 @media (min-width: 1200px) {
-
   .pub-strip-venue-chip {
-
     max-width: 720px;
-
   }
-
 }
-
-
 
 .pub-strip-featured-pill {
-
   font-size: 0.68rem;
-
-  font-weight: 800;
-
-  color: #fffbeb;
-
-  background: rgba(212, 175, 55, 0.25);
-
-  border: 1px solid #d4af37;
-
-  padding: 2px 10px;
-
-  border-radius: 9999px;
-
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-
+  font-weight: 600;
+  color: #e2b740;
+  background: rgba(197, 155, 39, 0.12);
+  border: 1px solid rgba(197, 155, 39, 0.3);
+  padding: 2px 8px;
+  border-radius: 4px;
   white-space: nowrap;
-
 }
 
-
-
-/* Card Title */
-
-.pub-strip-title {
-
-  font-family: var(--font-cinzel, 'Cinzel', serif);
-
-  font-size: 1.15rem;
-
-  font-weight: 700;
-
-  color: #ffffff;
-
-  line-height: 1.34;
-
-  margin: 0;
-
-  letter-spacing: -0.01em;
-
+/* Scholarly Publication Title (Serif, Title Case, High Legibility) */
+.pub-strip-title,
+.cv-strip-card .pub-strip-title {
+  font-family: var(--font-serif, 'Newsreader', Georgia, serif) !important;
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  color: #f8fafc !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
   transition: color 0.2s ease;
-
 }
 
-
-
-.pub-strip-card:hover .pub-strip-title {
-
-  color: #fef08a;
-
+.pub-strip-card:hover .pub-strip-title,
+.cv-strip-card:hover .pub-strip-title {
+  color: #e2e8f0 !important;
 }
 
-
-
-/* Venue Line */
-
+/* Clean Citation Line */
+.pub-strip-citation-line,
 .pub-strip-venue-line {
-
   display: flex;
-
   flex-wrap: wrap;
-
   align-items: center;
-
   gap: 8px;
-
-  font-size: 0.83rem;
-
+  font-size: 0.82rem;
   margin: 0;
-
+  color: #94a3b8;
 }
 
+.pub-citation-authors,
+.pub-strip-authors {
+  color: #cbd5e1;
+  font-style: normal;
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
 
+.pub-citation-authors strong {
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+.pub-citation-sep,
+.pub-strip-dot {
+  color: #475569;
+  font-style: normal;
+}
+
+.pub-citation-doi,
+.pub-strip-doi-link {
+  color: #60a5fa;
+  text-decoration: none;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.76rem;
+  transition: color 0.15s ease;
+}
+
+.pub-citation-doi:hover,
+.pub-strip-doi-link:hover {
+  color: #93c5fd;
+  text-decoration: underline;
+}
+
+.pub-external-arr {
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.pub-citation-isbn {
+  color: #94a3b8;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.74rem;
+}
 
 .pub-strip-venue-name {
-
-  color: #38bdf8;
-
-  font-style: italic;
-
-  font-family: var(--font-serif, Georgia, serif);
-
-}
-
-
-
-.pub-strip-dot {
-
-  color: #64748b;
-
-  font-style: normal;
-
-}
-
-
-
-.pub-strip-authors {
-
   color: #cbd5e1;
-
-  font-style: normal;
-
-  font-family: var(--font-sans, sans-serif);
-
-  font-size: 0.78rem;
-
-  font-weight: 600;
-
+  font-style: italic;
+  font-family: var(--font-serif, Georgia, serif);
 }
-
-
 
 .pub-strip-doi-inline {
-
   font-family: var(--font-mono, monospace);
-
   font-size: 0.74rem;
-
   color: #64748b;
-
 }
-
-
 
 .pub-strip-doi-lbl {
-
-  color: #94a3b8;
-
-  font-weight: 700;
-
+  color: #64748b;
+  font-weight: 600;
   margin-right: 4px;
-
 }
-
-
 
 .pub-strip-doi-val {
-
   color: #94a3b8;
-
   font-weight: 500;
-
   user-select: all;
-
-  letter-spacing: 0.01em;
-
 }
 
-
-
-.pub-strip-doi-link {
-
-  color: #38bdf8;
-
-  text-decoration: none;
-
-}
-
-
-
-.pub-strip-doi-link:hover {
-
-  text-decoration: underline;
-
-}
-
-
-
-/* Excerpt (Tight 2 lines maximum) */
-
+/* Scholarly Excerpt */
 .pub-strip-excerpt {
-
-  font-size: 0.83rem;
-
+  font-size: 0.86rem;
   color: #94a3b8;
-
-  line-height: 1.52;
-
-  margin: 2px 0 0;
-
+  line-height: 1.55;
+  margin: 3px 0 0;
   display: -webkit-box;
-
   -webkit-line-clamp: 2;
-
   -webkit-box-orient: vertical;
-
   overflow: hidden;
-
   max-width: 98%;
-
 }
 
-
-
-/* Right Actions Dock: Tight, Symmetric & Clean */
-
+/* Refined Academic Action Buttons (8px Rounded, 1px Hairline, No Neon Pills) */
 .pub-strip-actions {
-
   display: flex;
-
   flex-direction: column;
-
   align-items: flex-end;
-
   justify-content: center;
-
   gap: 8px;
-
   flex-shrink: 0;
-
 }
 
-
-
+.pub-academic-btn,
 .pub-strip-actions .pub-pill-btn {
-
-  min-width: 145px;
-
+  min-width: 140px;
   height: 36px;
-
   padding: 0 16px;
-
-  font-size: 0.76rem;
-
-  font-weight: 700;
-
-  border-radius: 9999px;
-
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 8px !important;
   display: inline-flex;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 7px;
-
   text-decoration: none;
-
   cursor: pointer;
-
-  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-
+  transition: all 0.2s ease;
   white-space: nowrap;
-
+  box-sizing: border-box;
 }
 
-
-
+/* Primary Access Button: Muted academic gold hairline with obsidian base */
+.pub-btn-access,
 .pub-strip-actions .pub-pill-primary {
-
-  background: linear-gradient(135deg, #d4af37 0%, #b89728 100%);
-
-  color: #020b14;
-
-  border: 1px solid rgba(212, 175, 55, 0.4);
-
-  box-shadow: 0 3px 10px rgba(212, 175, 55, 0.25);
-
+  background: rgba(197, 155, 39, 0.1) !important;
+  color: #f1c40f !important;
+  border: 1px solid rgba(197, 155, 39, 0.35) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
 }
 
-
-
+.pub-btn-access:hover,
 .pub-strip-actions .pub-pill-primary:hover {
-
-  background: linear-gradient(135deg, #fef08a 0%, #d4af37 100%);
-
-  color: #000000;
-
-  box-shadow: 0 5px 16px rgba(212, 175, 55, 0.4);
-
-  transform: translateY(-1px);
-
+  background: rgba(197, 155, 39, 0.2) !important;
+  color: #ffffff !important;
+  border-color: rgba(197, 155, 39, 0.6) !important;
+  box-shadow: 0 4px 12px rgba(197, 155, 39, 0.15) !important;
+  transform: translateY(-1px) !important;
 }
 
-
-
+/* Secondary Cite / BibTeX Button: Subtle hairline slate */
+.pub-btn-cite,
 .pub-strip-actions .pub-pill-secondary {
-
-  background: rgba(34, 166, 200, 0.12);
-
-  color: #7dd3fc;
-
-  border: 1px solid rgba(34, 166, 200, 0.35);
-
+  background: rgba(148, 163, 184, 0.06) !important;
+  color: #cbd5e1 !important;
+  border: 1px solid rgba(148, 163, 184, 0.2) !important;
 }
 
-
-
+.pub-btn-cite:hover,
 .pub-strip-actions .pub-pill-secondary:hover {
+  background: rgba(148, 163, 184, 0.14) !important;
+  color: #ffffff !important;
+  border-color: rgba(148, 163, 184, 0.4) !important;
+  transform: translateY(-1px) !important;
+}
 
-  background: rgba(34, 166, 200, 0.24);
+.pub-btn-arrow {
+  font-size: 0.85rem;
+  line-height: 1;
+}
 
-  color: #ffffff;
-
-  border-color: #38bdf8;
-
-  transform: translateY(-1px);
-
+/* Book cards title typography */
+.bokify-card-title {
+  font-family: var(--font-serif, 'Newsreader', Georgia, serif) !important;
+  font-size: 1.18rem !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  line-height: 1.35 !important;
 }
 
 
@@ -25723,9 +25483,6 @@ h1.cv-hero-name {
 .cv-section-title,
 
 .talks-category-title-group h2,
-
-.pub-pure-title,
-
 .bokify-hero-title,
 
 .activity-section-title,
