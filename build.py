@@ -11741,27 +11741,15 @@ def build_all():
             f.write(min_css)
         print(f"  Minified CSS: {len(raw_css)/1024:.1f} KB -> {len(min_css)/1024:.1f} KB ({((len(raw_css)-len(min_css))/len(raw_css))*100:.1f}% reduction)")
 
-    # Copy assets
-
+    # Copy assets safely (dirs_exist_ok=True prevents WinError 32 file lock on Windows)
     dist_assets = DIST_DIR / "assets"
+    dist_assets.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(ASSETS_DIR, dist_assets, dirs_exist_ok=True)
 
-    if dist_assets.exists():
-
-        shutil.rmtree(dist_assets)
-
-    shutil.copytree(ASSETS_DIR, dist_assets)
-
-
-
-    # Copy data directory (for articles.json & search items)
-
+    # Copy data directory safely (dirs_exist_ok=True prevents WinError 32 file lock on Windows)
     dist_data = DIST_DIR / "data"
-
-    if dist_data.exists():
-
-        shutil.rmtree(dist_data)
-
-    shutil.copytree(DATA_DIR, dist_data)
+    dist_data.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(DATA_DIR, dist_data, dirs_exist_ok=True)
 
 
 
