@@ -59,7 +59,7 @@
           "id": "supervision",
           "label": "Supervision",
           "url": "#",
-          "icon": "✦ Supervision",
+          "icon": "✦",
           "target": "_blank",
           "active_pages": [
             "Supervision"
