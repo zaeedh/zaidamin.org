@@ -53,20 +53,8 @@
         "research",
         "articles"
       ],
-      "has_dropdown": true,
-      "dropdown_items": [
-        {
-          "id": "supervision",
-          "label": "Supervision",
-          "url": "#",
-          "icon": "✦",
-          "target": "_blank",
-          "active_pages": [
-            "Supervision"
-          ],
-          "enabled": true
-        }
-      ]
+      "has_dropdown": false,
+      "dropdown_items": []
     },
     {
       "id": "talks",
