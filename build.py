@@ -735,7 +735,8 @@ def render_subpage_nav(active_page="home"):
 
                 d_active = "active" if active_page in d.get("active_pages", [d.get("id")]) else ""
 
-                sparkle = f'<span class="nav-team-sparkle">{d.get("icon", "")}</span>' if d.get("icon") else ''
+                sub_icon = str(d.get("icon") or "").strip()
+                sparkle = f'<span class="nav-team-sparkle">{sub_icon}</span>' if sub_icon and sub_icon.lower() not in ["none", "null", "false", "off"] else ''
 
                 sub_links.append(f'''<a href="{d_url}" class="nav-dropdown-team-link {d_active}" role="menuitem"{d_target_attr}>
 
@@ -859,7 +860,8 @@ def render_homepage_nav():
 
                 d_target_attr = f' target="{d_target}"' if d_target and d_target != "_self" else ""
 
-                sparkle = f'<span class="ref-team-sparkle">{d.get("icon", "")}</span>' if d.get("icon") else ''
+                sub_icon = str(d.get("icon") or "").strip()
+                sparkle = f'<span class="ref-team-sparkle">{sub_icon}</span>' if sub_icon and sub_icon.lower() not in ["none", "null", "false", "off"] else ''
 
                 sub_links.append(f'''<a href="{d_url}" class="ref-dropdown-team-link" role="menuitem" title="{d_label}"{d_target_attr}>
 

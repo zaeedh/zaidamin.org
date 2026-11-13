@@ -31,9 +31,9 @@
         {
           "id": "team",
           "label": "Research Team",
-          "url": "#",
+          "url": "research-team.html",
           "target": "_self",
-          "icon": "none",
+          "icon": "",
           "enabled": true,
           "active_pages": [
             "team"
