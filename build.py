@@ -8530,8 +8530,7 @@ def generate_cv_page():
 
               </picture>
 
-              <div class="cv-portrait-glare"></div>
-
+              
             </div>
 
             <div class="cv-portrait-kicker">
@@ -8620,32 +8619,19 @@ def generate_cv_page():
 
 
 
-            <div class="cv-hero-badges">
-
-              <span class="cv-badge-gold" title="UKM Distinctions">
-
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-
-                {exec_prof['distinction']}
-
+            <div class="cv-hero-distinctions">
+              <span class="cv-distinction-badge" title="Doctoral Distinction (Universiti Kebangsaan Malaysia)">
+                <span class="cv-distinction-pip cv-pip-gold"></span>
+                <span>Ph.D. in Computer Science (UKM) &bull; Tesis Cemerlang &amp; GOT</span>
               </span>
-
-              <span class="cv-badge-cyan" title="Global Cisco Grant">
-
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zm0 8.5L4.5 7 12 3.5 19.5 7 12 10.5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-
-                Global Cisco Scholar (Top 40 Worldwide)
-
+              <span class="cv-distinction-badge" title="Global Panduit-Cisco Scholar">
+                <span class="cv-distinction-pip cv-pip-cyan"></span>
+                <span>Global Cisco Scholar (Top 40 Worldwide)</span>
               </span>
-
-              <span class="cv-badge-emerald" title="Q1 Peer Reviewer">
-
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-
-                Active Q1 Journal Reviewer
-
+              <span class="cv-distinction-badge" title="Peer Reviewer for Top-Tier Scopus/WoS Q1 Venues">
+                <span class="cv-distinction-pip cv-pip-emerald"></span>
+                <span>Active Q1 Journal Reviewer</span>
               </span>
-
             </div>
 
           </div>
@@ -8722,7 +8708,7 @@ def generate_cv_page():
 
               <span class="cv-sublayer-dot cv-sublayer-dot-cyan"></span>
 
-              <span>OFFICIAL ACCREDITATION</span>
+              <span>ACCREDITATION</span>
 
             </div>
 
