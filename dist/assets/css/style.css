@@ -12349,7 +12349,9 @@ a {
 
 .cv-card-heading {
 
-  flex: 1 1 320px;
+  flex: 1 1 auto;
+  min-width: 280px;
+  min-height: 0;
 
 }
 
@@ -27298,6 +27300,7 @@ h1.cv-hero-name,
   }
 }
 
+@media (max-width: 640px) {
 .cv-jump-bar {
 
     flex-wrap: nowrap !important;
@@ -31106,7 +31109,9 @@ h1.cv-hero-name,
 
 .cv-card-heading {
 
-  flex: 1 1 320px;
+  flex: 1 1 auto;
+  min-width: 280px;
+  min-height: 0;
 
 }
 
@@ -49452,4 +49457,153 @@ h1.cv-hero-name,
 .cv-doc-link:hover {
   color: #93c5fd !important;
   text-decoration: underline !important;
+}
+
+
+/* ==============================================================================
+   CV SECTION 08: MONOGRAPH SHOWCASE (GOLDEN RATIO & ANTI-SLOP TYPOGRAPHY)
+   Harmonizes Section 08 Book Card with the rest of the CV & Publications gallery.
+   ============================================================================== */
+.cv-monograph-card {
+  display: grid !important;
+  grid-template-columns: 165px 1fr !important;
+  gap: 28px !important;
+  align-items: start !important;
+  background: #0f1422 !important;
+  border: 1px solid rgba(197, 155, 39, 0.35) !important;
+  border-left: 1px solid rgba(197, 155, 39, 0.35) !important;
+  border-radius: 14px !important;
+  padding: 24px 28px !important;
+  box-shadow: 0 8px 32px rgba(0, 5, 16, 0.45) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  margin-bottom: 28px !important;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              box-shadow 0.25s ease !important;
+}
+
+.cv-monograph-card:hover {
+  transform: translateY(-2px) !important;
+  border-color: rgba(212, 175, 55, 0.65) !important;
+  box-shadow: 0 14px 40px rgba(0, 8, 24, 0.55), 0 0 20px rgba(212, 175, 55, 0.12) !important;
+}
+
+.cv-monograph-cover-dock {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 165px !important;
+}
+
+.cv-monograph-cover-link {
+  display: block !important;
+  position: relative !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease !important;
+}
+
+.cv-monograph-cover-link:hover {
+  transform: scale(1.025) !important;
+  border-color: rgba(212, 175, 55, 0.8) !important;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.25) !important;
+}
+
+.cv-monograph-cover-img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 1 / 1.455 !important;
+  object-fit: cover !important;
+}
+
+.cv-monograph-cover-glare {
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.25) 100%) !important;
+  pointer-events: none !important;
+}
+
+.cv-monograph-content {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  min-width: 0 !important;
+}
+
+.cv-monograph-kicker {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-bottom: 2px !important;
+}
+
+.cv-monograph-isbn {
+  font-family: var(--font-mono, monospace) !important;
+  color: #d4af37 !important;
+  font-size: 0.74rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em !important;
+}
+
+.cv-monograph-title {
+  font-family: 'Cinzel', Georgia, serif !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  line-height: 1.35 !important;
+  letter-spacing: 0.02em !important;
+  text-transform: uppercase !important;
+  margin: 2px 0 4px 0 !important;
+  transition: color 0.2s ease !important;
+}
+
+.cv-monograph-card:hover .cv-monograph-title {
+  color: #fef08a !important;
+}
+
+.cv-monograph-meta {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 0.84rem !important;
+  color: #94a3b8 !important;
+  margin-bottom: 4px !important;
+}
+
+.cv-monograph-desc {
+  font-size: 0.88rem !important;
+  line-height: 1.68 !important;
+  color: rgba(248, 250, 252, 0.82) !important;
+  margin: 4px 0 16px 0 !important;
+}
+
+.cv-monograph-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-top: auto !important;
+}
+
+@media (max-width: 768px) {
+  .cv-monograph-card {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    padding: 20px 18px !important;
+  }
+  .cv-monograph-cover-dock {
+    max-width: 140px !important;
+    margin: 0 auto !important;
+  }
+  .cv-monograph-title {
+    font-size: 1.12rem !important;
+    text-align: left !important;
+  }
 }

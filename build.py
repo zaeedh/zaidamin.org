@@ -9390,27 +9390,73 @@ def generate_cv_page():
           <span class="cv-section-count">{len(publications)} Scholarly Works</span>
 
         </div>
+    """
 
+    book_info = cv.get('core_research_and_books', {}).get('book', {})
+    book_title = book_info.get('title', 'Information Sharing Behaviour on Social Media')
+    book_pub = book_info.get('publisher', 'Universiti Kebangsaan Malaysia (UKM) Press')
+    book_year = book_info.get('year', '2023')
+    book_author = book_info.get('author', 'Dr. Zaid Amin, Ph.D.')
+    book_desc = book_info.get('description', '')
+    book_cover = "/assets/images/uploads/Information_Sharing_Behaviour_on_Social_Media_-_Zaid_Amin_et_al_removed-1.png"
+    book_isbn = "978-967-412"
+    book_url = "https://www.e-sentral.com/book/info/382134"
 
+    html += f"""
+        <!-- Book Card: Elite Scholarly Monograph Showcase (Harmonized Golden Ratio & Obsidian Glass) -->
+        <article class="cv-monograph-card is-highlight" id="monograph-spotlight">
+          <div class="cv-monograph-cover-dock">
+            <a href="{book_url}" target="_blank" rel="noopener" class="cv-monograph-cover-link" title="Explore Monograph on e-Sentral / UKM Press (Publisher Portal)">
+              <img src="{book_cover}" alt="{book_title} - Official Book Cover" class="cv-monograph-cover-img" loading="lazy">
+              <div class="cv-monograph-cover-glare"></div>
+            </a>
+          </div>
 
-        <!-- Book Card -->
-        <div class="cv-card is-highlight" style="margin-bottom: 24px;">
-          <div class="cv-card-top">
-            <div class="cv-card-heading">
-              <span class="cv-kicker-badge cat-gold" style="margin-bottom: 6px;">Scholarly Monograph (Book)</span>
-              <h3 class="cv-card-title font-cinzel">{cv['core_research_and_books']['book']['title']}</h3>
-              <div class="cv-card-sub">{cv['core_research_and_books']['book']['publisher']} &bull; {cv['core_research_and_books']['book']['year']}</div>
+          <div class="cv-monograph-content">
+            <!-- Row 1: Academic Meta Kicker -->
+            <div class="cv-monograph-kicker">
+              <span class="cv-kicker-year">{book_year}</span>
+              <span class="cv-kicker-sep">&bull;</span>
+              <span class="cv-kicker-badge cat-gold">SCHOLARLY MONOGRAPH (BOOK)</span>
+              <span class="cv-kicker-sep">&bull;</span>
+              <span class="cv-kicker-venue">UKM Press Author</span>
+              <span class="cv-kicker-sep">&bull;</span>
+              <span class="cv-kicker-venue cv-monograph-isbn" title="International Standard Book Number">ISBN: {book_isbn}</span>
             </div>
-            <div class="cv-card-badges">
-              <span class="cv-kicker-badge cat-gold">UKM Press Author</span>
+
+            <!-- Row 2: Monograph Title in Cinzel Roman Serif -->
+            <h3 class="cv-monograph-title font-cinzel">{book_title}</h3>
+
+            <!-- Row 3: Authorship & Publisher Line -->
+            <div class="cv-monograph-meta">
+              <span class="cv-strip-venue-name">{book_pub}</span>
+              <span class="cv-kicker-sep">&bull;</span>
+              <span class="cv-strip-subextra">{book_author}</span>
+              <span class="cv-kicker-sep">&bull;</span>
+              <span class="cv-strip-subextra">First Edition</span>
+            </div>
+
+            <!-- Row 4: Scholarly Abstract / Synopsis -->
+            <p class="cv-monograph-desc">
+              {book_desc}
+            </p>
+
+            <!-- Row 5: Refined Academic Actions Dock -->
+            <div class="cv-monograph-actions">
+              <a href="{book_url}" target="_blank" rel="noopener" class="pub-academic-btn pub-btn-access" title="Publisher Access / e-Sentral Official Portal">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                <span>Publisher Access / Purchase Portal</span> <span class="pub-btn-arrow">&nearr;</span>
+              </a>
+              <a href="/publications#section-books" class="pub-academic-btn pub-btn-cite" title="View Full Monograph Catalog Record in Publication Gallery">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path><path d="M6 6h10"></path><path d="M6 10h10"></path></svg>
+                <span>Monograph Gallery Details</span>
+              </a>
             </div>
           </div>
-          <div class="cv-card-body">
-            {cv['core_research_and_books']['book']['description']}
-          </div>
-        </div>
+        </article>
 
         <h3 class="cv-subsection-title font-cinzel">Specialized Research Domains</h3>
+
         <div class="cv-grid-2col" style="margin-bottom: 24px;">
     """
 
