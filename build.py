@@ -8235,193 +8235,95 @@ def get_distinction_emblem(theme):
 
 
 def render_cv_strip_card(
-
     idx,
-
     cat_pill,
-
     year_pill,
-
     venue_chip,
-
     title,
-
     venue_name,
-
     sub_extra="",
-
     excerpt="",
-
     verification_url="",
-
     secondary_btn_label="",
-
     secondary_btn_url="",
-
     featured_pill="",
-
     media_html="",
-
     extra_classes="",
-
     data_attrs="",
-
     cat_theme="cyan",
-
     show_verification_btn=False
-
 ):
-
-    # Verification Link Button removed per user design request across Achievement & CV pages
-
     primary_btn = ""
 
-
-
     # Secondary Action Pill
-
     if secondary_btn_label and secondary_btn_url:
-
         is_mailto = secondary_btn_url.startswith("mailto:")
-
         is_ext = secondary_btn_url.startswith("http")
-
         sec_target = ' target="_blank" rel="noopener"' if is_ext else ''
 
-        
-
-        # Icon selection
-
         if is_mailto:
-
             sec_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>'
-
         elif 'gallery' in secondary_btn_label.lower() or 'talks' in secondary_btn_url:
-
             sec_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>'
-
         else:
-
             sec_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>'
 
-
-
-        secondary_btn = f'''<a href="{secondary_btn_url}"{sec_target} class="pub-pill-btn pub-pill-secondary" title="{secondary_btn_label}">
-
+        secondary_btn = f'''<a href="{secondary_btn_url}"{sec_target} class="pub-academic-btn pub-btn-cite" title="{secondary_btn_label}">
           {sec_svg}
-
           <span>{secondary_btn_label}</span>
-
         </a>'''
-
     else:
-
         secondary_btn = ""
 
-
-
-    # Subtitle dot
-
-    dot_separator = '<span class="pub-strip-dot">&bull;</span>' if sub_extra else ''
-
-    sub_extra_html = f'<span class="pub-strip-authors">{sub_extra}</span>' if sub_extra else ''
-
-
+    dot_separator = '<span class="cv-kicker-sep">&bull;</span>' if sub_extra else ''
+    sub_extra_html = f'<span class="cv-strip-subextra">{sub_extra}</span>' if sub_extra else ''
 
     card_cls = f"pub-strip-card cv-strip-card {extra_classes}".strip()
-
     data_attr_str = f" {data_attrs}" if data_attrs else ""
 
-
-
     actions_dock = f"""
-
-            <!-- Right Action Dock (Harmonized Action Pill) -->
-
+            <!-- Right Action Dock (Refined Academic Actions) -->
             <div class="pub-strip-actions">
-
               {secondary_btn}
-
             </div>""" if secondary_btn else ""
 
+    featured_html = f'<span class="cv-kicker-sep">&bull;</span> <span class="pub-kicker-featured">★ Spotlight</span>' if featured_pill else ''
 
+    clean_t = clean_academic_title(title) if title else ""
 
     return f"""
-
         <article class="{card_cls}"{data_attr_str}>
-
           <div class="pub-strip-main">
-
             <!-- Left Scholarly Content (Golden Ratio) -->
-
             <div class="pub-strip-content">
-
-              <!-- Row 1: Header / Badges / Tags -->
-
-              <div class="pub-strip-header">
-
-                <div class="pub-strip-tags">
-
-                  <span class="pub-strip-idx">#{idx:02d}</span>
-
-                  <span class="pub-strip-cat-pill cat-{cat_theme}">{cat_pill}</span>
-
-                  <span class="pub-strip-year-pill">{year_pill}</span>
-
-                  <span class="pub-strip-venue-chip" title="{venue_chip}">{venue_chip}</span>
-
-                </div>
-
-                {featured_pill}
-
+              <!-- Row 1: Quiet Academic Meta Kicker (No 4-Pill Clutter) -->
+              <div class="cv-card-meta-kicker">
+                {f'<span class="cv-kicker-year">{year_pill}</span>' if year_pill else ''}
+                {f'<span class="cv-kicker-sep">&bull;</span> <span class="cv-kicker-badge cat-{cat_theme}">{cat_pill}</span>' if cat_pill else ''}
+                {f'<span class="cv-kicker-sep">&bull;</span> <span class="cv-kicker-venue" title="{venue_chip}">{venue_chip}</span>' if venue_chip else ''}
+                {featured_html}
               </div>
 
-
-
-              <!-- Row 2: Title in Cinzel Roman Serif -->
-
-              <h3 class="pub-strip-title font-cinzel">{title}</h3>
-
-
-
-              <!-- Row 3: Subtitle / Institution / Scope -->
-
-              <div class="pub-strip-venue-line">
-
-                <span class="pub-strip-venue-name">{venue_name}</span>
-
-                {dot_separator}
-
-                {sub_extra_html}
-
-              </div>
-
-
+              <!-- Row 2: Title in Cinzel Roman Serif (Consistent with Section Heading) -->
+              <h3 class="cv-strip-title font-cinzel">{clean_t}</h3>
 
               <!-- Optional Media -->
-
               {media_html}
 
-
+              <!-- Row 3: Subtitle / Institution / Scope -->
+              <div class="cv-strip-venue-line">
+                <span class="cv-strip-venue-name">{venue_name}</span>
+                {dot_separator}
+                {sub_extra_html}
+              </div>
 
               <!-- Row 4: Narrative Description / Excerpt -->
-
-              <p class="pub-strip-excerpt">
-
-                {excerpt}
-
-              </p>
-
+              {f'<p class="pub-strip-excerpt">{excerpt}</p>' if excerpt else ''}
             </div>
 
-
-
             {actions_dock}
-
           </div>
-
         </article>
-
     """
 
 
@@ -8968,7 +8870,7 @@ def generate_cv_page():
 
             venue_chip=venue_short,
 
-            title=item['title'].upper(),
+            title=item['title'],
 
             venue_name=item['organization'],
 
@@ -9038,7 +8940,7 @@ def generate_cv_page():
 
             venue_chip=inst.split(',')[0],
 
-            title=item['role'].upper(),
+            title=item['role'],
 
             venue_name=inst,
 
@@ -9104,7 +9006,7 @@ def generate_cv_page():
 
             venue_chip=inst.split(',')[0],
 
-            title=item['role'].upper(),
+            title=item['role'],
 
             venue_name=inst,
 
@@ -9174,7 +9076,7 @@ def generate_cv_page():
 
             venue_chip=inst.split(',')[0],
 
-            title=deg.upper(),
+            title=deg,
 
             venue_name=f"{inst} &bull; {item['country']}",
 
@@ -9298,7 +9200,7 @@ def generate_cv_page():
 
             venue_chip=chip_label,
 
-            title=title_str.upper(),
+            title=title_str,
 
             venue_name=sub_str,
 
@@ -9476,7 +9378,7 @@ def generate_cv_page():
 
             venue_chip=issuer.split('/')[0].strip(),
 
-            title=cert['name'].upper(),
+            title=cert['name'],
 
             venue_name=issuer,
 
@@ -9744,7 +9646,7 @@ def generate_cv_page():
 
             venue_chip=inst.split(',')[0],
 
-            title=ref['name'].upper(),
+            title=ref['name'],
 
             venue_name=inst,
 

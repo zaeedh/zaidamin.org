@@ -20967,8 +20967,7 @@ mark {
 }
 
 /* Scholarly Publication Title (Serif, Title Case, High Legibility) */
-.pub-strip-title,
-.cv-strip-card .pub-strip-title {
+.pub-strip-title {
   font-family: var(--font-serif, 'Newsreader', Georgia, serif) !important;
   font-size: 1.25rem !important;
   font-weight: 600 !important;
@@ -20980,9 +20979,32 @@ mark {
   transition: color 0.2s ease;
 }
 
-.pub-strip-card:hover .pub-strip-title,
-.cv-strip-card:hover .pub-strip-title {
+.pub-strip-card:hover .pub-strip-title {
   color: #e2e8f0 !important;
+}
+
+/* CV & Distinction Card Titles: Consistent Classical Roman Cinzel (Matching Section Headings) */
+.cv-strip-title,
+.cv-strip-card .pub-strip-title,
+.cv-distinction-card .pub-strip-title,
+.cv-distinction-card .cv-distinction-title,
+.cv-distinction-title {
+  font-family: 'Cinzel', Georgia, serif !important;
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  letter-spacing: 0.025em !important;
+  text-transform: uppercase !important;
+  line-height: 1.38 !important;
+  margin: 0 0 6px 0 !important;
+  transition: color 0.2s ease;
+}
+
+.cv-strip-card:hover .cv-strip-title,
+.cv-strip-card:hover .pub-strip-title,
+.cv-distinction-card:hover .pub-strip-title,
+.cv-distinction-card:hover .cv-distinction-title {
+  color: #fef08a !important;
 }
 
 /* Clean Citation Line */
@@ -30873,4 +30895,148 @@ h1.cv-hero-name,
   .site-pill-dropdown-menu {
     min-width: 185px;
   }
+}
+
+
+/* ==============================================================================
+   CV & DISTINCTION CARDS: DE-SLOPPED INSTITUTIONAL STANDARDS
+   Clean 1px hairline border, obsidian slate (#0f1422), no 4-pill cluster,
+   no 3px colored left border stripes, no glowing neon pseudo-elements.
+   ============================================================================== */
+
+.cv-strip-card,
+.cv-distinction-card {
+  display: flex !important;
+  flex-direction: column !important;
+  background: #0f1422 !important;
+  border: 1px solid rgba(148, 163, 184, 0.12) !important;
+  border-left: 1px solid rgba(148, 163, 184, 0.12) !important;
+  border-radius: 12px !important;
+  padding: 18px 24px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  margin-bottom: 12px !important;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color 0.2s ease,
+              box-shadow 0.2s ease !important;
+}
+
+.cv-strip-card::before,
+.cv-distinction-card::before {
+  display: none !important;
+  content: none !important;
+}
+
+.cv-strip-card:hover,
+.cv-distinction-card:hover {
+  transform: translateY(-2px) !important;
+  border-color: rgba(197, 155, 39, 0.35) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+}
+
+.cv-strip-card.is-highlight,
+.cv-strip-card.is-spotlight,
+.cv-distinction-card.is-highlight,
+.cv-distinction-card.is-spotlight {
+  background: #0f1422 !important;
+  border-color: rgba(197, 155, 39, 0.25) !important;
+  border-left-color: rgba(197, 155, 39, 0.25) !important;
+}
+
+.cv-strip-card.is-highlight:hover,
+.cv-strip-card.is-spotlight:hover,
+.cv-distinction-card.is-highlight:hover,
+.cv-distinction-card.is-spotlight:hover {
+  border-color: rgba(197, 155, 39, 0.5) !important;
+  box-shadow: 0 8px 24px rgba(197, 155, 39, 0.15) !important;
+}
+
+/* Quiet Academic Meta Kicker Row */
+.cv-card-meta-kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, sans-serif);
+  margin-bottom: 6px;
+}
+
+.cv-kicker-year {
+  font-weight: 700;
+  color: #c59b27;
+  letter-spacing: 0.04em;
+  font-size: 0.78rem;
+}
+
+.cv-kicker-sep {
+  color: #475569;
+  font-size: 0.7rem;
+}
+
+.cv-kicker-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+}
+
+.cv-kicker-badge.cat-gold {
+  color: #e2b740;
+  background: rgba(197, 155, 39, 0.12);
+  border-color: rgba(197, 155, 39, 0.3);
+}
+
+.cv-kicker-badge.cat-cyan {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  border-color: rgba(56, 189, 248, 0.28);
+}
+
+.cv-kicker-badge.cat-indigo {
+  color: #a5b4fc;
+  background: rgba(165, 180, 252, 0.1);
+  border-color: rgba(165, 180, 252, 0.28);
+}
+
+.cv-kicker-badge.cat-emerald {
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.1);
+  border-color: rgba(52, 211, 153, 0.28);
+}
+
+.cv-kicker-venue {
+  color: #94a3b8;
+  font-style: italic;
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 0.8rem;
+}
+
+/* Subtitle & Organization Line */
+.cv-strip-venue-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  margin: 2px 0 6px 0;
+  color: #94a3b8;
+}
+
+.cv-strip-venue-name {
+  color: #cbd5e1;
+  font-style: italic;
+  font-family: var(--font-serif, Georgia, serif);
+}
+
+.cv-strip-subextra {
+  color: #94a3b8;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.8rem;
+  font-weight: 500;
 }
