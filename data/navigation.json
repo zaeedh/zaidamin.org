@@ -458,8 +458,8 @@
     "team": [
       {
         "id": "team_all",
-        "label": "✦ All Members",
-        "short_label": "✦ All",
+        "label": "All Members",
+        "short_label": "All",
         "url": "#team-all",
         "target": "_self",
         "icon": "",

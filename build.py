@@ -10477,445 +10477,291 @@ def generate_article_reader_page(preloaded_article=None):
 # ==============================================================================
 
 def generate_team_page():
-
     team_data = load_json("team.json")
-
     page_head = get_html_head(
-
-        get_page_browser_title("team", "Research Team & Supervision Roster | Dr. Zaid Amin"),
-
-        "Doctoral candidates, Master's by Research scholars, and international research collaborators under the academic supervision and mentorship of Dr. Zaid Amin."
-
+        get_page_browser_title("team", "Research Team & Academic Supervision | Dr. Zaid Amin"),
+        "Doctoral candidates, Master's by Research scholars, and international research collaborators under the academic supervision and mentorship of Dr. Zaid Amin at INTI International University."
     )
-
     page_header = get_page_header("team")
 
+    def render_student_card(s, category):
+        is_phd = category == "phd"
+        photo_num = int(s.get("photo_num", s.get("no", 1)))
+        
+        # Supervisory Role
+        role_str = s.get("role", "Main Supervisor")
+        is_main = "Main" in role_str
+        pip_class = "team-pip-gold" if is_main else "team-pip-cyan"
+        role_badge_class = "team-role-main" if is_main else "team-role-co"
+        
+        # Degree / Program
+        program_name = s.get("program") or s.get("degree") or ("Doctoral Research (Ph.D.)" if is_phd else "Master in Data Science")
+        degree_badge = "Doctoral Research" if is_phd else program_name
+        
+        # Matriculation ID
+        student_id = s.get("student_id", "")
+        id_html = f'<span class="team-id-badge font-mono">ID: {escape_html(student_id)}</span>' if student_id else ""
+        
+        # Session Period
+        period = s.get("period", "")
+        
+        # Thesis Title
+        thesis = s.get("thesis_title", "").strip()
+        inquiry_label = "DISSERTATION INQUIRY" if is_phd else "THESIS RESEARCH"
+        
+        # Status
+        status = s.get("status", "Prepare for Proposal Defense")
+        
+        # Photo path
+        photo = s.get("photo", f"/assets/images/team/student_{photo_num:02d}.svg")
+        frame_class = "frame-phd" if is_phd else "frame-master"
+        
+        return f"""
+          <article class="team-card team-card-{category}" data-category="{category}">
+            <div class="team-card-top">
+              <div class="team-avatar-frame {frame_class}">
+                <img src="{photo}" alt="{escape_html(s['name'])}" class="team-avatar-img" width="76" height="76" loading="lazy" onerror="this.onerror=null; this.src='/assets/images/team/student_{photo_num:02d}.svg';">
+              </div>
+              <div class="team-identity-block">
+                <div class="team-name-row">
+                  <h3 class="team-person-name font-cinzel">{escape_html(s['name'])}</h3>
+                  {id_html}
+                </div>
+                <div class="team-meta-ribbon">
+                  <span class="team-role-badge {role_badge_class}">
+                    <span class="team-role-pip {pip_class}"></span>
+                    <span>{escape_html(role_str)}</span>
+                  </span>
+                  <span class="team-degree-tag">{escape_html(degree_badge)}</span>
+                  <span class="team-session-tag font-mono">&bull; {escape_html(period)}</span>
+                </div>
+              </div>
+            </div>
 
+            <div class="team-inquiry-box">
+              <div class="team-inquiry-kicker font-cinzel">{inquiry_label}</div>
+              <p class="team-thesis-text">&ldquo;{escape_html(thesis)}&rdquo;</p>
+            </div>
+
+            <div class="team-card-footer">
+              <div class="team-status-chip">
+                <span class="team-status-dot"></span>
+                <span>{escape_html(status)}</span>
+              </div>
+              <span class="team-photo-slot font-mono" title="Photo Slot #{photo_num:02d} (editable)">Slot #{photo_num:02d}</span>
+            </div>
+          </article>
+        """
+
+    def render_collab_card(c):
+        return f"""
+          <article class="team-card team-card-collab" data-category="collaborator">
+            <div class="team-card-top">
+              <div class="team-avatar-frame frame-collab">
+                <img src="{c['photo']}" alt="{escape_html(c['name'])}" class="team-avatar-img" width="76" height="76" loading="lazy" onerror="this.onerror=null; this.src='/assets/images/team/akbilek_seitmukhanbet.jpg';">
+              </div>
+              <div class="team-identity-block">
+                <div class="team-name-row">
+                  <h3 class="team-person-name font-cinzel">{escape_html(c['name'])}</h3>
+                  <span class="team-badge font-cinzel">{escape_html(c.get('badge', 'Academic Collaborator'))}</span>
+                </div>
+                <div class="team-meta-ribbon">
+                  <span class="team-role-collab">{escape_html(c['role'])}</span>
+                  <span class="team-session-tag font-mono">&bull; {escape_html(c['period'])}</span>
+                </div>
+                <div class="team-inst-text">{escape_html(c.get('institution', ''))}</div>
+              </div>
+            </div>
+
+            <div class="team-inquiry-box">
+              <div class="team-inquiry-kicker font-cinzel">COLLABORATION FOCUS</div>
+              <p class="team-thesis-text">&ldquo;{escape_html(c['focus'])}&rdquo;</p>
+            </div>
+
+            <div class="team-card-footer">
+              <div class="team-status-chip">
+                <span class="team-status-dot team-status-dot-gold"></span>
+                <span>Active International Scholarly Partnership</span>
+              </div>
+            </div>
+          </article>
+        """
 
     # Render PhD cards
-
-    phd_cards = ""
-
-    for s in team_data.get("phd_students", []):
-
-        phd_cards += f"""
-
-          <article class="team-card" data-category="phd">
-
-            <div class="team-avatar-frame">
-
-              <img src="{s['photo']}" alt="{s['name']}" class="team-avatar-img" onerror="this.src='assets/images/avatar.svg'">
-
-            </div>
-
-            <div class="team-info-stack">
-
-              <div class="team-card-header-row">
-
-                <h3 class="team-person-name font-cinzel">{s['name']}</h3>
-
-                <span class="team-badge font-cinzel">{s.get('badge', 'Doctoral Research')}</span>
-
-              </div>
-
-              <div class="team-role-period">
-
-                <span class="team-role">{s['role']}</span>, <span class="team-period">{s['period']}</span>
-
-              </div>
-
-              <div class="team-thesis-text">
-
-                <span class="thesis-label">Thesis title:</span> &ldquo;{s['thesis_title']}&rdquo;
-
-              </div>
-
-            </div>
-
-          </article>
-
-        """
-
-
+    phd_cards = "".join([render_student_card(s, "phd") for s in team_data.get("phd_students", [])])
 
     # Render Master cards
-
-    master_cards = ""
-
-    for s in team_data.get("master_students", []):
-
-        master_cards += f"""
-
-          <article class="team-card" data-category="master">
-
-            <div class="team-avatar-frame">
-
-              <img src="{s['photo']}" alt="{s['name']}" class="team-avatar-img" onerror="this.src='assets/images/avatar.svg'">
-
-            </div>
-
-            <div class="team-info-stack">
-
-              <div class="team-card-header-row">
-
-                <h3 class="team-person-name font-cinzel">{s['name']}</h3>
-
-                <span class="team-badge font-cinzel">{s.get('badge', "Postgraduate Scholar")}</span>
-
-              </div>
-
-              <div class="team-role-period">
-
-                <span class="team-role">{s['role']}</span>, <span class="team-period">{s['period']}</span>
-
-              </div>
-
-              <div class="team-thesis-text">
-
-                <span class="thesis-label">Thesis title:</span> &ldquo;{s['thesis_title']}&rdquo;
-
-              </div>
-
-            </div>
-
-          </article>
-
-        """
-
-
+    master_cards = "".join([render_student_card(s, "master") for s in team_data.get("master_students", [])])
 
     # Render Collaborator cards
-
-    collab_cards = ""
-
-    for c in team_data.get("collaborators", []):
-
-        collab_cards += f"""
-
-          <article class="team-card team-card-collab" data-category="collaborator">
-
-            <div class="team-avatar-frame">
-
-              <img src="{c['photo']}" alt="{c['name']}" class="team-avatar-img" onerror="this.src='assets/images/avatar.svg'">
-
-            </div>
-
-            <div class="team-info-stack">
-
-              <div class="team-card-header-row">
-
-                <h3 class="team-person-name font-cinzel">{c['name']}</h3>
-
-                <span class="team-badge font-cinzel">{c.get('badge', 'Academic Collaborator')}</span>
-
-              </div>
-
-              <div class="team-role-period">
-
-                <span class="team-role">{c['role']}</span> &bull; <span class="team-period">{c['period']}</span>
-
-              </div>
-
-              <div class="team-inst-text">{c.get('institution', '')}</div>
-
-              <div class="team-thesis-text">
-
-                <span class="thesis-label">Collaboration Focus:</span> &ldquo;{c['focus']}&rdquo;
-
-              </div>
-
-            </div>
-
-          </article>
-
-        """
-
-
+    collab_cards = "".join([render_collab_card(c) for c in team_data.get("collaborators", [])])
 
     team_script = """
-
     <script>
-
       function filterTeam(cat, btn) {
-
-        document.querySelectorAll('.team-filter-pill').forEach(function(b) {
-
+        document.querySelectorAll('.team-filter-pill, .subpage-menu-pill').forEach(function(b) {
           b.classList.remove('active');
-
           b.setAttribute('aria-selected', 'false');
-
         });
-
         if (btn) {
-
           btn.classList.add('active');
-
           btn.setAttribute('aria-selected', 'true');
-
         }
-
         var sections = document.querySelectorAll('.team-category-section');
-
         sections.forEach(function(sec) {
-
           if (cat === 'all' || sec.getAttribute('data-category') === cat) {
-
             sec.style.display = 'block';
-
           } else {
-
             sec.style.display = 'none';
-
           }
-
         });
-
       }
 
-
-
       window.addEventListener('DOMContentLoaded', function() {
-
         var hash = window.location.hash;
-
         if (hash === '#cat-phd') {
-
           var btn = document.querySelector('.team-filter-pill[onclick*="phd"]');
-
           if (btn) filterTeam('phd', btn);
-
         } else if (hash === '#cat-master') {
-
           var btn = document.querySelector('.team-filter-pill[onclick*="master"]');
-
           if (btn) filterTeam('master', btn);
-
         } else if (hash === '#cat-collaborator') {
-
           var btn = document.querySelector('.team-filter-pill[onclick*="collaborator"]');
-
           if (btn) filterTeam('collaborator', btn);
-
         }
-
       });
-
     </script>
-
     """
 
-
-
     meta = team_data.get("page_meta", {})
-
     eyebrow_text = meta.get("eyebrow", "Academic Mentorship • Laboratory Scholars • Global Network").replace('✦', '').strip()
-
-    title_text = meta.get("title", "Research Team")
-
-    subtitle_text = meta.get("subtitle", "Doctoral candidates, Master's by Research scholars, and international research collaborators under the academic supervision and mentorship of Dr. Zaid Amin.")
-
-
+    title_text = meta.get("title", "Research Team & Supervision")
+    subtitle_text = meta.get("subtitle", "Doctoral candidates, Master's by Research scholars, and international research collaborators under the academic supervision and mentorship of Dr. Zaid Amin at INTI International University.")
 
     statement_text = team_data.get("statement", "").strip()
-
     statement_html = ""
-
     if statement_text:
-
         statement_html = f"""
-
-      <div style="margin: -10px auto 32px auto; max-width: 960px; padding: 18px 26px; background: rgba(8, 20, 36, 0.65); border: 1px solid rgba(56, 189, 248, 0.22); border-left: 3px solid #d4af37; border-radius: 12px; backdrop-filter: blur(8px); text-align: center;">
-
-        <p style="font-family: var(--font-cormorant); font-size: 1.15rem; font-style: italic; color: #bae6fd; margin: 0; line-height: 1.6;">
-
+      <div class="team-statement-box">
+        <div class="team-statement-eyebrow font-cinzel">LABORATORY RESEARCH STATEMENT</div>
+        <p class="team-statement-text">
           &ldquo;{statement_text}&rdquo;
-
         </p>
-
       </div>
-
         """
 
-
-
     phd_count = len(team_data.get("phd_students", []))
-
     master_count = len(team_data.get("master_students", []))
-
     collab_count = len(team_data.get("collaborators", []))
-
     total_count = phd_count + master_count + collab_count
 
-
-
     cta = team_data.get("cta_banner", {})
-
-    cta_eyebrow = cta.get("eyebrow", "Postgraduate Admissions & Supervision")
-
+    cta_eyebrow = cta.get("eyebrow", "Postgraduate Admissions & Supervision").replace('✦', '').strip()
     cta_title = cta.get("title", "Interested in Joining Our Research Lab?")
-
     cta_desc = cta.get("description", "Dr. Zaid Amin is actively seeking self-driven Ph.D. and Master's candidates interested in Human-Computer Interaction, AI Governance, Multimodal Foundation Models, and Cognitive Attention Systems.")
-
     cta_p_text = cta.get("primary_btn_text", "View Open Topics & How to Apply →")
-
     cta_p_url = cta.get("primary_btn_url", "prospective-students.html")
-
     cta_s_text = cta.get("secondary_btn_text", "Submit Research Inquiry ↗")
-
     cta_s_url = cta.get("secondary_btn_url", "mailto:zaid.amin@newinti.edu.my")
-
-
 
     team_nav_bar_html = render_page_menu_bar("team", counts={"all": total_count, "phd": phd_count, "master": master_count, "collaborator": collab_count})
     body_html = f"""
-
     <!-- Subpage Content: Research Team & Supervision Roster -->
-
     <div class="subpage-container team-page-container">
-
       <div class="pub-gallery-hero team-hero-header">
-
         <div class="subpage-eyebrow"><span class="eyebrow-dot">&bull;</span> {eyebrow_text}</div>
-
         <h1 class="pub-gallery-title font-cinzel">{title_text}</h1>
-
         <p class="pub-gallery-subtitle">
-
           {subtitle_text}
-
         </p>
-
       </div>
 
-
+      <!-- Scholarly Metrics Telemetry Bar (Gestalt Summary) -->
+      <div class="team-metrics-bar">
+        <div class="team-metric-item">
+          <span class="team-metric-val font-cinzel">{phd_count + master_count}</span>
+          <span class="team-metric-label">Active Postgraduate Scholars</span>
+        </div>
+        <div class="team-metric-divider"></div>
+        <div class="team-metric-item">
+          <span class="team-metric-val font-cinzel">{phd_count:02d}</span>
+          <span class="team-metric-label">Doctoral (Ph.D.) Candidates</span>
+        </div>
+        <div class="team-metric-divider"></div>
+        <div class="team-metric-item">
+          <span class="team-metric-val font-cinzel">{master_count:02d}</span>
+          <span class="team-metric-label">Master's by Research Scholars</span>
+        </div>
+        <div class="team-metric-divider"></div>
+        <div class="team-metric-item">
+          <span class="team-metric-val font-cinzel">{collab_count:02d}</span>
+          <span class="team-metric-label">International Collaborators</span>
+        </div>
+      </div>
 
       {statement_html}
 
-
-
       <!-- Category Filter Controls -->
-
       {team_nav_bar_html}
 
-
-
       <!-- SECTION 1: PhD Students -->
-
       <section class="team-category-section" id="cat-phd" data-category="phd">
-
         <div class="team-category-header">
-
           <div class="team-category-title-wrap">
-
-            <span class="team-category-num font-cinzel">01</span>
-
-            <h2 class="team-category-title font-cinzel">PhD Students</h2>
-
+            <span class="team-category-num font-cinzel">01 / DOCTORAL SCHOLARS</span>
+            <h2 class="team-category-title font-cinzel">Doctoral Research Candidates (Ph.D.)</h2>
           </div>
-
-          <span class="team-category-count font-cinzel">{phd_count} Doctoral Candidates</span>
-
+          <span class="team-category-count font-cinzel">{phd_count} Active Candidates</span>
         </div>
-
         <div class="team-grid-2col">
-
           {phd_cards}
-
         </div>
-
       </section>
-
-
 
       <!-- SECTION 2: Master Students -->
-
       <section class="team-category-section" id="cat-master" data-category="master">
-
         <div class="team-category-header">
-
           <div class="team-category-title-wrap">
-
-            <span class="team-category-num font-cinzel">02</span>
-
-            <h2 class="team-category-title font-cinzel">Master Students</h2>
-
+            <span class="team-category-num font-cinzel">02 / POSTGRADUATE SCHOLARS</span>
+            <h2 class="team-category-title font-cinzel">Postgraduate Research Scholars (Master's)</h2>
           </div>
-
-          <span class="team-category-count font-cinzel">{master_count} Master's by Research Scholars</span>
-
+          <span class="team-category-count font-cinzel">{master_count} Active Scholars</span>
         </div>
-
         <div class="team-grid-2col">
-
           {master_cards}
-
         </div>
-
       </section>
-
-
 
       <!-- SECTION 3: Collaborators -->
-
       <section class="team-category-section" id="cat-collaborator" data-category="collaborator">
-
         <div class="team-category-header">
-
           <div class="team-category-title-wrap">
-
-            <span class="team-category-num font-cinzel">03</span>
-
-            <h2 class="team-category-title font-cinzel">Collaborators</h2>
-
+            <span class="team-category-num font-cinzel">03 / SCHOLARLY COLLABORATORS</span>
+            <h2 class="team-category-title font-cinzel">International Academic Collaborators</h2>
           </div>
-
-          <span class="team-category-count font-cinzel">{collab_count} International Scholarly Partners</span>
-
+          <span class="team-category-count font-cinzel">{collab_count} Senior Research Partners</span>
         </div>
-
         <div class="team-grid-2col">
-
           {collab_cards}
-
         </div>
-
       </section>
 
-
-
       <!-- Supervision & Laboratory Inquiries CTA -->
-
       <div class="team-cta-banner">
-
         <div class="team-cta-content">
-
           <span class="team-cta-eyebrow font-cinzel">{cta_eyebrow}</span>
-
           <h3 class="team-cta-title font-cinzel">{cta_title}</h3>
-
           <p class="team-cta-desc">{cta_desc}</p>
-
           <div class="team-cta-btns">
-
             <a href="{cta_p_url}" class="team-cta-btn-primary">{cta_p_text}</a>
-
             <a href="{cta_s_url}" class="team-cta-btn-secondary">{cta_s_text}</a>
-
           </div>
-
         </div>
-
       </div>
-
     </div>
-
     """
 
-
-
     return page_head + page_header + body_html + team_script + get_page_footer()
-
-
 
 def generate_cms_portal_page():
 
