@@ -10680,7 +10680,8 @@ def generate_team_page():
     """
 
     meta = team_data.get("page_meta", {})
-    eyebrow_text = meta.get("eyebrow", "Academic Mentorship • Laboratory Scholars • Global Network").replace('✦', '').strip()
+    eyebrow_text = meta.get("eyebrow", "").replace('✦', '').strip()
+    eyebrow_html = f'<div class="subpage-eyebrow"><span class="eyebrow-dot">&bull;</span> {eyebrow_text}</div>' if eyebrow_text else ''
     title_text = meta.get("title", "Research Team & Supervision")
     subtitle_text = meta.get("subtitle", "Doctoral candidates, Master's by Research scholars, and international research collaborators under the academic supervision and mentorship of Dr. Zaid Amin at INTI International University.")
 
@@ -10715,7 +10716,7 @@ def generate_team_page():
     <!-- Subpage Content: Research Team & Supervision Roster -->
     <div class="subpage-container team-page-container">
       <div class="pub-gallery-hero team-hero-header">
-        <div class="subpage-eyebrow"><span class="eyebrow-dot">&bull;</span> {eyebrow_text}</div>
+        {eyebrow_html}
         <h1 class="pub-gallery-title font-cinzel">{title_text}</h1>
         <p class="pub-gallery-subtitle">
           {subtitle_text}

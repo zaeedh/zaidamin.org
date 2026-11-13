@@ -302,6 +302,27 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794607346401",
+      "timestamp": "2026-11-13T22:02:26.401Z",
+      "path": "/research-team",
+      "title": "Research Team & Supervision Roster",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-0D4A65",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "800x600",
+      "referrer": "Direct Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
       "id": "tr-1794606357749",
       "timestamp": "2026-11-13T21:45:57.749Z",
       "path": "/publications",
@@ -4087,7 +4108,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-14T05:45:57.785355",
+  "updated_at": "2026-11-14T06:02:26.409121",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -4172,6 +4193,6 @@
     "the-polite-city-ai-human-harmonization": 26
   },
   "server_live_hits": {
-    "MY": 123
+    "MY": 124
   }
 }
