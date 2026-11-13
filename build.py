@@ -9297,19 +9297,6 @@ def generate_cv_page():
 
     html += f"""
         </div>
-
-            <div style="font-size: 0.82rem; color: var(--brand-gold); margin-top: 4px; font-weight: 700;">Role: {conf['role']}</div>
-
-          </div>
-
-        """
-
-
-
-    html += f"""
-
-        </div>
-
       </section>
 
 
