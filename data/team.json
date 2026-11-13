@@ -60,18 +60,18 @@
       "badge": "Doctoral Research"
     },
     {
-      "no": 5,
       "name": "Jane Alkushovski",
-      "student_id": "I25032933",
       "role": "Main Supervisor",
       "period": "2026-2029",
-      "thesis_title": "Human-In-The-Loop Governance Framework for Manipulated Agentic Ai Actions in Banking Cloud Environments",
-      "status": "Prepare for Proposal Defense",
-      "photo": "/assets/images/team/student_05.svg",
-      "photo_num": 5,
+      "badge": "Doctoral Research",
+      "photo": "assets/images/uploads/team_1.png",
+      "student_id": "I25032933",
       "degree": "Ph.D. Candidate",
       "program": "Doctoral Research",
-      "badge": "Doctoral Research"
+      "status": "Prepare for Proposal Defense",
+      "thesis_title": "Human-In-The-Loop Governance Framework for Manipulated Agentic Ai Actions in Banking Cloud Environments",
+      "photo_num": 5,
+      "no": 5
     },
     {
       "no": 6,
@@ -471,48 +471,53 @@
   "collaborators": [
     {
       "name": "Prof. Dr. Nazlena Mohamad Ali",
-      "role": "Head of Research & Innovation",
+      "role": "",
       "period": "2021 – Present",
+      "badge": "Academic Collaborator",
+      "photo": "assets/images/uploads/team_2.jpg",
       "institution": "Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM)",
       "focus": "Visual Informatics, Multimodal AI Frameworks & HCI Modeling",
-      "photo": "/assets/images/team/prof_nazlena_ali.png",
-      "badge": "Academic Collaborator"
+      "no": 1
     },
     {
       "name": "Dr. Rahma Santhi Zinaida",
-      "role": "Senior Lecturer",
+      "role": "Main Supervisor",
       "period": "2022 – Present",
+      "badge": "Academic Collaborator",
+      "photo": "assets/images/uploads/team_3.png",
       "institution": "School of Communication and Media Studies, Sunway University, Malaysia",
       "focus": "Digital Communication, Virtual Reality & Srivijaya Heritage Informatics",
-      "photo": "/assets/images/team/dr_rahma_zinaida.png",
-      "badge": "Academic Collaborator"
+      "no": 2
     },
     {
       "name": "Dr. Mohamad Taha Ijab",
-      "role": "Head of Quality Assurance",
+      "role": "",
       "period": "2020 – Present",
+      "badge": "Academic Collaborator",
+      "photo": "assets/images/uploads/team_5.jpeg",
       "institution": "Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM)",
       "focus": "Sociotechnical Systems, Behavior Informatics & Information Sharing",
-      "photo": "/assets/images/team/dr_taha_ijab.png",
-      "badge": "Academic Collaborator"
+      "no": 3
     },
     {
       "name": "Dr. Hasmawaty Ahmad Rahman",
-      "role": "Lead Researcher & Co-Author",
+      "role": "",
       "period": "2024 – Present",
+      "badge": "Research Collaborator",
+      "photo": "assets/images/uploads/team_6.jpg",
       "institution": "Faculty of Engineering & Computer Science, Universitas Baturaja (UNBARA)",
       "focus": "Trustworthy Multi-Agent Compliance Systems & Sustainable Smart Cities",
-      "photo": "/assets/images/team/dr_hasmawaty.png",
-      "badge": "Research Collaborator"
+      "no": 4
     },
     {
       "name": "Prof. Hj. Isnawijayani, M.Si., Ph.D.",
-      "role": "Director of Postgraduate Program",
+      "role": "",
       "period": "2018 – Present",
+      "badge": "Senior Research Advisor",
+      "photo": "assets/images/uploads/team_7.jpg",
       "institution": "Universitas Bina Darma, Indonesia",
       "focus": "Digital Ethics, Media Systems & Postgraduate Mentorship",
-      "photo": "/assets/images/team/prof_isnawijayani.png",
-      "badge": "Senior Research Advisor"
+      "no": 5
     }
   ],
   "page_meta": {

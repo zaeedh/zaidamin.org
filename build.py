@@ -10676,31 +10676,6 @@ def generate_team_page():
         </p>
       </div>
 
-      <!-- Scholarly Metrics Telemetry Bar (Gestalt Summary) -->
-      <div class="team-metrics-bar">
-        <div class="team-metric-item">
-          <span class="team-metric-val font-cinzel">{phd_count + master_count}</span>
-          <span class="team-metric-label">Active Postgraduate Scholars</span>
-        </div>
-        <div class="team-metric-divider"></div>
-        <div class="team-metric-item">
-          <span class="team-metric-val font-cinzel">{phd_count:02d}</span>
-          <span class="team-metric-label">Doctoral (Ph.D.) Candidates</span>
-        </div>
-        <div class="team-metric-divider"></div>
-        <div class="team-metric-item">
-          <span class="team-metric-val font-cinzel">{master_count:02d}</span>
-          <span class="team-metric-label">Master's by Research Scholars</span>
-        </div>
-        <div class="team-metric-divider"></div>
-        <div class="team-metric-item">
-          <span class="team-metric-val font-cinzel">{collab_count:02d}</span>
-          <span class="team-metric-label">International Collaborators</span>
-        </div>
-      </div>
-
-      {statement_html}
-
       <!-- Category Filter Controls -->
       {team_nav_bar_html}
 
