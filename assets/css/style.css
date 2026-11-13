@@ -19680,6 +19680,12 @@ mark {
 
 }
 
+.bokify-card-meta-block:empty {
+
+  display: none !important;
+
+}
+
 
 
 .bokify-card-doi {

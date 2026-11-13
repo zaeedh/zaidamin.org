@@ -4521,7 +4521,28 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
         isbn_html = f'<div class="bokify-card-doi bokify-card-isbn"><span class="bokify-doi-val">ISBN: {isbn}</span></div>' if (isbn and "on process" not in str(isbn).lower() and str(isbn).strip() != "#") else ""
 
+        meta_items = []
+        if doi_html:
+            meta_items.append(doi_html)
+        if isbn_html:
+            meta_items.append(isbn_html)
 
+        if not meta_items:
+            v_lower = str(pub.get("venue", "")).lower()
+            d_lower = str(pub.get("doi", "")).lower()
+            is_upcoming = ("on process" in v_lower or "in preparation" in v_lower or "on process" in d_lower or pub.get("year", 0) > 2026)
+            if is_upcoming:
+                target_yr = pub.get("year", "Forthcoming")
+                meta_items.append('<div class="bokify-card-doi"><span class="bokify-doi-lbl">STATUS:</span> <span class="bokify-doi-val" style="color: #fef08a; font-weight: 600;">In Editorial Preparation</span></div>')
+                meta_items.append(f'<div class="bokify-card-doi bokify-card-isbn"><span class="bokify-doi-val" style="color: #94a3b8;">Target Release: {target_yr}</span></div>')
+
+        if meta_items:
+            meta_block_html = f'''
+            <div class="bokify-card-meta-block">
+              {"".join(meta_items)}
+            </div>'''
+        else:
+            meta_block_html = ""
 
         shelf_cards_html += f"""
 
@@ -4589,14 +4610,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
             {clean_series_label}
 
             {f'<p class="bokify-card-excerpt">{excerpt}</p>' if excerpt else ''}
-
-            <div class="bokify-card-meta-block">
-
-              {doi_html}
-
-              {isbn_html}
-
-            </div>
+            {meta_block_html}
 
           </div>
 
