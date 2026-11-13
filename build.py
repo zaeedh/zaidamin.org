@@ -9254,75 +9254,49 @@ def generate_cv_page():
 
 
 
-        <h3 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 14px;">High-Impact Q1 Journals</h3>
-
+        <h3 class="cv-subsection-title font-cinzel">High-Impact Q1 Journals</h3>
         <div class="cv-journals-grid">
-
     """
-
-
 
     for jnl in cv['peer_review_and_editorial']['verified_journals']:
-
+        raw_issn = jnl.get('issn', '')
+        issn_display = f"ISSN: {raw_issn}" if any(c.isdigit() for c in raw_issn) else raw_issn
         html += f"""
-
           <article class="cv-journal-card">
-
             <div class="cv-journal-kicker-row">
-
-              <span class="cv-journal-tier font-cinzel">{jnl['tier']}</span>
-
-              <span class="cv-journal-issn">ISSN: {jnl['issn']}</span>
-
+              <span class="cv-journal-tier">{jnl['tier']}</span>
+              <span class="cv-journal-issn">{issn_display}</span>
             </div>
-
             <div class="cv-journal-body">
-
               <h4 class="cv-journal-title font-cinzel">{jnl['name']}</h4>
-
               <div class="cv-journal-publisher">{jnl['publisher']}</div>
-
             </div>
-
             <div class="cv-journal-footer">
-
               <a href="{jnl['url']}" target="_blank" rel="noopener" class="cv-journal-link">
-
                 <span>Journal Profile</span>
-
-                <span class="link-arrow">&rarr;</span>
-
+                <span class="link-arrow">&nearr;</span>
               </a>
-
             </div>
-
           </article>
-
         """
 
-
-
     html += f"""
-
         </div>
 
-
-
-        <h3 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 14px;">International Conference Technical Committees</h3>
-
+        <h3 class="cv-subsection-title font-cinzel">International Conference Technical Committees</h3>
         <div class="cv-grid-2col">
-
     """
 
-
-
     for conf in cv['peer_review_and_editorial']['conference_committees']:
-
         html += f"""
-
           <div class="cv-mini-card">
+            <div class="cv-conf-title">{conf['name']}</div>
+            <div class="cv-conf-role"><span class="cv-role-badge">{conf['role']}</span></div>
+          </div>
+        """
 
-            <div style="font-weight: 800; color: #ffffff; font-size: 0.94rem;">{conf['name']}</div>
+    html += f"""
+        </div>
 
             <div style="font-size: 0.82rem; color: var(--brand-gold); margin-top: 4px; font-weight: 700;">Role: {conf['role']}</div>
 
@@ -9427,86 +9401,47 @@ def generate_cv_page():
 
 
         <!-- Book Card -->
-
         <div class="cv-card is-highlight" style="margin-bottom: 24px;">
-
           <div class="cv-card-top">
-
             <div class="cv-card-heading">
-
-              <span class="cv-type-pill" style="margin-bottom: 6px; display: inline-block;">Scholarly Monograph (Book)</span>
-
-              <h3 class="cv-card-title">{cv['core_research_and_books']['book']['title']}</h3>
-
+              <span class="cv-kicker-badge cat-gold" style="margin-bottom: 6px;">Scholarly Monograph (Book)</span>
+              <h3 class="cv-card-title font-cinzel">{cv['core_research_and_books']['book']['title']}</h3>
               <div class="cv-card-sub">{cv['core_research_and_books']['book']['publisher']} &bull; {cv['core_research_and_books']['book']['year']}</div>
-
             </div>
-
             <div class="cv-card-badges">
-
-              <span class="cv-badge-gold">UKM Press Author</span>
-
+              <span class="cv-kicker-badge cat-gold">UKM Press Author</span>
             </div>
-
           </div>
-
           <div class="cv-card-body">
-
             {cv['core_research_and_books']['book']['description']}
-
           </div>
-
         </div>
 
-
-
-        <h3 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 14px;">Specialized Research Domains</h3>
-
+        <h3 class="cv-subsection-title font-cinzel">Specialized Research Domains</h3>
         <div class="cv-grid-2col" style="margin-bottom: 24px;">
-
     """
 
-
-
     for dom in cv['core_research_and_books']['key_domains']:
-
         html += f"""
-
           <div class="cv-mini-card">
-
-            <strong style="color: #ffffff; font-size: 0.98rem;">{dom['domain']}</strong>
-
-            <div style="font-size: 0.84rem; color: var(--text-body); margin-top: 6px; line-height: 1.55;">{dom['desc']}</div>
-
+            <strong class="cv-domain-title font-cinzel">{dom['domain']}</strong>
+            <div class="cv-domain-desc">{dom['desc']}</div>
           </div>
-
         """
 
-
-
     html += f"""
-
         </div>
 
-
-
-        <div style="background: rgba(3, 18, 32, 0.75); border: 1px solid rgba(34, 166, 200, 0.25); border-radius: 14px; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
-
+        <div class="cv-repo-banner">
           <div>
-
-            <div style="font-weight: 800; color: #ffffff; font-size: 1.05rem;">Complete {len(publications)}-Work Peer-Reviewed Repository</div>
-
-            <div style="font-size: 0.85rem; color: var(--text-body); margin-top: 2px;">Comprehensive catalog of Q1 IEEE Access, Springer LNCS, Scopus-indexed conference papers, and preprints.</div>
-
+            <div class="cv-repo-title font-cinzel">Complete {len(publications)}-Work Peer-Reviewed Repository</div>
+            <div class="cv-repo-desc">Comprehensive catalog of Q1 IEEE Access, Springer LNCS, Scopus-indexed conference papers, and preprints.</div>
           </div>
-
-          <span class="cv-badge-gold" style="font-size: 0.82rem; padding: 6px 14px; font-weight: 700;">Peer-Reviewed Repository</span>
-
+          <a href="/publications" class="pub-academic-btn pub-btn-access">
+            <span>Explore All {len(publications)} Works</span> <span class="pub-btn-arrow">&nearr;</span>
+          </a>
         </div>
-
       </section>
-
-
 
       <!-- SECTION 9: TEACHING, SUPERVISION & HIGHER EDUCATION PERMITS -->
 
@@ -9527,78 +9462,38 @@ def generate_cv_page():
         </div>
 
         <div class="cv-grid-3col">
-
           <div class="cv-mini-card">
-
-            <div class="cv-ref-role" style="color: var(--brand-gold);">Official Government Permit</div>
-
-            <div class="cv-ref-name" style="font-size: 0.95rem; margin-top: 4px;">Higher Education Teaching Permit</div>
-
-            <div style="font-size: 0.82rem; color: var(--text-body); margin-top: 6px; line-height: 1.5;">Authorized for Doctoral, Master, and Bachelor Degree Programs.</div>
-
-            <div style="margin-top: 12px;">
-
-              <a href="{exec_prof['official_docs']['teaching_permit']['url']}" target="_blank" rel="noopener" style="font-size: 0.80rem; color: #38bdf8; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
-
-                <span>Official Document</span>
-
-                <span>&rarr;</span>
-
+            <div class="cv-kicker-badge cat-gold" style="width: fit-content; margin-bottom: 8px;">Official Government Permit</div>
+            <h4 class="cv-mini-title font-cinzel">Higher Education Teaching Permit</h4>
+            <div class="cv-mini-desc">Authorized for Doctoral, Master, and Bachelor Degree Programs.</div>
+            <div class="cv-mini-action">
+              <a href="{exec_prof['official_docs']['teaching_permit']['url']}" target="_blank" rel="noopener" class="cv-doc-link">
+                <span>Official Document</span> <span class="pub-btn-arrow">&nearr;</span>
               </a>
-
             </div>
-
           </div>
-
           <div class="cv-mini-card">
-
-            <div class="cv-ref-role" style="color: #38b6d0;">Institutional Accreditation</div>
-
-            <div class="cv-ref-name" style="font-size: 0.95rem; margin-top: 4px;">MQA Official Higher Education CV</div>
-
-            <div style="font-size: 0.82rem; color: var(--text-body); margin-top: 6px; line-height: 1.5;">Malaysian Qualifications Agency standard format for higher education accreditation.</div>
-
-            <div style="margin-top: 12px;">
-
-              <a href="{exec_prof['official_docs']['mqa_cv']['url']}" target="_blank" rel="noopener" style="font-size: 0.80rem; color: #38bdf8; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
-
-                <span>Official Document</span>
-
-                <span>&rarr;</span>
-
+            <div class="cv-kicker-badge cat-cyan" style="width: fit-content; margin-bottom: 8px;">Institutional Accreditation</div>
+            <h4 class="cv-mini-title font-cinzel">MQA Official Higher Education CV</h4>
+            <div class="cv-mini-desc">Malaysian Qualifications Agency standard format for higher education accreditation.</div>
+            <div class="cv-mini-action">
+              <a href="{exec_prof['official_docs']['mqa_cv']['url']}" target="_blank" rel="noopener" class="cv-doc-link">
+                <span>Official Document</span> <span class="pub-btn-arrow">&nearr;</span>
               </a>
-
             </div>
-
           </div>
-
           <div class="cv-mini-card">
-
-            <div class="cv-ref-role" style="color: #6ee7b7;">Supervisory Roles</div>
-
-            <div class="cv-ref-name" style="font-size: 0.95rem; margin-top: 4px;">Postgraduate Dissertation Supervision</div>
-
-            <div style="font-size: 0.82rem; color: var(--text-body); margin-top: 6px; line-height: 1.5;">Appointed Master and Ph.D. dissertation supervisor at INTI International University and UKM.</div>
-
-            <div style="margin-top: 12px;">
-
-              <a href="/prospective-students" style="font-size: 0.80rem; color: #38bdf8; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
-
-                <span>Supervision Lab</span>
-
-                <span>&rarr;</span>
-
+            <div class="cv-kicker-badge cat-emerald" style="width: fit-content; margin-bottom: 8px;">Supervisory Roles</div>
+            <h4 class="cv-mini-title font-cinzel">Postgraduate Dissertation Supervision</h4>
+            <div class="cv-mini-desc">Appointed Master and Ph.D. dissertation supervisor at INTI International University and UKM.</div>
+            <div class="cv-mini-action">
+              <a href="/research-team" class="cv-doc-link">
+                <span>Supervision Lab</span> <span class="pub-btn-arrow">&nearr;</span>
               </a>
-
             </div>
-
           </div>
-
         </div>
-
       </section>
-
-
 
       <!-- SECTION 10: ACADEMIC REFERENCES & PERSONAL INTERESTS -->
 
