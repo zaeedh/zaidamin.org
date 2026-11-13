@@ -1,6 +1,6 @@
 {
   "section_label": "INDEXED JOURNALS",
-  "star_glyph": "✦",
+  "star_glyph": "·",
   "autoplay": true,
   "interval_ms": 4800,
   "enabled": true,

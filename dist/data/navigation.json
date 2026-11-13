@@ -33,7 +33,7 @@
           "label": "Research Team",
           "url": "#",
           "target": "_self",
-          "icon": "✦",
+          "icon": "none",
           "enabled": true,
           "active_pages": [
             "team"

@@ -238,7 +238,7 @@
 
                   <div class="nav-team-label-wrap">
 
-                    <span class="nav-team-sparkle">✦</span>
+                    <span class="nav-team-sparkle">none</span>
 
                     <span class="nav-team-label">Research Team</span>
 
@@ -792,7 +792,7 @@
 
             document.getElementById('reader-title').textContent = article.title;
 
-            document.getElementById('reader-cat').textContent = '✦ ' + (article.category || 'Article');
+            document.getElementById('reader-cat').textContent = (article.category || 'Article');
 
             document.getElementById('reader-time').textContent = article.reading_time || '3 min read';
 

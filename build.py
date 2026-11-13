@@ -635,7 +635,7 @@ def get_navigation_data():
 
             {"id": "publications", "label": "Research & Publications", "short_label": "Research", "url": "publications.html", "target": "_self", "icon": "none", "enabled": True, "active_pages": ["publications", "team"], "has_dropdown": True, "dropdown_items": [
 
-                {"id": "team", "label": "Research Team", "url": "research-team.html", "target": "_self", "icon": "✦", "enabled": True, "active_pages": ["team"]}
+                {"id": "team", "label": "Research Team", "url": "research-team.html", "target": "_self", "icon": "none", "enabled": True, "active_pages": ["team"]}
 
             ]},
 
@@ -735,7 +735,7 @@ def render_subpage_nav(active_page="home"):
 
                 d_active = "active" if active_page in d.get("active_pages", [d.get("id")]) else ""
 
-                sparkle = f'<span class="nav-team-sparkle">{d.get("icon", "✦")}</span>' if d.get("icon") else ''
+                sparkle = f'<span class="nav-team-sparkle">{d.get("icon", "")}</span>' if d.get("icon") else ''
 
                 sub_links.append(f'''<a href="{d_url}" class="nav-dropdown-team-link {d_active}" role="menuitem"{d_target_attr}>
 
@@ -859,7 +859,7 @@ def render_homepage_nav():
 
                 d_target_attr = f' target="{d_target}"' if d_target and d_target != "_self" else ""
 
-                sparkle = f'<span class="ref-team-sparkle">{d.get("icon", "✦")}</span>' if d.get("icon") else ''
+                sparkle = f'<span class="ref-team-sparkle">{d.get("icon", "")}</span>' if d.get("icon") else ''
 
                 sub_links.append(f'''<a href="{d_url}" class="ref-dropdown-team-link" role="menuitem" title="{d_label}"{d_target_attr}>
 
@@ -1609,7 +1609,7 @@ def get_visitor_stats_html():
 
           <div class="stats-country-item" data-country-code="{c['code']}" title="{full_name}: {pct}% of total academic traffic ({count_k} visits)">
 
-            <span class="stats-origin-badge font-cinzel" data-live-badge="{c['code']}" style="display: none;">✦ YOU</span>
+            <span class="stats-origin-badge font-cinzel" data-live-badge="{c['code']}" style="display: none;">YOU</span>
 
             <div class="stats-country-top">
 
@@ -2372,7 +2372,7 @@ def get_spotlight_card_html():
 
         oa_badge_text = "Open Access Essay"
 
-        meta_characteristic = '<span class="spotlight-gem">✦</span> ESSAYS &amp; PERSPECTIVES'
+        meta_characteristic = 'ESSAYS &amp; PERSPECTIVES'
 
         meta_detail = "80+ Scholarly Articles Archive &nearr;"
 
@@ -2434,7 +2434,7 @@ def get_spotlight_card_html():
 
         oa_badge_text = role_str
 
-        meta_characteristic = '<span class="spotlight-gem">✦</span> BROADCAST &bull; KEYNOTE'
+        meta_characteristic = 'BROADCAST &bull; KEYNOTE'
 
         meta_detail = "TVRI &amp; Media Archive &nearr;"
 
@@ -2494,7 +2494,7 @@ def get_spotlight_card_html():
 
         oa_badge_text = badge_val
 
-        meta_characteristic = '<span class="spotlight-gem">✦</span> RESEARCH EXCELLENCE'
+        meta_characteristic = 'RESEARCH EXCELLENCE'
 
         meta_detail = "Official Curriculum Vitae &nearr;"
 
@@ -2550,7 +2550,7 @@ def get_spotlight_card_html():
 
         oa_badge_text = "Open Access"
 
-        meta_characteristic = '<span class="spotlight-gem">✦</span> SCOPUS Q1 &bull; OPEN ACCESS'
+        meta_characteristic = 'SCOPUS Q1 &bull; OPEN ACCESS'
 
         meta_detail = f"doi: {doi} &nearr;" if doi else "Direct DOI &nearr;"
 
@@ -2640,7 +2640,7 @@ def get_spotlight_card_html():
 
           <div class="ref-spotlight-top-bar">
 
-            <span class="ref-kicker-pill font-cinzel"><span class="pulse-dot"></span> {kicker_badge}</span>
+            <span class="ref-kicker-pill font-cinzel">{kicker_badge}</span>
 
             <div class="ref-top-right-group">
 
@@ -2664,36 +2664,18 @@ def get_spotlight_card_html():
 
         <div class="ref-spotlight-body">
 
-          <div class="ref-scopus-kicker font-cinzel"><span class="kicker-gem">✦</span> {clean_top_kicker}</div>
+          <div class="ref-scopus-kicker font-cinzel">{clean_top_kicker}</div>
 
           <h2 class="ref-spotlight-title">{title}</h2>
 
 
 
           <div class="ref-spotlight-meta-cluster">
-
-            <span class="spotlight-chip chip-venue font-cinzel">
-
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-
-              {venue} &bull; {year_val}
-
-            </span>
-
-            <span class="spotlight-chip chip-author">
-
-              <span class="chip-author-dot"></span>
-
-              {author_name} <span class="chip-author-role">({author_pre})</span>
-
-            </span>
-
-            <span class="spotlight-chip chip-oa font-cinzel">
-
-              <span class="chip-oa-check">&#10003;</span> {oa_badge_text}
-
-            </span>
-
+            <span class="spotlight-chip chip-venue font-cinzel">{venue} &bull; {year_val}</span>
+            <span class="meta-sep">&bull;</span>
+            <span class="spotlight-chip chip-author">{author_name} ({author_pre})</span>
+            <span class="meta-sep">&bull;</span>
+            <span class="spotlight-chip chip-oa font-cinzel">{oa_badge_text}</span>
           </div>
 
 
@@ -3574,7 +3556,7 @@ def get_portals_tray_carousel_html():
 
                 <div class="ref-card-kicker-row">
 
-                  <span class="ref-kicker-tag font-cinzel"><span class="kicker-gem">✦</span> {clean_tag}</span>
+                  <span class="ref-kicker-tag font-cinzel">{clean_tag}</span>
 
                 </div>
 
@@ -3716,7 +3698,7 @@ def get_journal_ticker_html():
 
     section_label = ticker_data.get("section_label", "INDEXED JOURNALS")
 
-    star_glyph = ticker_data.get("star_glyph", "✦")
+    star_glyph = ticker_data.get("star_glyph", "·")
 
     ticker_enabled = ticker_data.get("enabled", True)
 
@@ -4656,7 +4638,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
                 "status": "Manuscript in Editorial Preparation",
 
-                "badge": "✦ Future Slot",
+                "badge": "Future Slot",
 
                 "image": "",
 
@@ -4676,7 +4658,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
             p_status = _html_mod.escape(p_data.get("status", "Manuscript in Editorial Preparation"))
 
-            p_badge = _html_mod.escape(p_data.get("badge", "✦ Future Slot"))
+            p_badge = _html_mod.escape(p_data.get("badge", "Future Slot"))
 
             p_abstract = clean_excerpt_fn(p_data.get("abstract", ""), max_len=150)
 
@@ -4892,7 +4874,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
             </a>
 
-            <span class="pub-pill-btn pub-pill-secondary bokify-pill-wireframe-slot" title="Reserved slot for forthcoming publication">✦ Pipeline Slot</span>
+            <span class="pub-pill-btn pub-pill-secondary bokify-pill-wireframe-slot" title="Reserved slot for forthcoming publication">Pipeline Slot</span>
 
           </div>
 
@@ -5234,7 +5216,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
           <div class="bokify-shelf-title-wrap">
 
-            <span class="bokify-shelf-eyebrow">✦ CURATED CORPUS</span>
+            <span class="bokify-shelf-eyebrow">CURATED CORPUS</span>
 
             <h3 class="bokify-shelf-heading font-cinzel">All Published Volumes &amp; Chapters</h3>
 
@@ -5723,7 +5705,7 @@ def generate_publications_page():
 
       <div class="pub-gallery-hero">
 
-        <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> Scholarly Archive &bull; Peer-Reviewed Corpus</div>
+        <div class="subpage-eyebrow"><span class="eyebrow-dot">&bull;</span> Scholarly Archive &bull; Peer-Reviewed Corpus</div>
 
         <h1 class="pub-gallery-title">Research &amp; Publications</h1>
 
@@ -5813,7 +5795,7 @@ def generate_research_page():
 
 
 
-    cat_pills_html = f'<button class="article-cat-btn active" data-category="all">✦ All ({len(articles)})</button>'
+    cat_pills_html = f'<button class="article-cat-btn active" data-category="all">All ({len(articles)})</button>'
 
     for cat, count in sorted(categories.items(), key=lambda x: x[1], reverse=True):
 
@@ -6188,7 +6170,7 @@ def generate_research_page():
 
         <div class="activity-hero-content">
 
-          <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> Scholarly Archive &bull; Technical Initiatives</div>
+          <div class="subpage-eyebrow"><span class="eyebrow-dot">&bull;</span> Scholarly Archive &bull; Technical Initiatives</div>
 
           <h1 class="activity-hero-title">Activity &amp; Project</h1>
 
@@ -7717,7 +7699,7 @@ def generate_talks_page():
 
         <div class="talks-hero-content">
 
-          <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> Audio-Visual Archive &bull; Keynote Engagements</div>
+          <div class="subpage-eyebrow"><span class="eyebrow-dot">&bull;</span> Audio-Visual Archive &bull; Keynote Engagements</div>
 
           <h1 class="talks-hero-title">Media &amp; Talks</h1>
 
@@ -8154,7 +8136,7 @@ def generate_supervision_page():
 
       <div style="margin-bottom: 24px;">
 
-        <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> Academic Mentorship &bull; Postgraduate Lab</div>
+        <div class="subpage-eyebrow"><span class="eyebrow-dot">&bull;</span> Academic Mentorship &bull; Postgraduate Lab</div>
 
         <h1 class="subpage-hero-title font-cinzel">{supervision['heading']}</h1>
 
@@ -9873,7 +9855,7 @@ def generate_cv_page():
 
             <div class="cv-interests-kicker">
 
-              <span class="gem">✦</span>
+              
 
               <span>Personal Interests &amp; Exploration</span>
 
@@ -9893,7 +9875,7 @@ def generate_cv_page():
 
             <div class="cv-interest-chip">
 
-              <span class="chip-gem">✦</span>
+              
 
               <span>{interest}</span>
 
@@ -10226,7 +10208,7 @@ def generate_article_reader_page(preloaded_article=None):
 
             document.getElementById('reader-title').textContent = article.title;
 
-            document.getElementById('reader-cat').textContent = '✦ ' + (article.category || 'Article');
+            document.getElementById('reader-cat').textContent = (article.category || 'Article');
 
             document.getElementById('reader-time').textContent = article.reading_time || '3 min read';
 
@@ -11011,7 +10993,7 @@ def generate_team_page():
 
     meta = team_data.get("page_meta", {})
 
-    eyebrow_text = meta.get("eyebrow", "✦ Academic Mentorship • Laboratory Scholars • Global Network").replace('✦', '').strip()
+    eyebrow_text = meta.get("eyebrow", "Academic Mentorship • Laboratory Scholars • Global Network").replace('✦', '').strip()
 
     title_text = meta.get("title", "Research Team")
 
@@ -11053,7 +11035,7 @@ def generate_team_page():
 
     cta = team_data.get("cta_banner", {})
 
-    cta_eyebrow = cta.get("eyebrow", "✦ Postgraduate Admissions & Supervision")
+    cta_eyebrow = cta.get("eyebrow", "Postgraduate Admissions & Supervision")
 
     cta_title = cta.get("title", "Interested in Joining Our Research Lab?")
 
@@ -11078,7 +11060,7 @@ def generate_team_page():
 
       <div class="pub-gallery-hero team-hero-header">
 
-        <div class="subpage-eyebrow"><span class="eyebrow-dot">✦</span> {eyebrow_text}</div>
+        <div class="subpage-eyebrow"><span class="eyebrow-dot">&bull;</span> {eyebrow_text}</div>
 
         <h1 class="pub-gallery-title font-cinzel">{title_text}</h1>
 
