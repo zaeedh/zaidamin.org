@@ -1,21 +1,21 @@
 {
-  "heading": "Research Team & Academic Supervision",
-  "subheading": "Doctoral Candidates, Master's by Research Scholars & International Scholarly Collaborators under Dr. Zaid Amin's Mentorship",
+  "heading": "Research Team & Supervision",
+  "subheading": "Doctoral candidates, Master's by Research scholars, and international research collaborators under the academic supervision and mentorship of Dr. Zaid Amin at INTI International University.",
   "statement": "Our laboratory fosters high-impact inquiry across Human-Computer Interaction, AI Governance, Multimodal Foundation Models, Sociotechnical Systems, and Cognitive Attention Modeling. We guide emerging scholars to bridge rigorous computational frameworks with empirical validity and ethical deployment.",
   "phd_students": [
     {
-      "no": 1,
       "name": "LEE Ching Kai",
-      "student_id": "I25037923",
       "role": "Main Supervisor",
       "period": "2025-2028",
-      "thesis_title": "A novel information driven STI Implementation Framework for low-income reduction in Klang Valley, Malaysia",
-      "status": "Prepare for Proposal Defense",
-      "photo": "/assets/images/team/student_01.svg",
-      "photo_num": 1,
+      "badge": "Doctoral Research",
+      "photo": "assets/images/uploads/team_R.png",
+      "student_id": "I25037923",
       "degree": "Ph.D. Candidate",
       "program": "Doctoral Research",
-      "badge": "Doctoral Research"
+      "status": "Prepare for Proposal Defense",
+      "thesis_title": "A novel information driven STI Implementation Framework for low-income reduction in Klang Valley, Malaysia",
+      "photo_num": 1,
+      "no": 1
     },
     {
       "no": 2,
@@ -32,32 +32,32 @@
       "badge": "Doctoral Research"
     },
     {
-      "no": 3,
       "name": "Muhammad Hamdan Bin Hasan Gani",
-      "student_id": "I25035671",
       "role": "Main Supervisor",
       "period": "2025-2028",
-      "thesis_title": "CHAF: A Multi-Objective, LLM-Based Recipe Recommendation Framework for Malaysian Households Design, Technical Benchmarking and User Acceptance",
-      "status": "Prepare for Proposal Defense",
-      "photo": "/assets/images/team/student_03.svg",
-      "photo_num": 3,
+      "badge": "Doctoral Research",
+      "photo": "assets/images/uploads/team_8.png",
+      "student_id": "I25035671",
       "degree": "Ph.D. Candidate",
       "program": "Doctoral Research",
-      "badge": "Doctoral Research"
+      "status": "Prepare for Proposal Defense",
+      "thesis_title": "CHAF: A Multi-Objective, LLM-Based Recipe Recommendation Framework for Malaysian Households Design, Technical Benchmarking and User Acceptance",
+      "photo_num": 3,
+      "no": 3
     },
     {
-      "no": 4,
       "name": "Ferro Handaru Adidarma",
-      "student_id": "I18016455",
       "role": "Main Supervisor",
       "period": "2025-2028",
-      "thesis_title": "Using Explainable AI (XAI) Techniques to Understand the Contributions of Multi-Modal Features in House Price Prediction",
-      "status": "Prepare for Proposal Defense",
-      "photo": "/assets/images/team/student_04.svg",
-      "photo_num": 4,
+      "badge": "Doctoral Research",
+      "photo": "assets/images/uploads/team_A.jpg",
+      "student_id": "I18016455",
       "degree": "Ph.D. Candidate",
       "program": "Doctoral Research",
-      "badge": "Doctoral Research"
+      "status": "Prepare for Proposal Defense",
+      "thesis_title": "Using Explainable AI (XAI) Techniques to Understand the Contributions of Multi-Modal Features in House Price Prediction",
+      "photo_num": 4,
+      "no": 4
     },
     {
       "name": "Jane Alkushovski",
@@ -74,18 +74,18 @@
       "no": 5
     },
     {
-      "no": 6,
       "name": "Emil Anthony Arputham",
-      "student_id": "I24027528",
       "role": "Main Supervisor",
       "period": "2025-2028",
-      "thesis_title": "Data-Driven Assessment of Emerging Connectivity Technologies Using Machine Learning in Rural and Remote Regions",
-      "status": "Prepare for Proposal Defense",
-      "photo": "/assets/images/team/student_06.svg",
-      "photo_num": 6,
+      "badge": "Doctoral Research",
+      "photo": "assets/images/uploads/team_B.png",
+      "student_id": "I24027528",
       "degree": "Ph.D. Candidate",
       "program": "Doctoral Research",
-      "badge": "Doctoral Research"
+      "status": "Prepare for Proposal Defense",
+      "thesis_title": "Data-Driven Assessment of Emerging Connectivity Technologies Using Machine Learning in Rural and Remote Regions",
+      "photo_num": 6,
+      "no": 6
     },
     {
       "no": 7,
