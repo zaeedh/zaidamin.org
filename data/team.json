@@ -286,18 +286,18 @@
       "badge": "Postgraduate Scholar"
     },
     {
-      "no": 12,
       "name": "Teoh Chee Onn",
-      "student_id": "I25035622",
-      "program": "Master in Data Science",
       "role": "Main Supervisor",
       "period": "2025-2027",
-      "thesis_title": "Predicting IT Incident Trends Using Historical Support Ticket Data",
-      "status": "Prepare for Proposal Defense",
-      "photo": "/assets/images/team/student_21.svg",
-      "photo_num": 21,
+      "badge": "Postgraduate Scholar",
+      "photo": "assets/images/uploads/team_TERRENCS.png",
+      "student_id": "I25035622",
       "degree": "Master in Data Science",
-      "badge": "Postgraduate Scholar"
+      "program": "Master in Data Science",
+      "status": "Prepare for Proposal Defense",
+      "thesis_title": "Predicting IT Incident Trends Using Historical Support Ticket Data",
+      "photo_num": 21,
+      "no": 12
     },
     {
       "no": 13,
