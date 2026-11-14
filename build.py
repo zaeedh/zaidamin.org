@@ -6109,8 +6109,6 @@ def generate_research_page():
 
         <div class="activity-hero-content">
 
-          <div class="subpage-eyebrow"><span class="eyebrow-dot">&bull;</span> Scholarly Archive &bull; Technical Initiatives</div>
-
           <h1 class="activity-hero-title">Activity &amp; Project</h1>
 
           <p class="activity-hero-subtitle">
