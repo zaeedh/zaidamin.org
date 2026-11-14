@@ -334,7 +334,7 @@ def get_html_head(
 
             ga_id = analytics_cfg.get("ga_measurement_id", "").strip()
 
-            if analytics_cfg.get("ga_enabled") and ga_id:
+            if analytics_cfg.get("ga_enabled") and ga_id and ga_id != "G-ZAIDAMIN01":
 
                 ga_snippet = f'''
 
@@ -519,7 +519,11 @@ def get_html_head(
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap">
+  </noscript>
 
   <link rel="stylesheet" href="/assets/css/style.min.css?v=5.0">
 
@@ -2190,9 +2194,9 @@ def get_page_footer(show_visitor_stats=False):
 
 
 
-  <script src="/assets/js/rain-lighting.js"></script>
+  <script defer src="/assets/js/rain-lighting.js"></script>
 
-  <script src="/assets/js/main.js?v=4.1"></script>
+  <script defer src="/assets/js/main.js?v=4.1"></script>
 
 </body>
 

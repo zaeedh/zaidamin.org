@@ -3069,15 +3069,12 @@ function initCoinPortraitEngine() {
       }))
     : DEFAULT_PORTRAITS;
 
-  // Preload all portrait images into memory for instant, buttery flips
+  // Preload modern lightweight WebP portrait images into memory
   PORTRAITS.forEach(p => {
-    if (p.png) {
+    const src = normalizeAsset(p.webp || p.png);
+    if (src) {
       const img = new Image();
-      img.src = normalizeAsset(p.png);
-    }
-    if (p.webp) {
-      const imgWebp = new Image();
-      imgWebp.src = normalizeAsset(p.webp);
+      img.src = src;
     }
   });
 
