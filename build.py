@@ -2674,8 +2674,6 @@ def get_spotlight_card_html():
             <span class="spotlight-chip chip-venue font-cinzel">{venue} &bull; {year_val}</span>
             <span class="meta-sep">&bull;</span>
             <span class="spotlight-chip chip-author">{author_name} ({author_pre})</span>
-            <span class="meta-sep">&bull;</span>
-            <span class="spotlight-chip chip-oa font-cinzel">{oa_badge_text}</span>
           </div>
 
 
