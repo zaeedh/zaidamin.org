@@ -5646,8 +5646,6 @@ def generate_publications_page():
 
       <div class="pub-gallery-hero">
 
-        <div class="subpage-eyebrow"><span class="eyebrow-dot">&bull;</span> Scholarly Archive &bull; Peer-Reviewed Corpus</div>
-
         <h1 class="pub-gallery-title">Research &amp; Publications</h1>
 
         <p class="pub-gallery-subtitle">
