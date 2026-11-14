@@ -88,18 +88,18 @@
       "no": 6
     },
     {
-      "no": 7,
       "name": "WANG Hao",
-      "student_id": "i24027528",
-      "role": "Main Supervisor",
+      "role": "Co-Supervisor",
       "period": "2024-2027",
-      "thesis_title": "STREAM:Spatio-Temporal Innovation Gating with Reliability-Weighted Calibration for Open-World Industrial Anomaly Discovery",
-      "status": "Prepare for Proposal Defense",
+      "badge": "Doctoral Research",
       "photo": "/assets/images/team/student_07.svg",
-      "photo_num": 7,
+      "student_id": "i24027528",
       "degree": "Ph.D. Candidate",
       "program": "Doctoral Research",
-      "badge": "Doctoral Research"
+      "status": "Prepare for Proposal Defense",
+      "thesis_title": "STREAM:Spatio-Temporal Innovation Gating with Reliability-Weighted Calibration for Open-World Industrial Anomaly Discovery",
+      "photo_num": 7,
+      "no": 7
     },
     {
       "name": "Mario David Hayden",
