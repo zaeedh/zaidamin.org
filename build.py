@@ -2666,8 +2666,6 @@ def get_spotlight_card_html():
 
         <div class="ref-spotlight-body">
 
-          <div class="ref-scopus-kicker font-cinzel">{clean_top_kicker}</div>
-
           <h2 class="ref-spotlight-title">{title}</h2>
 
 
