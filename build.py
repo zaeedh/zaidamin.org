@@ -10681,13 +10681,15 @@ def generate_team_page():
     total_count = phd_count + master_count + collab_count
 
     cta = team_data.get("cta_banner", {})
-    cta_eyebrow = cta.get("eyebrow", "Postgraduate Admissions & Supervision").replace('✦', '').strip()
+    cta_eyebrow = cta.get("eyebrow", "Postgraduate Admissions & Supervision").replace('✦', '').replace('✧', '').strip()
     cta_title = cta.get("title", "Interested in Joining Our Research Lab?")
     cta_desc = cta.get("description", "Dr. Zaid Amin is actively seeking self-driven Ph.D. and Master's candidates interested in Human-Computer Interaction, AI Governance, Multimodal Foundation Models, and Cognitive Attention Systems.")
-    cta_p_text = cta.get("primary_btn_text", "View Open Topics & How to Apply →")
+    cta_p_raw = cta.get("primary_btn_text", "View Open Topics & How to Apply")
     cta_p_url = cta.get("primary_btn_url", "prospective-students.html")
-    cta_s_text = cta.get("secondary_btn_text", "Submit Research Inquiry ↗")
+    cta_s_raw = cta.get("secondary_btn_text", "Submit Research Inquiry")
     cta_s_url = cta.get("secondary_btn_url", "mailto:zaid.amin@newinti.edu.my")
+    clean_p_text = re.sub(r'\s*(?:→|->|â†’|&rarr;|\s)+$', '', cta_p_raw).strip() or "View Open Topics & How to Apply"
+    clean_s_text = re.sub(r'\s*(?:↗|â†—|&nearr;|\s)+$', '', cta_s_raw).strip() or "Submit Research Inquiry"
 
     team_nav_bar_html = render_page_menu_bar("team", counts={"all": total_count, "phd": phd_count, "master": master_count, "collaborator": collab_count})
     body_html = f"""
@@ -10753,8 +10755,20 @@ def generate_team_page():
           <h3 class="team-cta-title font-cinzel">{cta_title}</h3>
           <p class="team-cta-desc">{cta_desc}</p>
           <div class="team-cta-btns">
-            <a href="{cta_p_url}" class="team-cta-btn-primary">{cta_p_text}</a>
-            <a href="{cta_s_url}" class="team-cta-btn-secondary">{cta_s_text}</a>
+            <a href="{cta_p_url}" class="team-cta-btn-primary font-cinzel">
+              <span>{clean_p_text}</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="team-cta-btn-icon">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="{cta_s_url}" class="team-cta-btn-secondary font-cinzel">
+              <span>{clean_s_text}</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="team-cta-btn-icon">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </a>
           </div>
         </div>
       </div>

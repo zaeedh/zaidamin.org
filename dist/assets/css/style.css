@@ -48436,13 +48436,13 @@ h1.cv-hero-name,
 /* --- H. Supervision & Admissions CTA Banner --- */
 .team-cta-banner {
   margin-top: 56px !important;
-  padding: 34px 32px !important;
-  background: linear-gradient(135deg, rgba(13, 21, 38, 0.85), rgba(8, 18, 34, 0.95)) !important;
-  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  padding: 42px 36px !important;
+  background: linear-gradient(135deg, rgba(8, 20, 36, 0.90) 0%, rgba(4, 14, 26, 0.96) 100%) !important;
+  border: 1px solid rgba(212, 175, 55, 0.32) !important;
   border-radius: 20px !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(212, 175, 55, 0.15) !important;
   position: relative !important;
   overflow: hidden !important;
 }
@@ -48461,82 +48461,155 @@ h1.cv-hero-name,
 
 .team-cta-eyebrow {
   display: inline-block !important;
-  font-size: 0.68rem !important;
-  letter-spacing: 0.10em !important;
+  font-family: var(--font-cinzel, 'Cinzel', serif) !important;
+  font-size: 0.70rem !important;
+  letter-spacing: 0.12em !important;
   color: #d4af37 !important;
   text-transform: uppercase !important;
   font-weight: 700 !important;
-  margin-bottom: 8px !important;
+  margin-bottom: 10px !important;
 }
 
 .team-cta-title {
-  font-family: 'Cinzel', Georgia, serif !important;
-  font-size: 1.7rem !important;
+  font-family: var(--font-cinzel, 'Cinzel', serif) !important;
+  font-size: 1.75rem !important;
   font-weight: 700 !important;
   color: #ffffff !important;
-  letter-spacing: 0.01em !important;
-  margin: 0 0 12px 0 !important;
+  letter-spacing: 0.02em !important;
+  margin: 0 0 14px 0 !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4) !important;
 }
 
 .team-cta-desc {
-  font-size: 0.90rem !important;
-  line-height: 1.65 !important;
+  font-size: 0.92rem !important;
+  line-height: 1.68 !important;
   color: #cbd5e1 !important;
-  margin: 0 0 24px 0 !important;
+  margin: 0 0 26px 0 !important;
+  max-width: 720px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .team-cta-btns {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 14px !important;
+  gap: 16px !important;
   flex-wrap: wrap !important;
 }
 
+/* Primary CTA Button: Classical Cinzel Serif, Champagne Gold Hairline Capsule (matching Read Essay) */
 .team-cta-btn-primary {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 8px !important;
-  padding: 10px 22px !important;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.32) 0%, rgba(148, 163, 184, 0.22) 100%) !important;
-  border: 1px solid rgba(212, 175, 55, 0.75) !important;
+  justify-content: center !important;
+  gap: 9px !important;
+  height: 38px !important;
+  padding: 0 24px !important;
   border-radius: 9999px !important;
-  color: #ffffff !important;
-  font-size: 0.78rem !important;
+  font-family: var(--font-cinzel, 'Cinzel', serif) !important;
+  font-size: 0.74rem !important;
   font-weight: 700 !important;
-  letter-spacing: 0.04em !important;
+  letter-spacing: 0.07em !important;
+  text-transform: uppercase !important;
   text-decoration: none !important;
+  background: rgba(34, 166, 200, 0.08) !important;
+  border: 1px solid rgba(212, 175, 55, 0.38) !important;
+  color: #fef08a !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25) !important;
   transition: all 0.22s ease !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+}
+
+.team-cta-btn-primary .team-cta-btn-icon {
+  stroke: #fef08a !important;
+  transition: transform 0.20s ease, stroke 0.20s ease !important;
 }
 
 .team-cta-btn-primary:hover {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.5) 0%, rgba(34, 166, 200, 0.45) 100%) !important;
-  border-color: #fef08a !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3) !important;
+  background: linear-gradient(135deg, #facc15 0%, #d4af37 100%) !important;
+  border-color: #facc15 !important;
+  color: #020b14 !important;
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.40), 0 0 12px rgba(250, 204, 21, 0.25) !important;
+  transform: translateY(-1px) !important;
 }
 
+.team-cta-btn-primary:hover span {
+  color: #020b14 !important;
+}
+
+.team-cta-btn-primary:hover .team-cta-btn-icon {
+  stroke: #020b14 !important;
+  transform: translateX(3px) !important;
+}
+
+.team-cta-btn-primary:active {
+  background: linear-gradient(135deg, #d4af37 0%, #b8972e 100%) !important;
+  border-color: #d4af37 !important;
+  color: #020a14 !important;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.35) !important;
+  transform: translateY(0) scale(0.98) !important;
+}
+
+.team-cta-btn-primary:active span {
+  color: #020a14 !important;
+}
+
+.team-cta-btn-primary:active .team-cta-btn-icon {
+  stroke: #020a14 !important;
+}
+
+/* Secondary CTA Button: Harmonized Slate Obsidian Capsule */
 .team-cta-btn-secondary {
   display: inline-flex !important;
   align-items: center !important;
+  justify-content: center !important;
   gap: 8px !important;
-  padding: 10px 22px !important;
-  background: rgba(15, 23, 42, 0.5) !important;
-  border: 1px solid rgba(148, 163, 184, 0.22) !important;
+  height: 38px !important;
+  padding: 0 22px !important;
   border-radius: 9999px !important;
-  color: #94a3b8 !important;
-  font-size: 0.78rem !important;
+  font-family: var(--font-cinzel, 'Cinzel', serif) !important;
+  font-size: 0.73rem !important;
   font-weight: 600 !important;
-  letter-spacing: 0.04em !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
   text-decoration: none !important;
+  background: rgba(15, 23, 42, 0.60) !important;
+  border: 1px solid rgba(148, 163, 184, 0.25) !important;
+  color: #94a3b8 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.20) !important;
   transition: all 0.22s ease !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+}
+
+.team-cta-btn-secondary .team-cta-btn-icon {
+  stroke: #94a3b8 !important;
+  transition: transform 0.20s ease, stroke 0.20s ease !important;
 }
 
 .team-cta-btn-secondary:hover {
-  border-color: rgba(56, 189, 248, 0.45) !important;
-  color: #ffffff !important;
-  background: rgba(22, 36, 60, 0.75) !important;
+  background: rgba(22, 36, 60, 0.85) !important;
+  border-color: rgba(56, 189, 248, 0.50) !important;
+  color: #f1f5f9 !important;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.20) !important;
   transform: translateY(-1px) !important;
+}
+
+.team-cta-btn-secondary:hover span {
+  color: #f1f5f9 !important;
+}
+
+.team-cta-btn-secondary:hover .team-cta-btn-icon {
+  stroke: #f1f5f9 !important;
+  transform: translate(2px, -2px) !important;
+}
+
+.team-cta-btn-secondary:active {
+  background: rgba(18, 30, 50, 0.95) !important;
+  border-color: rgba(56, 189, 248, 0.40) !important;
+  transform: translateY(0) scale(0.98) !important;
 }
 
 /* Site Footer (Centered Alignment Restored) */
