@@ -26792,6 +26792,43 @@ h1.cv-hero-name,
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
   box-shadow: 0 16px 44px rgba(0, 8, 20, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  overflow: hidden !important;
+}
+
+/* Ambient Academic Network Watermark (Gestalt Continuity & Royal Dark Blue Harmonization) */
+.cv-hero-watermark {
+  position: absolute !important;
+  right: -10px !important;
+  bottom: -15px !important;
+  width: 350px !important;
+  height: 350px !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+  opacity: 0.34 !important;
+  transition: opacity 0.5s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  mask-image: radial-gradient(circle at 80% 80%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0.55) 58%, rgba(0, 0, 0, 0) 80%) !important;
+  -webkit-mask-image: radial-gradient(circle at 80% 80%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0.55) 58%, rgba(0, 0, 0, 0) 80%) !important;
+}
+
+.cv-hero-card:hover .cv-hero-watermark {
+  opacity: 0.44 !important;
+  transform: scale(1.02) !important;
+}
+
+.cv-hero-watermark-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+}
+
+.cv-hero-top,
+.cv-hero-summary,
+.cv-hero-sublayer {
+  position: relative !important;
+  z-index: 2 !important;
 }
 
 .cv-hero-top {
@@ -27289,6 +27326,13 @@ h1.cv-hero-name,
 @media (max-width: 680px) {
   .cv-hero-card {
     padding: 22px 18px !important;
+  }
+  .cv-hero-watermark {
+    width: 260px !important;
+    height: 260px !important;
+    right: -20px !important;
+    bottom: -20px !important;
+    opacity: 0.14 !important;
   }
   .cv-hero-top {
     flex-direction: column !important;
@@ -45572,6 +45616,43 @@ h1.cv-hero-name,
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
   box-shadow: 0 16px 44px rgba(0, 8, 20, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  overflow: hidden !important;
+}
+
+/* Ambient Academic Network Watermark (Gestalt Continuity & Royal Dark Blue Harmonization) */
+.cv-hero-watermark {
+  position: absolute !important;
+  right: -10px !important;
+  bottom: -15px !important;
+  width: 350px !important;
+  height: 350px !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+  opacity: 0.34 !important;
+  transition: opacity 0.5s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  mask-image: radial-gradient(circle at 80% 80%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0.55) 58%, rgba(0, 0, 0, 0) 80%) !important;
+  -webkit-mask-image: radial-gradient(circle at 80% 80%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0.55) 58%, rgba(0, 0, 0, 0) 80%) !important;
+}
+
+.cv-hero-card:hover .cv-hero-watermark {
+  opacity: 0.44 !important;
+  transform: scale(1.02) !important;
+}
+
+.cv-hero-watermark-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+}
+
+.cv-hero-top,
+.cv-hero-summary,
+.cv-hero-sublayer {
+  position: relative !important;
+  z-index: 2 !important;
 }
 
 .cv-hero-top {
@@ -46069,6 +46150,13 @@ h1.cv-hero-name,
 @media (max-width: 680px) {
   .cv-hero-card {
     padding: 22px 18px !important;
+  }
+  .cv-hero-watermark {
+    width: 260px !important;
+    height: 260px !important;
+    right: -20px !important;
+    bottom: -20px !important;
+    opacity: 0.14 !important;
   }
   .cv-hero-top {
     flex-direction: column !important;
