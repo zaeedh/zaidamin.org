@@ -302,6 +302,27 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794633913826",
+      "timestamp": "2026-11-14T05:25:13.826Z",
+      "path": "/article/tri-dharma-perguruan-tinggi/",
+      "title": "TRI DHARMA PERGURUAN TINGGI | Dr. Zaid Amin",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-54513B",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "800x600",
+      "referrer": "Direct Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
       "id": "tr-1794633470068",
       "timestamp": "2026-11-14T05:17:50.068Z",
       "path": "/",
@@ -4738,7 +4759,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-14T13:17:50.096396",
+  "updated_at": "2026-11-14T13:25:13.849403",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -4767,7 +4788,7 @@
     "soho": 7,
     "packet-tracer-version-53-software-downloads": 6,
     "cisco-tries-to-head-off-software-defined-networks": 5,
-    "tri-dharma-perguruan-tinggi": 4,
+    "tri-dharma-perguruan-tinggi": 5,
     "next-generation-network": 8,
     "recompile-dan-rekonfigurasi-freebsd-kernel-for-ipsec": 9,
     "how-do-we-excel": 8,
@@ -4823,6 +4844,6 @@
     "the-polite-city-ai-human-harmonization": 26
   },
   "server_live_hits": {
-    "MY": 154
+    "MY": 155
   }
 }
