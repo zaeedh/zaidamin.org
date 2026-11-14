@@ -18096,18 +18096,42 @@ mark {
 
 
 
-.pub-pill-primary:hover {
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover {
+  background: linear-gradient(135deg, #facc15 0%, #d4af37 100%) !important;
+  border-color: #facc15 !important;
+  color: #031220 !important;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.40), 0 0 10px rgba(250, 204, 21, 0.25) !important;
+  transform: translateY(-1px) !important;
+}
 
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.35) 0%, rgba(34, 166, 200, 0.40) 100%);
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg,
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg path,
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg polyline,
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg line {
+  stroke: #031220 !important;
+}
 
-  border-color: #d4af37;
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover span {
+  color: #031220 !important;
+}
 
-  color: #ffffff;
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active {
+  background: linear-gradient(135deg, #d4af37 0%, #b8972e 100%) !important;
+  border-color: #d4af37 !important;
+  color: #020a14 !important;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.35) !important;
+  transform: translateY(0) scale(0.98) !important;
+}
 
-  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.25);
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active svg,
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active svg path,
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active svg polyline,
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active svg line {
+  stroke: #020a14 !important;
+}
 
-  transform: translateY(-1px);
-
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active span {
+  color: #020a14 !important;
 }
 
 
@@ -21168,13 +21192,54 @@ mark {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
 }
 
-.pub-btn-access:hover,
-.pub-strip-actions .pub-pill-primary:hover {
-  background: rgba(197, 155, 39, 0.2) !important;
-  color: #ffffff !important;
-  border-color: rgba(197, 155, 39, 0.6) !important;
-  box-shadow: 0 4px 12px rgba(197, 155, 39, 0.15) !important;
+.pub-btn-access:not(.pub-btn-request):hover,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover {
+  background: linear-gradient(135deg, #facc15 0%, #d4af37 100%) !important;
+  border-color: #facc15 !important;
+  color: #031220 !important;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.40), 0 0 10px rgba(250, 204, 21, 0.25) !important;
   transform: translateY(-1px) !important;
+}
+
+.pub-btn-access:not(.pub-btn-request):hover svg,
+.pub-btn-access:not(.pub-btn-request):hover svg path,
+.pub-btn-access:not(.pub-btn-request):hover svg polyline,
+.pub-btn-access:not(.pub-btn-request):hover svg line,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg path,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg polyline,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg line {
+  stroke: #031220 !important;
+}
+
+.pub-btn-access:not(.pub-btn-request):hover span,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover span {
+  color: #031220 !important;
+}
+
+.pub-btn-access:not(.pub-btn-request):active,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active {
+  background: linear-gradient(135deg, #d4af37 0%, #b8972e 100%) !important;
+  border-color: #d4af37 !important;
+  color: #020a14 !important;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.35) !important;
+  transform: translateY(0) scale(0.98) !important;
+}
+
+.pub-btn-access:not(.pub-btn-request):active svg,
+.pub-btn-access:not(.pub-btn-request):active svg path,
+.pub-btn-access:not(.pub-btn-request):active svg polyline,
+.pub-btn-access:not(.pub-btn-request):active svg line,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active svg,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active svg path,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active svg polyline,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active svg line {
+  stroke: #020a14 !important;
+}
+
+.pub-btn-access:not(.pub-btn-request):active span,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active span {
+  color: #020a14 !important;
 }
 
 /* Secondary Cite / BibTeX Button: Subtle hairline slate */
@@ -36876,18 +36941,42 @@ mark {
 
 
 
-.pub-pill-primary:hover {
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover {
+  background: linear-gradient(135deg, #facc15 0%, #d4af37 100%) !important;
+  border-color: #facc15 !important;
+  color: #031220 !important;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.40), 0 0 10px rgba(250, 204, 21, 0.25) !important;
+  transform: translateY(-1px) !important;
+}
 
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.35) 0%, rgba(34, 166, 200, 0.40) 100%);
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg,
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg path,
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg polyline,
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg line {
+  stroke: #031220 !important;
+}
 
-  border-color: #d4af37;
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover span {
+  color: #031220 !important;
+}
 
-  color: #ffffff;
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active {
+  background: linear-gradient(135deg, #d4af37 0%, #b8972e 100%) !important;
+  border-color: #d4af37 !important;
+  color: #020a14 !important;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.35) !important;
+  transform: translateY(0) scale(0.98) !important;
+}
 
-  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.25);
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active svg,
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active svg path,
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active svg polyline,
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active svg line {
+  stroke: #020a14 !important;
+}
 
-  transform: translateY(-1px);
-
+.pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active span {
+  color: #020a14 !important;
 }
 
 
@@ -39948,13 +40037,54 @@ mark {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
 }
 
-.pub-btn-access:hover,
-.pub-strip-actions .pub-pill-primary:hover {
-  background: rgba(197, 155, 39, 0.2) !important;
-  color: #ffffff !important;
-  border-color: rgba(197, 155, 39, 0.6) !important;
-  box-shadow: 0 4px 12px rgba(197, 155, 39, 0.15) !important;
+.pub-btn-access:not(.pub-btn-request):hover,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover {
+  background: linear-gradient(135deg, #facc15 0%, #d4af37 100%) !important;
+  border-color: #facc15 !important;
+  color: #031220 !important;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.40), 0 0 10px rgba(250, 204, 21, 0.25) !important;
   transform: translateY(-1px) !important;
+}
+
+.pub-btn-access:not(.pub-btn-request):hover svg,
+.pub-btn-access:not(.pub-btn-request):hover svg path,
+.pub-btn-access:not(.pub-btn-request):hover svg polyline,
+.pub-btn-access:not(.pub-btn-request):hover svg line,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg path,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg polyline,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg line {
+  stroke: #031220 !important;
+}
+
+.pub-btn-access:not(.pub-btn-request):hover span,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover span {
+  color: #031220 !important;
+}
+
+.pub-btn-access:not(.pub-btn-request):active,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active {
+  background: linear-gradient(135deg, #d4af37 0%, #b8972e 100%) !important;
+  border-color: #d4af37 !important;
+  color: #020a14 !important;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.35) !important;
+  transform: translateY(0) scale(0.98) !important;
+}
+
+.pub-btn-access:not(.pub-btn-request):active svg,
+.pub-btn-access:not(.pub-btn-request):active svg path,
+.pub-btn-access:not(.pub-btn-request):active svg polyline,
+.pub-btn-access:not(.pub-btn-request):active svg line,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active svg,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active svg path,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active svg polyline,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active svg line {
+  stroke: #020a14 !important;
+}
+
+.pub-btn-access:not(.pub-btn-request):active span,
+.pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active span {
+  color: #020a14 !important;
 }
 
 /* Secondary Cite / BibTeX Button: Subtle hairline slate */
