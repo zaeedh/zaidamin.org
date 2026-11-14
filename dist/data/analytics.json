@@ -302,6 +302,48 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794648827224",
+      "timestamp": "2026-11-14T09:33:47.224Z",
+      "path": "/article?id=the-polite-city-ai-human-harmonization",
+      "title": "The Polite City: Why the Future of Smart Cities Needs Courteous AI, Not Digital Wardens | Dr. Zaid Amin",
+      "action": "PAGE_VIEW",
+      "post_id": "the-polite-city-ai-human-harmonization",
+      "visitor_id": "Reader-9EFE9B",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Google Chrome",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "800x600",
+      "referrer": "Direct Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36"
+    },
+    {
+      "id": "tr-1794648824705",
+      "timestamp": "2026-11-14T09:33:44.705Z",
+      "path": "/article/the-polite-city-ai-human-harmonization/",
+      "title": "The Polite City: Why the Future of Smart Cities Needs Courteous AI, Not Digital Wardens | Dr. Zaid Amin",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-9EFE9B",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Google Chrome",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "800x600",
+      "referrer": "Direct Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36"
+    },
+    {
       "id": "tr-1794646517539",
       "timestamp": "2026-11-14T08:55:17.539Z",
       "path": "/publications",
@@ -5284,7 +5326,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-14T16:55:17.543693",
+  "updated_at": "2026-11-14T17:33:47.246506",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -5366,9 +5408,9 @@
     "web-20-death-of-the-network-engineer": 10,
     "i-knew-i-can": 9,
     "what-is-network-engineering": 8,
-    "the-polite-city-ai-human-harmonization": 26
+    "the-polite-city-ai-human-harmonization": 28
   },
   "server_live_hits": {
-    "MY": 180
+    "MY": 182
   }
 }

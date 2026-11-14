@@ -9966,9 +9966,11 @@ def generate_article_reader_page(preloaded_article=None):
 
             document.getElementById('reader-title').textContent = article.title;
 
-            document.getElementById('reader-cat').textContent = (article.category || 'Article');
+            var catEl = document.getElementById('reader-cat');
+            if (catEl) catEl.textContent = (article.category || 'Article');
 
-            document.getElementById('reader-time').textContent = article.reading_time || '3 min read';
+            var timeEl = document.getElementById('reader-time');
+            if (timeEl) timeEl.textContent = article.reading_time || '3 min read';
 
             document.getElementById('reader-date').textContent = 'Published • ' + article.date;
 
@@ -10350,21 +10352,8 @@ def generate_article_reader_page(preloaded_article=None):
 
     <main class="article-reader-container" id="article-reader-root">
 
-      <!-- Article Header (Harmonized Gestalt Kicker & Golden Ratio Alignment) -->
+      <!-- Article Header -->
       <header class="article-reader-hero">
-        <div class="article-hero-kicker-row">
-          <div class="article-kicker-left">
-            <span class="article-badge-cat" id="reader-cat">{ssr_cat}</span>
-            <span class="article-time-badge" id="reader-time">{ssr_time}</span>
-          </div>
-          <a href="/research#articles" class="article-back-link font-cinzel" title="Return to Activity &amp; Project Hub">
-            <svg class="back-arrow-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            <span>Back to Activity &amp; Project</span>
-          </a>
-        </div>
-
-
-
         <h1 class="article-reader-title" id="reader-title">{ssr_title}</h1>
 
 
