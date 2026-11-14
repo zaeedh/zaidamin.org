@@ -213,6 +213,20 @@
   ],
   "opinions": [
     {
+      "id": "opinion-1794648228300",
+      "title": "Dr. Zaid Amin of UBD Clinches Best Presenter at IEEE International Conference",
+      "type": "Public Intellectual",
+      "badge": "Opinion & Public Intellect",
+      "publication": "Online Media \"Radar Palembang\"",
+      "year": "2026",
+      "date_display": "",
+      "abstract": "At the 4th International Conference on Electronic and Electrical Engineering and Intelligent System (ICE3IS 2024), hosted by Universitas Muhammadiyah Yogyakarta, scholars and industry leaders gathered to address the future of intelligent technologies for sustainable societies. Amidst competitive global presentations, Dr. Zaid Amin, Informatics Engineering Lecturer at Universitas Bina Darma (UBD), distinguished himself on the international stage by clinching the Best Presenter Award.\n\nDr. Zaid delivered an engaging presentation on his research titled “Tune-Attention Model: Designing Cybernetics Intervention for Information Sharing Behavior,” a collaborative study conducted alongside Assoc. Prof. Dr. Nazlena Mohamad Ali from Universiti Kebangsaan Malaysia (UKM). His paper tackled the pressing digital challenge of cognitive attention and behavioral interventions in online information ecosystems.\n\nThe presentation captivated both plenary and technical session audiences, earning top honors at the conference. With the proceedings bound for publication in IEEE Xplore and indexed by Scopus, the achievement underscores UBD’s institutional commitment to fostering internationally benchmarked computational research and cross-border academic excellence.",
+      "url": "https://radarpalembang.bacakoran.co/read/10039/dosen-teknik-informatika-ubd-zaid-amin-phd-raih-best-presenter-scopus-confrence-ieee-xplore",
+      "palette": "ivory",
+      "arch_style": "arch-cathedral",
+      "image": "assets/images/uploads/Radar_1.png"
+    },
+    {
       "id": "opinion-das-sein-das-sollen",
       "title": "Moral Decadence and Mental Health in the Era of Society 5.0",
       "type": "Philosophical Opinion",
