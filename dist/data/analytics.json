@@ -302,6 +302,27 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794667639748",
+      "timestamp": "2026-11-14T14:47:19.748Z",
+      "path": "/talks",
+      "title": "Media & Talks",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-C7455C",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Google Chrome",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "800x600",
+      "referrer": "Direct Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36"
+    },
+    {
       "id": "tr-1794664042073",
       "timestamp": "2026-11-14T13:47:22.073Z",
       "path": "/talks",
@@ -5725,7 +5746,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-14T21:47:22.099524",
+  "updated_at": "2026-11-14T22:47:19.762285",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -5810,6 +5831,6 @@
     "the-polite-city-ai-human-harmonization": 28
   },
   "server_live_hits": {
-    "MY": 201
+    "MY": 202
   }
 }

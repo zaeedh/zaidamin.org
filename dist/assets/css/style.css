@@ -22863,7 +22863,7 @@ mark {
   max-height: none;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 2px 4px 2px 2px;
+  padding: 4px;
   scrollbar-width: thin;
   scrollbar-color: rgba(212, 175, 55, 0.28) transparent;
   scroll-behavior: smooth;
@@ -22895,34 +22895,36 @@ mark {
   border: 1px solid rgba(186, 230, 253, 0.08);
   border-radius: 10px;
   cursor: pointer;
-  transition: all 0.30s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   text-align: left;
   width: 100%;
   position: relative;
+  transform: none !important;
 }
 
 .video-playlist-item:hover {
-  background: rgba(14, 32, 48, 0.92);
-  border-color: rgba(212, 175, 55, 0.45);
-  transform: translateX(4px);
+  background: rgba(16, 36, 56, 0.95);
+  border-color: rgba(212, 175, 55, 0.50);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.40);
+  transform: none !important;
 }
 
 .video-playlist-item.active {
-  background: linear-gradient(90deg, rgba(212, 175, 55, 0.14) 0%, rgba(10, 24, 38, 0.96) 100%);
-  border-color: rgba(212, 175, 55, 0.75);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
-  transform: translateX(4px);
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.16) 0%, rgba(10, 24, 38, 0.96) 100%);
+  border-color: rgba(212, 175, 55, 0.85);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.50), inset 0 0 0 1px rgba(212, 175, 55, 0.20);
+  transform: none !important;
 }
 
 .video-playlist-item.active::before {
   content: '';
   position: absolute;
-  left: -1px;
+  left: 0;
   top: 15%;
   height: 70%;
   width: 3px;
   background: linear-gradient(180deg, #fce09b, #d4af37);
-  border-radius: 999px;
+  border-radius: 0 4px 4px 0;
   box-shadow: none;
 }
 
@@ -41482,7 +41484,7 @@ mark {
   max-height: none;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 2px 4px 2px 2px;
+  padding: 4px;
   scrollbar-width: thin;
   scrollbar-color: rgba(212, 175, 55, 0.28) transparent;
   scroll-behavior: smooth;
@@ -41514,34 +41516,36 @@ mark {
   border: 1px solid rgba(186, 230, 253, 0.08);
   border-radius: 10px;
   cursor: pointer;
-  transition: all 0.30s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   text-align: left;
   width: 100%;
   position: relative;
+  transform: none !important;
 }
 
 .video-playlist-item:hover {
-  background: rgba(14, 32, 48, 0.92);
-  border-color: rgba(212, 175, 55, 0.45);
-  transform: translateX(4px);
+  background: rgba(16, 36, 56, 0.95);
+  border-color: rgba(212, 175, 55, 0.50);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.40);
+  transform: none !important;
 }
 
 .video-playlist-item.active {
-  background: linear-gradient(90deg, rgba(212, 175, 55, 0.14) 0%, rgba(10, 24, 38, 0.96) 100%);
-  border-color: rgba(212, 175, 55, 0.75);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
-  transform: translateX(4px);
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.16) 0%, rgba(10, 24, 38, 0.96) 100%);
+  border-color: rgba(212, 175, 55, 0.85);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.50), inset 0 0 0 1px rgba(212, 175, 55, 0.20);
+  transform: none !important;
 }
 
 .video-playlist-item.active::before {
   content: '';
   position: absolute;
-  left: -1px;
+  left: 0;
   top: 15%;
   height: 70%;
   width: 3px;
   background: linear-gradient(180deg, #fce09b, #d4af37);
-  border-radius: 999px;
+  border-radius: 0 4px 4px 0;
   box-shadow: none;
 }
 
