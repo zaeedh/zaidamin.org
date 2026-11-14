@@ -148,7 +148,7 @@
       "url": "https://drive.google.com/file/d/1MEJWn1XI03aQ4LvBTYqnFaF4YKHcLdae/view?usp=sharing",
       "palette": "ivory",
       "arch_style": "arch-cathedral",
-      "image": "/assets/images/uploads/IVI.png"
+      "image": "/assets/images/uploads/IVI.webp"
     },
     {
       "id": "keynote-1793869451640",
@@ -163,7 +163,7 @@
       "url": "https://tinyurl.com/4jzbhpc9",
       "palette": "ivory",
       "arch_style": "arch-cathedral",
-      "image": "/assets/images/uploads/dehasen.png"
+      "image": "/assets/images/uploads/dehasen.webp"
     },
     {
       "id": "keynote-matcom-2026",
@@ -178,7 +178,7 @@
       "url": "https://tinyurl.com/y54buapz",
       "palette": "ivory",
       "arch_style": "arch-cathedral",
-      "image": "/assets/images/uploads/Dr._Zaid_Amin_flyer.jpg"
+      "image": "/assets/images/uploads/Dr._Zaid_Amin_flyer.webp"
     },
     {
       "id": "keynote-ukm-trustworthy-ai",
@@ -193,7 +193,7 @@
       "url": "https://tinyurl.com/37j76mxz",
       "palette": "gold",
       "arch_style": "arch-starburst",
-      "image": "/assets/images/uploads/WhatsApp_Image_2026-07-18_at_17.45.26.jpeg"
+      "image": "/assets/images/uploads/WhatsApp_Image_2026-07-18_at_17.45.26.webp"
     },
     {
       "id": "keynote-autonomous-systems-2026",
@@ -208,7 +208,7 @@
       "url": "https://tinyurl.com/y54buapz",
       "palette": "noir",
       "arch_style": "arch-scoop",
-      "image": "/assets/images/uploads/489425378_1409742420348925_4390671906595567802_n.jpg"
+      "image": "/assets/images/uploads/489425378_1409742420348925_4390671906595567802_n.webp"
     }
   ],
   "opinions": [
@@ -224,7 +224,7 @@
       "url": "https://radarpalembang.bacakoran.co/read/10039/dosen-teknik-informatika-ubd-zaid-amin-phd-raih-best-presenter-scopus-confrence-ieee-xplore",
       "palette": "ivory",
       "arch_style": "arch-cathedral",
-      "image": "assets/images/uploads/Radar_1.png"
+      "image": "assets/images/uploads/Radar_1.webp"
     },
     {
       "id": "opinion-das-sein-das-sollen",
@@ -238,7 +238,7 @@
       "url": "https://sumeks.disway.id/opini/read/749470/dekadensi-moral-dan-kesehatan-mental-di-era-masyarakat-50",
       "palette": "ivory",
       "arch_style": "arch-cathedral",
-      "image": "/assets/images/uploads/SUMEKS.png"
+      "image": "/assets/images/uploads/SUMEKS.webp"
     },
     {
       "id": "opinion-the-proxy-trap",
@@ -252,7 +252,7 @@
       "url": "https://sumeks.disway.id/opini/read/763397/ketimpangan-sosial-flexing-pejabat-dan-luka-perbandingan-diri-di-media-sosial",
       "palette": "gold",
       "arch_style": "arch-starburst",
-      "image": "/assets/images/uploads/SUMEKS2.png"
+      "image": "/assets/images/uploads/SUMEKS2.webp"
     },
     {
       "id": "opinion-reclaiming-attention",
@@ -266,7 +266,7 @@
       "url": "https://seputarsumatera.com/polarisasi-di-era-digital-ancaman-diam-diam-bagi-persatuan-dan-demokrasi/",
       "palette": "noir",
       "arch_style": "arch-scoop",
-      "image": "/assets/images/uploads/seputar1.png"
+      "image": "/assets/images/uploads/seputar1.webp"
     }
   ]
 }

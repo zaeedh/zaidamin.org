@@ -6442,7 +6442,7 @@ def generate_talks_page():
 
           <div class="video-item-thumb-box">
 
-            <img src="{v_poster}" alt="{v_title}" class="video-item-thumb-img" loading="lazy" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+            <img src="{v_poster}" alt="{v_title}" class="video-item-thumb-img" loading="lazy" decoding="async" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
 
             <div class="video-item-thumb-yt-badge">
 
@@ -6473,7 +6473,9 @@ def generate_talks_page():
 
 
     playlist_joined = "\n".join(playlist_items_html)
-# Reusable Icon library for top-right circular badge
+    total_episodes_count = f"{len(talkshows):02d}"
+
+    # Reusable Icon library for top-right circular badge
 
     icon_map = {
 
@@ -6560,11 +6562,8 @@ def generate_talks_page():
 
 
         media_stage_html = f'''<div class="service-card-media-stage">
-
-            <img src="{k_img}" alt="" class="service-card-bg-glow" aria-hidden="true">
-
-            <img src="{k_img}" alt="{k_title}" class="service-card-fg-poster" loading="lazy" onerror="this.src=\'assets/images/spotlight-smart-cities.jpg\'">
-
+            <img src="{k_img}" alt="" class="service-card-bg-glow" aria-hidden="true" loading="lazy" decoding="async">
+            <img src="{k_img}" alt="{k_title}" class="service-card-fg-poster" loading="lazy" decoding="async" onerror="this.src=\'assets/images/spotlight-smart-cities.jpg\'">
           </div>'''
 
 
@@ -6644,11 +6643,8 @@ def generate_talks_page():
 
 
         media_stage_html = f'''<div class="service-card-media-stage">
-
-            <img src="{o_img}" alt="" class="service-card-bg-glow" aria-hidden="true">
-
-            <img src="{o_img}" alt="{o_title}" class="service-card-fg-poster" loading="lazy" onerror="this.src=\'assets/images/spotlight-smart-cities.jpg\'">
-
+            <img src="{o_img}" alt="" class="service-card-bg-glow" aria-hidden="true" loading="lazy" decoding="async">
+            <img src="{o_img}" alt="{o_title}" class="service-card-fg-poster" loading="lazy" decoding="async" onerror="this.src=\'assets/images/spotlight-smart-cities.jpg\'">
           </div>'''
 
 
@@ -6725,35 +6721,69 @@ def generate_talks_page():
 
     js_controller = """
 
+
+
     <!-- Client-side Interactive Controller for Video Stage & Carousels -->
+
+
 
     <script>
 
+
+
       document.addEventListener("DOMContentLoaded", function () {
+
+
 
         // 1. Video Gallery Stage Interaction
 
+
+
         const stagePoster = document.getElementById("stage-poster-img");
+
+
 
         const stageTitle = document.getElementById("stage-title");
 
+
+
         const stageDesc = document.getElementById("stage-description");
+
+
 
         const stageNetworkTitle = document.getElementById("stage-network-title");
 
+
+
         const stageNetworkSub = document.getElementById("stage-network-sub");
+
+
 
         const stageDate = document.getElementById("stage-date");
 
+
+
         const stageBadge = document.getElementById("stage-badge");
+
+
 
         const stageWatchLink = document.getElementById("stage-watch-link");
 
+
+
         const stageDuration = document.getElementById("stage-duration");
+
+
 
         const stagePlayBtn = document.getElementById("stage-play-center");
 
+
+
         const playlistItems = document.querySelectorAll(".video-playlist-item");
+
+
+
+
 
 
 
@@ -6761,532 +6791,1733 @@ def generate_talks_page():
 
 
 
+
+
+
+
         let isPlayerActive = false;
 
+
+
         const stageIframe = document.getElementById("stage-video-iframe");
+
+
 
         const stageCloseBtn = document.getElementById("stage-close-player");
 
 
 
+
+
+
+
         function startVideoPlayer(embedUrl) {
+
+
 
           if (!stageIframe || !embedUrl) return;
 
+
+
           let finalEmbed = embedUrl;
+
+
 
           const ytMatch = embedUrl.match(/(?:youtube[.]com\\/(?:watch[?]v=|embed\\/|v\\/)|youtu[.]be\\/)([a-zA-Z0-9_-]{11})/);
 
+
+
           if (ytMatch) {
+
+
 
             finalEmbed = `https://www.youtube-nocookie.com/embed/${ytMatch[1]}?autoplay=1&rel=0&modestbranding=1&enablejsapi=1`;
 
+
+
           }
+
+
 
           stageIframe.src = finalEmbed;
 
+
+
           stageIframe.classList.add("active");
+
+
 
           if (stageCloseBtn) stageCloseBtn.classList.add("active");
 
+
+
           isPlayerActive = true;
 
+
+
         }
+
+
+
+
 
 
 
         function closeVideoPlayer() {
 
+
+
           if (!stageIframe) return;
+
+
 
           stageIframe.src = "";
 
+
+
           stageIframe.classList.remove("active");
+
+
 
           if (stageCloseBtn) stageCloseBtn.classList.remove("active");
 
+
+
           isPlayerActive = false;
 
+
+
         }
+
+
+
+
 
 
 
         // Category 1: Talk Show Vertical Carousel Slider (Top-to-Down Auto-Advance)
 
+
+
         let playlistTimer = null;
+
+
 
         let isPlaylistHovered = false;
 
+
+
         const PLAYLIST_INTERVAL = 4800; // Calibrated 4.8s golden interval
 
+
+
+
+
+
+
+        function updatePlaylistCounter(idx) {
+
+
+
+          const counter = document.getElementById("video-playlist-counter");
+
+
+
+          if (!counter) return;
+
+
+
+          const currSpan = counter.querySelector(".counter-curr");
+
+
+
+          if (currSpan) {
+
+
+
+            currSpan.textContent = String(idx + 1).padStart(2, "0");
+
+
+
+          }
+
+
+
         }
+
+
+
+
 
 
 
         function scrollPlaylistItemIntoView(item) {
 
+
+
           const stack = document.getElementById("video-playlist-stack");
+
+
 
           if (!stack || !item) return;
 
+
+
           const itemTop = item.offsetTop - stack.offsetTop;
+
+
 
           const targetScroll = Math.max(0, Math.min(
 
+
+
             stack.scrollHeight - stack.clientHeight,
+
+
 
             itemTop - (stack.clientHeight - item.offsetHeight) / 2
 
+
+
           ));
+
+
 
           stack.scrollTo({ top: targetScroll, behavior: "smooth" });
 
+
+
         }
+
+
+
+
 
 
 
         function activateVideo(index, playNow) {
 
+
+
           if (index < 0 || index >= playlistItems.length) return;
+
+
 
           activeIndex = index;
 
 
 
+
+
+
+
           // Soft luxury crossfade effect on stage
+
+
 
           const stageContent = document.querySelector(".video-stage-content");
 
+
+
           if (stageContent && stagePoster) {
+
+
 
             stageContent.classList.add("stage-fading");
 
+
+
             stagePoster.classList.add("stage-fading");
+
+
 
             setTimeout(function () {
 
+
+
               stageContent.classList.remove("stage-fading");
+
+
 
               stagePoster.classList.remove("stage-fading");
 
+
+
             }, 220);
 
+
+
           }
+
+
+
+
 
 
 
           playlistItems.forEach(function (item, i) {
 
+
+
             if (i === index) {
+
+
 
               item.classList.add("active");
 
+
+
               scrollPlaylistItemIntoView(item);
-const d = item.dataset;
+
+
+
+              updatePlaylistCounter(index);
+
+
+
+
+
+
+
+              const d = item.dataset;
+
+
 
               if (stagePoster) stagePoster.src = d.poster;
 
+
+
               if (stageTitle) stageTitle.textContent = d.title;
+
+
 
               if (stageDesc) stageDesc.textContent = d.description;
 
+
+
               if (stageNetworkTitle) stageNetworkTitle.textContent = d.channel;
+
+
 
               if (stageNetworkSub) stageNetworkSub.textContent = d.category;
 
+
+
               if (stageDate) stageDate.textContent = d.date;
+
+
 
               if (stageBadge) stageBadge.textContent = d.category;
 
+
+
               if (stageWatchLink) stageWatchLink.href = d.url;
+
+
 
               if (stageDuration) {
 
+
+
                 stageDuration.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ' + d.duration;
 
+
+
               }
+
+
 
               if (playNow || isPlayerActive) {
 
+
+
                 startVideoPlayer(d.embed || d.url);
+
+
 
               }
 
+
+
             } else {
+
+
 
               item.classList.remove("active");
 
+
+
             }
+
+
 
           });
 
+
+
         }
+
+
+
+
 
 
 
         function slidePlaylistNext() {
 
+
+
           const nextIdx = (activeIndex + 1) % playlistItems.length;
+
+
 
           activateVideo(nextIdx);
 
+
+
         }
+
+
+
+
 
 
 
         function slidePlaylistPrev() {
 
+
+
           const prevIdx = (activeIndex - 1 + playlistItems.length) % playlistItems.length;
+
+
 
           activateVideo(prevIdx);
 
+
+
         }
+
+
+
+
 
 
 
         function startPlaylistTimer() {
 
+
+
           stopPlaylistTimer();
+
+
 
           playlistTimer = setInterval(function () {
 
+
+
             // Only auto-advance if not hovered, document visible, and NOT actively playing video
+
+
 
             if (!isPlaylistHovered && !document.hidden && !isPlayerActive) {
 
+
+
               slidePlaylistNext();
+
+
 
             }
 
+
+
           }, PLAYLIST_INTERVAL);
 
+
+
         }
+
+
+
+
 
 
 
         function stopPlaylistTimer() {
 
+
+
           if (playlistTimer) {
+
+
 
             clearInterval(playlistTimer);
 
+
+
             playlistTimer = null;
+
+
 
           }
 
+
+
         }
+
+
+
+
 
 
 
         function resetPlaylistTimer() {
 
+
+
           stopPlaylistTimer();
+
+
 
           startPlaylistTimer();
 
+
+
         }
+
+
+
+
 
 
 
         playlistItems.forEach(function (item, idx) {
 
+
+
           item.addEventListener("click", function (e) {
+
+
 
             e.preventDefault();
 
+
+
             activateVideo(idx);
+
+
 
             resetPlaylistTimer();
 
+
+
           });
+
+
 
         });
 
 
 
-          function slideNext() {
 
-            const shift = getShift();
 
-            const maxScroll = track.scrollWidth - track.clientWidth;
 
-            // When reaching or near the end, loop smoothly and elegantly back to the beginning
 
-            if (track.scrollLeft >= maxScroll - 20) {
+        const prevBtn = document.getElementById("video-prev-btn");
 
-              track.scrollTo({ left: 0, behavior: "smooth" });
 
-              activeIndex = 0;
 
-              updateActiveDot(0);
+        const nextBtn = document.getElementById("video-next-btn");
 
-            } else {
 
-              track.scrollBy({ left: shift, behavior: "smooth" });
 
-              activeIndex = Math.min(cards.length - 1, activeIndex + 1);
 
-              updateActiveDot(activeIndex);
 
-            }
 
-          }
 
+        if (prevBtn) {
 
 
-          function slidePrev() {
 
-            const shift = getShift();
+          prevBtn.addEventListener("click", function () {
 
-            // When at or near the start, loop smoothly to the end
 
-            if (track.scrollLeft <= 20) {
 
-              const maxScroll = track.scrollWidth - track.clientWidth;
+            slidePlaylistPrev();
 
-              track.scrollTo({ left: maxScroll, behavior: "smooth" });
 
-              activeIndex = cards.length - 1;
 
-              updateActiveDot(activeIndex);
+            resetPlaylistTimer();
 
-            } else {
 
-              track.scrollBy({ left: -shift, behavior: "smooth" });
-
-              activeIndex = Math.max(0, activeIndex - 1);
-
-              updateActiveDot(activeIndex);
-
-            }
-
-          }
-
-
-
-          if (nBtn) {
-
-            nBtn.addEventListener("click", function () {
-
-              slideNext();
-
-              resetTimer();
-
-            });
-
-          }
-
-
-
-          if (pBtn) {
-
-            pBtn.addEventListener("click", function () {
-
-              slidePrev();
-
-              resetTimer();
-
-            });
-
-          }
-
-
-
-          // Active indicator sync on scroll
-
-          let scrollDebounce = null;
-
-          track.addEventListener("scroll", function () {
-
-            clearTimeout(scrollDebounce);
-
-            scrollDebounce = setTimeout(function () {
-
-              const trackLeft = track.scrollLeft;
-
-              const shift = getShift();
-
-              const currentIdx = Math.round(trackLeft / shift);
-
-              const clamped = Math.max(0, Math.min(cards.length - 1, currentIdx));
-
-              if (clamped !== activeIndex) {
-
-                activeIndex = clamped;
-
-                updateActiveDot(activeIndex);
-
-              }
-
-            }, 60);
-
-          }, { passive: true });
-
-
-
-          // Smooth Automatic Sliding Cycle (Cadence)
-
-          function startTimer() {
-
-            stopTimer();
-
-            timer = setInterval(function () {
-
-              if (!isHovered && !document.hidden) {
-
-                slideNext();
-
-              }
-
-            }, delay);
-
-          }
-
-
-
-          function stopTimer() {
-
-            if (timer) {
-
-              clearInterval(timer);
-
-              timer = null;
-
-            }
-
-          }
-
-
-
-          function resetTimer() {
-
-            stopTimer();
-
-            startTimer();
-
-          }
-
-
-
-          // Pause on mouse hover (Figure-Ground Law: Focus on card interaction)
-
-          const hoverElements = [track, pBtn, nBtn, pag].filter(Boolean);
-
-          hoverElements.forEach(function (el) {
-
-            el.addEventListener("mouseenter", function () {
-
-              isHovered = true;
-
-              stopTimer();
-
-            });
-
-            el.addEventListener("mouseleave", function () {
-
-              isHovered = false;
-
-              startTimer();
-
-            });
 
           });
 
 
-
-          // Pause on mobile touch interactions
-
-          track.addEventListener("touchstart", function () {
-
-            isHovered = true;
-
-            stopTimer();
-
-          }, { passive: true });
-
-          track.addEventListener("touchend", function () {
-
-            isHovered = false;
-
-            resetTimer();
-
-          }, { passive: true });
-
-
-
-          // Visibility State Handler
-
-          document.addEventListener("visibilitychange", function () {
-
-            if (document.hidden) {
-
-              stopTimer();
-
-            } else if (!isHovered) {
-
-              startTimer();
-
-            }
-
-          });
-
-
-
-          startTimer();
 
         }
 
 
 
+        if (nextBtn) {
+
+
+
+          nextBtn.addEventListener("click", function () {
+
+
+
+            slidePlaylistNext();
+
+
+
+            resetPlaylistTimer();
+
+
+
+          });
+
+
+
+        }
+
+
+
+
+
+
+
+        // Pause on mouse hover (Figure-Ground Law: Focus on card interaction)
+
+
+
+        const playlistElements = [
+
+
+
+          document.getElementById("video-playlist-stack"),
+
+
+
+          document.querySelector(".video-playlist-container"),
+
+
+
+          document.getElementById("video-stage-frame")
+
+
+
+        ].filter(Boolean);
+
+
+
+
+
+
+
+        playlistElements.forEach(function (el) {
+
+
+
+          el.addEventListener("mouseenter", function () {
+
+
+
+            isPlaylistHovered = true;
+
+
+
+            stopPlaylistTimer();
+
+
+
+          });
+
+
+
+          el.addEventListener("mouseleave", function () {
+
+
+
+            isPlaylistHovered = false;
+
+
+
+            startPlaylistTimer();
+
+
+
+          });
+
+
+
+        });
+
+
+
+
+
+
+
+        // Touch gestures on mobile
+
+
+
+        const playlistStack = document.getElementById("video-playlist-stack");
+
+
+
+        if (playlistStack) {
+
+
+
+          playlistStack.addEventListener("touchstart", function () {
+
+
+
+            isPlaylistHovered = true;
+
+
+
+            stopPlaylistTimer();
+
+
+
+          }, { passive: true });
+
+
+
+          playlistStack.addEventListener("touchend", function () {
+
+
+
+            isPlaylistHovered = false;
+
+
+
+            resetPlaylistTimer();
+
+
+
+          }, { passive: true });
+
+
+
+        }
+
+
+
+
+
+
+
+        // Page visibility
+
+
+
+        document.addEventListener("visibilitychange", function () {
+
+
+
+          if (document.hidden) {
+
+
+
+            stopPlaylistTimer();
+
+
+
+          } else if (!isPlaylistHovered && !isPlayerActive) {
+
+
+
+            startPlaylistTimer();
+
+
+
+          }
+
+
+
+        });
+
+
+
+
+
+
+
+        // Initialize playlist counter and autoplay
+
+
+
+        updatePlaylistCounter(0);
+
+
+
+        startPlaylistTimer();
+
+
+
+
+
+
+
+        if (stagePlayBtn) {
+
+
+
+          stagePlayBtn.addEventListener("click", function () {
+
+
+
+            const activeItem = playlistItems[activeIndex];
+
+
+
+            if (activeItem) {
+
+
+
+              const embed = activeItem.dataset.embed || activeItem.dataset.url;
+
+
+
+              startVideoPlayer(embed);
+
+
+
+            }
+
+
+
+          });
+
+
+
+        }
+
+
+
+
+
+
+
+        if (stageCloseBtn) {
+
+
+
+          stageCloseBtn.addEventListener("click", function (e) {
+
+
+
+            e.stopPropagation();
+
+
+
+            closeVideoPlayer();
+
+
+
+          });
+
+
+
+        }
+
+
+
+
+
+
+
+        const shareBtn = document.getElementById("stage-share-btn");
+
+
+
+        if (shareBtn) {
+
+
+
+          shareBtn.addEventListener("click", function () {
+
+
+
+            const activeItem = playlistItems[activeIndex];
+
+
+
+            const url = activeItem && activeItem.dataset.url ? activeItem.dataset.url : window.location.href;
+
+
+
+            if (navigator.clipboard) {
+
+
+
+              navigator.clipboard.writeText(url).then(() => {
+
+
+
+                const origTitle = shareBtn.getAttribute("title") || "Share Broadcast Link";
+
+
+
+                shareBtn.setAttribute("title", "Link Copied!");
+
+
+
+                shareBtn.classList.add("copied");
+
+
+
+                setTimeout(() => {
+
+
+
+                  shareBtn.setAttribute("title", origTitle);
+
+
+
+                  shareBtn.classList.remove("copied");
+
+
+
+                }, 2000);
+
+
+
+              }).catch(() => {
+
+
+
+                prompt("Copy video link:", url);
+
+
+
+              });
+
+
+
+            } else {
+
+
+
+              prompt("Copy video link:", url);
+
+
+
+            }
+
+
+
+          });
+
+
+
+        }
+
+
+
+
+
+
+
+        // 2. Category 2 & 3 Smooth Auto-Advancing Carousel Controllers (Golden Ratio & Gestalt Harmonic Alignment)
+
+
+
+        function setupCarousel(prevId, nextId, trackId, paginationId, intervalMs) {
+
+
+
+          const pBtn = document.getElementById(prevId);
+
+
+
+          const nBtn = document.getElementById(nextId);
+
+
+
+          const track = document.getElementById(trackId);
+
+
+
+          const pag = paginationId ? document.getElementById(paginationId) : null;
+
+
+
+          if (!track) return;
+
+
+
+
+
+
+
+          const cards = Array.from(track.querySelectorAll(".service-portrait-card"));
+
+
+
+          if (cards.length === 0) return;
+
+
+
+
+
+
+
+          const delay = intervalMs || 3800;
+
+
+
+          let timer = null;
+
+
+
+          let isHovered = false;
+
+
+
+          let activeIndex = 0;
+
+
+
+
+
+
+
+          // Render Gestalt Pagination Indicator Dots
+
+
+
+          if (pag) {
+
+
+
+            pag.innerHTML = "";
+
+
+
+            cards.forEach(function (card, idx) {
+
+
+
+              const dot = document.createElement("button");
+
+
+
+              dot.className = "service-carousel-dot" + (idx === 0 ? " active" : "");
+
+
+
+              dot.type = "button";
+
+
+
+              dot.setAttribute("aria-label", "Go to slide " + (idx + 1));
+
+
+
+              dot.addEventListener("click", function () {
+
+
+
+                scrollToIndex(idx);
+
+
+
+                resetTimer();
+
+
+
+              });
+
+
+
+              pag.appendChild(dot);
+
+
+
+            });
+
+
+
+          }
+
+
+
+
+
+
+
+          function getShift() {
+
+
+
+            const card = cards[0];
+
+
+
+            return card ? card.offsetWidth + 20 : 375;
+
+
+
+          }
+
+
+
+
+
+
+
+          function updateActiveDot(idx) {
+
+
+
+            if (!pag) return;
+
+
+
+            const dots = pag.querySelectorAll(".service-carousel-dot");
+
+
+
+            dots.forEach(function (d, i) {
+
+
+
+              d.classList.toggle("active", i === idx);
+
+
+
+            });
+
+
+
+          }
+
+
+
+
+
+
+
+          function scrollToIndex(idx) {
+
+
+
+            if (idx < 0) idx = 0;
+
+
+
+            if (idx >= cards.length) idx = cards.length - 1;
+
+
+
+            const targetCard = cards[idx];
+
+
+
+            if (targetCard) {
+
+
+
+              const left = targetCard.offsetLeft - track.offsetLeft;
+
+
+
+              track.scrollTo({ left: left, behavior: "smooth" });
+
+
+
+              activeIndex = idx;
+
+
+
+              updateActiveDot(activeIndex);
+
+
+
+            }
+
+
+
+          }
+
+
+
+
+
+
+
+          function slideNext() {
+
+
+
+            const shift = getShift();
+
+
+
+            const maxScroll = track.scrollWidth - track.clientWidth;
+
+
+
+            // When reaching or near the end, loop smoothly and elegantly back to the beginning
+
+
+
+            if (track.scrollLeft >= maxScroll - 20) {
+
+
+
+              track.scrollTo({ left: 0, behavior: "smooth" });
+
+
+
+              activeIndex = 0;
+
+
+
+              updateActiveDot(0);
+
+
+
+            } else {
+
+
+
+              track.scrollBy({ left: shift, behavior: "smooth" });
+
+
+
+              activeIndex = Math.min(cards.length - 1, activeIndex + 1);
+
+
+
+              updateActiveDot(activeIndex);
+
+
+
+            }
+
+
+
+          }
+
+
+
+
+
+
+
+          function slidePrev() {
+
+
+
+            const shift = getShift();
+
+
+
+            // When at or near the start, loop smoothly to the end
+
+
+
+            if (track.scrollLeft <= 20) {
+
+
+
+              const maxScroll = track.scrollWidth - track.clientWidth;
+
+
+
+              track.scrollTo({ left: maxScroll, behavior: "smooth" });
+
+
+
+              activeIndex = cards.length - 1;
+
+
+
+              updateActiveDot(activeIndex);
+
+
+
+            } else {
+
+
+
+              track.scrollBy({ left: -shift, behavior: "smooth" });
+
+
+
+              activeIndex = Math.max(0, activeIndex - 1);
+
+
+
+              updateActiveDot(activeIndex);
+
+
+
+            }
+
+
+
+          }
+
+
+
+
+
+
+
+          if (nBtn) {
+
+
+
+            nBtn.addEventListener("click", function () {
+
+
+
+              slideNext();
+
+
+
+              resetTimer();
+
+
+
+            });
+
+
+
+          }
+
+
+
+
+
+
+
+          if (pBtn) {
+
+
+
+            pBtn.addEventListener("click", function () {
+
+
+
+              slidePrev();
+
+
+
+              resetTimer();
+
+
+
+            });
+
+
+
+          }
+
+
+
+
+
+
+
+          // Active indicator sync on scroll
+
+
+
+          let scrollDebounce = null;
+
+
+
+          track.addEventListener("scroll", function () {
+
+
+
+            clearTimeout(scrollDebounce);
+
+
+
+            scrollDebounce = setTimeout(function () {
+
+
+
+              const trackLeft = track.scrollLeft;
+
+
+
+              const shift = getShift();
+
+
+
+              const currentIdx = Math.round(trackLeft / shift);
+
+
+
+              const clamped = Math.max(0, Math.min(cards.length - 1, currentIdx));
+
+
+
+              if (clamped !== activeIndex) {
+
+
+
+                activeIndex = clamped;
+
+
+
+                updateActiveDot(activeIndex);
+
+
+
+              }
+
+
+
+            }, 60);
+
+
+
+          }, { passive: true });
+
+
+
+
+
+
+
+          // Smooth Automatic Sliding Cycle (Cadence)
+
+
+
+          function startTimer() {
+
+
+
+            stopTimer();
+
+
+
+            timer = setInterval(function () {
+
+
+
+              if (!isHovered && !document.hidden) {
+
+
+
+                slideNext();
+
+
+
+              }
+
+
+
+            }, delay);
+
+
+
+          }
+
+
+
+
+
+
+
+          function stopTimer() {
+
+
+
+            if (timer) {
+
+
+
+              clearInterval(timer);
+
+
+
+              timer = null;
+
+
+
+            }
+
+
+
+          }
+
+
+
+
+
+
+
+          function resetTimer() {
+
+
+
+            stopTimer();
+
+
+
+            startTimer();
+
+
+
+          }
+
+
+
+
+
+
+
+          // Pause on mouse hover (Figure-Ground Law: Focus on card interaction)
+
+
+
+          const hoverElements = [track, pBtn, nBtn, pag].filter(Boolean);
+
+
+
+          hoverElements.forEach(function (el) {
+
+
+
+            el.addEventListener("mouseenter", function () {
+
+
+
+              isHovered = true;
+
+
+
+              stopTimer();
+
+
+
+            });
+
+
+
+            el.addEventListener("mouseleave", function () {
+
+
+
+              isHovered = false;
+
+
+
+              startTimer();
+
+
+
+            });
+
+
+
+          });
+
+
+
+
+
+
+
+          // Pause on mobile touch interactions
+
+
+
+          track.addEventListener("touchstart", function () {
+
+
+
+            isHovered = true;
+
+
+
+            stopTimer();
+
+
+
+          }, { passive: true });
+
+
+
+          track.addEventListener("touchend", function () {
+
+
+
+            isHovered = false;
+
+
+
+            resetTimer();
+
+
+
+          }, { passive: true });
+
+
+
+
+
+
+
+          // Visibility State Handler
+
+
+
+          document.addEventListener("visibilitychange", function () {
+
+
+
+            if (document.hidden) {
+
+
+
+              stopTimer();
+
+
+
+            } else if (!isHovered) {
+
+
+
+              startTimer();
+
+
+
+            }
+
+
+
+          });
+
+
+
+
+
+
+
+          startTimer();
+
+
+
+        }
+
+
+
+
+
+
+
         setupCarousel("keynote-prev-btn", "keynote-next-btn", "keynote-track", "keynote-pagination", 3800);
+
+
 
         setupCarousel("opinion-prev-btn", "opinion-next-btn", "opinion-track", "opinion-pagination", 4200);
 
 
 
+
+
+
+
         // Automatically ensure any portrait/flyer image fits responsively with ambient glow
+
+
 
         document.querySelectorAll(".service-card-media-stage").forEach(function(stage) {
 
+
+
           const fg = stage.querySelector(".service-card-fg-poster, .service-card-bg-img");
+
+
 
           if (!fg) return;
 
+
+
           function autoFit() {
+
+
 
             if (fg.naturalHeight >= fg.naturalWidth * 0.9) {
 
+
+
               stage.classList.add("service-card-poster-mode");
+
+
 
               if (!stage.querySelector(".service-card-bg-glow")) {
 
+
+
                 const glow = document.createElement("img");
+
+
 
                 glow.src = fg.src;
 
+
+
                 glow.className = "service-card-bg-glow";
+
+
 
                 glow.setAttribute("aria-hidden", "true");
 
+
+
                 stage.prepend(glow);
+
+
 
               }
 
+
+
               fg.className = "service-card-fg-poster";
+
+
 
             }
 
+
+
           }
+
+
 
           if (fg.complete && fg.naturalWidth > 0) autoFit();
 
+
+
           else fg.addEventListener("load", autoFit);
+
+
 
         });
 
+
+
       });
 
+
+
     </script>
+
+
 
     """
 
@@ -7381,7 +8612,7 @@ const d = item.dataset;
 
             <div class="video-stage-poster-layer">
 
-              <img id="stage-poster-img" src="{feat_poster}" alt="{feat_title}" class="video-stage-poster-img" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
+              <img id="stage-poster-img" src="{feat_poster}" alt="{feat_title}" class="video-stage-poster-img" loading="lazy" decoding="async" onerror="this.src='assets/images/spotlight-smart-cities.jpg'">
 
             </div>
 
@@ -7409,7 +8640,7 @@ const d = item.dataset;
 
             <div class="video-stage-top-meta">
 
-              <img src="/assets/images/portraits/portrait-1.webp?v=5.1" alt="Dr. Zaid Amin" class="video-stage-avatar" onerror="this.onerror=null; this.src='/assets/images/portraits/portrait-1.png?v=5.1';">
+              <img src="/assets/images/portraits/portrait-1.webp?v=5.1" alt="Dr. Zaid Amin" class="video-stage-avatar" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='/assets/images/portraits/portrait-1.png?v=5.1';">
 
               <div>
 
@@ -7470,14 +8701,26 @@ const d = item.dataset;
 
 
           <!-- Right: Playlist Stack (38.2% Golden Ratio) -->
-
           <div class="video-playlist-container">
-
             <div class="video-playlist-stack" id="video-playlist-stack">
-
               {playlist_joined}
+            </div>
 
-            </div></div>
+            <!-- Bottom Navigation Arrows & Counter (Golden Ratio Harmonic Proportions) -->
+            <div class="video-playlist-footer">
+              <div class="video-playlist-counter" id="video-playlist-counter" aria-label="Episode index">
+                <span class="counter-curr">01</span><span class="counter-sep">/</span><span class="counter-total">{total_episodes_count}</span>
+              </div>
+              <div class="video-nav-arrows-group">
+                <button class="video-nav-arrow-btn" id="video-prev-btn" title="Previous Video" type="button" aria-label="Previous Video">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <button class="video-nav-arrow-btn" id="video-next-btn" title="Next Video" type="button" aria-label="Next Video">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
 
         </div>
 
@@ -7497,7 +8740,7 @@ const d = item.dataset;
 
           <div class="talks-invite-img-frame">
 
-            <img src="/assets/images/portraits/portrait-1.webp?v=5.1" alt="Dr. Zaid Amin" loading="lazy" onerror="this.onerror=null; this.src='/assets/images/portraits/portrait-1.png?v=5.1';">
+            <img src="/assets/images/portraits/portrait-1.webp?v=5.1" alt="Dr. Zaid Amin" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='/assets/images/portraits/portrait-1.png?v=5.1';">
 
           </div>
 
@@ -9998,7 +11241,7 @@ def generate_article_reader_page(preloaded_article=None):
 
               <source srcset="/assets/images/dr-zaid.webp" type="image/webp">
 
-              <img src="/assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="article-author-avatar">
+              <img src="/assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="article-author-avatar" loading="lazy" decoding="async">
 
             </picture>
 
@@ -10062,7 +11305,7 @@ def generate_article_reader_page(preloaded_article=None):
 
           <source srcset="assets/images/dr-zaid.webp" type="image/webp">
 
-          <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="article-bio-avatar">
+          <img src="assets/images/dr-zaid.png" alt="Dr. Zaid Amin" class="article-bio-avatar" loading="lazy" decoding="async">
 
         </picture>
 
