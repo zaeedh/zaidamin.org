@@ -22992,7 +22992,7 @@ mark {
 /* Playlist bottom navigation footer */
 .video-playlist-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin-top: 12px;
   padding-top: 10px;
@@ -41674,7 +41674,7 @@ mark {
 /* Playlist bottom navigation footer */
 .video-playlist-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin-top: 12px;
   padding-top: 10px;
