@@ -302,6 +302,48 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794625309963",
+      "timestamp": "2026-11-14T03:01:49.963Z",
+      "path": "/?t=test_soft_gold",
+      "title": "Zaid Amin, Ph.D.",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-E1B85F",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Google Chrome",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "800x600",
+      "referrer": "Direct Navigation",
+      "client_ip": "127.0.0.1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36"
+    },
+    {
+      "id": "tr-1794625308337",
+      "timestamp": "2026-11-14T03:01:48.337Z",
+      "path": "/",
+      "title": "Zaid Amin, Ph.D.",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-E1B85F",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Google Chrome",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "800x600",
+      "referrer": "Direct Navigation",
+      "client_ip": "127.0.0.1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36"
+    },
+    {
       "id": "tr-1794624989645",
       "timestamp": "2026-11-14T02:56:29.645Z",
       "path": "/?t=test_no_kicker",
@@ -4318,7 +4360,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-14T10:56:29.671294",
+  "updated_at": "2026-11-14T11:01:50.059608",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -4403,6 +4445,6 @@
     "the-polite-city-ai-human-harmonization": 26
   },
   "server_live_hits": {
-    "MY": 134
+    "MY": 136
   }
 }
