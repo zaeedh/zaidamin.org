@@ -1285,7 +1285,7 @@ def get_page_header(active_page="home"):
 
             <!-- Sacred Multi-Tiered Glowing Lotus Aerial Palace Button -->
 
-            <button class="lotus-palace-btn david-star-pure-btn" id="lotus-toggle-btn" aria-label="Toggle Scholarly Profiles & Direct Identifiers" title="Scholarly Profiles & Direct Identifiers (Sacred Lotus)" aria-expanded="false">
+            <button class="lotus-palace-btn david-star-pure-btn" id="lotus-toggle-btn" aria-label="Toggle Scholarly Profiles & Direct Identifiers" title="Scholarly Profiles & Direct Identifiers" aria-expanded="false">
 
               {render_lotus_symbol_svg()}
 
