@@ -8675,19 +8675,11 @@ def generate_talks_page():
             <div class="video-stage-content">
 
               <div class="video-stage-badge-row">
-
-                <span class="video-stage-badge" id="stage-badge">{feat_tag}</span>
-
                 <span class="video-stage-date" id="stage-date">{feat_date}</span>
-
                 <span class="video-stage-duration-tag" id="stage-duration">
-
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-
                   <span>{feat_duration}</span>
-
                 </span>
-
               </div>
 
               <h3 class="video-stage-title" id="stage-title">{feat_title}</h3>
