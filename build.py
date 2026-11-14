@@ -7636,8 +7636,6 @@ def generate_talks_page():
 
         <div class="talks-hero-content">
 
-          <div class="subpage-eyebrow"><span class="eyebrow-dot">&bull;</span> Audio-Visual Archive &bull; Keynote Engagements</div>
-
           <h1 class="talks-hero-title">Media &amp; Talks</h1>
 
           <p class="talks-hero-subtitle">
