@@ -302,6 +302,48 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794628295674",
+      "timestamp": "2026-11-14T03:51:35.674Z",
+      "path": "/?t=test_natural_soft_gold",
+      "title": "Zaid Amin, Ph.D.",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-60259E",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Google Chrome",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "800x600",
+      "referrer": "Direct Navigation",
+      "client_ip": "127.0.0.1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36"
+    },
+    {
+      "id": "tr-1794628292398",
+      "timestamp": "2026-11-14T03:51:32.398Z",
+      "path": "/",
+      "title": "Zaid Amin, Ph.D.",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-60259E",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Google Chrome",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "800x600",
+      "referrer": "Direct Navigation",
+      "client_ip": "127.0.0.1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36"
+    },
+    {
       "id": "tr-1794627798895",
       "timestamp": "2026-11-14T03:43:18.895Z",
       "path": "/publications?t=test_no_pub_eyebrow",
@@ -4486,7 +4528,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-14T11:43:18.910445",
+  "updated_at": "2026-11-14T11:51:35.721647",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -4571,6 +4613,6 @@
     "the-polite-city-ai-human-harmonization": 26
   },
   "server_live_hits": {
-    "MY": 142
+    "MY": 144
   }
 }
