@@ -38,6 +38,15 @@
           "active_pages": [
             "team"
           ]
+        },
+        {
+          "id": "publication",
+          "label": "Publication",
+          "url": "#",
+          "icon": "",
+          "target": "_self",
+          "active_pages": [],
+          "enabled": true
         }
       ]
     },

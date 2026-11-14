@@ -29,6 +29,15 @@
       "has_dropdown": true,
       "dropdown_items": [
         {
+          "id": "publication",
+          "label": "Publication",
+          "url": "#",
+          "icon": "",
+          "target": "_self",
+          "active_pages": [],
+          "enabled": true
+        },
+        {
           "id": "team",
           "label": "Research Team & Supervision",
           "url": "research-team.html",
