@@ -863,7 +863,7 @@ def render_homepage_nav():
                 sub_icon = str(d.get("icon") or "").strip()
                 sparkle = f'<span class="ref-team-sparkle">{sub_icon}</span>' if sub_icon and sub_icon.lower() not in ["none", "null", "false", "off"] else ''
 
-                sub_links.append(f'''<a href="{d_url}" class="ref-dropdown-team-link" role="menuitem" title="{d_label}"{d_target_attr}>
+                sub_links.append(f'''<a href="{d_url}" class="ref-dropdown-team-link" role="menuitem"{d_target_attr}>
 
                 <div class="ref-team-label-wrap">
 
@@ -881,7 +881,7 @@ def render_homepage_nav():
 
             html_items.append(f'''<div class="ref-menu-dropdown-wrapper">
 
-            <a href="{url}" class="ref-menu-tab" title="{label}" aria-haspopup="true" aria-expanded="false"{target_attr}>
+            <a href="{url}" class="ref-menu-tab" aria-haspopup="true" aria-expanded="false"{target_attr}>
 
               <span class="tab-txt-full">{label} <span class="ref-chevron">▾</span></span>
 
@@ -899,7 +899,7 @@ def render_homepage_nav():
 
         else:
 
-            html_items.append(f'''<a href="{url}" class="ref-menu-tab" title="{label}"{target_attr}>
+            html_items.append(f'''<a href="{url}" class="ref-menu-tab"{target_attr}>
 
             <span class="tab-txt-full">{label}</span>
 
