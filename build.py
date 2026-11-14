@@ -4446,7 +4446,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
                 label = "Download (SSRN)"
 
-            dl_btn = f'<a href="{url}" target="_blank" rel="noopener" class="pub-pill-btn pub-pill-primary">{render_svg_icon_fn("download")} <span>{label}</span></a>'
+            dl_btn = f'<a href="{url}" target="_blank" rel="noopener" class="pub-pill-btn pub-pill-primary"><span class="pub-btn-icon-box">{render_svg_icon_fn("download")}</span> <span>{label}</span> <span class="pub-btn-arrow">&nearr;</span></a>'
 
         else:
 
@@ -4454,7 +4454,7 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
             dl_btn = f'''<a href="{mailto}" class="pub-pill-btn pub-pill-primary pub-pill-request" title="Direct download unavailable. Available on request via institutional inquiry.">
 
-              <span class="pub-pill-lock-icon">{lock_svg}</span>
+              <span class="pub-btn-icon-box">{lock_svg}</span>
 
               <span>Available on Request</span>
 
@@ -4620,7 +4620,9 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
             <button class="pub-pill-btn pub-pill-secondary btn-bibtex-toggle" data-target="bib-{bibtex_id}">
 
-              Cite / BibTeX
+              <span class="pub-btn-icon-box"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2H4c-1.25 0-2 .75-2 2v6c0 7 4 8 7 8Z"></path><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2h-4c-1.25 0-2 .75-2 2v6c0 7 4 8 7 8Z"></path></svg></span>
+
+              <span>Cite / BibTeX</span>
 
             </button>
 
@@ -4932,13 +4934,15 @@ def render_book_showcase_section(publications, cat, render_svg_icon_fn, render_d
 
             <a href="mailto:zaid.amin@newinti.edu.my?subject=Advance%20Inquiry:%20{p_title}" class="pub-pill-btn pub-pill-primary bokify-btn-wireframe" title="Inquire about upcoming publication / manuscript advance">
 
-              {render_svg_icon_fn("email")}
+              <span class="pub-btn-icon-box">{render_svg_icon_fn("email")}</span>
 
               <span>Advance Inquiry / Notice</span>
 
+              <span class="pub-btn-arrow">&nearr;</span>
+
             </a>
 
-            <span class="pub-pill-btn pub-pill-secondary bokify-pill-wireframe-slot" title="Reserved slot for forthcoming publication">Pipeline Slot</span>
+            <span class="pub-pill-btn pub-pill-secondary bokify-pill-wireframe-slot" title="Reserved slot for forthcoming publication"><span class="pub-btn-icon-box"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span> <span>Pipeline Slot</span></span>
 
           </div>
 
@@ -5485,11 +5489,11 @@ def generate_publications_page():
                 label = "ePrints Record"
             else:
                 label = "Access Publication"
-            return f'<a href="{url}" target="_blank" rel="noopener" class="pub-academic-btn pub-btn-access"><span>{label}</span> <span class="pub-btn-arrow">&nearr;</span></a>'
+            return f'<a href="{url}" target="_blank" rel="noopener" class="pub-academic-btn pub-btn-access"><span class="pub-btn-icon-box"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></span> <span>{label}</span> <span class="pub-btn-arrow">&nearr;</span></a>'
         else:
             title_enc = html.escape(pub.get("title", ""))
             mailto = f"mailto:zaid.amin@newinti.edu.my?subject=Requesting%20Full-Text:%20{title_enc}"
-            return f'<a href="{mailto}" class="pub-academic-btn pub-btn-access pub-btn-request" title="Direct download unavailable. Available on request via email."><span>Request Full-Text</span></a>' 
+            return f'<a href="{mailto}" class="pub-academic-btn pub-btn-access pub-btn-request" title="Direct download unavailable. Available on request via email."><span class="pub-btn-icon-box"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></span> <span>Request Full-Text</span></a>' 
 
 
 
@@ -5576,7 +5580,8 @@ def generate_publications_page():
                 <div class="pub-strip-actions">
                   {download_btn}
                   <button type="button" class="pub-academic-btn pub-btn-cite btn-bibtex-toggle" data-target="bib-{bibtex_id}">
-                    Cite / BibTeX
+                    <span class="pub-btn-icon-box"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2H4c-1.25 0-2 .75-2 2v6c0 7 4 8 7 8Z"></path><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2h-4c-1.25 0-2 .75-2 2v6c0 7 4 8 7 8Z"></path></svg></span>
+                    <span>Cite / BibTeX</span>
                   </button>
                 </div>
               </div>
@@ -5850,15 +5855,15 @@ def generate_research_page():
 
             <a href="/article/{slug}" class="article-card-btn font-cinzel">
 
+              <span class="pub-btn-icon-box">
+
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+
+              </span>
+
               <span>Read Essay</span>
 
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="article-btn-icon">
-
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-
-                <polyline points="12 5 19 12 12 19"></polyline>
-
-              </svg>
+              <span class="pub-btn-arrow">&rarr;</span>
 
             </a>
 
@@ -8279,8 +8284,9 @@ def render_cv_strip_card(
             sec_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>'
 
         secondary_btn = f'''<a href="{secondary_btn_url}"{sec_target} class="pub-academic-btn pub-btn-cite" title="{secondary_btn_label}">
-          {sec_svg}
+          <span class="pub-btn-icon-box">{sec_svg}</span>
           <span>{secondary_btn_label}</span>
+          <span class="pub-btn-arrow">&nearr;</span>
         </a>'''
     else:
         secondary_btn = ""
@@ -9434,11 +9440,11 @@ def generate_cv_page():
             <!-- Row 5: Refined Academic Actions Dock -->
             <div class="cv-monograph-actions">
               <a href="{book_url}" target="_blank" rel="noopener" class="pub-academic-btn pub-btn-access" title="Publisher Access / e-Sentral Official Portal">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                <span class="pub-btn-icon-box"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></span>
                 <span>Publisher Access / Purchase Portal</span> <span class="pub-btn-arrow">&nearr;</span>
               </a>
               <a href="/publications#section-books" class="pub-academic-btn pub-btn-cite" title="View Full Monograph Catalog Record in Publication Gallery">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path><path d="M6 6h10"></path><path d="M6 10h10"></path></svg>
+                <span class="pub-btn-icon-box"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path><path d="M6 6h10"></path><path d="M6 10h10"></path></svg></span>
                 <span>Monograph Gallery Details</span>
               </a>
             </div>
@@ -9467,6 +9473,7 @@ def generate_cv_page():
             <div class="cv-repo-desc">Comprehensive catalog of Q1 IEEE Access, Springer LNCS, Scopus-indexed conference papers, and preprints.</div>
           </div>
           <a href="/publications" class="pub-academic-btn pub-btn-access">
+            <span class="pub-btn-icon-box"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg></span>
             <span>Explore All {len(publications)} Works</span> <span class="pub-btn-arrow">&nearr;</span>
           </a>
         </div>
@@ -10754,18 +10761,14 @@ def generate_team_page():
           <p class="team-cta-desc">{cta_desc}</p>
           <div class="team-cta-btns">
             <a href="{cta_p_url}" class="team-cta-btn-primary font-cinzel">
+              <span class="pub-btn-icon-box"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></span>
               <span>{clean_p_text}</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="team-cta-btn-icon">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
+              <span class="pub-btn-arrow">&nearr;</span>
             </a>
             <a href="{cta_s_url}" class="team-cta-btn-secondary font-cinzel">
+              <span class="pub-btn-icon-box"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg></span>
               <span>{clean_s_text}</span>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="team-cta-btn-icon">
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
-              </svg>
+              <span class="pub-btn-arrow">&nearr;</span>
             </a>
           </div>
         </div>

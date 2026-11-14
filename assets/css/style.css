@@ -13663,7 +13663,7 @@ a {
 
 .article-card-btn:hover {
 
-  background: linear-gradient(135deg, #d4af37 0%, #b89728 100%) !important;
+  background: linear-gradient(135deg, rgba(14, 32, 56, 0.96) 0%, rgba(4, 14, 28, 0.98) 100%) !important;
 
   border-color: #d4af37 !important;
 
@@ -18097,7 +18097,7 @@ mark {
 
 
 .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover {
-  background: linear-gradient(135deg, #facc15 0%, #d4af37 100%) !important;
+  background: linear-gradient(135deg, rgba(14, 32, 56, 0.96) 0%, rgba(4, 14, 28, 0.98) 100%) !important;
   border-color: #facc15 !important;
   color: #031220 !important;
   box-shadow: 0 4px 16px rgba(212, 175, 55, 0.40), 0 0 10px rgba(250, 204, 21, 0.25) !important;
@@ -18108,15 +18108,15 @@ mark {
 .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg path,
 .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg polyline,
 .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg line {
-  stroke: #031220 !important;
+  stroke: #030a14 !important;
 }
 
 .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover span {
-  color: #031220 !important;
+  color: #ffffff !important;
 }
 
 .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active {
-  background: linear-gradient(135deg, #d4af37 0%, #b8972e 100%) !important;
+  background: linear-gradient(135deg, rgba(8, 20, 36, 0.98) 0%, rgba(2, 8, 16, 1) 100%) !important;
   border-color: #d4af37 !important;
   color: #020a14 !important;
   box-shadow: 0 2px 8px rgba(212, 175, 55, 0.35) !important;
@@ -19834,7 +19834,7 @@ mark {
 
   background: linear-gradient(135deg, rgba(14, 28, 44, 0.92) 0%, rgba(6, 17, 30, 0.98) 100%) !important;
 
-  border: 1.5px solid rgba(56, 189, 248, 0.50) !important;
+  border:  1px solid rgba(212, 175, 55, 0.38) !important;
 
   color: #f1f5f9 !important;
 
@@ -19864,7 +19864,7 @@ mark {
 
   background: linear-gradient(135deg, rgba(22, 42, 66, 0.96) 0%, rgba(12, 26, 42, 0.98) 100%) !important;
 
-  border-color: rgba(56, 189, 248, 0.85) !important;
+  border-color:  rgba(212, 175, 55, 0.80) !important;
 
   box-shadow: 0 6px 22px rgba(56, 189, 248, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
 
@@ -19908,7 +19908,9 @@ mark {
 
 .pub-pill-btn.pub-pill-request:hover .pub-pill-lock-icon {
 
-  border-color: #38bdf8;
+  border-color:  #d4af37 !important;
+  background: #d4af37 !important;
+  color: #030a14 !important;
 
   color: #7dd3fc;
 
@@ -21194,7 +21196,7 @@ mark {
 
 .pub-btn-access:not(.pub-btn-request):hover,
 .pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover {
-  background: linear-gradient(135deg, #facc15 0%, #d4af37 100%) !important;
+  background: linear-gradient(135deg, rgba(14, 32, 56, 0.96) 0%, rgba(4, 14, 28, 0.98) 100%) !important;
   border-color: #facc15 !important;
   color: #031220 !important;
   box-shadow: 0 4px 16px rgba(212, 175, 55, 0.40), 0 0 10px rgba(250, 204, 21, 0.25) !important;
@@ -21209,17 +21211,17 @@ mark {
 .pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg path,
 .pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg polyline,
 .pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg line {
-  stroke: #031220 !important;
+  stroke: #030a14 !important;
 }
 
 .pub-btn-access:not(.pub-btn-request):hover span,
 .pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover span {
-  color: #031220 !important;
+  color: #ffffff !important;
 }
 
 .pub-btn-access:not(.pub-btn-request):active,
 .pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active {
-  background: linear-gradient(135deg, #d4af37 0%, #b8972e 100%) !important;
+  background: linear-gradient(135deg, rgba(8, 20, 36, 0.98) 0%, rgba(2, 8, 16, 1) 100%) !important;
   border-color: #d4af37 !important;
   color: #020a14 !important;
   box-shadow: 0 2px 8px rgba(212, 175, 55, 0.35) !important;
@@ -32508,7 +32510,7 @@ h1.cv-hero-name,
 
 .article-card-btn:hover {
 
-  background: linear-gradient(135deg, #d4af37 0%, #b89728 100%) !important;
+  background: linear-gradient(135deg, rgba(14, 32, 56, 0.96) 0%, rgba(4, 14, 28, 0.98) 100%) !important;
 
   border-color: #d4af37 !important;
 
@@ -36942,7 +36944,7 @@ mark {
 
 
 .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover {
-  background: linear-gradient(135deg, #facc15 0%, #d4af37 100%) !important;
+  background: linear-gradient(135deg, rgba(14, 32, 56, 0.96) 0%, rgba(4, 14, 28, 0.98) 100%) !important;
   border-color: #facc15 !important;
   color: #031220 !important;
   box-shadow: 0 4px 16px rgba(212, 175, 55, 0.40), 0 0 10px rgba(250, 204, 21, 0.25) !important;
@@ -36953,15 +36955,15 @@ mark {
 .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg path,
 .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg polyline,
 .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg line {
-  stroke: #031220 !important;
+  stroke: #030a14 !important;
 }
 
 .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover span {
-  color: #031220 !important;
+  color: #ffffff !important;
 }
 
 .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active {
-  background: linear-gradient(135deg, #d4af37 0%, #b8972e 100%) !important;
+  background: linear-gradient(135deg, rgba(8, 20, 36, 0.98) 0%, rgba(2, 8, 16, 1) 100%) !important;
   border-color: #d4af37 !important;
   color: #020a14 !important;
   box-shadow: 0 2px 8px rgba(212, 175, 55, 0.35) !important;
@@ -38679,7 +38681,7 @@ mark {
 
   background: linear-gradient(135deg, rgba(14, 28, 44, 0.92) 0%, rgba(6, 17, 30, 0.98) 100%) !important;
 
-  border: 1.5px solid rgba(56, 189, 248, 0.50) !important;
+  border:  1px solid rgba(212, 175, 55, 0.38) !important;
 
   color: #f1f5f9 !important;
 
@@ -38709,7 +38711,7 @@ mark {
 
   background: linear-gradient(135deg, rgba(22, 42, 66, 0.96) 0%, rgba(12, 26, 42, 0.98) 100%) !important;
 
-  border-color: rgba(56, 189, 248, 0.85) !important;
+  border-color:  rgba(212, 175, 55, 0.80) !important;
 
   box-shadow: 0 6px 22px rgba(56, 189, 248, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
 
@@ -38753,7 +38755,9 @@ mark {
 
 .pub-pill-btn.pub-pill-request:hover .pub-pill-lock-icon {
 
-  border-color: #38bdf8;
+  border-color:  #d4af37 !important;
+  background: #d4af37 !important;
+  color: #030a14 !important;
 
   color: #7dd3fc;
 
@@ -40039,7 +40043,7 @@ mark {
 
 .pub-btn-access:not(.pub-btn-request):hover,
 .pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover {
-  background: linear-gradient(135deg, #facc15 0%, #d4af37 100%) !important;
+  background: linear-gradient(135deg, rgba(14, 32, 56, 0.96) 0%, rgba(4, 14, 28, 0.98) 100%) !important;
   border-color: #facc15 !important;
   color: #031220 !important;
   box-shadow: 0 4px 16px rgba(212, 175, 55, 0.40), 0 0 10px rgba(250, 204, 21, 0.25) !important;
@@ -40054,17 +40058,17 @@ mark {
 .pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg path,
 .pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg polyline,
 .pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover svg line {
-  stroke: #031220 !important;
+  stroke: #030a14 !important;
 }
 
 .pub-btn-access:not(.pub-btn-request):hover span,
 .pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):hover span {
-  color: #031220 !important;
+  color: #ffffff !important;
 }
 
 .pub-btn-access:not(.pub-btn-request):active,
 .pub-strip-actions .pub-pill-primary:not(.pub-pill-request):not(.bokify-btn-wireframe):active {
-  background: linear-gradient(135deg, #d4af37 0%, #b8972e 100%) !important;
+  background: linear-gradient(135deg, rgba(8, 20, 36, 0.98) 0%, rgba(2, 8, 16, 1) 100%) !important;
   border-color: #d4af37 !important;
   color: #020a14 !important;
   box-shadow: 0 2px 8px rgba(212, 175, 55, 0.35) !important;
@@ -49654,4 +49658,334 @@ h1.cv-hero-name,
     font-size: 1.12rem !important;
     text-align: left !important;
   }
+}
+
+
+/* ==========================================================================
+   UNIFIED SIGNATURE BUTTON SYSTEM (100% Consistent with Watch Broadcast)
+   Obsidian Glass Pill, Hairline Gold Border, Left Circular Icon Badge
+   ========================================================================== */
+.pub-pill-btn,
+.pub-academic-btn,
+.pub-strip-actions .pub-pill-btn,
+.pub-strip-actions .pub-academic-btn,
+.article-card-btn,
+.team-cta-btn-primary,
+.team-cta-btn-secondary {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 9px !important;
+  height: 38px !important;
+  padding: 0 18px 0 12px !important;
+  border-radius: 9999px !important;
+  background: linear-gradient(135deg, rgba(8, 20, 36, 0.90) 0%, rgba(3, 10, 20, 0.96) 100%) !important;
+  border: 1px solid rgba(212, 175, 55, 0.38) !important;
+  color: #ffffff !important;
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
+  font-size: 0.76rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  text-decoration: none !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+}
+
+/* Cinzel font option for titles/essays/team CTAs if applied */
+.article-card-btn.font-cinzel,
+.team-cta-btn-primary.font-cinzel,
+.team-cta-btn-secondary.font-cinzel {
+  font-family: var(--font-cinzel, 'Cinzel', Georgia, serif) !important;
+  font-size: 0.74rem !important;
+  letter-spacing: 0.06em !important;
+}
+
+/* Secondary Button subtle rest state (e.g. Cite/BibTeX) */
+.pub-pill-secondary,
+.pub-btn-cite,
+.pub-strip-actions .pub-pill-secondary,
+.team-cta-btn-secondary {
+  border-color: rgba(212, 175, 55, 0.28) !important;
+}
+
+/* Circular Icon Badge Box (Matching talks-watch-icon-box exactly) */
+.pub-btn-icon-box,
+.pub-pill-lock-icon,
+.article-btn-icon-box {
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  border-radius: 50% !important;
+  background: rgba(212, 175, 55, 0.15) !important;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #d4af37 !important;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.pub-btn-icon-box svg,
+.pub-pill-lock-icon svg,
+.article-btn-icon-box svg {
+  width: 11px !important;
+  height: 11px !important;
+  display: block !important;
+  stroke: currentColor !important;
+  color: inherit !important;
+  transition: stroke 0.25s ease, color 0.25s ease, fill 0.25s ease !important;
+}
+
+/* Direct child SVG fallback (if any button lacks wrapper) */
+.pub-pill-btn > svg:not(.pub-btn-arrow):not(.article-btn-arrow):not(.team-cta-btn-icon),
+.pub-academic-btn > svg:not(.pub-btn-arrow):not(.article-btn-arrow) {
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  padding: 5px !important;
+  border-radius: 50% !important;
+  background: rgba(212, 175, 55, 0.15) !important;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  stroke: #d4af37 !important;
+  color: #d4af37 !important;
+  display: inline-flex !important;
+  box-sizing: border-box !important;
+  transition: transform 0.25s ease, background 0.25s ease, stroke 0.25s ease, color 0.25s ease, border-color 0.25s ease !important;
+}
+
+/* Right Arrow Indicator (Matching talks-watch-arrow) */
+.pub-btn-arrow,
+.article-btn-arrow {
+  color: #d4af37 !important;
+  font-size: 0.85rem !important;
+  line-height: 1 !important;
+  display: inline-block !important;
+  transition: transform 0.25s ease, color 0.25s ease !important;
+  margin-left: 2px !important;
+}
+
+/* Text label */
+.pub-pill-btn span:not(.pub-btn-icon-box):not(.pub-btn-arrow),
+.pub-academic-btn span:not(.pub-btn-icon-box):not(.pub-btn-arrow),
+.article-card-btn span:not(.pub-btn-icon-box):not(.pub-btn-arrow),
+.team-cta-btn-primary span:not(.pub-btn-icon-box):not(.pub-btn-arrow),
+.team-cta-btn-secondary span:not(.pub-btn-icon-box):not(.pub-btn-arrow) {
+  color: #ffffff !important;
+  transition: color 0.25s ease !important;
+}
+
+/* ==========================================================================
+   HOVER STATE (100% Consistent with Watch Broadcast Screenshot)
+   Container stays dark obsidian, border brightens gold, icon box turns solid gold
+   ========================================================================== */
+.pub-pill-btn:hover,
+.pub-academic-btn:hover,
+.pub-strip-actions .pub-pill-btn:hover,
+.pub-strip-actions .pub-academic-btn:hover,
+.article-card-btn:hover,
+.article-card:hover .article-card-btn,
+.team-cta-btn-primary:hover,
+.team-cta-btn-secondary:hover {
+  background: linear-gradient(135deg, rgba(14, 32, 56, 0.96) 0%, rgba(4, 14, 28, 0.98) 100%) !important;
+  border-color: rgba(212, 175, 55, 0.80) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.60), 0 0 16px rgba(212, 175, 55, 0.20) !important;
+}
+
+/* Text remains crisp white */
+.pub-pill-btn:hover span:not(.pub-btn-icon-box):not(.pub-btn-arrow),
+.pub-academic-btn:hover span:not(.pub-btn-icon-box):not(.pub-btn-arrow),
+.article-card-btn:hover span:not(.pub-btn-icon-box):not(.pub-btn-arrow),
+.article-card:hover .article-card-btn span:not(.pub-btn-icon-box):not(.pub-btn-arrow),
+.team-cta-btn-primary:hover span:not(.pub-btn-icon-box):not(.pub-btn-arrow),
+.team-cta-btn-secondary:hover span:not(.pub-btn-icon-box):not(.pub-btn-arrow) {
+  color: #ffffff !important;
+}
+
+/* Circular icon box turns SOLID GOLD on hover */
+.pub-pill-btn:hover .pub-btn-icon-box,
+.pub-pill-btn:hover .pub-pill-lock-icon,
+.pub-academic-btn:hover .pub-btn-icon-box,
+.pub-strip-actions .pub-pill-btn:hover .pub-btn-icon-box,
+.pub-strip-actions .pub-academic-btn:hover .pub-btn-icon-box,
+.article-card-btn:hover .pub-btn-icon-box,
+.article-card:hover .article-card-btn .pub-btn-icon-box,
+.team-cta-btn-primary:hover .pub-btn-icon-box,
+.team-cta-btn-secondary:hover .pub-btn-icon-box {
+  background: #d4af37 !important;
+  border-color: #d4af37 !important;
+  color: #030a14 !important;
+  transform: scale(1.08) !important;
+}
+
+/* Icon inside turns dark obsidian */
+.pub-pill-btn:hover .pub-btn-icon-box svg,
+.pub-pill-btn:hover .pub-pill-lock-icon svg,
+.pub-academic-btn:hover .pub-btn-icon-box svg,
+.pub-strip-actions .pub-pill-btn:hover .pub-btn-icon-box svg,
+.pub-strip-actions .pub-academic-btn:hover .pub-btn-icon-box svg,
+.article-card-btn:hover .pub-btn-icon-box svg,
+.article-card:hover .article-card-btn .pub-btn-icon-box svg,
+.team-cta-btn-primary:hover .pub-btn-icon-box svg,
+.team-cta-btn-secondary:hover .pub-btn-icon-box svg {
+  color: #030a14 !important;
+  stroke: #030a14 !important;
+}
+
+/* In case of filled SVG paths/polygons (like quotes or play icons) */
+.pub-pill-btn:hover .pub-btn-icon-box svg path:not([fill="none"]),
+.pub-pill-btn:hover .pub-btn-icon-box svg polygon,
+.pub-academic-btn:hover .pub-btn-icon-box svg path:not([fill="none"]),
+.pub-academic-btn:hover .pub-btn-icon-box svg polygon,
+.article-card-btn:hover .pub-btn-icon-box svg path:not([fill="none"]),
+.team-cta-btn-primary:hover .pub-btn-icon-box svg polygon {
+  fill: #030a14 !important;
+}
+
+/* Fallback for direct child SVG */
+.pub-pill-btn:hover > svg:not(.pub-btn-arrow):not(.article-btn-arrow):not(.team-cta-btn-icon),
+.pub-academic-btn:hover > svg:not(.pub-btn-arrow):not(.article-btn-arrow) {
+  background: #d4af37 !important;
+  border-color: #d4af37 !important;
+  stroke: #030a14 !important;
+  color: #030a14 !important;
+  transform: scale(1.08) !important;
+}
+
+/* Arrow nudge on hover */
+.pub-pill-btn:hover .pub-btn-arrow,
+.pub-academic-btn:hover .pub-btn-arrow,
+.pub-strip-actions .pub-pill-btn:hover .pub-btn-arrow,
+.pub-strip-actions .pub-academic-btn:hover .pub-btn-arrow,
+.article-card-btn:hover .pub-btn-arrow,
+.article-card:hover .article-card-btn .pub-btn-arrow,
+.team-cta-btn-primary:hover .pub-btn-arrow,
+.team-cta-btn-secondary:hover .pub-btn-arrow {
+  color: #fef08a !important;
+  transform: translate(2px, -2px) !important;
+}
+
+/* ==========================================================================
+   ACTIVE / CLICK STATE
+   Tactile compression feedback
+   ========================================================================== */
+.pub-pill-btn:active,
+.pub-academic-btn:active,
+.pub-strip-actions .pub-pill-btn:active,
+.pub-strip-actions .pub-academic-btn:active,
+.article-card-btn:active,
+.team-cta-btn-primary:active,
+.team-cta-btn-secondary:active {
+  transform: translateY(0) scale(0.98) !important;
+  background: linear-gradient(135deg, rgba(8, 20, 36, 0.98) 0%, rgba(2, 8, 16, 1) 100%) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.50) !important;
+}
+
+.pub-pill-btn:active .pub-btn-icon-box,
+.pub-academic-btn:active .pub-btn-icon-box,
+.pub-strip-actions .pub-pill-btn:active .pub-btn-icon-box,
+.pub-strip-actions .pub-academic-btn:active .pub-btn-icon-box,
+.article-card-btn:active .pub-btn-icon-box,
+.team-cta-btn-primary:active .pub-btn-icon-box,
+.team-cta-btn-secondary:active .pub-btn-icon-box {
+  background: #b8972e !important;
+  color: #020810 !important;
+  transform: scale(1) !important;
+}
+
+.pub-pill-btn:active .pub-btn-icon-box svg,
+.pub-academic-btn:active .pub-btn-icon-box svg,
+.pub-strip-actions .pub-pill-btn:active .pub-btn-icon-box svg,
+.pub-strip-actions .pub-academic-btn:active .pub-btn-icon-box svg,
+.article-card-btn:active .pub-btn-icon-box svg,
+.team-cta-btn-primary:active .pub-btn-icon-box svg,
+.team-cta-btn-secondary:active .pub-btn-icon-box svg {
+  stroke: #020810 !important;
+  color: #020810 !important;
+}
+
+
+/* Explicit Request Button Unification (Hairline Gold at rest, Solid Gold Badge on hover) */
+.pub-pill-request,
+.pub-btn-request,
+.pub-pill-btn.pub-pill-request,
+.pub-academic-btn.pub-btn-request {
+  border: 1px solid rgba(212, 175, 55, 0.38) !important;
+}
+
+.pub-pill-request:hover,
+.pub-btn-request:hover,
+.pub-pill-btn.pub-pill-request:hover,
+.pub-academic-btn.pub-btn-request:hover {
+  border-color: rgba(212, 175, 55, 0.80) !important;
+}
+
+.pub-pill-request .pub-pill-lock-icon,
+.pub-pill-request .pub-btn-icon-box,
+.pub-btn-request .pub-btn-icon-box {
+  background: rgba(212, 175, 55, 0.15) !important;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  color: #d4af37 !important;
+}
+
+.pub-pill-request:hover .pub-pill-lock-icon,
+.pub-pill-request:hover .pub-btn-icon-box,
+.pub-btn-request:hover .pub-btn-icon-box {
+  background: #d4af37 !important;
+  border-color: #d4af37 !important;
+  color: #030a14 !important;
+  transform: scale(1.08) !important;
+}
+
+.pub-pill-request:hover .pub-pill-lock-icon svg,
+.pub-pill-request:hover .pub-btn-icon-box svg,
+.pub-btn-request:hover .pub-btn-icon-box svg {
+  stroke: #030a14 !important;
+  color: #030a14 !important;
+}
+
+
+/* ==========================================================================
+   SOLID GOLD BADGE ICON STROKE & FILL (Obsidian on Gold)
+   Ensures ALL SVG paths, lines, polylines, rects render crisp obsidian black on gold badge
+   ========================================================================== */
+.pub-pill-btn:hover .pub-btn-icon-box svg,
+.pub-pill-btn:hover .pub-btn-icon-box svg *,
+.pub-pill-btn:hover .pub-pill-lock-icon svg,
+.pub-pill-btn:hover .pub-pill-lock-icon svg *,
+.pub-academic-btn:hover .pub-btn-icon-box svg,
+.pub-academic-btn:hover .pub-btn-icon-box svg *,
+.pub-strip-actions .pub-pill-btn:hover .pub-btn-icon-box svg,
+.pub-strip-actions .pub-pill-btn:hover .pub-btn-icon-box svg *,
+.pub-strip-actions .pub-academic-btn:hover .pub-btn-icon-box svg,
+.pub-strip-actions .pub-academic-btn:hover .pub-btn-icon-box svg *,
+.article-card-btn:hover .pub-btn-icon-box svg,
+.article-card-btn:hover .pub-btn-icon-box svg *,
+.article-card:hover .article-card-btn .pub-btn-icon-box svg,
+.article-card:hover .article-card-btn .pub-btn-icon-box svg *,
+.team-cta-btn-primary:hover .pub-btn-icon-box svg,
+.team-cta-btn-primary:hover .pub-btn-icon-box svg *,
+.team-cta-btn-secondary:hover .pub-btn-icon-box svg,
+.team-cta-btn-secondary:hover .pub-btn-icon-box svg * {
+  stroke: #030a14 !important;
+  color: #030a14 !important;
+}
+
+.pub-pill-btn:hover .pub-btn-icon-box svg path:not([fill="none"]),
+.pub-pill-btn:hover .pub-btn-icon-box svg polygon:not([fill="none"]),
+.pub-academic-btn:hover .pub-btn-icon-box svg path:not([fill="none"]),
+.pub-academic-btn:hover .pub-btn-icon-box svg polygon:not([fill="none"]),
+.article-card-btn:hover .pub-btn-icon-box svg path:not([fill="none"]),
+.article-card-btn:hover .pub-btn-icon-box svg polygon:not([fill="none"]),
+.team-cta-btn-primary:hover .pub-btn-icon-box svg polygon:not([fill="none"]) {
+  fill: #030a14 !important;
 }
