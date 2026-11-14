@@ -30,8 +30,8 @@
       "dropdown_items": [
         {
           "id": "publication",
-          "label": "Publication",
-          "url": "#",
+          "label": "Publications",
+          "url": "https://zaidamin.org/publications",
           "icon": "",
           "target": "_self",
           "active_pages": [],
