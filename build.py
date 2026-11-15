@@ -9359,14 +9359,6 @@ def generate_cv_page():
               
             </div>
 
-            <div class="cv-portrait-kicker">
-
-              <span class="cv-portrait-dot"></span>
-
-              <span>{photo_kicker}</span>
-
-            </div>
-
           </div>
 
 
@@ -9427,11 +9419,9 @@ def generate_cv_page():
 
 
 
-                <!-- Status Verification Pill (Centered on Vertical Axis) -->
+                <!-- Status Verification Label (Centered on Vertical Axis) -->
 
                 <div class="cv-edition-tag">
-
-                  <span class="cv-edition-status-dot"></span>
 
                   <span>{edition_label}</span>
 
@@ -9449,11 +9439,11 @@ def generate_cv_page():
                 <span>Ph.D. in Computer Science (UKM) &bull; Tesis Cemerlang &amp; GOT</span>
               </span>
               <span class="cv-distinction-badge" title="Global Panduit-Cisco Scholar">
-                <span class="cv-distinction-pip cv-pip-cyan"></span>
+                <span class="cv-distinction-pip cv-pip-gold"></span>
                 <span>Global Cisco Scholar (Top 40 Worldwide)</span>
               </span>
               <span class="cv-distinction-badge" title="Peer Reviewer for Top-Tier Scopus/WoS Q1 Venues">
-                <span class="cv-distinction-pip cv-pip-emerald"></span>
+                <span class="cv-distinction-pip cv-pip-gold"></span>
                 <span>Active Q1 Journal Reviewer</span>
               </span>
             </div>
@@ -9480,9 +9470,7 @@ def generate_cv_page():
 
           <div class="cv-sublayer-row">
 
-            <div class="cv-sublayer-kicker cv-sublayer-kicker-gold">
-
-              <span class="cv-sublayer-dot cv-sublayer-dot-gold"></span>
+            <div class="cv-sublayer-kicker">
 
               <span>RESEARCH INDICES</span>
 
@@ -9528,9 +9516,7 @@ def generate_cv_page():
 
           <div class="cv-sublayer-row">
 
-            <div class="cv-sublayer-kicker cv-sublayer-kicker-cyan">
-
-              <span class="cv-sublayer-dot cv-sublayer-dot-cyan"></span>
+            <div class="cv-sublayer-kicker">
 
               <span>ACCREDITATION</span>
 
