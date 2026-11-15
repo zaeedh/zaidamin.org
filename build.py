@@ -8731,14 +8731,6 @@ def generate_talks_page():
 
         <div class="talks-invite-content">
 
-          <div class="talks-invite-eyebrow">
-
-            <span class="talks-invite-dot"></span>
-
-            <span>Scholarly Invitation &bull; Global Engagements</span>
-
-          </div>
-
           <p class="talks-invite-p">
 
             Dr. Zaid Amin is available for international academic keynotes, conference plenary talks, institutional research workshops, and expert panel discussions on Human-Computer Interaction, AI Governance, Cognitive Attention Systems, and Digital Ethics.
@@ -8780,14 +8772,6 @@ def generate_talks_page():
         <div class="service-carousel-header">
 
           <div class="service-header-left">
-
-            <div class="service-eyebrow">
-
-              <span class="service-eyebrow-dot"></span>
-
-              <span>02. Keynote, Guest &amp; Visiting Speaker</span>
-
-            </div>
 
             <h2 class="service-heading">Global <em>Keynotes</em> &amp; Visiting Orations</h2>
 
@@ -8844,14 +8828,6 @@ def generate_talks_page():
         <div class="service-carousel-header">
 
           <div class="service-header-left">
-
-            <div class="service-eyebrow">
-
-              <span class="service-eyebrow-dot gold-dot"></span>
-
-              <span>03. Opinion &amp; Public Intellect</span>
-
-            </div>
 
             <h2 class="service-heading">Philosophical <em>Treatises</em> &amp; Critical Inquiries</h2>
 
@@ -9403,8 +9379,6 @@ def generate_cv_page():
 
               <div class="cv-hero-headings">
 
-                <div class="cv-section-tag" style="margin-bottom: 6px;">CURRICULUM VITAE &bull; ACADEMIC PORTFOLIO</div>
-
                 <h1 class="cv-hero-name font-cinzel">{exec_prof['name']}</h1>
 
                 <div class="cv-hero-role font-cinzel">
@@ -9610,8 +9584,6 @@ def generate_cv_page():
 
         <div id="achievements"></div>
 
-        <div class="cv-section-tag">01 / HONORS &amp; DISTINCTIONS</div>
-
         <div class="cv-section-title-wrap">
 
           <h2 class="cv-section-title">Prestigious Honors, Awards &amp; Research Grants</h2>
@@ -9764,8 +9736,6 @@ def generate_cv_page():
 
       <section id="leadership" class="cv-section">
 
-        <div class="cv-section-tag">02 / ACADEMIC GOVERNANCE</div>
-
         <div class="cv-section-title-wrap">
 
           <h2 class="cv-section-title">Academic Leadership &amp; University Administration</h2>
@@ -9830,8 +9800,6 @@ def generate_cv_page():
 
       <section id="experience" class="cv-section">
 
-        <div class="cv-section-tag">03 / CAREER APPOINTMENTS</div>
-
         <div class="cv-section-title-wrap">
 
           <h2 class="cv-section-title">Professional Work Experience &amp; Academic Appointments</h2>
@@ -9895,8 +9863,6 @@ def generate_cv_page():
       <!-- SECTION 4: EDUCATION & FORMAL QUALIFICATIONS -->
 
       <section id="education" class="cv-section">
-
-        <div class="cv-section-tag">04 / ACADEMIC CREDENTIALS</div>
 
         <div class="cv-section-title-wrap">
 
@@ -9965,8 +9931,6 @@ def generate_cv_page():
       <!-- SECTION 5: KEYNOTES, INVITED TALKS & MEDIA -->
 
       <section id="talks" class="cv-section">
-
-        <div class="cv-section-tag">05 / PUBLIC ENGAGEMENT</div>
 
         <div class="cv-section-title-wrap">
 
@@ -10091,8 +10055,6 @@ def generate_cv_page():
       <!-- SECTION 6: PEER REVIEW & EDITORIAL CONTRIBUTIONS -->
 
       <section id="peer-review" class="cv-section">
-
-        <div class="cv-section-tag">06 / SCHOLARLY RIGOR</div>
 
         <div class="cv-section-title-wrap">
 

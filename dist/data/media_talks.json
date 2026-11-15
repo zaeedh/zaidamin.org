@@ -213,6 +213,20 @@
   ],
   "opinions": [
     {
+      "id": "opinion-1794712456918",
+      "title": "Collaborating Across Borders: Dr. Zaid Amin (UBD), Prof. Alan F. Smeaton (DCU), and Assoc. Prof. Nazlena Mohamad Ali (UKM) Launch Landmark Book on Information Sharing",
+      "type": "Public Intellectual",
+      "badge": "Opinion & Public Intellect",
+      "publication": "Online Media \"Sumatera Ekspres\"",
+      "year": "2024",
+      "date_display": "FEBRUARY | 2024",
+      "abstract": "\"Information Sharing Behaviour on Social Media\"\n\nAuthors: Zaid Amin, Nazlena Mohamad Ali, & Alan F. Smeaton (Penerbit UKM)\n\nAddressing the escalating challenge of digital misinformation, this international monograph explores the cognitive determinants of user attention in online information-sharing ecosystems. Grounded in a cross-continental collaboration between Universitas Bina Darma (Indonesia), Universiti Kebangsaan Malaysia (Malaysia), and Dublin City University (Ireland), the book introduces the Tune-Attention Model (TAM) and the Visual Selective Attention System (VSAS). It provides researchers and UX architects with actionable, attention-based interaction design principles to mitigate fake news dissemination and foster attentive, responsible digital citizenship.",
+      "url": "https://sumsel.tribunnews.com/2024/01/05/bersama-dua-profesor-dari-dublin-dan-malaysia-dosen-ubd-luncurkan-buku",
+      "palette": "ivory",
+      "arch_style": "arch-cathedral",
+      "image": "assets/images/uploads/alan.png"
+    },
+    {
       "id": "opinion-1794711687776",
       "title": "Dr. Zaid Amin, Informatics Engineering Lecturer at Bina Darma University, appointed External Examiner at Universiti Kebangsaan Malaysia.",
       "type": "Public Intellectual",
