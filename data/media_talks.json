@@ -213,6 +213,20 @@
   ],
   "opinions": [
     {
+      "id": "opinion-1794711687776",
+      "title": "Dr. Zaid Amin, Informatics Engineering Lecturer at Bina Darma University, appointed External Examiner at Universiti Kebangsaan Malaysia.",
+      "type": "Public Intellectual",
+      "badge": "Opinion & Public Intellect",
+      "publication": "Online Media \"Sumatera Ekspres\"",
+      "year": "2024",
+      "date_display": "FEBRUARY | 2024",
+      "abstract": "UBD Informatics Lecturer Dr. Zaid Amin Serves as External PhD Examiner at Universiti Kebangsaan Malaysia\n\nPALEMBANG — In an active demonstration of cross-border academic collaboration, Zaid Amin, M.Kom., Ph.D., a faculty member in Informatics Engineering at Universitas Bina Darma (UBD) Palembang, was appointed as an External Examiner at the Institute of Visual Informatics (IVI), Universiti Kebangsaan Malaysia (UKM).\n\nDr. Zaid Amin served on the examination panel for the Doctoral (Ph.D.) Proposal Defense of candidate Anis Juanita Binti Mohd Zainudin (supervised by Senior Research Fellow Assoc. Prof. Dr. Nazlena Mohamad Ali). The doctoral research, titled \"A Sharing Behaviour Model Based on Information Characteristics as Misinformation Intervention Strategy,\" was evaluated virtually via Webex under UKM’s rigorous academic standards.\n\nThis international appointment marks a concrete milestone in executing the institutional Memorandum of Understanding (MoU) between UBD and UKM. UBD Rector commended the achievement, affirming that it validates the global standing and tangible academic contributions of Universitas Bina Darma on the international stage.",
+      "url": "https://sumeks.disway.id/edukasi/read/696565/dosen-teknik-informatika-universitas-bina-darma-jadi-external-examiner-di-universiti-kebangsaan-malaysia",
+      "palette": "ivory",
+      "arch_style": "arch-cathedral",
+      "image": "assets/images/uploads/external_examiner.jpg"
+    },
+    {
       "id": "opinion-1794711152627",
       "title": "Global Academic Recognition: UBD Palembang Lecturer Appointed as Q1 Journal Reviewer",
       "type": "Public Intellectual",
