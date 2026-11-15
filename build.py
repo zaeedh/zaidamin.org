@@ -3874,7 +3874,7 @@ def get_journal_ticker_html():
 
             <a href="{link_url}" target="_blank" rel="noopener" class="ticker-title-link">
 
-              {title_text} &nearr;
+              {title_text} <span class="ticker-title-arrow">&nearr;</span>
 
             </a>
 
@@ -3905,20 +3905,6 @@ def get_journal_ticker_html():
         <div class="ticker-viewport-col" id="journal-ticker-viewport" onmouseenter="pauseJournalTicker()" onmouseleave="resumeJournalTicker()">
 
           {slides_html}
-
-        </div>
-
-
-
-        <div class="ticker-controls-col">
-
-          <div class="ticker-arrows-box">
-
-            <button class="ticker-arrow-btn" onclick="rotateJournalTicker(-1)" title="Previous Journal (Top)" aria-label="Previous Journal">&uarr;</button>
-
-            <button class="ticker-arrow-btn" onclick="rotateJournalTicker(1)" title="Next Journal (Down)" aria-label="Next Journal">&darr;</button>
-
-          </div>
 
         </div>
 

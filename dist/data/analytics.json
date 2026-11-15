@@ -302,6 +302,69 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794716908247",
+      "timestamp": "2026-11-15T04:28:28.247Z",
+      "path": "/",
+      "title": "Dr. Zaid Amin | Academic & Computational Researcher",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-3CACF8",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "800x600",
+      "referrer": "Direct Navigation",
+      "client_ip": "127.0.0.1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
+      "id": "tr-1794716845760",
+      "timestamp": "2026-11-15T04:27:25.760Z",
+      "path": "/",
+      "title": "Dr. Zaid Amin | Academic & Computational Researcher",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-859AD6",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "800x600",
+      "referrer": "Direct Navigation",
+      "client_ip": "127.0.0.1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
+      "id": "tr-1794716322954",
+      "timestamp": "2026-11-15T04:18:42.954Z",
+      "path": "/",
+      "title": "Dr. Zaid Amin | Academic & Computational Researcher",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-C4C1D0",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "800x600",
+      "referrer": "Direct Navigation",
+      "client_ip": "127.0.0.1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
       "id": "tr-1794716209206",
       "timestamp": "2026-11-15T04:16:49.206Z",
       "path": "/",
@@ -6355,7 +6418,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-15T12:16:49.260400",
+  "updated_at": "2026-11-15T12:28:28.332170",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -6440,6 +6503,6 @@
     "the-polite-city-ai-human-harmonization": 28
   },
   "server_live_hits": {
-    "MY": 231
+    "MY": 234
   }
 }
