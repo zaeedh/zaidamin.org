@@ -10123,8 +10123,6 @@ def generate_cv_page():
 
       <section id="certifications" class="cv-section">
 
-        <div class="cv-section-tag">07 / TECHNICAL MASTERY</div>
-
         <div class="cv-section-title-wrap">
 
           <h2 class="cv-section-title">Professional Certifications &amp; Specialized Training</h2>
@@ -10192,8 +10190,6 @@ def generate_cv_page():
       <!-- SECTION 8: CORE RESEARCH, BOOKS & SCHOLARLY MONOGRAPHS -->
 
       <section id="research-monograph" class="cv-section">
-
-        <div class="cv-section-tag">08 / SCHOLARLY AUTHORSHIP</div>
 
         <div class="cv-section-title-wrap">
 
@@ -10299,8 +10295,6 @@ def generate_cv_page():
 
       <section id="teaching" class="cv-section">
 
-        <div class="cv-section-tag">09 / ACADEMIC PEDAGOGY</div>
-
         <div class="cv-section-title-wrap">
 
           <h2 class="cv-section-title">Teaching, Supervision &amp; Accreditation Credentials</h2>
@@ -10350,8 +10344,6 @@ def generate_cv_page():
       <!-- SECTION 10: ACADEMIC REFERENCES & PERSONAL INTERESTS -->
 
       <section id="references" class="cv-section">
-
-        <div class="cv-section-tag">10 / TESTIMONIALS &amp; PROFILE</div>
 
         <div class="cv-section-title-wrap">
 

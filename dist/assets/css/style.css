@@ -12240,17 +12240,7 @@ a {
 
 .cv-section-tag {
 
-  font-size: 0.72rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.16em;
-
-  text-transform: uppercase;
-
-  color: var(--brand-gold);
-
-  margin-bottom: 4px;
+  display: none !important;
 
 }
 
@@ -23873,21 +23863,7 @@ mark {
 
 .talks-invite-eyebrow {
 
-  font-size: 0.72rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.1em;
-
-  text-transform: uppercase;
-
-  color: #22a6c8;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 7px;
+  display: none !important;
 
 }
 
@@ -24051,23 +24027,7 @@ mark {
 
 .service-eyebrow {
 
-  font-size: 0.72rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.1em;
-
-  text-transform: uppercase;
-
-  color: var(--brand-blue);
-
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 7px;
-
-  margin: 0;
+  display: none !important;
 
 }
 
@@ -30876,17 +30836,7 @@ h1.cv-hero-name,
 
 .cv-section-tag {
 
-  font-size: 0.72rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.16em;
-
-  text-transform: uppercase;
-
-  color: var(--brand-gold);
-
-  margin-bottom: 4px;
+  display: none !important;
 
 }
 
@@ -42509,21 +42459,7 @@ mark {
 
 .talks-invite-eyebrow {
 
-  font-size: 0.72rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.1em;
-
-  text-transform: uppercase;
-
-  color: #22a6c8;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 7px;
+  display: none !important;
 
 }
 
@@ -42687,23 +42623,7 @@ mark {
 
 .service-eyebrow {
 
-  font-size: 0.72rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.1em;
-
-  text-transform: uppercase;
-
-  color: var(--brand-blue);
-
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 7px;
-
-  margin: 0;
+  display: none !important;
 
 }
 
