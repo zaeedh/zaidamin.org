@@ -22058,39 +22058,41 @@ mark {
 
 .talks-watch-header-btn {
 
-  display: inline-flex;
+  display: inline-flex !important;
 
-  align-items: center;
+  align-items: center !important;
 
-  gap: 9px;
+  gap: 10px !important;
 
-  padding: 8px 18px 8px 12px;
+  padding: 6px 18px 6px 7px !important;
 
-  background: linear-gradient(135deg, rgba(8, 20, 36, 0.9) 0%, rgba(3, 10, 20, 0.96) 100%);
+  background: linear-gradient(135deg, rgba(8, 20, 36, 0.95) 0%, rgba(3, 11, 22, 0.98) 100%) !important;
 
-  color: #f1f5f9;
+  color: #ffffff !important;
 
-  border-radius: 9999px;
+  border-radius: 9999px !important;
 
-  border: 1px solid rgba(212, 175, 55, 0.38);
+  border: 1.5px solid #d4af37 !important;
 
-  backdrop-filter: blur(12px);
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.40), 0 4px 14px rgba(0, 0, 0, 0.5) !important;
 
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px) !important;
 
-  font-size: 0.76rem;
+  -webkit-backdrop-filter: blur(12px) !important;
 
-  font-weight: 700;
+  font-family: var(--font-sans, 'Inter', -apple-system, sans-serif) !important;
 
-  letter-spacing: 0.06em;
+  font-size: 0.74rem !important;
 
-  text-transform: uppercase;
+  font-weight: 800 !important;
 
-  text-decoration: none;
+  letter-spacing: 0.08em !important;
 
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  text-transform: uppercase !important;
 
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none !important;
+
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
 
 }
 
@@ -22098,25 +22100,41 @@ mark {
 
 .talks-watch-header-btn .talks-watch-icon-box {
 
-  width: 22px;
+  width: 26px !important;
 
-  height: 22px;
+  height: 26px !important;
 
-  border-radius: 50%;
+  border-radius: 50% !important;
 
-  background: rgba(212, 175, 55, 0.15);
+  background: linear-gradient(135deg, #fce09b 0%, #d4af37 100%) !important;
 
-  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: #07131e !important;
 
-  display: inline-flex;
+  display: inline-flex !important;
 
-  align-items: center;
+  align-items: center !important;
 
-  justify-content: center;
+  justify-content: center !important;
 
-  color: #d4af37;
+  flex-shrink: 0 !important;
 
-  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35) !important;
+
+  border: none !important;
+
+  transition: transform 0.25s ease !important;
+
+}
+
+
+
+.talks-watch-header-btn .talks-watch-icon-box svg {
+
+  fill: #07131e !important;
+
+  width: 11px !important;
+
+  height: 11px !important;
 
 }
 
@@ -22124,13 +22142,13 @@ mark {
 
 .talks-watch-header-btn .talks-watch-arrow {
 
-  color: #d4af37;
+  color: #ffffff !important;
 
-  font-size: 0.85rem;
+  font-size: 0.88rem !important;
 
-  line-height: 1;
+  line-height: 1 !important;
 
-  transition: transform 0.25s ease, color 0.25s ease;
+  transition: transform 0.25s ease, color 0.25s ease !important;
 
 }
 
@@ -22138,15 +22156,15 @@ mark {
 
 .talks-watch-header-btn:hover {
 
-  background: linear-gradient(135deg, rgba(14, 32, 56, 0.96) 0%, rgba(4, 14, 28, 0.98) 100%);
+  background: linear-gradient(135deg, rgba(12, 28, 48, 0.98) 0%, rgba(5, 16, 30, 1) 100%) !important;
 
-  border-color: rgba(212, 175, 55, 0.8);
+  border-color: #fce09b !important;
 
-  color: #ffffff;
+  color: #ffffff !important;
 
-  transform: translateY(-2px);
+  transform: translateY(-2px) !important;
 
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.65), 0 6px 20px rgba(0, 0, 0, 0.6) !important;
 
 }
 
@@ -22154,11 +22172,7 @@ mark {
 
 .talks-watch-header-btn:hover .talks-watch-icon-box {
 
-  background: #d4af37;
-
-  color: #030a14;
-
-  transform: scale(1.08);
+  transform: scale(1.08) !important;
 
 }
 
@@ -22166,9 +22180,9 @@ mark {
 
 .talks-watch-header-btn:hover .talks-watch-arrow {
 
-  transform: translate(2px, -2px);
+  transform: translate(2px, -2px) !important;
 
-  color: #fef08a;
+  color: #fce09b !important;
 
 }
 
@@ -22176,33 +22190,33 @@ mark {
 
 .talks-share-header-btn {
 
-  width: 38px;
+  width: 38px !important;
 
-  height: 38px;
+  height: 38px !important;
 
-  border-radius: 50%;
+  border-radius: 50% !important;
 
-  background: linear-gradient(135deg, rgba(8, 20, 36, 0.88) 0%, rgba(3, 10, 20, 0.95) 100%);
+  background: rgba(6, 18, 32, 0.75) !important;
 
-  border: 1px solid rgba(212, 175, 55, 0.35);
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
 
-  color: #94a3b8;
+  color: #d4af37 !important;
 
-  display: inline-flex;
+  display: inline-flex !important;
 
-  align-items: center;
+  align-items: center !important;
 
-  justify-content: center;
+  justify-content: center !important;
 
-  cursor: pointer;
+  cursor: pointer !important;
 
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px) !important;
 
-  -webkit-backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px) !important;
 
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
 
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
 
 }
 
@@ -22210,13 +22224,15 @@ mark {
 
 .talks-share-header-btn:hover {
 
-  border-color: rgba(212, 175, 55, 0.75);
+  background: rgba(12, 28, 48, 0.95) !important;
 
-  color: #d4af37;
+  border-color: #d4af37 !important;
 
-  transform: translateY(-2px);
+  color: #fce09b !important;
 
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px) !important;
+
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.40) !important;
 
 }
 
@@ -23893,31 +23909,85 @@ mark {
 
 .talks-invite-btn-primary {
 
-  display: inline-flex;
+  display: inline-flex !important;
 
-  align-items: center;
+  align-items: center !important;
 
-  gap: 8px;
+  gap: 10px !important;
 
-  padding: 9px 20px;
+  padding: 7px 20px 7px 8px !important;
 
-  border-radius: 9999px;
+  border-radius: 9999px !important;
 
-  background: linear-gradient(135deg, #d4af37 0%, #aa8218 100%);
+  background: linear-gradient(135deg, rgba(8, 20, 36, 0.95) 0%, rgba(3, 11, 22, 0.98) 100%) !important;
 
-  color: #0d1219;
+  color: #ffffff !important;
 
-  font-size: 0.82rem;
+  border: 1.5px solid #d4af37 !important;
 
-  font-weight: 800;
+  font-family: var(--font-sans, 'Inter', -apple-system, sans-serif) !important;
 
-  letter-spacing: 0.04em;
+  font-size: 0.76rem !important;
 
-  text-decoration: none;
+  font-weight: 800 !important;
 
-  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35);
+  letter-spacing: 0.08em !important;
 
-  transition: all 0.25s ease;
+  text-transform: uppercase !important;
+
+  text-decoration: none !important;
+
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.40), 0 4px 14px rgba(0, 0, 0, 0.5) !important;
+
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+
+}
+
+
+
+.talks-invite-btn-primary .talks-icon-gold {
+
+  width: 26px !important;
+
+  height: 26px !important;
+
+  border-radius: 50% !important;
+
+  background: linear-gradient(135deg, #fce09b 0%, #d4af37 100%) !important;
+
+  color: #07131e !important;
+
+  display: inline-flex !important;
+
+  align-items: center !important;
+
+  justify-content: center !important;
+
+  flex-shrink: 0 !important;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35) !important;
+
+}
+
+
+
+.talks-invite-btn-primary .talks-icon-gold svg {
+
+  stroke: #07131e !important;
+
+}
+
+
+
+.talks-invite-btn-primary .talks-invite-arrow {
+
+  color: #ffffff !important;
+
+  font-size: 0.88rem !important;
+
+  line-height: 1 !important;
+
+  transition: transform 0.25s ease, color 0.25s ease !important;
 
 }
 
@@ -23925,11 +23995,33 @@ mark {
 
 .talks-invite-btn-primary:hover {
 
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(12, 28, 48, 0.98) 0%, rgba(5, 16, 30, 1) 100%) !important;
 
-  box-shadow: 0 6px 22px rgba(212, 175, 55, 0.55);
+  border-color: #fce09b !important;
 
-  color: #000000;
+  color: #ffffff !important;
+
+  transform: translateY(-2px) !important;
+
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.65), 0 6px 20px rgba(0, 0, 0, 0.6) !important;
+
+}
+
+
+
+.talks-invite-btn-primary:hover .talks-icon-gold {
+
+  transform: scale(1.08) !important;
+
+}
+
+
+
+.talks-invite-btn-primary:hover .talks-invite-arrow {
+
+  transform: translate(2px, -2px) !important;
+
+  color: #fce09b !important;
 
 }
 
@@ -23937,23 +24029,87 @@ mark {
 
 .talks-invite-link-sec {
 
-  font-size: 0.82rem;
+  display: inline-flex !important;
 
-  font-weight: 700;
+  align-items: center !important;
 
-  color: #ffffff;
+  gap: 10px !important;
 
-  text-decoration: underline;
+  padding: 7px 20px 7px 8px !important;
 
-  text-underline-offset: 4px;
+  border-radius: 9999px !important;
 
-  display: inline-flex;
+  background: rgba(6, 18, 32, 0.75) !important;
 
-  align-items: center;
+  color: #ffffff !important;
 
-  gap: 4px;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
 
-  transition: color 0.2s ease;
+  font-family: var(--font-sans, 'Inter', -apple-system, sans-serif) !important;
+
+  font-size: 0.76rem !important;
+
+  font-weight: 800 !important;
+
+  letter-spacing: 0.08em !important;
+
+  text-transform: uppercase !important;
+
+  text-decoration: none !important;
+
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
+
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+
+}
+
+
+
+.talks-invite-link-sec .talks-icon-outline {
+
+  width: 26px !important;
+
+  height: 26px !important;
+
+  border-radius: 50% !important;
+
+  background: rgba(212, 175, 55, 0.10) !important;
+
+  border: 1px solid rgba(212, 175, 55, 0.45) !important;
+
+  color: #d4af37 !important;
+
+  display: inline-flex !important;
+
+  align-items: center !important;
+
+  justify-content: center !important;
+
+  flex-shrink: 0 !important;
+
+  transition: transform 0.25s ease, background 0.25s ease !important;
+
+}
+
+
+
+.talks-invite-link-sec .talks-icon-outline svg {
+
+  stroke: #d4af37 !important;
+
+}
+
+
+
+.talks-invite-link-sec .talks-invite-arrow {
+
+  color: rgba(212, 175, 55, 0.85) !important;
+
+  font-size: 0.88rem !important;
+
+  line-height: 1 !important;
+
+  transition: transform 0.25s ease, color 0.25s ease !important;
 
 }
 
@@ -23961,7 +24117,37 @@ mark {
 
 .talks-invite-link-sec:hover {
 
-  color: #22a6c8;
+  background: rgba(10, 26, 44, 0.92) !important;
+
+  border-color: rgba(212, 175, 55, 0.75) !important;
+
+  color: #ffffff !important;
+
+  transform: translateY(-2px) !important;
+
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.30), 0 6px 18px rgba(0, 0, 0, 0.45) !important;
+
+}
+
+
+
+.talks-invite-link-sec:hover .talks-icon-outline {
+
+  background: rgba(212, 175, 55, 0.20) !important;
+
+  border-color: #d4af37 !important;
+
+  transform: scale(1.08) !important;
+
+}
+
+
+
+.talks-invite-link-sec:hover .talks-invite-arrow {
+
+  transform: translate(2px, -2px) !important;
+
+  color: #ffffff !important;
 
 }
 
@@ -24683,48 +24869,82 @@ mark {
 
 
 
-/* Clean Editorial Action Button (Harmonized Rounded Rectangle, Anti-AI Slop) */
+/* Harmonized Golden Ratio Button (Gold Halo Glow, Solid Icon Disc, Anti-AI Slop) */
 .service-card-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 18px;
-  border-radius: 6px;
-  background: #ffffff;
-  color: #070d15;
-  font-family: var(--font-sans, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  border: 1px solid #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  align-self: flex-start;
-  cursor: pointer;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 6px 16px 6px 7px !important;
+  border-radius: 9999px !important;
+  background: linear-gradient(135deg, rgba(8, 20, 36, 0.95) 0%, rgba(3, 11, 22, 0.98) 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #d4af37 !important;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.40), 0 4px 14px rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  font-family: var(--font-sans, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif) !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  align-self: flex-start !important;
 }
 
-.service-card-btn-disc {
-  display: none !important;
+.service-card-btn-icon {
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #fce09b 0%, #d4af37 100%) !important;
+  color: #07131e !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35) !important;
+  transition: transform 0.25s ease !important;
+}
+
+.service-card-btn-icon svg {
+  stroke: #07131e !important;
+}
+
+.service-card-btn-label {
+  color: #ffffff !important;
+}
+
+.service-card-btn-arrow {
+  color: #ffffff !important;
+  font-size: 0.88rem !important;
+  line-height: 1 !important;
+  transition: transform 0.25s ease, color 0.25s ease !important;
 }
 
 .service-card-btn:hover,
 .service-portrait-card:hover .service-card-btn {
-  background: #f8fafc;
-  color: #070d15;
-  border-color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(255, 255, 255, 0.2), 0 2px 8px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, rgba(12, 28, 48, 0.98) 0%, rgba(5, 16, 30, 1) 100%) !important;
+  border-color: #fce09b !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.65), 0 6px 20px rgba(0, 0, 0, 0.6) !important;
+}
+
+.service-card-btn:hover .service-card-btn-icon,
+.service-portrait-card:hover .service-card-btn-icon {
+  transform: scale(1.08) !important;
+}
+
+.service-card-btn:hover .service-card-btn-arrow,
+.service-portrait-card:hover .service-card-btn-arrow {
+  transform: translate(2px, -2px) !important;
+  color: #fce09b !important;
 }
 
 .service-card-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-.service-portrait-card:hover .service-card-btn-disc {
-  display: none !important;
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
 }
 
 
@@ -26080,27 +26300,29 @@ h1.cv-hero-name,
 
   align-items: center !important;
 
-  height: 30px !important;
+  height: 32px !important;
 
-  padding: 4px 12px !important;
+  padding: 5px 14px !important;
 
-  font-size: 0.74rem !important;
+  font-size: 0.75rem !important;
 
-  font-weight: 600 !important;
+  font-weight: 700 !important;
 
-  border-radius: 7px !important;
+  letter-spacing: 0.05em !important;
 
-  border: 1px solid rgba(186, 230, 253, 0.12) !important;
+  border-radius: 9999px !important;
 
-  background: rgba(6, 24, 42, 0.35) !important;
+  border: 1px solid rgba(212, 175, 55, 0.28) !important;
 
-  color: #94a3b8 !important;
+  background: rgba(6, 18, 32, 0.75) !important;
+
+  color: #cbd5e1 !important;
 
   text-decoration: none !important;
 
   white-space: nowrap !important;
 
-  transition: all 0.2s ease !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 
 }
 
@@ -26110,9 +26332,13 @@ h1.cv-hero-name,
 
   color: #ffffff !important;
 
-  border-color: rgba(186, 230, 253, 0.30) !important;
+  border-color: rgba(212, 175, 55, 0.65) !important;
 
-  background: rgba(186, 230, 253, 0.08) !important;
+  background: rgba(10, 26, 44, 0.90) !important;
+
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.25) !important;
+
+  transform: translateY(-1px) !important;
 
 }
 
@@ -26120,15 +26346,15 @@ h1.cv-hero-name,
 
 .talks-nav-pill.active {
 
-  background: rgba(34, 166, 200, 0.16) !important;
+  background: linear-gradient(135deg, rgba(8, 22, 40, 0.95) 0%, rgba(3, 12, 24, 0.98) 100%) !important;
 
-  color: #38bdf8 !important;
+  color: #ffffff !important;
 
-  border-color: rgba(56, 189, 248, 0.45) !important;
+  border-color: #d4af37 !important;
 
-  font-weight: 700 !important;
+  font-weight: 800 !important;
 
-  box-shadow: none !important;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.38), 0 2px 8px rgba(0, 0, 0, 0.4) !important;
 
 }
 
@@ -40614,39 +40840,41 @@ mark {
 
 .talks-watch-header-btn {
 
-  display: inline-flex;
+  display: inline-flex !important;
 
-  align-items: center;
+  align-items: center !important;
 
-  gap: 9px;
+  gap: 10px !important;
 
-  padding: 8px 18px 8px 12px;
+  padding: 6px 18px 6px 7px !important;
 
-  background: linear-gradient(135deg, rgba(8, 20, 36, 0.9) 0%, rgba(3, 10, 20, 0.96) 100%);
+  background: linear-gradient(135deg, rgba(8, 20, 36, 0.95) 0%, rgba(3, 11, 22, 0.98) 100%) !important;
 
-  color: #f1f5f9;
+  color: #ffffff !important;
 
-  border-radius: 9999px;
+  border-radius: 9999px !important;
 
-  border: 1px solid rgba(212, 175, 55, 0.38);
+  border: 1.5px solid #d4af37 !important;
 
-  backdrop-filter: blur(12px);
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.40), 0 4px 14px rgba(0, 0, 0, 0.5) !important;
 
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px) !important;
 
-  font-size: 0.76rem;
+  -webkit-backdrop-filter: blur(12px) !important;
 
-  font-weight: 700;
+  font-family: var(--font-sans, 'Inter', -apple-system, sans-serif) !important;
 
-  letter-spacing: 0.06em;
+  font-size: 0.74rem !important;
 
-  text-transform: uppercase;
+  font-weight: 800 !important;
 
-  text-decoration: none;
+  letter-spacing: 0.08em !important;
 
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  text-transform: uppercase !important;
 
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none !important;
+
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
 
 }
 
@@ -40654,25 +40882,41 @@ mark {
 
 .talks-watch-header-btn .talks-watch-icon-box {
 
-  width: 22px;
+  width: 26px !important;
 
-  height: 22px;
+  height: 26px !important;
 
-  border-radius: 50%;
+  border-radius: 50% !important;
 
-  background: rgba(212, 175, 55, 0.15);
+  background: linear-gradient(135deg, #fce09b 0%, #d4af37 100%) !important;
 
-  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: #07131e !important;
 
-  display: inline-flex;
+  display: inline-flex !important;
 
-  align-items: center;
+  align-items: center !important;
 
-  justify-content: center;
+  justify-content: center !important;
 
-  color: #d4af37;
+  flex-shrink: 0 !important;
 
-  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35) !important;
+
+  border: none !important;
+
+  transition: transform 0.25s ease !important;
+
+}
+
+
+
+.talks-watch-header-btn .talks-watch-icon-box svg {
+
+  fill: #07131e !important;
+
+  width: 11px !important;
+
+  height: 11px !important;
 
 }
 
@@ -40680,13 +40924,13 @@ mark {
 
 .talks-watch-header-btn .talks-watch-arrow {
 
-  color: #d4af37;
+  color: #ffffff !important;
 
-  font-size: 0.85rem;
+  font-size: 0.88rem !important;
 
-  line-height: 1;
+  line-height: 1 !important;
 
-  transition: transform 0.25s ease, color 0.25s ease;
+  transition: transform 0.25s ease, color 0.25s ease !important;
 
 }
 
@@ -40694,15 +40938,15 @@ mark {
 
 .talks-watch-header-btn:hover {
 
-  background: linear-gradient(135deg, rgba(14, 32, 56, 0.96) 0%, rgba(4, 14, 28, 0.98) 100%);
+  background: linear-gradient(135deg, rgba(12, 28, 48, 0.98) 0%, rgba(5, 16, 30, 1) 100%) !important;
 
-  border-color: rgba(212, 175, 55, 0.8);
+  border-color: #fce09b !important;
 
-  color: #ffffff;
+  color: #ffffff !important;
 
-  transform: translateY(-2px);
+  transform: translateY(-2px) !important;
 
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.65), 0 6px 20px rgba(0, 0, 0, 0.6) !important;
 
 }
 
@@ -40710,11 +40954,7 @@ mark {
 
 .talks-watch-header-btn:hover .talks-watch-icon-box {
 
-  background: #d4af37;
-
-  color: #030a14;
-
-  transform: scale(1.08);
+  transform: scale(1.08) !important;
 
 }
 
@@ -40722,9 +40962,9 @@ mark {
 
 .talks-watch-header-btn:hover .talks-watch-arrow {
 
-  transform: translate(2px, -2px);
+  transform: translate(2px, -2px) !important;
 
-  color: #fef08a;
+  color: #fce09b !important;
 
 }
 
@@ -40732,33 +40972,33 @@ mark {
 
 .talks-share-header-btn {
 
-  width: 38px;
+  width: 38px !important;
 
-  height: 38px;
+  height: 38px !important;
 
-  border-radius: 50%;
+  border-radius: 50% !important;
 
-  background: linear-gradient(135deg, rgba(8, 20, 36, 0.88) 0%, rgba(3, 10, 20, 0.95) 100%);
+  background: rgba(6, 18, 32, 0.75) !important;
 
-  border: 1px solid rgba(212, 175, 55, 0.35);
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
 
-  color: #94a3b8;
+  color: #d4af37 !important;
 
-  display: inline-flex;
+  display: inline-flex !important;
 
-  align-items: center;
+  align-items: center !important;
 
-  justify-content: center;
+  justify-content: center !important;
 
-  cursor: pointer;
+  cursor: pointer !important;
 
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px) !important;
 
-  -webkit-backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px) !important;
 
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
 
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
 
 }
 
@@ -40766,13 +41006,15 @@ mark {
 
 .talks-share-header-btn:hover {
 
-  border-color: rgba(212, 175, 55, 0.75);
+  background: rgba(12, 28, 48, 0.95) !important;
 
-  color: #d4af37;
+  border-color: #d4af37 !important;
 
-  transform: translateY(-2px);
+  color: #fce09b !important;
 
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px) !important;
+
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.40) !important;
 
 }
 
@@ -42449,31 +42691,85 @@ mark {
 
 .talks-invite-btn-primary {
 
-  display: inline-flex;
+  display: inline-flex !important;
 
-  align-items: center;
+  align-items: center !important;
 
-  gap: 8px;
+  gap: 10px !important;
 
-  padding: 9px 20px;
+  padding: 7px 20px 7px 8px !important;
 
-  border-radius: 9999px;
+  border-radius: 9999px !important;
 
-  background: linear-gradient(135deg, #d4af37 0%, #aa8218 100%);
+  background: linear-gradient(135deg, rgba(8, 20, 36, 0.95) 0%, rgba(3, 11, 22, 0.98) 100%) !important;
 
-  color: #0d1219;
+  color: #ffffff !important;
 
-  font-size: 0.82rem;
+  border: 1.5px solid #d4af37 !important;
 
-  font-weight: 800;
+  font-family: var(--font-sans, 'Inter', -apple-system, sans-serif) !important;
 
-  letter-spacing: 0.04em;
+  font-size: 0.76rem !important;
 
-  text-decoration: none;
+  font-weight: 800 !important;
 
-  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35);
+  letter-spacing: 0.08em !important;
 
-  transition: all 0.25s ease;
+  text-transform: uppercase !important;
+
+  text-decoration: none !important;
+
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.40), 0 4px 14px rgba(0, 0, 0, 0.5) !important;
+
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+
+}
+
+
+
+.talks-invite-btn-primary .talks-icon-gold {
+
+  width: 26px !important;
+
+  height: 26px !important;
+
+  border-radius: 50% !important;
+
+  background: linear-gradient(135deg, #fce09b 0%, #d4af37 100%) !important;
+
+  color: #07131e !important;
+
+  display: inline-flex !important;
+
+  align-items: center !important;
+
+  justify-content: center !important;
+
+  flex-shrink: 0 !important;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35) !important;
+
+}
+
+
+
+.talks-invite-btn-primary .talks-icon-gold svg {
+
+  stroke: #07131e !important;
+
+}
+
+
+
+.talks-invite-btn-primary .talks-invite-arrow {
+
+  color: #ffffff !important;
+
+  font-size: 0.88rem !important;
+
+  line-height: 1 !important;
+
+  transition: transform 0.25s ease, color 0.25s ease !important;
 
 }
 
@@ -42481,11 +42777,33 @@ mark {
 
 .talks-invite-btn-primary:hover {
 
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(12, 28, 48, 0.98) 0%, rgba(5, 16, 30, 1) 100%) !important;
 
-  box-shadow: 0 6px 22px rgba(212, 175, 55, 0.55);
+  border-color: #fce09b !important;
 
-  color: #000000;
+  color: #ffffff !important;
+
+  transform: translateY(-2px) !important;
+
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.65), 0 6px 20px rgba(0, 0, 0, 0.6) !important;
+
+}
+
+
+
+.talks-invite-btn-primary:hover .talks-icon-gold {
+
+  transform: scale(1.08) !important;
+
+}
+
+
+
+.talks-invite-btn-primary:hover .talks-invite-arrow {
+
+  transform: translate(2px, -2px) !important;
+
+  color: #fce09b !important;
 
 }
 
@@ -42493,23 +42811,87 @@ mark {
 
 .talks-invite-link-sec {
 
-  font-size: 0.82rem;
+  display: inline-flex !important;
 
-  font-weight: 700;
+  align-items: center !important;
 
-  color: #ffffff;
+  gap: 10px !important;
 
-  text-decoration: underline;
+  padding: 7px 20px 7px 8px !important;
 
-  text-underline-offset: 4px;
+  border-radius: 9999px !important;
 
-  display: inline-flex;
+  background: rgba(6, 18, 32, 0.75) !important;
 
-  align-items: center;
+  color: #ffffff !important;
 
-  gap: 4px;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
 
-  transition: color 0.2s ease;
+  font-family: var(--font-sans, 'Inter', -apple-system, sans-serif) !important;
+
+  font-size: 0.76rem !important;
+
+  font-weight: 800 !important;
+
+  letter-spacing: 0.08em !important;
+
+  text-transform: uppercase !important;
+
+  text-decoration: none !important;
+
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
+
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+
+}
+
+
+
+.talks-invite-link-sec .talks-icon-outline {
+
+  width: 26px !important;
+
+  height: 26px !important;
+
+  border-radius: 50% !important;
+
+  background: rgba(212, 175, 55, 0.10) !important;
+
+  border: 1px solid rgba(212, 175, 55, 0.45) !important;
+
+  color: #d4af37 !important;
+
+  display: inline-flex !important;
+
+  align-items: center !important;
+
+  justify-content: center !important;
+
+  flex-shrink: 0 !important;
+
+  transition: transform 0.25s ease, background 0.25s ease !important;
+
+}
+
+
+
+.talks-invite-link-sec .talks-icon-outline svg {
+
+  stroke: #d4af37 !important;
+
+}
+
+
+
+.talks-invite-link-sec .talks-invite-arrow {
+
+  color: rgba(212, 175, 55, 0.85) !important;
+
+  font-size: 0.88rem !important;
+
+  line-height: 1 !important;
+
+  transition: transform 0.25s ease, color 0.25s ease !important;
 
 }
 
@@ -42517,7 +42899,37 @@ mark {
 
 .talks-invite-link-sec:hover {
 
-  color: #22a6c8;
+  background: rgba(10, 26, 44, 0.92) !important;
+
+  border-color: rgba(212, 175, 55, 0.75) !important;
+
+  color: #ffffff !important;
+
+  transform: translateY(-2px) !important;
+
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.30), 0 6px 18px rgba(0, 0, 0, 0.45) !important;
+
+}
+
+
+
+.talks-invite-link-sec:hover .talks-icon-outline {
+
+  background: rgba(212, 175, 55, 0.20) !important;
+
+  border-color: #d4af37 !important;
+
+  transform: scale(1.08) !important;
+
+}
+
+
+
+.talks-invite-link-sec:hover .talks-invite-arrow {
+
+  transform: translate(2px, -2px) !important;
+
+  color: #ffffff !important;
 
 }
 
@@ -43239,48 +43651,82 @@ mark {
 
 
 
-/* Clean Editorial Action Button (Harmonized Rounded Rectangle, Anti-AI Slop) */
+/* Harmonized Golden Ratio Button (Gold Halo Glow, Solid Icon Disc, Anti-AI Slop) */
 .service-card-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 18px;
-  border-radius: 6px;
-  background: #ffffff;
-  color: #070d15;
-  font-family: var(--font-sans, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  border: 1px solid #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  align-self: flex-start;
-  cursor: pointer;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 6px 16px 6px 7px !important;
+  border-radius: 9999px !important;
+  background: linear-gradient(135deg, rgba(8, 20, 36, 0.95) 0%, rgba(3, 11, 22, 0.98) 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #d4af37 !important;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.40), 0 4px 14px rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  font-family: var(--font-sans, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif) !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  align-self: flex-start !important;
 }
 
-.service-card-btn-disc {
-  display: none !important;
+.service-card-btn-icon {
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #fce09b 0%, #d4af37 100%) !important;
+  color: #07131e !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35) !important;
+  transition: transform 0.25s ease !important;
+}
+
+.service-card-btn-icon svg {
+  stroke: #07131e !important;
+}
+
+.service-card-btn-label {
+  color: #ffffff !important;
+}
+
+.service-card-btn-arrow {
+  color: #ffffff !important;
+  font-size: 0.88rem !important;
+  line-height: 1 !important;
+  transition: transform 0.25s ease, color 0.25s ease !important;
 }
 
 .service-card-btn:hover,
 .service-portrait-card:hover .service-card-btn {
-  background: #f8fafc;
-  color: #070d15;
-  border-color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(255, 255, 255, 0.2), 0 2px 8px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, rgba(12, 28, 48, 0.98) 0%, rgba(5, 16, 30, 1) 100%) !important;
+  border-color: #fce09b !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.65), 0 6px 20px rgba(0, 0, 0, 0.6) !important;
+}
+
+.service-card-btn:hover .service-card-btn-icon,
+.service-portrait-card:hover .service-card-btn-icon {
+  transform: scale(1.08) !important;
+}
+
+.service-card-btn:hover .service-card-btn-arrow,
+.service-portrait-card:hover .service-card-btn-arrow {
+  transform: translate(2px, -2px) !important;
+  color: #fce09b !important;
 }
 
 .service-card-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-.service-portrait-card:hover .service-card-btn-disc {
-  display: none !important;
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
 }
 
 
@@ -44636,27 +45082,29 @@ h1.cv-hero-name,
 
   align-items: center !important;
 
-  height: 30px !important;
+  height: 32px !important;
 
-  padding: 4px 12px !important;
+  padding: 5px 14px !important;
 
-  font-size: 0.74rem !important;
+  font-size: 0.75rem !important;
 
-  font-weight: 600 !important;
+  font-weight: 700 !important;
 
-  border-radius: 7px !important;
+  letter-spacing: 0.05em !important;
 
-  border: 1px solid rgba(186, 230, 253, 0.12) !important;
+  border-radius: 9999px !important;
 
-  background: rgba(6, 24, 42, 0.35) !important;
+  border: 1px solid rgba(212, 175, 55, 0.28) !important;
 
-  color: #94a3b8 !important;
+  background: rgba(6, 18, 32, 0.75) !important;
+
+  color: #cbd5e1 !important;
 
   text-decoration: none !important;
 
   white-space: nowrap !important;
 
-  transition: all 0.2s ease !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 
 }
 
@@ -44666,9 +45114,13 @@ h1.cv-hero-name,
 
   color: #ffffff !important;
 
-  border-color: rgba(186, 230, 253, 0.30) !important;
+  border-color: rgba(212, 175, 55, 0.65) !important;
 
-  background: rgba(186, 230, 253, 0.08) !important;
+  background: rgba(10, 26, 44, 0.90) !important;
+
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.25) !important;
+
+  transform: translateY(-1px) !important;
 
 }
 
@@ -44676,15 +45128,15 @@ h1.cv-hero-name,
 
 .talks-nav-pill.active {
 
-  background: rgba(34, 166, 200, 0.16) !important;
+  background: linear-gradient(135deg, rgba(8, 22, 40, 0.95) 0%, rgba(3, 12, 24, 0.98) 100%) !important;
 
-  color: #38bdf8 !important;
+  color: #ffffff !important;
 
-  border-color: rgba(56, 189, 248, 0.45) !important;
+  border-color: #d4af37 !important;
 
-  font-weight: 700 !important;
+  font-weight: 800 !important;
 
-  box-shadow: none !important;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.38), 0 2px 8px rgba(0, 0, 0, 0.4) !important;
 
 }
 

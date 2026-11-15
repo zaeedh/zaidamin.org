@@ -6584,8 +6584,12 @@ def generate_talks_page():
 
             <p class="service-card-desc">{k_abstract}</p>
 
-            <a href="{k_url}" {"target='_blank' rel='noopener'" if k_url.startswith("http") else ""} class="service-card-btn">
-              <span>READ MORE</span>
+            <a href="{k_url}" {"target='_blank' rel='noopener'" if k_url.startswith("http") else ""} class="service-card-btn" title="Read Details: {k_title}">
+              <span class="service-card-btn-icon">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              </span>
+              <span class="service-card-btn-label">READ MORE</span>
+              <span class="service-card-btn-arrow">&nearr;</span>
             </a>
 
           </div>
@@ -6661,8 +6665,12 @@ def generate_talks_page():
 
             <p class="service-card-desc">{o_abstract}</p>
 
-            <a href="{o_url}" {"target='_blank' rel='noopener'" if o_url.startswith("http") else ""} class="service-card-btn">
-              <span>READ ESSAY</span>
+            <a href="{o_url}" {"target='_blank' rel='noopener'" if o_url.startswith("http") else ""} class="service-card-btn" title="Read Essay: {o_title}">
+              <span class="service-card-btn-icon">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+              </span>
+              <span class="service-card-btn-label">READ ESSAY</span>
+              <span class="service-card-btn-arrow">&nearr;</span>
             </a>
 
           </div>
@@ -8725,17 +8733,31 @@ def generate_talks_page():
 
           <div class="talks-invite-actions">
 
-            <a href="mailto:zaid.amin@newinti.edu.my" class="talks-invite-btn-primary">
+            <a href="mailto:zaid.amin@newinti.edu.my" class="talks-invite-btn-primary" title="Inquire for Keynote Speaking">
 
-              <span>Invite for Keynote</span>
+              <span class="talks-invite-icon-box talks-icon-gold">
 
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+
+              </span>
+
+              <span class="talks-invite-btn-text">INVITE FOR KEYNOTE</span>
+
+              <span class="talks-invite-arrow">&nearr;</span>
 
             </a>
 
-            <a href="/cv" class="talks-invite-link-sec">
+            <a href="/cv" class="talks-invite-link-sec" title="View Academic Curriculum Vitae">
 
-              <span>View Academic Curriculum Vitae &nearr;</span>
+              <span class="talks-invite-icon-box talks-icon-outline">
+
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+
+              </span>
+
+              <span class="talks-invite-btn-text">VIEW ACADEMIC CV</span>
+
+              <span class="talks-invite-arrow">&nearr;</span>
 
             </a>
 
