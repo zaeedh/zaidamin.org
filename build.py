@@ -8685,14 +8685,14 @@ def generate_talks_page():
               {playlist_joined}
             </div>
 
-            <!-- Bottom Navigation Arrows (Golden Ratio Harmonic Proportions) -->
+            <!-- Bottom Navigation Arrows (Golden Ratio Harmonic Proportions - Vertical Playlist Navigation) -->
             <div class="video-playlist-footer">
               <div class="video-nav-arrows-group">
-                <button class="video-nav-arrow-btn" id="video-prev-btn" title="Previous Video" type="button" aria-label="Previous Video">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"/></svg>
+                <button class="video-nav-arrow-btn" id="video-prev-btn" title="Previous Video (Up)" type="button" aria-label="Previous Video (Up)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
                 </button>
-                <button class="video-nav-arrow-btn" id="video-next-btn" title="Next Video" type="button" aria-label="Next Video">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
+                <button class="video-nav-arrow-btn" id="video-next-btn" title="Next Video (Down)" type="button" aria-label="Next Video (Down)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
               </div>
             </div>
