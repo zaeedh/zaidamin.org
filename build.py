@@ -8558,8 +8558,6 @@ def generate_talks_page():
 
             <h2>Talk Show</h2>
 
-            <p class="talks-category-subtitle">Televised Broadcasts &bull; Expert Commentary &bull; Studio Discourse</p>
-
           </div>
 
 

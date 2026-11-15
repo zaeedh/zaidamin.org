@@ -213,6 +213,20 @@
   ],
   "opinions": [
     {
+      "id": "opinion-1794709993788",
+      "title": "Dr. Zaid Amin receiving the Anugerah Universiti from UKM Chancellor Tuanku Muhriz.",
+      "type": "Public Intellectual",
+      "badge": "Opinion & Public Intellect",
+      "publication": "Online Media \"Detik Sumsel\"",
+      "year": "2022",
+      "date_display": "NOVEMBER | 2022",
+      "abstract": "Zaid Amin, M.Kom., Ph.D., a lecturer and Head of the Undergraduate Information Systems Program at Universitas Bina Darma (UBD), received the prestigious Anugerah Universiti award from Universiti Kebangsaan Malaysia (UKM). Honored for completing his PhD as a Graduate on Time (GOT) recipient and earning the Best Thesis (Thesis Cemerlang) distinction. Presented directly by UKM Chancellor and Yang di-Pertuan Besar of Negeri Sembilan, Tuanku Muhriz ibni Almarhum Tuanku Munawir, during UKM's 50th Golden Jubilee (Jubli Emas) convocation ceremony on November 26, 2022.",
+      "url": "https://www.detiksumsel.com/nasional/pr-9747551616/luar-biasa-dosen-universitas-bina-darma-terima-anugerah-universiti-dari-sultan-negeri-sembilan-di-malaysia",
+      "palette": "ivory",
+      "arch_style": "arch-cathedral",
+      "image": "assets/images/uploads/got2.jpg"
+    },
+    {
       "id": "opinion-1794648228300",
       "title": "Dr. Zaid Amin of UBD Clinches Best Presenter at IEEE International Conference",
       "type": "Public Intellectual",

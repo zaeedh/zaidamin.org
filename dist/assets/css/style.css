@@ -22010,7 +22010,7 @@ mark {
 
   justify-content: space-between;
 
-  align-items: flex-end;
+  align-items: center;
 
   margin-bottom: 18px;
 
@@ -22036,7 +22036,7 @@ mark {
 
   color: #ffffff;
 
-  margin: 0 0 4px 0;
+  margin: 0;
 
   letter-spacing: 0.04em;
 
@@ -22048,17 +22048,7 @@ mark {
 
 .talks-category-subtitle {
 
-  font-size: 0.78rem;
-
-  font-weight: 700;
-
-  letter-spacing: 0.08em;
-
-  color: var(--brand-blue);
-
-  text-transform: uppercase;
-
-  margin: 0;
+  display: none !important;
 
 }
 
@@ -40656,7 +40646,7 @@ mark {
 
   justify-content: space-between;
 
-  align-items: flex-end;
+  align-items: center;
 
   margin-bottom: 18px;
 
@@ -40682,7 +40672,7 @@ mark {
 
   color: #ffffff;
 
-  margin: 0 0 4px 0;
+  margin: 0;
 
   letter-spacing: 0.04em;
 
@@ -40694,17 +40684,7 @@ mark {
 
 .talks-category-subtitle {
 
-  font-size: 0.78rem;
-
-  font-weight: 700;
-
-  letter-spacing: 0.08em;
-
-  color: var(--brand-blue);
-
-  text-transform: uppercase;
-
-  margin: 0;
+  display: none !important;
 
 }
 
