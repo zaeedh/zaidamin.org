@@ -213,6 +213,20 @@
   ],
   "opinions": [
     {
+      "id": "opinion-1794715733857",
+      "title": "New Scholarly Book by Dr. Zaid Amin Explores the Mechanics of AI-Driven Digital Habits",
+      "type": "Public Intellectual",
+      "badge": "Opinion & Public Intellect",
+      "publication": "Online Media \"Sumatera Ekspres\"",
+      "year": "2025",
+      "date_display": "NOVEMBER | 2025",
+      "abstract": "In his latest book, Persuasive Technology: AI for Shaping Behavior and Habits, Dr. Zaid Amin investigates how artificial intelligence has evolved into an active force shaping everyday digital behaviors. Synthesizing insights from computing, psychology, and ethics, the book demystifies how corporations and digital platforms utilize predictive algorithms to guide consumer choices, while addressing the critical ethical boundaries surrounding digital addiction and cognitive manipulation. Serving as both a scholarly reference and a practical guide, the book provides actionable strategies for designing ethical, transparent, and user-empowering AI technologies in the modern digital age.",
+      "url": "https://sumeks.disway.id/palembang-update/read/764060/buku-terbaru-dr-zaid-amin-ungkap-peran-ai-dalam-membentuk-kebiasaan-digital",
+      "palette": "ivory",
+      "arch_style": "arch-cathedral",
+      "image": "assets/images/uploads/bookzaid1.jpg"
+    },
+    {
       "id": "opinion-1794715408241",
       "title": "Dr. Zaid Amin’s Team Awarded 2025 Kemendikbudristek Community Service Grant",
       "type": "Public Intellectual",
