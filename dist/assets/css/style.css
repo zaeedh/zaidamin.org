@@ -7324,7 +7324,7 @@ a {
 
 .journal-ticker-container {
 
-  background: radial-gradient(ellipse at 15% 50%, rgba(34, 166, 200, 0.08) 0%, rgba(6, 22, 38, 0.90) 55%, rgba(3, 12, 22, 0.96) 100%);
+  background: radial-gradient(ellipse at 18% 50%, rgba(203, 213, 225, 0.04) 0%, rgba(7, 21, 35, 0.92) 55%, rgba(3, 10, 18, 0.98) 100%);
 
   backdrop-filter: blur(16px);
 
@@ -7348,6 +7348,24 @@ a {
 
   overflow: hidden;
 
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+
+              background 0.3s ease;
+
+}
+
+
+
+.journal-ticker-container:hover {
+
+  border-color: rgba(203, 213, 225, 0.34);
+
+  box-shadow: 0 12px 32px rgba(0, 8, 20, 0.50), inset 0 1px 0 rgba(255, 255, 255, 0.09);
+
+  background: radial-gradient(ellipse at 18% 50%, rgba(203, 213, 225, 0.07) 0%, rgba(9, 25, 42, 0.94) 55%, rgba(4, 12, 22, 0.98) 100%);
+
 }
 
 
@@ -7358,7 +7376,7 @@ a {
 
   align-items: center;
 
-  gap: 7px;
+  gap: 8px;
 
   font-family: var(--font-cinzel, 'Cinzel', serif);
 
@@ -7376,7 +7394,9 @@ a {
 
   border-right: 1px solid rgba(212, 175, 55, 0.22);
 
-  padding-right: 14px;
+  padding-right: 16px;
+
+  margin-right: 2px;
 
 }
 
@@ -7422,7 +7442,7 @@ a {
 
   align-items: center;
 
-  gap: 10px;
+  gap: 12px;
 
   opacity: 0;
 
@@ -7508,11 +7528,11 @@ a {
 
 .tag-scopus {
 
-  background: rgba(34, 166, 200, 0.10);
+  background: rgba(203, 213, 225, 0.08);
 
-  border: 1px solid rgba(34, 166, 200, 0.28);
+  border: 1px solid rgba(203, 213, 225, 0.20);
 
-  color: #7dd3fc;
+  color: #cbd5e1;
 
 }
 
@@ -7582,7 +7602,7 @@ a {
 
   letter-spacing: 0.002em;
 
-  transition: color 0.2s ease;
+  transition: color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 
   flex: 1 1 auto;
 
@@ -7594,7 +7614,7 @@ a {
 
 .ticker-title-link:hover {
 
-  color: #38bdf8;
+  color: #cbd5e1;
 
   text-decoration: none;
 
@@ -7604,7 +7624,7 @@ a {
 
 .ticker-title-arrow {
 
-  color: rgba(212, 175, 55, 0.80);
+  color: rgba(212, 175, 55, 0.75);
 
   display: inline-block;
 
@@ -7612,7 +7632,7 @@ a {
 
   font-size: 0.85rem;
 
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease;
 
 }
 
@@ -7620,9 +7640,9 @@ a {
 
 .ticker-title-link:hover .ticker-title-arrow {
 
-  color: #38bdf8;
+  color: #cbd5e1;
 
-  transform: translate(2px, -2px);
+  transform: translate(2.5px, -2.5px);
 
 }
 
