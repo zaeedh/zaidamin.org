@@ -213,6 +213,20 @@
   ],
   "opinions": [
     {
+      "id": "opinion-1794715408241",
+      "title": "Dr. Zaid Amin’s Team Awarded 2025 Kemendikbudristek Community Service Grant",
+      "type": "Public Intellectual",
+      "badge": "Opinion & Public Intellect",
+      "publication": "Online Media \"Sumatera Ekspres\"",
+      "year": "2025",
+      "date_display": "NOVEMBER | 2025",
+      "abstract": "Traditional household-level agricultural micro, small, and medium enterprises (MSMEs) often face significant operational bottlenecks, including volatile crop yields, labor-intensive cultivation, and restricted market penetration. This community service project, funded under the 2025 Batch III Community Service (PkM) Grant by the Ministry of Education, Culture, Research, and Technology (Kemendikbudristek) Indonesia, introduces an integrated socio-technical framework to empower the instant ginger home industry at UPPKA Kampung KB Layang-Layang in Palembang. Led by a multidisciplinary team from Universitas Bina Darma and Universitas Muhammadiyah Palembang, the intervention operationalizes two complementary technological pillars: (1) an Internet of Things (IoT)-based Smart Farming system deploying real-time soil moisture and ambient temperature sensors to optimize irrigation efficiency, mitigate climate vulnerability, and ensure consistent rhizome yields; and (2) an attention-driven Persuasive Technology and Digital Branding model that equips local producers with modern packaging design, emotional brand storytelling, and multi-channel digital marketing capabilities across e-commerce and social platforms. By actively involving local homemakers and youth in hygienic production and digital literacy workshops, the initiative transitions traditional artisanal processing into a sustainable, resilient, and market-ready agro-business. This model provides an actionable blueprint for university-community partnerships leveraging applied computing to drive grassroots socioeconomic empowerment.",
+      "url": "https://sumeks.disway.id/edukasi/read/769237/tim-dosen-ubd-sukses-kembangkan-umkm-jahe-instan-lolos-hibah-pkm-kemendikbudristek",
+      "palette": "ivory",
+      "arch_style": "arch-cathedral",
+      "image": "assets/images/uploads/jahe.jpeg"
+    },
+    {
       "id": "opinion-1794712456918",
       "title": "Collaborating Across Borders: Dr. Zaid Amin (UBD), Prof. Alan F. Smeaton (DCU), and Assoc. Prof. Nazlena Mohamad Ali (UKM) Launch Landmark Book on Information Sharing",
       "type": "Public Intellectual",
