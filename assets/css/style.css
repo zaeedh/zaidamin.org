@@ -24759,84 +24759,48 @@ mark {
 
 
 
-/* White Capsule Button with Dark Circle Arrow Disc (Signature Element) */
-
+/* Clean Editorial Action Button (Harmonized Rounded Rectangle, Anti-AI Slop) */
 .service-card-btn {
-
   display: inline-flex;
-
   align-items: center;
-
-  justify-content: space-between;
-
-  gap: 12px;
-
-  padding: 6px 8px 6px 18px;
-
-  border-radius: 9999px;
-
+  justify-content: center;
+  padding: 8px 18px;
+  border-radius: 6px;
   background: #ffffff;
-
-  color: #0b1118;
-
-  font-size: 0.78rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.04em;
-
+  color: #070d15;
+  font-family: var(--font-sans, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   text-decoration: none;
-
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-
+  border: 1px solid #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   align-self: flex-start;
-
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-
+  cursor: pointer;
 }
-
-
 
 .service-card-btn-disc {
-
-  width: 26px;
-
-  height: 26px;
-
-  border-radius: 50%;
-
-  background: #0b1118;
-
-  color: #ffffff;
-
-  display: inline-flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  transition: transform 0.25s ease, background 0.25s ease;
-
+  display: none !important;
 }
 
-
-
+.service-card-btn:hover,
 .service-portrait-card:hover .service-card-btn {
-
-  background: #f4f6f8;
-
-  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
-
+  background: #f8fafc;
+  color: #070d15;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255, 255, 255, 0.2), 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-
+.service-card-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
 
 .service-portrait-card:hover .service-card-btn-disc {
-
-  transform: translate(2px, -2px);
-
-  background: #22a6c8;
-
+  display: none !important;
 }
 
 
@@ -43441,84 +43405,48 @@ mark {
 
 
 
-/* White Capsule Button with Dark Circle Arrow Disc (Signature Element) */
-
+/* Clean Editorial Action Button (Harmonized Rounded Rectangle, Anti-AI Slop) */
 .service-card-btn {
-
   display: inline-flex;
-
   align-items: center;
-
-  justify-content: space-between;
-
-  gap: 12px;
-
-  padding: 6px 8px 6px 18px;
-
-  border-radius: 9999px;
-
+  justify-content: center;
+  padding: 8px 18px;
+  border-radius: 6px;
   background: #ffffff;
-
-  color: #0b1118;
-
-  font-size: 0.78rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.04em;
-
+  color: #070d15;
+  font-family: var(--font-sans, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   text-decoration: none;
-
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-
+  border: 1px solid #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   align-self: flex-start;
-
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-
+  cursor: pointer;
 }
-
-
 
 .service-card-btn-disc {
-
-  width: 26px;
-
-  height: 26px;
-
-  border-radius: 50%;
-
-  background: #0b1118;
-
-  color: #ffffff;
-
-  display: inline-flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  transition: transform 0.25s ease, background 0.25s ease;
-
+  display: none !important;
 }
 
-
-
+.service-card-btn:hover,
 .service-portrait-card:hover .service-card-btn {
-
-  background: #f4f6f8;
-
-  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
-
+  background: #f8fafc;
+  color: #070d15;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255, 255, 255, 0.2), 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-
+.service-card-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
 
 .service-portrait-card:hover .service-card-btn-disc {
-
-  transform: translate(2px, -2px);
-
-  background: #22a6c8;
-
+  display: none !important;
 }
 
 

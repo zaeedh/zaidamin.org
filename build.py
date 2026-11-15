@@ -6599,11 +6599,7 @@ def generate_talks_page():
             <p class="service-card-desc">{k_abstract}</p>
 
             <a href="{k_url}" {"target='_blank' rel='noopener'" if k_url.startswith("http") else ""} class="service-card-btn">
-
-              <span>Read More</span>
-
-              <span class="service-card-btn-disc">&nearr;</span>
-
+              <span>READ MORE</span>
             </a>
 
           </div>
@@ -6680,11 +6676,7 @@ def generate_talks_page():
             <p class="service-card-desc">{o_abstract}</p>
 
             <a href="{o_url}" {"target='_blank' rel='noopener'" if o_url.startswith("http") else ""} class="service-card-btn">
-
-              <span>Read Essay</span>
-
-              <span class="service-card-btn-disc">&nearr;</span>
-
+              <span>READ ESSAY</span>
             </a>
 
           </div>
