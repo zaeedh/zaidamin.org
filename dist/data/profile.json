@@ -4,7 +4,7 @@
     "role_line": "Senior Lecturer & Researcher • Faculty of Data Science & IT (FDSIT)",
     "institution": "INTI International University, Malaysia",
     "research_fields": "Digital Ethics • Behavior & Social Computing • HCI",
-    "photo_front": "/assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
+    "photo_front": "/assets/images/uploads/portrait_lib_1794243515476_photo_5.webp",
     "photo_front_fallback": "/assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
     "photo_front_alt": "Zaid Amin, Ph.D. — Academic Portrait",
     "photo_back": "/assets/images/portraits/portrait-2.webp",
@@ -50,7 +50,7 @@
         "id": "portrait-1794243529996",
         "title": "Portrait 5",
         "subtitle": "Library Portrait",
-        "url": "/assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
+        "url": "/assets/images/uploads/portrait_lib_1794243515476_photo_5.webp",
         "fallback": "/assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
         "alt": "Dr. Zaid Amin, Ph.D. — Portrait 5"
       }

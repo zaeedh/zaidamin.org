@@ -2488,108 +2488,72 @@ function initVisitorTelemetryEngine() {
 
 
 
-  // Real-time Country Detection via Cloudflare Edge CDN / GeoIP
-
+  // Real-time Country Detection via Cloudflare Edge CDN / GeoIP with fast 1.5s timeout
   async function detectVisitorOrigin() {
-
     let rawCountry = 'OTHER';
-
     try {
-
-      // 1. Cloudflare CDN Edge Trace (lightning-fast, HTTPS, CORS-safe, 0 latency)
-
-      const res = await fetch('https://cloudflare.com/cdn-cgi/trace', { cache: 'no-store' });
-
+      // 1. Cloudflare CDN Edge Trace with 1.5s timeout so it never hangs page load
+      let controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      let timeoutId = controller ? setTimeout(() => controller.abort(), 1500) : null;
+      const res = await fetch('https://cloudflare.com/cdn-cgi/trace', {
+        cache: 'default',
+        signal: controller ? controller.signal : undefined
+      });
+      if (timeoutId) clearTimeout(timeoutId);
       if (res.ok) {
-
         const text = await res.text();
-
         const m = text.match(/loc=([A-Z]{2})/);
-
         if (m && m[1]) rawCountry = m[1];
-
       }
-
     } catch (e1) {
-
-      // 2. Free GeoIP Fallback
-
+      // 2. Free GeoIP Fallback with 1.5s timeout
       try {
-
-        const res2 = await fetch('https://api.country.is/');
-
+        let controller2 = typeof AbortController !== 'undefined' ? new AbortController() : null;
+        let timeoutId2 = controller2 ? setTimeout(() => controller2.abort(), 1500) : null;
+        const res2 = await fetch('https://api.country.is/', {
+          signal: controller2 ? controller2.signal : undefined
+        });
+        if (timeoutId2) clearTimeout(timeoutId2);
         if (res2.ok) {
-
           const data2 = await res2.json();
-
           if (data2 && data2.country) rawCountry = data2.country;
-
         }
-
       } catch (e2) {}
-
     }
 
-
-
     const knownCodes = ['MY', 'US', 'GB', 'SG', 'AU', 'DE'];
-
     const bucket = knownCodes.includes(rawCountry) ? rawCountry : 'OTHER';
 
-
-
     // Save session
-
     sessionStorage.setItem('zaidamin_session_counted', 'true');
-
     sessionStorage.setItem('zaidamin_visitor_country', bucket);
 
-
-
     // Record live hit
-
     liveHits[bucket] = (liveHits[bucket] || 0) + 1;
-
     try {
-
       localStorage.setItem('zaidamin_live_hits', JSON.stringify(liveHits));
-
     } catch (e) {}
 
-
-
     // Dispatch custom event for real-time audit logs
-
     window._liveTelemetry = {
-
       country: bucket,
-
       rawCountry,
-
       timestamp: new Date().toISOString(),
-
       liveHits
-
     };
 
-
-
     // Update UI with active highlight
-
     renderCounts(bucket);
-
   }
 
-
-
   if (!sessionCounted) {
-
-    detectVisitorOrigin();
-
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => detectVisitorOrigin(), { timeout: 3000 });
+    } else {
+      setTimeout(detectVisitorOrigin, 1500);
+    }
   } else {
-
     renderCounts(detectedCountry || 'MY');
-
   }
 
 
@@ -3069,14 +3033,23 @@ function initCoinPortraitEngine() {
       }))
     : DEFAULT_PORTRAITS;
 
-  // Preload modern lightweight WebP portrait images into memory
-  PORTRAITS.forEach(p => {
-    const src = normalizeAsset(p.webp || p.png);
-    if (src) {
-      const img = new Image();
-      img.src = src;
-    }
-  });
+  // Defer preloading remaining portrait images until browser is idle
+  const preloadRemainingPortraits = () => {
+    PORTRAITS.forEach((p, idx) => {
+      if (idx === 0) return; // First portrait is already rendered in the DOM
+      const src = normalizeAsset(p.webp || p.png);
+      if (src) {
+        const img = new Image();
+        img.src = src;
+      }
+    });
+  };
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(preloadRemainingPortraits, { timeout: 4000 });
+  } else {
+    window.addEventListener('load', () => setTimeout(preloadRemainingPortraits, 2000));
+  }
 
 
 

@@ -62,6 +62,13 @@ def minify_css(css: str) -> str:
     css = re.sub(r'\s+', ' ', css)
     # Remove space around delimiters safely
     css = re.sub(r'\s*([\{\}:;,>+~])\s*', r'\1', css)
+    # Remove empty rules iteratively
+    prev_len = len(css) + 1
+    while len(css) < prev_len:
+        prev_len = len(css)
+        css = re.sub(r'[^{};]+{}', '', css)
+    # Collapse multiple semicolons
+    css = re.sub(r';;+', ';', css)
     # Restore necessary space in media queries around 'and'
     css = re.sub(r'\band\(', 'and (', css)
     css = re.sub(r'\)\band', ') and', css)
@@ -525,7 +532,8 @@ def get_html_head(
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap">
   </noscript>
 
-  <link rel="stylesheet" href="/assets/css/style.min.css?v=5.0">
+  <link rel="preload" as="style" href="/assets/css/style.min.css?v=6.0">
+  <link rel="stylesheet" href="/assets/css/style.min.css?v=6.0">
 
   <!-- High-Definition Monogram Favicon Suite (Dr. Zaid Amin) -->
 
@@ -2194,9 +2202,9 @@ def get_page_footer(show_visitor_stats=False):
 
 
 
-  <script defer src="/assets/js/rain-lighting.js"></script>
+  <script defer src="/assets/js/rain-lighting.js?v=2.0"></script>
 
-  <script defer src="/assets/js/main.js?v=4.1"></script>
+  <script defer src="/assets/js/main.js?v=5.0"></script>
 
 </body>
 
@@ -3990,13 +3998,13 @@ def generate_golden_ratio_home():
 
                   <source srcset="{ph_front_webp}" type="image/webp">
 
-                  <img src="{ph_front_png}" alt="{ph_front_alt}" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="sync">
+                  <img src="{ph_front_png}" alt="{ph_front_alt}" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="async">
 
                 </picture>"""
 
         else:
 
-            front_media_html = f"""<img src="{ph_front_webp}" alt="{ph_front_alt}" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="sync">"""
+            front_media_html = f"""<img src="{ph_front_webp}" alt="{ph_front_alt}" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="async">"""
 
 
 
@@ -4006,13 +4014,13 @@ def generate_golden_ratio_home():
 
                   <source srcset="{ph_back_webp}" type="image/webp">
 
-                  <img src="{ph_back_png}" alt="{ph_back_alt}" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="sync">
+                  <img src="{ph_back_png}" alt="{ph_back_alt}" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="async">
 
                 </picture>"""
 
         else:
 
-            back_media_html = f"""<img src="{ph_back_webp}" alt="{ph_back_alt}" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="sync">"""
+            back_media_html = f"""<img src="{ph_back_webp}" alt="{ph_back_alt}" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="async">"""
 
 
 

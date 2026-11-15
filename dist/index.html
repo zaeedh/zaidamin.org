@@ -132,7 +132,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap">
   </noscript>
 
-  <link rel="stylesheet" href="/assets/css/style.min.css?v=5.0">
+  <link rel="preload" as="style" href="/assets/css/style.min.css?v=6.0">
+  <link rel="stylesheet" href="/assets/css/style.min.css?v=6.0">
 
   <!-- High-Definition Monogram Favicon Suite (Dr. Zaid Amin) -->
 
@@ -824,7 +825,13 @@
 
               <div class="coin-face coin-face-front" id="coin-face-front">
 
-                <img src="/assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg" alt="Zaid Amin, Ph.D. — Academic Portrait" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="sync">
+                <picture>
+
+                  <source srcset="/assets/images/uploads/portrait_lib_1794243515476_photo_5.webp" type="image/webp">
+
+                  <img src="/assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg" alt="Zaid Amin, Ph.D. — Academic Portrait" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="async">
+
+                </picture>
 
                 <div class="coin-specular-gleam"></div>
 
@@ -836,7 +843,7 @@
 
                   <source srcset="/assets/images/portraits/portrait-2.webp" type="image/webp">
 
-                  <img src="/assets/images/portraits/portrait-2.png" alt="Zaid Amin, Ph.D. — Secondary Portrait" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="sync">
+                  <img src="/assets/images/portraits/portrait-2.png" alt="Zaid Amin, Ph.D. — Secondary Portrait" class="ref-photo-img" width="114" height="114" fetchpriority="high" decoding="async">
 
                 </picture>
 
@@ -852,7 +859,7 @@
 
           </div>
 
-          <script>window.PORTALS_COIN_PORTRAITS = [{"id": "portrait-1", "title": "Portrait 1", "subtitle": "Academic Portrait", "url": "/assets/images/portraits/portrait-1.webp", "fallback": "/assets/images/portraits/portrait-1.png", "alt": "Dr. Zaid Amin, Ph.D. \u2014 Academic Portrait"}, {"id": "portrait-2", "title": "Portrait 2", "subtitle": "Singapore", "url": "/assets/images/portraits/portrait-2.webp", "fallback": "/assets/images/portraits/portrait-2.png", "alt": "Dr. Zaid Amin, Ph.D. \u2014 Singapore"}, {"id": "portrait-3", "title": "Portrait 3", "subtitle": "Barelang Scenic", "url": "/assets/images/portraits/portrait-3.webp", "fallback": "/assets/images/portraits/portrait-3.png", "alt": "Dr. Zaid Amin, Ph.D. \u2014 Barelang Scenic"}, {"id": "portrait-4", "title": "Portrait 4", "subtitle": "Dataran Merdeka KL", "url": "/assets/images/portraits/portrait-4.webp", "fallback": "/assets/images/portraits/portrait-4.png", "alt": "Dr. Zaid Amin, Ph.D. \u2014 Dataran Merdeka KL"}, {"id": "portrait-1794243529996", "title": "Portrait 5", "subtitle": "Library Portrait", "url": "/assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg", "fallback": "/assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg", "alt": "Dr. Zaid Amin, Ph.D. \u2014 Portrait 5"}];</script>
+          <script>window.PORTALS_COIN_PORTRAITS = [{"id": "portrait-1", "title": "Portrait 1", "subtitle": "Academic Portrait", "url": "/assets/images/portraits/portrait-1.webp", "fallback": "/assets/images/portraits/portrait-1.png", "alt": "Dr. Zaid Amin, Ph.D. \u2014 Academic Portrait"}, {"id": "portrait-2", "title": "Portrait 2", "subtitle": "Singapore", "url": "/assets/images/portraits/portrait-2.webp", "fallback": "/assets/images/portraits/portrait-2.png", "alt": "Dr. Zaid Amin, Ph.D. \u2014 Singapore"}, {"id": "portrait-3", "title": "Portrait 3", "subtitle": "Barelang Scenic", "url": "/assets/images/portraits/portrait-3.webp", "fallback": "/assets/images/portraits/portrait-3.png", "alt": "Dr. Zaid Amin, Ph.D. \u2014 Barelang Scenic"}, {"id": "portrait-4", "title": "Portrait 4", "subtitle": "Dataran Merdeka KL", "url": "/assets/images/portraits/portrait-4.webp", "fallback": "/assets/images/portraits/portrait-4.png", "alt": "Dr. Zaid Amin, Ph.D. \u2014 Dataran Merdeka KL"}, {"id": "portrait-1794243529996", "title": "Portrait 5", "subtitle": "Library Portrait", "url": "/assets/images/uploads/portrait_lib_1794243515476_photo_5.webp", "fallback": "/assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg", "alt": "Dr. Zaid Amin, Ph.D. \u2014 Portrait 5"}];</script>
 
         </div>
 
@@ -6720,9 +6727,9 @@
 
 
 
-  <script defer src="/assets/js/rain-lighting.js"></script>
+  <script defer src="/assets/js/rain-lighting.js?v=2.0"></script>
 
-  <script defer src="/assets/js/main.js?v=4.1"></script>
+  <script defer src="/assets/js/main.js?v=5.0"></script>
 
 </body>
 
