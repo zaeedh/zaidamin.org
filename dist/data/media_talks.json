@@ -213,6 +213,20 @@
   ],
   "opinions": [
     {
+      "id": "opinion-1794722043984",
+      "title": "The Metaverse in Higher Education: Smart Campus Development at UBD’s PKKMB",
+      "type": "Public Intellectual",
+      "badge": "Opinion & Public Intellect",
+      "publication": "Online Media \"Sumatera Ekspres\"",
+      "year": "2022",
+      "date_display": "OCTOBER | 2022",
+      "abstract": "At the 2022 New Student Orientation (PKKMB) of the Faculty of Computer Science, Universitas Bina Darma (UBD), incoming students were introduced to the potential of metaverse technologies in higher education. Faculty Dean Dr. Tata Sutabri highlighted the convergence of Augmented Reality (AR) and Virtual Reality (VR) as pivotal catalysts for building a futuristic Smart Campus. The orientation attended by academic leadership including Head of Information Systems Dr. Zaid Amin and Head of Informatics Alek Wijaya emphasized equipping students with early digital literacy to embrace virtual learning, collaborative simulation, and future-ready IT infrastructure.",
+      "url": "https://sumsel.tribunnews.com/2022/10/12/pemahaman-metavarse-untuk-pengembangan-smart-campus-pada-pkkmb-universitas-bina-darma#goog_rewarded",
+      "palette": "ivory",
+      "arch_style": "arch-cathedral",
+      "image": "assets/images/uploads/UBD1.png"
+    },
+    {
       "id": "opinion-1794716299763",
       "title": "2024 ICIBA-SOSIEC Chair and Universiti Malaya Bolster International Partnership",
       "type": "Public Intellectual",
@@ -256,7 +270,7 @@
     },
     {
       "id": "opinion-1794712456918",
-      "title": "Collaborating Across Borders: Dr. Zaid Amin (UBD), Prof. Alan F. Smeaton (DCU), and Assoc. Prof. Nazlena Mohamad Ali (UKM) Launch Landmark Book on Information Sharing",
+      "title": "Dr. Zaid Amin (UBD), Prof. Alan F. Smeaton (DCU), and Assoc. Prof. Nazlena Mohamad Ali (UKM) Launch Landmark Book on Information Sharing",
       "type": "Public Intellectual",
       "badge": "Opinion & Public Intellect",
       "publication": "Online Media \"Sumatera Ekspres\"",
