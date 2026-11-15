@@ -3952,38 +3952,37 @@ def generate_golden_ratio_home():
 
     ph_name = portals_hdr.get("name", "Dr. Zaid Amin")
 
-    ph_role = portals_hdr.get("role_line", "Senior Lecturer &bull; Faculty of Data Science &amp; IT (FDSIT)").replace("•", "&bull;")
-
+    ph_role_raw = portals_hdr.get("role_line", "Senior Lecturer & Researcher • Faculty of Data Science & IT (FDSIT)")
     ph_inst = portals_hdr.get("institution", "INTI International University, Malaysia")
-
     ph_fields_raw = portals_hdr.get("research_fields", "Digital Ethics • Behavior & Social Computing • HCI")
 
     import re as _re_bld
-
     _flist = [f.strip() for f in _re_bld.split(r'•|&bull;|,', ph_fields_raw) if f.strip()]
-
     ph_fields_html = ' <span class="ref-gold-dot">&bull;</span> '.join(_flist) if _flist else ph_fields_raw
+
+    _role_parts = [p.strip() for p in _re_bld.split(r'•|&bull;', ph_role_raw) if p.strip()]
+    if len(_role_parts) >= 2:
+        ph_role_markup = f"""<span class="ref-profile-title">{_role_parts[0]}</span>
+              <span class="ref-profile-dept">{_role_parts[1]}</span>
+              <span class="ref-profile-inst">{ph_inst}</span>"""
+    else:
+        ph_role_markup = f"""<span class="ref-profile-title">{ph_role_raw}</span>
+              <span class="ref-profile-inst">{ph_inst}</span>"""
 
     ph_front_webp = portals_hdr.get("photo_front", "/assets/images/portraits/portrait-1.webp")
     if ph_front_webp.startswith("assets/"): ph_front_webp = "/" + ph_front_webp
-
     ph_front_png = portals_hdr.get("photo_front_fallback", ph_front_webp.replace(".webp", ".png") if ph_front_webp.endswith(".webp") else ph_front_webp)
     if ph_front_png.startswith("assets/"): ph_front_png = "/" + ph_front_png
-
     ph_front_alt = portals_hdr.get("photo_front_alt", f"{ph_name} — Academic Portrait")
 
     ph_back_webp = portals_hdr.get("photo_back", "/assets/images/portraits/portrait-2.webp")
     if ph_back_webp.startswith("assets/"): ph_back_webp = "/" + ph_back_webp
-
     ph_back_png = portals_hdr.get("photo_back_fallback", ph_back_webp.replace(".webp", ".png") if ph_back_webp.endswith(".webp") else ph_back_webp)
     if ph_back_png.startswith("assets/"): ph_back_png = "/" + ph_back_png
-
     ph_back_alt = portals_hdr.get("photo_back_alt", f"{ph_name} — Secondary Portrait")
 
-    ph_status_enabled = portals_hdr.get("status_dot_enabled", True)
-
+    ph_status_enabled = portals_hdr.get("status_dot_enabled", False)
     ph_status_text = portals_hdr.get("status_text", "Active Senior Lecturer & Researcher")
-
     ph_status_html = f'<span class="ref-live-status" title="{ph_status_text}"></span>' if ph_status_enabled else ''
 
 
@@ -4101,11 +4100,7 @@ def generate_golden_ratio_home():
             <h3 class="ref-profile-name font-cinzel">{ph_name}</h3>
 
             <div class="ref-profile-role">
-
-              {ph_role}<br>
-
-              <span class="ref-profile-inst">{ph_inst}</span>
-
+              {ph_role_markup}
             </div>
 
             <div class="ref-profile-fields">

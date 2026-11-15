@@ -10,7 +10,7 @@
     "photo_back": "/assets/images/portraits/portrait-2.webp",
     "photo_back_fallback": "/assets/images/portraits/portrait-2.png",
     "photo_back_alt": "Zaid Amin, Ph.D. — Secondary Portrait",
-    "status_dot_enabled": true,
+    "status_dot_enabled": false,
     "status_text": "Active Senior Lecturer & Researcher",
     "show_photo": true,
     "portraits_list": [
