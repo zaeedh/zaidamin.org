@@ -725,95 +725,11 @@
       }
     }
 
-    draw(lightningBoost) {
+    getCoords() {
       const angle = getLocalRainAngle(this.x, this.y, simTime, this.bias);
       const wind = getStormWind(simTime);
       const currentLength = this.baseLength * wind.gustSpeedMultiplier;
-
-      ctx.save();
-      ctx.globalCompositeOperation = 'screen';
-
-      // Check if illuminated by rotating lighthouse beam
-      let beamGlint = 1.0;
-      const lx = beacon.lx;
-      const ly = beacon.ly;
-      if (this.x > lx && Math.abs(this.y - ly) < 48) {
-        const facingOcean = Math.max(0, Math.cos(beacon.angle));
-        beamGlint = 1.0 + facingOcean * 1.4;
-      }
-
-      // Soft ceiling
-      const a = Math.min(this.alpha * (1 + lightningBoost * 1.6) * beamGlint, 0.44);
-
-      const endX = this.x + Math.sin(angle) * currentLength;
-      const endY = this.y + Math.cos(angle) * currentLength;
-
-      if (this.layer === 2) {
-        // LAYER 3: Out-of-Focus Foreground Bokeh Blur
-        ctx.shadowColor = beamGlint > 1.15 ? 'rgba(254, 240, 138, 0.40)' : 'rgba(215, 235, 255, 0.35)';
-        ctx.shadowBlur = this.blur;
-
-        const grad = ctx.createLinearGradient(this.x, this.y, endX, endY);
-        if (beamGlint > 1.15) {
-          grad.addColorStop(0, 'rgba(254, 243, 199, 0)');
-          grad.addColorStop(0.35, `rgba(254, 243, 199, ${a * 0.70})`);
-          grad.addColorStop(1, 'rgba(254, 243, 199, 0)');
-        } else {
-          grad.addColorStop(0, 'rgba(210, 235, 255, 0)');
-          grad.addColorStop(0.35, `rgba(225, 242, 255, ${a * 0.70})`);
-          grad.addColorStop(1, 'rgba(200, 225, 250, 0)');
-        }
-
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = this.width;
-        ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(this.x, this.y);
-        ctx.lineTo(endX, endY);
-        ctx.stroke();
-
-      } else if (this.layer === 1) {
-        // LAYER 2: In-Focus Focal Plane (5-stop feathered gradient for silky smoothness)
-        const grad = ctx.createLinearGradient(this.x, this.y, endX, endY);
-        if (beamGlint > 1.15) {
-          grad.addColorStop(0, 'rgba(254, 243, 199, 0)');
-          grad.addColorStop(0.25, `rgba(254, 243, 199, ${a * 0.45})`);
-          grad.addColorStop(0.50, `rgba(254, 243, 199, ${a})`);
-          grad.addColorStop(0.80, `rgba(254, 243, 199, ${a * 0.35})`);
-          grad.addColorStop(1, 'rgba(254, 243, 199, 0)');
-        } else {
-          grad.addColorStop(0, 'rgba(215, 238, 255, 0)');
-          grad.addColorStop(0.25, `rgba(225, 242, 255, ${a * 0.45})`);
-          grad.addColorStop(0.50, `rgba(235, 248, 255, ${a})`);
-          grad.addColorStop(0.80, `rgba(220, 240, 255, ${a * 0.35})`);
-          grad.addColorStop(1, 'rgba(200, 225, 250, 0)');
-        }
-
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = this.width;
-        ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(this.x, this.y);
-        ctx.lineTo(endX, endY);
-        ctx.stroke();
-
-      } else {
-        // LAYER 1: Distant Background (Atmospheric Far Blur, whisper soft)
-        const grad = ctx.createLinearGradient(this.x, this.y, endX, endY);
-        grad.addColorStop(0, 'rgba(200, 225, 250, 0)');
-        grad.addColorStop(0.4, `rgba(210, 232, 252, ${a})`);
-        grad.addColorStop(1, 'rgba(200, 225, 250, 0)');
-
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = this.width;
-        ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(this.x, this.y);
-        ctx.lineTo(endX, endY);
-        ctx.stroke();
-      }
-
-      ctx.restore();
+      return [this.x, this.y, this.x + Math.sin(angle) * currentLength, this.y + Math.cos(angle) * currentLength];
     }
   }
 
@@ -868,9 +784,20 @@
   // ==========================================================================
   // 10. MAIN ANIMATION & RENDERING LOOP
   // ==========================================================================
+  let isBannerVisible = true;
+  if ('IntersectionObserver' in window) {
+    const bannerFrame = canvas.closest('.lighthouse-banner-frame') || canvas.parentElement;
+    if (bannerFrame) {
+      const observer = new IntersectionObserver((entries) => {
+        isBannerVisible = entries[0].isIntersecting;
+      }, { threshold: 0.02 });
+      observer.observe(bannerFrame);
+    }
+  }
+
   function render() {
-    // Gracefully skip rendering when canvas or parent is hidden (e.g. on mobile/tablet or disabled)
-    if (width === 0 || height === 0 || canvas.offsetParent === null) {
+    // Gracefully skip rendering when offscreen or tab is hidden (100% CPU/GPU savings during scroll)
+    if (!isBannerVisible || document.hidden || width === 0 || height === 0 || canvas.offsetParent === null) {
       requestAnimationFrame(render);
       return;
     }
@@ -915,11 +842,55 @@
     // 6. Rotating Lighthouse Beacon with Feathered Soft Edges & Eye Bloom
     beacon.draw(1 + ambientFlashIntensity * 0.8);
 
-    // 7. Soft, Small & Smooth Heterogeneous DOF Rain
-    for (let drop of raindrops) {
+    // 7. Ultra-High Performance Batched DOF Rain (Zero GC Allocation Churn)
+    const flashBoost = 1 + ambientFlashIntensity * 1.5;
+    ctx.save();
+    ctx.globalCompositeOperation = 'screen';
+    ctx.lineCap = 'round';
+
+    // Layer 0: Distant Background (whisper soft, fine mist)
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(210, 232, 252, ${Math.min(0.08 * flashBoost, 0.25)})`;
+    ctx.lineWidth = 0.35;
+    for (let i = 0; i < raindrops.length; i++) {
+      const drop = raindrops[i];
       drop.update();
-      drop.draw(ambientFlashIntensity);
+      if (drop.layer === 0) {
+        const [x1, y1, x2, y2] = drop.getCoords();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+      }
     }
+    ctx.stroke();
+
+    // Layer 1: Midground Focal Plane (silky in-focus driving drops)
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(225, 242, 255, ${Math.min(0.14 * flashBoost, 0.38)})`;
+    ctx.lineWidth = 0.52;
+    for (let i = 0; i < raindrops.length; i++) {
+      const drop = raindrops[i];
+      if (drop.layer === 1) {
+        const [x1, y1, x2, y2] = drop.getCoords();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+      }
+    }
+    ctx.stroke();
+
+    // Layer 2: Foreground Optical Bokeh (gentle motion blur)
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(215, 235, 255, ${Math.min(0.065 * flashBoost, 0.20)})`;
+    ctx.lineWidth = 1.35;
+    for (let i = 0; i < raindrops.length; i++) {
+      const drop = raindrops[i];
+      if (drop.layer === 2) {
+        const [x1, y1, x2, y2] = drop.getCoords();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+      }
+    }
+    ctx.stroke();
+    ctx.restore();
 
     requestAnimationFrame(render);
   }

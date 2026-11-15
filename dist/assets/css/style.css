@@ -55,13 +55,9 @@
 
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-
-  --font-serif: 'Newsreader', Georgia, serif;
-
-  --font-premium-serif: 'Cormorant Garamond', 'Newsreader', Georgia, serif;
-
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-premium-serif: 'Cormorant Garamond', Georgia, serif;
   --font-cinzel: 'Cinzel', Georgia, serif;
-
   --font-mono: 'JetBrains Mono', monospace;
 
 
@@ -2203,11 +2199,13 @@ a {
 
   gap: 20px;
 
-  background: rgba(4, 28, 48, 0.88);
+  background: rgba(4, 28, 48, 0.90);
 
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(10px);
 
-  -webkit-backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transform: translateZ(0);
 
   border: 1px solid rgba(34, 166, 200, 0.28);
 
@@ -3086,9 +3084,9 @@ a {
 
   background: rgba(3, 24, 42, 0.94);
 
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(12px);
 
-  -webkit-backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(12px);
 
   border: 1px solid rgba(34, 166, 200, 0.35);
 
@@ -5322,9 +5320,9 @@ a {
 
   background: rgba(4, 24, 40, 0.65);
 
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(12px);
 
-  -webkit-backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(12px);
 
   border: 1px solid rgba(140, 180, 205, 0.20);
 
@@ -5468,11 +5466,7 @@ a {
 
   gap: 7px;
 
-  background: rgba(2, 16, 28, 0.82);
-
-  backdrop-filter: blur(12px);
-
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(2, 16, 28, 0.94);
 
   padding: 5px 12px;
 
@@ -5542,11 +5536,7 @@ a {
 
   border-radius: 50%;
 
-  background: rgba(2, 16, 28, 0.82);
-
-  backdrop-filter: blur(12px);
-
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(2, 16, 28, 0.94);
 
   border: 1px solid rgba(212, 175, 55, 0.35);
 
@@ -6372,9 +6362,9 @@ a {
 
   background: rgba(4, 24, 40, 0.60);
 
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(12px);
 
-  -webkit-backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(12px);
 
   border: 1px solid rgba(140, 180, 205, 0.18);
 
@@ -7259,9 +7249,11 @@ a {
 
   background: radial-gradient(ellipse at 18% 50%, rgba(203, 213, 225, 0.04) 0%, rgba(7, 21, 35, 0.92) 55%, rgba(3, 10, 18, 0.98) 100%);
 
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(10px);
 
-  -webkit-backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transform: translateZ(0);
 
   border: 1px solid rgba(212, 175, 55, 0.22);
 
@@ -8459,9 +8451,9 @@ a {
 
     background: rgba(3, 16, 28, 0.98) !important;
 
-    backdrop-filter: blur(24px) !important;
+    backdrop-filter: blur(10px) !important;
 
-    -webkit-backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
 
     border: 1px solid rgba(212, 175, 55, 0.45) !important;
 
@@ -9169,9 +9161,11 @@ a {
 
   box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
 
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(10px);
 
-  -webkit-backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transform: translateZ(0);
 
   position: relative;
 
@@ -9862,7 +9856,7 @@ a {
 
   box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.90);
 
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(12px);
 
   z-index: 150;
 
@@ -11240,9 +11234,9 @@ a {
 
   background: rgba(3, 18, 32, 0.97);
 
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(12px);
 
-  -webkit-backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(12px);
 
   border: 1px solid rgba(212, 175, 55, 0.35);
 
@@ -11800,9 +11794,11 @@ a {
 
   margin-bottom: 34px;
 
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(10px);
 
-  -webkit-backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transform: translateZ(0);
 
   box-shadow: 0 16px 40px rgba(0, 10, 24, 0.45);
 
@@ -12086,9 +12082,11 @@ a {
 
   background: rgba(3, 16, 28, 0.90);
 
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(10px);
 
-  -webkit-backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transform: translateZ(0);
 
   border: 1px solid rgba(34, 166, 200, 0.24);
 
@@ -13360,11 +13358,7 @@ a {
 
   color: #7dd3fc;
 
-  background: rgba(3, 14, 26, 0.88);
-
-  backdrop-filter: blur(8px);
-
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(3, 14, 26, 0.94);
 
   border: 1px solid rgba(56, 189, 248, 0.35);
 
@@ -13396,11 +13390,7 @@ a {
 
   color: #fffbeb;
 
-  background: rgba(212, 175, 55, 0.3);
-
-  backdrop-filter: blur(8px);
-
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(40, 32, 10, 0.94);
 
   border: 1px solid #d4af37;
 
@@ -16457,9 +16447,11 @@ mark {
 
   background: rgba(2, 8, 16, 0.85);
 
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(10px);
 
-  -webkit-backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transform: translateZ(0);
 
 }
 
@@ -17099,9 +17091,11 @@ mark {
 
   background: rgba(4, 18, 32, 0.94);
 
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(10px);
 
-  -webkit-backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transform: translateZ(0);
 
   border: 1px solid rgba(34, 166, 200, 0.24);
 
@@ -17425,11 +17419,7 @@ mark {
 
   right: 12px;
 
-  background: rgba(3, 15, 28, 0.88);
-
-  backdrop-filter: blur(8px);
-
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(3, 15, 28, 0.94);
 
   border: 1px solid rgba(212, 175, 55, 0.5);
 
@@ -17711,11 +17701,7 @@ mark {
 
 .pub-badge-venue {
 
-  background: rgba(3, 15, 26, 0.88);
-
-  backdrop-filter: blur(6px);
-
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(3, 15, 26, 0.94);
 
   border: 1px solid rgba(34, 166, 200, 0.35);
 
@@ -17743,11 +17729,7 @@ mark {
 
 .pub-badge-year {
 
-  background: rgba(212, 175, 55, 0.18);
-
-  backdrop-filter: blur(6px);
-
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(45, 36, 12, 0.94);
 
   border: 1px solid rgba(212, 175, 55, 0.5);
 
@@ -24601,11 +24583,7 @@ mark {
 
   border-radius: 999px;
 
-  background: rgba(4, 14, 26, 0.75);
-
-  backdrop-filter: blur(12px);
-
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(4, 14, 26, 0.94);
 
   border: 1px solid rgba(186, 230, 253, 0.25);
 
@@ -24655,9 +24633,9 @@ mark {
 
   background: linear-gradient(180deg, rgba(3, 10, 20, 0.94) 0%, rgba(2, 7, 14, 0.99) 100%);
 
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(12px);
 
-  -webkit-backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(12px);
 
   border-top: 1px solid rgba(186, 230, 253, 0.16);
 
@@ -27397,9 +27375,9 @@ h1.cv-hero-name,
 
   border-radius: 14px !important;
 
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(12px);
 
-  -webkit-backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(12px);
 
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 6px 24px rgba(0, 8, 20, 0.35) !important;
 
@@ -28741,8 +28719,8 @@ h1.cv-hero-name,
   width: max-content !important;
   max-width: 280px !important;
   background: rgba(4, 11, 20, 0.95) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
   border: 1px solid rgba(212, 175, 55, 0.22) !important;
   border-radius: 12px !important;
   padding: 5px !important;
@@ -28798,8 +28776,8 @@ h1.cv-hero-name,
   width: max-content !important;
   max-width: 280px !important;
   background: rgba(4, 11, 20, 0.95) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
   border: 1px solid rgba(212, 175, 55, 0.22) !important;
   border-radius: 12px !important;
   padding: 5px !important;
@@ -29409,8 +29387,8 @@ h1.cv-hero-name,
   background: linear-gradient(135deg, rgba(8, 20, 36, 0.90) 0%, rgba(4, 14, 26, 0.96) 100%) !important;
   border: 1px solid rgba(212, 175, 55, 0.32) !important;
   border-radius: 20px !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(212, 175, 55, 0.15) !important;
   position: relative !important;
   overflow: hidden !important;
@@ -29617,8 +29595,8 @@ h1.cv-hero-name,
   width: calc(100% - 40px);
   max-width: 860px;
   background: linear-gradient(135deg, rgba(8, 24, 48, 0.95) 0%, rgba(3, 12, 28, 0.97) 100%);
-  backdrop-filter: blur(20px) saturate(190%);
-  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  backdrop-filter: blur(12px) saturate(190%);
+  -webkit-backdrop-filter: blur(12px) saturate(190%);
   border: 1px solid rgba(56, 189, 248, 0.30);
   border-radius: 999px;
   padding: 12px 24px;
@@ -29884,8 +29862,8 @@ h1.cv-hero-name,
   border: 1px solid rgba(56, 189, 248, 0.32);
   border-radius: 13px;
   box-shadow: 0 18px 42px rgba(0, 0, 0, 0.78), 0 0 0 1px rgba(212, 175, 55, 0.14) inset;
-  backdrop-filter: blur(18px) saturate(165%);
-  -webkit-backdrop-filter: blur(18px) saturate(165%);
+  backdrop-filter: blur(12px) saturate(165%);
+  -webkit-backdrop-filter: blur(12px) saturate(165%);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
