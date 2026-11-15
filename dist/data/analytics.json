@@ -302,6 +302,48 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794716209206",
+      "timestamp": "2026-11-15T04:16:49.206Z",
+      "path": "/",
+      "title": "Dr. Zaid Amin | Academic & Computational Researcher",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-5672AE",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "800x600",
+      "referrer": "Direct Navigation",
+      "client_ip": "127.0.0.1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
+      "id": "tr-1794716039949",
+      "timestamp": "2026-11-15T04:13:59.949Z",
+      "path": "/",
+      "title": "Dr. Zaid Amin | Academic & Computational Researcher",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-914A30",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "800x600",
+      "referrer": "Direct Navigation",
+      "client_ip": "127.0.0.1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
       "id": "tr-1794714598020",
       "timestamp": "2026-11-15T03:49:58.020Z",
       "path": "/cv",
@@ -6313,7 +6355,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-15T11:49:58.035568",
+  "updated_at": "2026-11-15T12:16:49.260400",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -6398,6 +6440,6 @@
     "the-polite-city-ai-human-harmonization": 28
   },
   "server_live_hits": {
-    "MY": 229
+    "MY": 231
   }
 }
