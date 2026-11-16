@@ -906,49 +906,48 @@
 
 
             // 2. Client-side deduplication against Hero image
-
             var hasHeroInBody = false;
-
             if (article.image) {
+              var heroClean = article.image.split('?')[0].split('#')[0];
+              var heroFileName = heroClean.split('/').pop();
+              var heroBase = heroFileName.replace(/\.[a-zA-Z0-9]+$/, '').toLowerCase();
+              var heroStem = heroBase.replace(/[-_](animated|static|banner|hero|cover|thumb)$/gi, '');
 
-              var heroFileName = article.image.split('/').pop().split('?')[0];
-
-              bodyElem.querySelectorAll('img').forEach(function(img) {
-
+              bodyElem.querySelectorAll('img').forEach(function(img, idx) {
                 var src = img.getAttribute('src') || '';
+                var srcClean = src.split('?')[0].split('#')[0];
+                var srcFileName = srcClean.split('/').pop();
+                var srcBase = srcFileName.replace(/\.[a-zA-Z0-9]+$/, '').toLowerCase();
+                var srcStem = srcBase.replace(/[-_](animated|static|banner|hero|cover|thumb)$/gi, '');
 
-                if (src === article.image || (heroFileName && heroFileName.length > 5 && src.includes(heroFileName))) {
+                var isExactMatch = (srcClean === heroClean) || (srcFileName && srcFileName === heroFileName);
+                var isStemMatch = (heroStem.length >= 5 && srcStem.length >= 5 && (srcBase.includes(heroStem) || heroBase.includes(srcStem)));
 
-                  var captionContainer = img.closest('.tr-caption-container') || img.closest('figure');
-
-                  if (captionContainer) {
-
-                    // Content figure with caption: KEEP in body! Do not delete!
-
-                    hasHeroInBody = true;
-
-                    return;
-
-                  }
-
-                  var parentA = img.closest('a');
-
-                  var parentBox = img.closest('.separator') || img.parentElement;
-
-                  if (parentA) parentA.remove();
-
-                  else img.remove();
-
-                  if (parentBox && !parentBox.textContent.trim() && parentBox.querySelectorAll('img').length === 0) {
-
-                    parentBox.remove();
-
-                  }
-
+                // If it's an opening figure at the very top of the article body
+                var isOpeningFigure = false;
+                if (idx === 0) {
+                  var firstBlock = bodyElem.firstElementChild;
+                  var secondBlock = firstBlock ? firstBlock.nextElementSibling : null;
+                  if (firstBlock && firstBlock.contains(img)) isOpeningFigure = true;
+                  else if (secondBlock && secondBlock.contains(img)) isOpeningFigure = true;
                 }
 
+                if (isExactMatch || isStemMatch || (isOpeningFigure && (srcBase.includes('abstract') || srcBase.includes('banner') || srcBase.includes('hero')))) {
+                  var captionContainer = img.closest('.tr-caption-container') || img.closest('figure');
+                  if (captionContainer || isOpeningFigure) {
+                    // Content figure or animated banner in body: KEEP in body and suppress duplicate top hero banner!
+                    hasHeroInBody = true;
+                    return;
+                  }
+                  var parentA = img.closest('a');
+                  var parentBox = img.closest('.separator') || img.parentElement;
+                  if (parentA) parentA.remove();
+                  else img.remove();
+                  if (parentBox && !parentBox.textContent.trim() && parentBox.querySelectorAll('img').length === 0) {
+                    parentBox.remove();
+                  }
+                }
               });
-
             }
 
 
@@ -972,8 +971,9 @@
 
 
             // 4. Hero Banner Display
-            if (article.image && !hasHeroInBody) {
-              const imgWrap = document.getElementById('reader-hero-img-wrap');
+            var isThumbOnly = !!(article.thumbnail_only || article.hide_hero_banner);
+            const imgWrap = document.getElementById('reader-hero-img-wrap');
+            if (article.image && !hasHeroInBody && !isThumbOnly) {
               const img = document.getElementById('reader-hero-img');
               var heroSrc = article.image;
               if (heroSrc.startsWith('assets/')) {
@@ -982,9 +982,11 @@
               img.src = heroSrc;
               img.alt = article.title;
               img.onerror = function() {
-                imgWrap.style.display = 'none';
+                if (imgWrap) imgWrap.style.display = 'none';
               };
-              imgWrap.style.display = 'block';
+              if (imgWrap) imgWrap.style.display = 'block';
+            } else {
+              if (imgWrap) imgWrap.style.display = 'none';
             }
 
             // 5. Interactive Fullscreen Lightbox & Image Expansion
