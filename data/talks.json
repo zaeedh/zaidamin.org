@@ -2,6 +2,18 @@
   "speaking_invitation_statement": "Dr. Zaid Amin is available for international academic keynotes, conference plenary talks, institutional workshops, and expert panel discussions on Human-Computer Interaction, AI Governance, Cognitive Attention Systems, and Digital Ethics. To invite Dr. Amin, please contact zaid.amin@newinti.edu.my.",
   "talks": [
     {
+      "id": "talk-trustworthy-ai-workshop-inti-2026",
+      "title": "Hands-On Workshop: Introduction to Trustworthy AI in Google Colab",
+      "event": "INTI International University - Bridging 2026 Program (Oct 2026 Intake)",
+      "role": "Workshop Lead & Senior Lecturer",
+      "year": "2026",
+      "date": "NOVEMBER | 2026",
+      "location": "Lab A3-CL10, INTI International University - Nilai, Malaysia",
+      "abstract": "Interactive hands-on cloud coding workshop for incoming university students introducing the 4 pillars of Trustworthy AI: fairness auditing via twin testing, explainability (XAI), PDPA privacy protection, and Human-in-the-Loop decision systems using Google Colab.",
+      "image": "assets/images/uploads/trustworthy_ai_workshop_photo1.jpeg",
+      "featured": false
+    },
+    {
       "id": "keynote-1793961197946",
       "title": "Speaker at Mobility International Program",
       "event": "Mobility International Program IVI and UBD",

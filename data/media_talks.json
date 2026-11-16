@@ -136,6 +136,21 @@
   ],
   "keynotes": [
     {
+      "id": "workshop-trustworthy-ai-inti-2026",
+      "title": "Introduction to Trustworthy AI in Google Colab",
+      "role": "Hands-On Workshop Lead",
+      "badge": "01 • WORKSHOP",
+      "event": "INTI International University - Bridging 2026 Hands-On Workshop",
+      "venue": "Lab A3-CL10, INTI International University - Nilai, Malaysia",
+      "year": "2026",
+      "date_display": "NOVEMBER | 2026",
+      "abstract": "Interactive 2-hour hands-on cloud coding workshop for newly enrolled students (October 2026 intake) on auditing machine learning bias, Explainable AI (XAI), PDPA privacy protection, and Human-in-the-Loop decision systems using Google Colab.",
+      "url": "/article/trustworthy-ai-workshop-google-colab-inti-2026",
+      "palette": "gold",
+      "arch_style": "arch-cathedral",
+      "image": "/assets/images/uploads/trustworthy_ai_workshop_photo1.webp"
+    },
+    {
       "id": "keynote-1793961197946",
       "title": "Speaker at Mobility International Program",
       "role": "Invited Visiting Training Speaker",
