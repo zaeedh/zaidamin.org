@@ -302,6 +302,69 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794820080269",
+      "timestamp": "2026-11-16T09:08:00.269Z",
+      "path": "/article/trustworthy-ai-workshop-google-colab-inti-2026",
+      "title": "Can You Trust the Algorithm? Introducing Trustworthy AI to INTI's New Oct 2026 Students with Google Colab | Dr. Zaid Amin",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-4A57D9",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Internal Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
+      "id": "tr-1794820075017",
+      "timestamp": "2026-11-16T09:07:55.017Z",
+      "path": "/research",
+      "title": "Activity & Project",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-4A57D9",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Internal Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
+      "id": "tr-1794820069969",
+      "timestamp": "2026-11-16T09:07:49.969Z",
+      "path": "/",
+      "title": "Dr. Zaid Amin | Academic & Computational Researcher",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-4A57D9",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Internal Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
       "id": "tr-1794819717179",
       "timestamp": "2026-11-16T09:01:57.179Z",
       "path": "/article/trustworthy-ai-workshop-google-colab-inti-2026",
@@ -7237,7 +7300,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-16T17:01:57.186526",
+  "updated_at": "2026-11-16T17:08:00.275378",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -7320,10 +7383,10 @@
     "i-knew-i-can": 9,
     "what-is-network-engineering": 8,
     "the-polite-city-ai-human-harmonization": 29,
-    "trustworthy-ai-workshop-google-colab-inti-2026": 27
+    "trustworthy-ai-workshop-google-colab-inti-2026": 28
   },
   "server_live_hits": {
-    "MY": 270,
+    "MY": 273,
     "OTHER": 3
   }
 }
