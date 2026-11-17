@@ -153,11 +153,11 @@
       "page": "publications.html",
       "page_label": "Research & Publications (publications.html)",
       "label": "Research Team Shortcut Pill",
-      "display_text": "👥 Research Team ↗",
+      "display_text": "\ud83d\udc65 Research Team \u2197",
       "title": "Research Team",
       "url": "/research-team",
       "target": "_self",
-      "icon": "👥",
+      "icon": "\ud83d\udc65",
       "enabled": false,
       "description": "Category navigation shortcut pill in the Publications page header"
     }
@@ -166,8 +166,8 @@
     "publications": [
       {
         "id": "pub_all",
-        "label": "✦ All",
-        "short_label": "✦ All",
+        "label": "\u2726 All",
+        "short_label": "\u2726 All",
         "url": "#pub-list",
         "target": "_self",
         "icon": "",
@@ -251,11 +251,11 @@
       },
       {
         "id": "pub_team_pill",
-        "label": "Research Team ↗",
-        "short_label": "Team ↗",
+        "label": "Research Team \u2197",
+        "short_label": "Team \u2197",
         "url": "/research-team",
         "target": "_self",
-        "icon": "👥",
+        "icon": "\ud83d\udc65",
         "action_type": "link",
         "filter_key": "",
         "target_section": "",
@@ -280,7 +280,7 @@
         "count_key": "articles",
         "show_count": true,
         "extra_class": "",
-        "enabled": true,
+        "enabled": false,
         "has_dropdown": false,
         "dropdown_items": []
       },
@@ -553,11 +553,11 @@
       },
       {
         "id": "sup_team",
-        "label": "Research Team ↗",
-        "short_label": "Team ↗",
+        "label": "Research Team \u2197",
+        "short_label": "Team \u2197",
         "url": "/research-team",
         "target": "_self",
-        "icon": "👥",
+        "icon": "\ud83d\udc65",
         "action_type": "link",
         "enabled": false,
         "has_dropdown": false,

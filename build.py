@@ -5949,25 +5949,19 @@ def generate_research_page():
     <script>
 
     function switchActivityTab(tab) {
-
       var isArticles = tab === 'articles';
-
-      document.getElementById('activity-pane-articles').style.display = isArticles ? 'block' : 'none';
-
-      document.getElementById('activity-pane-pillars').style.display = isArticles ? 'none' : 'block';
-
-      document.getElementById('tab-btn-articles').classList.toggle('active', isArticles);
-
-      document.getElementById('tab-btn-pillars').classList.toggle('active', !isArticles);
-
+      var paneArt = document.getElementById('activity-pane-articles');
+      var panePil = document.getElementById('activity-pane-pillars');
+      if (paneArt) paneArt.style.display = isArticles ? 'block' : 'none';
+      if (panePil) panePil.style.display = isArticles ? 'none' : 'block';
+      var btnArt = document.getElementById('tab-btn-articles');
+      var btnPil = document.getElementById('tab-btn-pillars');
+      if (btnArt) btnArt.classList.toggle('active', isArticles);
+      if (btnPil) btnPil.classList.toggle('active', !isArticles);
       if (history.replaceState) {
-
         history.replaceState(null, null, isArticles ? '#articles' : '#pillars');
-
       }
-
     }
-
 
 
     (function() {

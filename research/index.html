@@ -573,9 +573,7 @@
 
         </div>
 
-        <div class="activity-tabs-bar">
-          <button class="activity-tab-btn active" id="tab-btn-articles" onclick="switchActivityTab('articles')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -1px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg> <span>Scholarly Articles &amp; Essays (84)</span></button>
-        </div>
+        
 
       </section>
 
@@ -4674,25 +4672,19 @@
     <script>
 
     function switchActivityTab(tab) {
-
       var isArticles = tab === 'articles';
-
-      document.getElementById('activity-pane-articles').style.display = isArticles ? 'block' : 'none';
-
-      document.getElementById('activity-pane-pillars').style.display = isArticles ? 'none' : 'block';
-
-      document.getElementById('tab-btn-articles').classList.toggle('active', isArticles);
-
-      document.getElementById('tab-btn-pillars').classList.toggle('active', !isArticles);
-
+      var paneArt = document.getElementById('activity-pane-articles');
+      var panePil = document.getElementById('activity-pane-pillars');
+      if (paneArt) paneArt.style.display = isArticles ? 'block' : 'none';
+      if (panePil) panePil.style.display = isArticles ? 'none' : 'block';
+      var btnArt = document.getElementById('tab-btn-articles');
+      var btnPil = document.getElementById('tab-btn-pillars');
+      if (btnArt) btnArt.classList.toggle('active', isArticles);
+      if (btnPil) btnPil.classList.toggle('active', !isArticles);
       if (history.replaceState) {
-
         history.replaceState(null, null, isArticles ? '#articles' : '#pillars');
-
       }
-
     }
-
 
 
     (function() {
