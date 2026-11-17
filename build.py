@@ -5827,7 +5827,7 @@ def generate_research_page():
             </a>
             {spotlight_badge}
             <button type="button" class="article-card-bookmark-btn" data-slug="{slug}" onclick="toggleArticleBookmark(event, this, \'{slug}\')" aria-label="Bookmark article" title="Bookmark article" aria-pressed="false">
-              <svg class="bookmark-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+              <svg class="bookmark-icon" width="14" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
             </button>
           </div>
 
@@ -5844,7 +5844,7 @@ def generate_research_page():
             <!-- Capsule Chips Row (Reference UI Match: Star Rating, Category/Tag, Read Time) -->
             <div class="article-chips-row">
               <span class="article-chip article-chip-star" title="Rating {rating_val} of 5.0">
-                <svg class="chip-star-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg class="chip-star-icon" width="11" height="11" viewBox="0 0 24 24" fill="#d4af37" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 <span>{rating_val}</span>
               </span>
               <span class="article-chip article-chip-tag" title="{escaped_tag}">{escaped_tag}</span>
