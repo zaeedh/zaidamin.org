@@ -302,6 +302,48 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794893814158",
+      "timestamp": "2026-11-17T05:36:54.158Z",
+      "path": "/",
+      "title": "Dr. Zaid Amin | Academic & Computational Researcher",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-8D2AE2",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Google Chrome",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Direct Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+    },
+    {
+      "id": "tr-1794893807551",
+      "timestamp": "2026-11-17T05:36:47.551Z",
+      "path": "/",
+      "title": "Dr. Zaid Amin | Academic & Computational Researcher",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-8D2AE2",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Google Chrome",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Direct Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+    },
+    {
       "id": "tr-1794893219926",
       "timestamp": "2026-11-17T05:26:59.926Z",
       "path": "/",
@@ -7405,7 +7447,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-17T13:26:59.961848",
+  "updated_at": "2026-11-17T13:36:54.194548",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -7491,7 +7533,7 @@
     "trustworthy-ai-workshop-google-colab-inti-2026": 28
   },
   "server_live_hits": {
-    "MY": 278,
+    "MY": 280,
     "OTHER": 3
   }
 }
