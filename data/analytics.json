@@ -302,6 +302,48 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794900460244",
+      "timestamp": "2026-11-17T07:27:40.244Z",
+      "path": "/article/uniten-master-viva-external-examiner-nist-csf-2026",
+      "title": "Serving as External Examiner for Master's VIVA VOCE at Universiti Tenaga Nasional (UNITEN): Evaluating NIST CSF 2.0 in Critical Operational Technology | Dr. Zaid Amin",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-4A57D9",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Internal Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
+      "id": "tr-1794900454089",
+      "timestamp": "2026-11-17T07:27:34.089Z",
+      "path": "/research",
+      "title": "Activity & Project",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-4A57D9",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Internal Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
       "id": "tr-1794895011881",
       "timestamp": "2026-11-17T05:56:51.881Z",
       "path": "/research",
@@ -7531,7 +7573,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-17T13:56:51.888364",
+  "updated_at": "2026-11-17T15:27:40.279657",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -7615,10 +7657,11 @@
     "what-is-network-engineering": 8,
     "the-polite-city-ai-human-harmonization": 29,
     "trustworthy-ai-workshop-google-colab-inti-2026": 28,
-    "fdsit-final-year-viva-poster-showcase-2026": 23
+    "fdsit-final-year-viva-poster-showcase-2026": 23,
+    "uniten-master-viva-external-examiner-nist-csf-2026": 4
   },
   "server_live_hits": {
-    "MY": 284,
+    "MY": 286,
     "OTHER": 3
   }
 }
