@@ -296,7 +296,7 @@
         "count_key": "",
         "show_count": false,
         "extra_class": "",
-        "enabled": true,
+        "enabled": false,
         "has_dropdown": false,
         "dropdown_items": []
       }
