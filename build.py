@@ -11373,7 +11373,6 @@ def generate_team_page():
                 <span class="team-status-dot"></span>
                 <span>{escape_html(status)}</span>
               </div>
-              <span class="team-photo-slot font-mono" title="Photo Slot #{photo_num:02d} (editable)">Slot #{photo_num:02d}</span>
             </div>
           </article>
         """
@@ -11511,7 +11510,6 @@ def generate_team_page():
       <section class="team-category-section" id="cat-phd" data-category="phd">
         <div class="team-category-header">
           <div class="team-category-title-wrap">
-            <span class="team-category-num font-cinzel">01 / DOCTORAL SCHOLARS</span>
             <h2 class="team-category-title font-cinzel">Doctoral Research Candidates (Ph.D.)</h2>
           </div>
           <span class="team-category-count font-cinzel">{phd_count} Active Candidates</span>
@@ -11525,7 +11523,6 @@ def generate_team_page():
       <section class="team-category-section" id="cat-master" data-category="master">
         <div class="team-category-header">
           <div class="team-category-title-wrap">
-            <span class="team-category-num font-cinzel">02 / POSTGRADUATE SCHOLARS</span>
             <h2 class="team-category-title font-cinzel">Postgraduate Research Scholars (Master's)</h2>
           </div>
           <span class="team-category-count font-cinzel">{master_count} Active Scholars</span>
@@ -11539,7 +11536,6 @@ def generate_team_page():
       <section class="team-category-section" id="cat-collaborator" data-category="collaborator">
         <div class="team-category-header">
           <div class="team-category-title-wrap">
-            <span class="team-category-num font-cinzel">03 / SCHOLARLY COLLABORATORS</span>
             <h2 class="team-category-title font-cinzel">International Academic Collaborators</h2>
           </div>
           <span class="team-category-count font-cinzel">{collab_count} Senior Research Partners</span>
