@@ -6583,13 +6583,15 @@ def generate_talks_page():
 
             <p class="service-card-desc">{k_abstract}</p>
 
-            <a href="{k_url}" {"target='_blank' rel='noopener'" if k_url.startswith("http") else ""} class="service-card-btn" title="Read Details: {k_title}">
-              <span class="service-card-btn-icon">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-              </span>
-              <span class="service-card-btn-label">READ MORE</span>
-              <span class="service-card-btn-arrow">&nearr;</span>
-            </a>
+            <div class="service-card-action">
+              <a href="{k_url}" {"target='_blank' rel='noopener'" if k_url.startswith("http") else ""} class="service-card-btn font-cinzel" title="Read Details: {k_title}">
+                <span class="pub-btn-icon-box">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                </span>
+                <span class="service-card-btn-label">READ MORE</span>
+                <span class="pub-btn-arrow">&rarr;</span>
+              </a>
+            </div>
 
           </div>
 
@@ -6664,13 +6666,15 @@ def generate_talks_page():
 
             <p class="service-card-desc">{o_abstract}</p>
 
-            <a href="{o_url}" {"target='_blank' rel='noopener'" if o_url.startswith("http") else ""} class="service-card-btn" title="Read Essay: {o_title}">
-              <span class="service-card-btn-icon">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
-              </span>
-              <span class="service-card-btn-label">READ ESSAY</span>
-              <span class="service-card-btn-arrow">&nearr;</span>
-            </a>
+            <div class="service-card-action">
+              <a href="{o_url}" {"target='_blank' rel='noopener'" if o_url.startswith("http") else ""} class="service-card-btn font-cinzel" title="Read Essay: {o_title}">
+                <span class="pub-btn-icon-box">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+                </span>
+                <span class="service-card-btn-label">READ ESSAY</span>
+                <span class="pub-btn-arrow">&rarr;</span>
+              </a>
+            </div>
 
           </div>
 
