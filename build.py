@@ -5835,8 +5835,6 @@ def generate_research_page():
           <div class="article-card-body">
             <div class="article-card-meta">
               <span class="article-card-date">{date}</span>
-              <span class="article-card-dot">&bull;</span>
-              <span class="article-card-read">{read_time}</span>
             </div>
             <h3 class="article-card-title font-cinzel">
               <a href="/article/{slug}">{title}</a>

@@ -13465,24 +13465,9 @@ a {
 
 
 
-.article-card-dot {
-
-  color: #64748b !important;
-
-  font-size: 0.7rem !important;
-
-}
-
-
-
+.article-card-dot,
 .article-card-read {
-
-  color: #38bdf8 !important;
-
-  font-family: var(--font-mono, monospace) !important;
-
-  font-weight: 700 !important;
-
+  display: none !important;
 }
 
 
