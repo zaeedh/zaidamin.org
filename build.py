@@ -5804,8 +5804,6 @@ def generate_research_page():
 
             <div class="article-card-thumb-overlay"></div>
 
-            <span class="article-card-cat-badge">{cat}</span>
-
             {spotlight_badge}
 
           </a>
