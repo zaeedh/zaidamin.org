@@ -302,6 +302,48 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794894035564",
+      "timestamp": "2026-11-17T05:40:35.564Z",
+      "path": "/article/fdsit-final-year-viva-poster-showcase-2026",
+      "title": "Celebrating Student Innovation: FDSIT Final Year Diploma & Degree Poster and System VIVA Showcase at INTI International University | Dr. Zaid Amin",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-8D2AE2",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Google Chrome",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Internal Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+    },
+    {
+      "id": "tr-1794894031972",
+      "timestamp": "2026-11-17T05:40:31.972Z",
+      "path": "/research",
+      "title": "Activity & Project",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-8D2AE2",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Google Chrome",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Internal Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+    },
+    {
       "id": "tr-1794893814158",
       "timestamp": "2026-11-17T05:36:54.158Z",
       "path": "/",
@@ -7447,7 +7489,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-17T13:36:54.194548",
+  "updated_at": "2026-11-17T13:40:35.602246",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -7530,10 +7572,11 @@
     "i-knew-i-can": 9,
     "what-is-network-engineering": 8,
     "the-polite-city-ai-human-harmonization": 29,
-    "trustworthy-ai-workshop-google-colab-inti-2026": 28
+    "trustworthy-ai-workshop-google-colab-inti-2026": 28,
+    "fdsit-final-year-viva-poster-showcase-2026": 23
   },
   "server_live_hits": {
-    "MY": 280,
+    "MY": 282,
     "OTHER": 3
   }
 }
