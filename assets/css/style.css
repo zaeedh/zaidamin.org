@@ -28935,7 +28935,7 @@ h1.cv-hero-name,
 .team-page-container {
   max-width: 1152px !important;
   margin: 0 auto !important;
-  padding: 40px 24px 80px !important;
+  padding: 40px 24px 22px !important;
 }
 
 .team-hero-header {
@@ -29387,8 +29387,9 @@ h1.cv-hero-name,
 
 /* --- H. Supervision & Admissions CTA Banner --- */
 .team-cta-banner {
-  margin-top: 56px !important;
-  padding: 42px 36px !important;
+  margin-top: 52px !important;
+  margin-bottom: 0 !important;
+  padding: 38px 32px !important;
   background: linear-gradient(135deg, rgba(8, 20, 36, 0.90) 0%, rgba(4, 14, 26, 0.96) 100%) !important;
   border: 1px solid rgba(212, 175, 55, 0.32) !important;
   border-radius: 20px !important;
