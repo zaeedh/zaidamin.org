@@ -11378,6 +11378,11 @@ def generate_team_page():
         """
 
     def render_collab_card(c):
+        role = c.get('role', '').strip()
+        period = c.get('period', '').strip()
+        role_html = f'<span class="team-role-collab">{escape_html(role)}</span>' if role else ""
+        period_bullet = "&bull; " if role else ""
+        period_html = f'<span class="team-session-tag font-mono">{period_bullet}{escape_html(period)}</span>' if period else ""
         return f"""
           <article class="team-card team-card-collab" data-category="collaborator">
             <div class="team-card-top">
@@ -11390,8 +11395,8 @@ def generate_team_page():
                   <span class="team-badge font-cinzel">{escape_html(c.get('badge', 'Academic Collaborator'))}</span>
                 </div>
                 <div class="team-meta-ribbon">
-                  <span class="team-role-collab">{escape_html(c['role'])}</span>
-                  <span class="team-session-tag font-mono">&bull; {escape_html(c['period'])}</span>
+                  {role_html}
+                  {period_html}
                 </div>
                 <div class="team-inst-text">{escape_html(c.get('institution', ''))}</div>
               </div>
