@@ -13348,34 +13348,75 @@ a {
 
 
 
+.article-card-thumb-link {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+  text-decoration: none !important;
+}
+
+.article-card-bookmark-btn {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  background: rgba(15, 23, 42, 0.55) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+  z-index: 4 !important;
+}
+
+.article-card-bookmark-btn:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.45) !important;
+  color: #ffffff !important;
+  transform: scale(1.08) !important;
+}
+
+.article-card-bookmark-btn:active {
+  transform: scale(0.94) !important;
+}
+
+.article-card-bookmark-btn.bookmarked {
+  background: rgba(212, 175, 55, 0.3) !important;
+  border-color: #d4af37 !important;
+  color: #fbbf24 !important;
+}
+
+.article-card-bookmark-btn.bookmarked .bookmark-icon {
+  fill: #fbbf24 !important;
+  stroke: #fbbf24 !important;
+}
+
 .article-card-spotlight-pill {
-
-  position: absolute;
-
-  top: 9px;
-
-  right: 9px;
-
-  font-size: 0.66rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.04em;
-
-  color: #fffbeb;
-
-  background: rgba(40, 32, 10, 0.94);
-
-  border: 1px solid #d4af37;
-
-  padding: 3px 9px;
-
-  border-radius: 9999px;
-
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-
-  z-index: 2;
-
+  position: absolute !important;
+  top: 10px !important;
+  left: 10px !important;
+  right: auto !important;
+  font-size: 0.66rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+  color: #fffbeb !important;
+  background: rgba(40, 32, 10, 0.94) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  border: 1px solid #d4af37 !important;
+  padding: 3px 9px !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35) !important;
+  z-index: 3 !important;
 }
 
 
@@ -13495,25 +13536,72 @@ a {
 
 
 .article-card-excerpt {
-
   font-size: 0.82rem !important;
-
   line-height: 1.55 !important;
-
   color: #94a3b8 !important;
-
   margin: 0 !important;
-
   display: -webkit-box !important;
-
   -webkit-line-clamp: 3 !important;
-
   -webkit-box-orient: vertical !important;
-
   overflow: hidden !important;
-
   height: 4.65em !important;
+}
 
+/* ── Harmonized Capsule Chips Row (Reference UI Match) ── */
+.article-chips-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-top: 10px !important;
+  flex-wrap: wrap !important;
+}
+
+.article-chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 3px 9px !important;
+  border-radius: 9999px !important;
+  font-size: 0.72rem !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #cbd5e1 !important;
+  white-space: nowrap !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  transition: all 0.2s ease !important;
+}
+
+.article-chip:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+}
+
+.article-chip-star {
+  color: #f1f5f9 !important;
+  font-weight: 600 !important;
+}
+
+.article-chip-star .chip-star-icon {
+  color: #fbbf24 !important;
+  stroke: #fbbf24 !important;
+  fill: rgba(251, 191, 36, 0.25) !important;
+}
+
+.article-chip-tag {
+  max-width: 140px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  color: #e2e8f0 !important;
+}
+
+.article-chip-time {
+  color: #94a3b8 !important;
+  font-family: var(--font-mono, monospace) !important;
+  font-size: 0.69rem !important;
 }
 
 

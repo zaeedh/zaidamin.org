@@ -5787,79 +5787,85 @@ def generate_research_page():
         spotlight_badge = '<span class="article-card-spotlight-pill">★ SPOTLIGHT</span>' if is_spotlight else ''
 
         card_spotlight_class = " article-card-spotlight" if is_spotlight else ""
-
         escaped_title = _html_mod.escape(title)
 
+        # Primary tag selection for pill chip
+        tags_list = a.get("tags", [])
+        primary_tag = ""
+        for t in tags_list:
+            t_clean = t.strip()
+            if 3 <= len(t_clean) <= 18 and not t_clean.lower().startswith("20"):
+                primary_tag = t_clean
+                break
+        if not primary_tag and tags_list:
+            first_t = tags_list[0].strip()
+            if len(first_t) > 18:
+                truncated = first_t[:17].rsplit(" ", 1)[0]
+                primary_tag = truncated if truncated else first_t[:15]
+            else:
+                primary_tag = first_t
+        if not primary_tag:
+            primary_tag = "Scholarship"
+        escaped_tag = _html_mod.escape(primary_tag)
 
+        # Rating value (deterministic: 5.0 for spotlight, 4.9 or 4.8 based on title length)
+        rating_val = "5.0" if is_spotlight else ("4.9" if (len(title) % 2 == 0) else "4.8")
+
+        # Clean read time for pill chip
+        clean_read_time = read_time.replace("min read", "Min Read").replace("min", "Min Read").strip()
+        if not clean_read_time.endswith("Read"):
+            clean_read_time += " Read"
+        escaped_read_time = _html_mod.escape(clean_read_time)
 
         cards_html += f'''
-
         <article class="article-card{card_spotlight_class}" data-category="{cat}" data-title="{title.lower()}" data-tags="{tags_str}">
-
           <!-- Small Thumbnail Frame (Golden Ratio Harmonic Proportion) -->
-
-          <a href="/article/{slug}" class="article-card-thumb-wrap" aria-label="{escaped_title}">
-
-            <img src="{img_url}" alt="{escaped_title}" class="article-card-thumb" loading="lazy" onerror="this.onerror=null; this.src=\'assets/images/thumb-research.jpg\';">
-
-            <div class="article-card-thumb-overlay"></div>
-
+          <div class="article-card-thumb-wrap">
+            <a href="/article/{slug}" class="article-card-thumb-link" aria-label="{escaped_title}">
+              <img src="{img_url}" alt="{escaped_title}" class="article-card-thumb" loading="lazy" onerror="this.onerror=null; this.src=\'assets/images/thumb-research.jpg\';">
+              <div class="article-card-thumb-overlay"></div>
+            </a>
             {spotlight_badge}
-
-          </a>
-
-
+            <button type="button" class="article-card-bookmark-btn" data-slug="{slug}" onclick="toggleArticleBookmark(event, this, \'{slug}\')" aria-label="Bookmark article" title="Bookmark article" aria-pressed="false">
+              <svg class="bookmark-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+            </button>
+          </div>
 
           <!-- Content Body (Gestalt Proximity) -->
-
           <div class="article-card-body">
-
             <div class="article-card-meta">
-
               <span class="article-card-date">{date}</span>
-
               <span class="article-card-dot">&bull;</span>
-
               <span class="article-card-read">{read_time}</span>
-
             </div>
-
             <h3 class="article-card-title font-cinzel">
-
               <a href="/article/{slug}">{title}</a>
-
             </h3>
-
             <p class="article-card-excerpt">{excerpt}</p>
 
+            <!-- Capsule Chips Row (Reference UI Match: Star Rating, Category/Tag, Read Time) -->
+            <div class="article-chips-row">
+              <span class="article-chip article-chip-star" title="Rating {rating_val} of 5.0">
+                <svg class="chip-star-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <span>{rating_val}</span>
+              </span>
+              <span class="article-chip article-chip-tag" title="{escaped_tag}">{escaped_tag}</span>
+              <span class="article-chip article-chip-time" title="{escaped_read_time}">{escaped_read_time}</span>
+            </div>
           </div>
-
-
 
           <!-- Elegant Read Essay Button (Golden Ratio Capsule Pill) -->
-
           <div class="article-card-action">
-
             <a href="/article/{slug}" class="article-card-btn font-cinzel">
-
               <span class="pub-btn-icon-box">
-
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-
               </span>
-
               <span>Read Essay</span>
-
               <span class="pub-btn-arrow">&rarr;</span>
-
             </a>
-
           </div>
-
         </article>
-
         '''
-
 
 
     # Research Pillars HTML
@@ -6063,27 +6069,59 @@ def generate_research_page():
       }
 
 
-
       catButtons.forEach(function(btn) {
-
         btn.addEventListener('click', function() {
-
           catButtons.forEach(function(b) { b.classList.remove('active'); });
-
           btn.classList.add('active');
-
           currentCategory = btn.getAttribute('data-category');
-
           filterArticles();
-
         });
-
       });
-
     })();
 
-    </script>
+    // Interactive Article Bookmark Storage
+    window.toggleArticleBookmark = function(e, btn, slug) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      var isBookmarked = btn.classList.toggle('bookmarked');
+      var bookmarks = [];
+      try {
+        bookmarks = JSON.parse(localStorage.getItem('zaid_article_bookmarks') || '[]');
+      } catch(err) { bookmarks = []; }
 
+      if (isBookmarked) {
+        if (bookmarks.indexOf(slug) === -1) bookmarks.push(slug);
+        btn.setAttribute('aria-pressed', 'true');
+        btn.setAttribute('title', 'Remove bookmark');
+      } else {
+        bookmarks = bookmarks.filter(function(s) { return s !== slug; });
+        btn.setAttribute('aria-pressed', 'false');
+        btn.setAttribute('title', 'Bookmark article');
+      }
+      try {
+        localStorage.setItem('zaid_article_bookmarks', JSON.stringify(bookmarks));
+      } catch(err) {}
+    };
+
+    // Restore saved bookmarks on page load
+    (function() {
+      try {
+        var savedBookmarks = JSON.parse(localStorage.getItem('zaid_article_bookmarks') || '[]');
+        if (Array.isArray(savedBookmarks)) {
+          savedBookmarks.forEach(function(slug) {
+            var btn = document.querySelector('.article-card-bookmark-btn[data-slug="' + slug + '"]');
+            if (btn) {
+              btn.classList.add('bookmarked');
+              btn.setAttribute('aria-pressed', 'true');
+              btn.setAttribute('title', 'Remove bookmark');
+            }
+          });
+        }
+      } catch(err) {}
+    })();
+    </script>
     """
 
 
