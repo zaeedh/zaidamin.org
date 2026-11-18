@@ -29129,6 +29129,7 @@ h1.cv-hero-name,
   display: flex !important;
   align-items: baseline !important;
   justify-content: space-between !important;
+  flex-wrap: wrap !important;
   gap: 16px !important;
   margin-bottom: 24px !important;
   padding-bottom: 12px !important;
@@ -31049,3 +31050,202 @@ h1.cv-hero-name,
 .team-cta-btn-primary:hover .pub-btn-icon-box svg polygon:not([fill="none"]) {
   fill: #030a14 !important;
 }
+
+/* ==========================================================================
+   TEAM ROSTER & CTA RESPONSIVE ARCHITECTURE (Gestalt & Golden Ratio)
+   Eliminates category header text wrapping & count badge clipping on mobile/tab.
+   Fixes CTA banner button overflow with harmonized vertical capsule stack.
+   ========================================================================== */
+@media (max-width: 860px) {
+  /* Category Headers: Stack title & count into cohesive Gestalt unit */
+  .team-category-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    margin-bottom: 20px !important;
+    padding-bottom: 12px !important;
+  }
+
+  .team-category-title-wrap {
+    width: 100% !important;
+  }
+
+  .team-category-title {
+    font-size: 1.25rem !important;
+    line-height: 1.32 !important;
+    letter-spacing: -0.01em !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .team-category-count {
+    font-size: 0.72rem !important;
+    letter-spacing: 0.06em !important;
+    margin-top: 2px !important;
+    display: inline-block !important;
+  }
+
+  /* CTA Banner & Buttons: Balanced, centered vertical stack */
+  .team-cta-banner {
+    padding: 34px 22px !important;
+    margin-top: 42px !important;
+    border-radius: 18px !important;
+  }
+
+  .team-cta-title {
+    font-size: 1.45rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 12px !important;
+  }
+
+  .team-cta-desc {
+    font-size: 0.88rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 24px !important;
+  }
+
+  .team-cta-btns {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: 380px !important;
+    margin: 0 auto !important;
+  }
+
+  .team-cta-btn-primary,
+  .team-cta-btn-secondary {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 42px !important;
+    padding: 0 18px !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.05em !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    border-radius: 9999px !important;
+  }
+}
+
+@media (max-width: 540px) {
+  .team-category-header {
+    gap: 6px !important;
+    margin-bottom: 16px !important;
+    padding-bottom: 10px !important;
+  }
+
+  .team-category-title {
+    font-size: 1.15rem !important;
+    line-height: 1.34 !important;
+  }
+
+  .team-category-count {
+    font-size: 0.68rem !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .team-card {
+    padding: 18px 16px !important;
+    border-radius: 16px !important;
+  }
+
+  .team-card-top {
+    gap: 14px !important;
+  }
+
+  .team-avatar-frame {
+    width: 66px !important;
+    height: 66px !important;
+    min-width: 66px !important;
+    min-height: 66px !important;
+  }
+
+  .team-person-name {
+    font-size: 1.02rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .team-cta-banner {
+    padding: 28px 16px !important;
+    margin-top: 36px !important;
+    border-radius: 16px !important;
+  }
+
+  .team-cta-eyebrow {
+    font-size: 0.64rem !important;
+    letter-spacing: 0.10em !important;
+    margin-bottom: 8px !important;
+  }
+
+  .team-cta-title {
+    font-size: 1.25rem !important;
+    line-height: 1.32 !important;
+    margin-bottom: 10px !important;
+  }
+
+  .team-cta-desc {
+    font-size: 0.84rem !important;
+    line-height: 1.55 !important;
+    margin-bottom: 20px !important;
+  }
+
+  .team-cta-btns {
+    max-width: 100% !important;
+    gap: 10px !important;
+  }
+
+  .team-cta-btn-primary,
+  .team-cta-btn-secondary {
+    height: 40px !important;
+    padding: 0 12px !important;
+    font-size: 0.66rem !important;
+    letter-spacing: 0.03em !important;
+    gap: 7px !important;
+  }
+
+  .team-cta-btn-primary .pub-btn-icon-box,
+  .team-cta-btn-secondary .pub-btn-icon-box {
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+  }
+
+  .team-cta-btn-primary .pub-btn-icon-box svg,
+  .team-cta-btn-secondary .pub-btn-icon-box svg {
+    width: 10px !important;
+    height: 10px !important;
+  }
+
+  .team-cta-btn-primary > span:not(.pub-btn-icon-box):not(.pub-btn-arrow),
+  .team-cta-btn-secondary > span:not(.pub-btn-icon-box):not(.pub-btn-arrow) {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .team-cta-banner {
+    padding: 24px 12px !important;
+  }
+
+  .team-cta-title {
+    font-size: 1.15rem !important;
+  }
+
+  .team-cta-desc {
+    font-size: 0.80rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .team-cta-btn-primary,
+  .team-cta-btn-secondary {
+    height: 38px !important;
+    padding: 0 10px !important;
+    font-size: 0.62rem !important;
+    letter-spacing: 0.02em !important;
+    gap: 6px !important;
+  }
+}
+
