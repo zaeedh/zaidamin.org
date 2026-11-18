@@ -13514,27 +13514,7 @@ a {
 }
 
 .article-chip-star {
-  background: rgba(212, 175, 55, 0.08) !important;
-  border: 1px solid rgba(212, 175, 55, 0.24) !important;
-  color: #f8fafc !important;
-  font-weight: 600 !important;
-  gap: 4.5px !important;
-  padding: 0 8px 0 7px !important;
-}
-
-.article-chip-star .chip-star-icon {
-  display: inline-block !important;
-  color: #d4af37 !important;
-  stroke: #d4af37 !important;
-  fill: #d4af37 !important;
-  flex-shrink: 0 !important;
-  transform: translateY(-0.5px) !important; /* Optical baseline balance with numeral */
-}
-
-.article-chip-star span {
-  font-family: var(--font-mono, monospace) !important;
-  font-size: 0.70rem !important;
-  letter-spacing: 0.02em !important;
+  display: none !important;
 }
 
 .article-chip-tag {

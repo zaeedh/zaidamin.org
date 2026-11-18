@@ -5832,9 +5832,6 @@ def generate_research_page():
             primary_tag = "Scholarship"
         escaped_tag = _html_mod.escape(primary_tag)
 
-        # Rating value (deterministic: 5.0 for spotlight, 4.9 or 4.8 based on title length)
-        rating_val = "5.0" if is_spotlight else ("4.9" if (len(title) % 2 == 0) else "4.8")
-
         # Clean read time for pill chip
         clean_read_time = read_time.replace("min read", "Min Read").replace("min", "Min Read").strip()
         if not clean_read_time.endswith("Read"):
@@ -5865,12 +5862,8 @@ def generate_research_page():
             </h3>
             <p class="article-card-excerpt">{excerpt}</p>
 
-            <!-- Capsule Chips Row (Reference UI Match: Star Rating, Category/Tag, Read Time) -->
+            <!-- Capsule Chips Row (Category/Tag, Read Time) -->
             <div class="article-chips-row">
-              <span class="article-chip article-chip-star" title="Rating {rating_val} of 5.0">
-                <svg class="chip-star-icon" width="11" height="11" viewBox="0 0 24 24" fill="#d4af37" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                <span>{rating_val}</span>
-              </span>
               <span class="article-chip article-chip-tag" title="{escaped_tag}">{escaped_tag}</span>
               <span class="article-chip article-chip-time" title="{escaped_read_time}">{escaped_read_time}</span>
             </div>
