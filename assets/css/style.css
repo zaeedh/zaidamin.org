@@ -239,8 +239,8 @@ a {
 }
 
 /* ==========================================================================
-   EPIGRAPH POETIC SOFT FADE ENGINE (GESTALT & GOLDEN RATIO)
-   Smooth & Soft Character Fade In / Fade Out, Slow Left-to-Right Wave
+   EPIGRAPH ETHEREAL LIQUID CROSSFADE WAVE (GESTALT & GOLDEN RATIO)
+   Ultra-Slow, Smooth & Elegant Simultaneous Character Metamorphosis
    ("Das Sein, Das Sollen." <-> "Path of Nobility.")
    ========================================================================== */
 .epigraph-scramble-link {
@@ -252,7 +252,7 @@ a {
   outline: none;
   user-select: none;
   vertical-align: middle;
-  transition: color 0.5s ease;
+  transition: color 0.6s ease;
 }
 
 .epigraph-scramble-link:hover {
@@ -263,21 +263,21 @@ a {
 .epigraph-scramble-link::before {
   content: '';
   position: absolute;
-  top: -25%;
-  left: -6%;
-  width: 112%;
-  height: 150%;
+  top: -30%;
+  left: -8%;
+  width: 116%;
+  height: 160%;
   background: radial-gradient(
     ellipse at center,
-    rgba(212, 175, 55, 0.22) 0%,
-    rgba(254, 240, 138, 0.08) 40%,
-    transparent 72%
+    rgba(212, 175, 55, 0.24) 0%,
+    rgba(254, 240, 138, 0.08) 42%,
+    transparent 75%
   );
   pointer-events: none;
   opacity: 0;
-  transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 2.4s cubic-bezier(0.16, 1, 0.3, 1);
   border-radius: 50%;
-  filter: blur(14px);
+  filter: blur(16px);
   z-index: 1;
 }
 
@@ -288,10 +288,10 @@ a {
 /* Static SSR / Pre-JS fallback */
 .epigraph-scramble-inner {
   display: inline-block;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.6s ease;
 }
 
-/* Stage holding the soft fade characters */
+/* Stage holding the soft fade character slots */
 .epigraph-fade-stage {
   display: inline-flex;
   align-items: baseline;
@@ -300,78 +300,79 @@ a {
   vertical-align: baseline;
 }
 
-/* Individual Character in the soft left-to-right fade wave */
-.fade-char {
-  display: inline-block;
+/* Overlapping Morph Slot hosting simultaneous crossfade */
+.morph-slot {
+  display: inline-grid;
+  grid-template-areas: "char";
+  place-items: center baseline;
   position: relative;
   line-height: 1.2;
   vertical-align: baseline;
   text-align: center;
   margin: 0;
   padding: 0;
-  color: #ffffff;
-  text-shadow: 0 2px 18px rgba(34, 166, 200, 0.28);
-  transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
-              filter 0.55s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-              color 0.5s ease,
-              width 0.65s cubic-bezier(0.2, 0.8, 0.25, 1);
-  will-change: opacity, filter, transform;
+  box-sizing: border-box;
+  transition: width 0.9s cubic-bezier(0.2, 0.8, 0.25, 1),
+              opacity 0.9s ease;
 }
 
-.fade-char.fade-space {
-  width: 0.36em;
-  min-width: 0.36em;
+.morph-slot.slot-space {
+  width: 0.36em !important;
+  min-width: 0.36em !important;
 }
 
-.fade-char.fade-hidden {
+.morph-slot.slot-hidden {
   width: 0 !important;
   min-width: 0 !important;
   opacity: 0 !important;
-  filter: blur(5px) !important;
-  transform: scale(0.6) !important;
   pointer-events: none;
   margin: 0 !important;
   padding: 0 !important;
   visibility: hidden;
 }
 
-/* While dissolving out */
-.fade-char.fading-out {
+/* Individual Character Layer */
+.morph-char {
+  grid-area: char;
+  display: inline-block;
+  color: #ffffff;
+  text-shadow: 0 2px 18px rgba(34, 166, 200, 0.28);
+  will-change: opacity, filter, transform;
+  transition: opacity 1.2s cubic-bezier(0.25, 1, 0.4, 1),
+              filter 1.2s cubic-bezier(0.25, 1, 0.4, 1),
+              transform 1.2s cubic-bezier(0.25, 1, 0.4, 1),
+              color 0.9s ease;
+}
+
+.morph-char-curr {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0) scale(1);
+}
+
+.morph-char-next {
+  opacity: 0;
+  filter: blur(3px);
+  transform: translateY(2px) scale(1.02);
+  pointer-events: none;
+}
+
+/* Outgoing state: melts away into ethereal gold mist */
+.morph-char-curr.is-outgoing {
   opacity: 0;
   filter: blur(3.5px);
   color: #fef08a;
-  text-shadow: 0 0 14px rgba(254, 240, 138, 0.65);
-  transform: translateY(-2px) scale(0.96);
+  text-shadow: 0 0 14px rgba(254, 240, 138, 0.6);
+  transform: translateY(-2px) scale(0.97);
 }
 
-/* While dissolving in */
-.fade-char.fading-in {
-  animation: softFadeGleam 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes softFadeGleam {
-  0% {
-    opacity: 0;
-    filter: blur(3.5px);
-    color: #fff9c4;
-    text-shadow: 0 0 16px rgba(254, 240, 138, 0.85), 0 0 28px rgba(212, 175, 55, 0.55);
-    transform: translateY(2px) scale(1.02);
-  }
-  50% {
-    opacity: 1;
-    filter: blur(0px);
-    color: #ffffff;
-    text-shadow: 0 0 12px rgba(254, 240, 138, 0.5), 0 2px 18px rgba(34, 166, 200, 0.28);
-    transform: translateY(0) scale(1);
-  }
-  100% {
-    opacity: 1;
-    filter: blur(0px);
-    color: #ffffff;
-    text-shadow: 0 2px 18px rgba(34, 166, 200, 0.28);
-    transform: translateY(0) scale(1);
-  }
+/* Incoming state: softly blooms in with classical radiance */
+.morph-char-next.is-incoming {
+  opacity: 1;
+  filter: blur(0px);
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(254, 240, 138, 0.4), 0 2px 18px rgba(34, 166, 200, 0.28);
+  transform: translateY(0) scale(1);
 }
 
 /* ==========================================================================

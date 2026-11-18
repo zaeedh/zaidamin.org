@@ -3565,8 +3565,8 @@ document.addEventListener('click', (e) => {
 function initEpigraphScramble() {
   const link = document.getElementById('epigraph-scramble-text');
   if (!link) return;
-  if (link.__epigraphFadeActive) return;
-  link.__epigraphFadeActive = true;
+  if (link.__epigraphMorphActive) return;
+  link.__epigraphMorphActive = true;
 
   const phrase1 = (link.getAttribute('data-phrase-primary') || 'Das Sein, Das Sollen.').trim();
   const phrase2 = (link.getAttribute('data-phrase-secondary') || 'Path of Nobility.').trim();
@@ -3577,7 +3577,7 @@ function initEpigraphScramble() {
   let isTransitioning = false;
   let loopTimer = null;
 
-  // Build stage with individual character spans for left-to-right soft wave
+  // Build stage with dual-layer morph slots for seamless simultaneous optical crossfade
   let stage = link.querySelector('.epigraph-fade-stage');
   if (!stage) {
     stage = document.createElement('span');
@@ -3589,93 +3589,130 @@ function initEpigraphScramble() {
     stage.innerHTML = '';
   }
 
-  const charSpans = [];
+  const slots = [];
   for (let i = 0; i < maxLen; i++) {
-    const span = document.createElement('span');
-    span.className = 'fade-char';
-    span.setAttribute('data-idx', i);
+    const slot = document.createElement('span');
+    slot.className = 'morph-slot';
+    slot.setAttribute('data-idx', i);
+
+    const charCurr = document.createElement('span');
+    charCurr.className = 'morph-char morph-char-curr';
+
+    const charNext = document.createElement('span');
+    charNext.className = 'morph-char morph-char-next';
 
     const initialChar = phrase1[i] || '';
     if (initialChar === ' ') {
-      span.classList.add('fade-space');
-      span.textContent = '\u00a0';
+      slot.classList.add('slot-space');
+      charCurr.textContent = '\u00a0';
     } else if (initialChar) {
-      span.textContent = initialChar;
+      charCurr.textContent = initialChar;
     } else {
-      span.classList.add('fade-hidden');
+      slot.classList.add('slot-hidden');
     }
 
-    stage.appendChild(span);
-    charSpans.push(span);
+    slot.appendChild(charCurr);
+    slot.appendChild(charNext);
+    stage.appendChild(slot);
+
+    slots.push({
+      slot: slot,
+      charCurr: charCurr,
+      charNext: charNext
+    });
   }
 
-  function fadeTo(destinationText, callback) {
+  function crossfadeTo(destinationText, callback) {
     if (isTransitioning) return;
     isTransitioning = true;
     link.classList.add('is-fading');
 
     const destLen = destinationText.length;
-    // Slower, meditative cadence: 120ms per letter left-to-right wave (~2.5s total traversal)
-    const waveStep = 120;
-    // Soft, gradual dissolve: 500ms fade-out before blooming into target character
-    const fadeDuration = 500;
+    // Luxurious, slow-motion wave cadence: 150ms per letter (~3.15s wave transit)
+    const waveStep = 150;
+    // Silky simultaneous crossfade duration: 1200ms
+    const fadeDuration = 1200;
     let maxDelay = 0;
 
-    charSpans.forEach((span, i) => {
+    slots.forEach((item, i) => {
+      const fromChar = currentText[i] || '';
       const toChar = destinationText[i] || '';
       const delay = i * waveStep;
-      if (delay + fadeDuration + 850 > maxDelay) {
-        maxDelay = delay + fadeDuration + 850;
+      if (delay + fadeDuration > maxDelay) {
+        maxDelay = delay + fadeDuration;
       }
 
-      // Excess trailing characters beyond destination length fade out smoothly
+      // Handle trailing characters beyond destination length
       if (i >= destLen) {
         setTimeout(() => {
-          span.classList.add('fading-out');
+          item.charCurr.classList.add('is-outgoing');
           setTimeout(() => {
-            span.classList.remove('fading-out');
-            span.classList.add('fade-hidden');
-          }, fadeDuration);
+            item.slot.classList.add('slot-hidden');
+          }, fadeDuration * 0.75);
         }, delay);
         return;
       }
 
-      // Characters emerging from hidden state
-      if (span.classList.contains('fade-hidden')) {
+      // Handle characters emerging from hidden state
+      if (item.slot.classList.contains('slot-hidden')) {
         setTimeout(() => {
-          span.classList.remove('fade-hidden');
-          span.textContent = toChar === ' ' ? '\u00a0' : toChar;
-          if (toChar === ' ') span.classList.add('fade-space');
-          else span.classList.remove('fade-space');
-          span.classList.add('fading-in');
-          setTimeout(() => span.classList.remove('fading-in'), 850);
+          item.slot.classList.remove('slot-hidden');
+          item.charNext.textContent = toChar === ' ' ? '\u00a0' : toChar;
+          if (toChar === ' ') item.slot.classList.add('slot-space');
+          else item.slot.classList.remove('slot-space');
+
+          // Smoothly bloom in
+          void item.charNext.offsetWidth;
+          item.charNext.classList.add('is-incoming');
         }, delay);
         return;
       }
 
-      // Normal character-to-character soft dissolve
+      // Handle space transitions
+      if (toChar === ' ') {
+        setTimeout(() => {
+          item.charCurr.classList.add('is-outgoing');
+          item.slot.classList.add('slot-space');
+        }, delay);
+        return;
+      }
+
+      // Standard character: Simultaneous liquid crossfade (No blinking, no blackouts!)
       setTimeout(() => {
-        span.classList.add('fading-out');
+        item.charNext.textContent = toChar;
+        item.slot.classList.remove('slot-space');
 
-        setTimeout(() => {
-          span.textContent = toChar === ' ' ? '\u00a0' : toChar;
-          if (toChar === ' ') {
-            span.classList.add('fade-space');
-          } else {
-            span.classList.remove('fade-space');
-          }
-          span.classList.remove('fading-out');
-          span.classList.add('fading-in');
+        // Force reflow before applying transition
+        void item.charNext.offsetWidth;
 
-          setTimeout(() => {
-            span.classList.remove('fading-in');
-          }, 850);
-        }, fadeDuration);
+        // Both letters transition simultaneously: curr melts out while next blooms in!
+        item.charCurr.classList.add('is-outgoing');
+        item.charNext.classList.add('is-incoming');
       }, delay);
     });
 
-    // When complete
+    // When the whole wave completes
     setTimeout(() => {
+      // Re-normalize all slots for next transition
+      slots.forEach((item, i) => {
+        const charNow = destinationText[i] || '';
+        item.charCurr.classList.remove('is-outgoing');
+        item.charNext.classList.remove('is-incoming');
+
+        if (charNow === ' ') {
+          item.charCurr.textContent = '\u00a0';
+          item.slot.classList.add('slot-space');
+        } else if (charNow) {
+          item.charCurr.textContent = charNow;
+          item.slot.classList.remove('slot-space');
+          item.slot.classList.remove('slot-hidden');
+        } else {
+          item.charCurr.textContent = '';
+          item.slot.classList.add('slot-hidden');
+        }
+        item.charNext.textContent = '';
+      });
+
       link.classList.remove('is-fading');
       currentText = destinationText;
       isTransitioning = false;
@@ -3685,30 +3722,30 @@ function initEpigraphScramble() {
 
   function scheduleNext() {
     clearTimeout(loopTimer);
-    // Relaxed pause: 6.5s on primary ("Das Sein, Das Sollen."), 5.5s on secondary ("Path of Nobility.")
-    const pauseTime = (targetText === phrase2) ? 6500 : 5500;
+    // Relaxed, noble pauses: 7.5s on primary ("Das Sein, Das Sollen."), 6.5s on secondary ("Path of Nobility.")
+    const pauseTime = (targetText === phrase2) ? 7500 : 6500;
 
     loopTimer = setTimeout(() => {
-      fadeTo(targetText, () => {
+      crossfadeTo(targetText, () => {
         targetText = (targetText === phrase2) ? phrase1 : phrase2;
         scheduleNext();
       });
     }, pauseTime);
   }
 
-  // Initial delay: 2.0s after load for peaceful initial rendering
+  // Initial delay: 2.2s after page load for peaceful initial rendering
   loopTimer = setTimeout(() => {
-    fadeTo(targetText, () => {
+    crossfadeTo(targetText, () => {
       targetText = (targetText === phrase2) ? phrase1 : phrase2;
       scheduleNext();
     });
-  }, 2000);
+  }, 2200);
 
-  // Interactive Hover
+  // Interactive Hover: Triggers the smooth wave if at rest
   link.addEventListener('mouseenter', () => {
     if (!isTransitioning) {
       clearTimeout(loopTimer);
-      fadeTo(targetText, () => {
+      crossfadeTo(targetText, () => {
         targetText = (targetText === phrase2) ? phrase1 : phrase2;
         scheduleNext();
       });
@@ -3719,7 +3756,7 @@ function initEpigraphScramble() {
   link.addEventListener('touchstart', () => {
     if (!isTransitioning) {
       clearTimeout(loopTimer);
-      fadeTo(targetText, () => {
+      crossfadeTo(targetText, () => {
         targetText = (targetText === phrase2) ? phrase1 : phrase2;
         scheduleNext();
       });
@@ -3733,7 +3770,7 @@ function initEpigraphScramble() {
       e.preventDefault();
       if (!isTransitioning) {
         clearTimeout(loopTimer);
-        fadeTo(targetText, () => {
+        crossfadeTo(targetText, () => {
           targetText = (targetText === phrase2) ? phrase1 : phrase2;
           scheduleNext();
         });
@@ -3742,7 +3779,7 @@ function initEpigraphScramble() {
   });
 }
 
-// Immediate and fallback execution to guarantee the soft fade engine always starts
+// Immediate and fallback execution to guarantee the liquid crossfade engine always starts
 if (typeof window !== 'undefined') {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initEpigraphScramble);
