@@ -6655,6 +6655,8 @@ def generate_talks_page():
         k_url = _html_mod.escape(k.get("url", "#"))
 
         k_badge = _html_mod.escape(k.get("badge", f"0{idx+1} • Keynote"))
+        k_year = _html_mod.escape(str(k.get("year", "")))
+        k_year_chip = f'<span class="service-card-chip service-card-chip-year" title="{k_year}">{k_year}</span>' if k_year else ''
         k_img = k.get("image", "assets/images/spotlight-smart-cities.jpg")
         icon_svg = icon_map.get(keynote_icons[idx % len(keynote_icons)], icon_map["podium"])
 
@@ -6666,18 +6668,17 @@ def generate_talks_page():
         card_html = f"""
         <div class="service-portrait-card">
           {media_stage_html}
-          <div class="service-card-gradient-top"></div>
 
-          <!-- Top Row: Frosted Tag -->
-          <div class="service-card-top-row">
-            <span class="service-card-tag">{k_badge}</span>
-          </div>
-
-          <!-- Bottom Content: Venue, Title, Synopsis, Capsule Button (Unchanged for Keynotes) -->
+          <!-- Bottom Content: Venue, Title, Synopsis, Capsule Chips, Action Button -->
           <div class="service-card-bottom">
             <div class="service-card-venue">{k_venue}</div>
             <h3 class="service-card-title">{k_title}</h3>
             <p class="service-card-desc">{k_abstract}</p>
+
+            <div class="service-card-chips-row">
+              <span class="service-card-chip service-card-chip-tag" title="{k_badge}">{k_badge}</span>
+              {k_year_chip}
+            </div>
 
             <div class="service-card-action">
               <a href="{k_url}" {"target='_blank' rel='noopener'" if k_url.startswith("http") else ""} class="service-card-btn font-cinzel" title="Read Details: {k_title}">
