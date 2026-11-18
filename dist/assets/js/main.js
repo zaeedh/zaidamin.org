@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     ['CoinPortraitEngine', typeof initCoinPortraitEngine === 'function' ? initCoinPortraitEngine : null],
     ['EpigraphScramble', typeof initEpigraphScramble === 'function' ? initEpigraphScramble : null],
+    ['CookieConsent', typeof initCookieConsent === 'function' ? initCookieConsent : null],
 
   ];
 
@@ -3490,7 +3491,7 @@ window.showCvNotice = showCvNotice;
 // Academic Cookie & Privacy Consent Engine
 // ==============================================================================
 function initCookieConsent() {
-  const CONSENT_KEY = 'zaidamin_cookie_consent';
+  const CONSENT_KEY = 'zaidamin_cookie_consent_v2';
   const banner = document.getElementById('cookie-consent-banner');
   const backdrop = document.getElementById('cookie-consent-backdrop');
   const acceptBtn = document.getElementById('cookie-accept-btn');
@@ -3520,9 +3521,16 @@ function initCookieConsent() {
     if (backdrop) backdrop.classList.remove('is-visible');
   }
 
-  // If visitor hasn't made a choice, display the banner smoothly after 1.2s
-  if (!savedConsent) {
-    setTimeout(showBanner, 1200);
+  // Check URL query parameters or hash to allow forced preview (e.g. #cookies or ?cookie=1)
+  let forceShow = false;
+  try {
+    const params = new URLSearchParams(window.location.search);
+    forceShow = params.has('cookie') || params.has('cookies') || window.location.hash === '#cookies';
+  } catch (e) {}
+
+  // If visitor hasn't made a choice or forceShow is requested, display smoothly after 600ms
+  if (!savedConsent || forceShow) {
+    setTimeout(showBanner, 600);
   }
 
   acceptBtn.addEventListener('click', () => dismissBanner('accepted'));
@@ -3540,6 +3548,15 @@ function initCookieConsent() {
   window.reopenCookieConsent = function() {
     showBanner();
   };
+}
+
+// Immediate and DOMContentLoaded execution guarantee
+if (typeof window !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCookieConsent);
+  } else {
+    initCookieConsent();
+  }
 }
 
 
