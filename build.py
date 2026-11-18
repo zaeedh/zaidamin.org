@@ -2223,7 +2223,7 @@ def get_page_footer(show_visitor_stats=False):
 
 
   <script defer src="/assets/js/instant-nav.min.js?v=1.0"></script>
-  <script defer src="/assets/js/rain-lighting.min.js?v=2.1"></script>
+  <script defer src="/assets/js/rain-lighting.js?v=2.0"></script>
   <script defer src="/assets/js/main.min.js?v=5.1"></script>
 
 </body>
@@ -12167,7 +12167,7 @@ def build_all():
         print(f"  Minified CSS: {len(raw_css)/1024:.1f} KB -> {len(min_css)/1024:.1f} KB ({((len(raw_css)-len(min_css))/len(raw_css))*100:.1f}% reduction)")
 
         # Minify JavaScript production bundles
-        for js_file in ["main.js", "rain-lighting.js", "instant-nav.js"]:
+        for js_file in ["main.js", "instant-nav.js"]:
             js_src_file = ASSETS_DIR / "js" / js_file
             if js_src_file.exists():
                 with open(js_src_file, "r", encoding="utf-8") as f:
