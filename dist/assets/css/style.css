@@ -239,9 +239,10 @@ a {
 }
 
 /* ==========================================================================
-   EPIGRAPH ETHEREAL LIQUID CROSSFADE WAVE (GESTALT & GOLDEN RATIO)
-   Ultra-Slow, Smooth & Elegant Simultaneous Character Metamorphosis
+   EPIGRAPH MONOCHROME BLACK-IN / BLACK-OUT WAVE ENGINE (GESTALT & GOLDEN RATIO)
+   Pure Monochromatic Black-Out to Black-In, Left-to-Right Elegant Wave
    ("Das Sein, Das Sollen." <-> "Path of Nobility.")
+   Zero Scramble, Zero Shine, Pure Minimalist Elegance
    ========================================================================== */
 .epigraph-scramble-link {
   color: #ffffff;
@@ -252,46 +253,25 @@ a {
   outline: none;
   user-select: none;
   vertical-align: middle;
-  transition: color 0.6s ease;
+  transition: color 0.4s ease;
 }
 
 .epigraph-scramble-link:hover {
-  color: #fef08a;
+  color: #cbd5e1;
 }
 
-/* Soft ambient gold bloom that gently breathes during the wave */
+/* Zero Shine: ambient glow removed */
 .epigraph-scramble-link::before {
-  content: '';
-  position: absolute;
-  top: -30%;
-  left: -8%;
-  width: 116%;
-  height: 160%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(212, 175, 55, 0.24) 0%,
-    rgba(254, 240, 138, 0.08) 42%,
-    transparent 75%
-  );
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 2.4s cubic-bezier(0.16, 1, 0.3, 1);
-  border-radius: 50%;
-  filter: blur(16px);
-  z-index: 1;
-}
-
-.epigraph-scramble-link.is-fading::before {
-  opacity: 1;
+  display: none !important;
 }
 
 /* Static SSR / Pre-JS fallback */
 .epigraph-scramble-inner {
   display: inline-block;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.5s ease;
 }
 
-/* Stage holding the soft fade character slots */
+/* Stage holding the black-in / black-out character slots */
 .epigraph-fade-stage {
   display: inline-flex;
   align-items: baseline;
@@ -300,7 +280,7 @@ a {
   vertical-align: baseline;
 }
 
-/* Overlapping Morph Slot hosting simultaneous crossfade */
+/* Overlapping Morph Slot */
 .morph-slot {
   display: inline-grid;
   grid-template-areas: "char";
@@ -312,8 +292,8 @@ a {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: width 0.9s cubic-bezier(0.2, 0.8, 0.25, 1),
-              opacity 0.9s ease;
+  transition: width 0.75s cubic-bezier(0.2, 0.8, 0.25, 1),
+              opacity 0.75s ease;
 }
 
 .morph-slot.slot-space {
@@ -331,48 +311,43 @@ a {
   visibility: hidden;
 }
 
-/* Individual Character Layer */
+/* Individual Character Layer - Pure Minimalist Typography (Zero Shine) */
 .morph-char {
   grid-area: char;
   display: inline-block;
   color: #ffffff;
-  text-shadow: 0 2px 18px rgba(34, 166, 200, 0.28);
-  will-change: opacity, filter, transform;
-  transition: opacity 1.2s cubic-bezier(0.25, 1, 0.4, 1),
-              filter 1.2s cubic-bezier(0.25, 1, 0.4, 1),
-              transform 1.2s cubic-bezier(0.25, 1, 0.4, 1),
-              color 0.9s ease;
+  text-shadow: none;
+  will-change: opacity, color, transform;
+  transition: opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.75s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .morph-char-curr {
   opacity: 1;
-  filter: blur(0px);
-  transform: translateY(0) scale(1);
+  color: #ffffff;
+  transform: translateY(0);
 }
 
 .morph-char-next {
   opacity: 0;
-  filter: blur(3px);
-  transform: translateY(2px) scale(1.02);
+  color: #000000;
+  transform: translateY(0);
   pointer-events: none;
 }
 
-/* Outgoing state: melts away into ethereal gold mist */
+/* Black-out: smoothly dims down into black and dissolves */
 .morph-char-curr.is-outgoing {
   opacity: 0;
-  filter: blur(3.5px);
-  color: #fef08a;
-  text-shadow: 0 0 14px rgba(254, 240, 138, 0.6);
-  transform: translateY(-2px) scale(0.97);
+  color: #000000;
+  transform: translateY(-1px);
 }
 
-/* Incoming state: softly blooms in with classical radiance */
+/* Black-in: smoothly emerges from black into pure crisp white */
 .morph-char-next.is-incoming {
   opacity: 1;
-  filter: blur(0px);
   color: #ffffff;
-  text-shadow: 0 0 12px rgba(254, 240, 138, 0.4), 0 2px 18px rgba(34, 166, 200, 0.28);
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
 }
 
 /* ==========================================================================
