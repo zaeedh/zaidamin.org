@@ -84,6 +84,30 @@ def minify_css(css: str) -> str:
     return css.strip()
 
 
+def minify_js(code: str) -> str:
+    """Enterprise-grade JS minifier stripping comments and redundant whitespace."""
+    code = re.sub(r'/\*[\s\S]*?\*/', '', code)
+    lines = []
+    for line in code.splitlines():
+        trimmed = line.strip()
+        if trimmed.startswith('//'):
+            continue
+        lines.append(line.rstrip())
+    return '\n'.join([l for l in lines if l.strip()])
+
+
+def resolve_optimal_image(img_path: str) -> str:
+    """Returns .webp version if available on disk for massive bandwidth savings."""
+    if not img_path:
+        return "assets/images/thumb-research.jpg"
+    clean_p = img_path.lstrip("/").replace("\\", "/")
+    if "." in clean_p:
+        webp_candidate = clean_p.rsplit(".", 1)[0] + ".webp"
+        if os.path.exists(webp_candidate):
+            return "/" + webp_candidate if img_path.startswith("/") else webp_candidate
+    return img_path
+
+
 def normalize_asset_paths(html: str) -> str:
     """Ensure all local asset and image paths start with a leading slash to prevent 404s on subpage routes."""
     # 1. Any HTML attribute, JSON key, JS string, or CSS url referencing assets/(images|css|js|docs|icons|fonts|media)/
@@ -2198,9 +2222,9 @@ def get_page_footer(show_visitor_stats=False):
 
 
 
-  <script defer src="/assets/js/rain-lighting.js?v=2.0"></script>
-
-  <script defer src="/assets/js/main.js?v=5.0"></script>
+  <script defer src="/assets/js/instant-nav.min.js?v=1.0"></script>
+  <script defer src="/assets/js/rain-lighting.min.js?v=2.1"></script>
+  <script defer src="/assets/js/main.min.js?v=5.1"></script>
 
 </body>
 
@@ -5780,7 +5804,7 @@ def generate_research_page():
 
         tags_str = ",".join(a.get("tags", [])).lower()
 
-        img_url = a.get("image", "").strip() or "assets/images/thumb-research.jpg"
+        img_url = resolve_optimal_image(a.get("image", "").strip() or "assets/images/thumb-research.jpg")
 
         is_spotlight = a.get("featured")
 
@@ -5822,7 +5846,7 @@ def generate_research_page():
           <!-- Small Thumbnail Frame (Golden Ratio Harmonic Proportion) -->
           <div class="article-card-thumb-wrap">
             <a href="/article/{slug}" class="article-card-thumb-link" aria-label="{escaped_title}">
-              <img src="{img_url}" alt="{escaped_title}" class="article-card-thumb" loading="lazy" onerror="this.onerror=null; this.src=\'assets/images/thumb-research.jpg\';">
+              <img src="{img_url}" alt="{escaped_title}" class="article-card-thumb" loading="lazy" decoding="async" onerror="this.onerror=null; this.src=\'assets/images/thumb-research.jpg\';">
               <div class="article-card-thumb-overlay"></div>
             </a>
             {spotlight_badge}
@@ -12141,6 +12165,19 @@ def build_all():
         with open(ASSETS_DIR / "css" / "style.min.css", "w", encoding="utf-8") as f:
             f.write(min_css)
         print(f"  Minified CSS: {len(raw_css)/1024:.1f} KB -> {len(min_css)/1024:.1f} KB ({((len(raw_css)-len(min_css))/len(raw_css))*100:.1f}% reduction)")
+
+        # Minify JavaScript production bundles
+        for js_file in ["main.js", "rain-lighting.js", "instant-nav.js"]:
+            js_src_file = ASSETS_DIR / "js" / js_file
+            if js_src_file.exists():
+                with open(js_src_file, "r", encoding="utf-8") as f:
+                    raw_js = f.read()
+                min_js = minify_js(raw_js)
+                min_js_name = js_file.replace(".js", ".min.js")
+                with open(ASSETS_DIR / "js" / min_js_name, "w", encoding="utf-8") as f:
+                    f.write(min_js)
+                pct_saved = ((len(raw_js) - len(min_js)) / len(raw_js)) * 100 if raw_js else 0
+                print(f"  Minified JS ({min_js_name}): {len(raw_js)/1024:.1f} KB -> {len(min_js)/1024:.1f} KB ({pct_saved:.1f}% reduction)")
 
     # Copy assets safely (dirs_exist_ok=True prevents WinError 32 file lock on Windows)
     dist_assets = DIST_DIR / "assets"
