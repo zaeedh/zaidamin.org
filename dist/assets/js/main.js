@@ -3565,12 +3565,15 @@ document.addEventListener('click', (e) => {
 function initEpigraphScramble() {
   const link = document.getElementById('epigraph-scramble-text');
   if (!link) return;
-  if (link.__epigraphScrambleActive) return;
-  link.__epigraphScrambleActive = true;
+  if (link.__epigraphCubeActive) return;
+  link.__epigraphCubeActive = true;
 
   const phrase1 = (link.getAttribute('data-phrase-primary') || 'Das Sein, Das Sollen.').trim();
   const phrase2 = (link.getAttribute('data-phrase-secondary') || 'Path of Nobility.').trim();
-  let currentTarget = phrase2;
+  const maxLen = Math.max(phrase1.length, phrase2.length);
+
+  let currentText = phrase1;
+  let targetText = phrase2;
   let isScrambling = false;
   let loopTimer = null;
 
@@ -3581,145 +3584,207 @@ function initEpigraphScramble() {
     return GLYPHS.charAt(Math.floor(Math.random() * GLYPHS.length));
   }
 
-  function escapeChar(c) {
-    if (c === '&') return '&amp;';
-    if (c === '<') return '&lt;';
-    if (c === '>') return '&gt;';
-    if (c === ' ') return '&nbsp;';
-    return c;
+  // Create or retrieve 3D Cube Stage
+  let stage = link.querySelector('.epigraph-cube-stage');
+  if (!stage) {
+    stage = document.createElement('span');
+    stage.className = 'epigraph-cube-stage';
+    stage.setAttribute('aria-hidden', 'true');
+    link.innerHTML = '';
+    link.appendChild(stage);
+  } else {
+    stage.innerHTML = '';
   }
 
-  function scrambleTo(targetText, callback) {
+  // Build the individual abjad cubes
+  const cubes = [];
+  for (let i = 0; i < maxLen; i++) {
+    const cube = document.createElement('span');
+    cube.className = 'abjad-cube';
+    cube.setAttribute('data-idx', i);
+
+    const flipper = document.createElement('span');
+    flipper.className = 'cube-flipper';
+
+    const faceFront = document.createElement('span');
+    faceFront.className = 'cube-face cube-face-front';
+
+    const faceTop = document.createElement('span');
+    faceTop.className = 'cube-face cube-face-top';
+
+    const faceBack = document.createElement('span');
+    faceBack.className = 'cube-face cube-face-back';
+
+    const faceBottom = document.createElement('span');
+    faceBottom.className = 'cube-face cube-face-bottom';
+
+    flipper.appendChild(faceFront);
+    flipper.appendChild(faceTop);
+    flipper.appendChild(faceBack);
+    flipper.appendChild(faceBottom);
+    cube.appendChild(flipper);
+
+    const initialChar = phrase1[i] || '';
+    if (initialChar === ' ') {
+      cube.classList.add('cube-space');
+      faceFront.textContent = ' ';
+    } else if (initialChar) {
+      faceFront.textContent = initialChar;
+    } else {
+      cube.classList.add('cube-hidden');
+    }
+
+    stage.appendChild(cube);
+    cubes.push({
+      el: cube,
+      flipper: flipper,
+      faceFront: faceFront,
+      faceTop: faceTop,
+      faceBack: faceBack,
+      faceBottom: faceBottom
+    });
+  }
+
+  function transitionTo(destinationText, callback) {
     if (isScrambling) return;
     isScrambling = true;
     link.classList.add('is-scrambling');
 
-    const startText = (link.getAttribute('data-current') || link.textContent || phrase1).replace(/\u00a0/g, ' ').trim();
-    const maxLen = Math.max(startText.length, targetText.length);
-    const duration = 1600; // 1.6s stately duration
-    const startTime = performance.now();
+    const destLen = destinationText.length;
+    let maxDelay = 0;
+    const baseDuration = 1050; // Stately mechanical tumble duration
 
-    // Calculate left-to-right staggered resolution with subtle organic jitter
-    const resolveTimes = [];
-    for (let i = 0; i < maxLen; i++) {
-      const baseProg = i / maxLen;
-      const jitter = (Math.random() - 0.5) * 0.10;
-      resolveTimes.push(Math.min(0.96, Math.max(0.18, 0.22 + baseProg * 0.68 + jitter)));
-    }
+    cubes.forEach((c, i) => {
+      const fromChar = currentText[i] || '';
+      const toChar = destinationText[i] || '';
 
-    const currentChars = [];
-    for (let i = 0; i < maxLen; i++) {
-      currentChars.push({
-        char: startText[i] || '',
-        scrambleChar: ''
-      });
-    }
-
-    let lastTick = 0;
-    const tickInterval = 55; // ~18 glyph flips per second
-
-    function frame(now) {
-      const elapsed = now - startTime;
-      const progress = Math.min(1, elapsed / duration);
-      const shouldTick = (now - lastTick) > tickInterval;
-      if (shouldTick) {
-        lastTick = now;
+      // Golden ratio cascading wave from left to right with organic micro-jitter
+      const waveDelay = i * 46 + (Math.random() - 0.5) * 16;
+      const delay = Math.max(0, waveDelay);
+      if (delay + baseDuration > maxDelay) {
+        maxDelay = delay + baseDuration;
       }
 
-      let html = '';
-
-      for (let i = 0; i < maxLen; i++) {
-        const isResolved = progress >= resolveTimes[i];
-        const targetChar = targetText[i] || '';
-
-        if (isResolved) {
-          if (targetChar) {
-            html += `<span class="scramble-char char-resolved">${escapeChar(targetChar)}</span>`;
-          } else {
-            // Characters beyond target length fade out smoothly
-            const fadeProg = Math.max(0, 1 - (progress - resolveTimes[i]) * 4);
-            html += `<span class="scramble-char char-fading" style="opacity:${fadeProg.toFixed(2)};">${escapeChar(startText[i] || '')}</span>`;
-          }
-        } else {
-          // Actively scrambling
-          if (shouldTick || !currentChars[i].scrambleChar) {
-            currentChars[i].scrambleChar = (targetChar === ' ' || (startText[i] === ' ' && Math.random() > 0.45)) ? ' ' : randomGlyph();
-          }
-          const charToShow = currentChars[i].scrambleChar;
-          const charOpacity = i >= startText.length ? Math.min(1, progress * 2.5) : 1;
-          html += `<span class="scramble-char char-random" style="opacity:${charOpacity.toFixed(2)};">${escapeChar(charToShow)}</span>`;
-        }
+      // If character exceeds destination length -> tumble and collapse gracefully
+      if (i >= destLen) {
+        setTimeout(() => {
+          c.el.classList.add('cube-hidden');
+        }, delay * 0.7);
+        return;
       }
 
-      link.innerHTML = html;
+      // If character was previously hidden -> expand into stage
+      if (c.el.classList.contains('cube-hidden')) {
+        c.el.classList.remove('cube-hidden');
+      }
 
-      if (progress < 1) {
-        requestAnimationFrame(frame);
+      // Handle space character transition
+      if (toChar === ' ') {
+        c.el.classList.add('cube-space');
+        c.faceFront.textContent = ' ';
+        return;
       } else {
-        // Complete! Lock into clean final string and store state
-        link.innerHTML = `<span class="epigraph-scramble-inner">${escapeChar(targetText)}</span>`;
-        link.setAttribute('data-current', targetText);
-        link.classList.remove('is-scrambling');
-        isScrambling = false;
-        if (callback) callback();
+        c.el.classList.remove('cube-space');
       }
-    }
 
-    requestAnimationFrame(frame);
+      // Prepare 3D tumbler faces:
+      // Face 0 (Front): fromChar (rolls away)
+      // Face 1 (Top): random glyph 1
+      // Face 2 (Back): random glyph 2
+      // Face 3 (Bottom): random glyph 3
+      // When revolving -360deg, Face 0 re-emerges holding toChar!
+      c.faceFront.textContent = fromChar || randomGlyph();
+      c.faceTop.textContent = randomGlyph();
+      c.faceBack.textContent = randomGlyph();
+      c.faceBottom.textContent = randomGlyph();
+
+      // Configure transition on flipper
+      c.flipper.style.transition = `transform ${baseDuration}ms cubic-bezier(0.18, 0.88, 0.28, 1.05) ${delay}ms`;
+      c.flipper.style.transform = 'rotateX(-360deg)';
+
+      // Halfway through rotation (when Face 2 is facing camera), swap Face 0 to toChar
+      setTimeout(() => {
+        c.faceFront.textContent = toChar;
+      }, delay + baseDuration * 0.48);
+    });
+
+    // When the cascading wave finishes
+    setTimeout(() => {
+      // Cleanly normalize all cubes to rest at 0deg
+      cubes.forEach((c, i) => {
+        const charNow = destinationText[i] || '';
+        if (i < destLen && charNow !== ' ') {
+          c.faceFront.textContent = charNow;
+          c.faceFront.classList.add('is-settling');
+          setTimeout(() => c.faceFront.classList.remove('is-settling'), 600);
+        }
+        c.faceTop.textContent = '';
+        c.faceBack.textContent = '';
+        c.faceBottom.textContent = '';
+        c.flipper.style.transition = 'none';
+        c.flipper.style.transform = 'rotateX(0deg)';
+        void c.flipper.offsetWidth; // force reflow
+      });
+
+      link.classList.remove('is-scrambling');
+      currentText = destinationText;
+      isScrambling = false;
+      if (callback) callback();
+    }, maxDelay + 60);
   }
 
   function scheduleNext() {
     clearTimeout(loopTimer);
-    // Pause: 5.5s on primary ("Das Sein, Das Sollen."), 3.8s on secondary ("Path of Nobility.")
-    const pauseTime = (currentTarget === phrase2) ? 5500 : 3800;
+    // Pause: 5.5s on primary ("Das Sein, Das Sollen."), 4.5s on secondary ("Path of Nobility.")
+    const pauseTime = (targetText === phrase2) ? 5500 : 4500;
 
     loopTimer = setTimeout(() => {
-      scrambleTo(currentTarget, () => {
-        currentTarget = (currentTarget === phrase2) ? phrase1 : phrase2;
+      transitionTo(targetText, () => {
+        targetText = (targetText === phrase2) ? phrase1 : phrase2;
         scheduleNext();
       });
     }, pauseTime);
   }
 
-  // Initial delay: 1.0 second after page load for immediate visual delight
+  // Initial delay: 1.2 seconds after page load
   loopTimer = setTimeout(() => {
-    scrambleTo(currentTarget, () => {
-      currentTarget = (currentTarget === phrase2) ? phrase1 : phrase2;
+    transitionTo(targetText, () => {
+      targetText = (targetText === phrase2) ? phrase1 : phrase2;
       scheduleNext();
     });
-  }, 1000);
+  }, 1200);
 
   // Interactive Hover: If user hovers while at rest, trigger transition
   link.addEventListener('mouseenter', () => {
     if (!isScrambling) {
       clearTimeout(loopTimer);
-      scrambleTo(currentTarget, () => {
-        currentTarget = (currentTarget === phrase2) ? phrase1 : phrase2;
+      transitionTo(targetText, () => {
+        targetText = (targetText === phrase2) ? phrase1 : phrase2;
         scheduleNext();
       });
     }
   });
 
-  // Interactive Touch: For touch/mobile devices
+  // Interactive Touch
   link.addEventListener('touchstart', () => {
     if (!isScrambling) {
       clearTimeout(loopTimer);
-      scrambleTo(currentTarget, () => {
-        currentTarget = (currentTarget === phrase2) ? phrase1 : phrase2;
+      transitionTo(targetText, () => {
+        targetText = (targetText === phrase2) ? phrase1 : phrase2;
         scheduleNext();
       });
     }
   }, { passive: true });
 
-  // Interactive Click: If on home page, trigger scramble immediately without reload
+  // Interactive Click: If on home page, trigger transition without reloading
   link.addEventListener('click', (e) => {
     const isHome = window.location.pathname === '/' || window.location.pathname === '' || window.location.pathname.endsWith('index.html');
     if (isHome) {
       e.preventDefault();
       if (!isScrambling) {
         clearTimeout(loopTimer);
-        scrambleTo(currentTarget, () => {
-          currentTarget = (currentTarget === phrase2) ? phrase1 : phrase2;
+        transitionTo(targetText, () => {
+          targetText = (targetText === phrase2) ? phrase1 : phrase2;
           scheduleNext();
         });
       }
@@ -3727,7 +3792,7 @@ function initEpigraphScramble() {
   });
 }
 
-// Immediate and fallback execution to guarantee the scramble engine always starts
+// Immediate and fallback execution to guarantee the 3D cube engine always starts
 if (typeof window !== 'undefined') {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initEpigraphScramble);
