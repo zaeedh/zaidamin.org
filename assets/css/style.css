@@ -239,10 +239,10 @@ a {
 }
 
 /* ==========================================================================
-   EPIGRAPH DARK ROYAL BLUE DISSOLVE ENGINE (GESTALT & GOLDEN RATIO)
-   Ultra-Slow, Velvety Dark Royal Blue Metamorphosis Wave
+   EPIGRAPH DOMINANT BLACK-OUT / BLACK-IN ENGINE (GESTALT & GOLDEN RATIO)
+   Ultra-Slow, Deep Obsidian Black Metamorphosis Wave
    ("Das Sein, Das Sollen." <-> "Path of Nobility.")
-   Harmonious Nocturnal Palette, Zero Scramble, Museum-Grade Restraint
+   Zero Scramble, Zero Shine, Pure Meditative Dominant Black Diffusion
    ========================================================================== */
 .epigraph-scramble-link {
   color: #ffffff;
@@ -260,7 +260,7 @@ a {
   color: #cbd5e1;
 }
 
-/* Zero Scramble & Clean Minimalist Atmosphere */
+/* Zero Shine / Clean Minimalist Atmosphere */
 .epigraph-scramble-link::before {
   display: none !important;
 }
@@ -278,7 +278,7 @@ a {
   line-height: 1.2;
   vertical-align: baseline;
   text-align: left;
-  transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: width 1.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Dual phrase layers - 100% natural kerning and text baseline */
@@ -306,18 +306,18 @@ a {
   pointer-events: none;
 }
 
-/* Individual character in the dark royal blue wave */
+/* Individual character in the dominant black wave */
 .black-char {
   display: inline-block;
   vertical-align: baseline;
   line-height: inherit;
   margin: 0;
   padding: 0;
-  will-change: opacity, color, filter, text-shadow;
-  transition: opacity 1.0s cubic-bezier(0.22, 1, 0.36, 1),
-              color 1.0s cubic-bezier(0.22, 1, 0.36, 1),
-              filter 1.0s cubic-bezier(0.22, 1, 0.36, 1),
-              text-shadow 1.0s cubic-bezier(0.22, 1, 0.36, 1);
+  text-shadow: none !important;
+  will-change: opacity, color, filter;
+  transition: opacity 1.25s cubic-bezier(0.22, 1, 0.36, 1),
+              color 1.25s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 1.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .black-char.black-space {
