@@ -3565,8 +3565,8 @@ document.addEventListener('click', (e) => {
 function initEpigraphScramble() {
   const link = document.getElementById('epigraph-scramble-text');
   if (!link) return;
-  if (link.__epigraphCubeActive) return;
-  link.__epigraphCubeActive = true;
+  if (link.__epigraphFadeActive) return;
+  link.__epigraphFadeActive = true;
 
   const phrase1 = (link.getAttribute('data-phrase-primary') || 'Das Sein, Das Sollen.').trim();
   const phrase2 = (link.getAttribute('data-phrase-secondary') || 'Path of Nobility.').trim();
@@ -3574,21 +3574,14 @@ function initEpigraphScramble() {
 
   let currentText = phrase1;
   let targetText = phrase2;
-  let isScrambling = false;
+  let isTransitioning = false;
   let loopTimer = null;
 
-  // Classical noble uppercase glyphs + philosophical Greek symbols
-  const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\u0394\u03a3\u03a0\u03a9\u03a6\u03a8\u039b\u0398";
-
-  function randomGlyph() {
-    return GLYPHS.charAt(Math.floor(Math.random() * GLYPHS.length));
-  }
-
-  // Create or retrieve 3D Cube Stage
-  let stage = link.querySelector('.epigraph-cube-stage');
+  // Build stage with individual character spans for left-to-right soft wave
+  let stage = link.querySelector('.epigraph-fade-stage');
   if (!stage) {
     stage = document.createElement('span');
-    stage.className = 'epigraph-cube-stage';
+    stage.className = 'epigraph-fade-stage';
     stage.setAttribute('aria-hidden', 'true');
     link.innerHTML = '';
     link.appendChild(stage);
@@ -3596,169 +3589,123 @@ function initEpigraphScramble() {
     stage.innerHTML = '';
   }
 
-  // Build the individual abjad cubes
-  const cubes = [];
+  const charSpans = [];
   for (let i = 0; i < maxLen; i++) {
-    const cube = document.createElement('span');
-    cube.className = 'abjad-cube';
-    cube.setAttribute('data-idx', i);
-
-    const flipper = document.createElement('span');
-    flipper.className = 'cube-flipper';
-
-    const faceFront = document.createElement('span');
-    faceFront.className = 'cube-face cube-face-front';
-
-    const faceTop = document.createElement('span');
-    faceTop.className = 'cube-face cube-face-top';
-
-    const faceBack = document.createElement('span');
-    faceBack.className = 'cube-face cube-face-back';
-
-    const faceBottom = document.createElement('span');
-    faceBottom.className = 'cube-face cube-face-bottom';
-
-    flipper.appendChild(faceFront);
-    flipper.appendChild(faceTop);
-    flipper.appendChild(faceBack);
-    flipper.appendChild(faceBottom);
-    cube.appendChild(flipper);
+    const span = document.createElement('span');
+    span.className = 'fade-char';
+    span.setAttribute('data-idx', i);
 
     const initialChar = phrase1[i] || '';
     if (initialChar === ' ') {
-      cube.classList.add('cube-space');
-      faceFront.textContent = ' ';
+      span.classList.add('fade-space');
+      span.textContent = '\u00a0';
     } else if (initialChar) {
-      faceFront.textContent = initialChar;
+      span.textContent = initialChar;
     } else {
-      cube.classList.add('cube-hidden');
+      span.classList.add('fade-hidden');
     }
 
-    stage.appendChild(cube);
-    cubes.push({
-      el: cube,
-      flipper: flipper,
-      faceFront: faceFront,
-      faceTop: faceTop,
-      faceBack: faceBack,
-      faceBottom: faceBottom
-    });
+    stage.appendChild(span);
+    charSpans.push(span);
   }
 
-  function transitionTo(destinationText, callback) {
-    if (isScrambling) return;
-    isScrambling = true;
-    link.classList.add('is-scrambling');
+  function fadeTo(destinationText, callback) {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    link.classList.add('is-fading');
 
     const destLen = destinationText.length;
+    const waveStep = 60; // Slow, stately cadence from left to right (~60ms per letter)
+    const fadeDuration = 280; // Smooth 280ms dissolve per step
     let maxDelay = 0;
-    const baseDuration = 1050; // Stately mechanical tumble duration
 
-    cubes.forEach((c, i) => {
-      const fromChar = currentText[i] || '';
+    charSpans.forEach((span, i) => {
       const toChar = destinationText[i] || '';
-
-      // Golden ratio cascading wave from left to right with organic micro-jitter
-      const waveDelay = i * 46 + (Math.random() - 0.5) * 16;
-      const delay = Math.max(0, waveDelay);
-      if (delay + baseDuration > maxDelay) {
-        maxDelay = delay + baseDuration;
+      const delay = i * waveStep;
+      if (delay + fadeDuration * 2 > maxDelay) {
+        maxDelay = delay + fadeDuration * 2;
       }
 
-      // If character exceeds destination length -> tumble and collapse gracefully
+      // Excess trailing characters beyond destination length fade out smoothly
       if (i >= destLen) {
         setTimeout(() => {
-          c.el.classList.add('cube-hidden');
-        }, delay * 0.7);
+          span.classList.add('fading-out');
+          setTimeout(() => {
+            span.classList.remove('fading-out');
+            span.classList.add('fade-hidden');
+          }, fadeDuration);
+        }, delay);
         return;
       }
 
-      // If character was previously hidden -> expand into stage
-      if (c.el.classList.contains('cube-hidden')) {
-        c.el.classList.remove('cube-hidden');
-      }
-
-      // Handle space character transition
-      if (toChar === ' ') {
-        c.el.classList.add('cube-space');
-        c.faceFront.textContent = ' ';
+      // Characters emerging from hidden state
+      if (span.classList.contains('fade-hidden')) {
+        setTimeout(() => {
+          span.classList.remove('fade-hidden');
+          span.textContent = toChar === ' ' ? '\u00a0' : toChar;
+          if (toChar === ' ') span.classList.add('fade-space');
+          else span.classList.remove('fade-space');
+          span.classList.add('fading-in');
+          setTimeout(() => span.classList.remove('fading-in'), 500);
+        }, delay);
         return;
-      } else {
-        c.el.classList.remove('cube-space');
       }
 
-      // Prepare 3D tumbler faces:
-      // Face 0 (Front): fromChar (rolls away)
-      // Face 1 (Top): random glyph 1
-      // Face 2 (Back): random glyph 2
-      // Face 3 (Bottom): random glyph 3
-      // When revolving -360deg, Face 0 re-emerges holding toChar!
-      c.faceFront.textContent = fromChar || randomGlyph();
-      c.faceTop.textContent = randomGlyph();
-      c.faceBack.textContent = randomGlyph();
-      c.faceBottom.textContent = randomGlyph();
-
-      // Configure transition on flipper
-      c.flipper.style.transition = `transform ${baseDuration}ms cubic-bezier(0.18, 0.88, 0.28, 1.05) ${delay}ms`;
-      c.flipper.style.transform = 'rotateX(-360deg)';
-
-      // Halfway through rotation (when Face 2 is facing camera), swap Face 0 to toChar
+      // Normal character-to-character soft dissolve
       setTimeout(() => {
-        c.faceFront.textContent = toChar;
-      }, delay + baseDuration * 0.48);
+        span.classList.add('fading-out');
+
+        setTimeout(() => {
+          span.textContent = toChar === ' ' ? '\u00a0' : toChar;
+          if (toChar === ' ') {
+            span.classList.add('fade-space');
+          } else {
+            span.classList.remove('fade-space');
+          }
+          span.classList.remove('fading-out');
+          span.classList.add('fading-in');
+
+          setTimeout(() => {
+            span.classList.remove('fading-in');
+          }, 500);
+        }, fadeDuration);
+      }, delay);
     });
 
-    // When the cascading wave finishes
+    // When complete
     setTimeout(() => {
-      // Cleanly normalize all cubes to rest at 0deg
-      cubes.forEach((c, i) => {
-        const charNow = destinationText[i] || '';
-        if (i < destLen && charNow !== ' ') {
-          c.faceFront.textContent = charNow;
-          c.faceFront.classList.add('is-settling');
-          setTimeout(() => c.faceFront.classList.remove('is-settling'), 600);
-        }
-        c.faceTop.textContent = '';
-        c.faceBack.textContent = '';
-        c.faceBottom.textContent = '';
-        c.flipper.style.transition = 'none';
-        c.flipper.style.transform = 'rotateX(0deg)';
-        void c.flipper.offsetWidth; // force reflow
-      });
-
-      link.classList.remove('is-scrambling');
+      link.classList.remove('is-fading');
       currentText = destinationText;
-      isScrambling = false;
+      isTransitioning = false;
       if (callback) callback();
-    }, maxDelay + 60);
+    }, maxDelay + 80);
   }
 
   function scheduleNext() {
     clearTimeout(loopTimer);
-    // Pause: 5.5s on primary ("Das Sein, Das Sollen."), 4.5s on secondary ("Path of Nobility.")
-    const pauseTime = (targetText === phrase2) ? 5500 : 4500;
+    const pauseTime = (targetText === phrase2) ? 5500 : 4800;
 
     loopTimer = setTimeout(() => {
-      transitionTo(targetText, () => {
+      fadeTo(targetText, () => {
         targetText = (targetText === phrase2) ? phrase1 : phrase2;
         scheduleNext();
       });
     }, pauseTime);
   }
 
-  // Initial delay: 1.2 seconds after page load
+  // Initial delay: 1.2s after load
   loopTimer = setTimeout(() => {
-    transitionTo(targetText, () => {
+    fadeTo(targetText, () => {
       targetText = (targetText === phrase2) ? phrase1 : phrase2;
       scheduleNext();
     });
   }, 1200);
 
-  // Interactive Hover: If user hovers while at rest, trigger transition
+  // Interactive Hover
   link.addEventListener('mouseenter', () => {
-    if (!isScrambling) {
+    if (!isTransitioning) {
       clearTimeout(loopTimer);
-      transitionTo(targetText, () => {
+      fadeTo(targetText, () => {
         targetText = (targetText === phrase2) ? phrase1 : phrase2;
         scheduleNext();
       });
@@ -3767,23 +3714,23 @@ function initEpigraphScramble() {
 
   // Interactive Touch
   link.addEventListener('touchstart', () => {
-    if (!isScrambling) {
+    if (!isTransitioning) {
       clearTimeout(loopTimer);
-      transitionTo(targetText, () => {
+      fadeTo(targetText, () => {
         targetText = (targetText === phrase2) ? phrase1 : phrase2;
         scheduleNext();
       });
     }
   }, { passive: true });
 
-  // Interactive Click: If on home page, trigger transition without reloading
+  // Interactive Click on Homepage
   link.addEventListener('click', (e) => {
     const isHome = window.location.pathname === '/' || window.location.pathname === '' || window.location.pathname.endsWith('index.html');
     if (isHome) {
       e.preventDefault();
-      if (!isScrambling) {
+      if (!isTransitioning) {
         clearTimeout(loopTimer);
-        transitionTo(targetText, () => {
+        fadeTo(targetText, () => {
           targetText = (targetText === phrase2) ? phrase1 : phrase2;
           scheduleNext();
         });
@@ -3792,7 +3739,7 @@ function initEpigraphScramble() {
   });
 }
 
-// Immediate and fallback execution to guarantee the 3D cube engine always starts
+// Immediate and fallback execution to guarantee the soft fade engine always starts
 if (typeof window !== 'undefined') {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initEpigraphScramble);

@@ -239,10 +239,9 @@ a {
 }
 
 /* ==========================================================================
-   EPIGRAPH 3D CUBE ANIMATION TRANSITION & SOFT SPECULAR SHINE
-   3D Rolling Cube Transition for each abjad character
+   EPIGRAPH POETIC SOFT FADE ENGINE (GESTALT & GOLDEN RATIO)
+   Smooth & Soft Character Fade In / Fade Out, Slow Left-to-Right Wave
    ("Das Sein, Das Sollen." <-> "Path of Nobility.")
-   Gestalt Proportions, Golden Ratio Cadence & Ethereal Gold Luminescence
    ========================================================================== */
 .epigraph-scramble-link {
   color: #ffffff;
@@ -251,159 +250,127 @@ a {
   position: relative;
   cursor: pointer;
   outline: none;
-  transition: color 0.3s ease, text-shadow 0.4s ease;
   user-select: none;
   vertical-align: middle;
+  transition: color 0.4s ease;
 }
 
 .epigraph-scramble-link:hover {
   color: #fef08a;
 }
 
-/* Soft Ambient Aura / Specular Gleam during 3D Cube Scramble */
+/* Soft ambient gold bloom that gently breathes during the wave */
 .epigraph-scramble-link::before {
   content: '';
   position: absolute;
-  top: -30%;
-  left: -8%;
-  width: 116%;
-  height: 160%;
+  top: -25%;
+  left: -6%;
+  width: 112%;
+  height: 150%;
   background: radial-gradient(
     ellipse at center,
-    rgba(212, 175, 55, 0.28) 0%,
-    rgba(254, 240, 138, 0.12) 35%,
+    rgba(212, 175, 55, 0.22) 0%,
+    rgba(254, 240, 138, 0.08) 40%,
     transparent 72%
   );
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   border-radius: 50%;
-  filter: blur(10px);
+  filter: blur(12px);
   z-index: 1;
 }
 
-.epigraph-scramble-link.is-scrambling::before {
+.epigraph-scramble-link.is-fading::before {
   opacity: 1;
 }
 
-/* Static fallback wrapper before JS initializes */
+/* Static SSR / Pre-JS fallback */
 .epigraph-scramble-inner {
   display: inline-block;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease;
 }
 
-/* 3D Stage hosting the sequence of rolling character cubes */
-.epigraph-cube-stage {
+/* Stage holding the soft fade characters */
+.epigraph-fade-stage {
   display: inline-flex;
   align-items: baseline;
-  perspective: 750px;
-  perspective-origin: 50% 50%;
   position: relative;
   z-index: 2;
   vertical-align: baseline;
 }
 
-/* Individual Abjad Cube Cell */
-.abjad-cube {
+/* Individual Character in the soft left-to-right fade wave */
+.fade-char {
   display: inline-block;
   position: relative;
-  height: 1.35em;
-  line-height: 1.35em;
+  line-height: 1.2;
   vertical-align: baseline;
-  transform-style: preserve-3d;
   text-align: center;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  transition: width 0.45s cubic-bezier(0.2, 0.8, 0.25, 1),
-              opacity 0.45s ease,
-              transform 0.45s ease;
+  color: #ffffff;
+  text-shadow: 0 2px 18px rgba(34, 166, 200, 0.28);
+  transition: opacity 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+              filter 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.36s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.32s ease,
+              width 0.45s cubic-bezier(0.2, 0.8, 0.25, 1);
+  will-change: opacity, filter, transform;
 }
 
-.abjad-cube.cube-space {
-  width: 0.36em !important;
-  min-width: 0.36em !important;
+.fade-char.fade-space {
+  width: 0.36em;
+  min-width: 0.36em;
 }
 
-.abjad-cube.cube-hidden {
+.fade-char.fade-hidden {
   width: 0 !important;
   min-width: 0 !important;
   opacity: 0 !important;
-  transform: scale(0.25) rotateX(-120deg) !important;
+  filter: blur(4px) !important;
+  transform: scale(0.6) !important;
   pointer-events: none;
   margin: 0 !important;
   padding: 0 !important;
   visibility: hidden;
 }
 
-/* Rotating Cube Core */
-.cube-flipper {
-  display: block;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
-/* Cube Facets (4 faces revolving around X-axis) */
-.cube-face {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  border-radius: 2px;
-  box-sizing: border-box;
-}
-
-/* Face 0: Front face at rest */
-.cube-face-front {
-  transform: rotateX(0deg) translateZ(0.675em);
-  color: #ffffff;
-  text-shadow: 0 2px 18px rgba(34, 166, 200, 0.28);
-}
-
-/* Face 1: Top face (rolls down from top) */
-.cube-face-top {
-  transform: rotateX(90deg) translateZ(0.675em);
+/* While dissolving out */
+.fade-char.fading-out {
+  opacity: 0;
+  filter: blur(3px);
   color: #fef08a;
-  text-shadow: 0 0 10px rgba(250, 204, 21, 0.85), 0 0 22px rgba(212, 175, 55, 0.5);
+  text-shadow: 0 0 12px rgba(254, 240, 138, 0.6);
+  transform: translateY(-2px) scale(0.96);
 }
 
-/* Face 2: Back face */
-.cube-face-back {
-  transform: rotateX(180deg) translateZ(0.675em);
-  color: #fef08a;
-  text-shadow: 0 0 10px rgba(250, 204, 21, 0.85), 0 0 22px rgba(212, 175, 55, 0.5);
+/* While dissolving in */
+.fade-char.fading-in {
+  animation: softFadeGleam 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Face 3: Bottom face */
-.cube-face-bottom {
-  transform: rotateX(270deg) translateZ(0.675em);
-  color: #fef08a;
-  text-shadow: 0 0 10px rgba(250, 204, 21, 0.85), 0 0 22px rgba(212, 175, 55, 0.5);
-}
-
-/* Settled arrival glow on the newly locked character */
-.cube-face.is-settling {
-  animation: cubeSettleGleam 0.6s ease-out forwards;
-}
-
-@keyframes cubeSettleGleam {
+@keyframes softFadeGleam {
   0% {
+    opacity: 0;
+    filter: blur(3px);
     color: #fff9c4;
-    text-shadow: 0 0 18px rgba(254, 240, 138, 0.95), 0 0 30px rgba(212, 175, 55, 0.7);
-    transform: rotateX(0deg) translateZ(0.72em);
+    text-shadow: 0 0 14px rgba(254, 240, 138, 0.8), 0 0 24px rgba(212, 175, 55, 0.5);
+    transform: translateY(2px) scale(1.02);
+  }
+  60% {
+    opacity: 1;
+    filter: blur(0px);
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(254, 240, 138, 0.5), 0 2px 18px rgba(34, 166, 200, 0.28);
+    transform: translateY(0) scale(1);
   }
   100% {
+    opacity: 1;
+    filter: blur(0px);
     color: #ffffff;
     text-shadow: 0 2px 18px rgba(34, 166, 200, 0.28);
-    transform: rotateX(0deg) translateZ(0.675em);
+    transform: translateY(0) scale(1);
   }
 }
 
