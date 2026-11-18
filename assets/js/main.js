@@ -3492,8 +3492,10 @@ window.showCvNotice = showCvNotice;
 function initCookieConsent() {
   const CONSENT_KEY = 'zaidamin_cookie_consent';
   const banner = document.getElementById('cookie-consent-banner');
+  const backdrop = document.getElementById('cookie-consent-backdrop');
   const acceptBtn = document.getElementById('cookie-accept-btn');
   const rejectBtn = document.getElementById('cookie-reject-btn');
+  const closeBtn = document.getElementById('cookie-close-btn');
 
   if (!banner || !acceptBtn) return;
 
@@ -3502,11 +3504,9 @@ function initCookieConsent() {
     savedConsent = localStorage.getItem(CONSENT_KEY);
   } catch (e) {}
 
-  // If visitor hasn't made a choice, display the banner smoothly after 1.2s
-  if (!savedConsent) {
-    setTimeout(() => {
-      banner.classList.add('is-visible');
-    }, 1200);
+  function showBanner() {
+    banner.classList.add('is-visible');
+    if (backdrop) backdrop.classList.add('is-visible');
   }
 
   function dismissBanner(choice) {
@@ -3517,24 +3517,31 @@ function initCookieConsent() {
       }));
     } catch (e) {}
     banner.classList.remove('is-visible');
+    if (backdrop) backdrop.classList.remove('is-visible');
+  }
+
+  // If visitor hasn't made a choice, display the banner smoothly after 1.2s
+  if (!savedConsent) {
+    setTimeout(showBanner, 1200);
   }
 
   acceptBtn.addEventListener('click', () => dismissBanner('accepted'));
   if (rejectBtn) {
     rejectBtn.addEventListener('click', () => dismissBanner('rejected_non_essential'));
   }
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => dismissBanner('dismissed'));
+  }
+  if (backdrop) {
+    backdrop.addEventListener('click', () => dismissBanner('dismissed'));
+  }
 
   // Re-open consent banner anytime (e.g. from footer link)
   window.reopenCookieConsent = function() {
-    banner.classList.add('is-visible');
+    showBanner();
   };
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initCookieConsent);
-} else {
-  initCookieConsent();
-}
 
 // ==============================================================================
 // Unified Page Pill Sub-Menu Toggle (Touch & Keyboard Accessibility)
