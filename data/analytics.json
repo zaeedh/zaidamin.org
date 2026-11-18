@@ -302,6 +302,27 @@
   },
   "page_traces": [
     {
+      "id": "tr-1795040866306",
+      "timestamp": "2026-11-18T22:27:46.306Z",
+      "path": "/",
+      "title": "Dr. Zaid Amin | Academic & Computational Researcher",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-4A57D9",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Direct Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
       "id": "tr-1795039772204",
       "timestamp": "2026-11-18T22:09:32.204Z",
       "path": "/research-team",
@@ -8812,7 +8833,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-19T06:09:32.220364",
+  "updated_at": "2026-11-19T06:27:46.316398",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -8900,7 +8921,7 @@
     "uniten-master-viva-external-examiner-nist-csf-2026": 6
   },
   "server_live_hits": {
-    "MY": 345,
+    "MY": 346,
     "OTHER": 3
   }
 }
