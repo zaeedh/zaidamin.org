@@ -13318,50 +13318,48 @@ a {
   text-decoration: none !important;
 }
 
-/* ── Symmetrical Floating Dual Action Dock (Bookmark + Share Glass Circles) ── */
+/* ── Harmonious Capsule Action Dock (Bookmark + Share Circular Glass Buttons) ── */
+.article-card-actions-dock,
 .article-card-thumb-actions {
-  position: absolute !important;
-  top: 10px !important;
-  right: 10px !important;
-  display: flex !important;
+  display: inline-flex !important;
   align-items: center !important;
-  gap: 7px !important;
-  z-index: 5 !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
 }
 
 .article-card-action-btn {
   position: relative !important;
-  width: 32px !important;
-  height: 32px !important;
-  min-width: 32px !important;
-  max-width: 32px !important;
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  max-width: 28px !important;
   border-radius: 50% !important;
-  background: rgba(8, 20, 36, 0.65) !important;
+  background: rgba(14, 26, 42, 0.70) !important;
   backdrop-filter: blur(8px) !important;
   -webkit-backdrop-filter: blur(8px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28) !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   cursor: pointer !important;
   padding: 0 !important;
-  color: #ffffff !important;
+  color: #e2e8f0 !important;
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease !important;
   outline: none !important;
   box-sizing: border-box !important;
 }
 
 .article-card-action-btn:hover {
-  background: rgba(14, 32, 54, 0.88) !important;
+  background: rgba(20, 38, 62, 0.92) !important;
   border-color: rgba(212, 175, 55, 0.55) !important;
   color: #fef08a !important;
-  transform: translateY(-1px) scale(1.06) !important;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45) !important;
+  transform: translateY(-1px) scale(1.08) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.40) !important;
 }
 
 .article-card-action-btn:active {
-  transform: scale(0.94) !important;
+  transform: scale(0.93) !important;
 }
 
 .article-card-action-btn .action-icon {
@@ -13381,7 +13379,7 @@ a {
 /* Bookmarked Active State */
 .article-card-bookmark-btn.bookmarked {
   background: rgba(212, 175, 55, 0.22) !important;
-  border-color: rgba(212, 175, 55, 0.65) !important;
+  border-color: rgba(212, 175, 55, 0.70) !important;
   color: #d4af37 !important;
 }
 
@@ -13518,15 +13516,34 @@ a {
   height: 4.65em !important;
 }
 
-/* ── Harmonized Capsule Chips Row (Strict Height & Optical Alignment) ── */
+/* ── Harmonized Capsule Chips & Actions Row (Gestalt Dual Dock) ── */
 .article-chips-row {
   display: flex !important;
   align-items: center !important;
-  gap: 6px !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
   margin-top: auto !important;
-  padding-top: 6px !important;
+  padding-top: 8px !important;
   margin-bottom: 12px !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+.article-chips-left {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
   flex-wrap: wrap !important;
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+}
+
+.article-card-actions-dock {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
+  margin-left: auto !important;
 }
 
 .article-chip {
