@@ -3565,8 +3565,8 @@ document.addEventListener('click', (e) => {
 function initEpigraphScramble() {
   const link = document.getElementById('epigraph-scramble-text');
   if (!link) return;
-  if (link.__epigraphDualBlackActive) return;
-  link.__epigraphDualBlackActive = true;
+  if (link.__epigraphRoyalBlueActive) return;
+  link.__epigraphRoyalBlueActive = true;
 
   const phrase1Text = (link.getAttribute('data-phrase-primary') || 'Das Sein, Das Sollen.').trim();
   const phrase2Text = (link.getAttribute('data-phrase-secondary') || 'Path of Nobility.').trim();
@@ -3574,6 +3574,10 @@ function initEpigraphScramble() {
   let activePhrase = 1;
   let isTransitioning = false;
   let loopTimer = null;
+
+  // Dominant Dark Royal Blue Palette: Velvety deep ocean sapphire
+  const ROYAL_BLUE = '#11355a';
+  const ROYAL_BLUE_GLOW = '0 0 10px rgba(17, 53, 90, 0.5)';
 
   // Create Stage with separate phrase containers ensuring 100% natural kerning & baseline
   let stage = link.querySelector('.epigraph-black-stage');
@@ -3611,16 +3615,18 @@ function initEpigraphScramble() {
   const p1 = buildPhraseSpans(phrase1Text, 'epigraph-phrase-1');
   const p2 = buildPhraseSpans(phrase2Text, 'epigraph-phrase-2');
 
-  // Initial state: Phrase 1 is visible (crisp white), Phrase 2 is hidden (black & 0 opacity)
+  // Initial state: Phrase 1 is visible (crisp white), Phrase 2 is hidden in dark royal blue
   p1.spans.forEach(s => {
     s.style.color = '#ffffff';
     s.style.opacity = '1';
     s.style.filter = 'blur(0px)';
+    s.style.textShadow = 'none';
   });
   p2.spans.forEach(s => {
-    s.style.color = '#01101d';
+    s.style.color = ROYAL_BLUE;
     s.style.opacity = '0';
-    s.style.filter = 'blur(1.5px)';
+    s.style.filter = 'blur(2px)';
+    s.style.textShadow = ROYAL_BLUE_GLOW;
   });
 
   stage.appendChild(p1.el);
@@ -3642,23 +3648,24 @@ function initEpigraphScramble() {
     // Smoothly adjust container width with golden ratio ease
     stage.style.width = targetWidth + 'px';
 
-    // Pacing calibrated to Golden Ratio (Φ): 135ms step, 850ms soft dissolve, 280ms overlap
-    const step = 135;
-    const fadeDuration = 850;
-    const overlap = 280;
+    // Ultra-slow, liquid pacing: 155ms per character, 1000ms dissolve, 340ms overlap
+    const step = 155;
+    const fadeDuration = 1000;
+    const overlap = 340;
     let maxDelay = 0;
 
-    // 1. Black out outgoing phrase from left to right (dissolves into dark background)
+    // 1. Outgoing phrase dissolves slowly from left to right into dark royal blue
     outgoing.spans.forEach((span, i) => {
       const delay = i * step;
       setTimeout(() => {
-        span.style.color = '#01101d';
+        span.style.color = ROYAL_BLUE;
         span.style.opacity = '0';
-        span.style.filter = 'blur(1.5px)';
+        span.style.filter = 'blur(2px)';
+        span.style.textShadow = ROYAL_BLUE_GLOW;
       }, delay);
     });
 
-    // 2. Black in incoming phrase from left to right (softly emerges from dark background)
+    // 2. Incoming phrase softly emerges from dark royal blue into crisp white
     incoming.spans.forEach((span, j) => {
       const delay = j * step + overlap;
       if (delay + fadeDuration > maxDelay) {
@@ -3668,6 +3675,7 @@ function initEpigraphScramble() {
         span.style.color = '#ffffff';
         span.style.opacity = '1';
         span.style.filter = 'blur(0px)';
+        span.style.textShadow = 'none';
       }, delay);
     });
 
@@ -3676,13 +3684,13 @@ function initEpigraphScramble() {
       activePhrase = toPhrase;
       isTransitioning = false;
       if (callback) callback();
-    }, maxDelay + 100);
+    }, maxDelay + 120);
   }
 
   function scheduleNext() {
     clearTimeout(loopTimer);
-    // Dignified philosophical pauses: 7.8s on primary ("Das Sein, Das Sollen."), 6.2s on secondary ("Path of Nobility.")
-    const pauseTime = (activePhrase === 1) ? 7800 : 6200;
+    // Noble contemplation pauses: 8.2s on primary ("Das Sein, Das Sollen."), 6.5s on secondary ("Path of Nobility.")
+    const pauseTime = (activePhrase === 1) ? 8200 : 6500;
     const nextPhrase = (activePhrase === 1) ? 2 : 1;
 
     loopTimer = setTimeout(() => {
@@ -3692,12 +3700,12 @@ function initEpigraphScramble() {
     }, pauseTime);
   }
 
-  // Initial delay: 2.5s post-load for serene initial visual settling
+  // Initial delay: 2.6s post-load for serene initial visual settling
   loopTimer = setTimeout(() => {
     transition(2, () => {
       scheduleNext();
     });
-  }, 2500);
+  }, 2600);
 
   // Interactive Hover
   link.addEventListener('mouseenter', () => {
@@ -3737,7 +3745,7 @@ function initEpigraphScramble() {
   });
 }
 
-// Immediate and fallback execution to guarantee the black wave engine always starts
+// Immediate and fallback execution to guarantee the dark royal blue wave engine always starts
 if (typeof window !== 'undefined') {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initEpigraphScramble);

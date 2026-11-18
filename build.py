@@ -552,8 +552,8 @@ def get_html_head(
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
   </noscript>
 
-  <link rel="preload" as="style" href="/assets/css/style.min.css?v=6.8">
-  <link rel="stylesheet" href="/assets/css/style.min.css?v=6.8">
+  <link rel="preload" as="style" href="/assets/css/style.min.css?v=6.9">
+  <link rel="stylesheet" href="/assets/css/style.min.css?v=6.9">
 
   <!-- High-Definition Monogram Favicon Suite (Dr. Zaid Amin) -->
 
@@ -2228,7 +2228,7 @@ def get_page_footer(show_visitor_stats=False):
 
   <script defer src="/assets/js/instant-nav.min.js?v=1.0"></script>
   <script defer src="/assets/js/rain-lighting.js?v=2.0"></script>
-  <script defer src="/assets/js/main.min.js?v=6.8"></script>
+  <script defer src="/assets/js/main.min.js?v=6.9"></script>
 
 </body>
 
