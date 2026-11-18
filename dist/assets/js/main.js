@@ -3615,15 +3615,17 @@ function initEpigraphScramble() {
     link.classList.add('is-fading');
 
     const destLen = destinationText.length;
-    const waveStep = 60; // Slow, stately cadence from left to right (~60ms per letter)
-    const fadeDuration = 280; // Smooth 280ms dissolve per step
+    // Slower, meditative cadence: 120ms per letter left-to-right wave (~2.5s total traversal)
+    const waveStep = 120;
+    // Soft, gradual dissolve: 500ms fade-out before blooming into target character
+    const fadeDuration = 500;
     let maxDelay = 0;
 
     charSpans.forEach((span, i) => {
       const toChar = destinationText[i] || '';
       const delay = i * waveStep;
-      if (delay + fadeDuration * 2 > maxDelay) {
-        maxDelay = delay + fadeDuration * 2;
+      if (delay + fadeDuration + 850 > maxDelay) {
+        maxDelay = delay + fadeDuration + 850;
       }
 
       // Excess trailing characters beyond destination length fade out smoothly
@@ -3646,7 +3648,7 @@ function initEpigraphScramble() {
           if (toChar === ' ') span.classList.add('fade-space');
           else span.classList.remove('fade-space');
           span.classList.add('fading-in');
-          setTimeout(() => span.classList.remove('fading-in'), 500);
+          setTimeout(() => span.classList.remove('fading-in'), 850);
         }, delay);
         return;
       }
@@ -3667,7 +3669,7 @@ function initEpigraphScramble() {
 
           setTimeout(() => {
             span.classList.remove('fading-in');
-          }, 500);
+          }, 850);
         }, fadeDuration);
       }, delay);
     });
@@ -3678,12 +3680,13 @@ function initEpigraphScramble() {
       currentText = destinationText;
       isTransitioning = false;
       if (callback) callback();
-    }, maxDelay + 80);
+    }, maxDelay + 100);
   }
 
   function scheduleNext() {
     clearTimeout(loopTimer);
-    const pauseTime = (targetText === phrase2) ? 5500 : 4800;
+    // Relaxed pause: 6.5s on primary ("Das Sein, Das Sollen."), 5.5s on secondary ("Path of Nobility.")
+    const pauseTime = (targetText === phrase2) ? 6500 : 5500;
 
     loopTimer = setTimeout(() => {
       fadeTo(targetText, () => {
@@ -3693,13 +3696,13 @@ function initEpigraphScramble() {
     }, pauseTime);
   }
 
-  // Initial delay: 1.2s after load
+  // Initial delay: 2.0s after load for peaceful initial rendering
   loopTimer = setTimeout(() => {
     fadeTo(targetText, () => {
       targetText = (targetText === phrase2) ? phrase1 : phrase2;
       scheduleNext();
     });
-  }, 1200);
+  }, 2000);
 
   // Interactive Hover
   link.addEventListener('mouseenter', () => {
