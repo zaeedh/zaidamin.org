@@ -844,7 +844,7 @@ function initLotusLandingBloom() {
 
 
 
-  // 3. User clicks "Home" tab or header title "Das Sein, Das Sollen." on homepage
+  // 3. User clicks "Home" tab or header title "Das Sein, Das Sollen" on homepage
 
   const homeTabLinks = document.querySelectorAll('.tab-link-home, a[href="index.html"], a[href="./"], a[href="/"], .epigraph-title a');
 
@@ -3559,7 +3559,7 @@ document.addEventListener('click', (e) => {
 
 // ==============================================================================
 // Epigraph Text Scramble Engine (GSAP Scramble Style - Gestalt & Golden Ratio)
-// Smoothly animates: "Das Sein, Das Sollen." <-> "Path of Nobility."
+// Smoothly animates: "Das Sein, Das Sollen" <-> "Path of Nobility"
 // With slow random glyph flips, soft golden ambient shine, and graceful fades.
 // ==============================================================================
 function initEpigraphScramble() {
@@ -3568,8 +3568,8 @@ function initEpigraphScramble() {
   if (link.__epigraphDominantBlackActive) return;
   link.__epigraphDominantBlackActive = true;
 
-  const phrase1Text = (link.getAttribute('data-phrase-primary') || 'Das Sein, Das Sollen.').trim();
-  const phrase2Text = (link.getAttribute('data-phrase-secondary') || 'Path of Nobility.').trim();
+  const phrase1Text = (link.getAttribute('data-phrase-primary') || 'Das Sein, Das Sollen').trim().replace(/\.+$/, '');
+  const phrase2Text = (link.getAttribute('data-phrase-secondary') || 'Path of Nobility').trim().replace(/\.+$/, '');
 
   let activePhrase = 1;
   let isTransitioning = false;
@@ -3688,7 +3688,7 @@ function initEpigraphScramble() {
 
   function scheduleNext() {
     clearTimeout(loopTimer);
-    // Noble contemplation pauses: 9.0s on primary ("Das Sein, Das Sollen."), 7.5s on secondary ("Path of Nobility.")
+    // Noble contemplation pauses: 9.0s on primary ("Das Sein, Das Sollen"), 7.5s on secondary ("Path of Nobility")
     const pauseTime = (activePhrase === 1) ? 9000 : 7500;
     const nextPhrase = (activePhrase === 1) ? 2 : 1;
 

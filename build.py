@@ -552,8 +552,8 @@ def get_html_head(
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
   </noscript>
 
-  <link rel="preload" as="style" href="/assets/css/style.min.css?v=7.0">
-  <link rel="stylesheet" href="/assets/css/style.min.css?v=7.0">
+  <link rel="preload" as="style" href="/assets/css/style.min.css?v=7.1">
+  <link rel="stylesheet" href="/assets/css/style.min.css?v=7.1">
 
   <!-- High-Definition Monogram Favicon Suite (Dr. Zaid Amin) -->
 
@@ -1017,7 +1017,7 @@ def get_page_header(active_page="home"):
 
     scholarly_links_rendered = "\n              ".join(pills_html)
 
-    epigraph_title = profile.get("epigraph", "Das Sein, Das Sollen.")
+    epigraph_title = profile.get("epigraph", "Das Sein, Das Sollen").rstrip(".")
 
     star_svg = '''<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" class="david-star-svg">
 
@@ -1290,7 +1290,7 @@ def get_page_header(active_page="home"):
         <div class="epigraph-title-group">
 
           <h1 class="epigraph-title">
-            <a href="/" class="epigraph-scramble-link" id="epigraph-scramble-text" aria-label="Das Sein, Das Sollen &mdash; Path of Nobility" data-phrase-primary="{epigraph_title}" data-phrase-secondary="Path of Nobility.">
+            <a href="/" class="epigraph-scramble-link" id="epigraph-scramble-text" aria-label="Das Sein, Das Sollen &mdash; Path of Nobility" data-phrase-primary="{epigraph_title}" data-phrase-secondary="Path of Nobility">
               <span class="epigraph-scramble-inner">{epigraph_title}</span>
             </a>
           </h1>
@@ -2228,7 +2228,7 @@ def get_page_footer(show_visitor_stats=False):
 
   <script defer src="/assets/js/instant-nav.min.js?v=1.0"></script>
   <script defer src="/assets/js/rain-lighting.js?v=2.0"></script>
-  <script defer src="/assets/js/main.min.js?v=7.0"></script>
+  <script defer src="/assets/js/main.min.js?v=7.1"></script>
 
 </body>
 
