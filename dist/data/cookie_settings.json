@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "banner_style": "minimal_floating",
+  "banner_style": "ice_card",
   "message": "This site uses cookies to deliver optimal performance and analyze academic research traffic.",
   "learn_more_text": "Learn More",
   "learn_more_url": "/research#privacy",

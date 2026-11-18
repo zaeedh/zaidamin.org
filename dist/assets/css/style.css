@@ -29677,27 +29677,40 @@ h1.cv-hero-name,
 }
 
 /* ==============================================================================
-   ACADEMIC COOKIE & PRIVACY CONSENT BANNER (Royal Blue & Gold Glassmorphism)
+   ACADEMIC COOKIE & PRIVACY CONSENT - FROSTED ICE ROUND CORNER CARD
+   Apple / iOS-Grade Ice Glassmorphism with Smooth 28px Squircle Radius & Rosette Badge
    Harmonized Composition, Gestalt Proximity & Golden Ratio Geometry
    ============================================================================== */
 .cookie-consent-bar {
   position: fixed;
-  bottom: 24px;
+  bottom: 32px;
   left: 50%;
-  transform: translateX(-50%) translateY(130%);
-  width: calc(100% - 40px);
-  max-width: 860px;
-  background: linear-gradient(135deg, rgba(8, 24, 48, 0.95) 0%, rgba(3, 12, 28, 0.97) 100%);
-  backdrop-filter: blur(12px) saturate(190%);
-  -webkit-backdrop-filter: blur(12px) saturate(190%);
-  border: 1px solid rgba(56, 189, 248, 0.30);
-  border-radius: 999px;
-  padding: 12px 24px;
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.88), 0 0 0 1px rgba(212, 175, 55, 0.16) inset;
+  transform: translateX(-50%) translateY(140%);
+  width: calc(100% - 32px);
+  max-width: 440px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(14, 42, 85, 0.55) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 28px; /* Prominent Ice Round Corners */
+  padding: 30px 28px 24px 28px;
+  box-shadow:
+    0 24px 64px -12px rgba(0, 0, 0, 0.65),
+    0 8px 24px -4px rgba(2, 6, 23, 0.5),
+    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.6), /* Specular Top Bevel Catch */
+    inset 0 0 24px rgba(255, 255, 255, 0.04);
   z-index: 999999;
   opacity: 0;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.38s ease, box-shadow 0.38s ease;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.4s ease,
+              box-shadow 0.4s ease;
   pointer-events: none;
+  text-align: center;
 }
 
 .cookie-consent-bar.is-visible,
@@ -29707,201 +29720,197 @@ h1.cv-hero-name,
   pointer-events: auto;
 }
 
-.cookie-consent-inner {
+.cookie-ice-content {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: nowrap !important;
   width: 100%;
 }
 
-.cookie-consent-text {
+/* 12-Lobed Scalloped Rosette Verified Badge */
+.cookie-ice-badge-wrap {
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  filter: drop-shadow(0 8px 20px rgba(37, 99, 235, 0.45));
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cookie-consent-bar:hover .cookie-ice-badge-wrap {
+  transform: scale(1.04);
+}
+
+.cookie-ice-badge-svg {
+  display: block;
+}
+
+/* Card Heading */
+.cookie-ice-title {
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif);
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+/* Description Text */
+.cookie-ice-desc {
   font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif);
   font-size: 0.84rem;
-  line-height: 1.50;
-  color: #cbd5e1;
-  flex: 1 1 auto;
-  min-width: 0;
-  letter-spacing: 0.01em;
-  margin: 0;
+  line-height: 1.54;
+  color: rgba(226, 232, 240, 0.88);
+  margin: 0 0 20px 0;
+  text-align: center;
 }
 
 .cookie-policy-link {
   color: #38bdf8;
-  text-decoration: underline;
-  text-decoration-color: rgba(56, 189, 248, 0.45);
-  text-underline-offset: 3px;
+  text-decoration: none;
   font-weight: 600;
-  margin-left: 6px;
-  transition: all 0.2s ease;
-  white-space: nowrap;
+  margin-left: 4px;
+  display: inline-block;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .cookie-policy-link:hover {
-  color: #fce09b;
-  text-decoration-color: #fce09b;
-  text-shadow: 0 0 10px rgba(252, 224, 155, 0.4);
+  color: #93c5fd;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transform: translateX(1px);
 }
 
+/* Action Buttons Container */
 .cookie-consent-actions {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 10px;
-  flex-shrink: 0;
-  flex-wrap: nowrap;
+  width: 100%;
 }
 
+/* Frosted Glass Pill Button - Exact Match to Reference 'Start >' */
 .cookie-btn {
-  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Inter", sans-serif);
-  font-size: 0.78rem;
-  padding: 6px 18px;
   border-radius: 999px;
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Inter", sans-serif);
   cursor: pointer;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
   line-height: 1.4;
-  outline: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-.cookie-btn-secondary {
-  background: rgba(30, 58, 138, 0.20);
-  color: #cbd5e1;
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  font-weight: 500;
-}
-
-.cookie-btn-secondary:hover {
-  color: #ffffff;
-  border-color: rgba(56, 189, 248, 0.75);
-  background: rgba(56, 189, 248, 0.25);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-  transform: translateY(-1px);
-}
-
 .cookie-btn-primary {
-  background: linear-gradient(135deg, #d4af37 0%, #aa8420 100%);
-  color: #020610 !important;
-  border: 1px solid rgba(254, 240, 138, 0.50);
-  font-weight: 700;
-  letter-spacing: 0.015em;
-  box-shadow: 0 2px 12px rgba(212, 175, 55, 0.30);
+  width: 100%;
+  max-width: 220px;
+  gap: 6px;
+  padding: 10px 24px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.14) !important;
+  border: 1px solid rgba(255, 255, 255, 0.32) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.30),
+              inset 0 1px 1.5px rgba(255, 255, 255, 0.45) !important;
 }
 
 .cookie-btn-primary:hover {
-  background: linear-gradient(135deg, #fce09b 0%, #d4af37 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.55);
+  background: rgba(255, 255, 255, 0.25) !important;
+  border-color: rgba(255, 255, 255, 0.55) !important;
+  box-shadow: 0 6px 24px rgba(56, 189, 248, 0.35),
+              inset 0 1px 2px rgba(255, 255, 255, 0.65) !important;
+  transform: translateY(-1.5px);
+}
+
+.cookie-btn-primary:active {
+  transform: translateY(0.5px);
+  background: rgba(255, 255, 255, 0.18) !important;
+}
+
+/* Secondary Button (Reject / Dismiss) */
+.cookie-btn-secondary {
+  background: transparent !important;
+  border: none !important;
+  color: rgba(148, 163, 184, 0.85) !important;
+  font-size: 0.77rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 4px 14px;
+  box-shadow: none !important;
+  transition: color 0.2s ease;
+  line-height: 1.4;
+}
+
+.cookie-btn-secondary:hover {
+  color: #cbd5e1 !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transform: none;
 }
 
 .footer-cookie-pref-link {
   color: #94a3b8;
   text-decoration: underline;
-  text-decoration-color: rgba(148, 163, 184, 0.35);
   text-underline-offset: 3px;
   margin-left: 4px;
   font-size: 0.76rem;
-  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .footer-cookie-pref-link:hover {
-  color: #fce09b;
-  text-decoration-color: #fce09b;
+  color: #38bdf8;
 }
 
-/* Tablet & Intermediate Viewports (Balanced Horizon) */
-@media (max-width: 860px) {
-  .cookie-consent-bar {
-    bottom: 16px;
-    width: calc(100% - 32px);
-    max-width: 740px;
-    padding: 10px 20px;
-  }
-  .cookie-consent-inner {
-    gap: 14px;
-    flex-wrap: nowrap !important;
-  }
-  .cookie-consent-text {
-    font-size: 0.80rem;
-    line-height: 1.45;
-  }
-  .cookie-btn {
-    font-size: 0.75rem;
-    padding: 5px 15px;
-  }
-}
-
-/* Mobile Viewports (Screenshot 2 Side-by-Side Harmonization) */
+/* Mobile & Tablet Responsiveness */
 @media (max-width: 640px) {
   .cookie-consent-bar {
-    bottom: 12px;
-    width: calc(100% - 20px);
-    max-width: 540px;
-    padding: 10px 14px;
-    border-radius: 16px;
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.94), 0 0 0 1px rgba(212, 175, 55, 0.16) inset;
+    bottom: 16px;
+    width: calc(100% - 28px);
+    max-width: 360px;
+    padding: 22px 20px 18px 20px;
+    border-radius: 24px;
   }
-  .cookie-consent-inner {
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 10px !important;
-    flex-wrap: nowrap !important;
+  .cookie-ice-badge-wrap {
+    margin-bottom: 10px;
   }
-  .cookie-consent-text {
-    font-size: 0.75rem;
-    line-height: 1.38;
-    color: #cbd5e1;
-    flex: 1 1 auto;
-    min-width: 0;
+  .cookie-ice-badge-svg {
+    width: 48px;
+    height: 48px;
   }
-  .cookie-policy-link {
-    font-size: 0.75rem;
-    margin-left: 3px;
+  .cookie-ice-title {
+    font-size: 1.05rem;
+    margin-bottom: 6px;
   }
-  .cookie-consent-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 5px;
-    flex-shrink: 0;
-    width: auto;
+  .cookie-ice-desc {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    margin-bottom: 16px;
   }
-  .cookie-btn {
-    font-size: 0.70rem;
-    padding: 4px 10px;
-    border-radius: 999px;
-    line-height: 1.3;
-    text-align: center;
+  .cookie-btn-primary {
+    font-size: 0.82rem;
+    padding: 8px 20px;
+    max-width: 190px;
   }
 }
 
-/* Small Smartphone Adaptation (e.g. 320px - 380px) */
 @media (max-width: 380px) {
   .cookie-consent-bar {
-    bottom: 8px;
-    padding: 8px 11px;
-    width: calc(100% - 14px);
-    border-radius: 14px;
-  }
-  .cookie-consent-text {
-    font-size: 0.71rem;
-    line-height: 1.32;
-  }
-  .cookie-consent-actions {
-    gap: 4px;
-  }
-  .cookie-btn {
-    font-size: 0.67rem;
-    padding: 3px 8px;
+    bottom: 10px;
+    width: calc(100% - 16px);
+    border-radius: 20px;
+    padding: 18px 16px 14px 16px;
   }
 }
+
 
 /* ==============================================================================
    UNIFIED PAGE NAVIGATION DROPDOWNS & FOOTER MENU SYSTEM
