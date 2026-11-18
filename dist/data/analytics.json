@@ -302,6 +302,48 @@
   },
   "page_traces": [
     {
+      "id": "tr-1795012677589",
+      "timestamp": "2026-11-18T14:37:57.589Z",
+      "path": "/",
+      "title": "Dr. Zaid Amin | Academic & Computational Researcher",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-4A57D9",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Internal Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
+      "id": "tr-1795012661961",
+      "timestamp": "2026-11-18T14:37:41.961Z",
+      "path": "/article/the-polite-city-ai-human-harmonization",
+      "title": "The Polite City: Why the Future of Smart Cities Needs Courteous AI, Not Digital Wardens | Dr. Zaid Amin",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-4A57D9",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Internal Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
       "id": "tr-1795008851707",
       "timestamp": "2026-11-18T13:34:11.707Z",
       "path": "/",
@@ -8749,7 +8791,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-18T21:34:11.718359",
+  "updated_at": "2026-11-18T22:37:57.660980",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -8831,13 +8873,13 @@
     "web-20-death-of-the-network-engineer": 10,
     "i-knew-i-can": 9,
     "what-is-network-engineering": 8,
-    "the-polite-city-ai-human-harmonization": 30,
+    "the-polite-city-ai-human-harmonization": 31,
     "trustworthy-ai-workshop-google-colab-inti-2026": 29,
     "fdsit-final-year-viva-poster-showcase-2026": 25,
     "uniten-master-viva-external-examiner-nist-csf-2026": 6
   },
   "server_live_hits": {
-    "MY": 342,
+    "MY": 344,
     "OTHER": 3
   }
 }

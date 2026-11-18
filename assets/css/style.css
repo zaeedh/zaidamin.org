@@ -253,7 +253,7 @@ a {
   outline: none;
   user-select: none;
   vertical-align: middle;
-  transition: color 0.4s ease;
+  transition: color 0.5s ease;
 }
 
 .epigraph-scramble-link:hover {
@@ -268,7 +268,7 @@ a {
 /* Static SSR / Pre-JS fallback */
 .epigraph-scramble-inner {
   display: inline-block;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.6s ease;
 }
 
 /* Stage holding the dual phrase layers with rock-solid baseline alignment */
@@ -278,7 +278,7 @@ a {
   line-height: 1.2;
   vertical-align: baseline;
   text-align: left;
-  transition: width 0.75s cubic-bezier(0.25, 1, 0.4, 1);
+  transition: width 0.95s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Dual phrase layers - 100% natural kerning and text baseline */
@@ -314,9 +314,10 @@ a {
   margin: 0;
   padding: 0;
   text-shadow: none !important;
-  will-change: opacity, color;
-  transition: opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1),
-              color 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, color, filter;
+  transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+              color 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 0.85s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .black-char.black-space {

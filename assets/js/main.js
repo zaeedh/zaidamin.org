@@ -3615,10 +3615,12 @@ function initEpigraphScramble() {
   p1.spans.forEach(s => {
     s.style.color = '#ffffff';
     s.style.opacity = '1';
+    s.style.filter = 'blur(0px)';
   });
   p2.spans.forEach(s => {
-    s.style.color = '#000000';
+    s.style.color = '#01101d';
     s.style.opacity = '0';
+    s.style.filter = 'blur(1.5px)';
   });
 
   stage.appendChild(p1.el);
@@ -3637,24 +3639,26 @@ function initEpigraphScramble() {
     const incoming = (toPhrase === 2) ? p2 : p1;
     const targetWidth = (toPhrase === 2) ? w2 : w1;
 
-    // Smoothly adjust container width
+    // Smoothly adjust container width with golden ratio ease
     stage.style.width = targetWidth + 'px';
 
-    const step = 95; // 95ms left-to-right cadence
-    const fadeDuration = 650; // 650ms soft dissolve into black / out of black
-    const overlap = 220; // 220ms soft overlap
+    // Pacing calibrated to Golden Ratio (Φ): 135ms step, 850ms soft dissolve, 280ms overlap
+    const step = 135;
+    const fadeDuration = 850;
+    const overlap = 280;
     let maxDelay = 0;
 
-    // 1. Black out outgoing phrase from left to right
+    // 1. Black out outgoing phrase from left to right (dissolves into dark background)
     outgoing.spans.forEach((span, i) => {
       const delay = i * step;
       setTimeout(() => {
-        span.style.color = '#000000';
+        span.style.color = '#01101d';
         span.style.opacity = '0';
+        span.style.filter = 'blur(1.5px)';
       }, delay);
     });
 
-    // 2. Black in incoming phrase from left to right
+    // 2. Black in incoming phrase from left to right (softly emerges from dark background)
     incoming.spans.forEach((span, j) => {
       const delay = j * step + overlap;
       if (delay + fadeDuration > maxDelay) {
@@ -3663,6 +3667,7 @@ function initEpigraphScramble() {
       setTimeout(() => {
         span.style.color = '#ffffff';
         span.style.opacity = '1';
+        span.style.filter = 'blur(0px)';
       }, delay);
     });
 
@@ -3671,12 +3676,13 @@ function initEpigraphScramble() {
       activePhrase = toPhrase;
       isTransitioning = false;
       if (callback) callback();
-    }, maxDelay + 80);
+    }, maxDelay + 100);
   }
 
   function scheduleNext() {
     clearTimeout(loopTimer);
-    const pauseTime = (activePhrase === 1) ? 6500 : 5500;
+    // Dignified philosophical pauses: 7.8s on primary ("Das Sein, Das Sollen."), 6.2s on secondary ("Path of Nobility.")
+    const pauseTime = (activePhrase === 1) ? 7800 : 6200;
     const nextPhrase = (activePhrase === 1) ? 2 : 1;
 
     loopTimer = setTimeout(() => {
@@ -3686,12 +3692,12 @@ function initEpigraphScramble() {
     }, pauseTime);
   }
 
-  // Initial delay: 2.0s post-load
+  // Initial delay: 2.5s post-load for serene initial visual settling
   loopTimer = setTimeout(() => {
     transition(2, () => {
       scheduleNext();
     });
-  }, 2000);
+  }, 2500);
 
   // Interactive Hover
   link.addEventListener('mouseenter', () => {
