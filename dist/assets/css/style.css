@@ -26512,9 +26512,10 @@ h1.cv-hero-name,
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
-  justify-content: space-between !important;
-  gap: 12px !important;
+  justify-content: flex-start !important;
+  gap: 14px !important;
   width: 100% !important;
+  flex-wrap: wrap !important;
 }
 
 .articles-search-wrap {
@@ -26566,11 +26567,23 @@ h1.cv-hero-name,
   display: inline-flex !important;
   align-items: center !important;
   font-size: 0.75rem !important;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
   color: #8da4be !important;
   letter-spacing: 0.03em !important;
   white-space: nowrap !important;
   font-variant-numeric: tabular-nums !important;
+  height: 32px !important;
+  line-height: 32px !important;
+}
+
+.article-count-indicator::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 1px !important;
+  height: 14px !important;
+  background: rgba(186, 230, 253, 0.22) !important;
+  margin-right: 14px !important;
+  flex-shrink: 0 !important;
 }
 
 .articles-category-pills {
@@ -26625,7 +26638,7 @@ h1.cv-hero-name,
   }
   .articles-controls-header {
     flex-direction: column !important;
-    align-items: stretch !important;
+    align-items: flex-start !important;
     gap: 6px !important;
   }
   .articles-search-wrap {
@@ -26634,8 +26647,14 @@ h1.cv-hero-name,
   }
   .article-count-indicator {
     font-size: 0.70rem !important;
-    text-align: right !important;
-    justify-content: flex-end !important;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    height: auto !important;
+    line-height: 1.4 !important;
+    padding-left: 4px !important;
+  }
+  .article-count-indicator::before {
+    display: none !important;
   }
   .articles-category-pills {
     gap: 6px !important;
