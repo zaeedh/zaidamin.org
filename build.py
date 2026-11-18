@@ -6653,49 +6653,30 @@ def generate_talks_page():
         k_url = _html_mod.escape(k.get("url", "#"))
 
         k_badge = _html_mod.escape(k.get("badge", f"0{idx+1} • Keynote"))
-
+        k_year = _html_mod.escape(str(k.get("year", "")))
+        k_year_chip = f'<span class="service-card-chip service-card-chip-year" title="{k_year}">{k_year}</span>' if k_year else ''
         k_img = k.get("image", "assets/images/spotlight-smart-cities.jpg")
-
         icon_svg = icon_map.get(keynote_icons[idx % len(keynote_icons)], icon_map["podium"])
-
-
 
         media_stage_html = f'''<div class="service-card-media-stage">
             <img src="{k_img}" alt="" class="service-card-bg-glow" aria-hidden="true" loading="lazy" decoding="async">
             <img src="{k_img}" alt="{k_title}" class="service-card-fg-poster" loading="lazy" decoding="async" onerror="this.src=\'assets/images/spotlight-smart-cities.jpg\'">
           </div>'''
 
-
-
         card_html = f"""
-
         <div class="service-portrait-card">
-
           {media_stage_html}
 
-          <div class="service-card-gradient-top"></div>
-
-
-
-          <!-- Top Row: Frosted Tag -->
-
-          <div class="service-card-top-row">
-
-            <span class="service-card-tag">{k_badge}</span>
-
-          </div>
-
-
-
-          <!-- Bottom Content: Venue, Title, Synopsis, Capsule Button -->
-
+          <!-- Bottom Content: Venue, Title, Synopsis, Capsule Chips, Action Button -->
           <div class="service-card-bottom">
-
             <div class="service-card-venue">{k_venue}</div>
-
             <h3 class="service-card-title">{k_title}</h3>
-
             <p class="service-card-desc">{k_abstract}</p>
+
+            <div class="service-card-chips-row">
+              <span class="service-card-chip service-card-chip-tag" title="{k_badge}">{k_badge}</span>
+              {k_year_chip}
+            </div>
 
             <div class="service-card-action">
               <a href="{k_url}" {"target='_blank' rel='noopener'" if k_url.startswith("http") else ""} class="service-card-btn font-cinzel" title="Read Details: {k_title}">
@@ -6706,9 +6687,7 @@ def generate_talks_page():
                 <span class="pub-btn-arrow">&rarr;</span>
               </a>
             </div>
-
           </div>
-
         </div>"""
 
         keynotes_cards_html.append(card_html)
@@ -6736,49 +6715,30 @@ def generate_talks_page():
         o_url = _html_mod.escape(o.get("url", "#"))
 
         o_badge = _html_mod.escape(o.get("badge", f"Essay 0{idx+1}"))
-
+        o_year = _html_mod.escape(str(o.get("year", "")))
+        o_year_chip = f'<span class="service-card-chip service-card-chip-year" title="{o_year}">{o_year}</span>' if o_year else ''
         o_img = o.get("image", "assets/images/spotlight-smart-cities.jpg")
-
         icon_svg = icon_map.get(opinion_icons[idx % len(opinion_icons)], icon_map["philosophy"])
-
-
 
         media_stage_html = f'''<div class="service-card-media-stage">
             <img src="{o_img}" alt="" class="service-card-bg-glow" aria-hidden="true" loading="lazy" decoding="async">
             <img src="{o_img}" alt="{o_title}" class="service-card-fg-poster" loading="lazy" decoding="async" onerror="this.src=\'assets/images/spotlight-smart-cities.jpg\'">
           </div>'''
 
-
-
         card_html = f"""
-
         <div class="service-portrait-card">
-
           {media_stage_html}
 
-          <div class="service-card-gradient-top"></div>
-
-
-
-          <!-- Top Row: Frosted Tag -->
-
-          <div class="service-card-top-row">
-
-            <span class="service-card-tag">{o_badge}</span>
-
-          </div>
-
-
-
-          <!-- Bottom Content: Publication, Title, Synopsis, Capsule Button -->
-
+          <!-- Bottom Content: Publication, Title, Synopsis, Capsule Chips, Action Button -->
           <div class="service-card-bottom">
-
             <div class="service-card-venue">{o_pub}</div>
-
             <h3 class="service-card-title">{o_title}</h3>
-
             <p class="service-card-desc">{o_abstract}</p>
+
+            <div class="service-card-chips-row">
+              <span class="service-card-chip service-card-chip-tag" title="{o_badge}">{o_badge}</span>
+              {o_year_chip}
+            </div>
 
             <div class="service-card-action">
               <a href="{o_url}" {"target='_blank' rel='noopener'" if o_url.startswith("http") else ""} class="service-card-btn font-cinzel" title="Read Essay: {o_title}">
@@ -6789,9 +6749,7 @@ def generate_talks_page():
                 <span class="pub-btn-arrow">&rarr;</span>
               </a>
             </div>
-
           </div>
-
         </div>"""
 
         opinions_cards_html.append(card_html)

@@ -24566,21 +24566,7 @@ mark {
 
 .service-card-gradient-top {
 
-  position: absolute;
-
-  top: 0;
-
-  left: 0;
-
-  width: 100%;
-
-  height: 75px;
-
-  background: linear-gradient(to bottom, rgba(2, 8, 16, 0.7) 0%, transparent 100%);
-
-  z-index: 2;
-
-  pointer-events: none;
+  display: none !important;
 
 }
 
@@ -24594,59 +24580,18 @@ mark {
 
 
 
-/* Top Row: Frosted Tag */
-
+/* Top Row: Clean Unobstructed Media Stage (Eyebrow Moved to Content Drawer) */
 .service-card-top-row {
-
-  position: relative;
-
-  z-index: 3;
-
-  display: flex;
-
-  justify-content: flex-start !important;
-
-  align-items: center;
-
-  width: 100%;
-
+  display: none !important;
 }
-
-
 
 .service-card-tag {
-
-  padding: 5px 14px;
-
-  border-radius: 999px;
-
-  background: rgba(4, 14, 26, 0.94);
-
-  border: 1px solid rgba(186, 230, 253, 0.25);
-
-  color: #fef08a;
-
-  font-size: 0.72rem;
-
-  font-weight: 700;
-
-  letter-spacing: 0.05em;
-
-  text-transform: uppercase;
-
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-
+  display: none !important;
 }
-
-
 
 .service-card-icon-badge {
-
   display: none !important;
-
 }
-
-
 
 /* Bottom Content: Dedicated Frosted Obsidian Drawer (Gestalt Law of Figure-Ground & Common Region) */
 .service-card-bottom {
@@ -24655,10 +24600,10 @@ mark {
   display: flex;
   flex-direction: column;
   gap: 0;
-  margin: 0 -22px -20px -22px;
-  width: calc(100% + 44px);
-  min-height: 242px;
-  padding: 18px 22px 18px 22px;
+  margin: auto -22px -20px -22px !important;
+  width: calc(100% + 44px) !important;
+  min-height: 254px;
+  padding: 16px 20px 18px 20px;
   background: linear-gradient(180deg, rgba(3, 10, 20, 0.94) 0%, rgba(2, 7, 14, 0.99) 100%);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -24701,13 +24646,71 @@ mark {
   font-size: 0.78rem;
   color: #94a3b8;
   line-height: 1.48;
-  margin: 0 0 12px 0;
+  margin: 0 0 10px 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   min-height: 2.96em;
   max-height: 2.96em;
+}
+
+/* ── Harmonized Service Card Chips Row (Gestalt Proximity & Golden Ratio Rhythm) ── */
+.service-card-chips-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 7px !important;
+  flex-wrap: wrap !important;
+  margin-top: auto !important;
+  margin-bottom: 12px !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+.service-card-chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 25px !important;
+  padding: 0 10px !important;
+  border-radius: 9999px !important;
+  font-size: 0.70rem !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #cbd5e1 !important;
+  white-space: nowrap !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-sizing: border-box !important;
+}
+
+.service-card-chip-tag {
+  color: #fef08a !important;
+  border-color: rgba(212, 175, 55, 0.32) !important;
+  background: rgba(212, 175, 55, 0.08) !important;
+}
+
+.service-card-chip-year {
+  color: #94a3b8 !important;
+  font-variant-numeric: tabular-nums !important;
+  border-color: rgba(255, 255, 255, 0.10) !important;
+}
+
+.service-portrait-card:hover .service-card-chip-tag {
+  background: rgba(212, 175, 55, 0.18) !important;
+  border-color: rgba(212, 175, 55, 0.58) !important;
+  color: #ffffff !important;
+}
+
+.service-portrait-card:hover .service-card-chip-year {
+  color: #e2e8f0 !important;
+  border-color: rgba(255, 255, 255, 0.22) !important;
 }
 
 /* ── Dedicated Action Container (Gestalt Proximity & Golden Ratio Anchor) ── */
