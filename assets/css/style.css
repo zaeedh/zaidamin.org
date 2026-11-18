@@ -24563,30 +24563,43 @@ mark {
 
 
 /* Top Vignette */
-
 .service-card-gradient-top {
-
-  display: none !important;
-
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75px;
+  background: linear-gradient(to bottom, rgba(2, 8, 16, 0.72) 0%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
 }
-
-
 
 .service-card-gradient-bottom {
-
   display: none;
-
 }
 
-
-
-/* Top Row: Clean Unobstructed Media Stage (Eyebrow Moved to Content Drawer) */
+/* Top Row: Frosted Tag (Preserved for Global Keynotes & Visiting Orations) */
 .service-card-top-row {
-  display: none !important;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: flex-start !important;
+  align-items: center;
+  width: 100%;
 }
 
 .service-card-tag {
-  display: none !important;
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: rgba(4, 14, 26, 0.94);
+  border: 1px solid rgba(186, 230, 253, 0.25);
+  color: #fef08a;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .service-card-icon-badge {
@@ -24613,7 +24626,17 @@ mark {
 }
 
 .service-card-venue {
-  display: none !important;
+  font-size: 0.70rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #d4af37;
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 .service-card-title {
@@ -24711,6 +24734,10 @@ mark {
   border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
   width: 100% !important;
   display: flex !important;
+}
+
+.service-card-chips-row + .service-card-action {
+  margin-top: 0 !important;
 }
 
 /* Harmonized Golden Ratio Button (Matching Read Essay Screenshot 100%) */
