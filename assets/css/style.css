@@ -238,6 +238,79 @@ a {
 
 }
 
+/* ==========================================================================
+   EPIGRAPH SCRAMBLE TEXT & SOFT AMBIENT SHINE
+   Philosophical Scramble Animation ("Das Sein, Das Sollen." <-> "Path of Nobility.")
+   ========================================================================== */
+.epigraph-scramble-link {
+  color: #ffffff;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  transition: color 0.3s ease, text-shadow 0.4s ease;
+  user-select: none;
+}
+
+.epigraph-scramble-link:hover {
+  color: #fef08a;
+}
+
+/* Soft Ambient Aura / Specular Gleam during scramble */
+.epigraph-scramble-link::before {
+  content: '';
+  position: absolute;
+  top: -25%;
+  left: -8%;
+  width: 116%;
+  height: 150%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(212, 175, 55, 0.28) 0%,
+    rgba(254, 240, 138, 0.10) 35%,
+    transparent 70%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 50%;
+  filter: blur(8px);
+  z-index: 1;
+}
+
+.epigraph-scramble-link.is-scrambling::before {
+  opacity: 1;
+}
+
+/* Scramble Character Typography */
+.scramble-char {
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+  transition: opacity 0.22s ease, color 0.22s ease, text-shadow 0.3s ease;
+}
+
+/* Active Scrambling Characters: Soft Gold Shimmer */
+.scramble-char.char-random {
+  color: #fef08a;
+  text-shadow: 0 0 10px rgba(250, 204, 21, 0.75), 0 0 22px rgba(212, 175, 55, 0.45);
+  opacity: 0.92;
+}
+
+/* Resolved Characters: Noble Crisp White */
+.scramble-char.char-resolved {
+  color: #ffffff;
+  text-shadow: 0 2px 16px rgba(34, 166, 200, 0.25);
+  opacity: 1;
+}
+
+/* Fading Characters: Smooth Dissolve */
+.scramble-char.char-fading {
+  opacity: 0;
+  transform: scale(0.94);
+}
+
 
 
 /* ==========================================================================

@@ -1289,7 +1289,11 @@ def get_page_header(active_page="home"):
 
         <div class="epigraph-title-group">
 
-          <h1 class="epigraph-title">{epigraph_title}</h1>
+          <h1 class="epigraph-title">
+            <a href="/" class="epigraph-scramble-link" id="epigraph-scramble-text" aria-label="Das Sein, Das Sollen &mdash; Path of Nobility" data-phrase-primary="{epigraph_title}" data-phrase-secondary="Path of Nobility.">
+              <span class="epigraph-scramble-inner">{epigraph_title}</span>
+            </a>
+          </h1>
 
           <div class="epigraph-golden-line" aria-hidden="true"></div>
 

@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ['TelemetryAccessTraceLogger', typeof initTelemetryAccessTraceLogger === 'function' ? initTelemetryAccessTraceLogger : null],
 
     ['CoinPortraitEngine', typeof initCoinPortraitEngine === 'function' ? initCoinPortraitEngine : null],
+    ['EpigraphScramble', typeof initEpigraphScramble === 'function' ? initEpigraphScramble : null],
 
   ];
 
@@ -3555,6 +3556,154 @@ document.addEventListener('click', (e) => {
     document.querySelectorAll('.site-pill-dropdown-wrap.is-open').forEach((w) => w.classList.remove('is-open'));
   }
 }, true);
+
+// ==============================================================================
+// Epigraph Text Scramble Engine (GSAP Scramble Style - Gestalt & Golden Ratio)
+// Smoothly animates: "Das Sein, Das Sollen." <-> "Path of Nobility."
+// With slow random glyph flips, soft golden ambient shine, and graceful fades.
+// ==============================================================================
+function initEpigraphScramble() {
+  const link = document.getElementById('epigraph-scramble-text');
+  if (!link) return;
+
+  // Accessibility: Respect users who prefer reduced motion
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  const phrase1 = (link.dataset.phrasePrimary || link.textContent || "Das Sein, Das Sollen.").trim();
+  const phrase2 = (link.dataset.phraseSecondary || "Path of Nobility.").trim();
+  let currentTarget = phrase2;
+  let isScrambling = false;
+  let loopTimer = null;
+
+  // Classical, noble uppercase glyphs + philosophical Greek symbols
+  const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ΔΣΠΩΦΨΛΘ";
+
+  function randomGlyph() {
+    return GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+  }
+
+  function escapeChar(c) {
+    if (c === '&') return '&amp;';
+    if (c === '<') return '&lt;';
+    if (c === '>') return '&gt;';
+    if (c === ' ') return '&nbsp;';
+    return c;
+  }
+
+  function scrambleTo(targetText, callback) {
+    if (isScrambling) return;
+    isScrambling = true;
+    link.classList.add('is-scrambling');
+
+    const startText = link.textContent.trim();
+    const maxLen = Math.max(startText.length, targetText.length);
+
+    // Stately, deliberate duration: 1.8 seconds
+    const duration = 1800;
+    const startTime = performance.now();
+
+    // Calculate left-to-right staggered resolution with subtle organic jitter
+    const resolveTimes = [];
+    for (let i = 0; i < maxLen; i++) {
+      const baseProg = i / maxLen;
+      const jitter = (Math.random() - 0.5) * 0.12;
+      resolveTimes.push(Math.min(0.98, Math.max(0.08, baseProg * 0.72 + 0.22 + jitter)));
+    }
+
+    const currentChars = [];
+    for (let i = 0; i < maxLen; i++) {
+      currentChars.push({
+        char: startText[i] || '',
+        scrambleChar: ''
+      });
+    }
+
+    let lastTick = 0;
+    const tickInterval = 65; // ~15 glyph flips per second for measured cadence
+
+    function frame(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(1, elapsed / duration);
+      const shouldTick = (now - lastTick) > tickInterval;
+      if (shouldTick) {
+        lastTick = now;
+      }
+
+      let html = '';
+
+      for (let i = 0; i < maxLen; i++) {
+        const isResolved = progress >= resolveTimes[i];
+        const targetChar = targetText[i] || '';
+
+        if (isResolved) {
+          if (targetChar) {
+            html += `<span class="scramble-char char-resolved">${escapeChar(targetChar)}</span>`;
+          } else {
+            // Characters beyond target length fade out smoothly
+            const fadeProg = Math.max(0, 1 - (progress - resolveTimes[i]) * 4);
+            html += `<span class="scramble-char char-fading" style="opacity:${fadeProg.toFixed(2)};">${escapeChar(startText[i] || '')}</span>`;
+          }
+        } else {
+          // Actively scrambling
+          if (shouldTick || !currentChars[i].scrambleChar) {
+            currentChars[i].scrambleChar = (targetChar === ' ' || (startText[i] === ' ' && Math.random() > 0.4)) ? ' ' : randomGlyph();
+          }
+          const charToShow = currentChars[i].scrambleChar;
+          const charOpacity = i >= startText.length ? Math.min(1, progress * 2.5) : 1;
+          html += `<span class="scramble-char char-random" style="opacity:${charOpacity.toFixed(2)};">${escapeChar(charToShow)}</span>`;
+        }
+      }
+
+      link.innerHTML = html;
+
+      if (progress < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        // Complete! Lock into clean final string
+        link.textContent = targetText;
+        link.classList.remove('is-scrambling');
+        isScrambling = false;
+        if (callback) callback();
+      }
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  function scheduleNext() {
+    clearTimeout(loopTimer);
+    // Pause: 5.5s on primary ("Das Sein, Das Sollen."), 3.8s on secondary ("Path of Nobility.")
+    const pauseTime = (currentTarget === phrase2) ? 5500 : 3800;
+
+    loopTimer = setTimeout(() => {
+      scrambleTo(currentTarget, () => {
+        currentTarget = (currentTarget === phrase2) ? phrase1 : phrase2;
+        scheduleNext();
+      });
+    }, pauseTime);
+  }
+
+  // Initial delay: 3.2 seconds after page load
+  loopTimer = setTimeout(() => {
+    scrambleTo(currentTarget, () => {
+      currentTarget = (currentTarget === phrase2) ? phrase1 : phrase2;
+      scheduleNext();
+    });
+  }, 3200);
+
+  // Interactive Hover: If user hovers while at rest, trigger transition
+  link.addEventListener('mouseenter', () => {
+    if (!isScrambling) {
+      clearTimeout(loopTimer);
+      scrambleTo(currentTarget, () => {
+        currentTarget = (currentTarget === phrase2) ? phrase1 : phrase2;
+        scheduleNext();
+      });
+    }
+  });
+}
 
 
 
