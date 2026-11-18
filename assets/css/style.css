@@ -58,6 +58,7 @@
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-premium-serif: 'Cormorant Garamond', Georgia, serif;
   --font-cinzel: 'Cinzel', Georgia, serif;
+  --font-baskerville: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', monospace;
 
 
@@ -14239,19 +14240,19 @@ a {
 
 .article-reader-title {
 
-  font-family: var(--font-cinzel), Georgia, serif;
+  font-family: var(--font-baskerville, 'Libre Baskerville', Georgia, serif) !important;
 
-  font-size: clamp(1.75rem, 3.2vw, 2.35rem);
+  font-size: clamp(1.85rem, 3.4vw, 2.5rem);
 
   font-weight: 700;
 
-  line-height: 1.28;
+  line-height: 1.30;
 
   color: #ffffff;
 
   margin: 0 0 18px 0;
 
-  letter-spacing: -0.015em;
+  letter-spacing: -0.012em;
 
   text-wrap: balance;
 
@@ -15390,6 +15391,8 @@ mark {
   }
 
   .article-reader-title {
+
+    font-family: var(--font-baskerville, 'Libre Baskerville', Georgia, serif) !important;
 
     font-size: 1.60rem !important;
 
