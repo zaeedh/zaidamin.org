@@ -5861,18 +5861,16 @@ def generate_research_page():
             </h3>
             <p class="article-card-excerpt">{excerpt}</p>
 
-            <!-- Capsule Chips & Actions Row (Harmonious Dual Dock: Chips Left, Actions Right) -->
+            <!-- Capsule Chips & Actions Row (Gestalt Proximity & Golden Ratio Flow) -->
             <div class="article-chips-row">
-              <div class="article-chips-left">
-                <span class="article-chip article-chip-tag" title="{escaped_tag}">{escaped_tag}</span>
-                <span class="article-chip article-chip-time" title="{escaped_read_time}">{escaped_read_time}</span>
-              </div>
+              <span class="article-chip article-chip-tag" title="{escaped_tag}">{escaped_tag}</span>
+              <span class="article-chip article-chip-time" title="{escaped_read_time}">{escaped_read_time}</span>
               <div class="article-card-actions-dock">
                 <button type="button" class="article-card-action-btn article-card-bookmark-btn" data-slug="{slug}" onclick="toggleArticleBookmark(event, this, \'{slug}\')" aria-label="Bookmark article" title="Bookmark article" aria-pressed="false">
-                  <svg class="action-icon bookmark-icon" width="13" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                  <svg class="card-action-svg card-bookmark-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
                 </button>
                 <button type="button" class="article-card-action-btn article-card-share-btn" data-slug="{slug}" data-title="{escaped_title_attr}" onclick="shareArticleLink(event, this, \'{slug}\', \'{escaped_title_attr}\')" aria-label="Share article" title="Share article">
-                  <svg class="action-icon share-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9V5l11 7-11 7v-4.1c-5 0-8.5 1.6-11 5.1 1-5 4-10 11-11z"></path></svg>
+                  <svg class="card-action-svg card-share-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9V5l11 7-11 7v-4.1c-5 0-8.5 1.6-11 5.1 1-5 4-10 11-11z"></path></svg>
                 </button>
               </div>
             </div>

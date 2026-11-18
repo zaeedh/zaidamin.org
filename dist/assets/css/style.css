@@ -3366,7 +3366,9 @@ a {
 
 
 
-.bookmark-icon {
+.thumb-heritage .bookmark-icon,
+
+.legacy-thumb-bookmark-icon {
 
   position: absolute;
 
@@ -13329,72 +13331,91 @@ a {
 
 .article-card-action-btn {
   position: relative !important;
-  width: 28px !important;
-  height: 28px !important;
-  min-width: 28px !important;
-  max-width: 28px !important;
+  width: 25px !important;
+  height: 25px !important;
+  min-width: 25px !important;
+  max-width: 25px !important;
   border-radius: 50% !important;
-  background: rgba(14, 26, 42, 0.70) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
   backdrop-filter: blur(8px) !important;
   -webkit-backdrop-filter: blur(8px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: none !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   cursor: pointer !important;
   padding: 0 !important;
-  color: #e2e8f0 !important;
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease !important;
+  margin: 0 !important;
+  color: #cbd5e1 !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease !important;
   outline: none !important;
   box-sizing: border-box !important;
 }
 
 .article-card-action-btn:hover {
-  background: rgba(20, 38, 62, 0.92) !important;
-  border-color: rgba(212, 175, 55, 0.55) !important;
+  background: rgba(212, 175, 55, 0.12) !important;
+  border-color: rgba(212, 175, 55, 0.50) !important;
   color: #fef08a !important;
-  transform: translateY(-1px) scale(1.08) !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.40) !important;
+  transform: translateY(-1px) scale(1.06) !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35) !important;
 }
 
 .article-card-action-btn:active {
-  transform: scale(0.93) !important;
+  transform: scale(0.94) !important;
 }
 
+.article-card-action-btn .card-action-svg,
 .article-card-action-btn .action-icon {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: 12px !important;
+  height: 12px !important;
+  max-width: 12px !important;
+  max-height: 12px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   display: block !important;
-  margin: auto !important;
   color: inherit !important;
   stroke: currentColor !important;
   fill: none !important;
   flex-shrink: 0 !important;
-  transition: all 0.2s ease !important;
+  pointer-events: none !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
+.article-card-action-btn .card-bookmark-svg,
 .article-card-action-btn .bookmark-icon {
-  transform: translateY(0.5px) !important; /* Optical center compensation for notch */
+  transform: translateY(0.5px) !important; /* Optical center compensation for ribbon notch */
 }
 
 /* Bookmarked Active State */
 .article-card-bookmark-btn.bookmarked {
-  background: rgba(212, 175, 55, 0.22) !important;
-  border-color: rgba(212, 175, 55, 0.70) !important;
+  background: rgba(212, 175, 55, 0.20) !important;
+  border-color: rgba(212, 175, 55, 0.75) !important;
   color: #d4af37 !important;
 }
 
+.article-card-bookmark-btn.bookmarked .card-bookmark-svg,
 .article-card-bookmark-btn.bookmarked .bookmark-icon {
   fill: #d4af37 !important;
   stroke: #d4af37 !important;
-  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.6)) !important;
+  filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.5)) !important;
 }
 
 /* Share Copied Success State */
 .article-card-share-btn.copied {
-  background: rgba(34, 197, 94, 0.25) !important;
+  background: rgba(34, 197, 94, 0.20) !important;
   border-color: rgba(34, 197, 94, 0.70) !important;
   color: #4ade80 !important;
-  transform: scale(1.08) !important;
+  transform: scale(1.06) !important;
 }
 
 /* Micro-Toast Feedback for Clipboard Share */
@@ -13516,12 +13537,13 @@ a {
   height: 4.65em !important;
 }
 
-/* ── Harmonized Capsule Chips & Actions Row (Gestalt Dual Dock) ── */
+/* ── Harmonized Capsule Chips & Actions Row (Gestalt Proximity & Golden Ratio Flow) ── */
 .article-chips-row {
   display: flex !important;
   align-items: center !important;
-  justify-content: space-between !important;
-  gap: 8px !important;
+  justify-content: flex-start !important;
+  gap: 7px !important;
+  flex-wrap: wrap !important;
   margin-top: auto !important;
   padding-top: 8px !important;
   margin-bottom: 12px !important;
@@ -13532,18 +13554,16 @@ a {
 .article-chips-left {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 6px !important;
+  gap: 7px !important;
   flex-wrap: wrap !important;
-  min-width: 0 !important;
-  flex: 1 1 auto !important;
 }
 
 .article-card-actions-dock {
   display: inline-flex !important;
   align-items: center !important;
   gap: 6px !important;
+  margin-left: 2px !important;
   flex-shrink: 0 !important;
-  margin-left: auto !important;
 }
 
 .article-chip {
