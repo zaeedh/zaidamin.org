@@ -207,35 +207,23 @@ a {
    ========================================================================== */
 
 .epigraph-header {
-
-  margin-bottom: 8px;
-
+  margin-bottom: 12px;
   text-align: left;
-
 }
 
-
-
 .epigraph-title {
-
-  font-family: var(--font-cinzel), 'Cormorant Garamond', Georgia, serif;
-
+  font-family: var(--font-cinzel), 'Cinzel', 'Trajan Pro', 'Cormorant Garamond', Georgia, serif;
   font-size: 1.55rem;
-
   font-weight: 600;
-
   color: #ffffff;
-
-  letter-spacing: 0.08em;
-
+  letter-spacing: 0.1em;
   margin: 0;
-
-  line-height: 1.2;
-
+  line-height: 1.25;
   display: inline-block;
-
-  text-shadow: 0 2px 18px rgba(34, 166, 200, 0.28);
-
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* ==========================================================================
@@ -253,11 +241,11 @@ a {
   outline: none;
   user-select: none;
   vertical-align: middle;
-  transition: color 0.5s ease;
+  transition: color 0.6s ease;
 }
 
 .epigraph-scramble-link:hover {
-  color: #cbd5e1;
+  color: #f1f5f9;
 }
 
 /* Zero Shine / Clean Minimalist Atmosphere */
@@ -275,10 +263,10 @@ a {
 .epigraph-black-stage {
   display: inline-block;
   position: relative;
-  line-height: 1.2;
+  line-height: 1.25;
   vertical-align: baseline;
   text-align: left;
-  transition: width 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: width 1.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Dual phrase layers - 100% natural kerning and text baseline */
@@ -315,9 +303,9 @@ a {
   padding: 0;
   text-shadow: none !important;
   will-change: opacity, color, filter;
-  transition: opacity 1.25s cubic-bezier(0.22, 1, 0.36, 1),
-              color 1.25s cubic-bezier(0.22, 1, 0.36, 1),
-              filter 1.25s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 1.85s cubic-bezier(0.16, 1, 0.3, 1),
+              color 1.85s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 1.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .black-char.black-space {
@@ -325,64 +313,33 @@ a {
 }
 
 /* ==========================================================================
-
    EPIGRAPH GOLDEN BEAM / ACCENT LINE (GOLDEN RATIO PROPORTIONS)
-
-   Sleek, Luminous & Clean Aesthetic Beneath 'Das Sein, Das Sollen'
-
+   Sleek, Luminous & Clean Architectural Inlay Beneath 'Das Sein, Das Sollen'
    ========================================================================== */
-
 .epigraph-title-group {
-
   display: flex;
-
   flex-direction: column;
-
   align-items: flex-start;
-
   position: relative;
-
 }
-
-
 
 .epigraph-golden-line {
-
-  width: 240px; /* Golden Ratio section of epigraph heading */
-
+  width: 210px; /* Golden Ratio proportion to title */
   max-width: 85%;
-
-  height: 2px;
-
-  margin-top: 6px;
-
+  height: 1.618px;
+  margin-top: 8px;
   background: linear-gradient(
-
     90deg,
-
-    rgba(212, 175, 55, 0.15) 0%,
-
-    rgba(212, 175, 55, 0.85) 18%,
-
-    #fce09b 48%,
-
-    rgba(212, 175, 55, 0.75) 75%,
-
+    rgba(212, 175, 55, 0) 0%,
+    rgba(212, 175, 55, 0.75) 14.6%,
+    rgba(252, 224, 155, 0.95) 38.2%,
+    rgba(212, 175, 55, 0.7) 61.8%,
     rgba(212, 175, 55, 0) 100%
-
   );
-
   border-radius: 999px;
-
-  box-shadow: none;
-
+  box-shadow: 0 1px 6px rgba(212, 175, 55, 0.18);
   pointer-events: none;
-
 }
-
-
-
-
 
 /* ==========================================================================
 
