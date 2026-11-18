@@ -5274,32 +5274,29 @@ a {
 
 
 
-@media (max-width: 980px) {
-
+@media (max-width: 1024px) {
   .golden-split-section.ref-split-layout {
-
-    grid-template-columns: 1fr;
-
-    gap: 20px;
-
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+    margin-bottom: 24px !important;
   }
 
   .ref-spotlight-card,
+  .ref-portals-card {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
 
   .ref-portals-card {
-
-    height: auto;
-
+    padding-bottom: 20px !important;
   }
 
   .ref-inset-tray {
-
-    height: auto;
-
-    max-height: 440px;
-
+    height: auto !important;
+    max-height: 440px !important;
   }
-
 }
 
 
@@ -25171,11 +25168,33 @@ mark {
 
 
 /* 5. Home Page (index.html) */
-
 .golden-visitor-stats {
+  margin: 32px 0 16px 0 !important;
+  clear: both !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
 
-  margin: 20px 0 10px 0 !important;
-
+@media (max-width: 1024px) {
+  .golden-split-section.ref-split-layout {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+    margin-bottom: 24px !important;
+  }
+  .ref-spotlight-card,
+  .ref-portals-card {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  .ref-portals-card {
+    padding-bottom: 20px !important;
+  }
+  .golden-visitor-stats {
+    margin: 32px 0 16px 0 !important;
+    clear: both !important;
+  }
 }
 
 
@@ -27091,7 +27110,13 @@ h1.cv-hero-name,
   width: 100% !important;
 }
 /* Responsive Rules for CV Hero */
+/* Responsive Rules for CV Hero (Tablet & Mobile Golden Harmonization) */
 @media (max-width: 980px) {
+  .cv-hero-card {
+    overflow: hidden !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
   .cv-hero-top {
     flex-wrap: wrap !important;
   }
@@ -27116,34 +27141,98 @@ h1.cv-hero-name,
   }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 768px) {
   .cv-hero-card {
-    padding: 22px 18px !important;
+    padding: 24px 18px !important;
+    overflow: hidden !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
   .cv-hero-top {
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
+    gap: 16px !important;
   }
   .cv-portrait-col {
-    margin-bottom: 8px !important;
+    margin-bottom: 4px !important;
+  }
+  .cv-hero-headings {
+    text-align: center !important;
+    width: 100% !important;
   }
   .cv-hero-name {
-    font-size: 1.75rem !important;
+    font-size: 1.70rem !important;
+    text-align: center !important;
   }
-  .cv-hero-distinctions,
-  .cv-hero-badges {
-    justify-content: center !important;
+  .cv-hero-role {
+    text-align: center !important;
+  }
+  .cv-hero-affiliation {
+    text-align: center !important;
   }
   .cv-hero-cta-cluster {
     width: 100% !important;
     flex-direction: column !important;
     align-items: stretch !important;
+    gap: 10px !important;
   }
   .cv-round-btn-download,
   .cv-round-btn-secondary {
     width: 100% !important;
     justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+  /* Harmonious Executive Distinction Stack (Eliminates Staircase & Horizontal Overflow) */
+  .cv-hero-distinctions,
+  .cv-hero-badges {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 8px !important;
+    margin: 16px 0 0 0 !important;
+    box-sizing: border-box !important;
+  }
+  .cv-distinction-badge,
+  .cv-hero-badges span {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    line-height: 1.4 !important;
+    padding: 8px 12px !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.015em !important;
+    border-radius: 8px !important;
+    background: rgba(10, 22, 38, 0.75) !important;
+    border: 1px solid rgba(212, 175, 55, 0.25) !important;
+    text-align: left !important;
+  }
+  .cv-distinction-pip {
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+    background: #d4af37 !important;
+    margin-right: 4px !important;
+  }
+  /* Bio Summary Balanced Spacing & Gestalt Flow */
+  .cv-hero-summary {
+    font-size: 0.88rem !important;
+    line-height: 1.68 !important;
+    margin-top: 18px !important;
+    padding-top: 16px !important;
+    border-top: 1px solid rgba(212, 175, 55, 0.16) !important;
+    text-align: left !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
   .cv-sublayer-pills {
     width: 100% !important;
@@ -30556,6 +30645,8 @@ h1.cv-hero-name,
     grid-template-columns: 1fr !important;
     gap: 18px !important;
     padding: 20px 18px !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
   }
   .cv-monograph-cover-dock {
     max-width: 140px !important;
@@ -30564,6 +30655,52 @@ h1.cv-hero-name,
   .cv-monograph-title {
     font-size: 1.12rem !important;
     text-align: left !important;
+  }
+  .cv-monograph-actions {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    gap: 10px !important;
+    margin-top: 16px !important;
+    box-sizing: border-box !important;
+  }
+  .cv-monograph-actions .pub-academic-btn {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    height: 40px !important;
+    padding: 0 14px !important;
+    font-size: 0.70rem !important;
+    letter-spacing: 0.03em !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+  .cv-monograph-actions .pub-academic-btn span {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+  .cv-monograph-actions .pub-btn-arrow {
+    margin-left: 2px !important;
+    flex-shrink: 0 !important;
+  }
+  .cv-monograph-actions .pub-btn-icon-box {
+    flex-shrink: 0 !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .cv-monograph-actions .pub-academic-btn {
+    font-size: 0.66rem !important;
+    padding: 0 8px !important;
+    gap: 6px !important;
+  }
+  .cv-monograph-actions .pub-btn-icon-box {
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
   }
 }
 
