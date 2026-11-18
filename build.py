@@ -6669,9 +6669,8 @@ def generate_talks_page():
         <div class="service-portrait-card">
           {media_stage_html}
 
-          <!-- Bottom Content: Venue, Title, Synopsis, Capsule Chips, Action Button -->
+          <!-- Bottom Content: Title, Synopsis, Capsule Chips, Action Button -->
           <div class="service-card-bottom">
-            <div class="service-card-venue">{k_venue}</div>
             <h3 class="service-card-title">{k_title}</h3>
             <p class="service-card-desc">{k_abstract}</p>
 
@@ -6731,9 +6730,8 @@ def generate_talks_page():
         <div class="service-portrait-card">
           {media_stage_html}
 
-          <!-- Bottom Content: Publication, Title, Synopsis, Capsule Chips, Action Button -->
+          <!-- Bottom Content: Title, Synopsis, Capsule Chips, Action Button -->
           <div class="service-card-bottom">
-            <div class="service-card-venue">{o_pub}</div>
             <h3 class="service-card-title">{o_title}</h3>
             <p class="service-card-desc">{o_abstract}</p>
 
