@@ -3565,23 +3565,20 @@ document.addEventListener('click', (e) => {
 function initEpigraphScramble() {
   const link = document.getElementById('epigraph-scramble-text');
   if (!link) return;
+  if (link.__epigraphScrambleActive) return;
+  link.__epigraphScrambleActive = true;
 
-  // Accessibility: Respect users who prefer reduced motion
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return;
-  }
-
-  const phrase1 = (link.dataset.phrasePrimary || link.textContent || "Das Sein, Das Sollen.").trim();
-  const phrase2 = (link.dataset.phraseSecondary || "Path of Nobility.").trim();
+  const phrase1 = (link.getAttribute('data-phrase-primary') || 'Das Sein, Das Sollen.').trim();
+  const phrase2 = (link.getAttribute('data-phrase-secondary') || 'Path of Nobility.').trim();
   let currentTarget = phrase2;
   let isScrambling = false;
   let loopTimer = null;
 
-  // Classical, noble uppercase glyphs + philosophical Greek symbols
-  const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ΔΣΠΩΦΨΛΘ";
+  // Classical noble uppercase glyphs + philosophical Greek symbols
+  const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\u0394\u03a3\u03a0\u03a9\u03a6\u03a8\u039b\u0398";
 
   function randomGlyph() {
-    return GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+    return GLYPHS.charAt(Math.floor(Math.random() * GLYPHS.length));
   }
 
   function escapeChar(c) {
@@ -3597,19 +3594,17 @@ function initEpigraphScramble() {
     isScrambling = true;
     link.classList.add('is-scrambling');
 
-    const startText = link.textContent.trim();
+    const startText = (link.getAttribute('data-current') || link.textContent || phrase1).replace(/\u00a0/g, ' ').trim();
     const maxLen = Math.max(startText.length, targetText.length);
-
-    // Stately, deliberate duration: 1.8 seconds
-    const duration = 1800;
+    const duration = 1600; // 1.6s stately duration
     const startTime = performance.now();
 
     // Calculate left-to-right staggered resolution with subtle organic jitter
     const resolveTimes = [];
     for (let i = 0; i < maxLen; i++) {
       const baseProg = i / maxLen;
-      const jitter = (Math.random() - 0.5) * 0.12;
-      resolveTimes.push(Math.min(0.98, Math.max(0.08, baseProg * 0.72 + 0.22 + jitter)));
+      const jitter = (Math.random() - 0.5) * 0.10;
+      resolveTimes.push(Math.min(0.96, Math.max(0.18, 0.22 + baseProg * 0.68 + jitter)));
     }
 
     const currentChars = [];
@@ -3621,7 +3616,7 @@ function initEpigraphScramble() {
     }
 
     let lastTick = 0;
-    const tickInterval = 65; // ~15 glyph flips per second for measured cadence
+    const tickInterval = 55; // ~18 glyph flips per second
 
     function frame(now) {
       const elapsed = now - startTime;
@@ -3648,7 +3643,7 @@ function initEpigraphScramble() {
         } else {
           // Actively scrambling
           if (shouldTick || !currentChars[i].scrambleChar) {
-            currentChars[i].scrambleChar = (targetChar === ' ' || (startText[i] === ' ' && Math.random() > 0.4)) ? ' ' : randomGlyph();
+            currentChars[i].scrambleChar = (targetChar === ' ' || (startText[i] === ' ' && Math.random() > 0.45)) ? ' ' : randomGlyph();
           }
           const charToShow = currentChars[i].scrambleChar;
           const charOpacity = i >= startText.length ? Math.min(1, progress * 2.5) : 1;
@@ -3661,8 +3656,9 @@ function initEpigraphScramble() {
       if (progress < 1) {
         requestAnimationFrame(frame);
       } else {
-        // Complete! Lock into clean final string
-        link.textContent = targetText;
+        // Complete! Lock into clean final string and store state
+        link.innerHTML = `<span class="epigraph-scramble-inner">${escapeChar(targetText)}</span>`;
+        link.setAttribute('data-current', targetText);
         link.classList.remove('is-scrambling');
         isScrambling = false;
         if (callback) callback();
@@ -3685,13 +3681,13 @@ function initEpigraphScramble() {
     }, pauseTime);
   }
 
-  // Initial delay: 3.2 seconds after page load
+  // Initial delay: 1.0 second after page load for immediate visual delight
   loopTimer = setTimeout(() => {
     scrambleTo(currentTarget, () => {
       currentTarget = (currentTarget === phrase2) ? phrase1 : phrase2;
       scheduleNext();
     });
-  }, 3200);
+  }, 1000);
 
   // Interactive Hover: If user hovers while at rest, trigger transition
   link.addEventListener('mouseenter', () => {
@@ -3703,8 +3699,40 @@ function initEpigraphScramble() {
       });
     }
   });
+
+  // Interactive Touch: For touch/mobile devices
+  link.addEventListener('touchstart', () => {
+    if (!isScrambling) {
+      clearTimeout(loopTimer);
+      scrambleTo(currentTarget, () => {
+        currentTarget = (currentTarget === phrase2) ? phrase1 : phrase2;
+        scheduleNext();
+      });
+    }
+  }, { passive: true });
+
+  // Interactive Click: If on home page, trigger scramble immediately without reload
+  link.addEventListener('click', (e) => {
+    const isHome = window.location.pathname === '/' || window.location.pathname === '' || window.location.pathname.endsWith('index.html');
+    if (isHome) {
+      e.preventDefault();
+      if (!isScrambling) {
+        clearTimeout(loopTimer);
+        scrambleTo(currentTarget, () => {
+          currentTarget = (currentTarget === phrase2) ? phrase1 : phrase2;
+          scheduleNext();
+        });
+      }
+    }
+  });
 }
 
-
-
+// Immediate and fallback execution to guarantee the scramble engine always starts
+if (typeof window !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEpigraphScramble);
+  } else {
+    initEpigraphScramble();
+  }
+}
 

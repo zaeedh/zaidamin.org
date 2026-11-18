@@ -311,6 +311,11 @@ a {
   transform: scale(0.94);
 }
 
+.epigraph-scramble-inner {
+  display: inline-block;
+  transition: opacity 0.3s ease;
+}
+
 
 
 /* ==========================================================================
