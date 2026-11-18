@@ -239,10 +239,10 @@ a {
 }
 
 /* ==========================================================================
-   EPIGRAPH MONOCHROME BLACK-IN / BLACK-OUT WAVE ENGINE (GESTALT & GOLDEN RATIO)
-   Pure Monochromatic Black-Out to Black-In, Left-to-Right Elegant Wave
+   EPIGRAPH MONOCHROME BLACK-IN / BLACK-OUT ENGINE (GESTALT & GOLDEN RATIO)
+   Pure Monochromatic Black-Out to Black-In, Left-to-Right Soft Wave
    ("Das Sein, Das Sollen." <-> "Path of Nobility.")
-   Zero Scramble, Zero Shine, Pure Minimalist Elegance
+   Zero Scramble, Zero Shine, Pure Minimalist Elegance, Natural Kerning & Baseline
    ========================================================================== */
 .epigraph-scramble-link {
   color: #ffffff;
@@ -260,7 +260,7 @@ a {
   color: #cbd5e1;
 }
 
-/* Zero Shine: ambient glow removed */
+/* Zero Shine: ambient glow completely disabled */
 .epigraph-scramble-link::before {
   display: none !important;
 }
@@ -271,83 +271,56 @@ a {
   transition: opacity 0.5s ease;
 }
 
-/* Stage holding the black-in / black-out character slots */
-.epigraph-fade-stage {
-  display: inline-flex;
-  align-items: baseline;
-  position: relative;
-  z-index: 2;
-  vertical-align: baseline;
-}
-
-/* Overlapping Morph Slot */
-.morph-slot {
-  display: inline-grid;
-  grid-template-areas: "char";
-  place-items: center baseline;
+/* Stage holding the dual phrase layers with rock-solid baseline alignment */
+.epigraph-black-stage {
+  display: inline-block;
   position: relative;
   line-height: 1.2;
   vertical-align: baseline;
-  text-align: center;
+  text-align: left;
+  transition: width 0.75s cubic-bezier(0.25, 1, 0.4, 1);
+}
+
+/* Dual phrase layers - 100% natural kerning and text baseline */
+.epigraph-phrase {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  vertical-align: baseline;
+}
+
+.epigraph-phrase-1 {
+  position: relative;
+  z-index: 2;
+}
+
+.epigraph-phrase-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Individual character in the black-in / black-out wave */
+.black-char {
+  display: inline-block;
+  vertical-align: baseline;
+  line-height: inherit;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  transition: width 0.75s cubic-bezier(0.2, 0.8, 0.25, 1),
-              opacity 0.75s ease;
+  text-shadow: none !important;
+  will-change: opacity, color;
+  transition: opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.65s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.morph-slot.slot-space {
-  width: 0.36em !important;
-  min-width: 0.36em !important;
-}
-
-.morph-slot.slot-hidden {
-  width: 0 !important;
-  min-width: 0 !important;
-  opacity: 0 !important;
-  pointer-events: none;
-  margin: 0 !important;
-  padding: 0 !important;
-  visibility: hidden;
-}
-
-/* Individual Character Layer - Pure Minimalist Typography (Zero Shine) */
-.morph-char {
-  grid-area: char;
-  display: inline-block;
-  color: #ffffff;
-  text-shadow: none;
-  will-change: opacity, color, transform;
-  transition: opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1),
-              color 0.75s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.morph-char-curr {
-  opacity: 1;
-  color: #ffffff;
-  transform: translateY(0);
-}
-
-.morph-char-next {
-  opacity: 0;
-  color: #000000;
-  transform: translateY(0);
-  pointer-events: none;
-}
-
-/* Black-out: smoothly dims down into black and dissolves */
-.morph-char-curr.is-outgoing {
-  opacity: 0;
-  color: #000000;
-  transform: translateY(-1px);
-}
-
-/* Black-in: smoothly emerges from black into pure crisp white */
-.morph-char-next.is-incoming {
-  opacity: 1;
-  color: #ffffff;
-  transform: translateY(0);
+.black-char.black-space {
+  display: inline;
 }
 
 /* ==========================================================================

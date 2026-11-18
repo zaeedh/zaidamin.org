@@ -3565,23 +3565,21 @@ document.addEventListener('click', (e) => {
 function initEpigraphScramble() {
   const link = document.getElementById('epigraph-scramble-text');
   if (!link) return;
-  if (link.__epigraphBlackWaveActive) return;
-  link.__epigraphBlackWaveActive = true;
+  if (link.__epigraphDualBlackActive) return;
+  link.__epigraphDualBlackActive = true;
 
-  const phrase1 = (link.getAttribute('data-phrase-primary') || 'Das Sein, Das Sollen.').trim();
-  const phrase2 = (link.getAttribute('data-phrase-secondary') || 'Path of Nobility.').trim();
-  const maxLen = Math.max(phrase1.length, phrase2.length);
+  const phrase1Text = (link.getAttribute('data-phrase-primary') || 'Das Sein, Das Sollen.').trim();
+  const phrase2Text = (link.getAttribute('data-phrase-secondary') || 'Path of Nobility.').trim();
 
-  let currentText = phrase1;
-  let targetText = phrase2;
+  let activePhrase = 1;
   let isTransitioning = false;
   let loopTimer = null;
 
-  // Build stage with dual-layer slots for black-out to black-in transition
-  let stage = link.querySelector('.epigraph-fade-stage');
+  // Create Stage with separate phrase containers ensuring 100% natural kerning & baseline
+  let stage = link.querySelector('.epigraph-black-stage');
   if (!stage) {
     stage = document.createElement('span');
-    stage.className = 'epigraph-fade-stage';
+    stage.className = 'epigraph-black-stage';
     stage.setAttribute('aria-hidden', 'true');
     link.innerHTML = '';
     link.appendChild(stage);
@@ -3589,127 +3587,88 @@ function initEpigraphScramble() {
     stage.innerHTML = '';
   }
 
-  const slots = [];
-  for (let i = 0; i < maxLen; i++) {
-    const slot = document.createElement('span');
-    slot.className = 'morph-slot';
-    slot.setAttribute('data-idx', i);
+  function buildPhraseSpans(text, phraseClass) {
+    const phraseEl = document.createElement('span');
+    phraseEl.className = 'epigraph-phrase ' + phraseClass;
+    const charSpans = [];
 
-    const charCurr = document.createElement('span');
-    charCurr.className = 'morph-char morph-char-curr';
-
-    const charNext = document.createElement('span');
-    charNext.className = 'morph-char morph-char-next';
-
-    const initialChar = phrase1[i] || '';
-    if (initialChar === ' ') {
-      slot.classList.add('slot-space');
-      charCurr.textContent = '\u00a0';
-    } else if (initialChar) {
-      charCurr.textContent = initialChar;
-    } else {
-      slot.classList.add('slot-hidden');
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      const span = document.createElement('span');
+      span.className = 'black-char';
+      if (ch === ' ') {
+        span.classList.add('black-space');
+        span.innerHTML = '&nbsp;';
+      } else {
+        span.textContent = ch;
+      }
+      phraseEl.appendChild(span);
+      charSpans.push(span);
     }
-
-    slot.appendChild(charCurr);
-    slot.appendChild(charNext);
-    stage.appendChild(slot);
-
-    slots.push({
-      slot: slot,
-      charCurr: charCurr,
-      charNext: charNext
-    });
+    return { el: phraseEl, spans: charSpans };
   }
 
-  function blackTransitionTo(destinationText, callback) {
+  const p1 = buildPhraseSpans(phrase1Text, 'epigraph-phrase-1');
+  const p2 = buildPhraseSpans(phrase2Text, 'epigraph-phrase-2');
+
+  // Initial state: Phrase 1 is visible (crisp white), Phrase 2 is hidden (black & 0 opacity)
+  p1.spans.forEach(s => {
+    s.style.color = '#ffffff';
+    s.style.opacity = '1';
+  });
+  p2.spans.forEach(s => {
+    s.style.color = '#000000';
+    s.style.opacity = '0';
+  });
+
+  stage.appendChild(p1.el);
+  stage.appendChild(p2.el);
+
+  // Measure natural widths for seamless fluid container expansion/contraction
+  const w1 = p1.el.offsetWidth || 230;
+  const w2 = p2.el.offsetWidth || 180;
+  stage.style.width = w1 + 'px';
+
+  function transition(toPhrase, callback) {
     if (isTransitioning) return;
     isTransitioning = true;
 
-    const destLen = destinationText.length;
-    // Elegant left-to-right wave: 110ms step per letter
-    const waveStep = 110;
-    // Soft black-out / black-in duration: 750ms
-    const fadeDuration = 750;
+    const outgoing = (toPhrase === 2) ? p1 : p2;
+    const incoming = (toPhrase === 2) ? p2 : p1;
+    const targetWidth = (toPhrase === 2) ? w2 : w1;
+
+    // Smoothly adjust container width
+    stage.style.width = targetWidth + 'px';
+
+    const step = 95; // 95ms left-to-right cadence
+    const fadeDuration = 650; // 650ms soft dissolve into black / out of black
+    const overlap = 220; // 220ms soft overlap
     let maxDelay = 0;
 
-    slots.forEach((item, i) => {
-      const toChar = destinationText[i] || '';
-      const delay = i * waveStep;
-      if (delay + fadeDuration > maxDelay) {
-        maxDelay = delay + fadeDuration;
-      }
-
-      // Trailing characters beyond destination length fade into black and collapse
-      if (i >= destLen) {
-        setTimeout(() => {
-          item.charCurr.classList.add('is-outgoing');
-          setTimeout(() => {
-            item.slot.classList.add('slot-hidden');
-          }, fadeDuration * 0.7);
-        }, delay);
-        return;
-      }
-
-      // Characters emerging from hidden state
-      if (item.slot.classList.contains('slot-hidden')) {
-        setTimeout(() => {
-          item.slot.classList.remove('slot-hidden');
-          item.charNext.textContent = toChar === ' ' ? '\u00a0' : toChar;
-          if (toChar === ' ') item.slot.classList.add('slot-space');
-          else item.slot.classList.remove('slot-space');
-
-          void item.charNext.offsetWidth;
-          item.charNext.classList.add('is-incoming');
-        }, delay);
-        return;
-      }
-
-      // Space transitions
-      if (toChar === ' ') {
-        setTimeout(() => {
-          item.charCurr.classList.add('is-outgoing');
-          item.slot.classList.add('slot-space');
-        }, delay);
-        return;
-      }
-
-      // Standard character: Left-to-right Black-Out then Black-In (Zero Shine, Zero Scramble)
+    // 1. Black out outgoing phrase from left to right
+    outgoing.spans.forEach((span, i) => {
+      const delay = i * step;
       setTimeout(() => {
-        item.charNext.textContent = toChar;
-        item.slot.classList.remove('slot-space');
-
-        void item.charNext.offsetWidth;
-
-        // Current character dims down into black (out), new character emerges from black (in)
-        item.charCurr.classList.add('is-outgoing');
-        item.charNext.classList.add('is-incoming');
+        span.style.color = '#000000';
+        span.style.opacity = '0';
       }, delay);
     });
 
-    // When the full wave has finished
+    // 2. Black in incoming phrase from left to right
+    incoming.spans.forEach((span, j) => {
+      const delay = j * step + overlap;
+      if (delay + fadeDuration > maxDelay) {
+        maxDelay = delay + fadeDuration;
+      }
+      setTimeout(() => {
+        span.style.color = '#ffffff';
+        span.style.opacity = '1';
+      }, delay);
+    });
+
+    // When wave completes
     setTimeout(() => {
-      // Re-normalize all slots for next transition
-      slots.forEach((item, i) => {
-        const charNow = destinationText[i] || '';
-        item.charCurr.classList.remove('is-outgoing');
-        item.charNext.classList.remove('is-incoming');
-
-        if (charNow === ' ') {
-          item.charCurr.textContent = '\u00a0';
-          item.slot.classList.add('slot-space');
-        } else if (charNow) {
-          item.charCurr.textContent = charNow;
-          item.slot.classList.remove('slot-space');
-          item.slot.classList.remove('slot-hidden');
-        } else {
-          item.charCurr.textContent = '';
-          item.slot.classList.add('slot-hidden');
-        }
-        item.charNext.textContent = '';
-      });
-
-      currentText = destinationText;
+      activePhrase = toPhrase;
       isTransitioning = false;
       if (callback) callback();
     }, maxDelay + 80);
@@ -3717,21 +3676,19 @@ function initEpigraphScramble() {
 
   function scheduleNext() {
     clearTimeout(loopTimer);
-    // Pause intervals: 6.5s on primary ("Das Sein, Das Sollen."), 5.5s on secondary ("Path of Nobility.")
-    const pauseTime = (targetText === phrase2) ? 6500 : 5500;
+    const pauseTime = (activePhrase === 1) ? 6500 : 5500;
+    const nextPhrase = (activePhrase === 1) ? 2 : 1;
 
     loopTimer = setTimeout(() => {
-      blackTransitionTo(targetText, () => {
-        targetText = (targetText === phrase2) ? phrase1 : phrase2;
+      transition(nextPhrase, () => {
         scheduleNext();
       });
     }, pauseTime);
   }
 
-  // Initial delay: 2.0s after page load
+  // Initial delay: 2.0s post-load
   loopTimer = setTimeout(() => {
-    blackTransitionTo(targetText, () => {
-      targetText = (targetText === phrase2) ? phrase1 : phrase2;
+    transition(2, () => {
       scheduleNext();
     });
   }, 2000);
@@ -3740,8 +3697,8 @@ function initEpigraphScramble() {
   link.addEventListener('mouseenter', () => {
     if (!isTransitioning) {
       clearTimeout(loopTimer);
-      blackTransitionTo(targetText, () => {
-        targetText = (targetText === phrase2) ? phrase1 : phrase2;
+      const nextPhrase = (activePhrase === 1) ? 2 : 1;
+      transition(nextPhrase, () => {
         scheduleNext();
       });
     }
@@ -3751,8 +3708,8 @@ function initEpigraphScramble() {
   link.addEventListener('touchstart', () => {
     if (!isTransitioning) {
       clearTimeout(loopTimer);
-      blackTransitionTo(targetText, () => {
-        targetText = (targetText === phrase2) ? phrase1 : phrase2;
+      const nextPhrase = (activePhrase === 1) ? 2 : 1;
+      transition(nextPhrase, () => {
         scheduleNext();
       });
     }
@@ -3765,8 +3722,8 @@ function initEpigraphScramble() {
       e.preventDefault();
       if (!isTransitioning) {
         clearTimeout(loopTimer);
-        blackTransitionTo(targetText, () => {
-          targetText = (targetText === phrase2) ? phrase1 : phrase2;
+        const nextPhrase = (activePhrase === 1) ? 2 : 1;
+        transition(nextPhrase, () => {
           scheduleNext();
         });
       }
@@ -3774,7 +3731,7 @@ function initEpigraphScramble() {
   });
 }
 
-// Immediate and fallback execution to guarantee the black-in black-out engine always starts
+// Immediate and fallback execution to guarantee the black wave engine always starts
 if (typeof window !== 'undefined') {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initEpigraphScramble);
