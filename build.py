@@ -5838,6 +5838,8 @@ def generate_research_page():
             clean_read_time += " Read"
         escaped_read_time = _html_mod.escape(clean_read_time)
 
+        escaped_title_attr = _html_mod.escape(title, quote=True)
+
         cards_html += f'''
         <article class="article-card{card_spotlight_class}" data-category="{cat}" data-title="{title.lower()}" data-tags="{tags_str}">
           <!-- Small Thumbnail Frame (Golden Ratio Harmonic Proportion) -->
@@ -5847,9 +5849,14 @@ def generate_research_page():
               <div class="article-card-thumb-overlay"></div>
             </a>
             {spotlight_badge}
-            <button type="button" class="article-card-bookmark-btn" data-slug="{slug}" onclick="toggleArticleBookmark(event, this, \'{slug}\')" aria-label="Bookmark article" title="Bookmark article" aria-pressed="false">
-              <svg class="bookmark-icon" width="16" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-            </button>
+            <div class="article-card-thumb-actions">
+              <button type="button" class="article-card-action-btn article-card-bookmark-btn" data-slug="{slug}" onclick="toggleArticleBookmark(event, this, \'{slug}\')" aria-label="Bookmark article" title="Bookmark article" aria-pressed="false">
+                <svg class="action-icon bookmark-icon" width="14" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+              </button>
+              <button type="button" class="article-card-action-btn article-card-share-btn" data-slug="{slug}" data-title="{escaped_title_attr}" onclick="shareArticleLink(event, this, \'{slug}\', \'{escaped_title_attr}\')" aria-label="Share article" title="Share article">
+                <svg class="action-icon share-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9V5l11 7-11 7v-4.1c-5 0-8.5 1.6-11 5.1 1-5 4-10 11-11z"></path></svg>
+              </button>
+            </div>
           </div>
 
           <!-- Content Body (Gestalt Proximity) -->
@@ -6087,6 +6094,68 @@ def generate_research_page():
         });
       });
     })();
+
+    // Micro-Toast Notification Utility
+    function showShareToast(message) {
+      var toast = document.getElementById('article-share-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'article-share-toast';
+        toast.className = 'share-micro-toast';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = message || 'Link copied to clipboard!';
+      toast.classList.add('show');
+      clearTimeout(window.__shareToastTimer);
+      window.__shareToastTimer = setTimeout(function() {
+        toast.classList.remove('show');
+      }, 2200);
+    }
+
+    // Interactive Article Share
+    window.shareArticleLink = function(e, btn, slug, title) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      var url = window.location.origin + '/article/' + slug;
+      if (navigator.share) {
+        navigator.share({
+          title: title || 'Dr. Zaid Amin - Article',
+          url: url
+        }).catch(function() {});
+        return;
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function() {
+          btn.classList.add('copied');
+          showShareToast('Article link copied to clipboard!');
+          setTimeout(function() { btn.classList.remove('copied'); }, 1800);
+        }).catch(function() {
+          fallbackCopy(url, btn);
+        });
+      } else {
+        fallbackCopy(url, btn);
+      }
+    };
+
+    function fallbackCopy(text, btn) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        btn.classList.add('copied');
+        showShareToast('Article link copied to clipboard!');
+        setTimeout(function() { btn.classList.remove('copied'); }, 1800);
+      } catch(err) {
+        showShareToast('URL: ' + text);
+      }
+      document.body.removeChild(ta);
+    }
 
     // Interactive Article Bookmark Storage
     window.toggleArticleBookmark = function(e, btn, slug) {

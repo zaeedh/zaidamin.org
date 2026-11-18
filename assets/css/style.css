@@ -13318,69 +13318,114 @@ a {
   text-decoration: none !important;
 }
 
-/* ── Pure Floating Bookmark Icon (No Circle Background) ── */
-.article-card-bookmark-btn {
+/* ── Symmetrical Floating Dual Action Dock (Bookmark + Share Glass Circles) ── */
+.article-card-thumb-actions {
   position: absolute !important;
   top: 10px !important;
   right: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  z-index: 5 !important;
+}
+
+.article-card-action-btn {
+  position: relative !important;
   width: 32px !important;
   height: 32px !important;
-  border-radius: 0 !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  display: flex !important;
+  min-width: 32px !important;
+  max-width: 32px !important;
+  border-radius: 50% !important;
+  background: rgba(8, 20, 36, 0.65) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
+  display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   cursor: pointer !important;
   padding: 0 !important;
-  color: rgba(255, 255, 255, 0.92) !important;
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease !important;
-  z-index: 4 !important;
+  color: #ffffff !important;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease !important;
   outline: none !important;
+  box-sizing: border-box !important;
 }
 
-.article-card-bookmark-btn:hover {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  color: #d4af37 !important;
-  transform: scale(1.15) !important;
+.article-card-action-btn:hover {
+  background: rgba(14, 32, 54, 0.88) !important;
+  border-color: rgba(212, 175, 55, 0.55) !important;
+  color: #fef08a !important;
+  transform: translateY(-1px) scale(1.06) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45) !important;
 }
 
-.article-card-bookmark-btn:active {
-  transform: scale(0.92) !important;
+.article-card-action-btn:active {
+  transform: scale(0.94) !important;
 }
 
-.article-card-bookmark-btn.bookmarked {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  color: #d4af37 !important;
-}
-
-.article-card-bookmark-btn .bookmark-icon {
+.article-card-action-btn .action-icon {
   display: block !important;
   margin: auto !important;
-  transform: none !important;
+  color: inherit !important;
   stroke: currentColor !important;
   fill: none !important;
   flex-shrink: 0 !important;
-  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55)) !important;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), fill 0.2s ease, stroke 0.2s ease, filter 0.2s ease !important;
+  transition: all 0.2s ease !important;
 }
 
-.article-card-bookmark-btn:hover .bookmark-icon {
-  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 6px rgba(212, 175, 55, 0.5)) !important;
+.article-card-action-btn .bookmark-icon {
+  transform: translateY(0.5px) !important; /* Optical center compensation for notch */
+}
+
+/* Bookmarked Active State */
+.article-card-bookmark-btn.bookmarked {
+  background: rgba(212, 175, 55, 0.22) !important;
+  border-color: rgba(212, 175, 55, 0.65) !important;
+  color: #d4af37 !important;
 }
 
 .article-card-bookmark-btn.bookmarked .bookmark-icon {
   fill: #d4af37 !important;
   stroke: #d4af37 !important;
-  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 8px rgba(212, 175, 55, 0.6)) !important;
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.6)) !important;
+}
+
+/* Share Copied Success State */
+.article-card-share-btn.copied {
+  background: rgba(34, 197, 94, 0.25) !important;
+  border-color: rgba(34, 197, 94, 0.70) !important;
+  color: #4ade80 !important;
+  transform: scale(1.08) !important;
+}
+
+/* Micro-Toast Feedback for Clipboard Share */
+.share-micro-toast {
+  position: fixed !important;
+  bottom: 28px !important;
+  left: 50% !important;
+  transform: translateX(-50%) translateY(20px) !important;
+  background: rgba(8, 20, 36, 0.95) !important;
+  border: 1px solid rgba(212, 175, 55, 0.45) !important;
+  color: #f8fafc !important;
+  padding: 8px 20px !important;
+  border-radius: 9999px !important;
+  font-family: var(--font-sans, sans-serif) !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.60) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  z-index: 99999 !important;
+}
+
+.share-micro-toast.show {
+  opacity: 1 !important;
+  transform: translateX(-50%) translateY(0) !important;
 }
 
 /* ── Symmetrical Spotlight Pill Badge (Top-Left) ── */
