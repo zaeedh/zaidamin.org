@@ -302,6 +302,48 @@
   },
   "page_traces": [
     {
+      "id": "tr-1794978120978",
+      "timestamp": "2026-11-18T05:02:00.978Z",
+      "path": "/talks",
+      "title": "Media & Talks",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-8D2AE2",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Google Chrome",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Internal Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+    },
+    {
+      "id": "tr-1794978114018",
+      "timestamp": "2026-11-18T05:01:54.018Z",
+      "path": "/cv",
+      "title": "Achievement & Curriculum Vitae",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-8D2AE2",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Google Chrome",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Internal Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+    },
+    {
       "id": "tr-1794971163742",
       "timestamp": "2026-11-18T03:06:03.742Z",
       "path": "/research",
@@ -8077,7 +8119,7 @@
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-18T11:06:03.755230",
+  "updated_at": "2026-11-18T13:02:00.988827",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -8165,7 +8207,7 @@
     "uniten-master-viva-external-examiner-nist-csf-2026": 5
   },
   "server_live_hits": {
-    "MY": 310,
+    "MY": 312,
     "OTHER": 3
   }
 }

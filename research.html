@@ -585,15 +585,25 @@
 
         <div class="articles-controls">
 
-          <div class="articles-search-wrap">
+          <div class="articles-controls-header">
 
-            <span class="articles-search-icon">
+            <div class="articles-search-wrap">
 
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <span class="articles-search-icon">
 
-            </span>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
 
-            <input type="text" id="article-search" class="article-search-input" placeholder="Search essays..." aria-label="Search across 84 scholarly essays by keyword, topic, or title" autocomplete="off">
+              </span>
+
+              <input type="text" id="article-search" class="article-search-input" placeholder="Search essays by keyword, topic, or title..." aria-label="Search across 84 scholarly essays by keyword, topic, or title" autocomplete="off">
+
+            </div>
+
+            <div id="article-count-display" class="article-count-indicator">
+
+              Showing all 84 essays
+
+            </div>
 
           </div>
 
@@ -602,12 +612,6 @@
             <button class="article-cat-btn active" data-category="all">All (84)</button><button class="article-cat-btn" data-category="AI & Cybernetics">AI & Cybernetics (53)</button><button class="article-cat-btn" data-category="Essays & Perspectives">Essays & Perspectives (22)</button><button class="article-cat-btn" data-category="Pedagogy & Education">Pedagogy & Education (3)</button><button class="article-cat-btn" data-category="Digital Ethics & HCI">Digital Ethics & HCI (3)</button><button class="article-cat-btn" data-category="Philosophy & Society">Philosophy & Society (2)</button><button class="article-cat-btn" data-category="Epistemic & Media">Epistemic & Media (1)</button>
 
           </nav>
-
-        </div>
-
-        <div id="article-count-display" class="article-count-indicator" style="display: none; margin: -12px 0 16px 4px; font-size: 0.80rem; color: #94a3b8; font-weight: 600;">
-
-          Showing all 84 articles
 
         </div>
 
@@ -4839,13 +4843,11 @@
 
           if (currentSearch || currentCategory !== 'all') {
 
-            countDisplay.style.display = 'block';
-
-            countDisplay.textContent = 'Showing ' + visibleCount + ' of ' + cards.length + ' articles';
+            countDisplay.textContent = 'Showing ' + visibleCount + ' of ' + cards.length + ' essays';
 
           } else {
 
-            countDisplay.style.display = 'none';
+            countDisplay.textContent = 'Showing all ' + cards.length + ' essays';
 
           }
 

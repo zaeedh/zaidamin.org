@@ -6056,13 +6056,11 @@ def generate_research_page():
 
           if (currentSearch || currentCategory !== 'all') {
 
-            countDisplay.style.display = 'block';
-
-            countDisplay.textContent = 'Showing ' + visibleCount + ' of ' + cards.length + ' articles';
+            countDisplay.textContent = 'Showing ' + visibleCount + ' of ' + cards.length + ' essays';
 
           } else {
 
-            countDisplay.style.display = 'none';
+            countDisplay.textContent = 'Showing all ' + cards.length + ' essays';
 
           }
 
@@ -6239,15 +6237,25 @@ def generate_research_page():
 
         <div class="articles-controls">
 
-          <div class="articles-search-wrap">
+          <div class="articles-controls-header">
 
-            <span class="articles-search-icon">
+            <div class="articles-search-wrap">
 
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <span class="articles-search-icon">
 
-            </span>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
 
-            <input type="text" id="article-search" class="article-search-input" placeholder="Search essays..." aria-label="Search across {len(articles)} scholarly essays by keyword, topic, or title" autocomplete="off">
+              </span>
+
+              <input type="text" id="article-search" class="article-search-input" placeholder="Search essays by keyword, topic, or title..." aria-label="Search across {len(articles)} scholarly essays by keyword, topic, or title" autocomplete="off">
+
+            </div>
+
+            <div id="article-count-display" class="article-count-indicator">
+
+              Showing all {len(articles)} essays
+
+            </div>
 
           </div>
 
@@ -6256,12 +6264,6 @@ def generate_research_page():
             {cat_pills_html}
 
           </nav>
-
-        </div>
-
-        <div id="article-count-display" class="article-count-indicator" style="display: none; margin: -12px 0 16px 4px; font-size: 0.80rem; color: #94a3b8; font-weight: 600;">
-
-          Showing all {len(articles)} articles
 
         </div>
 
