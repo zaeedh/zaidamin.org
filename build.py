@@ -9206,77 +9206,75 @@ def render_cv_strip_card(
     cat_theme="cyan",
     show_verification_btn=False
 ):
-    primary_btn = ""
-
     # Secondary Action Pill
     if secondary_btn_label and secondary_btn_url:
         is_mailto = secondary_btn_url.startswith("mailto:")
         is_ext = secondary_btn_url.startswith("http")
         sec_target = ' target="_blank" rel="noopener"' if is_ext else ''
 
-        if is_mailto:
-            sec_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>'
-        elif 'gallery' in secondary_btn_label.lower() or 'talks' in secondary_btn_url:
-            sec_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>'
-        else:
-            sec_svg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>'
-
-        secondary_btn = f'''<a href="{secondary_btn_url}"{sec_target} class="pub-academic-btn pub-btn-cite" title="{secondary_btn_label}">
-          <span class="pub-btn-icon-box">{sec_svg}</span>
+        secondary_btn = f'''<a href="{secondary_btn_url}"{sec_target} class="cv-entry-action-btn" title="{secondary_btn_label}">
           <span>{secondary_btn_label}</span>
-          <span class="pub-btn-arrow">&nearr;</span>
+          <span class="cv-action-arrow">&nearr;</span>
         </a>'''
     else:
         secondary_btn = ""
 
-    dot_separator = '<span class="cv-kicker-sep">&bull;</span>' if sub_extra else ''
-    sub_extra_html = f'<span class="cv-strip-subextra">{sub_extra}</span>' if sub_extra else ''
-
-    card_cls = f"pub-strip-card cv-strip-card {extra_classes}".strip()
+    clean_t = clean_academic_title(title) if title else ""
+    card_cls = f"cv-entry-item cv-distinction-card {extra_classes}".strip()
     data_attr_str = f" {data_attrs}" if data_attrs else ""
 
-    actions_dock = f"""
-            <!-- Right Action Dock (Refined Academic Actions) -->
-            <div class="pub-strip-actions">
-              {secondary_btn}
-            </div>""" if secondary_btn else ""
+    # Clean sub_extra if redundant with cat_pill
+    clean_sub = sub_extra.strip() if sub_extra else ""
+    if clean_sub.upper() == str(cat_pill).upper():
+        clean_sub = ""
 
-    featured_html = f'<span class="cv-kicker-sep">&bull;</span> <span class="pub-kicker-featured">★ Spotlight</span>' if featured_pill else ''
+    spotlight_tag = f'<span class="cv-spotlight-pip">★ Spotlight</span>' if featured_pill else ''
 
-    clean_t = clean_academic_title(title) if title else ""
+    # Row 1: Kicker / Meta Ribbon: Year • Badge • Venue Chip
+    kicker_parts = []
+    if year_pill:
+        kicker_parts.append(f'<span class="cv-card-year">{year_pill}</span>')
+    if cat_pill:
+        kicker_parts.append(f'<span class="cv-card-badge cat-{cat_theme}">{cat_pill}</span>')
+    if venue_chip:
+        kicker_parts.append(f'<span class="cv-card-chip">{venue_chip}</span>')
+
+    kicker_dots = ' <span class="cv-card-dot">&bull;</span> '.join(kicker_parts)
+    kicker_html = f"""<div class="cv-card-kicker">
+      <div class="cv-card-kicker-left">{kicker_dots}</div>
+      {spotlight_tag}
+    </div>""" if kicker_parts else ""
+
+    # Row 3: Organization & Scope Subline: Venue Name • Category / Sub-extra
+    sub_parts = []
+    org_text = venue_name if venue_name else venue_chip
+    if org_text:
+        sub_parts.append(f'<span class="cv-card-org">{org_text}</span>')
+    if clean_sub:
+        sub_parts.append(f'<span class="cv-card-scope">{clean_sub}</span>')
+
+    sub_line_inner = ' <span class="cv-card-dot">&bull;</span> '.join(sub_parts)
+    sub_line_html = f"""<div class="cv-card-subline">
+      <div class="cv-card-subline-left">{sub_line_inner}</div>
+      {f'<div class="cv-card-subline-right">{secondary_btn}</div>' if secondary_btn else ''}
+    </div>""" if sub_parts else ""
 
     return f"""
         <article class="{card_cls}"{data_attr_str}>
-          <div class="pub-strip-main">
-            <!-- Left Scholarly Content (Golden Ratio) -->
-            <div class="pub-strip-content">
-              <!-- Row 1: Quiet Academic Meta Kicker (No 4-Pill Clutter) -->
-              <div class="cv-card-meta-kicker">
-                {f'<span class="cv-kicker-year">{year_pill}</span>' if year_pill else ''}
-                {f'<span class="cv-kicker-sep">&bull;</span> <span class="cv-kicker-badge cat-{cat_theme}">{cat_pill}</span>' if cat_pill else ''}
-                {f'<span class="cv-kicker-sep">&bull;</span> <span class="cv-kicker-venue" title="{venue_chip}">{venue_chip}</span>' if venue_chip else ''}
-                {featured_html}
-              </div>
+          <!-- Row 1: Kicker Ribbon (Year • Badge • Chip) -->
+          {kicker_html}
 
-              <!-- Row 2: Title in Cinzel Roman Serif (Consistent with Section Heading) -->
-              <h3 class="cv-strip-title font-cinzel">{clean_t}</h3>
+          <!-- Row 2: Title in Cinzel Roman Serif (Gold on Hover) -->
+          <h3 class="cv-entry-title font-cinzel">{clean_t}</h3>
 
-              <!-- Optional Media -->
-              {media_html}
+          <!-- Row 3: Organization & Category Subline in Cormorant Italic -->
+          {sub_line_html}
 
-              <!-- Row 3: Subtitle / Institution / Scope -->
-              <div class="cv-strip-venue-line">
-                <span class="cv-strip-venue-name">{venue_name}</span>
-                {dot_separator}
-                {sub_extra_html}
-              </div>
+          <!-- Optional Media -->
+          {media_html}
 
-              <!-- Row 4: Narrative Description / Excerpt -->
-              {f'<p class="pub-strip-excerpt">{excerpt}</p>' if excerpt else ''}
-            </div>
-
-            {actions_dock}
-          </div>
+          <!-- Row 4: Narrative / Excerpt Details (Golden Ratio Leading) -->
+          {f'<p class="cv-entry-details">{excerpt}</p>' if excerpt else ''}
         </article>
     """
 
@@ -9672,7 +9670,7 @@ def generate_cv_page():
 
 
 
-            <!-- SECTION 1: PRESTIGIOUS HONORS, AWARDS & RESEARCH GRANTS -->
+      <!-- SECTION 1: PRESTIGIOUS HONORS, AWARDS & RESEARCH GRANTS (ATS-FRIENDLY LINEAR ARCHITECTURE) -->
 
       <section id="honors" class="cv-section cv-honors-section">
 
@@ -9686,52 +9684,7 @@ def generate_cv_page():
 
         </div>
 
-
-
-        <!-- Gestalt Category Filter Dock (Reduced Visual Noise & Instant Hook) -->
-
-        <div class="cv-distinction-filter-dock" role="tablist" aria-label="Filter Honors & Distinctions">
-
-          <button type="button" class="cv-distinction-filter-btn active" onclick="filterDistinctions(this, 'all')">
-
-            <span>All Distinctions</span>
-
-            <span class="cv-filter-count">{len(cv['achievements_and_grants'])}</span>
-
-          </button>
-
-          <button type="button" class="cv-distinction-filter-btn" onclick="filterDistinctions(this, 'awards')">
-
-            <span class="cv-filter-dot cv-filter-dot-gold"></span>
-
-            <span>Honors &amp; Awards</span>
-
-            <span class="cv-filter-count">6</span>
-
-          </button>
-
-          <button type="button" class="cv-distinction-filter-btn" onclick="filterDistinctions(this, 'grants')">
-
-            <span class="cv-filter-dot cv-filter-dot-cyan"></span>
-
-            <span>Competitive Grants</span>
-
-            <span class="cv-filter-count">5</span>
-
-          </button>
-
-          <button type="button" class="cv-distinction-filter-btn" onclick="filterDistinctions(this, 'governance')">
-
-            <span class="cv-filter-dot cv-filter-dot-indigo"></span>
-
-            <span>Governance &amp; Chairs</span>
-
-            <span class="cv-filter-count">5</span>
-
-          </button>
-
-        </div>
-
+        <div class="cv-timeline-sheet">
     """
 
 
@@ -9795,9 +9748,7 @@ def generate_cv_page():
             title=item['title'],
 
             venue_name=item['organization'],
-
             sub_extra=cat_label,
-
             excerpt=item['details'],
 
             verification_url="",
@@ -9822,6 +9773,7 @@ def generate_cv_page():
 
     html += f"""
 
+        </div>
       </section>
 
 
@@ -9838,6 +9790,7 @@ def generate_cv_page():
 
         </div>
 
+        <div class="cv-timeline-sheet">
     """
 
 
@@ -9851,21 +9804,13 @@ def generate_cv_page():
 
 
         html += render_cv_strip_card(
-
             idx=idx,
-
-            cat_pill="GOVERNANCE",
-
+            cat_pill="",
             year_pill=item['period'],
-
             venue_chip=inst.split(',')[0],
-
             title=item['role'],
-
             venue_name=inst,
-
-            sub_extra=item.get('scope', 'Academic Administration'),
-
+            sub_extra="",
             excerpt=item['responsibilities'],
 
             verification_url="",
@@ -9886,6 +9831,7 @@ def generate_cv_page():
 
     html += f"""
 
+        </div>
       </section>
 
 
@@ -9902,6 +9848,7 @@ def generate_cv_page():
 
         </div>
 
+        <div class="cv-timeline-sheet">
     """
 
 
@@ -9917,19 +9864,12 @@ def generate_cv_page():
         html += render_cv_strip_card(
 
             idx=idx,
-
-            cat_pill="APPOINTMENT",
-
+            cat_pill="",
             year_pill=item['period'],
-
             venue_chip=inst.split(',')[0],
-
             title=item['role'],
-
             venue_name=inst,
-
-            sub_extra="Career Appointment & Professional Instruction",
-
+            sub_extra="",
             excerpt=item['description'],
 
             verification_url="",
@@ -9950,6 +9890,7 @@ def generate_cv_page():
 
     html += f"""
 
+        </div>
       </section>
 
 
@@ -9966,6 +9907,7 @@ def generate_cv_page():
 
         </div>
 
+        <div class="cv-timeline-sheet">
     """
 
 
@@ -9983,21 +9925,13 @@ def generate_cv_page():
 
 
         html += render_cv_strip_card(
-
             idx=idx,
-
-            cat_pill="DOCTORAL DEGREE" if is_phd else ("MASTER DEGREE" if 'master' in deg.lower() else "FORMAL DEGREE"),
-
+            cat_pill="",
             year_pill=item['period'],
-
             venue_chip=inst.split(',')[0],
-
             title=deg,
-
             venue_name=f"{inst} &bull; {item['country']}",
-
             sub_extra=item.get('distinction', ''),
-
             excerpt=f"<strong>Core Focus:</strong> {item['focus']}",
 
             verification_url="",
@@ -10018,8 +9952,52 @@ def generate_cv_page():
 
     html += f"""
 
+        </div>
       </section>
 
+
+      
+      <!-- SECTION: CORE COMPETENCIES, METHODOLOGIES & RESEARCH DOMAINS (ATS KEYWORDS) -->
+      <section id="skills" class="cv-section">
+        <div class="cv-section-title-wrap">
+          <h2 class="cv-section-title">Core Competencies, Methodologies &amp; Research Domains</h2>
+          <span class="cv-section-count">Verified Expertise</span>
+        </div>
+        <div class="cv-timeline-sheet cv-ats-skills-sheet">
+          <div class="cv-ats-skill-group">
+            <h3 class="cv-ats-group-title">AI, Sociotechnical Computing &amp; HCI</h3>
+            <div class="cv-ats-tags-cloud">
+              <span class="cv-ats-tag">Behavior &amp; Social Computing</span>
+              <span class="cv-ats-tag">Human-Computer Interaction (HCI)</span>
+              <span class="cv-ats-tag">Digital Ethics &amp; AI Governance</span>
+              <span class="cv-ats-tag">Trustworthy AI &amp; Epistemology</span>
+              <span class="cv-ats-tag">Persuasive Technology</span>
+              <span class="cv-ats-tag">Interaction Design &amp; UX Rigor</span>
+              <span class="cv-ats-tag">Immersive Technology &amp; VR</span>
+            </div>
+          </div>
+          <div class="cv-ats-skill-group">
+            <h3 class="cv-ats-group-title">Higher Education Leadership &amp; Accreditation</h3>
+            <div class="cv-ats-tags-cloud">
+              <span class="cv-ats-tag">Curriculum Architecture &amp; Instructional Design</span>
+              <span class="cv-ats-tag">Malaysian Qualifications Agency (MQA) Accreditation</span>
+              <span class="cv-ats-tag">QS World University Rankings Strategic Portfolio</span>
+              <span class="cv-ats-tag">Postgraduate Ph.D. &amp; Master Dissertation Supervision</span>
+              <span class="cv-ats-tag">Institutional Quality Assurance</span>
+            </div>
+          </div>
+          <div class="cv-ats-skill-group">
+            <h3 class="cv-ats-group-title">Scholarly Rigor &amp; Editorial Leadership</h3>
+            <div class="cv-ats-tags-cloud">
+              <span class="cv-ats-tag">Scopus &amp; Web of Science (WoS) Q1 Peer Review</span>
+              <span class="cv-ats-tag">National Competitive Research Grant Leadership (PI)</span>
+              <span class="cv-ats-tag">International Conference General Chairmanship</span>
+              <span class="cv-ats-tag">Empirical &amp; Experimental Research Methodologies</span>
+              <span class="cv-ats-tag">Community Technology Transfer</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
 
       <!-- SECTION 5: KEYNOTES, INVITED TALKS & MEDIA -->
@@ -10038,6 +10016,7 @@ def generate_cv_page():
 
         </div>
 
+        <div class="cv-timeline-sheet">
     """
 
 
@@ -10115,11 +10094,8 @@ def generate_cv_page():
             venue_chip=chip_label,
 
             title=title_str,
-
             venue_name=sub_str,
-
-            sub_extra=role_str,
-
+            sub_extra="",
             excerpt=desc_str,
 
             verification_url="",
@@ -10142,6 +10118,7 @@ def generate_cv_page():
 
     html += f"""
 
+        </div>
       </section>
 
 
@@ -10225,7 +10202,7 @@ def generate_cv_page():
 
         </div>
 
-        <div class="cv-strip-list">
+        <div class="cv-timeline-sheet cv-strip-list">
 
     """
 
@@ -10240,21 +10217,13 @@ def generate_cv_page():
 
 
         html += render_cv_strip_card(
-
             idx=idx,
-
-            cat_pill="CERTIFICATION",
-
+            cat_pill="",
             year_pill=cert['period'],
-
             venue_chip=issuer.split('/')[0].strip(),
-
             title=cert['name'],
-
             venue_name=issuer,
-
-            sub_extra="Technical Mastery & Professional Accreditation",
-
+            sub_extra="",
             excerpt=cert['details'],
 
             verification_url="",
@@ -10403,7 +10372,7 @@ def generate_cv_page():
 
         <div class="cv-grid-3col">
           <div class="cv-mini-card">
-            <div class="cv-kicker-badge cat-gold" style="width: fit-content; margin-bottom: 8px;">Official Government Permit</div>
+            <div class="cv-kicker-badge" style="width: fit-content; margin-bottom: 8px;">Official Government Permit</div>
             <h4 class="cv-mini-title font-cinzel">Higher Education Teaching Permit</h4>
             <div class="cv-mini-desc">Authorized for Doctoral, Master, and Bachelor Degree Programs.</div>
             <div class="cv-mini-action">
@@ -10413,7 +10382,7 @@ def generate_cv_page():
             </div>
           </div>
           <div class="cv-mini-card">
-            <div class="cv-kicker-badge cat-cyan" style="width: fit-content; margin-bottom: 8px;">Institutional Accreditation</div>
+            <div class="cv-kicker-badge" style="width: fit-content; margin-bottom: 8px;">Institutional Accreditation</div>
             <h4 class="cv-mini-title font-cinzel">MQA Official Higher Education CV</h4>
             <div class="cv-mini-desc">Malaysian Qualifications Agency standard format for higher education accreditation.</div>
             <div class="cv-mini-action">
@@ -10423,7 +10392,7 @@ def generate_cv_page():
             </div>
           </div>
           <div class="cv-mini-card">
-            <div class="cv-kicker-badge cat-emerald" style="width: fit-content; margin-bottom: 8px;">Supervisory Roles</div>
+            <div class="cv-kicker-badge" style="width: fit-content; margin-bottom: 8px;">Supervisory Roles</div>
             <h4 class="cv-mini-title font-cinzel">Postgraduate Dissertation Supervision</h4>
             <div class="cv-mini-desc">Appointed Master and Ph.D. dissertation supervisor at INTI International University and UKM.</div>
             <div class="cv-mini-action">
@@ -10434,6 +10403,61 @@ def generate_cv_page():
           </div>
         </div>
       </section>
+
+
+      
+      <!-- SECTION: LANGUAGES & CORE EXECUTIVE ATTRIBUTES -->
+      <section id="languages" class="cv-section">
+        <div class="cv-section-title-wrap">
+          <h2 class="cv-section-title">Languages &amp; Core Executive Attributes</h2>
+          <span class="cv-section-count">3 Linguistic Proficiencies</span>
+        </div>
+        <div class="cv-timeline-sheet cv-ats-lang-sheet">
+          <div class="cv-ats-lang-grid">
+            <div class="cv-ats-lang-card">
+              <div class="cv-ats-lang-header">
+                <span class="cv-ats-lang-name">English</span>
+                <span class="cv-ats-lang-badge">Academic &amp; Professional Fluent</span>
+              </div>
+              <p class="cv-ats-lang-desc">Primary working language for doctoral dissertation, international Q1 scholarly publications, global conference chairmanships, and university curriculum delivery.</p>
+            </div>
+            <div class="cv-ats-lang-card">
+              <div class="cv-ats-lang-header">
+                <span class="cv-ats-lang-name">Bahasa Indonesia</span>
+                <span class="cv-ats-lang-badge">Native / Bilingual Proficiency</span>
+              </div>
+              <p class="cv-ats-lang-desc">Native language; academic instruction, national competitive research grant leadership (Kemendikbudristek BIMA), and community technology transfer initiatives.</p>
+            </div>
+            <div class="cv-ats-lang-card">
+              <div class="cv-ats-lang-header">
+                <span class="cv-ats-lang-name">Malay</span>
+                <span class="cv-ats-lang-badge">Professional Working Proficiency</span>
+              </div>
+              <p class="cv-ats-lang-desc">Professional research collaboration and academic governance fluency across Malaysian higher education institutions (UKM, INTI International University).</p>
+            </div>
+          </div>
+
+          <div class="cv-ats-strengths-row">
+            <div class="cv-ats-strength-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Scientific Rigor</span>
+            </div>
+            <div class="cv-ats-strength-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+              <span>Ethical Governance</span>
+            </div>
+            <div class="cv-ats-strength-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              <span>Epistemic Innovation</span>
+            </div>
+            <div class="cv-ats-strength-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <span>Academic Mentorship</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       <!-- SECTION 10: ACADEMIC REFERENCES & PERSONAL INTERESTS -->
 
@@ -10449,7 +10473,7 @@ def generate_cv_page():
 
 
 
-        <div class="cv-strip-list" style="margin-bottom: 28px;">
+        <div class="cv-timeline-sheet cv-strip-list" style="margin-bottom: 28px;">
 
     """
 
@@ -10472,17 +10496,11 @@ def generate_cv_page():
         html += render_cv_strip_card(
 
             idx=idx,
-
-            cat_pill="ACADEMIC REFEREE",
-
-            year_pill="Official Referee",
-
+            cat_pill="",
+            year_pill="",
             venue_chip=inst.split(',')[0],
-
             title=ref['name'],
-
             venue_name=inst,
-
             sub_extra=ref['role'],
 
             excerpt=ref_excerpt,
@@ -10509,64 +10527,22 @@ def generate_cv_page():
 
         </div>
 
-        <div class="cv-interests-card">
-
-          <div class="cv-interests-header-row">
-
-            <div class="cv-interests-kicker">
-
-              
-
-              <span>Personal Interests &amp; Exploration</span>
-
-            </div>
-
-          </div>
-
-          <div class="cv-interests-chips-grid">
-
-    """
-
-
-
-    for interest in cv['personal_interests']:
-
-        html += f"""
-
-            <div class="cv-interest-chip">
-
-              
-
-              <span>{interest}</span>
-
-            </div>
-
-        """
-
-
-
-    html += """
-
-          </div>
-
-        </div>
-
-
-
       </section>
 
-
+        <!-- Personal Interests & Cultural Exploration (ATS Plaintext Tags) -->
+        <div class="cv-interests-clean-card">
+          <div class="cv-interests-header-clean">
+            <span class="cv-interests-title-clean">Personal Interests &amp; Cultural Exploration</span>
+          </div>
+          <div class="cv-interests-tags-clean">
+            {"".join(f'<span class="cv-interest-pill-clean">&bull; {it}</span>' for it in cv.get('personal_interests', []))}
+          </div>
+        </div>
 
     </div>
-
     """
 
-
-
-    
-
     html += """
-
     <script>
 
       function filterDistinctions(btn, cat) {
