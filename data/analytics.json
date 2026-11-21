@@ -302,6 +302,48 @@
   },
   "page_traces": [
     {
+      "id": "tr-1795248874620",
+      "timestamp": "2026-11-21T08:14:34.620Z",
+      "path": "/research",
+      "title": "Activity & Project",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-710AAA",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Google Chrome",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "800x600",
+      "referrer": "Direct Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36"
+    },
+    {
+      "id": "tr-1795248829109",
+      "timestamp": "2026-11-21T08:13:49.109Z",
+      "path": "/research",
+      "title": "Activity & Project",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-364DA4",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Google Chrome",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "800x600",
+      "referrer": "Direct Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36"
+    },
+    {
       "id": "tr-1795228509842",
       "timestamp": "2026-11-21T02:35:09.842Z",
       "path": "/article/the-polite-city-ai-human-harmonization",
@@ -10146,35 +10188,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794379687542",
-      "timestamp": "2026-11-11T06:48:07.542Z",
-      "path": "/",
-      "title": "Zaid Amin, Ph.D.",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794379652551",
-      "timestamp": "2026-11-11T06:47:32.551Z",
-      "path": "/",
-      "title": "Zaid Amin, Ph.D.",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-21T10:35:09.864695",
+  "updated_at": "2026-11-21T16:14:34.627662",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -10262,7 +10280,7 @@
     "uniten-master-viva-external-examiner-nist-csf-2026": 8
   },
   "server_live_hits": {
-    "MY": 427,
+    "MY": 429,
     "OTHER": 3
   }
 }

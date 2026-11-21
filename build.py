@@ -5890,10 +5890,10 @@ def generate_research_page():
               <span class="article-chip article-chip-tag" title="{escaped_tag}">{escaped_tag}</span>
               <span class="article-chip article-chip-time" title="{escaped_read_time}">{escaped_read_time}</span>
               <div class="article-card-actions-dock">
-                <button type="button" class="article-card-action-btn article-card-bookmark-btn" data-slug="{slug}" onclick="toggleArticleBookmark(event, this, \'{slug}\')" aria-label="Bookmark article" title="Bookmark article" aria-pressed="false">
+                <button type="button" class="article-card-action-btn article-card-bookmark-btn" data-slug="{slug}" onclick="toggleArticleBookmark(event, this)" aria-label="Bookmark article" title="Bookmark article" aria-pressed="false">
                   <svg class="card-action-svg card-bookmark-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
                 </button>
-                <button type="button" class="article-card-action-btn article-card-share-btn" data-slug="{slug}" data-title="{escaped_title_attr}" onclick="shareArticleLink(event, this, \'{slug}\', \'{escaped_title_attr}\')" aria-label="Share article" title="Share article">
+                <button type="button" class="article-card-action-btn article-card-share-btn" data-slug="{slug}" data-title="{escaped_title_attr}" onclick="shareArticleLink(event, this)" aria-label="Share article" title="Share article">
                   <svg class="card-action-svg card-share-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9V5l11 7-11 7v-4.1c-5 0-8.5 1.6-11 5.1 1-5 4-10 11-11z"></path></svg>
                 </button>
               </div>
@@ -6135,31 +6135,53 @@ def generate_research_page():
     }
 
     // Interactive Article Share
-    window.shareArticleLink = function(e, btn, slug, title) {
+    window.shareArticleLink = function(e, btn, optSlug, optTitle) {
       if (e) {
         e.preventDefault();
         e.stopPropagation();
       }
+      var button = btn;
+      if (!button && e && e.currentTarget) {
+        button = e.currentTarget;
+      }
+      if (!button && e && e.target && e.target.closest) {
+        button = e.target.closest('.article-card-share-btn');
+      }
+      var slug = optSlug || (button ? button.getAttribute('data-slug') : '') || '';
+      var title = optTitle || (button ? button.getAttribute('data-title') : '') || 'Dr. Zaid Amin - Article';
       var url = window.location.origin + '/article/' + slug;
+
       if (navigator.share) {
         navigator.share({
-          title: title || 'Dr. Zaid Amin - Article',
+          title: title,
           url: url
-        }).catch(function() {});
+        }).catch(function(err) {
+          // If aborted by user (cancelled share dialog), don't show fallback
+          if (err && (err.name === 'AbortError' || err.code === 20)) {
+            return;
+          }
+          // If native share failed for any other reason, fallback to clipboard
+          copyToClipboardFallback(url, button);
+        });
         return;
       }
+
+      copyToClipboardFallback(url, button);
+    };
+
+    function copyToClipboardFallback(url, btn) {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(url).then(function() {
-          btn.classList.add('copied');
+          if (btn) btn.classList.add('copied');
           showShareToast('Article link copied to clipboard!');
-          setTimeout(function() { btn.classList.remove('copied'); }, 1800);
+          if (btn) setTimeout(function() { btn.classList.remove('copied'); }, 1800);
         }).catch(function() {
           fallbackCopy(url, btn);
         });
       } else {
         fallbackCopy(url, btn);
       }
-    };
+    }
 
     function fallbackCopy(text, btn) {
       var ta = document.createElement('textarea');
@@ -6170,9 +6192,9 @@ def generate_research_page():
       ta.select();
       try {
         document.execCommand('copy');
-        btn.classList.add('copied');
+        if (btn) btn.classList.add('copied');
         showShareToast('Article link copied to clipboard!');
-        setTimeout(function() { btn.classList.remove('copied'); }, 1800);
+        if (btn) setTimeout(function() { btn.classList.remove('copied'); }, 1800);
       } catch(err) {
         showShareToast('URL: ' + text);
       }
@@ -6180,12 +6202,17 @@ def generate_research_page():
     }
 
     // Interactive Article Bookmark Storage
-    window.toggleArticleBookmark = function(e, btn, slug) {
+    window.toggleArticleBookmark = function(e, btn, optSlug) {
       if (e) {
         e.preventDefault();
         e.stopPropagation();
       }
-      var isBookmarked = btn.classList.toggle('bookmarked');
+      var button = btn;
+      if (!button && e && e.currentTarget) button = e.currentTarget;
+      if (!button && e && e.target && e.target.closest) button = e.target.closest('.article-card-bookmark-btn');
+      var slug = optSlug || (button ? button.getAttribute('data-slug') : '') || '';
+      if (!slug) return;
+      var isBookmarked = button ? button.classList.toggle('bookmarked') : false;
       var bookmarks = [];
       try {
         bookmarks = JSON.parse(localStorage.getItem('zaid_article_bookmarks') || '[]');
@@ -6193,12 +6220,16 @@ def generate_research_page():
 
       if (isBookmarked) {
         if (bookmarks.indexOf(slug) === -1) bookmarks.push(slug);
-        btn.setAttribute('aria-pressed', 'true');
-        btn.setAttribute('title', 'Remove bookmark');
+        if (button) {
+          button.setAttribute('aria-pressed', 'true');
+          button.setAttribute('title', 'Remove bookmark');
+        }
       } else {
         bookmarks = bookmarks.filter(function(s) { return s !== slug; });
-        btn.setAttribute('aria-pressed', 'false');
-        btn.setAttribute('title', 'Bookmark article');
+        if (button) {
+          button.setAttribute('aria-pressed', 'false');
+          button.setAttribute('title', 'Bookmark article');
+        }
       }
       try {
         localStorage.setItem('zaid_article_bookmarks', JSON.stringify(bookmarks));
