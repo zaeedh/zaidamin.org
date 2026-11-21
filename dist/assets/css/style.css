@@ -25471,41 +25471,36 @@ h1.cv-hero-name {
    ========================================================================== */
 
 .subpage-eyebrow,
-
 .pub-gallery-badge,
-
 .cv-section-tag {
-
   display: inline-flex !important;
-
   align-items: center !important;
-
   gap: 8px !important;
-
   font-family: var(--font-sans) !important;
-
   font-size: 0.75rem !important;
-
   font-weight: 800 !important;
-
   letter-spacing: 0.14em !important;
-
   text-transform: uppercase !important;
-
-  color: var(--brand-blue, #22a6c8) !important;
-
+  color: #c59b27 !important; /* Elegant dark gold */
   margin-bottom: 8px !important;
-
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-
+.subpage-eyebrow:hover,
+.pub-gallery-badge:hover,
+.cv-section-tag:hover {
+  color: #fef08a !important; /* Bright gold on hover */
+  text-shadow: 0 0 10px rgba(254, 240, 138, 0.35) !important;
+}
 
 .subpage-eyebrow .eyebrow-dot {
-
   font-size: 0.72rem !important;
-
   color: #d4af37 !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
 
+.subpage-eyebrow:hover .eyebrow-dot {
+  color: #fef08a !important;
 }
 
 
@@ -25738,41 +25733,24 @@ h1.cv-hero-name {
 /* 2. Unified Eyebrows (Minimalist Quiet Orientation) */
 
 .subpage-eyebrow,
-
 .pub-gallery-badge,
-
 .cv-section-tag {
-
   display: inline-flex !important;
-
   align-items: center !important;
-
   gap: 6px !important;
-
   font-family: var(--font-sans) !important;
-
   font-size: 0.68rem !important;
-
   font-weight: 700 !important;
-
   letter-spacing: 0.12em !important;
-
   text-transform: uppercase !important;
-
-  color: rgba(56, 189, 248, 0.75) !important;
-
+  color: #c59b27 !important; /* Elegant dark gold */
   margin-bottom: 4px !important;
-
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-
-
 .subpage-eyebrow .eyebrow-dot {
-
   font-size: 0.65rem !important;
-
-  color: rgba(212, 175, 55, 0.85) !important;
-
+  color: #d4af37 !important;
 }
 
 
@@ -27382,13 +27360,20 @@ h1.cv-hero-name,
   font-weight: 700 !important;
   letter-spacing: 0.1em !important;
   text-transform: uppercase !important;
-  color: #64748b !important;
+  color: #c59b27 !important; /* Elegant dark gold */
   white-space: nowrap !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .cv-sublayer-kicker-gold,
 .cv-sublayer-kicker-cyan {
-  color: #64748b !important;
+  color: #c59b27 !important;
+}
+
+.cv-sublayer-row:hover .cv-sublayer-kicker,
+.cv-sublayer-kicker:hover {
+  color: #fef08a !important; /* Bright gold on hover */
+  text-shadow: 0 0 10px rgba(254, 240, 138, 0.35) !important;
 }
 
 .cv-sublayer-dot {
@@ -30460,6 +30445,63 @@ h1.cv-hero-name,
   text-shadow: 0 0 14px rgba(250, 204, 21, 0.22) !important;
 }
 
+/* Eyebrow & Badges transition to BRIGHT GOLD on Card Hover */
+.cv-timeline-sheet .cv-entry-item:hover .cv-card-year,
+.cv-timeline-sheet .cv-distinction-card:hover .cv-card-year,
+.cv-timeline-sheet .cv-strip-card:hover .cv-card-year,
+.cv-entry-item:hover .cv-card-year,
+.cv-distinction-card:hover .cv-card-year,
+.cv-strip-card:hover .cv-card-year,
+.cv-monograph-card:hover .cv-kicker-year {
+  color: #fef08a !important; /* Radiant Bright Gold */
+  text-shadow: 0 0 10px rgba(254, 240, 138, 0.45) !important;
+  opacity: 1 !important;
+}
+
+.cv-timeline-sheet .cv-entry-item:hover .cv-card-dot,
+.cv-timeline-sheet .cv-distinction-card:hover .cv-card-dot,
+.cv-timeline-sheet .cv-strip-card:hover .cv-card-dot,
+.cv-entry-item:hover .cv-card-dot,
+.cv-distinction-card:hover .cv-card-dot,
+.cv-strip-card:hover .cv-card-dot,
+.cv-monograph-card:hover .cv-kicker-sep {
+  color: #fde047 !important; /* Bright Gold Dot */
+  text-shadow: 0 0 6px rgba(250, 204, 21, 0.40) !important;
+}
+
+.cv-timeline-sheet .cv-entry-item:hover .cv-card-badge,
+.cv-timeline-sheet .cv-distinction-card:hover .cv-card-badge,
+.cv-timeline-sheet .cv-strip-card:hover .cv-card-badge,
+.cv-entry-item:hover .cv-card-badge,
+.cv-distinction-card:hover .cv-card-badge,
+.cv-strip-card:hover .cv-card-badge,
+.cv-monograph-card:hover .cv-kicker-badge,
+.cv-mini-card:hover .cv-kicker-badge,
+.cv-journal-card:hover .cv-journal-tier {
+  color: #fef08a !important; /* Radiant Bright Gold Badge */
+  background: rgba(212, 175, 55, 0.18) !important;
+  border-color: rgba(254, 240, 138, 0.65) !important;
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.28) !important;
+}
+
+.cv-timeline-sheet .cv-entry-item:hover .cv-card-chip,
+.cv-timeline-sheet .cv-distinction-card:hover .cv-card-chip,
+.cv-timeline-sheet .cv-strip-card:hover .cv-card-chip,
+.cv-entry-item:hover .cv-card-chip,
+.cv-distinction-card:hover .cv-card-chip,
+.cv-strip-card:hover .cv-card-chip,
+.cv-monograph-card:hover .cv-kicker-venue {
+  color: #fce09b !important; /* Bright Champagne Gold Chip */
+  text-shadow: 0 0 8px rgba(250, 204, 21, 0.20) !important;
+}
+
+.cv-timeline-sheet .cv-entry-item:hover .cv-spotlight-pip,
+.cv-entry-item:hover .cv-spotlight-pip {
+  color: #fef08a !important;
+  border-color: rgba(254, 240, 138, 0.65) !important;
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.28) !important;
+}
+
 /* Row 1: Kicker Ribbon (Year • Badge • Chip) */
 .cv-card-kicker {
   display: flex !important;
@@ -30482,15 +30524,17 @@ h1.cv-hero-name,
   font-family: var(--font-mono, 'JetBrains Mono', monospace) !important;
   font-size: 0.80rem !important;
   font-weight: 600 !important;
-  color: #bfa15f !important; /* Refined antique champagne gold — second gaze */
+  color: #c59b27 !important; /* Elegant dark gold */
   letter-spacing: 0.03em !important;
-  opacity: 0.92 !important;
+  opacity: 0.95 !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .cv-card-dot {
-  color: rgba(148, 163, 184, 0.28) !important;
+  color: rgba(197, 155, 39, 0.45) !important; /* Dark gold separator dot */
   font-size: 0.72rem !important;
   user-select: none !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .cv-card-badge {
@@ -30503,36 +30547,28 @@ h1.cv-hero-name,
   padding: 2px 7px !important;
   border-radius: 4px !important;
   line-height: 1.25 !important;
-  transition: all 0.2s ease !important;
+  color: #c59b27 !important; /* Elegant dark gold */
+  background: rgba(197, 155, 39, 0.08) !important;
+  border: 1px solid rgba(197, 155, 39, 0.28) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-/* Awards & Honors: Muted Warm Champagne */
+/* All categories unified in elegant dark gold (replaces pale cyan & indigo) */
 .cv-card-badge.cat-gold,
-.cv-card-badge.cat-spotlight {
-  color: #c9b07a !important;
-  background: rgba(201, 176, 122, 0.05) !important;
-  border: 1px solid rgba(201, 176, 122, 0.20) !important;
-}
-
-/* Grants & Competitive: Muted Arctic Steel / Slate */
-.cv-card-badge.cat-cyan {
-  color: #8faec4 !important;
-  background: rgba(143, 174, 196, 0.05) !important;
-  border: 1px solid rgba(143, 174, 196, 0.20) !important;
-}
-
-/* Governance & Chairs: Muted Twilight Lavender */
+.cv-card-badge.cat-spotlight,
+.cv-card-badge.cat-cyan,
 .cv-card-badge.cat-indigo {
-  color: #a59fc4 !important;
-  background: rgba(165, 159, 196, 0.05) !important;
-  border: 1px solid rgba(165, 159, 196, 0.20) !important;
+  color: #c59b27 !important;
+  background: rgba(197, 155, 39, 0.08) !important;
+  border: 1px solid rgba(197, 155, 39, 0.28) !important;
 }
 
 .cv-card-chip {
   font-family: 'Cormorant Garamond', Georgia, serif !important;
   font-style: italic !important;
-  color: #8492a6 !important;
+  color: #b5a47e !important; /* Warm antique gold/champagne subtext */
   font-size: 0.88rem !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .cv-spotlight-pip {
@@ -30540,16 +30576,17 @@ h1.cv-hero-name,
   align-items: center !important;
   font-size: 0.64rem !important;
   font-weight: 600 !important;
-  color: #c9b07a !important;
-  background: rgba(201, 176, 122, 0.05) !important;
-  border: 1px solid rgba(201, 176, 122, 0.20) !important;
+  color: #c59b27 !important;
+  background: rgba(197, 155, 39, 0.08) !important;
+  border: 1px solid rgba(197, 155, 39, 0.28) !important;
   padding: 2px 7px !important;
   border-radius: 4px !important;
   text-transform: uppercase !important;
   letter-spacing: 0.05em !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-/* Monograph & Auxiliary Kicker Ribbons (Second-Gaze Parity) */
+/* Monograph & Auxiliary Kicker Ribbons */
 .cv-monograph-kicker {
   display: inline-flex !important;
   align-items: center !important;
@@ -30562,9 +30599,10 @@ h1.cv-hero-name,
   font-family: var(--font-mono, monospace) !important;
   font-size: 0.80rem !important;
   font-weight: 600 !important;
-  color: #bfa15f !important;
+  color: #c59b27 !important;
   letter-spacing: 0.03em !important;
-  opacity: 0.92 !important;
+  opacity: 0.95 !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .cv-kicker-badge {
@@ -30576,28 +30614,41 @@ h1.cv-hero-name,
   text-transform: uppercase !important;
   padding: 2px 7px !important;
   border-radius: 4px !important;
-  color: #8faec4 !important;
-  background: rgba(143, 174, 196, 0.05) !important;
-  border: 1px solid rgba(143, 174, 196, 0.20) !important;
+  color: #c59b27 !important;
+  background: rgba(197, 155, 39, 0.08) !important;
+  border: 1px solid rgba(197, 155, 39, 0.28) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .cv-kicker-badge.cat-gold {
-  color: #c9b07a !important;
-  background: rgba(201, 176, 122, 0.05) !important;
-  border: 1px solid rgba(201, 176, 122, 0.20) !important;
+  color: #c59b27 !important;
+  background: rgba(197, 155, 39, 0.08) !important;
+  border: 1px solid rgba(197, 155, 39, 0.28) !important;
 }
 
 .cv-kicker-venue {
   font-family: 'Cormorant Garamond', Georgia, serif !important;
   font-style: italic !important;
-  color: #8492a6 !important;
+  color: #b5a47e !important;
   font-size: 0.88rem !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .cv-kicker-sep {
-  color: rgba(148, 163, 184, 0.28) !important;
+  color: rgba(197, 155, 39, 0.45) !important;
   font-size: 0.72rem !important;
   user-select: none !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Direct Hover on Eyebrow Badges */
+.cv-card-badge:hover,
+.cv-kicker-badge:hover {
+  color: #ffffff !important;
+  background: rgba(212, 175, 55, 0.28) !important;
+  border-color: #fef08a !important;
+  box-shadow: 0 0 14px rgba(250, 204, 21, 0.40) !important;
+  cursor: pointer;
 }
 
 /* Row 2: Title in Cinzel Roman Serif */
@@ -30977,23 +31028,29 @@ h1.cv-hero-name,
 .cv-journal-tier {
   font-size: 0.68rem !important;
   font-weight: 700 !important;
-  color: #cbd5e1 !important;
-  background: rgba(148, 163, 184, 0.08) !important;
-  border: 1px solid rgba(148, 163, 184, 0.20) !important;
+  color: #c59b27 !important; /* Elegant dark gold */
+  background: rgba(197, 155, 39, 0.08) !important;
+  border: 1px solid rgba(197, 155, 39, 0.28) !important;
   border-radius: 4px !important;
   padding: 2px 8px !important;
   letter-spacing: 0.04em !important;
   text-transform: uppercase !important;
   white-space: nowrap !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .cv-journal-issn {
   font-size: 0.72rem !important;
   font-weight: 600 !important;
-  color: #64748b !important;
+  color: #b5a47e !important;
   font-family: var(--font-mono, monospace) !important;
   letter-spacing: 0.02em !important;
   white-space: nowrap !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.cv-journal-card:hover .cv-journal-issn {
+  color: #fce09b !important;
 }
 
 .cv-journal-body {
