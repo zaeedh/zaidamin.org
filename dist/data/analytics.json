@@ -302,6 +302,27 @@
   },
   "page_traces": [
     {
+      "id": "tr-1795251143686",
+      "timestamp": "2026-11-21T08:52:23.686Z",
+      "path": "/research-team",
+      "title": "Research Team & Supervision Roster",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-4A57D9",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Internal Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
       "id": "tr-1795250287133",
       "timestamp": "2026-11-21T08:38:07.133Z",
       "path": "/",
@@ -10194,23 +10215,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794379717461",
-      "timestamp": "2026-11-11T06:48:37.462Z",
-      "path": "/",
-      "title": "Zaid Amin, Ph.D.",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-21T16:38:07.159587",
+  "updated_at": "2026-11-21T16:52:23.705177",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -10298,7 +10307,7 @@
     "uniten-master-viva-external-examiner-nist-csf-2026": 8
   },
   "server_live_hits": {
-    "MY": 431,
+    "MY": 432,
     "OTHER": 3
   }
 }
