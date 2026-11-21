@@ -6304,6 +6304,28 @@ def generate_research_page():
 
         {act_nav_bar_html}
 
+        <div class="activity-hero-search-dock">
+
+          <div class="articles-search-wrap">
+
+            <span class="articles-search-icon">
+
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+
+            </span>
+
+            <input type="text" id="article-search" class="article-search-input" placeholder="Search essays by keyword, topic, or title..." aria-label="Search across {len(articles)} scholarly essays by keyword, topic, or title" autocomplete="off">
+
+          </div>
+
+          <div id="article-count-display" class="article-count-indicator">
+
+            Showing all {len(articles)} essays
+
+          </div>
+
+        </div>
+
       </section>
 
 
@@ -6313,28 +6335,6 @@ def generate_research_page():
       <div id="activity-pane-articles">
 
         <div class="articles-controls">
-
-          <div class="articles-controls-header">
-
-            <div class="articles-search-wrap">
-
-              <span class="articles-search-icon">
-
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-
-              </span>
-
-              <input type="text" id="article-search" class="article-search-input" placeholder="Search essays by keyword, topic, or title..." aria-label="Search across {len(articles)} scholarly essays by keyword, topic, or title" autocomplete="off">
-
-            </div>
-
-            <div id="article-count-display" class="article-count-indicator">
-
-              Showing all {len(articles)} essays
-
-            </div>
-
-          </div>
 
           <nav class="articles-category-pills" aria-label="Article Categories">
 

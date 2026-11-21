@@ -26767,49 +26767,39 @@ h1.cv-hero-name,
 
 
 
-/* 7. Minimalist Two-Tier Controls Bar (research.html - Articles) - Golden Ratio & Gestalt Harmonization */
-.articles-controls {
-  position: sticky !important;
-  top: 76px !important;
-  z-index: 40 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: stretch !important;
-  gap: 10px !important;
-  margin-bottom: 22px !important;
-  padding: 10px 14px !important;
-  background: rgba(3, 14, 26, 0.82) !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
-  border: 1px solid rgba(212, 175, 55, 0.18) !important;
-  border-radius: 14px !important;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35) !important;
-}
-
-.articles-controls-header {
+/* 7. Minimalist Activity & Project Header Search & Category Dock - Golden Ratio & Gestalt Harmonization */
+.activity-hero-search-dock {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
-  justify-content: flex-start !important;
-  gap: 14px !important;
-  width: 100% !important;
-  flex-wrap: wrap !important;
+  justify-content: flex-end !important;
+  gap: 12px !important;
+  flex: 0 1 auto !important;
+  width: auto !important;
+  max-width: 480px !important;
+  flex-shrink: 0 !important;
+  height: auto !important;
 }
 
+.activity-hero-search-dock .articles-search-wrap,
 .articles-search-wrap {
-  flex: 0 1 340px !important;
-  width: 340px !important;
-  max-width: 100% !important;
-  height: 32px !important;
+  flex: 1 1 260px !important;
+  width: 260px !important;
+  max-width: 320px !important;
+  height: 34px !important;
+  max-height: 34px !important;
+  min-height: 34px !important;
   margin: 0 !important;
   position: relative !important;
 }
 
+.activity-hero-search-dock .articles-search-input,
 .articles-search-input {
   width: 100% !important;
-  height: 32px !important;
+  height: 34px !important;
+  max-height: 34px !important;
   font-size: 0.78rem !important;
-  padding: 4px 12px 4px 30px !important;
+  padding: 4px 12px 4px 32px !important;
   border-radius: 9999px !important;
   background: rgba(2, 11, 20, 0.85) !important;
   border: 1px solid rgba(186, 230, 253, 0.18) !important;
@@ -26819,15 +26809,17 @@ h1.cv-hero-name,
   box-sizing: border-box !important;
 }
 
+.activity-hero-search-dock .articles-search-input:focus,
 .articles-search-input:focus {
-  border-color: rgba(212, 175, 55, 0.50) !important;
-  box-shadow: 0 0 12px rgba(212, 175, 55, 0.15) !important;
+  border-color: rgba(212, 175, 55, 0.55) !important;
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.18) !important;
   background: rgba(3, 16, 30, 0.95) !important;
 }
 
+.activity-hero-search-dock .articles-search-icon,
 .articles-search-icon {
   position: absolute !important;
-  left: 10px !important;
+  left: 11px !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
   color: #64748b !important;
@@ -26836,32 +26828,53 @@ h1.cv-hero-name,
   pointer-events: none !important;
 }
 
+.activity-hero-search-dock .articles-search-icon svg,
 .articles-search-icon svg {
   width: 13px !important;
   height: 13px !important;
 }
 
+.activity-hero-search-dock .article-count-indicator,
 .article-count-indicator {
   display: inline-flex !important;
   align-items: center !important;
   font-size: 0.75rem !important;
   font-weight: 500 !important;
   color: #8da4be !important;
-  letter-spacing: 0.03em !important;
+  letter-spacing: 0.02em !important;
   white-space: nowrap !important;
   font-variant-numeric: tabular-nums !important;
-  height: 32px !important;
-  line-height: 32px !important;
+  height: 34px !important;
+  line-height: 34px !important;
+  flex-shrink: 0 !important;
 }
 
+.activity-hero-search-dock .article-count-indicator::before,
 .article-count-indicator::before {
   content: "" !important;
   display: inline-block !important;
   width: 1px !important;
   height: 14px !important;
   background: rgba(186, 230, 253, 0.22) !important;
-  margin-right: 14px !important;
+  margin-right: 12px !important;
   flex-shrink: 0 !important;
+}
+
+.articles-controls {
+  position: sticky !important;
+  top: 76px !important;
+  z-index: 40 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  margin-bottom: 22px !important;
+  padding: 8px 14px !important;
+  background: rgba(3, 14, 26, 0.82) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(212, 175, 55, 0.18) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35) !important;
 }
 
 .articles-category-pills {
@@ -26909,38 +26922,76 @@ h1.cv-hero-name,
   box-shadow: none !important;
 }
 
-@media (max-width: 768px) {
-  .articles-controls {
-    padding: 10px 12px !important;
-    gap: 8px !important;
-  }
-  .articles-controls-header {
+@media (max-width: 991px) {
+  .activity-hero-section {
     flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 6px !important;
+    align-items: stretch !important;
+    gap: 14px !important;
   }
-  .articles-search-wrap {
-    flex: 1 1 100% !important;
+  .activity-hero-search-dock {
     width: 100% !important;
-  }
-  .article-count-indicator {
-    font-size: 0.70rem !important;
-    text-align: left !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
     justify-content: flex-start !important;
     height: auto !important;
-    line-height: 1.4 !important;
-    padding-left: 4px !important;
   }
-  .article-count-indicator::before {
-    display: none !important;
+  .activity-hero-search-dock .articles-search-wrap {
+    flex: 0 1 360px !important;
+    width: 360px !important;
+    max-width: 100% !important;
+    height: 34px !important;
+    max-height: 34px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .articles-controls {
+    padding: 8px 10px !important;
+    margin-bottom: 16px !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
   }
   .articles-category-pills {
+    flex-wrap: nowrap !important;
     gap: 6px !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+  }
+  .articles-category-pills::-webkit-scrollbar {
+    display: none !important;
   }
   .article-cat-btn {
     height: 25px !important;
     padding: 0 9px !important;
     font-size: 0.70rem !important;
+  }
+}
+
+@media (max-width: 580px) {
+  .activity-hero-search-dock {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    flex: 0 0 auto !important;
+    height: auto !important;
+  }
+  .activity-hero-search-dock .articles-search-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 34px !important;
+    max-height: 34px !important;
+    flex: 0 0 34px !important;
+  }
+  .activity-hero-search-dock .article-count-indicator {
+    height: auto !important;
+    line-height: 1.4 !important;
+    font-size: 0.72rem !important;
+    padding-left: 2px !important;
+    justify-content: flex-start !important;
+    flex: 0 0 auto !important;
+  }
+  .activity-hero-search-dock .article-count-indicator::before {
+    display: none !important;
   }
 }
 
