@@ -25801,9 +25801,7 @@ h1.cv-hero-name,
 
 .talks-hero-subtitle,
 
-.pub-gallery-subtitle,
-
-.subpage-hero-subtitle {
+.pub-gallery-subtitle {
 
   font-family: var(--font-sans) !important;
 
@@ -25817,6 +25815,134 @@ h1.cv-hero-name,
 
   margin: 0 0 16px 0 !important;
 
+}
+
+/* 4b. Subpage Hero Subtitle - Full Width Golden Ratio Harmonization */
+.subpage-hero-subtitle {
+
+  font-family: var(--font-sans) !important;
+
+  font-size: 0.94rem !important;
+
+  color: #94a3b8 !important;
+
+  max-width: 100% !important;
+
+  line-height: 1.62 !important;
+
+  margin: 0 0 28px 0 !important;
+
+  letter-spacing: 0.012em !important;
+
+  text-wrap: pretty !important;
+
+}
+
+/* Prospective Students / Supervision Page - Golden Ratio & Gestalt Harmonization */
+.supervision-direction-card {
+  background: rgba(17, 23, 38, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 24px 28px;
+  backdrop-filter: blur(8px);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.supervision-direction-card:hover {
+  border-color: rgba(212, 175, 55, 0.40);
+  box-shadow: 0 10px 28px -6px rgba(212, 175, 55, 0.12), 0 4px 16px -4px rgba(0, 0, 0, 0.45);
+  transform: translateY(-2px);
+}
+
+.supervision-pill {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(212, 175, 55, 0.08);
+  color: #d4af37;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  margin-right: 6px;
+  text-transform: uppercase;
+}
+
+.supervision-direction-title {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin: 10px 0 8px 0;
+  color: #ffffff;
+  line-height: 1.35;
+}
+
+.supervision-direction-desc {
+  font-size: 0.92rem;
+  color: #cbd5e1;
+  line-height: 1.62;
+  margin-bottom: 14px;
+}
+
+.supervision-prereq {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 10px;
+}
+
+.supervision-prereq strong {
+  color: #d4af37;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.supervision-inquiry-panel {
+  background: linear-gradient(145deg, rgba(17, 23, 38, 0.92) 0%, rgba(15, 20, 34, 0.96) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 16px;
+  padding: 32px 36px;
+  box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.25s ease;
+}
+
+.supervision-inquiry-panel:hover {
+  border-color: rgba(212, 175, 55, 0.45);
+}
+
+.supervision-inquiry-title {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+.supervision-inquiry-list {
+  margin-left: 22px;
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: #cbd5e1;
+}
+
+.supervision-inquiry-list li {
+  margin-bottom: 6px;
+}
+
+.supervision-inquiry-link {
+  font-weight: 600;
+  color: #d4af37;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.supervision-inquiry-link:hover {
+  color: #f1d77a;
 }
 
 

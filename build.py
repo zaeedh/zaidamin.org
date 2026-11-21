@@ -9043,7 +9043,7 @@ def generate_supervision_page():
 
     <div class="subpage-container">
 
-      <div style="margin-bottom: 24px;">
+      <div style="margin-bottom: 32px;">
 
         <h1 class="subpage-hero-title font-cinzel">{supervision['heading']}</h1>
 
@@ -9068,19 +9068,19 @@ def generate_supervision_page():
 
     for t in supervision["open_topics"]:
 
-        pills = " ".join([f'<span style="background:rgba(34, 166, 200, 0.14); color:#38b6d0; padding:4px 10px; border-radius:4px; font-size:0.75rem; font-weight:700; border:1px solid rgba(34, 166, 200, 0.3);">{d}</span>' for d in t["degree_levels"]])
+        pills = " ".join([f'<span class="supervision-pill">{d}</span>' for d in t["degree_levels"]])
 
         html += f"""
 
-          <div style="background:rgba(4, 28, 48, 0.75); border:1px solid rgba(34, 166, 200, 0.22); border-radius:16px; padding:28px; backdrop-filter:blur(8px);">
+          <div class="supervision-direction-card">
 
-            <div style="margin-bottom: 8px;">{pills}</div>
+            <div>{pills}</div>
 
-            <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 8px; color: #ffffff;">{t['title']}</h3>
+            <h3 class="supervision-direction-title">{t['title']}</h3>
 
-            <p style="font-size: 0.95rem; color: var(--text-body); line-height: 1.6; margin-bottom: 12px;">{t['description']}</p>
+            <p class="supervision-direction-desc">{t['description']}</p>
 
-            <div style="font-size: 0.825rem; color: var(--text-muted);"><strong style="color:#ffffff;">Prerequisites:</strong> {t['skills_required']}</div>
+            <div class="supervision-prereq"><strong>Prerequisites:</strong> {t['skills_required']}</div>
 
           </div>
 
@@ -9094,17 +9094,17 @@ def generate_supervision_page():
 
 
 
-      <div id="inquiry-form" style="background: linear-gradient(135deg, rgba(4, 28, 48, 0.95), rgba(6, 40, 68, 0.98)); border: 2px solid var(--brand-blue); border-radius: 18px; padding: 32px; box-shadow: 0 12px 35px rgba(0, 10, 24, 0.50);">
+      <div id="inquiry-form" class="supervision-inquiry-panel">
 
-        <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; color: #ffffff;">How to Submit an Inquiry for Supervision</h2>
+        <h2 class="supervision-inquiry-title font-cinzel">How to Submit an Inquiry for Supervision</h2>
 
-        <ol style="margin-left: 20px; font-size: 0.95rem; line-height: 1.8; color: var(--text-body);">
+        <ol class="supervision-inquiry-list">
 
           <li>Review my recent publications on Attention-Based Design (IEEE Access) or Agentic AI Governance (Smart Cities 2026).</li>
 
           <li>Prepare your Academic CV, transcripts, and a 1-page Research Proposal outlining your core problem.</li>
 
-          <li>Email your materials to <a href="mailto:zaid.amin@newinti.edu.my" style="font-weight:700; color:var(--brand-blue); text-decoration:underline;">zaid.amin@newinti.edu.my</a> with the subject: <code>[Prospective Postgraduate] - [Your Name] - [Ph.D./Master]</code>.</li>
+          <li>Email your materials to <a href="mailto:zaid.amin@newinti.edu.my" class="supervision-inquiry-link">zaid.amin@newinti.edu.my</a> with the subject: <code>[Prospective Postgraduate] - [Your Name] - [Ph.D./Master]</code>.</li>
 
         </ol>
 
