@@ -22750,26 +22750,36 @@ mark {
   overflow-y: auto;
   overflow-x: hidden;
   padding: 4px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(212, 175, 55, 0.28) transparent;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
   scroll-behavior: smooth;
 }
 
 .video-playlist-stack::-webkit-scrollbar {
-  width: 4px;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.video-playlist-stack::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 .video-playlist-stack::-webkit-scrollbar-track {
-  background: transparent;
+  display: none !important;
+  background: transparent !important;
 }
 
 .video-playlist-stack::-webkit-scrollbar-thumb {
-  background: rgba(212, 175, 55, 0.28);
-  border-radius: 999px;
+  display: none !important;
+  background: transparent !important;
 }
 
 .video-playlist-stack::-webkit-scrollbar-thumb:hover {
-  background: rgba(212, 175, 55, 0.55);
+  display: none !important;
+  background: transparent !important;
 }
 
 .video-playlist-item {
