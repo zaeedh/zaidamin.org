@@ -13250,7 +13250,7 @@ a {
 
 .article-card {
 
-  display: flex !important;
+  display: flex;
 
   flex-direction: column !important;
 
@@ -13279,6 +13279,12 @@ a {
   backdrop-filter: blur(8px) !important;
 
   -webkit-backdrop-filter: blur(8px) !important;
+
+}
+
+.article-card.is-hidden {
+
+  display: none !important;
 
 }
 

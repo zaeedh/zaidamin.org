@@ -5863,9 +5863,11 @@ def generate_research_page():
         escaped_read_time = _html_mod.escape(clean_read_time)
 
         escaped_title_attr = _html_mod.escape(title, quote=True)
+        escaped_title_data = _html_mod.escape(title.lower(), quote=True)
+        escaped_tags_data = _html_mod.escape(tags_str, quote=True)
 
         cards_html += f'''
-        <article class="article-card{card_spotlight_class}" data-category="{cat}" data-title="{title.lower()}" data-tags="{tags_str}">
+        <article class="article-card{card_spotlight_class}" data-category="{cat}" data-title="{escaped_title_data}" data-tags="{escaped_tags_data}">
           <!-- Small Thumbnail Frame (Golden Ratio Harmonic Proportion) -->
           <div class="article-card-thumb-wrap">
             <a href="/article/{slug}" class="article-card-thumb-link" aria-label="{escaped_title}">
@@ -6064,13 +6066,17 @@ def generate_research_page():
 
           if (catMatch && searchMatch) {
 
-            card.style.display = 'flex';
+            card.classList.remove('is-hidden');
+
+            card.style.removeProperty('display');
 
             visibleCount++;
 
           } else {
 
-            card.style.display = 'none';
+            card.classList.add('is-hidden');
+
+            card.style.setProperty('display', 'none', 'important');
 
           }
 
@@ -6085,6 +6091,22 @@ def generate_research_page():
           } else {
 
             countDisplay.textContent = 'Showing all ' + cards.length + ' essays';
+
+          }
+
+        }
+
+        var emptyState = document.getElementById('articles-empty-state');
+
+        if (emptyState) {
+
+          if (visibleCount === 0) {
+
+            emptyState.style.setProperty('display', 'block', 'important');
+
+          } else {
+
+            emptyState.style.setProperty('display', 'none', 'important');
 
           }
 
@@ -6327,6 +6349,14 @@ def generate_research_page():
         <div class="articles-grid" id="articles-grid">
 
           {cards_html}
+
+          <div id="articles-empty-state" class="articles-empty-state" style="display: none; grid-column: 1 / -1; text-align: center; padding: 56px 20px; background: rgba(17, 23, 38, 0.4); border: 1px dashed rgba(148, 163, 184, 0.15); border-radius: 12px; margin-top: 12px;">
+
+            <p style="font-family: var(--font-cinzel, 'Cinzel', serif); font-size: 1.05rem; color: #bae6fd; margin-bottom: 6px; letter-spacing: 0.04em;">No essays found</p>
+
+            <p style="font-size: 0.85rem; color: #94a3b8; margin: 0;">Try adjusting your keyword or selecting another category filter.</p>
+
+          </div>
 
         </div>
 
