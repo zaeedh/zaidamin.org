@@ -9045,8 +9045,6 @@ def generate_supervision_page():
 
       <div style="margin-bottom: 24px;">
 
-        <div class="subpage-eyebrow"><span class="eyebrow-dot">&bull;</span> Academic Mentorship &bull; Postgraduate Lab</div>
-
         <h1 class="subpage-hero-title font-cinzel">{supervision['heading']}</h1>
 
         <p class="subpage-hero-subtitle">
