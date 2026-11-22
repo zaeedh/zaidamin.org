@@ -648,11 +648,11 @@ a {
 
   position: absolute;
 
-  bottom: clamp(50px, 13.5%, 64px);
+  bottom: clamp(48px, 13.5%, 64px);
 
   right: clamp(24px, 4%, 38px);
 
-  max-width: clamp(520px, 54vw, 720px);
+  max-width: clamp(520px, 52vw, 680px);
 
   box-sizing: border-box;
 
@@ -752,23 +752,23 @@ a {
 
 .storm-quote-text {
 
-  font-family: var(--font-display-serif), var(--font-premium-serif), Georgia, serif !important;
+  font-family: Georgia, 'Lora', 'Merriweather', 'Times New Roman', serif !important;
 
   font-style: normal !important;
 
-  font-weight: 500 !important;
+  font-weight: 700 !important;
 
-  font-size: clamp(1.12rem, 1.38vw, 1.22rem) !important;
+  font-size: clamp(1.06rem, 1.30vw, 1.18rem) !important;
 
   color: #f3f8fc !important;
 
   line-height: 1.48 !important;
 
-  margin: 0 0 8px 0 !important;
+  margin: 0 0 10px 0 !important;
 
-  letter-spacing: 0.014em !important;
+  letter-spacing: 0.012em !important;
 
-  text-shadow: 0 2px 12px rgba(0, 10, 24, 0.98), 0 0 26px rgba(0, 6, 16, 0.95) !important;
+  text-shadow: 0 2px 14px rgba(0, 10, 24, 0.98), 0 0 26px rgba(0, 6, 16, 0.95) !important;
 
   text-align: right !important;
 
@@ -846,17 +846,21 @@ a {
 
     right: 18px;
 
-    max-width: 500px;
+    max-width: 480px;
 
   }
 
   .storm-quote-text {
 
-    font-size: 1.00rem !important;
+    font-family: Georgia, 'Lora', 'Merriweather', 'Times New Roman', serif !important;
+
+    font-size: 0.98rem !important;
 
     line-height: 1.44 !important;
 
     font-style: normal !important;
+
+    font-weight: 700 !important;
 
     letter-spacing: 0.012em !important;
 
@@ -954,9 +958,9 @@ a {
 
     bottom: 20px;
 
-    right: 14px;
+    right: 16px;
 
-    left: 14px;
+    left: 16px;
 
     max-width: none;
 
@@ -964,11 +968,15 @@ a {
 
   .storm-quote-text {
 
-    font-size: 0.90rem !important;
+    font-family: Georgia, 'Lora', 'Merriweather', 'Times New Roman', serif !important;
+
+    font-size: 0.88rem !important;
 
     line-height: 1.40 !important;
 
     font-style: normal !important;
+
+    font-weight: 700 !important;
 
     letter-spacing: 0.012em !important;
 
