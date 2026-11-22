@@ -27461,19 +27461,32 @@ h1.cv-hero-name,
   transform: translateY(-1px) !important;
 }
 
-/* Word ATS Secondary Button */
+/* Word ATS Secondary Button (Blended Gray & White Environmental Tone) */
 .cv-round-btn-secondary.cv-round-btn-word {
-  border-color: rgba(56, 189, 248, 0.28) !important;
-  color: #7dd3fc !important;
+  background: rgba(10, 20, 32, 0.65) !important;
+  border: 1px solid rgba(148, 163, 184, 0.24) !important;
+  color: #94a3b8 !important;
   font-size: 0.64rem !important;
   letter-spacing: 0.05em !important;
+  transition: all 0.20s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .cv-round-btn-secondary.cv-round-btn-word:hover {
-  border-color: #38bdf8 !important;
+  border-color: rgba(241, 245, 249, 0.45) !important;
   color: #ffffff !important;
-  background: rgba(14, 45, 75, 0.85) !important;
+  background: rgba(22, 36, 54, 0.85) !important;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4), 0 0 10px rgba(226, 232, 240, 0.08) !important;
   transform: translateY(-1px) !important;
+}
+
+.cv-round-btn-secondary.cv-round-btn-word:active,
+.cv-round-btn-secondary.cv-round-btn-word:focus-visible {
+  border-color: rgba(255, 255, 255, 0.75) !important;
+  color: #ffffff !important;
+  background: rgba(30, 48, 70, 0.95) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5), inset 0 1px 3px rgba(0, 0, 0, 0.35) !important;
+  transform: translateY(0px) scale(0.99) !important;
+  outline: none !important;
 }
 
 /* Dual ATS Action Row (Side-by-Side: ATS Print/PDF + ATS Word .docx) */
