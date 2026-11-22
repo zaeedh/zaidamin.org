@@ -8,6 +8,29 @@
 
 
 
+/* ==========================================================================
+   SF Pro Text Typography Engine (Apple San Francisco Webfont Suite)
+   ========================================================================== */
+@font-face {
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('-apple-system'), local('BlinkMacSystemFont'), local('SF Pro Text'), local('SF Pro'),
+       url('/assets/fonts/SF-Pro-Text-Regular.woff2') format('woff2'),
+       url('/assets/fonts/SF-Pro-Text-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('-apple-system'), local('BlinkMacSystemFont'), local('SF Pro Text Medium'), local('SF Pro Medium'),
+       url('/assets/fonts/SF-Pro-Text-Medium.woff2') format('woff2'),
+       url('/assets/fonts/SF-Pro-Text-Medium.woff') format('woff');
+}
+
 :root {
 
   /* Color Palette - Refined Academic Slate & Antique Bronze (Prestigious Institutional Standard) */
@@ -652,7 +675,7 @@ a {
 
   right: clamp(24px, 4%, 38px);
 
-  max-width: clamp(520px, 52vw, 680px);
+  max-width: clamp(480px, 48vw, 620px);
 
   box-sizing: border-box;
 
@@ -751,89 +774,47 @@ a {
 
 
 .storm-quote-text {
-
-  font-family: Georgia, 'Lora', 'Merriweather', 'Times New Roman', serif !important;
-
+  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'SF Pro', 'Inter', system-ui, sans-serif !important;
   font-style: normal !important;
-
-  font-weight: 700 !important;
-
-  font-size: clamp(1.06rem, 1.30vw, 1.18rem) !important;
-
-  color: #f3f8fc !important;
-
-  line-height: 1.48 !important;
-
-  margin: 0 0 10px 0 !important;
-
+  font-weight: 500 !important;
+  font-size: clamp(0.96rem, 1.15vw, 1.08rem) !important;
+  color: #dbe7f2 !important;
+  line-height: 1.52 !important;
+  margin: 0 0 9px 0 !important;
   letter-spacing: 0.012em !important;
-
-  text-shadow: 0 2px 14px rgba(0, 10, 24, 0.98), 0 0 26px rgba(0, 6, 16, 0.95) !important;
-
+  text-shadow: 0 2px 14px rgba(4, 14, 24, 0.98), 0 0 26px rgba(8, 24, 38, 0.90) !important;
   text-align: right !important;
-
 }
-
-
 
 .storm-quote-cite {
-
   display: flex;
-
   align-items: center;
-
   justify-content: flex-end;
-
   gap: 10px;
-
   font-style: normal;
-
   text-align: right;
-
 }
-
-
 
 .storm-cite-line {
-
-  width: 36px;
-
+  width: 28px;
   height: 1px;
-
-  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.70));
-
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.65));
   display: inline-block;
-
 }
 
-
-
 .storm-cite-label {
-
   font-family: var(--font-cinzel), serif;
-
-  font-size: 0.78rem; /* Proportionally scaled */
-
+  font-size: 0.76rem;
   font-weight: 700;
-
   letter-spacing: 0.16em;
-
-  color: #d4af37;
-
-  background: linear-gradient(135deg, #fce09b 0%, #d4af37 50%, #b88d28 100%);
-
+  color: #c9ab57;
+  background: linear-gradient(135deg, #f4df9f 0%, #d4af37 60%, #b88d28 100%);
   -webkit-background-clip: text;
-
   -webkit-text-fill-color: transparent;
-
   text-transform: uppercase;
-
   line-height: 1.2;
-
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.95));
-
+  filter: drop-shadow(0 2px 8px rgba(4, 14, 24, 0.95));
   display: inline-block;
-
 }
 
 
@@ -846,24 +827,19 @@ a {
 
     right: 18px;
 
-    max-width: 480px;
+    max-width: 440px;
 
   }
 
   .storm-quote-text {
-
-    font-family: Georgia, 'Lora', 'Merriweather', 'Times New Roman', serif !important;
-
-    font-size: 0.98rem !important;
-
-    line-height: 1.44 !important;
-
+    font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'SF Pro', 'Inter', system-ui, sans-serif !important;
+    font-size: 0.88rem !important;
+    line-height: 1.46 !important;
     font-style: normal !important;
-
-    font-weight: 700 !important;
-
-    letter-spacing: 0.012em !important;
-
+    font-weight: 500 !important;
+    color: #dbe7f2 !important;
+    letter-spacing: 0.010em !important;
+    text-shadow: 0 2px 12px rgba(4, 14, 24, 0.98), 0 0 22px rgba(8, 24, 38, 0.90) !important;
   }
 
 }
@@ -967,19 +943,14 @@ a {
   }
 
   .storm-quote-text {
-
-    font-family: Georgia, 'Lora', 'Merriweather', 'Times New Roman', serif !important;
-
-    font-size: 0.88rem !important;
-
-    line-height: 1.40 !important;
-
+    font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'SF Pro', 'Inter', system-ui, sans-serif !important;
+    font-size: 0.80rem !important;
+    line-height: 1.42 !important;
     font-style: normal !important;
-
-    font-weight: 700 !important;
-
-    letter-spacing: 0.012em !important;
-
+    font-weight: 500 !important;
+    color: #dbe7f2 !important;
+    letter-spacing: 0.008em !important;
+    text-shadow: 0 2px 10px rgba(4, 14, 24, 0.98), 0 0 20px rgba(8, 24, 38, 0.90) !important;
   }
 
   .storm-cite-label {
