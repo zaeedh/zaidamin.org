@@ -5,13 +5,13 @@
     "institution": "INTI International University, Malaysia",
     "research_fields": "Digital Ethics • Behavior & Social Computing • HCI",
     "photo_front": "/assets/images/uploads/portrait_lib_1794243515476_photo_5.webp",
-    "photo_front_fallback": "/assets/images/uploads/portrait_lib_1794243515476_photo_5.jpg",
+    "photo_front_fallback": "/assets/images/uploads/portrait_lib_1794243515476_photo_5.png",
     "photo_front_alt": "Zaid Amin, Ph.D. — Academic Portrait",
     "photo_back": "/assets/images/portraits/portrait-2.webp",
     "photo_back_fallback": "/assets/images/portraits/portrait-2.png",
     "photo_back_alt": "Zaid Amin, Ph.D. — Secondary Portrait",
     "status_dot_enabled": false,
-    "status_text": "Active Senior Lecturer & Researcher",
+    "status_text": "Active International Lecturer & Researcher",
     "show_photo": true,
     "portraits_list": [
       {
@@ -126,9 +126,9 @@
     "website": "https://newinti.edu.my"
   },
   "epigraph": "Das Sein, Das Sollen",
-  "site_title": "Dr. Zaid Amin | Academic & Computational Researcher",
+  "site_title": "Dr. Zaid Amin | International Academic & Computational Researcher",
   "page_titles": {
-    "home": "Dr. Zaid Amin | Academic & Computational Researcher",
+    "home": "Dr. Zaid Amin | International Academic & Computational Researcher",
     "publications": "Research & Publication Gallery",
     "research": "Activity & Project",
     "talks": "Media & Talks",
