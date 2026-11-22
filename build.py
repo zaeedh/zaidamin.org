@@ -1127,7 +1127,7 @@ def get_page_header(active_page="home"):
 
         quote_html = f'''<div class="storm-quote-overlay">
 
-        <p class="storm-quote-text font-serif">
+        <p class="storm-quote-text font-cinzel">
 
           &ldquo;{q_text}&rdquo;
 
