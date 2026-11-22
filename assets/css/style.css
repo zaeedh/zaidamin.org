@@ -57,6 +57,7 @@
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-premium-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-display-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
   --font-cinzel: 'Cinzel', Georgia, serif;
   --font-mono: 'JetBrains Mono', monospace;
 
@@ -647,11 +648,11 @@ a {
 
   position: absolute;
 
-  bottom: clamp(52px, 14%, 66px);
+  bottom: clamp(50px, 13.5%, 64px);
 
-  right: clamp(26px, 4%, 38px);
+  right: clamp(24px, 4%, 38px);
 
-  max-width: 620px;
+  max-width: clamp(540px, 55vw, 760px);
 
   box-sizing: border-box;
 
@@ -751,25 +752,25 @@ a {
 
 .storm-quote-text {
 
-  font-family: var(--font-premium-serif), Georgia, serif;
+  font-family: var(--font-display-serif), var(--font-premium-serif), Georgia, serif !important;
 
-  font-style: italic;
+  font-style: normal !important;
 
-  font-weight: 400;
+  font-weight: 500 !important;
 
-  font-size: 1.05rem; /* Increased for elevated legibility and cinematic prestige */
+  font-size: clamp(1.22rem, 1.62vw, 1.40rem) !important;
 
-  color: #eaf4fb; /* Ethereal sea-pearl luminescence */
+  color: #f3f8fc !important;
 
-  line-height: 1.54;
+  line-height: 1.48 !important;
 
-  margin: 0 0 7px 0;
+  margin: 0 0 8px 0 !important;
 
-  letter-spacing: 0.015em;
+  letter-spacing: 0.012em !important;
 
-  text-shadow: 0 2px 10px rgba(0, 10, 24, 0.98), 0 0 24px rgba(0, 6, 16, 0.92);
+  text-shadow: 0 2px 12px rgba(0, 10, 24, 0.98), 0 0 26px rgba(0, 6, 16, 0.95) !important;
 
-  text-align: right;
+  text-align: right !important;
 
 }
 
@@ -841,19 +842,21 @@ a {
 
   .storm-quote-overlay {
 
-    bottom: clamp(38px, 11%, 50px);
+    bottom: clamp(34px, 10%, 46px);
 
-    right: 20px;
+    right: 18px;
 
-    max-width: 500px;
+    max-width: 520px;
 
   }
 
   .storm-quote-text {
 
-    font-size: 0.94rem;
+    font-size: 1.06rem !important;
 
-    line-height: 1.46;
+    line-height: 1.44 !important;
+
+    font-style: normal !important;
 
   }
 
@@ -947,7 +950,7 @@ a {
 
   .storm-quote-overlay {
 
-    bottom: 24px;
+    bottom: 20px;
 
     right: 14px;
 
@@ -959,15 +962,17 @@ a {
 
   .storm-quote-text {
 
-    font-size: 0.86rem;
+    font-size: 0.94rem !important;
 
-    line-height: 1.40;
+    line-height: 1.40 !important;
+
+    font-style: normal !important;
 
   }
 
   .storm-cite-label {
 
-    font-size: 0.72rem;
+    font-size: 0.70rem;
 
   }
 
