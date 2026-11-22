@@ -752,21 +752,21 @@ a {
 
 .storm-quote-text {
 
-  font-family: var(--font-cinzel), 'Cinzel', 'Trajan Pro', 'Cormorant Garamond', Georgia, serif !important;
+  font-family: var(--font-display-serif), var(--font-premium-serif), Georgia, serif !important;
 
   font-style: normal !important;
 
-  font-weight: 600 !important;
+  font-weight: 500 !important;
 
-  font-size: clamp(1.06rem, 1.30vw, 1.18rem) !important;
+  font-size: clamp(1.12rem, 1.38vw, 1.22rem) !important;
 
   color: #f3f8fc !important;
 
-  line-height: 1.54 !important;
+  line-height: 1.48 !important;
 
   margin: 0 0 8px 0 !important;
 
-  letter-spacing: 0.04em !important;
+  letter-spacing: 0.014em !important;
 
   text-shadow: 0 2px 12px rgba(0, 10, 24, 0.98), 0 0 26px rgba(0, 6, 16, 0.95) !important;
 
@@ -852,13 +852,13 @@ a {
 
   .storm-quote-text {
 
-    font-size: 0.96rem !important;
+    font-size: 1.00rem !important;
 
-    line-height: 1.48 !important;
+    line-height: 1.44 !important;
 
     font-style: normal !important;
 
-    letter-spacing: 0.035em !important;
+    letter-spacing: 0.012em !important;
 
   }
 
@@ -964,13 +964,13 @@ a {
 
   .storm-quote-text {
 
-    font-size: 0.88rem !important;
+    font-size: 0.90rem !important;
 
-    line-height: 1.44 !important;
+    line-height: 1.40 !important;
 
     font-style: normal !important;
 
-    letter-spacing: 0.03em !important;
+    letter-spacing: 0.012em !important;
 
   }
 
