@@ -20738,7 +20738,8 @@ mark {
 
 .pub-pure-header-info {
   flex: 1;
-  max-width: 900px;
+  width: 100%;
+  max-width: 100%;
 }
 
 .pub-section-kicker-row {
@@ -20804,6 +20805,8 @@ mark {
   color: #94a3b8;
   line-height: 1.62;
   margin: 0;
+  width: 100%;
+  max-width: 100%;
 }
 
 .pub-pure-chips-wrapper {

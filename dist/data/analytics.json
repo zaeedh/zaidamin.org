@@ -302,6 +302,69 @@
   },
   "page_traces": [
     {
+      "id": "tr-1795299758006",
+      "timestamp": "2026-11-21T22:22:38.006Z",
+      "path": "/cv",
+      "title": "Achievement & Curriculum Vitae",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-4A57D9",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Internal Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
+      "id": "tr-1795299584225",
+      "timestamp": "2026-11-21T22:19:44.225Z",
+      "path": "/",
+      "title": "Dr. Zaid Amin | Academic & Computational Researcher",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-4A57D9",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Internal Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
+      "id": "tr-1795299503986",
+      "timestamp": "2026-11-21T22:18:23.986Z",
+      "path": "/cv",
+      "title": "Achievement & Curriculum Vitae",
+      "action": "PAGE_VIEW",
+      "post_id": "",
+      "visitor_id": "Reader-4A57D9",
+      "country": "MY",
+      "country_name": "Malaysia",
+      "colo": "KUL",
+      "device": "Desktop",
+      "browser": "Microsoft Edge",
+      "os": "Windows",
+      "timezone": "Asia/Kuala_Lumpur",
+      "language": "en-US",
+      "screen": "1280x800",
+      "referrer": "Internal Navigation",
+      "client_ip": "::1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    {
       "id": "tr-1795298845253",
       "timestamp": "2026-11-21T22:07:25.253Z",
       "path": "/",
@@ -10296,47 +10359,11 @@
       "colo": "KUL",
       "device": "Desktop",
       "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794393486561",
-      "timestamp": "2026-11-11T10:38:06.561Z",
-      "path": "/cv",
-      "title": "Achievement & Curriculum Vitae",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794391790220",
-      "timestamp": "2026-11-11T10:09:50.220Z",
-      "path": "/cv",
-      "title": "Achievement & Curriculum Vitae",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
-    },
-    {
-      "id": "tr-1794391686056",
-      "timestamp": "2026-11-11T10:08:06.056Z",
-      "path": "/cv",
-      "title": "Achievement & Curriculum Vitae",
-      "action": "PAGE_VIEW",
-      "country": "MY",
-      "country_name": "Malaysia",
-      "colo": "KUL",
-      "device": "Desktop",
-      "referrer": "Direct Navigation"
     }
   ],
   "last_audit_sync": "2026-11-03",
   "notes": "Google Analytics 4 Measurement ID, Live Readership Telemetry Baseline, Timeline Trends & Access Traces",
-  "updated_at": "2026-11-22T06:07:25.292551",
+  "updated_at": "2026-11-22T06:22:38.015020",
   "post_reads": {
     "harmony-human-trusted-ai-and-resilient-multimodal-orchestration": 11,
     "kehidupan-pendidik-saat-pandemi-covid-19-part-i": 9,
@@ -10424,7 +10451,7 @@
     "uniten-master-viva-external-examiner-nist-csf-2026": 8
   },
   "server_live_hits": {
-    "MY": 445,
+    "MY": 448,
     "OTHER": 3
   }
 }
