@@ -109,13 +109,34 @@ def resolve_optimal_image(img_path: str) -> str:
 
 
 def normalize_asset_paths(html: str) -> str:
-    """Ensure all local asset and image paths start with a leading slash to prevent 404s on subpage routes."""
+    """Ensure all local asset and image paths start with a leading slash and optimal .webp formats."""
     # 1. Any HTML attribute, JSON key, JS string, or CSS url referencing assets/(images|css|js|docs|icons|fonts|media)/
     html = re.sub(r'(?<=["\'\(])assets/(?=(?:images|css|js|docs|icons|fonts|media)/)', r'/assets/', html)
     # 2. Also cover any remaining standard attributes just in case
     html = re.sub(r'(\b(?:src|srcset|href|poster|data-[a-zA-Z0-9_-]+)=["\'])assets/', r'\1/assets/', html)
     # 3. JS / DOM forms: this.src='assets/...', .src = 'assets/...'
     html = re.sub(r'(\b(?:this\.)?src\s*=\s*["\'])assets/', r'\1/assets/', html)
+
+    # 4. Automatically upgrade .jpg/.jpeg/.png references to modern .webp if equivalent exists on disk
+    def _webp_sub(match):
+        prefix = match.group(1)
+        path = match.group(2)
+        suffix = match.group(3)
+        clean = path.lstrip("/").replace("\\", "/")
+        if "." in clean:
+            base, ext = clean.rsplit(".", 1)
+            webp_file = base + ".webp"
+            if (BASE_DIR / webp_file).exists() or os.path.exists(webp_file):
+                new_path = ("/" if path.startswith("/") else "") + webp_file
+                return f"{prefix}{new_path}{suffix}"
+        return match.group(0)
+
+    # Match attributes: src, srcset, poster, data-*, or JSON "image": "..."
+    html = re.sub(r'(\b(?:src|srcset|poster|data-[a-zA-Z0-9_-]+|image)=[\'"])([^\'"]+\.(?:jpg|jpeg|png))([\'"])', _webp_sub, html, flags=re.IGNORECASE)
+    # Match JS inline fallback assignments
+    html = re.sub(r'(\b(?:this\.)?src\s*=\s*[\'"])([^\'"]+\.(?:jpg|jpeg|png))([\'"])', _webp_sub, html, flags=re.IGNORECASE)
+    # Match CSS url(...)
+    html = re.sub(r'(url\([\'"]?)(/assets/[^\'")\s]+\.(?:jpg|jpeg|png))([\'"]?\))', _webp_sub, html, flags=re.IGNORECASE)
     return html
 
 
@@ -546,14 +567,13 @@ def get_html_head(
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=GFS+Didot&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=GFS+Didot&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
   <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=GFS+Didot&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
   </noscript>
 
   <link rel="preload" href="/assets/fonts/Lucida-Bright-Italic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/Qabyrinth.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/SF-Pro-Text-Medium.woff2" as="font" type="font/woff2" crossorigin>
 
   <link rel="preload" as="style" href="/assets/css/style.min.css?v=7.7">
