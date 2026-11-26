@@ -2,6 +2,18 @@
   "speaking_invitation_statement": "Dr. Zaid Amin is available for international academic keynotes, conference plenary talks, institutional workshops, and expert panel discussions on Human-Computer Interaction, AI Governance, Cognitive Attention Systems, and Digital Ethics. To invite Dr. Amin, please contact zaid.amin@newinti.edu.my.",
   "talks": [
     {
+      "id": "talk-sunway-responsive-interfaces-2026",
+      "title": "Guest Lecture: Designing for Every Screen: Responsive Interfaces for Digital Literacy",
+      "event": "Sunway University - Digital Media Literacy (COM2023–COM2024, Week 8)",
+      "role": "Guest Lecturer",
+      "year": "2026",
+      "date": "NOVEMBER | 2026",
+      "location": "Uni Lecture Theatre 6, Sunway University, Malaysia",
+      "abstract": "Interactive guest lecture introducing mobile-first responsive interface design, the 3-Suitcase Breakpoint Rule, Thumb Zone ergonomics, and Adobe XD prototyping for digital literacy campaigns using live ClassPoint activities.",
+      "image": "assets/images/uploads/sunway_2026_photo1.jpeg",
+      "featured": false
+    },
+    {
       "id": "talk-trustworthy-ai-workshop-inti-2026",
       "title": "Hands-On Workshop: Introduction to Trustworthy AI in Google Colab",
       "event": "INTI International University - Bridging 2026 Program (Oct 2026 Intake)",
