@@ -136,6 +136,21 @@
   ],
   "keynotes": [
     {
+      "id": "keynote-1795834692557",
+      "title": "Guest Lecture at Sunway University",
+      "role": "Invited Visiting Speaker",
+      "badge": "02 • VISITING",
+      "event": "Designing for Every Screen: Responsive Interfaces for Digital Literacy",
+      "venue": "Sunway University",
+      "year": "2026",
+      "date_display": "NOV | 2026",
+      "abstract": "On the morning of 26 November 2026 (8:00–9:45 AM MYT), I had the privilege and honor of being invited as a Guest Lecturer at Sunway University (Faculty of Arts & Social Sciences) for Week 8 of the Digital Media Literacy (COM2023 – COM2024) course in Uni Lecture Theatre 6.\n\nWhat made this morning truly unforgettable was the remarkable diversity in the room. I had the joy of sharing ideas and learning alongside international students from the United Kingdom, Turkmenistan, Pakistan, Japan, China, and South Korea, together with their Malaysian peers. Teaching interface design in such a multicultural setting is always energizing: every student brings a different set of digital habits, favorite apps, and cultural perspectives on how people read and interact on screens.",
+      "url": "https://zaidamin.org/assets/docs/sunway-responsive-interfaces-digital-literacy-2026.pdf",
+      "palette": "ivory",
+      "arch_style": "arch-cathedral",
+      "image": "assets/images/uploads/poster.jpg"
+    },
+    {
       "id": "workshop-trustworthy-ai-inti-2026",
       "title": "Introduction to Trustworthy AI in Google Colab",
       "role": "Hands-On Workshop Lead",
